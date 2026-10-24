@@ -1,0 +1,690 @@
+[
+  {
+    "archivo": "assets/E04_bush_berries.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      15,
+      40,
+      42
+    ],
+    "sha256": "aeaba4d8d3e1b20725f3fe27eddd0878b8082f2f7b24b194fc3c5c043e9597e5",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_bush_without_berries.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      15,
+      40,
+      42
+    ],
+    "sha256": "6c3bb49e1f7265e8c52cdedb2f901c0297f16ec4287a8e5f5050518dc70ebdc9",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_floor_ruins.png",
+    "dimensiones": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "sha256": "e6c0b27fb6d36a7775e3e8225726db17f8d0aebc7dc71bce7bd17675681f23ce",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_grass.png",
+    "dimensiones": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "sha256": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_grass_flecks.png",
+    "dimensiones": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "sha256": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_grass_periodica.png",
+    "dimensiones": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "sha256": "b30d514b1d1c985b5055bc290e17fdb736e294e8b8874b7a5e278116dbed64ee",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_ore_copper.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      8,
+      13,
+      44,
+      43
+    ],
+    "sha256": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_ore_depleted.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      29,
+      42,
+      43
+    ],
+    "sha256": "fa81ad9199c12cbc2c0d120bda99668275d4228c0976551ff5644d4d37316a10",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_path_47.png",
+    "dimensiones": [
+      128,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      128,
+      96
+    ],
+    "sha256": "1970328eb9fb0916d5b8882550ad872218984e71dd3888e153fd50a5938d4dde",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_path_mascaras.png",
+    "dimensiones": [
+      128,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      128,
+      96
+    ],
+    "sha256": "66e5645884221e7a8dc1666d3fa171128b17f1313bbe7578d9122ee8c59b12d7",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_rock.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      22,
+      38,
+      44
+    ],
+    "sha256": "dd28ff33a0b63207092639eed98c6a264549eed28b95f2e080430baf62202236",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_rock_depleted.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      33,
+      38,
+      44
+    ],
+    "sha256": "9c9716fcfabf0d9dff1545d1f7c2785b88f6f0f432f45dc489939d8b739dd650",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_ruins_47.png",
+    "dimensiones": [
+      128,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      128,
+      96
+    ],
+    "sha256": "2c285b277ac27b6c13f0da7257ba754a2d232cde91145525be6dafebc5b5e9d7",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_ruins_mascaras.png",
+    "dimensiones": [
+      128,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      128,
+      96
+    ],
+    "sha256": "66e5645884221e7a8dc1666d3fa171128b17f1313bbe7578d9122ee8c59b12d7",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_steps_n.png",
+    "dimensiones": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "sha256": "a90e6cfdfa45c376f0405b073806fc1e8731594e937dbe0f17f967f5c8292775",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_stump_broadleaf.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      18,
+      35,
+      33,
+      44
+    ],
+    "sha256": "61705bb2d1735c21d97b23e91be6306ef70333f68f6fb5242a5570410d426dfa",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_stump_fruit.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      17,
+      35,
+      29,
+      43
+    ],
+    "sha256": "94f21ae5aa82b3b04bca20281bee1d6b112c426a67b15a1225057befad25448e",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_stump_pine.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      18,
+      34,
+      31,
+      43
+    ],
+    "sha256": "49507c43de1cf8f885cf5e75dcb91fbe42220c4974ca85e5eb5aa65b6ee809bf",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_broadleaf.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      9,
+      41,
+      44
+    ],
+    "sha256": "a37c01868c1e96d4fbf697987cc1fd2d87c0ad5fa8abc4e973fafb6aec02bc10",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_broadleaf_64.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      5,
+      2,
+      59,
+      62
+    ],
+    "sha256": "b01f2ed064cf9360b37fecc18780ec4e25a2e0d9745e2b2c05f0fc52e1c31f5a",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_broadleaf_64_copa.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      5,
+      2,
+      59,
+      45
+    ],
+    "sha256": "56c3f6766ea724cfeacc8be62fe25dca3456d79c6c0a5628fad34df0d4793967",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_broadleaf_64_tronco.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      13,
+      45,
+      53,
+      62
+    ],
+    "sha256": "c1c068a6590216d41bd3a833b079600561d16c4d37fd732172a989bdb777978c",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_broadleaf_copa.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      9,
+      41,
+      34
+    ],
+    "sha256": "04d63684717d0887c78cd561164a46d2f24b9180f6b12c05dc3880871828c2b7",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_broadleaf_tronco.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      14,
+      34,
+      38,
+      44
+    ],
+    "sha256": "9603ba42a33500aec9ddcd220b881494a31ed114c1caf4d6282f745a1367e535",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_fruit.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      10,
+      14,
+      36,
+      43
+    ],
+    "sha256": "3f8ead1870dca9456c55be3ff3721c0d3853415fa76c66fe2497fce0aa870c2c",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_fruit_64.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      5,
+      2,
+      59,
+      62
+    ],
+    "sha256": "69c9052095bb9cd261524cd1716d4ce359faca8c34dc31ffde39091da8e02a91",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_fruit_64_copa.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      13,
+      2,
+      55,
+      17
+    ],
+    "sha256": "7ffb26e323b5baeedb82cf5c3c899567a10fcf262de36b585dfb8c718d8d0e29",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_fruit_64_tronco.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      5,
+      17,
+      59,
+      62
+    ],
+    "sha256": "caf0f80ac18728f15a60b8b00e61eac36a8dc4c7808990584f373c56157ecdad",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_fruit_copa.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      14,
+      14,
+      32,
+      21
+    ],
+    "sha256": "f7373e193ce6ffee0af9606325f0e4d8f9d58c6a159afe879a37590711fe5bca",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_fruit_tronco.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      10,
+      21,
+      36,
+      43
+    ],
+    "sha256": "54ce6ad205676b3e57856a01ce993ac9266a53e39b9c792730920005b994c644",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_pine.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      5,
+      38,
+      43
+    ],
+    "sha256": "4a41a6c366f67043fc9c6b9cf8ec8928d24c88dd6474b0632864e1ee6111b366",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_pine_64.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      11,
+      2,
+      53,
+      62
+    ],
+    "sha256": "b9cabaf308a85e09a188a936f1968aecc0f36e06f6b5b51a3b29f1955d1fc491",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_pine_64_copa.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      11,
+      2,
+      53,
+      51
+    ],
+    "sha256": "41b71ebdf8b43505229bf187dba39ecd0f4d6261807b7f7782f7a7fe62c25654",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_pine_64_tronco.png",
+    "dimensiones": [
+      64,
+      64
+    ],
+    "bbox": [
+      16,
+      51,
+      46,
+      62
+    ],
+    "sha256": "9d50e7ddec73f122b3151d446f916753d4eef5bca683f8f3bb6501e73891d5db",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_pine_copa.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      5,
+      38,
+      36
+    ],
+    "sha256": "59d2896b965668e27974c98496adf2bff3b6ac6c7f98ae6d1f3270b61fd67a9f",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_tree_pine_tronco.png",
+    "dimensiones": [
+      48,
+      48
+    ],
+    "bbox": [
+      14,
+      36,
+      33,
+      43
+    ],
+    "sha256": "5dd7e82ffbbea61100f722b03ba15a2beb356721d315e0ac327a06b7dbe0cec0",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_wall_47.png",
+    "dimensiones": [
+      128,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      128,
+      96
+    ],
+    "sha256": "3a97a0041945b0a66b51a9bf1733f6f0dd40f2e976bf307774fd852b14aff68b",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_wall_mascaras.png",
+    "dimensiones": [
+      128,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      128,
+      96
+    ],
+    "sha256": "66e5645884221e7a8dc1666d3fa171128b17f1313bbe7578d9122ee8c59b12d7",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_wall_stone.png",
+    "dimensiones": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "sha256": "49a1ba2df37bac4ec79037bc2be6aa1a7005d7ad19a432890b7eec157a9510b2",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_water_47.png",
+    "dimensiones": [
+      128,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      128,
+      96
+    ],
+    "sha256": "78d7dca0f616ce52964eb86aeb2b35190843be939ef6ab3ec1e177976ce5c3d7",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_water_47_anim.png",
+    "dimensiones": [
+      512,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      512,
+      96
+    ],
+    "sha256": "cc45bf1d27769c7daf348934c44a8953b3701b3828b399c0aeabe61f596ae439",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_water_anim_propuesto.png",
+    "dimensiones": [
+      64,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      64,
+      16
+    ],
+    "sha256": "3aec29b51d0fbedd345fd177644732fa8b80c1de6026f76207c5d8ab73e8ed79",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  },
+  {
+    "archivo": "assets/E04_water_mascaras.png",
+    "dimensiones": [
+      128,
+      96
+    ],
+    "bbox": [
+      0,
+      0,
+      128,
+      96
+    ],
+    "sha256": "66e5645884221e7a8dc1666d3fa171128b17f1313bbe7578d9122ee8c59b12d7",
+    "estado": "candidato_no_aceptado",
+    "procedencia": "Consultar JSON del recurso y fuentes/; reutilizado o derivado de material existente"
+  }
+]

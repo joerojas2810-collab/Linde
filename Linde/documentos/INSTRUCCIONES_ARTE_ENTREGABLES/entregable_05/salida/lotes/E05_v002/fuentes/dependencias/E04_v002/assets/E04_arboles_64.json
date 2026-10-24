@@ -1,0 +1,98 @@
+[
+  {
+    "id": "E04_tree_broadleaf_64",
+    "canvas": [
+      64,
+      64
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1,
+    "celda_colision_existente": [
+      16,
+      16
+    ],
+    "fuente": "fuentes/entradas/originales/objetos.png",
+    "sha256_fuente": "d82156cedef6434135e3c2e8d67525a1e8103ff4f3d58da621d42be75eade237",
+    "rect_fuente": [
+      0,
+      0,
+      320,
+      400
+    ],
+    "bbox_core_fuente": [
+      30,
+      58,
+      312,
+      371
+    ],
+    "escala_conversion": 0.19169329073482427,
+    "nota": "Reextracción de fuente existente, no ampliación48→64. Propuesta de tamaño nativo; mantener original48 como alternativa."
+  },
+  {
+    "id": "E04_tree_pine_64",
+    "canvas": [
+      64,
+      64
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1,
+    "celda_colision_existente": [
+      16,
+      16
+    ],
+    "fuente": "fuentes/entradas/originales/objetos.png",
+    "sha256_fuente": "d82156cedef6434135e3c2e8d67525a1e8103ff4f3d58da621d42be75eade237",
+    "rect_fuente": [
+      320,
+      0,
+      320,
+      400
+    ],
+    "bbox_core_fuente": [
+      46,
+      39,
+      281,
+      371
+    ],
+    "escala_conversion": 0.18072289156626506,
+    "nota": "Reextracción de fuente existente, no ampliación48→64. Propuesta de tamaño nativo; mantener original48 como alternativa."
+  },
+  {
+    "id": "E04_tree_fruit_64",
+    "canvas": [
+      64,
+      64
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1,
+    "celda_colision_existente": [
+      16,
+      16
+    ],
+    "fuente": "fuentes/entradas/originales/objetos.png",
+    "sha256_fuente": "d82156cedef6434135e3c2e8d67525a1e8103ff4f3d58da621d42be75eade237",
+    "rect_fuente": [
+      640,
+      0,
+      300,
+      400
+    ],
+    "bbox_core_fuente": [
+      25,
+      111,
+      261,
+      371
+    ],
+    "escala_conversion": 0.23076923076923078,
+    "nota": "Reextracción de fuente existente, no ampliación48→64. Propuesta de tamaño nativo; mantener original48 como alternativa."
+  }
+]

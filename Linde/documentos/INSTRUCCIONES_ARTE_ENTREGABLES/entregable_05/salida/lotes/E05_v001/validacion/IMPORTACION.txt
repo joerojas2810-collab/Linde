@@ -1,0 +1,160 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Inicialización del proyecto (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Escaneando la estructura del archivo...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Cargando nombres de clases globales...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verificando GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creando scripts de carga automática...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Inicializando plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Iniciando escaneo de archivos...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Escaneando acciones... (44 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | E05_barrel.png[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | E05_bed.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | E05_bridge_vertical.png[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | E05_casa_abierta_muestra.png[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | E05_casa_fachada_sin_puerta.png[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | E05_casa_interior_logico.png[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | E05_casa_puerta_cerrada.png[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | E05_casa_tejado.png[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | E05_cave_entrance.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | E05_chest_closed.png[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | E05_chest_open.png[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | E05_chest_treasure.png[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | E05_cottage_closed.png[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | E05_cottage_open.png[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | E05_crafting_shed.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | E05_fence_corner_ne.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | E05_fence_cross.png[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | E05_fence_horizontal.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | E05_fence_t_nes.png[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | E05_fence_vertical.png[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | E05_floor_wood.png[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | E05_furnace.png[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | E05_palisade.png[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | E05_workbench.png[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | barrel.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | bed.png[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | bridge_vertical.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | cave_entrance.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | chest_closed.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | chest_open.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | chest_treasure.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | cottage_closed.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | cottage_open.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | crafting_shed.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | fence_horizontal.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | floor_wood.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | furnace.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | palisade.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | workbench.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | E00_personaje_escala.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | E05_referencia_objetos.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | E05_vallas_generadas.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | E05_muestra_nativa.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | E05_muestra_x2.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importación de Assets (44 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   2% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   4% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   6% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   8% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  11% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  13% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  15% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  17% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  20% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  22% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  24% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  26% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  28% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  31% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  33% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  35% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  37% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  40% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  42% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  44% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  46% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  48% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  51% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  53% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  55% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  57% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  60% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  62% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  64% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  66% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  68% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  71% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  73% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  77% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  80% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  82% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  84% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  86% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  88% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  91% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  93% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  95% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   0% ] [90m[1mreimport[22m | Ejecutando operaciones de pre-reimportación...[39m[0m
+[   0% ] [90m[1mreimport[22m | E05_palisade.png[39m[0m
+[   2% ] [90m[1mreimport[22m | E05_workbench.png[39m[0m
+[   4% ] [90m[1mreimport[22m | barrel.png[39m[0m
+[   6% ] [90m[1mreimport[22m | bed.png[39m[0m
+[   8% ] [90m[1mreimport[22m | bridge_vertical.png[39m[0m
+[  11% ] [90m[1mreimport[22m | cave_entrance.png[39m[0m
+[  13% ] [90m[1mreimport[22m | chest_closed.png[39m[0m
+[  15% ] [90m[1mreimport[22m | chest_open.png[39m[0m
+[  17% ] [90m[1mreimport[22m | chest_treasure.png[39m[0m
+[  20% ] [90m[1mreimport[22m | cottage_closed.png[39m[0m
+[  22% ] [90m[1mreimport[22m | cottage_open.png[39m[0m
+[  24% ] [90m[1mreimport[22m | crafting_shed.png[39m[0m
+[  26% ] [90m[1mreimport[22m | fence_horizontal.png[39m[0m
+[  28% ] [90m[1mreimport[22m | floor_wood.png[39m[0m
+[  31% ] [90m[1mreimport[22m | furnace.png[39m[0m
+[  33% ] [90m[1mreimport[22m | palisade.png[39m[0m
+[  35% ] [90m[1mreimport[22m | workbench.png[39m[0m
+[  37% ] [90m[1mreimport[22m | E00_personaje_escala.png[39m[0m
+[  40% ] [90m[1mreimport[22m | E05_referencia_objetos.png[39m[0m
+[  42% ] [90m[1mreimport[22m | E05_vallas_generadas.png[39m[0m
+[  44% ] [90m[1mreimport[22m | E05_muestra_nativa.png[39m[0m
+[  46% ] [90m[1mreimport[22m | E05_muestra_x2.png[39m[0m
+[  48% ] [90m[1mreimport[22m | E05_barrel.png[39m[0m
+[  51% ] [90m[1mreimport[22m | E05_bed.png[39m[0m
+[  53% ] [90m[1mreimport[22m | E05_bridge_vertical.png[39m[0m
+[  55% ] [90m[1mreimport[22m | E05_casa_abierta_muestra.png[39m[0m
+[  57% ] [90m[1mreimport[22m | E05_casa_fachada_sin_puerta.png[39m[0m
+[  60% ] [90m[1mreimport[22m | E05_casa_interior_logico.png[39m[0m
+[  62% ] [90m[1mreimport[22m | E05_casa_puerta_cerrada.png[39m[0m
+[  64% ] [90m[1mreimport[22m | E05_casa_tejado.png[39m[0m
+[  66% ] [90m[1mreimport[22m | E05_cave_entrance.png[39m[0m
+[  68% ] [90m[1mreimport[22m | E05_chest_closed.png[39m[0m
+[  71% ] [90m[1mreimport[22m | E05_chest_open.png[39m[0m
+[  73% ] [90m[1mreimport[22m | E05_chest_treasure.png[39m[0m
+[  75% ] [90m[1mreimport[22m | E05_cottage_closed.png[39m[0m
+[  77% ] [90m[1mreimport[22m | E05_cottage_open.png[39m[0m
+[  80% ] [90m[1mreimport[22m | E05_crafting_shed.png[39m[0m
+[  82% ] [90m[1mreimport[22m | E05_fence_corner_ne.png[39m[0m
+[  84% ] [90m[1mreimport[22m | E05_fence_cross.png[39m[0m
+[  86% ] [90m[1mreimport[22m | E05_fence_horizontal.png[39m[0m
+[  88% ] [90m[1mreimport[22m | E05_fence_t_nes.png[39m[0m
+[  91% ] [90m[1mreimport[22m | E05_fence_vertical.png[39m[0m
+[  93% ] [90m[1mreimport[22m | E05_floor_wood.png[39m[0m
+[  95% ] [90m[1mreimport[22m | E05_furnace.png[39m[0m
+[  97% ] [90m[1mreimport[22m | Finalizando la importación de recursos...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importación de Assets (44 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Ejecutando operaciones post-reimportación...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Cargando editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Cargando diseño del editor...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Cargando docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

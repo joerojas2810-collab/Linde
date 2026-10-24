@@ -1,0 +1,122 @@
+[
+  {
+    "id": "E05_fence_vertical",
+    "source_grid_rect": [
+      0,
+      0,
+      543,
+      724
+    ],
+    "alpha_threshold": 192,
+    "source": "E05_vallas_generadas.png",
+    "source_sha256": "40c42f9b274be876663e9b78a564a3e753e73a4e4d726439775b4293621948fd",
+    "scale": 0.10495626822157435,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        19,
+        8,
+        28,
+        44
+      ],
+      "pivot": [
+        24,
+        44
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  },
+  {
+    "id": "E05_fence_corner_ne",
+    "source_grid_rect": [
+      543,
+      0,
+      1086,
+      724
+    ],
+    "alpha_threshold": 192,
+    "source": "E05_vallas_generadas.png",
+    "source_sha256": "40c42f9b274be876663e9b78a564a3e753e73a4e4d726439775b4293621948fd",
+    "scale": 0.093841642228739,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        10,
+        39,
+        44
+      ],
+      "pivot": [
+        23,
+        44
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  },
+  {
+    "id": "E05_fence_t_nes",
+    "source_grid_rect": [
+      1086,
+      0,
+      1629,
+      724
+    ],
+    "alpha_threshold": 192,
+    "source": "E05_vallas_generadas.png",
+    "source_sha256": "40c42f9b274be876663e9b78a564a3e753e73a4e4d726439775b4293621948fd",
+    "scale": 0.0700218818380744,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        19,
+        39,
+        44
+      ],
+      "pivot": [
+        23,
+        44
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  },
+  {
+    "id": "E05_fence_cross",
+    "source_grid_rect": [
+      1629,
+      0,
+      2172,
+      724
+    ],
+    "alpha_threshold": 192,
+    "source": "E05_vallas_generadas.png",
+    "source_sha256": "40c42f9b274be876663e9b78a564a3e753e73a4e4d726439775b4293621948fd",
+    "scale": 0.07529411764705882,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        10,
+        39,
+        44
+      ],
+      "pivot": [
+        23,
+        44
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  }
+]

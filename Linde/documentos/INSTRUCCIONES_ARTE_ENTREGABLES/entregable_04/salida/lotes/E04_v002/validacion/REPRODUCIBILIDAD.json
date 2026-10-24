@@ -1,0 +1,7 @@
+{
+  "comando": "python herramientas/E04_continuar.py",
+  "exit_code": 0,
+  "assets_sha256_identicos": 50,
+  "stdout": "E04 v002: 10243 comprobaciones de continuidad/reconstrucción; reutilización sin generación nueva",
+  "nuevas_generaciones": 0
+}

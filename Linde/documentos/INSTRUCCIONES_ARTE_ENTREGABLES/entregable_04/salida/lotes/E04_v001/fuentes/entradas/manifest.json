@@ -1,0 +1,1198 @@
+{
+  "assets": [
+    {
+      "alpha_binary": true,
+      "bbox": [
+        9,
+        9,
+        32,
+        35
+      ],
+      "collision_hint": "small trunk only; canopy depth separately",
+      "expected_draw_size": [
+        32,
+        32
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/tree_broadleaf.png",
+      "id": "tree_broadleaf",
+      "opaque_pixels": 753.0,
+      "pivot": [
+        25,
+        44
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        0.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        11,
+        5,
+        27,
+        38
+      ],
+      "collision_hint": "small trunk only; canopy depth separately",
+      "expected_draw_size": [
+        32,
+        32
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/tree_pine.png",
+      "id": "tree_pine",
+      "opaque_pixels": 541.0,
+      "pivot": [
+        24,
+        43
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        1.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        10,
+        14,
+        26,
+        29
+      ],
+      "collision_hint": "small trunk only; canopy depth separately",
+      "expected_draw_size": [
+        32,
+        32
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/tree_fruit.png",
+      "id": "tree_fruit",
+      "opaque_pixels": 497.0,
+      "pivot": [
+        23,
+        43
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        2.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        11,
+        22,
+        27,
+        22
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/rock.png",
+      "id": "rock",
+      "opaque_pixels": 401.0,
+      "pivot": [
+        24,
+        44
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        3.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        8,
+        13,
+        36,
+        30
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/ore_copper.png",
+      "id": "ore_copper",
+      "opaque_pixels": 722.0,
+      "pivot": [
+        26,
+        43
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        0.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        9,
+        15,
+        31,
+        27
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/bush_berries.png",
+      "id": "bush_berries",
+      "opaque_pixels": 630.0,
+      "pivot": [
+        24,
+        42
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        1.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        10,
+        11,
+        25,
+        31
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/barrel.png",
+      "id": "barrel",
+      "opaque_pixels": 651.0,
+      "pivot": [
+        22,
+        42
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        2.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        7,
+        18,
+        33,
+        22
+      ],
+      "expected_draw_size": [
+        32,
+        32
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/fence_horizontal.png",
+      "id": "fence_horizontal",
+      "opaque_pixels": 536.0,
+      "pivot": [
+        23,
+        40
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        3.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        5,
+        17,
+        33,
+        27
+      ],
+      "expected_draw_size": [
+        24,
+        24
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/chest_closed.png",
+      "id": "chest_closed",
+      "opaque_pixels": 851.0,
+      "pivot": [
+        21,
+        44
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        0.0,
+        2.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        11,
+        15,
+        26,
+        29
+      ],
+      "expected_draw_size": [
+        24,
+        24
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/chest_open.png",
+      "id": "chest_open",
+      "opaque_pixels": 686.0,
+      "pivot": [
+        24,
+        44
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        1.0,
+        2.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        8,
+        14,
+        29,
+        30
+      ],
+      "expected_draw_size": [
+        24,
+        24
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/chest_treasure.png",
+      "id": "chest_treasure",
+      "opaque_pixels": 770.0,
+      "pivot": [
+        22,
+        44
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        2.0,
+        2.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        3,
+        18,
+        39,
+        27
+      ],
+      "expected_draw_size": [
+        32,
+        32
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/workbench.png",
+      "id": "workbench",
+      "opaque_pixels": 881.0,
+      "pivot": [
+        22,
+        45
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        3.0,
+        2.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        9,
+        4,
+        33,
+        36
+      ],
+      "expected_draw_size": [
+        24,
+        24
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/furnace.png",
+      "id": "furnace",
+      "opaque_pixels": 844.0,
+      "pivot": [
+        25,
+        40
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        0.0,
+        3.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        11,
+        9,
+        25,
+        31
+      ],
+      "expected_draw_size": [
+        32,
+        32
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/bed.png",
+      "id": "bed",
+      "opaque_pixels": 661.0,
+      "pivot": [
+        23,
+        40
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        1.0,
+        3.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        7,
+        13,
+        35,
+        26
+      ],
+      "expected_draw_size": [
+        32,
+        32
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/palisade.png",
+      "id": "palisade",
+      "opaque_pixels": 732.0,
+      "pivot": [
+        24,
+        39
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        2.0,
+        3.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        7,
+        6,
+        28,
+        37
+      ],
+      "expected_draw_size": [
+        48,
+        48
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/bridge_vertical.png",
+      "id": "bridge_vertical",
+      "opaque_pixels": 830.0,
+      "pivot": [
+        21,
+        43
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        48.0,
+        48.0
+      ],
+      "source": "originales/objetos.png",
+      "source_cell": [
+        3.0,
+        3.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/grass.png",
+      "id": "grass",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        0.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/grass_flecks.png",
+      "id": "grass_flecks",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        1.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/path_fill.png",
+      "id": "path_fill",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        2.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/water_fill.png",
+      "id": "water_fill",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        3.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/path_grass_n.png",
+      "id": "path_grass_n",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        0.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/path_grass_s.png",
+      "id": "path_grass_s",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        1.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/path_grass_w.png",
+      "id": "path_grass_w",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        2.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/path_grass_e.png",
+      "id": "path_grass_e",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        3.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/water_shore_n.png",
+      "id": "water_shore_n",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        0.0,
+        2.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/water_shore_s.png",
+      "id": "water_shore_s",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        1.0,
+        2.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/water_shore_w.png",
+      "id": "water_shore_w",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        2.0,
+        2.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/water_shore_e.png",
+      "id": "water_shore_e",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        3.0,
+        2.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/floor_wood.png",
+      "id": "floor_wood",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        0.0,
+        3.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/wall_stone.png",
+      "id": "wall_stone",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        1.0,
+        3.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/floor_ruins.png",
+      "id": "floor_ruins",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        2.0,
+        3.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "expected_draw_size": [
+        16,
+        16
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/steps_n.png",
+      "id": "steps_n",
+      "opaque_pixels": 256.0,
+      "pivot": [
+        8,
+        16
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        16.0,
+        16.0
+      ],
+      "source": "originales/terreno.png",
+      "source_cell": [
+        3.0,
+        3.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_verified"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        10,
+        21,
+        81,
+        68
+      ],
+      "expected_draw_size": [
+        96,
+        96
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/cottage_closed.png",
+      "id": "cottage_closed",
+      "opaque_pixels": 4333.0,
+      "pivot": [
+        50,
+        89
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        96.0,
+        96.0
+      ],
+      "source": "originales/edificios.png",
+      "source_cell": [
+        0.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        6,
+        19,
+        85,
+        69
+      ],
+      "expected_draw_size": [
+        96,
+        96
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/cottage_open.png",
+      "id": "cottage_open",
+      "opaque_pixels": 4630.0,
+      "pivot": [
+        48,
+        88
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        96.0,
+        96.0
+      ],
+      "source": "originales/edificios.png",
+      "source_cell": [
+        1.0,
+        0.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        12,
+        13,
+        79,
+        62
+      ],
+      "expected_draw_size": [
+        96,
+        96
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/crafting_shed.png",
+      "id": "crafting_shed",
+      "opaque_pixels": 4140.0,
+      "pivot": [
+        51,
+        75
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        96.0,
+        96.0
+      ],
+      "source": "originales/edificios.png",
+      "source_cell": [
+        0.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    },
+    {
+      "alpha_binary": true,
+      "bbox": [
+        9,
+        19,
+        80,
+        63
+      ],
+      "expected_draw_size": [
+        64,
+        64
+      ],
+      "expected_draw_size_status": "proposed_for_16px_grid_not_map_validated",
+      "file": "assets/cave_entrance.png",
+      "id": "cave_entrance",
+      "opaque_pixels": 3918.0,
+      "pivot": [
+        49,
+        82
+      ],
+      "pivot_status": "bbox_bottom_center_provisional_ground_anchor",
+      "size": [
+        96.0,
+        96.0
+      ],
+      "source": "originales/edificios.png",
+      "source_cell": [
+        1.0,
+        1.0
+      ],
+      "status": "initial_native_candidate",
+      "tileability": "not_applicable"
+    }
+  ],
+  "collision": "author separately; pivot is provisional",
+  "count": 36.0,
+  "method": "Godot nearest resize per equal atlas cell; alpha threshold 0.5; no palette normalization"
+}

@@ -1,0 +1,291 @@
+{
+  "id": "E05_INVENTARIO",
+  "entradas": [
+    {
+      "id": "E05_FUENTE_barrel",
+      "ruta": "fuentes/entradas/assets/barrel.png",
+      "sha256": "b0c19aa1d8fe59ae4e28979552fc68ea14ddf78137d6c8f27e04e2df64c1c84a",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        10,
+        11,
+        35,
+        42
+      ],
+      "pivot": [
+        22,
+        42
+      ]
+    },
+    {
+      "id": "E05_FUENTE_bed",
+      "ruta": "fuentes/entradas/assets/bed.png",
+      "sha256": "f7be4c7faf8f09fbb2da68d857b59f5b8811a10e0d0a9da963f7f69a66939c25",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        9,
+        36,
+        40
+      ],
+      "pivot": [
+        24,
+        40
+      ]
+    },
+    {
+      "id": "E05_FUENTE_bridge_vertical",
+      "ruta": "fuentes/entradas/assets/bridge_vertical.png",
+      "sha256": "4806b3f9dad38b087e23396b45efdd80b8cde558396df8755319452fa75f98b3",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        6,
+        35,
+        43
+      ],
+      "pivot": [
+        21,
+        43
+      ]
+    },
+    {
+      "id": "E05_FUENTE_cave_entrance",
+      "ruta": "fuentes/entradas/assets/cave_entrance.png",
+      "sha256": "622b34e4f5a69c32cc0ac32161cea05e670ff3f7c55aba9f3421d6ede3c36298",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        9,
+        19,
+        89,
+        82
+      ],
+      "pivot": [
+        49,
+        82
+      ]
+    },
+    {
+      "id": "E05_FUENTE_chest_closed",
+      "ruta": "fuentes/entradas/assets/chest_closed.png",
+      "sha256": "a05921b4188eda9c8f28d6ff5dfa5687a249b25c66920bdfda779990a0c565cf",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        5,
+        17,
+        38,
+        44
+      ],
+      "pivot": [
+        22,
+        44
+      ]
+    },
+    {
+      "id": "E05_FUENTE_chest_open",
+      "ruta": "fuentes/entradas/assets/chest_open.png",
+      "sha256": "f3ca0b0a6a76cb1ad7c71bca35e7e7a08223384c9942e3b9278f69986e19d7d8",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        15,
+        37,
+        44
+      ],
+      "pivot": [
+        24,
+        44
+      ]
+    },
+    {
+      "id": "E05_FUENTE_chest_treasure",
+      "ruta": "fuentes/entradas/assets/chest_treasure.png",
+      "sha256": "a51b1d720e85d3c5f1657f4dbea07fdc2c3ed744bae7125a031067df978dcf89",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        8,
+        14,
+        37,
+        44
+      ],
+      "pivot": [
+        22,
+        44
+      ]
+    },
+    {
+      "id": "E05_FUENTE_cottage_closed",
+      "ruta": "fuentes/entradas/assets/cottage_closed.png",
+      "sha256": "436407cde8a5f0b72ec5d289059c98087c6d2097e888315a0697573f8f5b9474",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        10,
+        21,
+        91,
+        89
+      ],
+      "pivot": [
+        50,
+        89
+      ]
+    },
+    {
+      "id": "E05_FUENTE_cottage_open",
+      "ruta": "fuentes/entradas/assets/cottage_open.png",
+      "sha256": "ee60e83dc1402f848dcdf2c28ad8f198fba7d2e01568c50ca9856cf5dba42a1a",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        6,
+        19,
+        91,
+        88
+      ],
+      "pivot": [
+        48,
+        88
+      ]
+    },
+    {
+      "id": "E05_FUENTE_crafting_shed",
+      "ruta": "fuentes/entradas/assets/crafting_shed.png",
+      "sha256": "b4ec746612c63bd3eda0a9aa75b4a8d99c8a8a7422729eabd99b8cd275debf29",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        12,
+        13,
+        91,
+        75
+      ],
+      "pivot": [
+        52,
+        75
+      ]
+    },
+    {
+      "id": "E05_FUENTE_fence_horizontal",
+      "ruta": "fuentes/entradas/assets/fence_horizontal.png",
+      "sha256": "ca46412a6838c0e381d8136bbfcc2bc9b9a6abd7263dfa750a823fa7631667d1",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        18,
+        40,
+        40
+      ],
+      "pivot": [
+        24,
+        40
+      ]
+    },
+    {
+      "id": "E05_FUENTE_floor_wood",
+      "ruta": "fuentes/entradas/assets/floor_wood.png",
+      "sha256": "0342932ca24917096a0b8b8b01ecaba78eadb626b4602d601b1cf3657e8ee6e0",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E05_FUENTE_furnace",
+      "ruta": "fuentes/entradas/assets/furnace.png",
+      "sha256": "6112d44fd8ec0872be3abff40f70c5be9f470df598ba2ad6529d943764c578b0",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        4,
+        42,
+        40
+      ],
+      "pivot": [
+        26,
+        40
+      ]
+    },
+    {
+      "id": "E05_FUENTE_palisade",
+      "ruta": "fuentes/entradas/assets/palisade.png",
+      "sha256": "d03fb26e8704d9d6a41177276c0e9ddc56b72c8c6b43b8a4b6073baabefa78a2",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        13,
+        42,
+        39
+      ],
+      "pivot": [
+        24,
+        39
+      ]
+    },
+    {
+      "id": "E05_FUENTE_workbench",
+      "ruta": "fuentes/entradas/assets/workbench.png",
+      "sha256": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        3,
+        18,
+        42,
+        45
+      ],
+      "pivot": [
+        22,
+        45
+      ]
+    }
+  ],
+  "estado": "inicio; muestras de escala/anclas, no aceptación de lote final"
+}

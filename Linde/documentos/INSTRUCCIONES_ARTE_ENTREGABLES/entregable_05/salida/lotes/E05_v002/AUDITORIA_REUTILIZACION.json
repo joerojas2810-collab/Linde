@@ -1,0 +1,387 @@
+{
+  "id": "E05_AUDITORIA",
+  "png_revisados_repositorio": 2057,
+  "hashes_png_distintos": 546,
+  "fuentes_originales_localizadas": true,
+  "nuevas_generaciones_en_esta_revision": 0,
+  "recursos": [
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_barrel.png",
+      "sha256": "b0c19aa1d8fe59ae4e28979552fc68ea14ddf78137d6c8f27e04e2df64c1c84a",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/barrel.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/barrel.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/barrel.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/barrel.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/barrel.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_barrel.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/barrel.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_bed.png",
+      "sha256": "f7be4c7faf8f09fbb2da68d857b59f5b8811a10e0d0a9da963f7f69a66939c25",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/bed.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/bed.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/bed.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/bed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/bed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_bed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/bed.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_bridge_vertical.png",
+      "sha256": "4806b3f9dad38b087e23396b45efdd80b8cde558396df8755319452fa75f98b3",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/bridge_vertical.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/bridge_vertical.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/bridge_vertical.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/bridge_vertical.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/bridge_vertical.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_bridge_vertical.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/bridge_vertical.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_abierta_muestra.png",
+      "sha256": "2a2f05cef35494e389ec10979c0f15048dfea137a31be3d1cea5b97b00a2d04e",
+      "dimensiones": [
+        96,
+        96
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_abierta_muestra.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_fachada_sin_puerta.png",
+      "sha256": "45cd862c4c396ae9ed5c943ffa595474abef08a200cc4c4d6a463c384d769b9a",
+      "dimensiones": [
+        96,
+        96
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_fachada_sin_puerta.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_interior_logico.png",
+      "sha256": "1b8fe859d7017de5723b8e84b3b814726c40e63e6cb8acff7c1982d35d9ea333",
+      "dimensiones": [
+        128,
+        112
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_interior_logico.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_puerta_cerrada.png",
+      "sha256": "9df8f01cbd50b20da077ab22a77442ee9b5884dafcbb3ba95e499ba76edcd627",
+      "dimensiones": [
+        96,
+        96
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_puerta_cerrada.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_tejado.png",
+      "sha256": "301e63abe7d9a48bd83d85fb65038e89cb63e9008c6d67ca8e3403be474d219c",
+      "dimensiones": [
+        96,
+        96
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_casa_tejado.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_cave_entrance.png",
+      "sha256": "622b34e4f5a69c32cc0ac32161cea05e670ff3f7c55aba9f3421d6ede3c36298",
+      "dimensiones": [
+        96,
+        96
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/cave_entrance.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/cave_entrance.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/cave_entrance.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/cave_entrance.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/cave_entrance.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_cave_entrance.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/cave_entrance.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_chest_closed.png",
+      "sha256": "a05921b4188eda9c8f28d6ff5dfa5687a249b25c66920bdfda779990a0c565cf",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/chest_closed.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/chest_closed.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_closed.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_closed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_closed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_chest_closed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/chest_closed.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_chest_open.png",
+      "sha256": "f3ca0b0a6a76cb1ad7c71bca35e7e7a08223384c9942e3b9278f69986e19d7d8",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/chest_open.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/chest_open.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_open.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_open.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_open.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_chest_open.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/chest_open.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_chest_treasure.png",
+      "sha256": "a51b1d720e85d3c5f1657f4dbea07fdc2c3ed744bae7125a031067df978dcf89",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/chest_treasure.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/chest_treasure.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_treasure.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_treasure.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/chest_treasure.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_chest_treasure.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/chest_treasure.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_cottage_closed.png",
+      "sha256": "436407cde8a5f0b72ec5d289059c98087c6d2097e888315a0697573f8f5b9474",
+      "dimensiones": [
+        96,
+        96
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/cottage_closed.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/cottage_closed.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/cottage_closed.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/cottage_closed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/cottage_closed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_cottage_closed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/cottage_closed.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_cottage_open.png",
+      "sha256": "ee60e83dc1402f848dcdf2c28ad8f198fba7d2e01568c50ca9856cf5dba42a1a",
+      "dimensiones": [
+        96,
+        96
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/cottage_open.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/cottage_open.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/cottage_open.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/cottage_open.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/cottage_open.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_cottage_open.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/cottage_open.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_crafting_shed.png",
+      "sha256": "b4ec746612c63bd3eda0a9aa75b4a8d99c8a8a7422729eabd99b8cd275debf29",
+      "dimensiones": [
+        96,
+        96
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/crafting_shed.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/crafting_shed.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/crafting_shed.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/crafting_shed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/crafting_shed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_crafting_shed.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/crafting_shed.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_corner_ne.png",
+      "sha256": "bcd3584acf0377fd2fe8a4cc79b400d424c8f7ef7a978f935045af09be56c24e",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_corner_ne.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_cross.png",
+      "sha256": "a2db14f0908cec5f333ee196ecb1cf71061ef7b22f42246e628627c1ef53378c",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_cross.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_horizontal.png",
+      "sha256": "ca46412a6838c0e381d8136bbfcc2bc9b9a6abd7263dfa750a823fa7631667d1",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/fence_horizontal.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/fence_horizontal.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/fence_horizontal.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/fence_horizontal.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/fence_horizontal.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_horizontal.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/fence_horizontal.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_t_nes.png",
+      "sha256": "6ddd2ee3153a79cedff839eacae551e027c1c099e24dc32462d7912ca35378fe",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_t_nes.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_vertical.png",
+      "sha256": "162965fd4d1e44f9ee7bb7b6f68f25c2727f9b3160c2610d721a8333fbe0664c",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_fence_vertical.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_floor_wood.png",
+      "sha256": "0342932ca24917096a0b8b8b01ecaba78eadb626b4602d601b1cf3657e8ee6e0",
+      "dimensiones": [
+        16,
+        16
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/floor_wood.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/floor_wood.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/floor_wood.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/floor_wood.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/floor_wood.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_floor_wood.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/floor_wood.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_furnace.png",
+      "sha256": "6112d44fd8ec0872be3abff40f70c5be9f470df598ba2ad6529d943764c578b0",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/furnace.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/furnace.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/furnace.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/furnace.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/furnace.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_furnace.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/furnace.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_palisade.png",
+      "sha256": "d03fb26e8704d9d6a41177276c0e9ddc56b72c8c6b43b8a4b6073baabefa78a2",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/palisade.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/palisade.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/palisade.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/palisade.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/palisade.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_palisade.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/palisade.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    },
+    {
+      "ruta_previa": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_workbench.png",
+      "sha256": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345",
+      "dimensiones": [
+        48,
+        48
+      ],
+      "copias_identicas": [
+        "Linde/arte-entregado/biblioteca_01/escenario/assets/workbench.png",
+        "Linde/arte-entregado/biblioteca_01/mapa_muestra/assets/escenario/workbench.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_1_ARTE_Y_RECURSOS/entradas/arte-entregado/biblioteca_01/escenario/assets/workbench.png",
+        "Linde/documentos/INSTRUCCIONES_2_IA/IA_2_GODOT_INTEGRACION_Y_QA/entradas/arte-entregado/biblioteca_01/escenario/assets/workbench.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entradas/arte-entregado/biblioteca_01/escenario/assets/workbench.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/assets/E05_workbench.png",
+        "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_05/salida/lotes/E05_v001/fuentes/entradas/assets/workbench.png"
+      ],
+      "decision": "reutilizar como entrada congelada; ajustes posteriores con procedencia y versión nueva"
+    }
+  ]
+}

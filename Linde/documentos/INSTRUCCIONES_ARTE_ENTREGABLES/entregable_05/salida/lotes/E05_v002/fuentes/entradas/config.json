@@ -1,0 +1,163 @@
+[
+  {
+    "source": "originales/objetos.png",
+    "cols": 4,
+    "rows": 4,
+    "size": 48,
+    "ids": [
+      "tree_broadleaf",
+      "tree_pine",
+      "tree_fruit",
+      "rock",
+      "ore_copper",
+      "bush_berries",
+      "barrel",
+      "fence_horizontal",
+      "chest_closed",
+      "chest_open",
+      "chest_treasure",
+      "workbench",
+      "furnace",
+      "bed",
+      "palisade",
+      "bridge_vertical"
+    ],
+    "rects": [
+      [
+        0,
+        0,
+        320,
+        400
+      ],
+      [
+        320,
+        0,
+        320,
+        400
+      ],
+      [
+        640,
+        0,
+        300,
+        400
+      ],
+      [
+        940,
+        0,
+        314,
+        400
+      ],
+      [
+        0,
+        400,
+        320,
+        300
+      ],
+      [
+        320,
+        400,
+        320,
+        300
+      ],
+      [
+        640,
+        400,
+        300,
+        300
+      ],
+      [
+        940,
+        400,
+        314,
+        300
+      ],
+      [
+        0,
+        700,
+        320,
+        245
+      ],
+      [
+        320,
+        700,
+        320,
+        245
+      ],
+      [
+        640,
+        700,
+        300,
+        245
+      ],
+      [
+        940,
+        700,
+        314,
+        245
+      ],
+      [
+        0,
+        945,
+        320,
+        309
+      ],
+      [
+        320,
+        945,
+        320,
+        309
+      ],
+      [
+        640,
+        945,
+        300,
+        309
+      ],
+      [
+        940,
+        945,
+        314,
+        309
+      ]
+    ],
+    "kind": "object"
+  },
+  {
+    "source": "originales/terreno.png",
+    "cols": 4,
+    "rows": 4,
+    "size": 16,
+    "ids": [
+      "grass",
+      "grass_flecks",
+      "path_fill",
+      "water_fill",
+      "path_grass_n",
+      "path_grass_s",
+      "path_grass_w",
+      "path_grass_e",
+      "water_shore_n",
+      "water_shore_s",
+      "water_shore_w",
+      "water_shore_e",
+      "floor_wood",
+      "wall_stone",
+      "floor_ruins",
+      "steps_n"
+    ],
+    "kind": "tile"
+  },
+  {
+    "source": "originales/edificios.png",
+    "cols": 2,
+    "rows": 2,
+    "size": 96,
+    "ids": [
+      "cottage_closed",
+      "cottage_open",
+      "crafting_shed",
+      "cave_entrance"
+    ],
+    "kind": "building"
+  }
+]

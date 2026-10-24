@@ -1,0 +1,1284 @@
+{
+  "id": "E05_v001",
+  "estado": "primer_sublote_muestras_no_cerrado",
+  "recursos": [
+    {
+      "id": "E05_E05_barrel",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_barrel.png",
+      "sha256": "b0c19aa1d8fe59ae4e28979552fc68ea14ddf78137d6c8f27e04e2df64c1c84a",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        10,
+        11,
+        35,
+        42
+      ],
+      "pivot": [
+        22,
+        42
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_bed",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_bed.png",
+      "sha256": "f7be4c7faf8f09fbb2da68d857b59f5b8811a10e0d0a9da963f7f69a66939c25",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        9,
+        36,
+        40
+      ],
+      "pivot": [
+        24,
+        40
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_bridge_vertical",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_bridge_vertical.png",
+      "sha256": "4806b3f9dad38b087e23396b45efdd80b8cde558396df8755319452fa75f98b3",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        6,
+        35,
+        43
+      ],
+      "pivot": [
+        21,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_casa_abierta_muestra",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_casa_abierta_muestra.png",
+      "sha256": "2a2f05cef35494e389ec10979c0f15048dfea137a31be3d1cea5b97b00a2d04e",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        10,
+        21,
+        91,
+        89
+      ],
+      "pivot": [
+        50,
+        89
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_casa_fachada_sin_puerta",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_casa_fachada_sin_puerta.png",
+      "sha256": "45cd862c4c396ae9ed5c943ffa595474abef08a200cc4c4d6a463c384d769b9a",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        15,
+        65,
+        86,
+        89
+      ],
+      "pivot": [
+        50,
+        89
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_casa_interior_logico",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_casa_interior_logico.png",
+      "sha256": "1b8fe859d7017de5723b8e84b3b814726c40e63e6cb8acff7c1982d35d9ea333",
+      "size": [
+        128,
+        112
+      ],
+      "bbox": [
+        16,
+        16,
+        112,
+        112
+      ],
+      "pivot": [
+        64,
+        112
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_casa_puerta_cerrada",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_casa_puerta_cerrada.png",
+      "sha256": "9df8f01cbd50b20da077ab22a77442ee9b5884dafcbb3ba95e499ba76edcd627",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        34,
+        65,
+        52,
+        89
+      ],
+      "pivot": [
+        43,
+        89
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_casa_tejado",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_casa_tejado.png",
+      "sha256": "301e63abe7d9a48bd83d85fb65038e89cb63e9008c6d67ca8e3403be474d219c",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        10,
+        21,
+        91,
+        65
+      ],
+      "pivot": [
+        50,
+        65
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_cave_entrance",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_cave_entrance.png",
+      "sha256": "622b34e4f5a69c32cc0ac32161cea05e670ff3f7c55aba9f3421d6ede3c36298",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        9,
+        19,
+        89,
+        82
+      ],
+      "pivot": [
+        49,
+        82
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_chest_closed",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_chest_closed.png",
+      "sha256": "a05921b4188eda9c8f28d6ff5dfa5687a249b25c66920bdfda779990a0c565cf",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        5,
+        17,
+        38,
+        44
+      ],
+      "pivot": [
+        22,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_chest_open",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_chest_open.png",
+      "sha256": "f3ca0b0a6a76cb1ad7c71bca35e7e7a08223384c9942e3b9278f69986e19d7d8",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        15,
+        37,
+        44
+      ],
+      "pivot": [
+        24,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_chest_treasure",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_chest_treasure.png",
+      "sha256": "a51b1d720e85d3c5f1657f4dbea07fdc2c3ed744bae7125a031067df978dcf89",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        8,
+        14,
+        37,
+        44
+      ],
+      "pivot": [
+        22,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_cottage_closed",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_cottage_closed.png",
+      "sha256": "436407cde8a5f0b72ec5d289059c98087c6d2097e888315a0697573f8f5b9474",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        10,
+        21,
+        91,
+        89
+      ],
+      "pivot": [
+        50,
+        89
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_cottage_open",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_cottage_open.png",
+      "sha256": "ee60e83dc1402f848dcdf2c28ad8f198fba7d2e01568c50ca9856cf5dba42a1a",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        6,
+        19,
+        91,
+        88
+      ],
+      "pivot": [
+        48,
+        88
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_crafting_shed",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_crafting_shed.png",
+      "sha256": "b4ec746612c63bd3eda0a9aa75b4a8d99c8a8a7422729eabd99b8cd275debf29",
+      "size": [
+        96,
+        96
+      ],
+      "bbox": [
+        12,
+        13,
+        91,
+        75
+      ],
+      "pivot": [
+        52,
+        75
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_fence_corner_ne",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_fence_corner_ne.png",
+      "sha256": "bcd3584acf0377fd2fe8a4cc79b400d424c8f7ef7a978f935045af09be56c24e",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        10,
+        39,
+        44
+      ],
+      "pivot": [
+        23,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_fence_cross",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_fence_cross.png",
+      "sha256": "a2db14f0908cec5f333ee196ecb1cf71061ef7b22f42246e628627c1ef53378c",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        10,
+        39,
+        44
+      ],
+      "pivot": [
+        23,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_fence_horizontal",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_fence_horizontal.png",
+      "sha256": "ca46412a6838c0e381d8136bbfcc2bc9b9a6abd7263dfa750a823fa7631667d1",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        18,
+        40,
+        40
+      ],
+      "pivot": [
+        24,
+        40
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_fence_t_nes",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_fence_t_nes.png",
+      "sha256": "6ddd2ee3153a79cedff839eacae551e027c1c099e24dc32462d7912ca35378fe",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        19,
+        39,
+        44
+      ],
+      "pivot": [
+        23,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_fence_vertical",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_fence_vertical.png",
+      "sha256": "162965fd4d1e44f9ee7bb7b6f68f25c2727f9b3160c2610d721a8333fbe0664c",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        19,
+        8,
+        28,
+        44
+      ],
+      "pivot": [
+        24,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_floor_wood",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_floor_wood.png",
+      "sha256": "0342932ca24917096a0b8b8b01ecaba78eadb626b4602d601b1cf3657e8ee6e0",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_furnace",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_furnace.png",
+      "sha256": "6112d44fd8ec0872be3abff40f70c5be9f470df598ba2ad6529d943764c578b0",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        4,
+        42,
+        40
+      ],
+      "pivot": [
+        26,
+        40
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_palisade",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_palisade.png",
+      "sha256": "d03fb26e8704d9d6a41177276c0e9ddc56b72c8c6b43b8a4b6073baabefa78a2",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        7,
+        13,
+        42,
+        39
+      ],
+      "pivot": [
+        24,
+        39
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_E05_workbench",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E05_workbench.png",
+      "sha256": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        3,
+        18,
+        42,
+        45
+      ],
+      "pivot": [
+        22,
+        45
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+        "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+        "Revisar extremos conectables de las nuevas vallas en rejilla16",
+        "Pivotes y profundidad en integración",
+        "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+      ]
+    },
+    {
+      "id": "E05_CONTRATO_PROPUESTO_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "CONTRATO_PROPUESTO.json",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "cfe1da6b67e5df01278f52ee12c66ddbb316b905dd52753764c7b49ed8df953d"
+    },
+    {
+      "id": "E05_fuentes__E05_hashes_entradas_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E05_hashes_entradas.json",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "88003437bbc7124a8481f86571a5ce0dedcde89f42d5618c74a2dc859644c53d"
+    },
+    {
+      "id": "E05_fuentes__E05_PROMPT_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E05_PROMPT.md",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "78eaa51a72b3b081106078d379a10cf340ec57c2f1bd7530ac33958facf33206"
+    },
+    {
+      "id": "E05_fuentes__E05_recortes_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E05_recortes.json",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "f45d7af05f06370436c643ac9f0a126c323b2e0468b6940e9a034bbcb1a32cc5"
+    },
+    {
+      "id": "E05_fuentes__E05_referencia_objetos_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E05_referencia_objetos.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "b2d97c3625d1b8b7cc7a5d5dd6aa172aa581d95c6c845830dd544a9008f8c97f"
+    },
+    {
+      "id": "E05_fuentes__E05_vallas_generadas_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E05_vallas_generadas.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "40c42f9b274be876663e9b78a564a3e753e73a4e4d726439775b4293621948fd"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__barrel_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/barrel.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "b0c19aa1d8fe59ae4e28979552fc68ea14ddf78137d6c8f27e04e2df64c1c84a"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__bed_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/bed.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "f7be4c7faf8f09fbb2da68d857b59f5b8811a10e0d0a9da963f7f69a66939c25"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__bridge_vertical_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/bridge_vertical.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "4806b3f9dad38b087e23396b45efdd80b8cde558396df8755319452fa75f98b3"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__cave_entrance_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/cave_entrance.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "622b34e4f5a69c32cc0ac32161cea05e670ff3f7c55aba9f3421d6ede3c36298"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__chest_closed_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/chest_closed.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "a05921b4188eda9c8f28d6ff5dfa5687a249b25c66920bdfda779990a0c565cf"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__chest_open_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/chest_open.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "f3ca0b0a6a76cb1ad7c71bca35e7e7a08223384c9942e3b9278f69986e19d7d8"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__chest_treasure_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/chest_treasure.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "a51b1d720e85d3c5f1657f4dbea07fdc2c3ed744bae7125a031067df978dcf89"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__cottage_closed_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/cottage_closed.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "436407cde8a5f0b72ec5d289059c98087c6d2097e888315a0697573f8f5b9474"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__cottage_open_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/cottage_open.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ee60e83dc1402f848dcdf2c28ad8f198fba7d2e01568c50ca9856cf5dba42a1a"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__crafting_shed_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/crafting_shed.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "b4ec746612c63bd3eda0a9aa75b4a8d99c8a8a7422729eabd99b8cd275debf29"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__fence_horizontal_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/fence_horizontal.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ca46412a6838c0e381d8136bbfcc2bc9b9a6abd7263dfa750a823fa7631667d1"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__floor_wood_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/floor_wood.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "0342932ca24917096a0b8b8b01ecaba78eadb626b4602d601b1cf3657e8ee6e0"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__furnace_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/furnace.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "6112d44fd8ec0872be3abff40f70c5be9f470df598ba2ad6529d943764c578b0"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__palisade_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/palisade.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "d03fb26e8704d9d6a41177276c0e9ddc56b72c8c6b43b8a4b6073baabefa78a2"
+    },
+    {
+      "id": "E05_fuentes__entradas__assets__workbench_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/workbench.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345"
+    },
+    {
+      "id": "E05_fuentes__entradas__config_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/config.json",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "b568fa053d43e1e6fc38c54da5d78383a7789093a41e6883c49b4a289776c679"
+    },
+    {
+      "id": "E05_fuentes__entradas__E00_personaje_escala_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/E00_personaje_escala.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ca27efc8830dbe165bee7188f143b21a6a99c809791735d4a0e4df0bc1734347"
+    },
+    {
+      "id": "E05_fuentes__entradas__LEEME_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/LEEME.md",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "1e4e6b32b2b4c7678d7f28572d7e33e3561d0f55df552a90ceb154052bbfeb46"
+    },
+    {
+      "id": "E05_fuentes__entradas__manifest_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/manifest.json",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "8e6084f1ab1e98bd14f6ed46e54930539501bb604e5a5cfc1c3f441cea41b0da"
+    },
+    {
+      "id": "E05_fuentes__entradas__PROMPTS_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/PROMPTS.md",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "3ef03090c7974b0686150a65558ad7a7357a9260414ae3394c9a2846de818e58"
+    },
+    {
+      "id": "E05_GALERIA_html",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "GALERIA.html",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "dc6bf637ed17e9caaa0adecda551a827aa551ac566afa98c6aa7475118289d84"
+    },
+    {
+      "id": "E05_INFORME_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "INFORME.md",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "c4826870f928867ccc2059c521317c10d9837d3fd7e273d2635669a2cc394b00"
+    },
+    {
+      "id": "E05_INVENTARIO_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "INVENTARIO.json",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "7fb5ed69ff503a5fa266642e85c3a6f2761a0aa9162bf8545ade95b6f0be8883"
+    },
+    {
+      "id": "E05_MUESTRA_gd",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "MUESTRA.gd",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "2d8b8f07effa3e59ba503b09a2eeb60601c231ddb57acd4a8b3178de16f77e24"
+    },
+    {
+      "id": "E05_MUESTRA_tscn",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "MUESTRA.tscn",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "37f0ea805596ce6a8f1569215d7be9603ee816d5cb3bd9d442fe10d888eb313e"
+    },
+    {
+      "id": "E05_previews__E05_muestra_nativa_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "previews/E05_muestra_nativa.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "6c204c787c8fae23882172bcbc8c1f7ed32d34ac961a3a2980abb2e6d573a77f"
+    },
+    {
+      "id": "E05_previews__E05_muestra_x2_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "previews/E05_muestra_x2.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "3c6847c84e676b86f6643128090ea15d80dab8de444b959376aab7b8747de5be"
+    },
+    {
+      "id": "E05_project_godot",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "project.godot",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "0dba78cc88c2940322ceab6dfb2a5fd4d4d4ea71cb44c3e4437335679e3916d9"
+    },
+    {
+      "id": "E05_validacion__E05_muestra_godot_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/E05_muestra_godot.png",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "7ee0f9fa72a06ec7dd973e06cce6fcb54d93d59eeadc01bd69c14aabc72a7487"
+    },
+    {
+      "id": "E05_validacion__IMPORTACION_log",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/IMPORTACION.log",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "8be60fcc766ad3929653b6e2184ff1ddbced544656eb530ab3482e64116978a5"
+    },
+    {
+      "id": "E05_validacion__IMPORTACION_txt",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/IMPORTACION.txt",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "6766d2b28b1a9be5947dae3dfed6415a915de9a31f654eef0de466e620452416"
+    },
+    {
+      "id": "E05_validacion__MOTOR_log",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/MOTOR.log",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "5bb943af698b13d8a4f01fccd36e886f7cbe4e5b0dd8d175f8861fdfd6a8de45"
+    },
+    {
+      "id": "E05_validacion__RENDER_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/RENDER.json",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ad4d25f1130ce346312a0fd734a8eb5445fffa0e79e82493c09a1b35fb381377"
+    },
+    {
+      "id": "E05_validacion__RESULTADOS_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/RESULTADOS.json",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "3b98cb7cf1b801a1ae28a4c5835de0182e6380ab6818fa3a4876a9f890f10742"
+    },
+    {
+      "id": "E05_validacion__REVISION_INICIAL_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/REVISION_INICIAL.md",
+      "origen": "Compilación del primer sublote E05",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ad899ec43d219382866dbabeaac3795fb3aec8d8ff2a4177023c6449c9f1856f"
+    }
+  ],
+  "contrato": "CONTRATO_PROPUESTO.json"
+}

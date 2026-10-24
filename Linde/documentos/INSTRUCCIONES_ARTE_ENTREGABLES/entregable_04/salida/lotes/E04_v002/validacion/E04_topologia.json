@@ -1,0 +1,15 @@
+{
+  "resultado": "CORRECTO",
+  "interfaces_y_reconstruccion": 10243,
+  "patrones": 47,
+  "mascaras_entrada": 256,
+  "vecindarios_exhaustivos_por_eje": 4096,
+  "tipos": [
+    "path",
+    "water",
+    "ruins",
+    "wall"
+  ],
+  "compara": "máscara semántica y RGBA en cada borde compartido de dos celdas conectadas",
+  "limite": "No certifica calidad artística ni todos los contactos entre materiales diferentes."
+}

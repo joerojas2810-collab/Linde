@@ -1,0 +1,10 @@
+{
+  "resultado": "CORRECTO",
+  "comprobaciones_geometria": 77,
+  "puerta_fija": true,
+  "pixeles_distintos_fuera_portal": 0,
+  "suelo_y_paredes_siguen_logica_8x7": true,
+  "base_cofres_identica": true,
+  "vallas_16_mascaras_puertos_16px": true,
+  "limites": "No equivale a aceptación visual. No cambia colisiones ni comportamiento de puerta/cosecha/construcción."
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "E04_stump_broadleaf",
+    "source_grid_rect": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "alpha_threshold": 192,
+    "source": "E04_estados_generados.png",
+    "source_sha256": "47816d9d8f3fa10c093731dd3f9882c6d9a44f43fa2bccc81da96b7eeef436cb",
+    "scale": 0.07894736842105263,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        18,
+        35,
+        33,
+        44
+      ],
+      "pivot": [
+        26,
+        44
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  },
+  {
+    "id": "E04_stump_pine",
+    "source_grid_rect": [
+      512,
+      0,
+      1024,
+      512
+    ],
+    "alpha_threshold": 192,
+    "source": "E04_estados_generados.png",
+    "source_sha256": "47816d9d8f3fa10c093731dd3f9882c6d9a44f43fa2bccc81da96b7eeef436cb",
+    "scale": 0.08904109589041095,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        18,
+        34,
+        31,
+        43
+      ],
+      "pivot": [
+        24,
+        43
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  },
+  {
+    "id": "E04_stump_fruit",
+    "source_grid_rect": [
+      1024,
+      0,
+      1536,
+      512
+    ],
+    "alpha_threshold": 192,
+    "source": "E04_estados_generados.png",
+    "source_sha256": "47816d9d8f3fa10c093731dd3f9882c6d9a44f43fa2bccc81da96b7eeef436cb",
+    "scale": 0.08163265306122448,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        17,
+        35,
+        29,
+        43
+      ],
+      "pivot": [
+        23,
+        43
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  },
+  {
+    "id": "E04_rock_depleted",
+    "source_grid_rect": [
+      0,
+      512,
+      512,
+      1024
+    ],
+    "alpha_threshold": 192,
+    "source": "E04_estados_generados.png",
+    "source_sha256": "47816d9d8f3fa10c093731dd3f9882c6d9a44f43fa2bccc81da96b7eeef436cb",
+    "scale": 0.10266159695817491,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        33,
+        38,
+        44
+      ],
+      "pivot": [
+        24,
+        44
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  },
+  {
+    "id": "E04_ore_depleted",
+    "source_grid_rect": [
+      512,
+      512,
+      1024,
+      1024
+    ],
+    "alpha_threshold": 192,
+    "source": "E04_estados_generados.png",
+    "source_sha256": "47816d9d8f3fa10c093731dd3f9882c6d9a44f43fa2bccc81da96b7eeef436cb",
+    "scale": 0.10294117647058823,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        29,
+        42,
+        43
+      ],
+      "pivot": [
+        26,
+        43
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  },
+  {
+    "id": "E04_bush_without_berries",
+    "source_grid_rect": [
+      1024,
+      512,
+      1536,
+      1024
+    ],
+    "alpha_threshold": 192,
+    "source": "E04_estados_generados.png",
+    "source_sha256": "47816d9d8f3fa10c093731dd3f9882c6d9a44f43fa2bccc81da96b7eeef436cb",
+    "scale": 0.09574468085106383,
+    "native": {
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        15,
+        40,
+        42
+      ],
+      "pivot": [
+        24,
+        42
+      ]
+    },
+    "estado": "muestra candidata; no certifica coincidencia artística"
+  }
+]

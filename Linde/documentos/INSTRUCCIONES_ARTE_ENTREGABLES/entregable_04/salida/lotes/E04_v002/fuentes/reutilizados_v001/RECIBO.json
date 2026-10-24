@@ -1,0 +1,33 @@
+{
+  "version": "E04_v001",
+  "recursos": {
+    "E04_bush_berries.png": "aeaba4d8d3e1b20725f3fe27eddd0878b8082f2f7b24b194fc3c5c043e9597e5",
+    "E04_bush_without_berries.png": "6c3bb49e1f7265e8c52cdedb2f901c0297f16ec4287a8e5f5050518dc70ebdc9",
+    "E04_floor_ruins.png": "e6c0b27fb6d36a7775e3e8225726db17f8d0aebc7dc71bce7bd17675681f23ce",
+    "E04_grass.png": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8",
+    "E04_grass_flecks.png": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852",
+    "E04_ore_copper.png": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168",
+    "E04_ore_depleted.png": "fa81ad9199c12cbc2c0d120bda99668275d4228c0976551ff5644d4d37316a10",
+    "E04_path_47.png": "588ed8b6309b548e9f074d5b7cdcbaca9f2cf742b7c592da3602f9d15515c15c",
+    "E04_path_conexiones.json": "e71807786e1b5224dff063a435932230c725ef4432b80d5251bb9851aa6031d0",
+    "E04_rock.png": "dd28ff33a0b63207092639eed98c6a264549eed28b95f2e080430baf62202236",
+    "E04_rock_depleted.png": "9c9716fcfabf0d9dff1545d1f7c2785b88f6f0f432f45dc489939d8b739dd650",
+    "E04_steps_n.png": "a90e6cfdfa45c376f0405b073806fc1e8731594e937dbe0f17f967f5c8292775",
+    "E04_stump_broadleaf.png": "61705bb2d1735c21d97b23e91be6306ef70333f68f6fb5242a5570410d426dfa",
+    "E04_stump_fruit.png": "94f21ae5aa82b3b04bca20281bee1d6b112c426a67b15a1225057befad25448e",
+    "E04_stump_pine.png": "49507c43de1cf8f885cf5e75dcb91fbe42220c4974ca85e5eb5aa65b6ee809bf",
+    "E04_tree_broadleaf.png": "a37c01868c1e96d4fbf697987cc1fd2d87c0ad5fa8abc4e973fafb6aec02bc10",
+    "E04_tree_broadleaf_copa.png": "04d63684717d0887c78cd561164a46d2f24b9180f6b12c05dc3880871828c2b7",
+    "E04_tree_broadleaf_tronco.png": "9603ba42a33500aec9ddcd220b881494a31ed114c1caf4d6282f745a1367e535",
+    "E04_tree_fruit.png": "3f8ead1870dca9456c55be3ff3721c0d3853415fa76c66fe2497fce0aa870c2c",
+    "E04_tree_fruit_copa.png": "f7373e193ce6ffee0af9606325f0e4d8f9d58c6a159afe879a37590711fe5bca",
+    "E04_tree_fruit_tronco.png": "54ce6ad205676b3e57856a01ce993ac9266a53e39b9c792730920005b994c644",
+    "E04_tree_pine.png": "4a41a6c366f67043fc9c6b9cf8ec8928d24c88dd6474b0632864e1ee6111b366",
+    "E04_tree_pine_copa.png": "59d2896b965668e27974c98496adf2bff3b6ac6c7f98ae6d1f3270b61fd67a9f",
+    "E04_tree_pine_tronco.png": "5dd7e82ffbbea61100f722b03ba15a2beb356721d315e0ac327a06b7dbe0cec0",
+    "E04_wall_stone.png": "49a1ba2df37bac4ec79037bc2be6aa1a7005d7ad19a432890b7eec157a9510b2",
+    "E04_water_47.png": "7281101a54f47038e03c0ffbad29507b8f403e589292223412745093ff772fc5",
+    "E04_water_anim_propuesto.png": "e5797303a78eeaf0ec65db9b6d4652c6b0c2557164f475345904185551bced87",
+    "E04_water_conexiones.json": "deed60f4527fb47cbd964ce282f19619cc008128ce5940cf8a9cd24b5520cc35"
+  }
+}

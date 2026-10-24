@@ -1,0 +1,190 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Inicialización del proyecto (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Escaneando la estructura del archivo...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Cargando nombres de clases globales...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verificando GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creando scripts de carga automática...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Inicializando plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Iniciando escaneo de archivos...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Escaneando acciones... (54 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | E04_bush_berries.png[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | E04_bush_without_berries.png[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | E04_floor_ruins.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | E04_grass.png[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | E04_grass_flecks.png[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | E04_ore_copper.png[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | E04_ore_depleted.png[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | E04_path_47.png[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | E04_rock.png[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | E04_rock_depleted.png[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | E04_steps_n.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | E04_stump_broadleaf.png[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | E04_stump_fruit.png[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | E04_stump_pine.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | E04_tree_broadleaf.png[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | E04_tree_broadleaf_copa.png[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | E04_tree_broadleaf_tronco.png[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | E04_tree_fruit.png[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | E04_tree_fruit_copa.png[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | E04_tree_fruit_tronco.png[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | E04_tree_pine.png[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | E04_tree_pine_copa.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | E04_tree_pine_tronco.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | E04_wall_stone.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | E04_water_47.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | E04_water_anim_propuesto.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | bush_berries.png[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | floor_ruins.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | grass.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | grass_flecks.png[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | ore_copper.png[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | path_fill.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | path_grass_e.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | path_grass_n.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | path_grass_s.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | path_grass_w.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | rock.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | steps_n.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | tree_broadleaf.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | tree_fruit.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | tree_pine.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | wall_stone.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | water_fill.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | water_shore_e.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | water_shore_n.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | water_shore_s.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | water_shore_w.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | E00_personaje_escala.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | E04_estados_generados.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | E04_referencia_estados.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | E04_muestra_nativa.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | E04_muestra_x2.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | E04_path_47_x4.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | E04_water_47_x4.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importación de Assets (54 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   1% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   3% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   5% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   7% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   9% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  10% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  12% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  14% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  16% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  18% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  20% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  21% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  23% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  25% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  29% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  30% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  32% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  34% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  36% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  38% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  40% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  41% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  43% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  45% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  47% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  49% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  52% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  54% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  56% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  58% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  60% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  61% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  63% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  65% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  67% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  69% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  70% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  74% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  76% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  78% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  80% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  81% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  83% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  85% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  87% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  89% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  90% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  92% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  94% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[  96% ] [90m[1mreimport[22m | Preparando archivos para reimportarlos...[39m[0m
+[   0% ] [90m[1mreimport[22m | Ejecutando operaciones de pre-reimportación...[39m[0m
+[   0% ] [90m[1mreimport[22m | floor_ruins.png[39m[0m
+[   1% ] [90m[1mreimport[22m | grass.png[39m[0m
+[   3% ] [90m[1mreimport[22m | grass_flecks.png[39m[0m
+[   5% ] [90m[1mreimport[22m | ore_copper.png[39m[0m
+[   7% ] [90m[1mreimport[22m | path_fill.png[39m[0m
+[   9% ] [90m[1mreimport[22m | path_grass_e.png[39m[0m
+[  10% ] [90m[1mreimport[22m | path_grass_n.png[39m[0m
+[  12% ] [90m[1mreimport[22m | path_grass_s.png[39m[0m
+[  14% ] [90m[1mreimport[22m | path_grass_w.png[39m[0m
+[  16% ] [90m[1mreimport[22m | rock.png[39m[0m
+[  18% ] [90m[1mreimport[22m | steps_n.png[39m[0m
+[  20% ] [90m[1mreimport[22m | tree_broadleaf.png[39m[0m
+[  21% ] [90m[1mreimport[22m | tree_fruit.png[39m[0m
+[  23% ] [90m[1mreimport[22m | tree_pine.png[39m[0m
+[  25% ] [90m[1mreimport[22m | wall_stone.png[39m[0m
+[  27% ] [90m[1mreimport[22m | water_fill.png[39m[0m
+[  29% ] [90m[1mreimport[22m | water_shore_e.png[39m[0m
+[  30% ] [90m[1mreimport[22m | water_shore_n.png[39m[0m
+[  32% ] [90m[1mreimport[22m | water_shore_s.png[39m[0m
+[  34% ] [90m[1mreimport[22m | water_shore_w.png[39m[0m
+[  36% ] [90m[1mreimport[22m | E00_personaje_escala.png[39m[0m
+[  38% ] [90m[1mreimport[22m | E04_estados_generados.png[39m[0m
+[  40% ] [90m[1mreimport[22m | E04_referencia_estados.png[39m[0m
+[  41% ] [90m[1mreimport[22m | E04_muestra_nativa.png[39m[0m
+[  43% ] [90m[1mreimport[22m | E04_muestra_x2.png[39m[0m
+[  45% ] [90m[1mreimport[22m | E04_path_47_x4.png[39m[0m
+[  47% ] [90m[1mreimport[22m | E04_water_47_x4.png[39m[0m
+[  49% ] [90m[1mreimport[22m | E04_bush_berries.png[39m[0m
+[  50% ] [90m[1mreimport[22m | E04_bush_without_berries.png[39m[0m
+[  52% ] [90m[1mreimport[22m | E04_floor_ruins.png[39m[0m
+[  54% ] [90m[1mreimport[22m | E04_grass.png[39m[0m
+[  56% ] [90m[1mreimport[22m | E04_grass_flecks.png[39m[0m
+[  58% ] [90m[1mreimport[22m | E04_ore_copper.png[39m[0m
+[  60% ] [90m[1mreimport[22m | E04_ore_depleted.png[39m[0m
+[  61% ] [90m[1mreimport[22m | E04_path_47.png[39m[0m
+[  63% ] [90m[1mreimport[22m | E04_rock.png[39m[0m
+[  65% ] [90m[1mreimport[22m | E04_rock_depleted.png[39m[0m
+[  67% ] [90m[1mreimport[22m | E04_steps_n.png[39m[0m
+[  69% ] [90m[1mreimport[22m | E04_stump_broadleaf.png[39m[0m
+[  70% ] [90m[1mreimport[22m | E04_stump_fruit.png[39m[0m
+[  72% ] [90m[1mreimport[22m | E04_stump_pine.png[39m[0m
+[  74% ] [90m[1mreimport[22m | E04_tree_broadleaf.png[39m[0m
+[  76% ] [90m[1mreimport[22m | E04_tree_broadleaf_copa.png[39m[0m
+[  78% ] [90m[1mreimport[22m | E04_tree_broadleaf_tronco.png[39m[0m
+[  80% ] [90m[1mreimport[22m | E04_tree_fruit.png[39m[0m
+[  81% ] [90m[1mreimport[22m | E04_tree_fruit_copa.png[39m[0m
+[  83% ] [90m[1mreimport[22m | E04_tree_fruit_tronco.png[39m[0m
+[  85% ] [90m[1mreimport[22m | E04_tree_pine.png[39m[0m
+[  87% ] [90m[1mreimport[22m | E04_tree_pine_copa.png[39m[0m
+[  89% ] [90m[1mreimport[22m | E04_tree_pine_tronco.png[39m[0m
+[  90% ] [90m[1mreimport[22m | E04_wall_stone.png[39m[0m
+[  92% ] [90m[1mreimport[22m | E04_water_47.png[39m[0m
+[  94% ] [90m[1mreimport[22m | E04_water_anim_propuesto.png[39m[0m
+[  96% ] [90m[1mreimport[22m | bush_berries.png[39m[0m
+[  98% ] [90m[1mreimport[22m | Finalizando la importación de recursos...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importación de Assets (54 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Ejecutando operaciones post-reimportación...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Cargando editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Cargando diseño del editor...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Cargando docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

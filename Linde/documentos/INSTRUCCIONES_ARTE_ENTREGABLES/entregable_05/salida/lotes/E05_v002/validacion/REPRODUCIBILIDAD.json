@@ -1,0 +1,7 @@
+{
+  "comando": "python herramientas/E05_continuar.py",
+  "exit_code": 0,
+  "assets_sha256_identicos": 46,
+  "stdout": "E05 v002: 77 comprobaciones; casa modular, vallas y cofre desde fuentes existentes",
+  "nuevas_generaciones": 0
+}

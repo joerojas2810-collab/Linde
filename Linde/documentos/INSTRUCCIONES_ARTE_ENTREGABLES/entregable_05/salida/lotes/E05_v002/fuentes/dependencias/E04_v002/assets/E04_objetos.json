@@ -1,0 +1,578 @@
+{
+  "E04_bush_berries": {
+    "archivo": "E04_bush_berries.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      15,
+      40,
+      42
+    ],
+    "pivote": [
+      24,
+      42
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_bush_without_berries": {
+    "archivo": "E04_bush_without_berries.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      15,
+      40,
+      42
+    ],
+    "pivote": [
+      24,
+      42
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_floor_ruins": {
+    "archivo": "E04_floor_ruins.png",
+    "canvas": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "pivote": [
+      8,
+      16
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_grass": {
+    "archivo": "E04_grass.png",
+    "canvas": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "pivote": [
+      8,
+      16
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_grass_flecks": {
+    "archivo": "E04_grass_flecks.png",
+    "canvas": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "pivote": [
+      8,
+      16
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_ore_copper": {
+    "archivo": "E04_ore_copper.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      8,
+      13,
+      44,
+      43
+    ],
+    "pivote": [
+      26,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_ore_depleted": {
+    "archivo": "E04_ore_depleted.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      29,
+      42,
+      43
+    ],
+    "pivote": [
+      26,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_rock": {
+    "archivo": "E04_rock.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      22,
+      38,
+      44
+    ],
+    "pivote": [
+      24,
+      44
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_rock_depleted": {
+    "archivo": "E04_rock_depleted.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      33,
+      38,
+      44
+    ],
+    "pivote": [
+      24,
+      44
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_steps_n": {
+    "archivo": "E04_steps_n.png",
+    "canvas": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "pivote": [
+      8,
+      16
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_stump_broadleaf": {
+    "archivo": "E04_stump_broadleaf.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      18,
+      35,
+      33,
+      44
+    ],
+    "pivote": [
+      25,
+      44
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_stump_fruit": {
+    "archivo": "E04_stump_fruit.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      17,
+      35,
+      29,
+      43
+    ],
+    "pivote": [
+      23,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_stump_pine": {
+    "archivo": "E04_stump_pine.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      18,
+      34,
+      31,
+      43
+    ],
+    "pivote": [
+      24,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_broadleaf": {
+    "archivo": "E04_tree_broadleaf.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      9,
+      41,
+      44
+    ],
+    "pivote": [
+      25,
+      44
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_broadleaf_64": {
+    "archivo": "E04_tree_broadleaf_64.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      5,
+      2,
+      59,
+      62
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_broadleaf_64_copa": {
+    "archivo": "E04_tree_broadleaf_64_copa.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      5,
+      2,
+      59,
+      45
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_broadleaf_64_tronco": {
+    "archivo": "E04_tree_broadleaf_64_tronco.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      13,
+      45,
+      53,
+      62
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_broadleaf_copa": {
+    "archivo": "E04_tree_broadleaf_copa.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      9,
+      41,
+      34
+    ],
+    "pivote": [
+      25,
+      44
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_broadleaf_tronco": {
+    "archivo": "E04_tree_broadleaf_tronco.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      14,
+      34,
+      38,
+      44
+    ],
+    "pivote": [
+      25,
+      44
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_fruit": {
+    "archivo": "E04_tree_fruit.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      10,
+      14,
+      36,
+      43
+    ],
+    "pivote": [
+      23,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_fruit_64": {
+    "archivo": "E04_tree_fruit_64.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      5,
+      2,
+      59,
+      62
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_fruit_64_copa": {
+    "archivo": "E04_tree_fruit_64_copa.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      13,
+      2,
+      55,
+      17
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_fruit_64_tronco": {
+    "archivo": "E04_tree_fruit_64_tronco.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      5,
+      17,
+      59,
+      62
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_fruit_copa": {
+    "archivo": "E04_tree_fruit_copa.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      14,
+      14,
+      32,
+      21
+    ],
+    "pivote": [
+      23,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_fruit_tronco": {
+    "archivo": "E04_tree_fruit_tronco.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      10,
+      21,
+      36,
+      43
+    ],
+    "pivote": [
+      23,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_pine": {
+    "archivo": "E04_tree_pine.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      5,
+      38,
+      43
+    ],
+    "pivote": [
+      24,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_pine_64": {
+    "archivo": "E04_tree_pine_64.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      11,
+      2,
+      53,
+      62
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_pine_64_copa": {
+    "archivo": "E04_tree_pine_64_copa.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      11,
+      2,
+      53,
+      51
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_pine_64_tronco": {
+    "archivo": "E04_tree_pine_64_tronco.png",
+    "canvas": [
+      64,
+      64
+    ],
+    "bbox": [
+      16,
+      51,
+      46,
+      62
+    ],
+    "pivote": [
+      32,
+      62
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_pine_copa": {
+    "archivo": "E04_tree_pine_copa.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      5,
+      38,
+      36
+    ],
+    "pivote": [
+      24,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_tree_pine_tronco": {
+    "archivo": "E04_tree_pine_tronco.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      14,
+      36,
+      33,
+      43
+    ],
+    "pivote": [
+      24,
+      43
+    ],
+    "escala_dibujada": 1
+  },
+  "E04_wall_stone": {
+    "archivo": "E04_wall_stone.png",
+    "canvas": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "pivote": [
+      8,
+      16
+    ],
+    "escala_dibujada": 1
+  }
+}

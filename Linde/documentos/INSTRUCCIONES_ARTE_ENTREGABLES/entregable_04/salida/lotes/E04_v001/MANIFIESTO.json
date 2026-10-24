@@ -1,0 +1,1450 @@
+{
+  "id": "E04_v001",
+  "estado": "primer_sublote_muestras_no_cerrado",
+  "recursos": [
+    {
+      "id": "E04_E04_bush_berries",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_bush_berries.png",
+      "sha256": "aeaba4d8d3e1b20725f3fe27eddd0878b8082f2f7b24b194fc3c5c043e9597e5",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        15,
+        40,
+        42
+      ],
+      "pivot": [
+        24,
+        42
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_bush_without_berries",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_bush_without_berries.png",
+      "sha256": "6c3bb49e1f7265e8c52cdedb2f901c0297f16ec4287a8e5f5050518dc70ebdc9",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        15,
+        40,
+        42
+      ],
+      "pivot": [
+        24,
+        42
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_floor_ruins",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_floor_ruins.png",
+      "sha256": "e6c0b27fb6d36a7775e3e8225726db17f8d0aebc7dc71bce7bd17675681f23ce",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_grass",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_grass.png",
+      "sha256": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_grass_flecks",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_grass_flecks.png",
+      "sha256": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_ore_copper",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_ore_copper.png",
+      "sha256": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        8,
+        13,
+        44,
+        43
+      ],
+      "pivot": [
+        26,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_ore_depleted",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_ore_depleted.png",
+      "sha256": "fa81ad9199c12cbc2c0d120bda99668275d4228c0976551ff5644d4d37316a10",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        29,
+        42,
+        43
+      ],
+      "pivot": [
+        26,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_path_47",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_path_47.png",
+      "sha256": "588ed8b6309b548e9f074d5b7cdcbaca9f2cf742b7c592da3602f9d15515c15c",
+      "size": [
+        128,
+        96
+      ],
+      "bbox": [
+        0,
+        0,
+        128,
+        96
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_assets__E04_path_conexiones_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "assets/E04_path_conexiones.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "e71807786e1b5224dff063a435932230c725ef4432b80d5251bb9851aa6031d0"
+    },
+    {
+      "id": "E04_E04_rock",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_rock.png",
+      "sha256": "dd28ff33a0b63207092639eed98c6a264549eed28b95f2e080430baf62202236",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        22,
+        38,
+        44
+      ],
+      "pivot": [
+        24,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_rock_depleted",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_rock_depleted.png",
+      "sha256": "9c9716fcfabf0d9dff1545d1f7c2785b88f6f0f432f45dc489939d8b739dd650",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        33,
+        38,
+        44
+      ],
+      "pivot": [
+        24,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_steps_n",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_steps_n.png",
+      "sha256": "a90e6cfdfa45c376f0405b073806fc1e8731594e937dbe0f17f967f5c8292775",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_stump_broadleaf",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_stump_broadleaf.png",
+      "sha256": "61705bb2d1735c21d97b23e91be6306ef70333f68f6fb5242a5570410d426dfa",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        18,
+        35,
+        33,
+        44
+      ],
+      "pivot": [
+        26,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_stump_fruit",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_stump_fruit.png",
+      "sha256": "94f21ae5aa82b3b04bca20281bee1d6b112c426a67b15a1225057befad25448e",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        17,
+        35,
+        29,
+        43
+      ],
+      "pivot": [
+        23,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_stump_pine",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_stump_pine.png",
+      "sha256": "49507c43de1cf8f885cf5e75dcb91fbe42220c4974ca85e5eb5aa65b6ee809bf",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        18,
+        34,
+        31,
+        43
+      ],
+      "pivot": [
+        24,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_broadleaf",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_broadleaf.png",
+      "sha256": "a37c01868c1e96d4fbf697987cc1fd2d87c0ad5fa8abc4e973fafb6aec02bc10",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        9,
+        41,
+        44
+      ],
+      "pivot": [
+        25,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_broadleaf_copa",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_broadleaf_copa.png",
+      "sha256": "04d63684717d0887c78cd561164a46d2f24b9180f6b12c05dc3880871828c2b7",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        9,
+        41,
+        34
+      ],
+      "pivot": [
+        25,
+        34
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_broadleaf_tronco",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_broadleaf_tronco.png",
+      "sha256": "9603ba42a33500aec9ddcd220b881494a31ed114c1caf4d6282f745a1367e535",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        14,
+        34,
+        38,
+        44
+      ],
+      "pivot": [
+        26,
+        44
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_fruit",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_fruit.png",
+      "sha256": "3f8ead1870dca9456c55be3ff3721c0d3853415fa76c66fe2497fce0aa870c2c",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        10,
+        14,
+        36,
+        43
+      ],
+      "pivot": [
+        23,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_fruit_copa",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_fruit_copa.png",
+      "sha256": "f7373e193ce6ffee0af9606325f0e4d8f9d58c6a159afe879a37590711fe5bca",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        14,
+        14,
+        32,
+        21
+      ],
+      "pivot": [
+        23,
+        21
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_fruit_tronco",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_fruit_tronco.png",
+      "sha256": "54ce6ad205676b3e57856a01ce993ac9266a53e39b9c792730920005b994c644",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        10,
+        21,
+        36,
+        43
+      ],
+      "pivot": [
+        23,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_pine",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_pine.png",
+      "sha256": "4a41a6c366f67043fc9c6b9cf8ec8928d24c88dd6474b0632864e1ee6111b366",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        5,
+        38,
+        43
+      ],
+      "pivot": [
+        24,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_pine_copa",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_pine_copa.png",
+      "sha256": "59d2896b965668e27974c98496adf2bff3b6ac6c7f98ae6d1f3270b61fd67a9f",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        5,
+        38,
+        36
+      ],
+      "pivot": [
+        24,
+        36
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_tree_pine_tronco",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_tree_pine_tronco.png",
+      "sha256": "5dd7e82ffbbea61100f722b03ba15a2beb356721d315e0ac327a06b7dbe0cec0",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        14,
+        36,
+        33,
+        43
+      ],
+      "pivot": [
+        24,
+        43
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_wall_stone",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_wall_stone.png",
+      "sha256": "49a1ba2df37bac4ec79037bc2be6aa1a7005d7ad19a432890b7eec157a9510b2",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_water_47",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_water_47.png",
+      "sha256": "7281101a54f47038e03c0ffbad29507b8f403e589292223412745093ff772fc5",
+      "size": [
+        128,
+        96
+      ],
+      "bbox": [
+        0,
+        0,
+        128,
+        96
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_E04_water_anim_propuesto",
+      "tipo": "png_nativo_candidato",
+      "ruta": "assets/E04_water_anim_propuesto.png",
+      "sha256": "e5797303a78eeaf0ec65db9b6d4652c6b0c2557164f475345904185551bced87",
+      "size": [
+        64,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        64,
+        16
+      ],
+      "pivot": [
+        32,
+        16
+      ],
+      "origen": "Fuentes de escenario suministradas + recortes/generación referenciada del propio entregable",
+      "herramienta": "image_gen integrada para estados/vallas nuevos; Python/Pillow/NumPy para compilación y composición",
+      "licencia_restricciones": "No certificada; conservar procedencia y consultar autores antes de redistribuir.",
+      "estado": "muestra_candidata",
+      "pendientes": [
+        "Aceptar escala y paleta aplicadas antes de serie",
+        "Revisar visualmente esquinas y transiciones en el mapa real",
+        "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+        "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+      ]
+    },
+    {
+      "id": "E04_assets__E04_water_conexiones_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "assets/E04_water_conexiones.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "deed60f4527fb47cbd964ce282f19619cc008128ce5940cf8a9cd24b5520cc35"
+    },
+    {
+      "id": "E04_CONTRATO_PROPUESTO_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "CONTRATO_PROPUESTO.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "a4d46497c7906d5690c02c923364c2db0af1cdafb375880ae0f93205629abfa0"
+    },
+    {
+      "id": "E04_fuentes__E04_estados_generados_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E04_estados_generados.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "47816d9d8f3fa10c093731dd3f9882c6d9a44f43fa2bccc81da96b7eeef436cb"
+    },
+    {
+      "id": "E04_fuentes__E04_hashes_entradas_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E04_hashes_entradas.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "a393acc01a29585cb02acb342fe7b4325a33d1e534c88837a1b6a65e0eed71b6"
+    },
+    {
+      "id": "E04_fuentes__E04_PROMPT_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E04_PROMPT.md",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "4cfcf07a89667a0b587015d716e01a65ca782f53332f20fb4dbdac173effd216"
+    },
+    {
+      "id": "E04_fuentes__E04_recortes_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E04_recortes.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "18d653f850d60c2ec1eb6c3f69e7be9323a5868c85b1aed87da7d34b46ba7482"
+    },
+    {
+      "id": "E04_fuentes__E04_referencia_estados_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/E04_referencia_estados.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "e1edc0b1aa3edbf1ab32c703545cd31e6612384603a8d77eaaffe18fda12aaf1"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__bush_berries_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/bush_berries.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "aeaba4d8d3e1b20725f3fe27eddd0878b8082f2f7b24b194fc3c5c043e9597e5"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__floor_ruins_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/floor_ruins.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "e6c0b27fb6d36a7775e3e8225726db17f8d0aebc7dc71bce7bd17675681f23ce"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__grass_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/grass.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__grass_flecks_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/grass_flecks.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__ore_copper_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/ore_copper.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__path_fill_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/path_fill.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "1a544a37dec6e6bbecf6019dc5f7c0185a353bb85223fc6d13173115aecbdedf"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__path_grass_e_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/path_grass_e.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "499bac02785d67c366d152b3974f081d88fe9faafdf42757c42ad1399aa1ed2f"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__path_grass_n_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/path_grass_n.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ba1f7bd7cea1a3262b7cb915a4da0363f487eaa362ab8428b4577a8128adf9c7"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__path_grass_s_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/path_grass_s.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "a470ec7f5d4149a03af070a0536db0d6b9200ceed4712dd4f14fbcbf510b6da0"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__path_grass_w_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/path_grass_w.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "74ef08330831edec6e6cbaa5a1d5199fc4d0fe9b872261a12dd7a97fcf6d59c0"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__rock_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/rock.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "dd28ff33a0b63207092639eed98c6a264549eed28b95f2e080430baf62202236"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__steps_n_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/steps_n.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "a90e6cfdfa45c376f0405b073806fc1e8731594e937dbe0f17f967f5c8292775"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__tree_broadleaf_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/tree_broadleaf.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "a37c01868c1e96d4fbf697987cc1fd2d87c0ad5fa8abc4e973fafb6aec02bc10"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__tree_fruit_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/tree_fruit.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "3f8ead1870dca9456c55be3ff3721c0d3853415fa76c66fe2497fce0aa870c2c"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__tree_pine_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/tree_pine.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "4a41a6c366f67043fc9c6b9cf8ec8928d24c88dd6474b0632864e1ee6111b366"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__wall_stone_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/wall_stone.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "49a1ba2df37bac4ec79037bc2be6aa1a7005d7ad19a432890b7eec157a9510b2"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__water_fill_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/water_fill.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "6e35f33213b6f13b492bdf91ca07a151c3e96ec677545a099de71a79a582615c"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__water_shore_e_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/water_shore_e.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "abdb5707c3f2be38b2fc9ab34003e099a337c6ccc652d7bc7245feca394d1a04"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__water_shore_n_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/water_shore_n.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "d64ec4d643f8fa15806d666b1b7a8971360fdce95778f9c86ca8063a29ffe647"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__water_shore_s_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/water_shore_s.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "5e0e3da32b6ab90efc89872cdfe423f32650e4a0b6fda27d655721708da80448"
+    },
+    {
+      "id": "E04_fuentes__entradas__assets__water_shore_w_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/assets/water_shore_w.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "4d8073901b3ed2aebfe200ba287795912e3cd837e06e8588c5f192edef91e5d8"
+    },
+    {
+      "id": "E04_fuentes__entradas__config_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/config.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "b568fa053d43e1e6fc38c54da5d78383a7789093a41e6883c49b4a289776c679"
+    },
+    {
+      "id": "E04_fuentes__entradas__E00_personaje_escala_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/E00_personaje_escala.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ca27efc8830dbe165bee7188f143b21a6a99c809791735d4a0e4df0bc1734347"
+    },
+    {
+      "id": "E04_fuentes__entradas__LEEME_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/LEEME.md",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "1e4e6b32b2b4c7678d7f28572d7e33e3561d0f55df552a90ceb154052bbfeb46"
+    },
+    {
+      "id": "E04_fuentes__entradas__manifest_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/manifest.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "8e6084f1ab1e98bd14f6ed46e54930539501bb604e5a5cfc1c3f441cea41b0da"
+    },
+    {
+      "id": "E04_fuentes__entradas__PROMPTS_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "fuentes/entradas/PROMPTS.md",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "3ef03090c7974b0686150a65558ad7a7357a9260414ae3394c9a2846de818e58"
+    },
+    {
+      "id": "E04_GALERIA_html",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "GALERIA.html",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "53e42d94d8110e49bfe3c7dbb99dd489b0454137a7833588c8d6e02a583984d5"
+    },
+    {
+      "id": "E04_INFORME_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "INFORME.md",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "93e4f8cb484955d19be3ab6055ed4f462555b14c20516dd874f3c23e25b5e94d"
+    },
+    {
+      "id": "E04_INVENTARIO_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "INVENTARIO.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "8334a1876487636536af419065f87a98cb2c1c48b28062cc70ba04c44635bee6"
+    },
+    {
+      "id": "E04_MUESTRA_gd",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "MUESTRA.gd",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "0b5e11ed95e5a4220860d2645d2ce961b37f61dd95f51c94de4752adfde98eae"
+    },
+    {
+      "id": "E04_MUESTRA_tscn",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "MUESTRA.tscn",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "37f0ea805596ce6a8f1569215d7be9603ee816d5cb3bd9d442fe10d888eb313e"
+    },
+    {
+      "id": "E04_previews__E04_muestra_nativa_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "previews/E04_muestra_nativa.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "001bee5bfc9dd855bd37cd5728f3d7cfb29c225652399a5e33f216f664522c51"
+    },
+    {
+      "id": "E04_previews__E04_muestra_x2_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "previews/E04_muestra_x2.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "32b1e5c5fcf68d429c5adda371d5a839236c6b50fea8a70dc6af4bd9f8541083"
+    },
+    {
+      "id": "E04_previews__E04_path_47_x4_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "previews/E04_path_47_x4.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "8b0dfd3955e488071759b884e4dbe153504213ec05b0d4729f532e9b0f784efd"
+    },
+    {
+      "id": "E04_previews__E04_water_47_x4_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "previews/E04_water_47_x4.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ee728d88c483baff1fbe426a2051dd06a752ed5514ee74b680c4165dbbe25b44"
+    },
+    {
+      "id": "E04_project_godot",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "project.godot",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "e2c52a6bc7cba33bbc0d90c8eece2ad3b3ab0238b32165f2fe7fb1607e0ed284"
+    },
+    {
+      "id": "E04_validacion__E04_muestra_godot_png",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/E04_muestra_godot.png",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "7a8dc9021ca88d62316de507db18a5f78894161510671fa74e03ca01e3bf68e6"
+    },
+    {
+      "id": "E04_validacion__IMPORTACION_log",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/IMPORTACION.log",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "ac88999ee8cf60dfa0838107e7d9735e9e7ec678fb1d7fae6c61f4c0b7937c4b"
+    },
+    {
+      "id": "E04_validacion__IMPORTACION_txt",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/IMPORTACION.txt",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "1c769b532513dad04c93ebd86c54b4cbdc6c13134560cf5ce7e330123a5af05f"
+    },
+    {
+      "id": "E04_validacion__MOTOR_log",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/MOTOR.log",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "7cb3da9b4785ac7e519857013ee6c62daf525706dc48cc023e36590237e01584"
+    },
+    {
+      "id": "E04_validacion__RENDER_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/RENDER.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "9578707e1d2004b92cdda6c8fd2f6cea6c72448f179efc4bf3e2a4eec4f027a7"
+    },
+    {
+      "id": "E04_validacion__RESULTADOS_json",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/RESULTADOS.json",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "9ec2a8bec45b7220230017c23ac30f5f2dc9d2343a0f83f45f3657b1ddcdbc39"
+    },
+    {
+      "id": "E04_validacion__REVISION_INICIAL_md",
+      "tipo": "fuente_evidencia_o_contrato",
+      "ruta": "validacion/REVISION_INICIAL.md",
+      "origen": "Compilación del primer sublote E04",
+      "herramienta": "Godot 4.7.1 / Python/Pillow/NumPy / image_gen para fuentes nuevas",
+      "licencia_restricciones": "No certificada; conservar procedencia de las fuentes",
+      "estado": "inicio_no_cerrado",
+      "pendientes": [
+        "Revisión de escala/anclas antes de serie completa"
+      ],
+      "sha256": "f3902ff4f4a56463de69c7d0b0cf3d480bba740d65ac2874ccf56d92eadb8ae9"
+    }
+  ],
+  "contrato": "CONTRATO_PROPUESTO.json"
+}

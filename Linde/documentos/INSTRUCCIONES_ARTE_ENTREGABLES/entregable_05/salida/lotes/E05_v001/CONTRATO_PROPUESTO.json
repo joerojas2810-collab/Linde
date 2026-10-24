@@ -1,0 +1,59 @@
+{
+  "reconstruccion_casa_cerrada_exacta": true,
+  "puerta_rect_fuente": [
+    34,
+    65,
+    52,
+    89
+  ],
+  "casa_logica": {
+    "rect_celdas": [
+      24,
+      16,
+      8,
+      7
+    ],
+    "puerta_celda": [
+      27,
+      22
+    ],
+    "size_px": [
+      128,
+      112
+    ],
+    "umbral_local_px": [
+      56,
+      104
+    ]
+  },
+  "casa_muestra": {
+    "atlas": [
+      96,
+      96
+    ],
+    "traslacion_fuente_al_rect_logico": [
+      13,
+      23
+    ],
+    "ancla_umbral_fuente": [
+      43,
+      81
+    ],
+    "nota": "Ancla propuesta para mostrar desajuste. El sprite96 no cubre toda la huella lógica128x112; no declararlo modular terminado."
+  },
+  "ghost": "Proponer tintado del mismo PNG en el render; no se crea otro atlas.",
+  "pendientes": [
+    "Confirmar anclas y escala con muestra antes de producir la casa modular extendida",
+    "Completar paredes/fachada/tejado para huella lógica sin desplazar puerta ni colisión",
+    "Revisar extremos conectables de las nuevas vallas en rejilla16",
+    "Pivotes y profundidad en integración",
+    "Puente/cueva/cobertizo solo referencia separada, sin acceso nuevo"
+  ],
+  "id": "E05_CONTRATO_PROPUESTO",
+  "estado": "muestra inicial pendiente de revisión",
+  "escala_nativa": 1,
+  "escala_dibujada": 1,
+  "zoom_preview": 2,
+  "filtro": "nearest",
+  "colisiones_modificadas": false
+}

@@ -1,0 +1,202 @@
+{
+  "barrel": {
+    "archivo": "E05_barrel.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      10,
+      11,
+      35,
+      42
+    ],
+    "pivote": [
+      22,
+      42
+    ],
+    "escala_dibujada": 1,
+    "sha256": "b0c19aa1d8fe59ae4e28979552fc68ea14ddf78137d6c8f27e04e2df64c1c84a",
+    "reutilizado_sin_cambios": true
+  },
+  "bed": {
+    "archivo": "E05_bed.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      11,
+      9,
+      36,
+      40
+    ],
+    "pivote": [
+      23,
+      40
+    ],
+    "escala_dibujada": 1,
+    "sha256": "f7be4c7faf8f09fbb2da68d857b59f5b8811a10e0d0a9da963f7f69a66939c25",
+    "reutilizado_sin_cambios": true
+  },
+  "workbench": {
+    "archivo": "E05_workbench.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      3,
+      18,
+      42,
+      45
+    ],
+    "pivote": [
+      22,
+      45
+    ],
+    "escala_dibujada": 1,
+    "sha256": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345",
+    "reutilizado_sin_cambios": true
+  },
+  "furnace": {
+    "archivo": "E05_furnace.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      9,
+      4,
+      42,
+      40
+    ],
+    "pivote": [
+      25,
+      40
+    ],
+    "escala_dibujada": 1,
+    "sha256": "6112d44fd8ec0872be3abff40f70c5be9f470df598ba2ad6529d943764c578b0",
+    "reutilizado_sin_cambios": true
+  },
+  "palisade": {
+    "archivo": "E05_palisade.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      7,
+      13,
+      42,
+      39
+    ],
+    "pivote": [
+      24,
+      39
+    ],
+    "escala_dibujada": 1,
+    "sha256": "d03fb26e8704d9d6a41177276c0e9ddc56b72c8c6b43b8a4b6073baabefa78a2",
+    "reutilizado_sin_cambios": true
+  },
+  "chest_treasure": {
+    "archivo": "E05_chest_treasure.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      8,
+      14,
+      37,
+      44
+    ],
+    "pivote": [
+      22,
+      44
+    ],
+    "escala_dibujada": 1,
+    "sha256": "a51b1d720e85d3c5f1657f4dbea07fdc2c3ed744bae7125a031067df978dcf89",
+    "reutilizado_sin_cambios": true
+  },
+  "bridge_vertical": {
+    "archivo": "E05_bridge_vertical.png",
+    "canvas": [
+      48,
+      48
+    ],
+    "bbox": [
+      7,
+      6,
+      35,
+      43
+    ],
+    "pivote": [
+      21,
+      43
+    ],
+    "escala_dibujada": 1,
+    "sha256": "4806b3f9dad38b087e23396b45efdd80b8cde558396df8755319452fa75f98b3",
+    "reutilizado_sin_cambios": true
+  },
+  "crafting_shed": {
+    "archivo": "E05_crafting_shed.png",
+    "canvas": [
+      96,
+      96
+    ],
+    "bbox": [
+      12,
+      13,
+      91,
+      75
+    ],
+    "pivote": [
+      51,
+      75
+    ],
+    "escala_dibujada": 1,
+    "sha256": "b4ec746612c63bd3eda0a9aa75b4a8d99c8a8a7422729eabd99b8cd275debf29",
+    "reutilizado_sin_cambios": true
+  },
+  "cave_entrance": {
+    "archivo": "E05_cave_entrance.png",
+    "canvas": [
+      96,
+      96
+    ],
+    "bbox": [
+      9,
+      19,
+      89,
+      82
+    ],
+    "pivote": [
+      49,
+      82
+    ],
+    "escala_dibujada": 1,
+    "sha256": "622b34e4f5a69c32cc0ac32161cea05e670ff3f7c55aba9f3421d6ede3c36298",
+    "reutilizado_sin_cambios": true
+  },
+  "floor_wood": {
+    "archivo": "E05_floor_wood.png",
+    "canvas": [
+      16,
+      16
+    ],
+    "bbox": [
+      0,
+      0,
+      16,
+      16
+    ],
+    "pivote": [
+      8,
+      16
+    ],
+    "escala_dibujada": 1,
+    "sha256": "0342932ca24917096a0b8b8b01ecaba78eadb626b4602d601b1cf3657e8ee6e0",
+    "reutilizado_sin_cambios": true
+  }
+}

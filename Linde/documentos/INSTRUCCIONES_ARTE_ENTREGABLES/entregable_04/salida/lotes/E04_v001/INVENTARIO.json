@@ -1,0 +1,405 @@
+{
+  "id": "E04_INVENTARIO",
+  "entradas": [
+    {
+      "id": "E04_FUENTE_bush_berries",
+      "ruta": "fuentes/entradas/assets/bush_berries.png",
+      "sha256": "aeaba4d8d3e1b20725f3fe27eddd0878b8082f2f7b24b194fc3c5c043e9597e5",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        15,
+        40,
+        42
+      ],
+      "pivot": [
+        24,
+        42
+      ]
+    },
+    {
+      "id": "E04_FUENTE_floor_ruins",
+      "ruta": "fuentes/entradas/assets/floor_ruins.png",
+      "sha256": "e6c0b27fb6d36a7775e3e8225726db17f8d0aebc7dc71bce7bd17675681f23ce",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_grass",
+      "ruta": "fuentes/entradas/assets/grass.png",
+      "sha256": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_grass_flecks",
+      "ruta": "fuentes/entradas/assets/grass_flecks.png",
+      "sha256": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_ore_copper",
+      "ruta": "fuentes/entradas/assets/ore_copper.png",
+      "sha256": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        8,
+        13,
+        44,
+        43
+      ],
+      "pivot": [
+        26,
+        43
+      ]
+    },
+    {
+      "id": "E04_FUENTE_path_fill",
+      "ruta": "fuentes/entradas/assets/path_fill.png",
+      "sha256": "1a544a37dec6e6bbecf6019dc5f7c0185a353bb85223fc6d13173115aecbdedf",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_path_grass_e",
+      "ruta": "fuentes/entradas/assets/path_grass_e.png",
+      "sha256": "499bac02785d67c366d152b3974f081d88fe9faafdf42757c42ad1399aa1ed2f",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_path_grass_n",
+      "ruta": "fuentes/entradas/assets/path_grass_n.png",
+      "sha256": "ba1f7bd7cea1a3262b7cb915a4da0363f487eaa362ab8428b4577a8128adf9c7",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_path_grass_s",
+      "ruta": "fuentes/entradas/assets/path_grass_s.png",
+      "sha256": "a470ec7f5d4149a03af070a0536db0d6b9200ceed4712dd4f14fbcbf510b6da0",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_path_grass_w",
+      "ruta": "fuentes/entradas/assets/path_grass_w.png",
+      "sha256": "74ef08330831edec6e6cbaa5a1d5199fc4d0fe9b872261a12dd7a97fcf6d59c0",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_rock",
+      "ruta": "fuentes/entradas/assets/rock.png",
+      "sha256": "dd28ff33a0b63207092639eed98c6a264549eed28b95f2e080430baf62202236",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        22,
+        38,
+        44
+      ],
+      "pivot": [
+        24,
+        44
+      ]
+    },
+    {
+      "id": "E04_FUENTE_steps_n",
+      "ruta": "fuentes/entradas/assets/steps_n.png",
+      "sha256": "a90e6cfdfa45c376f0405b073806fc1e8731594e937dbe0f17f967f5c8292775",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_tree_broadleaf",
+      "ruta": "fuentes/entradas/assets/tree_broadleaf.png",
+      "sha256": "a37c01868c1e96d4fbf697987cc1fd2d87c0ad5fa8abc4e973fafb6aec02bc10",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        9,
+        9,
+        41,
+        44
+      ],
+      "pivot": [
+        25,
+        44
+      ]
+    },
+    {
+      "id": "E04_FUENTE_tree_fruit",
+      "ruta": "fuentes/entradas/assets/tree_fruit.png",
+      "sha256": "3f8ead1870dca9456c55be3ff3721c0d3853415fa76c66fe2497fce0aa870c2c",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        10,
+        14,
+        36,
+        43
+      ],
+      "pivot": [
+        23,
+        43
+      ]
+    },
+    {
+      "id": "E04_FUENTE_tree_pine",
+      "ruta": "fuentes/entradas/assets/tree_pine.png",
+      "sha256": "4a41a6c366f67043fc9c6b9cf8ec8928d24c88dd6474b0632864e1ee6111b366",
+      "size": [
+        48,
+        48
+      ],
+      "bbox": [
+        11,
+        5,
+        38,
+        43
+      ],
+      "pivot": [
+        24,
+        43
+      ]
+    },
+    {
+      "id": "E04_FUENTE_wall_stone",
+      "ruta": "fuentes/entradas/assets/wall_stone.png",
+      "sha256": "49a1ba2df37bac4ec79037bc2be6aa1a7005d7ad19a432890b7eec157a9510b2",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_water_fill",
+      "ruta": "fuentes/entradas/assets/water_fill.png",
+      "sha256": "6e35f33213b6f13b492bdf91ca07a151c3e96ec677545a099de71a79a582615c",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_water_shore_e",
+      "ruta": "fuentes/entradas/assets/water_shore_e.png",
+      "sha256": "abdb5707c3f2be38b2fc9ab34003e099a337c6ccc652d7bc7245feca394d1a04",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_water_shore_n",
+      "ruta": "fuentes/entradas/assets/water_shore_n.png",
+      "sha256": "d64ec4d643f8fa15806d666b1b7a8971360fdce95778f9c86ca8063a29ffe647",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_water_shore_s",
+      "ruta": "fuentes/entradas/assets/water_shore_s.png",
+      "sha256": "5e0e3da32b6ab90efc89872cdfe423f32650e4a0b6fda27d655721708da80448",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "E04_FUENTE_water_shore_w",
+      "ruta": "fuentes/entradas/assets/water_shore_w.png",
+      "sha256": "4d8073901b3ed2aebfe200ba287795912e3cd837e06e8588c5f192edef91e5d8",
+      "size": [
+        16,
+        16
+      ],
+      "bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ]
+    }
+  ],
+  "estado": "inicio; muestras de escala/anclas, no aceptación de lote final"
+}

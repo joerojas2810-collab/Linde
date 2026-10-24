@@ -1,0 +1,30 @@
+{
+  "patrones_por_terreno": 47,
+  "reglas_256_mascaras": true,
+  "agua_propuesta": {
+    "atlas": [
+      64,
+      16
+    ],
+    "celda": [
+      16,
+      16
+    ],
+    "frames": 4,
+    "ms_por_frame": 150,
+    "scope": "preview, no reloj de juego"
+  },
+  "pendientes": [
+    "Aceptar escala y paleta aplicadas antes de serie",
+    "Revisar visualmente esquinas y transiciones en el mapa real",
+    "Decidir si árboles de fuente48 requieren nuevas versiones grandes en píxel nativo, sin escalar48→32",
+    "Integración de agotados y profundidad sin cambiar colisión/regeneración"
+  ],
+  "id": "E04_CONTRATO_PROPUESTO",
+  "estado": "muestra inicial pendiente de revisión",
+  "escala_nativa": 1,
+  "escala_dibujada": 1,
+  "zoom_preview": 2,
+  "filtro": "nearest",
+  "colisiones_modificadas": false
+}
