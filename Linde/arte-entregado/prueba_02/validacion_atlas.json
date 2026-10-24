@@ -1,0 +1,39 @@
+{
+  "dimensiones": [
+    128,
+    128
+  ],
+  "alpha": [
+    0,
+    255
+  ],
+  "colores_opacos": 32,
+  "filas_cuatro_direcciones": true,
+  "columnas_estaticas_identicas": true,
+  "anclas_bbox": [
+    [
+      8,
+      5,
+      23,
+      32
+    ],
+    [
+      8,
+      5,
+      23,
+      32
+    ],
+    [
+      8,
+      5,
+      23,
+      32
+    ],
+    [
+      8,
+      5,
+      23,
+      32
+    ]
+  ]
+}

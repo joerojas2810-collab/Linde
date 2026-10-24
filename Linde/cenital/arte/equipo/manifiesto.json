@@ -1,0 +1,42 @@
+{
+  "_nota": "Copia sin cambios de Linde/arte-entregado/equipo_indice_01 (hojas/ y base/). Celda, pivote y orden: Linde/documentos/contrato-equipo.md (PROPUESTA, sin aprobar). sha256 = hash del original al copiar.",
+  "celda": 32,
+  "pivote": [16, 32],
+  "filas": ["frente", "derecha", "espalda", "izquierda"],
+  "cuadros": 4,
+  "indices": {"principal": "#ff0000", "sombra": "#00ff00", "acento": "#0000ff", "detalle": "#808080"},
+  "base": {
+    "hoja": "base/caminata.png",
+    "capas": {"cuerpo": "base/capas/cuerpo.png", "piel": "base/capas/piel.png", "pelo": "base/capas/pelo.png",
+      "tunica": "base/capas/tunica.png", "pantalon": "base/capas/pantalon.png", "botas": "base/capas/botas.png",
+      "cinturon": "base/capas/cinturon.png"}
+  },
+  "hojas": {
+    "ligera": {
+      "casco": {"archivo": "equipo_ligera_casco_caminata.png", "sha256": "9f3cf2d08eefc8eba33e40464f7e47b4165b7fe21b39f6f877d05799ee3ecf9c"},
+      "torso": {"archivo": "equipo_ligera_torso_caminata.png", "sha256": "2c6cbf78c71b8c5a0f4f81da7df4ef1fc3bf40eff57d9026fa40afc6cb598d77"},
+      "guantes": {"archivo": "equipo_ligera_guantes_caminata.png", "sha256": "bc51cd0e669e361c342ec62fe87caf0af7b92cb8b54801f5613a2a349ec375a1"},
+      "botas": {"archivo": "equipo_ligera_botas_caminata.png", "sha256": "07769212622c1515e9bc83a46f4681ebd96a91b9436009e8c92affc309e55e12"},
+      "pantalones": {"archivo": "equipo_ligera_pantalones_caminata.png", "sha256": "cc7dc8884c1bdd853c7a274f74acdd90c48cc59a935385f55f2293dc1e83df9e"}
+    },
+    "media": {
+      "casco": {"archivo": "equipo_media_casco_caminata.png", "sha256": "55eebd4cae29ff22d95cf438fec569681fd56349e28b1ffee87d01a1b26fd0c2"},
+      "torso": {"archivo": "equipo_media_torso_caminata.png", "sha256": "694da2e27a42cde48a76e26b2d434c105b9fa60df2e566274de88f76e6a88891"},
+      "guantes": {"archivo": "equipo_media_guantes_caminata.png", "sha256": "bc51cd0e669e361c342ec62fe87caf0af7b92cb8b54801f5613a2a349ec375a1"},
+      "botas": {"archivo": "equipo_media_botas_caminata.png", "sha256": "cd9fce5f66311ccc1bb541a92e38e050a7a7fcf41bf39575a2807a413d992b0f"},
+      "pantalones": {"archivo": "equipo_media_pantalones_caminata.png", "sha256": "2e00c3787a951ac71552793a04cea6fc253b56be4ab127a75fe0de6a043d46b7"}
+    },
+    "pesada": {
+      "casco": {"archivo": "equipo_pesada_casco_caminata.png", "sha256": "beb53b3d691e8ced38b34f89f8927ea3f899afe46ef85521d2b265d1fbb22e00"},
+      "torso": {"archivo": "equipo_pesada_torso_caminata.png", "sha256": "5ffb1a1049e34509c29eff64c8b3fb9e102b52b1aadb332e2c71050c0f78814c"},
+      "guantes": {"archivo": "equipo_pesada_guantes_caminata.png", "sha256": "b32104502741368dc9b3e544438bd19675a5270069293373eefc178632f9f110"},
+      "botas": {"archivo": "equipo_pesada_botas_caminata.png", "sha256": "0c4d1cd82c19d901fdc9cb984d7ae828f7a64cfd58bc986a4774c83d98c48f18"},
+      "pantalones": {"archivo": "equipo_pesada_pantalones_caminata.png", "sha256": "2e00c3787a951ac71552793a04cea6fc253b56be4ab127a75fe0de6a043d46b7"}
+    },
+    "compartido": {
+      "escudo": {"archivo": "escudo_caminata.png", "sha256": "43c6da88043ace9f2b7d55767a0563d4ae25e872cf2c599700b75068f2d2539c"},
+      "espada": {"archivo": "espada_caminata.png", "sha256": "0e1d1d0123bce851f30096bf113f3ebb30979deb4363fb69a018adae6ca0118d"}
+    }
+  },
+  "validacion": "17/17 salida 0, 0 errores, 0 avisos: herramientas/arte/validar_hoja.gd (sha256 18eb68a6...) --modo=indice --celda=32 --base=base/caminata.png (sha256 ca27efc8...), 2026-10-23"
+}

@@ -1,0 +1,106 @@
+{
+  "checks": [
+    {
+      "id": "casco_frente",
+      "opaque": 314,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "casco_derecha",
+      "opaque": 267,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "casco_espalda",
+      "opaque": 312,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "casco_izquierda",
+      "opaque": 267,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "coraza_frente",
+      "opaque": 345,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "coraza_derecha",
+      "opaque": 255,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "coraza_espalda",
+      "opaque": 344,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "coraza_izquierda",
+      "opaque": 264,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "escudo_frente",
+      "opaque": 358,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "escudo_derecha",
+      "opaque": 297,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "escudo_espalda",
+      "opaque": 378,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "escudo_izquierda",
+      "opaque": 292,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "espada_frente",
+      "opaque": 379,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "espada_derecha",
+      "opaque": 304,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "espada_espalda",
+      "opaque": 385,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "id": "espada_izquierda",
+      "opaque": 310,
+      "partial_alpha": 0,
+      "pass": true
+    }
+  ],
+  "modularity_verified": false,
+  "occlusion_verified": false,
+  "source_size": [
+    1368,
+    1149
+  ]
+}

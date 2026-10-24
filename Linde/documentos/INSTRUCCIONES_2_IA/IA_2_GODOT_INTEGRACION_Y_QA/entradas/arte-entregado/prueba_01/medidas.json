@@ -1,0 +1,33 @@
+{
+  "imagen": [
+    2172,
+    724
+  ],
+  "regiones_alpha": [
+    [
+      139,
+      127,
+      284,
+      503
+    ],
+    [
+      668,
+      127,
+      288,
+      504
+    ],
+    [
+      1206,
+      125,
+      279,
+      505
+    ],
+    [
+      1754,
+      126,
+      282,
+      505
+    ]
+  ],
+  "nota": "Regiones medidas sobre alpha. No son celdas nativas ni validacion de pixel art."
+}

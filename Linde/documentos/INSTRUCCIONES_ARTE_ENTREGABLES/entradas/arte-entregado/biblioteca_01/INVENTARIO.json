@@ -1,0 +1,575 @@
+{
+  "listed_resources": [
+    {
+      "section": "escenario",
+      "id": "tree_broadleaf",
+      "file": "escenario/assets/tree_broadleaf.png",
+      "sha256": "a37c01868c1e96d4fbf697987cc1fd2d87c0ad5fa8abc4e973fafb6aec02bc10"
+    },
+    {
+      "section": "escenario",
+      "id": "tree_pine",
+      "file": "escenario/assets/tree_pine.png",
+      "sha256": "4a41a6c366f67043fc9c6b9cf8ec8928d24c88dd6474b0632864e1ee6111b366"
+    },
+    {
+      "section": "escenario",
+      "id": "tree_fruit",
+      "file": "escenario/assets/tree_fruit.png",
+      "sha256": "3f8ead1870dca9456c55be3ff3721c0d3853415fa76c66fe2497fce0aa870c2c"
+    },
+    {
+      "section": "escenario",
+      "id": "rock",
+      "file": "escenario/assets/rock.png",
+      "sha256": "dd28ff33a0b63207092639eed98c6a264549eed28b95f2e080430baf62202236"
+    },
+    {
+      "section": "escenario",
+      "id": "ore_copper",
+      "file": "escenario/assets/ore_copper.png",
+      "sha256": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168"
+    },
+    {
+      "section": "escenario",
+      "id": "bush_berries",
+      "file": "escenario/assets/bush_berries.png",
+      "sha256": "aeaba4d8d3e1b20725f3fe27eddd0878b8082f2f7b24b194fc3c5c043e9597e5"
+    },
+    {
+      "section": "escenario",
+      "id": "barrel",
+      "file": "escenario/assets/barrel.png",
+      "sha256": "b0c19aa1d8fe59ae4e28979552fc68ea14ddf78137d6c8f27e04e2df64c1c84a"
+    },
+    {
+      "section": "escenario",
+      "id": "fence_horizontal",
+      "file": "escenario/assets/fence_horizontal.png",
+      "sha256": "ca46412a6838c0e381d8136bbfcc2bc9b9a6abd7263dfa750a823fa7631667d1"
+    },
+    {
+      "section": "escenario",
+      "id": "chest_closed",
+      "file": "escenario/assets/chest_closed.png",
+      "sha256": "a05921b4188eda9c8f28d6ff5dfa5687a249b25c66920bdfda779990a0c565cf"
+    },
+    {
+      "section": "escenario",
+      "id": "chest_open",
+      "file": "escenario/assets/chest_open.png",
+      "sha256": "f3ca0b0a6a76cb1ad7c71bca35e7e7a08223384c9942e3b9278f69986e19d7d8"
+    },
+    {
+      "section": "escenario",
+      "id": "chest_treasure",
+      "file": "escenario/assets/chest_treasure.png",
+      "sha256": "a51b1d720e85d3c5f1657f4dbea07fdc2c3ed744bae7125a031067df978dcf89"
+    },
+    {
+      "section": "escenario",
+      "id": "workbench",
+      "file": "escenario/assets/workbench.png",
+      "sha256": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345"
+    },
+    {
+      "section": "escenario",
+      "id": "furnace",
+      "file": "escenario/assets/furnace.png",
+      "sha256": "6112d44fd8ec0872be3abff40f70c5be9f470df598ba2ad6529d943764c578b0"
+    },
+    {
+      "section": "escenario",
+      "id": "bed",
+      "file": "escenario/assets/bed.png",
+      "sha256": "f7be4c7faf8f09fbb2da68d857b59f5b8811a10e0d0a9da963f7f69a66939c25"
+    },
+    {
+      "section": "escenario",
+      "id": "palisade",
+      "file": "escenario/assets/palisade.png",
+      "sha256": "d03fb26e8704d9d6a41177276c0e9ddc56b72c8c6b43b8a4b6073baabefa78a2"
+    },
+    {
+      "section": "escenario",
+      "id": "bridge_vertical",
+      "file": "escenario/assets/bridge_vertical.png",
+      "sha256": "4806b3f9dad38b087e23396b45efdd80b8cde558396df8755319452fa75f98b3"
+    },
+    {
+      "section": "escenario",
+      "id": "grass",
+      "file": "escenario/assets/grass.png",
+      "sha256": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8"
+    },
+    {
+      "section": "escenario",
+      "id": "grass_flecks",
+      "file": "escenario/assets/grass_flecks.png",
+      "sha256": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852"
+    },
+    {
+      "section": "escenario",
+      "id": "path_fill",
+      "file": "escenario/assets/path_fill.png",
+      "sha256": "1a544a37dec6e6bbecf6019dc5f7c0185a353bb85223fc6d13173115aecbdedf"
+    },
+    {
+      "section": "escenario",
+      "id": "water_fill",
+      "file": "escenario/assets/water_fill.png",
+      "sha256": "6e35f33213b6f13b492bdf91ca07a151c3e96ec677545a099de71a79a582615c"
+    },
+    {
+      "section": "escenario",
+      "id": "path_grass_n",
+      "file": "escenario/assets/path_grass_n.png",
+      "sha256": "ba1f7bd7cea1a3262b7cb915a4da0363f487eaa362ab8428b4577a8128adf9c7"
+    },
+    {
+      "section": "escenario",
+      "id": "path_grass_s",
+      "file": "escenario/assets/path_grass_s.png",
+      "sha256": "a470ec7f5d4149a03af070a0536db0d6b9200ceed4712dd4f14fbcbf510b6da0"
+    },
+    {
+      "section": "escenario",
+      "id": "path_grass_w",
+      "file": "escenario/assets/path_grass_w.png",
+      "sha256": "74ef08330831edec6e6cbaa5a1d5199fc4d0fe9b872261a12dd7a97fcf6d59c0"
+    },
+    {
+      "section": "escenario",
+      "id": "path_grass_e",
+      "file": "escenario/assets/path_grass_e.png",
+      "sha256": "499bac02785d67c366d152b3974f081d88fe9faafdf42757c42ad1399aa1ed2f"
+    },
+    {
+      "section": "escenario",
+      "id": "water_shore_n",
+      "file": "escenario/assets/water_shore_n.png",
+      "sha256": "d64ec4d643f8fa15806d666b1b7a8971360fdce95778f9c86ca8063a29ffe647"
+    },
+    {
+      "section": "escenario",
+      "id": "water_shore_s",
+      "file": "escenario/assets/water_shore_s.png",
+      "sha256": "5e0e3da32b6ab90efc89872cdfe423f32650e4a0b6fda27d655721708da80448"
+    },
+    {
+      "section": "escenario",
+      "id": "water_shore_w",
+      "file": "escenario/assets/water_shore_w.png",
+      "sha256": "4d8073901b3ed2aebfe200ba287795912e3cd837e06e8588c5f192edef91e5d8"
+    },
+    {
+      "section": "escenario",
+      "id": "water_shore_e",
+      "file": "escenario/assets/water_shore_e.png",
+      "sha256": "abdb5707c3f2be38b2fc9ab34003e099a337c6ccc652d7bc7245feca394d1a04"
+    },
+    {
+      "section": "escenario",
+      "id": "floor_wood",
+      "file": "escenario/assets/floor_wood.png",
+      "sha256": "0342932ca24917096a0b8b8b01ecaba78eadb626b4602d601b1cf3657e8ee6e0"
+    },
+    {
+      "section": "escenario",
+      "id": "wall_stone",
+      "file": "escenario/assets/wall_stone.png",
+      "sha256": "49a1ba2df37bac4ec79037bc2be6aa1a7005d7ad19a432890b7eec157a9510b2"
+    },
+    {
+      "section": "escenario",
+      "id": "floor_ruins",
+      "file": "escenario/assets/floor_ruins.png",
+      "sha256": "e6c0b27fb6d36a7775e3e8225726db17f8d0aebc7dc71bce7bd17675681f23ce"
+    },
+    {
+      "section": "escenario",
+      "id": "steps_n",
+      "file": "escenario/assets/steps_n.png",
+      "sha256": "a90e6cfdfa45c376f0405b073806fc1e8731594e937dbe0f17f967f5c8292775"
+    },
+    {
+      "section": "escenario",
+      "id": "cottage_closed",
+      "file": "escenario/assets/cottage_closed.png",
+      "sha256": "436407cde8a5f0b72ec5d289059c98087c6d2097e888315a0697573f8f5b9474"
+    },
+    {
+      "section": "escenario",
+      "id": "cottage_open",
+      "file": "escenario/assets/cottage_open.png",
+      "sha256": "ee60e83dc1402f848dcdf2c28ad8f198fba7d2e01568c50ca9856cf5dba42a1a"
+    },
+    {
+      "section": "escenario",
+      "id": "crafting_shed",
+      "file": "escenario/assets/crafting_shed.png",
+      "sha256": "b4ec746612c63bd3eda0a9aa75b4a8d99c8a8a7422729eabd99b8cd275debf29"
+    },
+    {
+      "section": "escenario",
+      "id": "cave_entrance",
+      "file": "escenario/assets/cave_entrance.png",
+      "sha256": "622b34e4f5a69c32cc0ac32161cea05e670ff3f7c55aba9f3421d6ede3c36298"
+    },
+    {
+      "section": "interfaz",
+      "id": "madera",
+      "file": "interfaz/assets/madera.png",
+      "sha256": "0faa0afbe73567ce7ac276d59961d6caf1f2564b80d514f4be9ade6648d7a78c"
+    },
+    {
+      "section": "interfaz",
+      "id": "piedra",
+      "file": "interfaz/assets/piedra.png",
+      "sha256": "d46ba9e50e6e4b3cd397afde278fb4d0f6623771694bab083c8ffa36273da3d9"
+    },
+    {
+      "section": "interfaz",
+      "id": "fibra",
+      "file": "interfaz/assets/fibra.png",
+      "sha256": "fc8f72bf3f60f51870a7688512841f91ecd43591e62282ca0b9590a926e7e08b"
+    },
+    {
+      "section": "interfaz",
+      "id": "mena_hierro",
+      "file": "interfaz/assets/mena_hierro.png",
+      "sha256": "b7849670842b4e4fca2177b60acd7c5a35cbfd4cecfd76d019f9b6df1a1ab1dc"
+    },
+    {
+      "section": "interfaz",
+      "id": "lingote_hierro",
+      "file": "interfaz/assets/lingote_hierro.png",
+      "sha256": "205ca43ad1c3596a2e2d3d76730ec5a7ad5fbaad7ff1cc84b0148bce0cc33888"
+    },
+    {
+      "section": "interfaz",
+      "id": "baya",
+      "file": "interfaz/assets/baya.png",
+      "sha256": "6db148dfd993c4a6190fcec538c4e7d2068e4a377e809f426165b974c3430d40"
+    },
+    {
+      "section": "interfaz",
+      "id": "gelatina",
+      "file": "interfaz/assets/gelatina.png",
+      "sha256": "ca99a95219f97a6dfdc22b64fdf52cb9290fa213492701bcca6d5955a37f5f36"
+    },
+    {
+      "section": "interfaz",
+      "id": "unguento",
+      "file": "interfaz/assets/unguento.png",
+      "sha256": "e8695c42996fd2fe52a7041deb3ab70a2933318b83fd16deab5f9f32dd805db4"
+    },
+    {
+      "section": "interfaz",
+      "id": "gema",
+      "file": "interfaz/assets/gema.png",
+      "sha256": "3498697b4912d7ba9dbb7caea09325f13fc6085af3ad7e094bfaad7d95294874"
+    },
+    {
+      "section": "interfaz",
+      "id": "hacha_piedra",
+      "file": "interfaz/assets/hacha_piedra.png",
+      "sha256": "e597ac9a5d4e373d3620b06c2e8fa811c8b960e84e733d5ea616a3799968cdcf"
+    },
+    {
+      "section": "interfaz",
+      "id": "pico_piedra",
+      "file": "interfaz/assets/pico_piedra.png",
+      "sha256": "116d3cb9d6a7338c1c0c85a859852f0478cdd083eb972a5e42061bcc8fdb9368"
+    },
+    {
+      "section": "interfaz",
+      "id": "espada_hierro",
+      "file": "interfaz/assets/espada_hierro.png",
+      "sha256": "13ba6e52257a6a5ec2e562fea8536fcfcb0bbc981ddb024982918eb5edfd1de6"
+    },
+    {
+      "section": "interfaz",
+      "id": "casco",
+      "file": "interfaz/assets/casco.png",
+      "sha256": "21231eba47da222c48fe1379f09fdf54dacf056f44030c414dc0ffc50c6f912c"
+    },
+    {
+      "section": "interfaz",
+      "id": "coraza",
+      "file": "interfaz/assets/coraza.png",
+      "sha256": "cbdda3665900109d07662216917f792c861f546bf22f9a7028a89c9586de1d7a"
+    },
+    {
+      "section": "interfaz",
+      "id": "escudo",
+      "file": "interfaz/assets/escudo.png",
+      "sha256": "23ba62490c59690f0e29a4369df5a8cd8464cf80063c97bf7504c26fa28eaad8"
+    },
+    {
+      "section": "interfaz",
+      "id": "categoria_oficio",
+      "file": "interfaz/assets/categoria_oficio.png",
+      "sha256": "a253f79e9452bd5faf4ce4a202d04c0c9a014e5305d80ec7adc04272b843f5f7"
+    },
+    {
+      "section": "interfaz",
+      "id": "categoria_exploracion",
+      "file": "interfaz/assets/categoria_exploracion.png",
+      "sha256": "d23e7a13f48a97b4c75da29ad258501c053593dabf21bed6e80e073fbdd49c8d"
+    },
+    {
+      "section": "interfaz",
+      "id": "categoria_combate",
+      "file": "interfaz/assets/categoria_combate.png",
+      "sha256": "94847896547a283ee187bae4897811a4e71cef3073e6c936e59017e7b1214471"
+    },
+    {
+      "section": "interfaz",
+      "id": "categoria_comunidad",
+      "file": "interfaz/assets/categoria_comunidad.png",
+      "sha256": "4aa5e2363498ecafcf403b74e21a65880ec633ddc6312a99c716d6baf9c63da2"
+    },
+    {
+      "section": "interfaz",
+      "id": "mision_icono",
+      "file": "interfaz/assets/mision_icono.png",
+      "sha256": "8c8f434d552a3bd1aeadf3ebb4d59bdc2eac6c96adda37654f42fea34a505ad4"
+    },
+    {
+      "section": "interfaz",
+      "id": "panel",
+      "file": "interfaz/assets/panel.png",
+      "sha256": "7f950e5944c2e8372d5b57d0fd40004e5b771b990b5b6f93cae3552c1c328b0c"
+    },
+    {
+      "section": "interfaz",
+      "id": "slot_normal",
+      "file": "interfaz/assets/slot_normal.png",
+      "sha256": "826b7a77a68263d6cca82696fae2cfbf0092e119d097b2557266929f890ab0c4"
+    },
+    {
+      "section": "interfaz",
+      "id": "slot_selected",
+      "file": "interfaz/assets/slot_selected.png",
+      "sha256": "2064cbef44e801cd78cecfb57b0de6f72b4c913d6445f0a456fe1128a8baedef"
+    },
+    {
+      "section": "interfaz",
+      "id": "slot_disabled",
+      "file": "interfaz/assets/slot_disabled.png",
+      "sha256": "20c913893983340b959ceb8b4c5ea7c3a5ba76e6ebb29117cc31d6eb19b9ad95"
+    },
+    {
+      "section": "interfaz",
+      "id": "button_normal",
+      "file": "interfaz/assets/button_normal.png",
+      "sha256": "5ea9e031858e9178639445a7aa875199474dde50caef7afecc79e9dfc7a05124"
+    },
+    {
+      "section": "interfaz",
+      "id": "button_hover",
+      "file": "interfaz/assets/button_hover.png",
+      "sha256": "3370dbbc9e19a3db72d7639599a193b2e6a042ab552ab5cfaca771a9b592d73c"
+    },
+    {
+      "section": "interfaz",
+      "id": "button_pressed",
+      "file": "interfaz/assets/button_pressed.png",
+      "sha256": "bab5ad9313c1c56af2966e2a66368e9c8e6a1593130a5a7789838e2599405341"
+    },
+    {
+      "section": "interfaz",
+      "id": "healthbar_frame",
+      "file": "interfaz/assets/healthbar_frame.png",
+      "sha256": "e003be410d9010c9537a24cd769966ebc8372d498a325c75ced6d16a5c3077d5"
+    },
+    {
+      "section": "interfaz",
+      "id": "healthbar_full",
+      "file": "interfaz/assets/healthbar_full.png",
+      "sha256": "27b8e9c20252a9a7a3c828dc94363343782fdb5782c9e9eb17c83a27ec7fae1a"
+    },
+    {
+      "section": "interfaz",
+      "id": "skill_locked",
+      "file": "interfaz/assets/skill_locked.png",
+      "sha256": "46c06d229a25dd5cf0a7cceb63e0b3d9c2398c15e26d8ca64b5783c5d95b0439"
+    },
+    {
+      "section": "interfaz",
+      "id": "skill_unlocked",
+      "file": "interfaz/assets/skill_unlocked.png",
+      "sha256": "2ea6b4efd3e9b859ae3d1468bf19ebb8bcf02b7eecc550edc6bf136b7dfc98b6"
+    },
+    {
+      "section": "interfaz",
+      "id": "skill_selected",
+      "file": "interfaz/assets/skill_selected.png",
+      "sha256": "e8ea9150f914451986ad8652faa35cbb0d4ecd8cdf7d649670c063ab9e472854"
+    },
+    {
+      "section": "interfaz",
+      "id": "quest_marker",
+      "file": "interfaz/assets/quest_marker.png",
+      "sha256": "717d0512e66afc7cd22ce4a61f0f8bb62783d7c1c65200edc39e041eff9b431a"
+    },
+    {
+      "section": "interfaz",
+      "id": "interact_indicator",
+      "file": "interfaz/assets/interact_indicator.png",
+      "sha256": "563803ada2808182a4895beedf363c43e1bb574aed7de5c061f4c50894b513fa"
+    },
+    {
+      "section": "interfaz",
+      "id": "tooltip_panel",
+      "file": "interfaz/assets/tooltip_panel.png",
+      "sha256": "490c8282e71479980babd0037118f06800ce9ad5cdbc18e0be933c27dbb84ffe"
+    },
+    {
+      "section": "interfaz",
+      "id": "counter_panel",
+      "file": "interfaz/assets/counter_panel.png",
+      "sha256": "5bb068ffc55f76e16f776ee1e4daa1fbc56d945d57f25ff2ef3609020c23513a"
+    },
+    {
+      "section": "interfaz",
+      "id": "healthbar_fill",
+      "file": "interfaz/assets/healthbar_fill.png",
+      "sha256": "1de6c98dc9a4b5cb9858ec1d7be8e631c11375e4f2ca1e1debc8f3ba4149fea3"
+    },
+    {
+      "section": "equipo",
+      "id": "casco_frente",
+      "file": "equipo/assets/casco_frente.png",
+      "sha256": "c8f37b90d59b1e55998d6499efbbf1d49f1acde35702548da6b6dc692cef2bc9"
+    },
+    {
+      "section": "equipo",
+      "id": "casco_derecha",
+      "file": "equipo/assets/casco_derecha.png",
+      "sha256": "1c84afdfb0a751cc9f9086cf2a5e7f102243520150bd70192438c8b5a5c7f682"
+    },
+    {
+      "section": "equipo",
+      "id": "casco_espalda",
+      "file": "equipo/assets/casco_espalda.png",
+      "sha256": "cb6de1db1e6b841f26072808797027c5244dff2121f320831f92b674bd0363a7"
+    },
+    {
+      "section": "equipo",
+      "id": "casco_izquierda",
+      "file": "equipo/assets/casco_izquierda.png",
+      "sha256": "59c535d1cf6627c5ac911ab063253aea62e11a91d8f94488c231998d4d723680"
+    },
+    {
+      "section": "equipo",
+      "id": "coraza_frente",
+      "file": "equipo/assets/coraza_frente.png",
+      "sha256": "4cf65e9a527c4fd57a90aae2662a21a900ebe24009886603aa99f9c45a6f8985"
+    },
+    {
+      "section": "equipo",
+      "id": "coraza_derecha",
+      "file": "equipo/assets/coraza_derecha.png",
+      "sha256": "1fb03c795b5c10558fcb5b481d4d72db4b4dfd747bc143a5dfabcf82a62c4537"
+    },
+    {
+      "section": "equipo",
+      "id": "coraza_espalda",
+      "file": "equipo/assets/coraza_espalda.png",
+      "sha256": "cc6f50772f1c6a8f24ccf1fac1767801862987d0b92fe7291e6b0e9fe5685fd3"
+    },
+    {
+      "section": "equipo",
+      "id": "coraza_izquierda",
+      "file": "equipo/assets/coraza_izquierda.png",
+      "sha256": "51c2f02f1459ad45149bc7b78d27c131199ddde08178e9ce4c0d5c92178f5958"
+    },
+    {
+      "section": "equipo",
+      "id": "escudo_frente",
+      "file": "equipo/assets/escudo_frente.png",
+      "sha256": "2be29a8460278fe46b5ec26d41f123be6f7bca991c225c4d8dd76ba67a588348"
+    },
+    {
+      "section": "equipo",
+      "id": "escudo_derecha",
+      "file": "equipo/assets/escudo_derecha.png",
+      "sha256": "535768327aac01491d5baa12a5369264b3e97d9f9bbc776ba381c4846a7c9890"
+    },
+    {
+      "section": "equipo",
+      "id": "escudo_espalda",
+      "file": "equipo/assets/escudo_espalda.png",
+      "sha256": "8a916c19ae1aeb346819cb4a2948b13dc232395a49b0870357abe30c5a3d43a7"
+    },
+    {
+      "section": "equipo",
+      "id": "escudo_izquierda",
+      "file": "equipo/assets/escudo_izquierda.png",
+      "sha256": "ec713c2c45ac4eb68385d156d50fc89583593a24fbc378c3a47467bd5069aca0"
+    },
+    {
+      "section": "equipo",
+      "id": "espada_frente",
+      "file": "equipo/assets/espada_frente.png",
+      "sha256": "15c937d7f92d4b9929c748d8662ce114443fa2031c13478003675936d0d26861"
+    },
+    {
+      "section": "equipo",
+      "id": "espada_derecha",
+      "file": "equipo/assets/espada_derecha.png",
+      "sha256": "eeb86a9effcc12265dbbb5e691e9edb30a1669f69a6c49f0ada9023c83662b0f"
+    },
+    {
+      "section": "equipo",
+      "id": "espada_espalda",
+      "file": "equipo/assets/espada_espalda.png",
+      "sha256": "f5f4f39db0ef3a98117222712c1be39c8b2aa77e76d7672775d490feb1af9f4f"
+    },
+    {
+      "section": "equipo",
+      "id": "espada_izquierda",
+      "file": "equipo/assets/espada_izquierda.png",
+      "sha256": "3e97eca8004b333862a8813457a395555da9b9da269dab05f38c01c16ab72fe9"
+    },
+    {
+      "section": "enemigos",
+      "id": "slime",
+      "file": "enemigos/nativos/slime.png",
+      "sha256": "624999a0cc54e8b0aa7210086e4a4aa7d73344d8fe6b0cba8b349077573b512b"
+    },
+    {
+      "section": "enemigos",
+      "id": "guardian",
+      "file": "enemigos/nativos/guardian.png",
+      "sha256": "97094ed0a4f6735384e12054b81dfe6f088688835c38747bdc57b0c83794cd28"
+    },
+    {
+      "section": "enemigos",
+      "id": "ciervo",
+      "file": "enemigos/nativos/ciervo.png",
+      "sha256": "2f86f5c3855da99c7437c69b7d0a4ddcd4606555314702783b087093cfd80130"
+    },
+    {
+      "section": "personaje",
+      "id": "caminata",
+      "file": "personaje/caminata.png",
+      "sha256": "ca27efc8830dbe165bee7188f143b21a6a99c809791735d4a0e4df0bc1734347"
+    },
+    {
+      "section": "personaje",
+      "id": "herramienta",
+      "file": "personaje/herramienta.png",
+      "sha256": "54c786a417b10614f3f15e8ebdcd7ad36c020178f0e61f94f7191db757be8742"
+    },
+    {
+      "section": "personaje",
+      "id": "ataque",
+      "file": "personaje/ataque.png",
+      "sha256": "2ceaeb5add2a6b1eeb1e31c4b2e2276b902667ad36c253c7fc964938896800ad"
+    }
+  ],
+  "note": "Includes animation sheets as one resource each; derived masks, variants and adjusted overlays documented separately."
+}

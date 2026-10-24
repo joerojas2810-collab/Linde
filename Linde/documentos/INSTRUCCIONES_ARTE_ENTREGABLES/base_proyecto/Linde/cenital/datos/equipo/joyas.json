@@ -1,0 +1,10 @@
+{
+  "_nota": "PROVISIONAL: NIVEL_MAX, K_N y costes (sistema-de-equipo.md 3.6 y 12). La receta de la Chispa no está en el documento: es una decisión provisional de implementación.",
+  "nivel_max": 5,
+  "k_n": 0.10,
+  "joyas": [
+    {"id": "chispa", "nombre": "Chispa de Temple", "funcion": "mejorar", "pila": 20, "c": "#ffb347",
+     "coste_por_nivel": {"1": 1, "2": 1, "3": 2, "4": 3, "5": 4},
+     "receta": {"ent": {"gema": 1, "lingote": 1}, "est": "horno", "hab": "artesano"}}
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "alignment_approved": false,
+  "checks": [
+    {
+      "geometry_pass": true,
+      "id": "casco_frente",
+      "opaque_box": "[P: (8, 5), S: (15, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "casco_derecha",
+      "opaque_box": "[P: (8, 5), S: (16, 15)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "casco_espalda",
+      "opaque_box": "[P: (8, 5), S: (15, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "casco_izquierda",
+      "opaque_box": "[P: (8, 5), S: (16, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "coraza_frente",
+      "opaque_box": "[P: (9, 13), S: (14, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "coraza_derecha",
+      "opaque_box": "[P: (11, 13), S: (11, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "coraza_espalda",
+      "opaque_box": "[P: (9, 13), S: (14, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "coraza_izquierda",
+      "opaque_box": "[P: (11, 13), S: (10, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "escudo_frente",
+      "opaque_box": "[P: (15, 18), S: (10, 12)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "escudo_derecha",
+      "opaque_box": "[P: (17, 18), S: (6, 12)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "escudo_espalda",
+      "opaque_box": "[P: (6, 18), S: (11, 12)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "escudo_izquierda",
+      "opaque_box": "[P: (8, 18), S: (9, 12)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "espada_frente",
+      "opaque_box": "[P: (6, 13), S: (7, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "espada_derecha",
+      "opaque_box": "[P: (17, 14), S: (8, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "espada_espalda",
+      "opaque_box": "[P: (19, 13), S: (7, 14)]",
+      "partial_alpha": 0
+    },
+    {
+      "geometry_pass": true,
+      "id": "espada_izquierda",
+      "opaque_box": "[P: (7, 14), S: (9, 14)]",
+      "partial_alpha": 0
+    }
+  ],
+  "occlusion_approved": false
+}

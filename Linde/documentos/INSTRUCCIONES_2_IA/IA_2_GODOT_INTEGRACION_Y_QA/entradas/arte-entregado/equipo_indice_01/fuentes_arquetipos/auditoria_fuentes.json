@@ -1,0 +1,82 @@
+{
+	"ligera_casco_quieto.png": {
+		"final_walk_atlas": false,
+		"opaque_colors": [
+			"00ff00",
+			"ff0000",
+			"808080",
+			"0000ff"
+		],
+		"opaque_pixels_by_direction": [
+			82,
+			99,
+			110,
+			91
+		],
+		"partial_alpha": 0,
+		"size": [
+			32,
+			128
+		]
+	},
+	"ligera_torso_quieto.png": {
+		"final_walk_atlas": false,
+		"opaque_colors": [
+			"ff0000",
+			"00ff00",
+			"808080",
+			"0000ff"
+		],
+		"opaque_pixels_by_direction": [
+			42,
+			26,
+			44,
+			23
+		],
+		"partial_alpha": 0,
+		"size": [
+			32,
+			128
+		]
+	},
+	"pesada_casco_quieto.png": {
+		"final_walk_atlas": false,
+		"opaque_colors": [
+			"ff0000",
+			"00ff00",
+			"808080",
+			"0000ff"
+		],
+		"opaque_pixels_by_direction": [
+			93,
+			89,
+			126,
+			90
+		],
+		"partial_alpha": 0,
+		"size": [
+			32,
+			128
+		]
+	},
+	"pesada_torso_quieto.png": {
+		"final_walk_atlas": false,
+		"opaque_colors": [
+			"0000ff",
+			"808080",
+			"ff0000",
+			"00ff00"
+		],
+		"opaque_pixels_by_direction": [
+			62,
+			39,
+			66,
+			35
+		],
+		"partial_alpha": 0,
+		"size": [
+			32,
+			128
+		]
+	}
+}

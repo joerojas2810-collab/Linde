@@ -1,0 +1,82 @@
+[
+  {
+    "archivo": "00_LEEME.md",
+    "bytes": 2761,
+    "sha256": "d72d358851f85cc60edb54f7f8b9e6524d965cb11ab36c3a95b9588f36b2ea41"
+  },
+  {
+    "archivo": "01_VISION_Y_DECISIONES.md",
+    "bytes": 3449,
+    "sha256": "9a29059a83dff166d2a095cd91f95eee37c5f0fd462c54faa8c0dc6ead3fd0a9"
+  },
+  {
+    "archivo": "02_SISTEMAS_DEL_JUEGO.md",
+    "bytes": 6381,
+    "sha256": "b09abc5a6fdfbe549bd6ff36e99e35bd9ea4c35db9ba4ee4ce173b97074d3c52"
+  },
+  {
+    "archivo": "03_NARRATIVA.md",
+    "bytes": 3396,
+    "sha256": "aefffb9f7a5e3b854a069ba802a3c1aedef860715baa32159238a2d7a8613986"
+  },
+  {
+    "archivo": "04_ARTE_Y_ANIMACION.md",
+    "bytes": 3558,
+    "sha256": "1b65358cc18eb7b865a09aa8439a2f538d3a03c90b63909099b75df5dc49aa33"
+  },
+  {
+    "archivo": "05_ARQUITECTURA_Y_CONSTRUCCION.md",
+    "bytes": 5605,
+    "sha256": "487fcb44609e713924c6024f7720b4c9c16323a1f310946a521059eaa2957185"
+  },
+  {
+    "archivo": "06_FUENTES_Y_SUPUESTOS.md",
+    "bytes": 6038,
+    "sha256": "fb1f93d704056915fdabd26f79528b8718452a285378e1402724b3ea42ce3c24"
+  },
+  {
+    "archivo": "PROMPT_PARA_CLAUDE.md",
+    "bytes": 3023,
+    "sha256": "bf00a89e546ff8eae909b22da3f64abc0d4c13d55c011d61aad9e6bc72014ed2"
+  },
+  {
+    "archivo": "codigo_base/prototipo_lateral_fuentes.zip",
+    "bytes": 397523,
+    "sha256": "c8a27ba967073a522c6b97238124a6ae78eacd963ed180208911ca2e53715021"
+  },
+  {
+    "archivo": "evidencia/estado_historico_proyecto.json",
+    "bytes": 905,
+    "sha256": "942dd2a5e4c09dd95f01eaf88e771d26c921c79745c443961ef06eb5b99071ef"
+  },
+  {
+    "archivo": "evidencia/manifiesto_verificacion.json",
+    "bytes": 26588,
+    "sha256": "65d038967515247b4262d6eff4a39cce61d999e5b97fdeba9300a3ab039daa56"
+  },
+  {
+    "archivo": "evidencia/matriz_fuentes.csv",
+    "bytes": 15979,
+    "sha256": "c1ee62394857ed87e2857156defa34cb8b808016406faa8d35bec8575916e431"
+  },
+  {
+    "archivo": "evidencia/procedencia_prototipo_lateral.md",
+    "bytes": 3149,
+    "sha256": "fe4435dd1a891f3da70a5617e845761c0a348f2bac4c73d7027b9f7a203ea9bf"
+  },
+  {
+    "archivo": "evidencia/verificacion_historica_lateral.json",
+    "bytes": 293,
+    "sha256": "3045d5a7b6819ab3833fcbd633be77e001eba1dfacf7c5e1290ffb8a9536511c"
+  },
+  {
+    "archivo": "referencias/prototipo_lateral_actual.png",
+    "bytes": 81848,
+    "sha256": "c6da7c3469c89794d926df504e2d5fe57502636d5828097715586715c7c0e4e2"
+  },
+  {
+    "archivo": "referencias/visual_objetivo.png",
+    "bytes": 1881220,
+    "sha256": "e74b1e5d09334248d71dd57c0051c3ad57b90b25c0fdacaaf71df5a74322d6e0"
+  }
+]

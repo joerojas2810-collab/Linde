@@ -1,0 +1,25 @@
+{
+  "corners_exact": true,
+  "margins": [
+    8,
+    8,
+    8,
+    8
+  ],
+  "method": "Godot Image 3x3 regions, nearest center stretch; visual inspection still required in final game",
+  "panel": "assets/panel.png",
+  "tested_sizes": [
+    [
+      96,
+      64
+    ],
+    [
+      160,
+      96
+    ],
+    [
+      192,
+      128
+    ]
+  ]
+}

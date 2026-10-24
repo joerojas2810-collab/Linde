@@ -1,0 +1,125 @@
+{
+  "validator_sha256": "18eb68a6c4a02f24e75ed7fa9a4f0408e4cb3f922addf58095de756e5f6a5ca0",
+  "base_sha256": "ca27efc8830dbe165bee7188f143b21a6a99c809791735d4a0e4df0bc1734347",
+  "results": [
+    {
+      "file": "equipo_ligera_botas_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 2
+    },
+    {
+      "file": "equipo_ligera_casco_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 4
+    },
+    {
+      "file": "equipo_ligera_guantes_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 1
+    },
+    {
+      "file": "equipo_ligera_pantalones_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 3
+    },
+    {
+      "file": "equipo_ligera_torso_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 4
+    },
+    {
+      "file": "equipo_media_botas_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 2
+    },
+    {
+      "file": "equipo_media_casco_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 3
+    },
+    {
+      "file": "equipo_media_guantes_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 1
+    },
+    {
+      "file": "equipo_media_pantalones_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 3
+    },
+    {
+      "file": "equipo_media_torso_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 3
+    },
+    {
+      "file": "equipo_pesada_botas_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 2
+    },
+    {
+      "file": "equipo_pesada_casco_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 4
+    },
+    {
+      "file": "equipo_pesada_guantes_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 2
+    },
+    {
+      "file": "equipo_pesada_pantalones_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 3
+    },
+    {
+      "file": "equipo_pesada_torso_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 4
+    },
+    {
+      "file": "escudo_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 3
+    },
+    {
+      "file": "espada_caminata.png",
+      "exit": 0,
+      "errores": [],
+      "avisos": [],
+      "colores": 4
+    }
+  ]
+}

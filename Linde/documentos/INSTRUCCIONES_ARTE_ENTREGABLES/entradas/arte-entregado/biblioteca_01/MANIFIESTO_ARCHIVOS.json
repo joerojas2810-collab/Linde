@@ -1,0 +1,1957 @@
+[
+  {
+    "file": "Abrir-Galeria.command",
+    "bytes": 91,
+    "sha256": "eebf96806acbecfa4b744486fe39570424097e5bab29724128e419eb147f4b4b"
+  },
+  {
+    "file": "Abrir-Muestra-Arte.command",
+    "bytes": 650,
+    "sha256": "d58f7fefa574894cecaa883849a1e3342b3335dcf3dadba788585468a1fbde0d"
+  },
+  {
+    "file": "GALERIA.html",
+    "bytes": 15845,
+    "sha256": "aa4d4f55919a568155488173e1aa545891480d4e825d5f3b569c6d52153e4d43"
+  },
+  {
+    "file": "INVENTARIO.json",
+    "bytes": 19315,
+    "sha256": "141cbbe91d8e11d55ceb348071a87e1f3090429738fda42175cb90c80d4f9ebc"
+  },
+  {
+    "file": "LEEME.md",
+    "bytes": 4618,
+    "sha256": "aaec04ba3fbc76039a78e06a1c1c289c6af14c98bcd3715547b2ccd9535dcbed"
+  },
+  {
+    "file": "PARA_CLAUDE.md",
+    "bytes": 2514,
+    "sha256": "35da28a02ec7b10341392c5030e404102fa12348a92000b8167bd72f9445c2b8"
+  },
+  {
+    "file": "VERIFICACION.md",
+    "bytes": 3765,
+    "sha256": "39bfd1c8694f251105ac24046619a5565181f4071f17b41deebd15665d419c21"
+  },
+  {
+    "file": "enemigos/PROMPT_ciervo.txt",
+    "bytes": 1466,
+    "sha256": "a9ceed80563e88017cfd4174c888aebab04761e80a110d6a9cc3d741d5cccd6d"
+  },
+  {
+    "file": "enemigos/PROMPT_guardian.txt",
+    "bytes": 1429,
+    "sha256": "a2a8d82bfe69af67bab1be61296426aca9b3ad2fe5ed97a12c404d7a71447f85"
+  },
+  {
+    "file": "enemigos/PROMPT_slime.txt",
+    "bytes": 1492,
+    "sha256": "01dcd46692f6843b374c9eb9ebd4a272e024f3ddff5a7ebe0ee36ea5463fda63"
+  },
+  {
+    "file": "enemigos/README.md",
+    "bytes": 3736,
+    "sha256": "6a55169cc8a22943a5512cc925203f30c33b5bc67bbbaa1598a8895bf637731d"
+  },
+  {
+    "file": "enemigos/capturar.gd",
+    "bytes": 773,
+    "sha256": "d08bf5db135d0db03071a56bd25cd16fc37f46872b4636e0ef03d630dea76b60"
+  },
+  {
+    "file": "enemigos/ciervo_preview.png",
+    "bytes": 46382,
+    "sha256": "593aba25766ff6396e92c8aa1992877183c7566db1dbacf67607032b9889d196"
+  },
+  {
+    "file": "enemigos/convertir.gd",
+    "bytes": 2973,
+    "sha256": "d559dcad321117cfc76d2d17ec0636e9754c1512d3317de4021f812c91b63d73"
+  },
+  {
+    "file": "enemigos/guardian_preview.png",
+    "bytes": 62232,
+    "sha256": "5d7798b00251516f14179050f95f10da76c9f0a6598fea0294018feca7d86890"
+  },
+  {
+    "file": "enemigos/manifest.json",
+    "bytes": 5700,
+    "sha256": "e8d0aaa9e7ca2fa777af92a0fba981a606a7e305f2699796bcd9a94c8606a911"
+  },
+  {
+    "file": "enemigos/mapa_ciervo.png",
+    "bytes": 118218,
+    "sha256": "d022b78489935a3ba6d7ed95c34f293683e1ba6a060181f41f6d4507780d2417"
+  },
+  {
+    "file": "enemigos/mapa_guardian.png",
+    "bytes": 90201,
+    "sha256": "a8f0647faf12d805645b22318a95ffa26d4745979bd0a4c4de17ef892881c974"
+  },
+  {
+    "file": "enemigos/mapa_slime.png",
+    "bytes": 95036,
+    "sha256": "e88b0a73121ede70a85d4d68b81d0b1980150a1ce4ec40ee58ad858435f51380"
+  },
+  {
+    "file": "enemigos/nativos/ciervo.png",
+    "bytes": 25413,
+    "sha256": "2f86f5c3855da99c7437c69b7d0a4ddcd4606555314702783b087093cfd80130"
+  },
+  {
+    "file": "enemigos/nativos/guardian.png",
+    "bytes": 36105,
+    "sha256": "97094ed0a4f6735384e12054b81dfe6f088688835c38747bdc57b0c83794cd28"
+  },
+  {
+    "file": "enemigos/nativos/slime.png",
+    "bytes": 7557,
+    "sha256": "624999a0cc54e8b0aa7210086e4a4aa7d73344d8fe6b0cba8b349077573b512b"
+  },
+  {
+    "file": "enemigos/originales/ciervo.png",
+    "bytes": 1185267,
+    "sha256": "b5c3b45b0b2f3c3ad4b43066bc7e849c7b26236a93078a4dd94f8b7454db97f6"
+  },
+  {
+    "file": "enemigos/originales/guardian.png",
+    "bytes": 1271909,
+    "sha256": "e7ea5701abbe8ddbab93d961592507f1543ebc8cd63d844c39203238fc63775d"
+  },
+  {
+    "file": "enemigos/originales/slime.png",
+    "bytes": 889992,
+    "sha256": "b44622cf9ddd2874f1bbeae74a0ba1c5cc2ac1ef23b52cdd9fad3f3b31934c47"
+  },
+  {
+    "file": "enemigos/slime_preview.png",
+    "bytes": 15118,
+    "sha256": "8035073677c2f455fd677211153db18eecf7918fc883b00d0fc270204b5498f0"
+  },
+  {
+    "file": "enemigos/validacion.json",
+    "bytes": 5146,
+    "sha256": "0608872827e2c1b095f077c4abec8e55d289110b95b9da73e58ffd26acb96267"
+  },
+  {
+    "file": "enemigos/verificar.gd",
+    "bytes": 1298,
+    "sha256": "937c1ae6e958938950c67d7d097ae4557d397398bdbcda0c1f163f5d283103a0"
+  },
+  {
+    "file": "enemigos/vista.html",
+    "bytes": 1876,
+    "sha256": "b398bc7da1069884c2197480afb4449d82144e8959bb05033528368f72a52a8a"
+  },
+  {
+    "file": "equipo/PROMPT_GENERACION.md",
+    "bytes": 1577,
+    "sha256": "1ea30c384bf337f42500e5da6aab6c7c68baca4701e36ff2356852cbb6d47663"
+  },
+  {
+    "file": "equipo/README.md",
+    "bytes": 3229,
+    "sha256": "002facbc61b41c378f9f1b7a3d4444b01825b6c3280e6b48f1df3d2ae2e912cb"
+  },
+  {
+    "file": "equipo/ajustar_overlays.gd",
+    "bytes": 5804,
+    "sha256": "80089610063ed1bb0ce1496a4419372ddcd65945723c5efc6b89e08f740c7389"
+  },
+  {
+    "file": "equipo/assets/casco_4_direcciones.png",
+    "bytes": 4309,
+    "sha256": "11ed30b477d8c0e143d7de486beb8cffd2a93716538782a901052b60046854e5"
+  },
+  {
+    "file": "equipo/assets/casco_derecha.png",
+    "bytes": 1194,
+    "sha256": "1c84afdfb0a751cc9f9086cf2a5e7f102243520150bd70192438c8b5a5c7f682"
+  },
+  {
+    "file": "equipo/assets/casco_espalda.png",
+    "bytes": 1251,
+    "sha256": "cb6de1db1e6b841f26072808797027c5244dff2121f320831f92b674bd0363a7"
+  },
+  {
+    "file": "equipo/assets/casco_frente.png",
+    "bytes": 1275,
+    "sha256": "c8f37b90d59b1e55998d6499efbbf1d49f1acde35702548da6b6dc692cef2bc9"
+  },
+  {
+    "file": "equipo/assets/casco_izquierda.png",
+    "bytes": 1180,
+    "sha256": "59c535d1cf6627c5ac911ab063253aea62e11a91d8f94488c231998d4d723680"
+  },
+  {
+    "file": "equipo/assets/coraza_4_direcciones.png",
+    "bytes": 4218,
+    "sha256": "29aa4393b6a05d69df61d24212267820fec4219f5a8bc26f160637a944108bbd"
+  },
+  {
+    "file": "equipo/assets/coraza_derecha.png",
+    "bytes": 1095,
+    "sha256": "1fb03c795b5c10558fcb5b481d4d72db4b4dfd747bc143a5dfabcf82a62c4537"
+  },
+  {
+    "file": "equipo/assets/coraza_espalda.png",
+    "bytes": 1325,
+    "sha256": "cc6f50772f1c6a8f24ccf1fac1767801862987d0b92fe7291e6b0e9fe5685fd3"
+  },
+  {
+    "file": "equipo/assets/coraza_frente.png",
+    "bytes": 1368,
+    "sha256": "4cf65e9a527c4fd57a90aae2662a21a900ebe24009886603aa99f9c45a6f8985"
+  },
+  {
+    "file": "equipo/assets/coraza_izquierda.png",
+    "bytes": 1101,
+    "sha256": "51c2f02f1459ad45149bc7b78d27c131199ddde08178e9ce4c0d5c92178f5958"
+  },
+  {
+    "file": "equipo/assets/escudo_4_direcciones.png",
+    "bytes": 4533,
+    "sha256": "6527bcebe6a20bbc9f23d93100013e8147322c5c9e9a3b8c60f3fbb815d97e64"
+  },
+  {
+    "file": "equipo/assets/escudo_derecha.png",
+    "bytes": 1172,
+    "sha256": "535768327aac01491d5baa12a5369264b3e97d9f9bbc776ba381c4846a7c9890"
+  },
+  {
+    "file": "equipo/assets/escudo_espalda.png",
+    "bytes": 1387,
+    "sha256": "8a916c19ae1aeb346819cb4a2948b13dc232395a49b0870357abe30c5a3d43a7"
+  },
+  {
+    "file": "equipo/assets/escudo_frente.png",
+    "bytes": 1407,
+    "sha256": "2be29a8460278fe46b5ec26d41f123be6f7bca991c225c4d8dd76ba67a588348"
+  },
+  {
+    "file": "equipo/assets/escudo_izquierda.png",
+    "bytes": 1188,
+    "sha256": "ec713c2c45ac4eb68385d156d50fc89583593a24fbc378c3a47467bd5069aca0"
+  },
+  {
+    "file": "equipo/assets/espada_4_direcciones.png",
+    "bytes": 4830,
+    "sha256": "4403cde9963892e9c42e67733dc2778f0b8f4a0ca0481518b265d3fb1c87c8b7"
+  },
+  {
+    "file": "equipo/assets/espada_derecha.png",
+    "bytes": 1274,
+    "sha256": "eeb86a9effcc12265dbbb5e691e9edb30a1669f69a6c49f0ada9023c83662b0f"
+  },
+  {
+    "file": "equipo/assets/espada_espalda.png",
+    "bytes": 1441,
+    "sha256": "f5f4f39db0ef3a98117222712c1be39c8b2aa77e76d7672775d490feb1af9f4f"
+  },
+  {
+    "file": "equipo/assets/espada_frente.png",
+    "bytes": 1493,
+    "sha256": "15c937d7f92d4b9929c748d8662ce114443fa2031c13478003675936d0d26861"
+  },
+  {
+    "file": "equipo/assets/espada_izquierda.png",
+    "bytes": 1265,
+    "sha256": "3e97eca8004b333862a8813457a395555da9b9da269dab05f38c01c16ab72fe9"
+  },
+  {
+    "file": "equipo/base_aprobada.png",
+    "bytes": 2791,
+    "sha256": "a100915de0ad6c492fa6b28429c767dadf35f1bb6db3ffe18748d6c78fecb321"
+  },
+  {
+    "file": "equipo/checks.json",
+    "bytes": 1870,
+    "sha256": "f46ef5ac12a5d35dc6031c8ddb59f82fe2e8311ca3eec94fca7116c8ca9a74ac"
+  },
+  {
+    "file": "equipo/comparacion_base_y_equipo.png",
+    "bytes": 34709,
+    "sha256": "ea16e533e9d23c8259b1089e1a487e611aa8a445a0426661bb2a87ef90934f94"
+  },
+  {
+    "file": "equipo/convertir.gd",
+    "bytes": 3689,
+    "sha256": "1cc3f775f820d84eeb8f05c6ecf505ac52c2f3d0ca29d550e278580315c1bade"
+  },
+  {
+    "file": "equipo/convertir_overlays.gd",
+    "bytes": 5601,
+    "sha256": "4ca608aee1a2723ab3743e2dfb0efa13fb2d433a8693d5ec4fbe405917d82aae"
+  },
+  {
+    "file": "equipo/equipo_estatico_128x128.png",
+    "bytes": 17474,
+    "sha256": "58edb0cf49683f70f812856568ad412d6496a2b157885b2c624ca7e3f589948c"
+  },
+  {
+    "file": "equipo/galeria.html",
+    "bytes": 2541,
+    "sha256": "09525a22f11f2adeecf274e99d09e6eac235354a8679fa0d06196169e89fb5e8"
+  },
+  {
+    "file": "equipo/manifest.json",
+    "bytes": 5654,
+    "sha256": "bf98f2a73f1f43280d1bd198e31922111e0a43bf6ecc583f1508af5784dcd160"
+  },
+  {
+    "file": "equipo/original_equipo.png",
+    "bytes": 939637,
+    "sha256": "6aa6fe2c59de041c5d4c29cf1e2400453f80fea20dcf6b8ba0b5cbffdb0aa84d"
+  },
+  {
+    "file": "equipo/overlays_ajustados/README.md",
+    "bytes": 2923,
+    "sha256": "cf0fe21f98f95358ef212dbebd7902f9ccde9e6ea6620fedef88ec2543814778"
+  },
+  {
+    "file": "equipo/overlays_ajustados/casco_4_direcciones.png",
+    "bytes": 1459,
+    "sha256": "72c349cd56d5ad392ca2ef63bd2d4f9045c5a7862f0be44f24daa8bb9458f76c"
+  },
+  {
+    "file": "equipo/overlays_ajustados/casco_atlas_128x128.png",
+    "bytes": 1797,
+    "sha256": "b0d274470a5b32b3c8f427ed2ebed7c7be30fd94a346e167cfc66577fa7636db"
+  },
+  {
+    "file": "equipo/overlays_ajustados/casco_derecha.png",
+    "bytes": 446,
+    "sha256": "6afb7a28ff4bc2e964d8a0955e594f333f16f7a942f7b8e7d73ac1fd4914bd37"
+  },
+  {
+    "file": "equipo/overlays_ajustados/casco_espalda.png",
+    "bytes": 513,
+    "sha256": "b769639692eb371a32f82d128ae6d7abdefdf7a42a66db06a17502b9d6f18fc1"
+  },
+  {
+    "file": "equipo/overlays_ajustados/casco_frente.png",
+    "bytes": 454,
+    "sha256": "cba9422b03b4a5ef895721a77d77b3eebfcbc7b496c32cdf198fbb1a24469fe8"
+  },
+  {
+    "file": "equipo/overlays_ajustados/casco_izquierda.png",
+    "bytes": 533,
+    "sha256": "726fd3cdd6e9f3701e6be9de535d9bfbfd8f5b267712fcec4a138f4a197e698d"
+  },
+  {
+    "file": "equipo/overlays_ajustados/checks.json",
+    "bytes": 795,
+    "sha256": "28da89f9e4bde2e72342c2a72ac0e7804fed3bae88434525a51ca62e99382fdc"
+  },
+  {
+    "file": "equipo/overlays_ajustados/composiciones_ampliadas.png",
+    "bytes": 34372,
+    "sha256": "147201a96021f07c7a48a0814ca785f1a0857bfb507a09f703e4a990e39dbdf8"
+  },
+  {
+    "file": "equipo/overlays_ajustados/composiciones_nativas_128x192.png",
+    "bytes": 13520,
+    "sha256": "e4c69f407348282130841f300eda52f86f2edb6ed292fb811c97e0487bbbfda7"
+  },
+  {
+    "file": "equipo/overlays_ajustados/coraza_4_direcciones.png",
+    "bytes": 674,
+    "sha256": "9f05c2d6a9f337438ecbfda32e3a506e1700630a9cc71a99e72cabd523d47716"
+  },
+  {
+    "file": "equipo/overlays_ajustados/coraza_atlas_128x128.png",
+    "bytes": 883,
+    "sha256": "30afbe692f43baf9f00ec8fa11b5864e2bdd8c45679c66e910b10d48e2c33417"
+  },
+  {
+    "file": "equipo/overlays_ajustados/coraza_derecha.png",
+    "bytes": 266,
+    "sha256": "58a604869c0eb0c129b81937ebd56df40fd06c7ad586a658a86e64c3e89be787"
+  },
+  {
+    "file": "equipo/overlays_ajustados/coraza_espalda.png",
+    "bytes": 265,
+    "sha256": "4aaa6263e74f9e8c6c6763fa6c8fb1b86e6090f595b06d9c9327581451afe4e6"
+  },
+  {
+    "file": "equipo/overlays_ajustados/coraza_frente.png",
+    "bytes": 267,
+    "sha256": "e48cd5900d60ef94362d8a2bb938832374d48917a3f9569f0d97f617c4ae4193"
+  },
+  {
+    "file": "equipo/overlays_ajustados/coraza_izquierda.png",
+    "bytes": 245,
+    "sha256": "98a2e4b8250abd44573e3874fa4d0db507ad452324245a52d5ee4138ec4b1570"
+  },
+  {
+    "file": "equipo/overlays_ajustados/escudo_4_direcciones.png",
+    "bytes": 1348,
+    "sha256": "2cca56ad75c612bf22083bb249a24a1cbfdf0a95b569f29fba33f17d4e08919b"
+  },
+  {
+    "file": "equipo/overlays_ajustados/escudo_atlas_128x128.png",
+    "bytes": 1707,
+    "sha256": "ac3159cd4bae4faa51c1397fa107096737dd68a29282466dd810bb79ca3aac6f"
+  },
+  {
+    "file": "equipo/overlays_ajustados/escudo_derecha.png",
+    "bytes": 310,
+    "sha256": "ce6d6fa7a9febecdec7facd50183429a28a73c414fa8deff95f7721b9534e5d3"
+  },
+  {
+    "file": "equipo/overlays_ajustados/escudo_espalda.png",
+    "bytes": 516,
+    "sha256": "191c269e2c957629374dec57b688ac23b95262a73ccc30c8c294bbbef3de36a4"
+  },
+  {
+    "file": "equipo/overlays_ajustados/escudo_frente.png",
+    "bytes": 490,
+    "sha256": "a3eafcb87bc61946b0fc037a4f128b5ec59a1579c4d0ef31159e5466115d5e79"
+  },
+  {
+    "file": "equipo/overlays_ajustados/escudo_izquierda.png",
+    "bytes": 464,
+    "sha256": "bb44cbeecb71e3d462d46129cff27391a68f0725bfde0c4b86507d12b7b6ce7a"
+  },
+  {
+    "file": "equipo/overlays_ajustados/espada_4_direcciones.png",
+    "bytes": 1088,
+    "sha256": "d412bd20f6aa1b7983f3456e69dfa04622916c5dd55eb6328167d76dc0de94eb"
+  },
+  {
+    "file": "equipo/overlays_ajustados/espada_atlas_128x128.png",
+    "bytes": 1438,
+    "sha256": "1505b84a88e5f7e9f68b68aeb17a9bf2ad749e324537ee4b6a4b9b69fd91a8ad"
+  },
+  {
+    "file": "equipo/overlays_ajustados/espada_derecha.png",
+    "bytes": 382,
+    "sha256": "c838849310e3580938209fb24b486f674067cd265e30695e25384b62f8c327f6"
+  },
+  {
+    "file": "equipo/overlays_ajustados/espada_espalda.png",
+    "bytes": 397,
+    "sha256": "17b6cde0af80b491e8e5e729081a991975a36a79687e079f158eb2d28f5ecb1e"
+  },
+  {
+    "file": "equipo/overlays_ajustados/espada_frente.png",
+    "bytes": 409,
+    "sha256": "3d54371551d836f1c11ab11560ffd35b555ce50fef730a8c58469a54a6d5c6ca"
+  },
+  {
+    "file": "equipo/overlays_ajustados/espada_izquierda.png",
+    "bytes": 298,
+    "sha256": "53bebc864efe640e812d5b8226fe28cd1aade12e75688916963e1163d74bef13"
+  },
+  {
+    "file": "equipo/overlays_ajustados/galeria.html",
+    "bytes": 686,
+    "sha256": "ac405115022cb8738257742d5a3ab8d9d002589582d0cd88d813afb270f2101c"
+  },
+  {
+    "file": "equipo/overlays_ajustados/manifest.json",
+    "bytes": 3491,
+    "sha256": "f3176e98893a38e563f40fcec5adc86cde6d6787089ad53934229708fa51386c"
+  },
+  {
+    "file": "equipo/overlays_ajustados/personaje_casco.png",
+    "bytes": 1797,
+    "sha256": "b0d274470a5b32b3c8f427ed2ebed7c7be30fd94a346e167cfc66577fa7636db"
+  },
+  {
+    "file": "equipo/overlays_ajustados/personaje_coraza.png",
+    "bytes": 883,
+    "sha256": "30afbe692f43baf9f00ec8fa11b5864e2bdd8c45679c66e910b10d48e2c33417"
+  },
+  {
+    "file": "equipo/overlays_ajustados/personaje_equipo_fragmento.json",
+    "bytes": 228,
+    "sha256": "80dc77799b48555839fbb8df6c61a277e0e20ced7b4c01306f2e5ff689a25aca"
+  },
+  {
+    "file": "equipo/overlays_ajustados/personaje_escudo.png",
+    "bytes": 1707,
+    "sha256": "ac3159cd4bae4faa51c1397fa107096737dd68a29282466dd810bb79ca3aac6f"
+  },
+  {
+    "file": "equipo/overlays_ajustados/personaje_espada.png",
+    "bytes": 1438,
+    "sha256": "1505b84a88e5f7e9f68b68aeb17a9bf2ad749e324537ee4b6a4b9b69fd91a8ad"
+  },
+  {
+    "file": "equipo/overlays_experimentales/PROMPT.md",
+    "bytes": 1454,
+    "sha256": "04d7c4e2a4c72493dbd5f53f0a39cf723210dbbb86102e41c957ab6f2371000e"
+  },
+  {
+    "file": "equipo/overlays_experimentales/README.md",
+    "bytes": 2753,
+    "sha256": "4e1da1fd23ecd3580349e3abe8829dd8e043e1674817cef05570a070f632cc3f"
+  },
+  {
+    "file": "equipo/overlays_experimentales/casco_4_direcciones.png",
+    "bytes": 2113,
+    "sha256": "f73eb612f84ab40c83bad93b87478738eb543435e3d5f14fd02522c4a5887475"
+  },
+  {
+    "file": "equipo/overlays_experimentales/casco_derecha.png",
+    "bytes": 643,
+    "sha256": "7a725ca3f367314d6c3ad4669e3234c4803d3b2768ea470572fabf1196d6fb1b"
+  },
+  {
+    "file": "equipo/overlays_experimentales/casco_espalda.png",
+    "bytes": 680,
+    "sha256": "bc71fb4eb76cb44d3d2b6e53dcaba7e7b37aae3706d625976831e82c27fc40ab"
+  },
+  {
+    "file": "equipo/overlays_experimentales/casco_frente.png",
+    "bytes": 593,
+    "sha256": "d12acabdf8a169099435b99fbbf34019419091486f9ebe1d0b3841ee92f0286b"
+  },
+  {
+    "file": "equipo/overlays_experimentales/casco_izquierda.png",
+    "bytes": 648,
+    "sha256": "2c013f7057e1d94c7b4f8ddc85c81de41a75cecd6739f7f2a95031876cf510dc"
+  },
+  {
+    "file": "equipo/overlays_experimentales/checks.json",
+    "bytes": 2414,
+    "sha256": "808b1f091e36da81acfede7d3b068ddf68f9586462aebe4609f5361e7493e678"
+  },
+  {
+    "file": "equipo/overlays_experimentales/composiciones_ampliadas.png",
+    "bytes": 36209,
+    "sha256": "1f92f995baadfc395cb299693471d3cf58682f9f023cc61912f350c67e94815e"
+  },
+  {
+    "file": "equipo/overlays_experimentales/composiciones_nativas_128x192.png",
+    "bytes": 16962,
+    "sha256": "dee454ef0d36ecd7815caf3fc9e13893a7e902cc3ead7a82696ec94acb5f2ec3"
+  },
+  {
+    "file": "equipo/overlays_experimentales/coraza_4_direcciones.png",
+    "bytes": 2162,
+    "sha256": "576981758c754e6d3209d8d8ed00a0e04bb8a343b41b8a1ed8d33536bc5f543a"
+  },
+  {
+    "file": "equipo/overlays_experimentales/coraza_derecha.png",
+    "bytes": 613,
+    "sha256": "daffa37e2d3ae87ab943a9df8b0ec6fea74ce488eb0e386e72c367aace0933d6"
+  },
+  {
+    "file": "equipo/overlays_experimentales/coraza_espalda.png",
+    "bytes": 696,
+    "sha256": "96d49a2738f0efb04ea1c82732b2a48c1ab0879337535521ecf9525301fdc59a"
+  },
+  {
+    "file": "equipo/overlays_experimentales/coraza_frente.png",
+    "bytes": 730,
+    "sha256": "dba6a73adf3776318ed4535f453c2c89e311ebcc7bcf92d2b775514e6d90a841"
+  },
+  {
+    "file": "equipo/overlays_experimentales/coraza_izquierda.png",
+    "bytes": 583,
+    "sha256": "2f48ea7da9f5d6db07df03af4a8626147c15291aec48b52e4a25b809023defe7"
+  },
+  {
+    "file": "equipo/overlays_experimentales/edicion_original.png",
+    "bytes": 404433,
+    "sha256": "34b2655c7584bcd6364cffceb951a42976a0062f97336325d859ee7fbe0d0103"
+  },
+  {
+    "file": "equipo/overlays_experimentales/escudo_4_direcciones.png",
+    "bytes": 1480,
+    "sha256": "84e9105c7be0b3b602f0a5fdfdc37b459d43d7335aff22a637444fc084b67d32"
+  },
+  {
+    "file": "equipo/overlays_experimentales/escudo_derecha.png",
+    "bytes": 360,
+    "sha256": "47deb20508ec5697f2a1dddbe217cdb06ac74d8f753c3e5eed746ac8252b7d77"
+  },
+  {
+    "file": "equipo/overlays_experimentales/escudo_espalda.png",
+    "bytes": 548,
+    "sha256": "0de33ce32d7beff4b6e12041f346e56acf9ab993a65ccc20f1ec8c4e5894998c"
+  },
+  {
+    "file": "equipo/overlays_experimentales/escudo_frente.png",
+    "bytes": 529,
+    "sha256": "ac6af8fd232846eb3ca10d8b27bbaf53f9e1b4b0b5a896f867fb3ca0e1321c83"
+  },
+  {
+    "file": "equipo/overlays_experimentales/escudo_izquierda.png",
+    "bytes": 496,
+    "sha256": "f5f39a22cb9a275ca168e07d15856c456f13cc48c1aee81b72d6160706426cb7"
+  },
+  {
+    "file": "equipo/overlays_experimentales/espada_4_direcciones.png",
+    "bytes": 1196,
+    "sha256": "24cfe5979e338a09e1a2d9ff5c91079c7a8d614f74d831e907310f70c4ca2801"
+  },
+  {
+    "file": "equipo/overlays_experimentales/espada_derecha.png",
+    "bytes": 385,
+    "sha256": "f0191fcde152c6e0c9d0f38bc3eaeea08f4543adcac536a0222215d47a66fb60"
+  },
+  {
+    "file": "equipo/overlays_experimentales/espada_espalda.png",
+    "bytes": 411,
+    "sha256": "d3257ff17d51301387ec70bd059c2156634ed74619fcd687afc66b9fce8b9ef7"
+  },
+  {
+    "file": "equipo/overlays_experimentales/espada_frente.png",
+    "bytes": 423,
+    "sha256": "64c6963673fc55c0eb47ac8fc076b337d3bc3bf4e6c38842b47fc7bb76531395"
+  },
+  {
+    "file": "equipo/overlays_experimentales/espada_izquierda.png",
+    "bytes": 443,
+    "sha256": "c1758f8958ecd44557b7bfaf900a60c6f673170f08aeb7a2f05b3b73ef99b066"
+  },
+  {
+    "file": "equipo/overlays_experimentales/galeria.html",
+    "bytes": 833,
+    "sha256": "34b81bc9885e14be5122b531131f781ae4e9cd03c5eec14ddbb9b77efc4b71f6"
+  },
+  {
+    "file": "equipo/overlays_experimentales/manifest.json",
+    "bytes": 6478,
+    "sha256": "2e0faa2cb75e31bfd4eb8db235d9f11a967334d20d29029bbd5104d3e6dd6a72"
+  },
+  {
+    "file": "equipo/project.godot",
+    "bytes": 192,
+    "sha256": "4511a0742b27a10c7fc0ba0af97d5c17d8d5d973326e55ddf005b7469c480191"
+  },
+  {
+    "file": "escenario/LEEME.md",
+    "bytes": 3845,
+    "sha256": "aae6566a25f76cf5067eb855cd12da64324b26426ad65d67d173a379b59096ac"
+  },
+  {
+    "file": "escenario/PROMPTS.md",
+    "bytes": 3333,
+    "sha256": "ae50f58fca01f5b25e9459818b956a329a337e8411e24af50afef459d49cde5a"
+  },
+  {
+    "file": "escenario/assets/barrel.png",
+    "bytes": 2336,
+    "sha256": "b0c19aa1d8fe59ae4e28979552fc68ea14ddf78137d6c8f27e04e2df64c1c84a"
+  },
+  {
+    "file": "escenario/assets/bed.png",
+    "bytes": 2189,
+    "sha256": "f7be4c7faf8f09fbb2da68d857b59f5b8811a10e0d0a9da963f7f69a66939c25"
+  },
+  {
+    "file": "escenario/assets/bridge_vertical.png",
+    "bytes": 2638,
+    "sha256": "4806b3f9dad38b087e23396b45efdd80b8cde558396df8755319452fa75f98b3"
+  },
+  {
+    "file": "escenario/assets/bush_berries.png",
+    "bytes": 2285,
+    "sha256": "aeaba4d8d3e1b20725f3fe27eddd0878b8082f2f7b24b194fc3c5c043e9597e5"
+  },
+  {
+    "file": "escenario/assets/cave_entrance.png",
+    "bytes": 9990,
+    "sha256": "622b34e4f5a69c32cc0ac32161cea05e670ff3f7c55aba9f3421d6ede3c36298"
+  },
+  {
+    "file": "escenario/assets/chest_closed.png",
+    "bytes": 2421,
+    "sha256": "a05921b4188eda9c8f28d6ff5dfa5687a249b25c66920bdfda779990a0c565cf"
+  },
+  {
+    "file": "escenario/assets/chest_open.png",
+    "bytes": 1991,
+    "sha256": "f3ca0b0a6a76cb1ad7c71bca35e7e7a08223384c9942e3b9278f69986e19d7d8"
+  },
+  {
+    "file": "escenario/assets/chest_treasure.png",
+    "bytes": 2472,
+    "sha256": "a51b1d720e85d3c5f1657f4dbea07fdc2c3ed744bae7125a031067df978dcf89"
+  },
+  {
+    "file": "escenario/assets/cottage_closed.png",
+    "bytes": 9846,
+    "sha256": "436407cde8a5f0b72ec5d289059c98087c6d2097e888315a0697573f8f5b9474"
+  },
+  {
+    "file": "escenario/assets/cottage_open.png",
+    "bytes": 10154,
+    "sha256": "ee60e83dc1402f848dcdf2c28ad8f198fba7d2e01568c50ca9856cf5dba42a1a"
+  },
+  {
+    "file": "escenario/assets/crafting_shed.png",
+    "bytes": 10021,
+    "sha256": "b4ec746612c63bd3eda0a9aa75b4a8d99c8a8a7422729eabd99b8cd275debf29"
+  },
+  {
+    "file": "escenario/assets/fence_horizontal.png",
+    "bytes": 1831,
+    "sha256": "ca46412a6838c0e381d8136bbfcc2bc9b9a6abd7263dfa750a823fa7631667d1"
+  },
+  {
+    "file": "escenario/assets/floor_ruins.png",
+    "bytes": 900,
+    "sha256": "e6c0b27fb6d36a7775e3e8225726db17f8d0aebc7dc71bce7bd17675681f23ce"
+  },
+  {
+    "file": "escenario/assets/floor_wood.png",
+    "bytes": 654,
+    "sha256": "0342932ca24917096a0b8b8b01ecaba78eadb626b4602d601b1cf3657e8ee6e0"
+  },
+  {
+    "file": "escenario/assets/furnace.png",
+    "bytes": 2973,
+    "sha256": "6112d44fd8ec0872be3abff40f70c5be9f470df598ba2ad6529d943764c578b0"
+  },
+  {
+    "file": "escenario/assets/grass.png",
+    "bytes": 494,
+    "sha256": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8"
+  },
+  {
+    "file": "escenario/assets/grass_flecks.png",
+    "bytes": 548,
+    "sha256": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852"
+  },
+  {
+    "file": "escenario/assets/ore_copper.png",
+    "bytes": 2757,
+    "sha256": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168"
+  },
+  {
+    "file": "escenario/assets/palisade.png",
+    "bytes": 2550,
+    "sha256": "d03fb26e8704d9d6a41177276c0e9ddc56b72c8c6b43b8a4b6073baabefa78a2"
+  },
+  {
+    "file": "escenario/assets/path_fill.png",
+    "bytes": 503,
+    "sha256": "1a544a37dec6e6bbecf6019dc5f7c0185a353bb85223fc6d13173115aecbdedf"
+  },
+  {
+    "file": "escenario/assets/path_grass_e.png",
+    "bytes": 589,
+    "sha256": "499bac02785d67c366d152b3974f081d88fe9faafdf42757c42ad1399aa1ed2f"
+  },
+  {
+    "file": "escenario/assets/path_grass_n.png",
+    "bytes": 585,
+    "sha256": "ba1f7bd7cea1a3262b7cb915a4da0363f487eaa362ab8428b4577a8128adf9c7"
+  },
+  {
+    "file": "escenario/assets/path_grass_s.png",
+    "bytes": 593,
+    "sha256": "a470ec7f5d4149a03af070a0536db0d6b9200ceed4712dd4f14fbcbf510b6da0"
+  },
+  {
+    "file": "escenario/assets/path_grass_w.png",
+    "bytes": 601,
+    "sha256": "74ef08330831edec6e6cbaa5a1d5199fc4d0fe9b872261a12dd7a97fcf6d59c0"
+  },
+  {
+    "file": "escenario/assets/rock.png",
+    "bytes": 1659,
+    "sha256": "dd28ff33a0b63207092639eed98c6a264549eed28b95f2e080430baf62202236"
+  },
+  {
+    "file": "escenario/assets/steps_n.png",
+    "bytes": 836,
+    "sha256": "a90e6cfdfa45c376f0405b073806fc1e8731594e937dbe0f17f967f5c8292775"
+  },
+  {
+    "file": "escenario/assets/tree_broadleaf.png",
+    "bytes": 2446,
+    "sha256": "a37c01868c1e96d4fbf697987cc1fd2d87c0ad5fa8abc4e973fafb6aec02bc10"
+  },
+  {
+    "file": "escenario/assets/tree_fruit.png",
+    "bytes": 1953,
+    "sha256": "3f8ead1870dca9456c55be3ff3721c0d3853415fa76c66fe2497fce0aa870c2c"
+  },
+  {
+    "file": "escenario/assets/tree_pine.png",
+    "bytes": 2005,
+    "sha256": "4a41a6c366f67043fc9c6b9cf8ec8928d24c88dd6474b0632864e1ee6111b366"
+  },
+  {
+    "file": "escenario/assets/wall_stone.png",
+    "bytes": 846,
+    "sha256": "49a1ba2df37bac4ec79037bc2be6aa1a7005d7ad19a432890b7eec157a9510b2"
+  },
+  {
+    "file": "escenario/assets/water_fill.png",
+    "bytes": 552,
+    "sha256": "6e35f33213b6f13b492bdf91ca07a151c3e96ec677545a099de71a79a582615c"
+  },
+  {
+    "file": "escenario/assets/water_shore_e.png",
+    "bytes": 688,
+    "sha256": "abdb5707c3f2be38b2fc9ab34003e099a337c6ccc652d7bc7245feca394d1a04"
+  },
+  {
+    "file": "escenario/assets/water_shore_n.png",
+    "bytes": 606,
+    "sha256": "d64ec4d643f8fa15806d666b1b7a8971360fdce95778f9c86ca8063a29ffe647"
+  },
+  {
+    "file": "escenario/assets/water_shore_s.png",
+    "bytes": 624,
+    "sha256": "5e0e3da32b6ab90efc89872cdfe423f32650e4a0b6fda27d655721708da80448"
+  },
+  {
+    "file": "escenario/assets/water_shore_w.png",
+    "bytes": 659,
+    "sha256": "4d8073901b3ed2aebfe200ba287795912e3cd837e06e8588c5f192edef91e5d8"
+  },
+  {
+    "file": "escenario/assets/workbench.png",
+    "bytes": 2846,
+    "sha256": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345"
+  },
+  {
+    "file": "escenario/catalogo.html",
+    "bytes": 4934,
+    "sha256": "2a2d4cc9998f99619f1a778d63ad5b97c1c601f5835b532e6155c08f0c5378c2"
+  },
+  {
+    "file": "escenario/catalogo.png",
+    "bytes": 101013,
+    "sha256": "4ffe4e584c6b9fe5fa00c6cfb301885c3f3e74f139c029e4b3350277dd7b560f"
+  },
+  {
+    "file": "escenario/config.json",
+    "bytes": 2247,
+    "sha256": "26075864e8420e70a2dd50fa1a1ead5d5bc6a30e55e10eb69b797f96fa226075"
+  },
+  {
+    "file": "escenario/convertir.gd",
+    "bytes": 2884,
+    "sha256": "12d97ec40480d4fb0b64f4fbc1a65306419a5b9d746144452bfc20549ba49614"
+  },
+  {
+    "file": "escenario/manifest.json",
+    "bytes": 25607,
+    "sha256": "32fa1354e6d4fe9a6deabb81bbb3358f86069ce7f0db76ad785c92222fcd36b4"
+  },
+  {
+    "file": "escenario/medir.gd",
+    "bytes": 1196,
+    "sha256": "b23962d6ab96bb67d2ed6d4b17f3be21afa0791937b6c1cdab58d70523df20ea"
+  },
+  {
+    "file": "escenario/originales/edificios.png",
+    "bytes": 1059732,
+    "sha256": "eb3ce169c69a7aa71cfd0402c9f97d67bf3fb31081a44fc071d48c4f24ec0157"
+  },
+  {
+    "file": "escenario/originales/objetos.png",
+    "bytes": 1083449,
+    "sha256": "d82156cedef6434135e3c2e8d67525a1e8103ff4f3d58da621d42be75eade237"
+  },
+  {
+    "file": "escenario/originales/terreno.png",
+    "bytes": 1358609,
+    "sha256": "f944ae53d1b0a42542d8561bbbe73668420ccff9c01b68c77ce326fe36685ddc"
+  },
+  {
+    "file": "escenario/project.godot",
+    "bytes": 191,
+    "sha256": "d3b2997b4f57c56ee1cbf3b93a3af4c3e695d877fc88c7b33b70affc3b86bea7"
+  },
+  {
+    "file": "interfaz/PROMPTS.md",
+    "bytes": 3448,
+    "sha256": "40b7d1b36008605de8ebfd7a664238158c4801bef3849e7b2c614ff3622109f9"
+  },
+  {
+    "file": "interfaz/README.md",
+    "bytes": 4464,
+    "sha256": "73aa3fc2aa9fe34a384d6d3c973ac9ef1d04fe7a84c38a0d4b138bdacd342afd"
+  },
+  {
+    "file": "interfaz/assets/baya.png",
+    "bytes": 1695,
+    "sha256": "6db148dfd993c4a6190fcec538c4e7d2068e4a377e809f426165b974c3430d40"
+  },
+  {
+    "file": "interfaz/assets/button_hover.png",
+    "bytes": 2043,
+    "sha256": "3370dbbc9e19a3db72d7639599a193b2e6a042ab552ab5cfaca771a9b592d73c"
+  },
+  {
+    "file": "interfaz/assets/button_normal.png",
+    "bytes": 2039,
+    "sha256": "5ea9e031858e9178639445a7aa875199474dde50caef7afecc79e9dfc7a05124"
+  },
+  {
+    "file": "interfaz/assets/button_pressed.png",
+    "bytes": 1754,
+    "sha256": "bab5ad9313c1c56af2966e2a66368e9c8e6a1593130a5a7789838e2599405341"
+  },
+  {
+    "file": "interfaz/assets/casco.png",
+    "bytes": 1894,
+    "sha256": "21231eba47da222c48fe1379f09fdf54dacf056f44030c414dc0ffc50c6f912c"
+  },
+  {
+    "file": "interfaz/assets/categoria_combate.png",
+    "bytes": 1623,
+    "sha256": "94847896547a283ee187bae4897811a4e71cef3073e6c936e59017e7b1214471"
+  },
+  {
+    "file": "interfaz/assets/categoria_comunidad.png",
+    "bytes": 1362,
+    "sha256": "4aa5e2363498ecafcf403b74e21a65880ec633ddc6312a99c716d6baf9c63da2"
+  },
+  {
+    "file": "interfaz/assets/categoria_exploracion.png",
+    "bytes": 1755,
+    "sha256": "d23e7a13f48a97b4c75da29ad258501c053593dabf21bed6e80e073fbdd49c8d"
+  },
+  {
+    "file": "interfaz/assets/categoria_oficio.png",
+    "bytes": 1733,
+    "sha256": "a253f79e9452bd5faf4ce4a202d04c0c9a014e5305d80ec7adc04272b843f5f7"
+  },
+  {
+    "file": "interfaz/assets/coraza.png",
+    "bytes": 1796,
+    "sha256": "cbdda3665900109d07662216917f792c861f546bf22f9a7028a89c9586de1d7a"
+  },
+  {
+    "file": "interfaz/assets/counter_panel.png",
+    "bytes": 2194,
+    "sha256": "5bb068ffc55f76e16f776ee1e4daa1fbc56d945d57f25ff2ef3609020c23513a"
+  },
+  {
+    "file": "interfaz/assets/escudo.png",
+    "bytes": 1813,
+    "sha256": "23ba62490c59690f0e29a4369df5a8cd8464cf80063c97bf7504c26fa28eaad8"
+  },
+  {
+    "file": "interfaz/assets/espada_hierro.png",
+    "bytes": 1232,
+    "sha256": "13ba6e52257a6a5ec2e562fea8536fcfcb0bbc981ddb024982918eb5edfd1de6"
+  },
+  {
+    "file": "interfaz/assets/fibra.png",
+    "bytes": 1662,
+    "sha256": "fc8f72bf3f60f51870a7688512841f91ecd43591e62282ca0b9590a926e7e08b"
+  },
+  {
+    "file": "interfaz/assets/gelatina.png",
+    "bytes": 1115,
+    "sha256": "ca99a95219f97a6dfdc22b64fdf52cb9290fa213492701bcca6d5955a37f5f36"
+  },
+  {
+    "file": "interfaz/assets/gema.png",
+    "bytes": 1312,
+    "sha256": "3498697b4912d7ba9dbb7caea09325f13fc6085af3ad7e094bfaad7d95294874"
+  },
+  {
+    "file": "interfaz/assets/hacha_piedra.png",
+    "bytes": 1251,
+    "sha256": "e597ac9a5d4e373d3620b06c2e8fa811c8b960e84e733d5ea616a3799968cdcf"
+  },
+  {
+    "file": "interfaz/assets/healthbar_fill.png",
+    "bytes": 461,
+    "sha256": "1de6c98dc9a4b5cb9858ec1d7be8e631c11375e4f2ca1e1debc8f3ba4149fea3"
+  },
+  {
+    "file": "interfaz/assets/healthbar_frame.png",
+    "bytes": 1720,
+    "sha256": "e003be410d9010c9537a24cd769966ebc8372d498a325c75ced6d16a5c3077d5"
+  },
+  {
+    "file": "interfaz/assets/healthbar_full.png",
+    "bytes": 2293,
+    "sha256": "27b8e9c20252a9a7a3c828dc94363343782fdb5782c9e9eb17c83a27ec7fae1a"
+  },
+  {
+    "file": "interfaz/assets/interact_indicator.png",
+    "bytes": 1129,
+    "sha256": "563803ada2808182a4895beedf363c43e1bb574aed7de5c061f4c50894b513fa"
+  },
+  {
+    "file": "interfaz/assets/lingote_hierro.png",
+    "bytes": 1275,
+    "sha256": "205ca43ad1c3596a2e2d3d76730ec5a7ad5fbaad7ff1cc84b0148bce0cc33888"
+  },
+  {
+    "file": "interfaz/assets/madera.png",
+    "bytes": 1481,
+    "sha256": "0faa0afbe73567ce7ac276d59961d6caf1f2564b80d514f4be9ade6648d7a78c"
+  },
+  {
+    "file": "interfaz/assets/mena_hierro.png",
+    "bytes": 1668,
+    "sha256": "b7849670842b4e4fca2177b60acd7c5a35cbfd4cecfd76d019f9b6df1a1ab1dc"
+  },
+  {
+    "file": "interfaz/assets/mision_icono.png",
+    "bytes": 898,
+    "sha256": "8c8f434d552a3bd1aeadf3ebb4d59bdc2eac6c96adda37654f42fea34a505ad4"
+  },
+  {
+    "file": "interfaz/assets/panel.png",
+    "bytes": 4940,
+    "sha256": "7f950e5944c2e8372d5b57d0fd40004e5b771b990b5b6f93cae3552c1c328b0c"
+  },
+  {
+    "file": "interfaz/assets/pico_piedra.png",
+    "bytes": 1340,
+    "sha256": "116d3cb9d6a7338c1c0c85a859852f0478cdd083eb972a5e42061bcc8fdb9368"
+  },
+  {
+    "file": "interfaz/assets/piedra.png",
+    "bytes": 1569,
+    "sha256": "d46ba9e50e6e4b3cd397afde278fb4d0f6623771694bab083c8ffa36273da3d9"
+  },
+  {
+    "file": "interfaz/assets/quest_marker.png",
+    "bytes": 1593,
+    "sha256": "717d0512e66afc7cd22ce4a61f0f8bb62783d7c1c65200edc39e041eff9b431a"
+  },
+  {
+    "file": "interfaz/assets/skill_locked.png",
+    "bytes": 1849,
+    "sha256": "46c06d229a25dd5cf0a7cceb63e0b3d9c2398c15e26d8ca64b5783c5d95b0439"
+  },
+  {
+    "file": "interfaz/assets/skill_selected.png",
+    "bytes": 1794,
+    "sha256": "e8ea9150f914451986ad8652faa35cbb0d4ecd8cdf7d649670c063ab9e472854"
+  },
+  {
+    "file": "interfaz/assets/skill_unlocked.png",
+    "bytes": 1788,
+    "sha256": "2ea6b4efd3e9b859ae3d1468bf19ebb8bcf02b7eecc550edc6bf136b7dfc98b6"
+  },
+  {
+    "file": "interfaz/assets/slot_disabled.png",
+    "bytes": 1665,
+    "sha256": "20c913893983340b959ceb8b4c5ea7c3a5ba76e6ebb29117cc31d6eb19b9ad95"
+  },
+  {
+    "file": "interfaz/assets/slot_normal.png",
+    "bytes": 1770,
+    "sha256": "826b7a77a68263d6cca82696fae2cfbf0092e119d097b2557266929f890ab0c4"
+  },
+  {
+    "file": "interfaz/assets/slot_selected.png",
+    "bytes": 1741,
+    "sha256": "2064cbef44e801cd78cecfb57b0de6f72b4c913d6445f0a456fe1128a8baedef"
+  },
+  {
+    "file": "interfaz/assets/tooltip_panel.png",
+    "bytes": 5634,
+    "sha256": "490c8282e71479980babd0037118f06800ce9ad5cdbc18e0be933c27dbb84ffe"
+  },
+  {
+    "file": "interfaz/assets/unguento.png",
+    "bytes": 1637,
+    "sha256": "e8695c42996fd2fe52a7041deb3ab70a2933318b83fd16deab5f9f32dd805db4"
+  },
+  {
+    "file": "interfaz/checks.json",
+    "bytes": 5152,
+    "sha256": "867d5796b17d7e853f30dd0e7f3452fce6af6330fd407f65690abca7da5167ec"
+  },
+  {
+    "file": "interfaz/convertir.gd",
+    "bytes": 4492,
+    "sha256": "5c95ba92107372942edfdd485d335643af3217db3ffea8fdebb864b767d5339a"
+  },
+  {
+    "file": "interfaz/galeria.gd",
+    "bytes": 2379,
+    "sha256": "0b5805bd664544e6f946e625a55da94d4dafeed1aa7017ffb078915ccc786498"
+  },
+  {
+    "file": "interfaz/galeria.html",
+    "bytes": 7301,
+    "sha256": "c9ddbb0c2385a8dd653e375589c1ace54e010fcf0427b74bc45db1534b97c58b"
+  },
+  {
+    "file": "interfaz/galeria.png",
+    "bytes": 85289,
+    "sha256": "6ad7f22730ddeb3a4afd062f017eb0df9a695cd02618972624ffca171af6162c"
+  },
+  {
+    "file": "interfaz/manifest.json",
+    "bytes": 14368,
+    "sha256": "eab4575cc138f58fbcfb5f8faa34618bb8602d7c74991ca8f5fad4fcc6f24636"
+  },
+  {
+    "file": "interfaz/ninepatch_check.json",
+    "bytes": 339,
+    "sha256": "0e69dafcfba525f12962901400d408b24a119303d09e4883cc1c2896b864fc35"
+  },
+  {
+    "file": "interfaz/original_iconos.png",
+    "bytes": 1230441,
+    "sha256": "55f439e3ddd3e771332878cc18a6e6f9e1dc491bccbc10f0630329cfaaf0c482"
+  },
+  {
+    "file": "interfaz/original_widgets.png",
+    "bytes": 1106529,
+    "sha256": "580e41c13dd2f7ec3e73793f208a39d1b2e52348d6056e7dd3f9cb9d85dadadb"
+  },
+  {
+    "file": "interfaz/project.godot",
+    "bytes": 185,
+    "sha256": "a9a307ad6a8e727c82136116642a1a034b5855018037ddc20f6d42a5022e5d48"
+  },
+  {
+    "file": "interfaz/prueba_ninepatch.png",
+    "bytes": 19638,
+    "sha256": "cd45892cec663c7c48cda600e2183b199869f5666890b7971c44e32abd653bce"
+  },
+  {
+    "file": "mapa_muestra/LEEME_ARTE.md",
+    "bytes": 2501,
+    "sha256": "7c0a0e0d9c13f817ee71e63d5f49a47fb327c5dbf2683ce82532e32551d6d638"
+  },
+  {
+    "file": "mapa_muestra/arte/ataque.png",
+    "bytes": 16178,
+    "sha256": "2ceaeb5add2a6b1eeb1e31c4b2e2276b902667ad36c253c7fc964938896800ad"
+  },
+  {
+    "file": "mapa_muestra/arte/herramienta.png",
+    "bytes": 14981,
+    "sha256": "54c786a417b10614f3f15e8ebdcd7ad36c020178f0e61f94f7191db757be8742"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje.json",
+    "bytes": 161,
+    "sha256": "f8981414b0dccc1366e1189023971582709c062a67d0c50e8ad8ad432467c307"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_casco.png",
+    "bytes": 1797,
+    "sha256": "b0d274470a5b32b3c8f427ed2ebed7c7be30fd94a346e167cfc66577fa7636db"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_cinturon.png",
+    "bytes": 246,
+    "sha256": "44dcc93147a8b894b7f41a7879be6255cc0eeaae84b345ce7db2f9e445347ff1"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_coraza.png",
+    "bytes": 883,
+    "sha256": "30afbe692f43baf9f00ec8fa11b5864e2bdd8c45679c66e910b10d48e2c33417"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_cuerpo.png",
+    "bytes": 4152,
+    "sha256": "91abc6b051af1bd7915080ffdd96ade22e792ce962e3ec38fd03dcfd3e5bf1b8"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_escudo.png",
+    "bytes": 1707,
+    "sha256": "ac3159cd4bae4faa51c1397fa107096737dd68a29282466dd810bb79ca3aac6f"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_espada.png",
+    "bytes": 1438,
+    "sha256": "1505b84a88e5f7e9f68b68aeb17a9bf2ad749e324537ee4b6a4b9b69fd91a8ad"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_pantalon.png",
+    "bytes": 1908,
+    "sha256": "daefcca5600622e8b3e11311309382445bbfc310a837e4fabbe3145e5a1c26a4"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_pelo.png",
+    "bytes": 4722,
+    "sha256": "4a46fd059cf4f59ab94cec2e0632faf805f1a89d7972d63b9cd5222f4409a751"
+  },
+  {
+    "file": "mapa_muestra/arte/personaje_tunica.png",
+    "bytes": 1294,
+    "sha256": "03a230dc6857633549bd40d9ac58261c373a4fcd6554ee0870afce0556c5de1e"
+  },
+  {
+    "file": "mapa_muestra/assets/enemigos/ciervo.png",
+    "bytes": 25413,
+    "sha256": "2f86f5c3855da99c7437c69b7d0a4ddcd4606555314702783b087093cfd80130"
+  },
+  {
+    "file": "mapa_muestra/assets/enemigos/guardian.png",
+    "bytes": 36105,
+    "sha256": "97094ed0a4f6735384e12054b81dfe6f088688835c38747bdc57b0c83794cd28"
+  },
+  {
+    "file": "mapa_muestra/assets/enemigos/slime.png",
+    "bytes": 7557,
+    "sha256": "624999a0cc54e8b0aa7210086e4a4aa7d73344d8fe6b0cba8b349077573b512b"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/barrel.png",
+    "bytes": 2336,
+    "sha256": "b0c19aa1d8fe59ae4e28979552fc68ea14ddf78137d6c8f27e04e2df64c1c84a"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/bed.png",
+    "bytes": 2189,
+    "sha256": "f7be4c7faf8f09fbb2da68d857b59f5b8811a10e0d0a9da963f7f69a66939c25"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/bridge_vertical.png",
+    "bytes": 2638,
+    "sha256": "4806b3f9dad38b087e23396b45efdd80b8cde558396df8755319452fa75f98b3"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/bush_berries.png",
+    "bytes": 2285,
+    "sha256": "aeaba4d8d3e1b20725f3fe27eddd0878b8082f2f7b24b194fc3c5c043e9597e5"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/cave_entrance.png",
+    "bytes": 9990,
+    "sha256": "622b34e4f5a69c32cc0ac32161cea05e670ff3f7c55aba9f3421d6ede3c36298"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/chest_closed.png",
+    "bytes": 2421,
+    "sha256": "a05921b4188eda9c8f28d6ff5dfa5687a249b25c66920bdfda779990a0c565cf"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/chest_open.png",
+    "bytes": 1991,
+    "sha256": "f3ca0b0a6a76cb1ad7c71bca35e7e7a08223384c9942e3b9278f69986e19d7d8"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/chest_treasure.png",
+    "bytes": 2472,
+    "sha256": "a51b1d720e85d3c5f1657f4dbea07fdc2c3ed744bae7125a031067df978dcf89"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/cottage_closed.png",
+    "bytes": 9846,
+    "sha256": "436407cde8a5f0b72ec5d289059c98087c6d2097e888315a0697573f8f5b9474"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/cottage_open.png",
+    "bytes": 10154,
+    "sha256": "ee60e83dc1402f848dcdf2c28ad8f198fba7d2e01568c50ca9856cf5dba42a1a"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/crafting_shed.png",
+    "bytes": 10021,
+    "sha256": "b4ec746612c63bd3eda0a9aa75b4a8d99c8a8a7422729eabd99b8cd275debf29"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/fence_horizontal.png",
+    "bytes": 1831,
+    "sha256": "ca46412a6838c0e381d8136bbfcc2bc9b9a6abd7263dfa750a823fa7631667d1"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/floor_ruins.png",
+    "bytes": 900,
+    "sha256": "e6c0b27fb6d36a7775e3e8225726db17f8d0aebc7dc71bce7bd17675681f23ce"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/floor_wood.png",
+    "bytes": 654,
+    "sha256": "0342932ca24917096a0b8b8b01ecaba78eadb626b4602d601b1cf3657e8ee6e0"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/furnace.png",
+    "bytes": 2973,
+    "sha256": "6112d44fd8ec0872be3abff40f70c5be9f470df598ba2ad6529d943764c578b0"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/grass.png",
+    "bytes": 494,
+    "sha256": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/grass_flecks.png",
+    "bytes": 548,
+    "sha256": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/ore_copper.png",
+    "bytes": 2757,
+    "sha256": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/palisade.png",
+    "bytes": 2550,
+    "sha256": "d03fb26e8704d9d6a41177276c0e9ddc56b72c8c6b43b8a4b6073baabefa78a2"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/path_fill.png",
+    "bytes": 503,
+    "sha256": "1a544a37dec6e6bbecf6019dc5f7c0185a353bb85223fc6d13173115aecbdedf"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/path_grass_e.png",
+    "bytes": 589,
+    "sha256": "499bac02785d67c366d152b3974f081d88fe9faafdf42757c42ad1399aa1ed2f"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/path_grass_n.png",
+    "bytes": 585,
+    "sha256": "ba1f7bd7cea1a3262b7cb915a4da0363f487eaa362ab8428b4577a8128adf9c7"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/path_grass_s.png",
+    "bytes": 593,
+    "sha256": "a470ec7f5d4149a03af070a0536db0d6b9200ceed4712dd4f14fbcbf510b6da0"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/path_grass_w.png",
+    "bytes": 601,
+    "sha256": "74ef08330831edec6e6cbaa5a1d5199fc4d0fe9b872261a12dd7a97fcf6d59c0"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/rock.png",
+    "bytes": 1659,
+    "sha256": "dd28ff33a0b63207092639eed98c6a264549eed28b95f2e080430baf62202236"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/steps_n.png",
+    "bytes": 836,
+    "sha256": "a90e6cfdfa45c376f0405b073806fc1e8731594e937dbe0f17f967f5c8292775"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/tree_broadleaf.png",
+    "bytes": 2446,
+    "sha256": "a37c01868c1e96d4fbf697987cc1fd2d87c0ad5fa8abc4e973fafb6aec02bc10"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/tree_fruit.png",
+    "bytes": 1953,
+    "sha256": "3f8ead1870dca9456c55be3ff3721c0d3853415fa76c66fe2497fce0aa870c2c"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/tree_pine.png",
+    "bytes": 2005,
+    "sha256": "4a41a6c366f67043fc9c6b9cf8ec8928d24c88dd6474b0632864e1ee6111b366"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/wall_stone.png",
+    "bytes": 846,
+    "sha256": "49a1ba2df37bac4ec79037bc2be6aa1a7005d7ad19a432890b7eec157a9510b2"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/water_fill.png",
+    "bytes": 552,
+    "sha256": "6e35f33213b6f13b492bdf91ca07a151c3e96ec677545a099de71a79a582615c"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/water_shore_e.png",
+    "bytes": 688,
+    "sha256": "abdb5707c3f2be38b2fc9ab34003e099a337c6ccc652d7bc7245feca394d1a04"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/water_shore_n.png",
+    "bytes": 606,
+    "sha256": "d64ec4d643f8fa15806d666b1b7a8971360fdce95778f9c86ca8063a29ffe647"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/water_shore_s.png",
+    "bytes": 624,
+    "sha256": "5e0e3da32b6ab90efc89872cdfe423f32650e4a0b6fda27d655721708da80448"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/water_shore_w.png",
+    "bytes": 659,
+    "sha256": "4d8073901b3ed2aebfe200ba287795912e3cd837e06e8588c5f192edef91e5d8"
+  },
+  {
+    "file": "mapa_muestra/assets/escenario/workbench.png",
+    "bytes": 2846,
+    "sha256": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/baya.png",
+    "bytes": 1695,
+    "sha256": "6db148dfd993c4a6190fcec538c4e7d2068e4a377e809f426165b974c3430d40"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/button_hover.png",
+    "bytes": 2043,
+    "sha256": "3370dbbc9e19a3db72d7639599a193b2e6a042ab552ab5cfaca771a9b592d73c"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/button_normal.png",
+    "bytes": 2039,
+    "sha256": "5ea9e031858e9178639445a7aa875199474dde50caef7afecc79e9dfc7a05124"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/button_pressed.png",
+    "bytes": 1754,
+    "sha256": "bab5ad9313c1c56af2966e2a66368e9c8e6a1593130a5a7789838e2599405341"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/captura_inventario.png",
+    "bytes": 118718,
+    "sha256": "1f9d9f908f6d2db7f99fd8851051f56d938e14e98bd9593769634f0fc9026218"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/casco.png",
+    "bytes": 1894,
+    "sha256": "21231eba47da222c48fe1379f09fdf54dacf056f44030c414dc0ffc50c6f912c"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/categoria_combate.png",
+    "bytes": 1623,
+    "sha256": "94847896547a283ee187bae4897811a4e71cef3073e6c936e59017e7b1214471"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/categoria_comunidad.png",
+    "bytes": 1362,
+    "sha256": "4aa5e2363498ecafcf403b74e21a65880ec633ddc6312a99c716d6baf9c63da2"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/categoria_exploracion.png",
+    "bytes": 1755,
+    "sha256": "d23e7a13f48a97b4c75da29ad258501c053593dabf21bed6e80e073fbdd49c8d"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/categoria_oficio.png",
+    "bytes": 1733,
+    "sha256": "a253f79e9452bd5faf4ce4a202d04c0c9a014e5305d80ec7adc04272b843f5f7"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/coraza.png",
+    "bytes": 1796,
+    "sha256": "cbdda3665900109d07662216917f792c861f546bf22f9a7028a89c9586de1d7a"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/counter_panel.png",
+    "bytes": 2194,
+    "sha256": "5bb068ffc55f76e16f776ee1e4daa1fbc56d945d57f25ff2ef3609020c23513a"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/escudo.png",
+    "bytes": 1813,
+    "sha256": "23ba62490c59690f0e29a4369df5a8cd8464cf80063c97bf7504c26fa28eaad8"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/espada_hierro.png",
+    "bytes": 1232,
+    "sha256": "13ba6e52257a6a5ec2e562fea8536fcfcb0bbc981ddb024982918eb5edfd1de6"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/fibra.png",
+    "bytes": 1662,
+    "sha256": "fc8f72bf3f60f51870a7688512841f91ecd43591e62282ca0b9590a926e7e08b"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/gelatina.png",
+    "bytes": 1115,
+    "sha256": "ca99a95219f97a6dfdc22b64fdf52cb9290fa213492701bcca6d5955a37f5f36"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/gema.png",
+    "bytes": 1312,
+    "sha256": "3498697b4912d7ba9dbb7caea09325f13fc6085af3ad7e094bfaad7d95294874"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/hacha_piedra.png",
+    "bytes": 1251,
+    "sha256": "e597ac9a5d4e373d3620b06c2e8fa811c8b960e84e733d5ea616a3799968cdcf"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/healthbar_fill.png",
+    "bytes": 461,
+    "sha256": "1de6c98dc9a4b5cb9858ec1d7be8e631c11375e4f2ca1e1debc8f3ba4149fea3"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/healthbar_frame.png",
+    "bytes": 1720,
+    "sha256": "e003be410d9010c9537a24cd769966ebc8372d498a325c75ced6d16a5c3077d5"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/healthbar_full.png",
+    "bytes": 2293,
+    "sha256": "27b8e9c20252a9a7a3c828dc94363343782fdb5782c9e9eb17c83a27ec7fae1a"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/interact_indicator.png",
+    "bytes": 1129,
+    "sha256": "563803ada2808182a4895beedf363c43e1bb574aed7de5c061f4c50894b513fa"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/lingote_hierro.png",
+    "bytes": 1275,
+    "sha256": "205ca43ad1c3596a2e2d3d76730ec5a7ad5fbaad7ff1cc84b0148bce0cc33888"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/madera.png",
+    "bytes": 1481,
+    "sha256": "0faa0afbe73567ce7ac276d59961d6caf1f2564b80d514f4be9ade6648d7a78c"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/mena_hierro.png",
+    "bytes": 1668,
+    "sha256": "b7849670842b4e4fca2177b60acd7c5a35cbfd4cecfd76d019f9b6df1a1ab1dc"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/mision_icono.png",
+    "bytes": 898,
+    "sha256": "8c8f434d552a3bd1aeadf3ebb4d59bdc2eac6c96adda37654f42fea34a505ad4"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/panel.png",
+    "bytes": 4940,
+    "sha256": "7f950e5944c2e8372d5b57d0fd40004e5b771b990b5b6f93cae3552c1c328b0c"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/pico_piedra.png",
+    "bytes": 1340,
+    "sha256": "116d3cb9d6a7338c1c0c85a859852f0478cdd083eb972a5e42061bcc8fdb9368"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/piedra.png",
+    "bytes": 1569,
+    "sha256": "d46ba9e50e6e4b3cd397afde278fb4d0f6623771694bab083c8ffa36273da3d9"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/quest_marker.png",
+    "bytes": 1593,
+    "sha256": "717d0512e66afc7cd22ce4a61f0f8bb62783d7c1c65200edc39e041eff9b431a"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/skill_locked.png",
+    "bytes": 1849,
+    "sha256": "46c06d229a25dd5cf0a7cceb63e0b3d9c2398c15e26d8ca64b5783c5d95b0439"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/skill_selected.png",
+    "bytes": 1794,
+    "sha256": "e8ea9150f914451986ad8652faa35cbb0d4ecd8cdf7d649670c063ab9e472854"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/skill_unlocked.png",
+    "bytes": 1788,
+    "sha256": "2ea6b4efd3e9b859ae3d1468bf19ebb8bcf02b7eecc550edc6bf136b7dfc98b6"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/slot_disabled.png",
+    "bytes": 1665,
+    "sha256": "20c913893983340b959ceb8b4c5ea7c3a5ba76e6ebb29117cc31d6eb19b9ad95"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/slot_normal.png",
+    "bytes": 1770,
+    "sha256": "826b7a77a68263d6cca82696fae2cfbf0092e119d097b2557266929f890ab0c4"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/slot_selected.png",
+    "bytes": 1741,
+    "sha256": "2064cbef44e801cd78cecfb57b0de6f72b4c913d6445f0a456fe1128a8baedef"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/tooltip_panel.png",
+    "bytes": 5634,
+    "sha256": "490c8282e71479980babd0037118f06800ce9ad5cdbc18e0be933c27dbb84ffe"
+  },
+  {
+    "file": "mapa_muestra/assets/interfaz/unguento.png",
+    "bytes": 1637,
+    "sha256": "e8695c42996fd2fe52a7041deb3ab70a2933318b83fd16deab5f9f32dd805db4"
+  },
+  {
+    "file": "mapa_muestra/captura_ataque.png",
+    "bytes": 120368,
+    "sha256": "1bfc16319af109a6257e84941c3afeec6e4410a4422fd49ffe8935ac4c7e77a9"
+  },
+  {
+    "file": "mapa_muestra/captura_biblioteca.png",
+    "bytes": 119429,
+    "sha256": "91c8e0d6c9f196946202fb36472a516f70f41049ac0c8252ef51f67e98b7f927"
+  },
+  {
+    "file": "mapa_muestra/captura_equipo_derecha.png",
+    "bytes": 119675,
+    "sha256": "9098bf52e2260d429919d1ad35521726f60b3ecc03d95f5212fe868ed8307a25"
+  },
+  {
+    "file": "mapa_muestra/captura_equipo_espalda.png",
+    "bytes": 120135,
+    "sha256": "26628fec7a2ad57f6b5d2ec7db380a09e4ba4eb73c8e8fe4b5aa5aec4e80d3e0"
+  },
+  {
+    "file": "mapa_muestra/captura_equipo_frente.png",
+    "bytes": 120054,
+    "sha256": "82442735b4d7f40b26c442e880e42cba1cac254143758543d3a9a3e729750467"
+  },
+  {
+    "file": "mapa_muestra/captura_equipo_izquierda.png",
+    "bytes": 119931,
+    "sha256": "d8e459dae53b91cd84c8b345da2353017985590c120bd3c341c4327ce56de011"
+  },
+  {
+    "file": "mapa_muestra/captura_escenario_27_24.png",
+    "bytes": 118718,
+    "sha256": "1f9d9f908f6d2db7f99fd8851051f56d938e14e98bd9593769634f0fc9026218"
+  },
+  {
+    "file": "mapa_muestra/captura_herramienta.png",
+    "bytes": 119663,
+    "sha256": "88d0a87d5b1957d11777cf8ad3cf04fee1942348521a9fe1efd97f3a657719ea"
+  },
+  {
+    "file": "mapa_muestra/captura_inventario.png",
+    "bytes": 120714,
+    "sha256": "8750ff8dec9e6ce16345640b0f6422ddd8c9864e56960b20fc66de674a537986"
+  },
+  {
+    "file": "mapa_muestra/docs/DECISIONES.md",
+    "bytes": 8188,
+    "sha256": "07d4eb0fac8b1bffd89e40b621966fcd51aed5fba7ae16a5d148447b4c4194d6"
+  },
+  {
+    "file": "mapa_muestra/main.tscn",
+    "bytes": 162,
+    "sha256": "18547b89d50c36cc27b1775fad0a2ece1f64bedaa8ae5bace8b6669182f2d79c"
+  },
+  {
+    "file": "mapa_muestra/project.godot",
+    "bytes": 485,
+    "sha256": "4bed57c945d4a58fb5fd092552426b13afcb05d97fa7ff6358663b40bf83e800"
+  },
+  {
+    "file": "mapa_muestra/scripts/apariencia.gd",
+    "bytes": 2055,
+    "sha256": "f419703c3aa778609d7ec9d66261efcb028c189952ed95e06b0da1605c937ee0"
+  },
+  {
+    "file": "mapa_muestra/scripts/apariencia.gd.uid",
+    "bytes": 20,
+    "sha256": "7d998a49ff890cadecaddc528818f0e4b4dec0a2b27eb8efd3e74cbe5f6f707f"
+  },
+  {
+    "file": "mapa_muestra/scripts/arte.gd",
+    "bytes": 12677,
+    "sha256": "d3034c2d0a622edff028a9fcc29f7526f8a0abff4a079b6f4788ca96045acd85"
+  },
+  {
+    "file": "mapa_muestra/scripts/arte.gd.uid",
+    "bytes": 20,
+    "sha256": "36bed8dec34fc772efcdaee8cae401b5201ce7fd76d4f3165c81e6dfb2483df9"
+  },
+  {
+    "file": "mapa_muestra/scripts/capas_sprite.gd",
+    "bytes": 4043,
+    "sha256": "be87cb5e19cfdfa739eefa086d0cf16c2e5dd9e7b0896b6b371d3ce89c189ab3"
+  },
+  {
+    "file": "mapa_muestra/scripts/capas_sprite.gd.uid",
+    "bytes": 20,
+    "sha256": "71ffb336ec91d3bb737c482a2857728f3332f1a01a6715f9d0acf0a3a9e23288"
+  },
+  {
+    "file": "mapa_muestra/scripts/catalogos.gd",
+    "bytes": 13785,
+    "sha256": "8af35b256048d46337cd32c777d2ceb437c9a8e2aa8bec20092710581894b8bf"
+  },
+  {
+    "file": "mapa_muestra/scripts/catalogos.gd.uid",
+    "bytes": 20,
+    "sha256": "69b3f088476bd87347911c6024ae3be0546a386383f83e8e3b7532695e257170"
+  },
+  {
+    "file": "mapa_muestra/scripts/combate.gd",
+    "bytes": 6193,
+    "sha256": "55edca7aee6598b5239a5778e6fb20cd841e21e2c093b47b4507973cadaad2e8"
+  },
+  {
+    "file": "mapa_muestra/scripts/combate.gd.uid",
+    "bytes": 19,
+    "sha256": "faec1b6892dc56e215ffe6ad204b9f853df3b155796efbc6b19482296215195d"
+  },
+  {
+    "file": "mapa_muestra/scripts/escena.gd",
+    "bytes": 21331,
+    "sha256": "76dd89fa3d7adff4c07196ba04dd37cb0d347994c6067b2f421dc2d48e578b13"
+  },
+  {
+    "file": "mapa_muestra/scripts/escena.gd.uid",
+    "bytes": 19,
+    "sha256": "607f86fa4982d0787c4f3200fa2def53b7e649aaed87a30d38c10adec759cceb"
+  },
+  {
+    "file": "mapa_muestra/scripts/guardado.gd",
+    "bytes": 2425,
+    "sha256": "0fab6ab0e9a2079da1a593cb19ddd1a8135af4f5b1587e7ec3616661b7ed2e94"
+  },
+  {
+    "file": "mapa_muestra/scripts/guardado.gd.uid",
+    "bytes": 20,
+    "sha256": "a0c8cf14609c968789fe3b42af3a2a229222c88219044e982fcc9ec03949bfea"
+  },
+  {
+    "file": "mapa_muestra/scripts/habitantes.gd",
+    "bytes": 3160,
+    "sha256": "69d91f1ed4b7a475369304482b667d4857a6eb5c2dd49323dab19549561e019b"
+  },
+  {
+    "file": "mapa_muestra/scripts/habitantes.gd.uid",
+    "bytes": 20,
+    "sha256": "dfeb3c33ff3a526be41caff4ff58238019a3ee5d554677b272be62f9d98be8b7"
+  },
+  {
+    "file": "mapa_muestra/scripts/hud.gd",
+    "bytes": 8004,
+    "sha256": "35e41ba5a60753c3dae1e91c6aa0927fa6039b0df3663e7e984ec6d5d08ef613"
+  },
+  {
+    "file": "mapa_muestra/scripts/hud.gd.uid",
+    "bytes": 20,
+    "sha256": "47989e56b611b69a98d4c4a5298b15930b1d5d4c62b7a572025666347d70a82e"
+  },
+  {
+    "file": "mapa_muestra/scripts/inventario.gd",
+    "bytes": 1349,
+    "sha256": "bdddd67436742311f57327ed983dbb7d1a245b6b021f78241f192bd819ab2d47"
+  },
+  {
+    "file": "mapa_muestra/scripts/inventario.gd.uid",
+    "bytes": 20,
+    "sha256": "3608b4a1c4044c2fa53ad1bfe3661d7b4130e858d427076b28f442d59761c364"
+  },
+  {
+    "file": "mapa_muestra/scripts/juego.gd",
+    "bytes": 19008,
+    "sha256": "abab01fe73dc974ba80880878be37cc9f241b2f239009bdd62aa264b2d9202fc"
+  },
+  {
+    "file": "mapa_muestra/scripts/juego.gd.uid",
+    "bytes": 20,
+    "sha256": "1e0b0b970a96b732b2cb81f4e7b975983ab66433df69239ef41b1ab4c923e24b"
+  },
+  {
+    "file": "mapa_muestra/scripts/mundo.gd",
+    "bytes": 10458,
+    "sha256": "9a0b522d81cadc6c611cc73b2437f748c9ded993a14097a221b1ae09302103dd"
+  },
+  {
+    "file": "mapa_muestra/scripts/mundo.gd.uid",
+    "bytes": 20,
+    "sha256": "8146d57e447ca517503c7c374e0843b86fbfd2ec921d0fd423b7271c889bc471"
+  },
+  {
+    "file": "mapa_muestra/scripts/params.gd",
+    "bytes": 825,
+    "sha256": "365f1ccf389b834939d3fef42b163e01c517e5a6b89979f9b2bd55ef3da4f0af"
+  },
+  {
+    "file": "mapa_muestra/scripts/params.gd.uid",
+    "bytes": 19,
+    "sha256": "cd36ed7399c86f3d4a2f654e4fffea27a82b6e2b26c3c5dccd9bea6e83e8678d"
+  },
+  {
+    "file": "mapa_muestra/tests/captura_arte.gd",
+    "bytes": 564,
+    "sha256": "1db47d5f1d0fc626301d5ad7d710e929cb9b88fc0290409702de87e374f7e98e"
+  },
+  {
+    "file": "mapa_muestra/tests/captura_arte.gd.uid",
+    "bytes": 20,
+    "sha256": "b6059d57d703cbb903957e179370e594ebb31a4ebd48226fa8433579a6cb7ca9"
+  },
+  {
+    "file": "mapa_muestra/tests/captura_biblioteca.gd",
+    "bytes": 1023,
+    "sha256": "1b66799434ab45198272c165670325f3bf9745fd027b4a199ca6ced512dfb7c9"
+  },
+  {
+    "file": "mapa_muestra/tests/captura_biblioteca.gd.uid",
+    "bytes": 20,
+    "sha256": "4707f33c315ed1385fde21496ca41c65829a284fd6c46d995bdd43122b93d135"
+  },
+  {
+    "file": "mapa_muestra/tests/captura_equipo_arte.gd",
+    "bytes": 730,
+    "sha256": "ce8d7be769db43f38015efa5e9dde1b4cff99ddda4579f148a0f31645f47340b"
+  },
+  {
+    "file": "mapa_muestra/tests/captura_equipo_arte.gd.uid",
+    "bytes": 20,
+    "sha256": "f9812b24132c4eca0fa2ca68d0fb114c8cffc184a4a3fda3538352ee3dfebdb7"
+  },
+  {
+    "file": "mapa_muestra/tests/prueba.gd",
+    "bytes": 30176,
+    "sha256": "688133c9d09333eb67b1c33bb26a0258203f6c12c4e36d8faf2a35b533d9606e"
+  },
+  {
+    "file": "mapa_muestra/tests/prueba.gd.uid",
+    "bytes": 20,
+    "sha256": "22fc3181ceea76e1eb4308fbe7f043d2f7b304ea3c2bd8f7e2b4d8f66186be8e"
+  },
+  {
+    "file": "mapa_muestra/tests/prueba_ui.gd",
+    "bytes": 2187,
+    "sha256": "5686bc661a07054070bd41fe1dd764bfd6c545ed5327a648bffe102deb51be0c"
+  },
+  {
+    "file": "mapa_muestra/tests/prueba_ui.gd.uid",
+    "bytes": 20,
+    "sha256": "0ea754728a4712eae6bed41ea4c24fd4b3cf1102d86fd4970f1af9914c05ab21"
+  },
+  {
+    "file": "personaje/LEEME.md",
+    "bytes": 3745,
+    "sha256": "93e00b1dffe0c6ba7221301cb736f2bbe9e9858dc0c44e5e48dedee779eea5ab"
+  },
+  {
+    "file": "personaje/PROMPTS.md",
+    "bytes": 3874,
+    "sha256": "382192f5421c4eedbd4bae8ca47ebd700a3ec1c2c063424b118a0c47fe342e68"
+  },
+  {
+    "file": "personaje/ataque.png",
+    "bytes": 16178,
+    "sha256": "2ceaeb5add2a6b1eeb1e31c4b2e2276b902667ad36c253c7fc964938896800ad"
+  },
+  {
+    "file": "personaje/caminata.png",
+    "bytes": 10698,
+    "sha256": "ca27efc8830dbe165bee7188f143b21a6a99c809791735d4a0e4df0bc1734347"
+  },
+  {
+    "file": "personaje/capas/botas.png",
+    "bytes": 637,
+    "sha256": "e8bcc73f0fa1844794462e89747ce603f24f5314dcb29a708d33716211367da3"
+  },
+  {
+    "file": "personaje/capas/cinturon.png",
+    "bytes": 246,
+    "sha256": "44dcc93147a8b894b7f41a7879be6255cc0eeaae84b345ce7db2f9e445347ff1"
+  },
+  {
+    "file": "personaje/capas/cuerpo.png",
+    "bytes": 2273,
+    "sha256": "63e01859fef914048708807d4bfa5c4dbf7d10efb2997b5808192e8e9bea385b"
+  },
+  {
+    "file": "personaje/capas/pantalon.png",
+    "bytes": 1908,
+    "sha256": "daefcca5600622e8b3e11311309382445bbfc310a837e4fabbe3145e5a1c26a4"
+  },
+  {
+    "file": "personaje/capas/pelo.png",
+    "bytes": 4722,
+    "sha256": "4a46fd059cf4f59ab94cec2e0632faf805f1a89d7972d63b9cd5222f4409a751"
+  },
+  {
+    "file": "personaje/capas/piel.png",
+    "bytes": 1195,
+    "sha256": "bd5e0dd98fd2f776fb3c070646b347b7bad69b4b573c6742704f3deaa8ead1ca"
+  },
+  {
+    "file": "personaje/capas/tunica.png",
+    "bytes": 1294,
+    "sha256": "03a230dc6857633549bd40d9ac58261c373a4fcd6554ee0870afce0556c5de1e"
+  },
+  {
+    "file": "personaje/conversion.json",
+    "bytes": 4649,
+    "sha256": "cfa359eb94b754b7221e2787068045c50c34de881f012da94c731e7377f10b31"
+  },
+  {
+    "file": "personaje/convertir.gd",
+    "bytes": 4992,
+    "sha256": "6788c13a18fb618bbe98c000f74690e17432553b567017d44f2b9449ce9fa7ce"
+  },
+  {
+    "file": "personaje/galeria.png",
+    "bytes": 113679,
+    "sha256": "7b47df6784adb0a7a63c32c7b9d999a5ac54158879dd61112be4e71e6f058732"
+  },
+  {
+    "file": "personaje/herramienta.png",
+    "bytes": 14981,
+    "sha256": "54c786a417b10614f3f15e8ebdcd7ad36c020178f0e61f94f7191db757be8742"
+  },
+  {
+    "file": "personaje/integrar.gd",
+    "bytes": 820,
+    "sha256": "0560f857ef6eb507d73f2768010e942523a44ae6e63adf3c523ccc3f3a45015c"
+  },
+  {
+    "file": "personaje/manifest.json",
+    "bytes": 5465,
+    "sha256": "8de650535c82c50d69b863a63e744953fd15c84681eb61e428765a56184c2b86"
+  },
+  {
+    "file": "personaje/originales/ataque.png",
+    "bytes": 1009990,
+    "sha256": "1fbc9f3a5645e8f2c13a6bba49354e0c17c0e379179a1b0c58fb5b9be6404438"
+  },
+  {
+    "file": "personaje/originales/caminata.png",
+    "bytes": 860926,
+    "sha256": "fd907d0bc5d50bab7a93e3b3d98a043e4edb24605059071b27c9ef6323542e96"
+  },
+  {
+    "file": "personaje/originales/herramienta.png",
+    "bytes": 938420,
+    "sha256": "ad5dddf7c45c60c6bd887f931e9e8870b86019f2e4df4be53f7fac765942a411"
+  },
+  {
+    "file": "personaje/project.godot",
+    "bytes": 237,
+    "sha256": "241e74e0c1f9c7a3648b7de78f60108b5b5ffaae57d980c1a796eacc1c9ce9ae"
+  },
+  {
+    "file": "personaje/validacion.json",
+    "bytes": 764,
+    "sha256": "aa8a854f57981eb13b6f2a991c9e5ad172d1281f6bcc1375bfd7c83873c20fd4"
+  },
+  {
+    "file": "personaje/variante_arena.png",
+    "bytes": 11002,
+    "sha256": "988bb7943797566487a16568c224a7825786d23a6a3ac8e674f72c29a5bda13d"
+  },
+  {
+    "file": "personaje/variante_cobre.png",
+    "bytes": 10908,
+    "sha256": "0bf80c2f958dabb71867137dcc1769248f87fb9d4212e2b0f24c9a1f43ce2797"
+  },
+  {
+    "file": "personaje/variante_violeta.png",
+    "bytes": 10955,
+    "sha256": "7a5882a4db97e1625f1715fa826ef60bf8532e86e1083ea1ca164111539917dd"
+  },
+  {
+    "file": "personaje/vista.gd",
+    "bytes": 1300,
+    "sha256": "78028ceeaf2135efda7985d80aa8f374125fcbda15da946f5bf59f802f120e4d"
+  },
+  {
+    "file": "personaje/vista.tscn",
+    "bytes": 162,
+    "sha256": "ef27a1962692560aea863069bdd247c56f3265e08697bdf3a9a931468b9f4bee"
+  },
+  {
+    "file": "prueba.log",
+    "bytes": 8767,
+    "sha256": "5f2209d5ac33648417ed63ab6b3431e7fd21b58f7bb7e81feb7f8fbc766213ec"
+  },
+  {
+    "file": "prueba_ui.log",
+    "bytes": 689,
+    "sha256": "44633b68f865cf64432ed515668d22e52bfbaec9c87ea96ebdf55e3ce30c81c7"
+  },
+  {
+    "file": "verificacion_pruebas.json",
+    "bytes": 272,
+    "sha256": "a119e59145c67068ea7d54e99a6a30147472ddcaf54bb422d282b290da530091"
+  }
+]

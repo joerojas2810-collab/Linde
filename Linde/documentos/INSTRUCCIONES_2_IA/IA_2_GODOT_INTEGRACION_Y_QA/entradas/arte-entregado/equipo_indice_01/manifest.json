@@ -1,0 +1,307 @@
+{
+  "assets": [
+    {
+      "arquetipo": "media",
+      "cell": 32,
+      "file": "equipo_media_casco_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "casco",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_reutilizadas",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "media",
+      "cell": 32,
+      "file": "equipo_media_torso_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "torso",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_reutilizadas",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "media",
+      "cell": 32,
+      "file": "equipo_media_guantes_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "guantes",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_reutilizadas",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "media",
+      "cell": 32,
+      "file": "equipo_media_botas_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "botas",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_reutilizadas",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "media",
+      "cell": 32,
+      "file": "equipo_media_pantalones_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "pantalones",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_reutilizadas",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "ligera",
+      "cell": 32,
+      "file": "equipo_ligera_casco_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "casco",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "ligera",
+      "cell": 32,
+      "file": "equipo_ligera_torso_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "torso",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "ligera",
+      "cell": 32,
+      "file": "equipo_ligera_guantes_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "guantes",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "ligera",
+      "cell": 32,
+      "file": "equipo_ligera_botas_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "botas",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "ligera",
+      "cell": 32,
+      "file": "equipo_ligera_pantalones_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "pantalones",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "pesada",
+      "cell": 32,
+      "file": "equipo_pesada_casco_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "casco",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "pesada",
+      "cell": 32,
+      "file": "equipo_pesada_torso_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "torso",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "pesada",
+      "cell": 32,
+      "file": "equipo_pesada_guantes_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "guantes",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "pesada",
+      "cell": 32,
+      "file": "equipo_pesada_botas_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "botas",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "pesada",
+      "cell": 32,
+      "file": "equipo_pesada_pantalones_caminata.png",
+      "motion_source": "base/caminata.png; scanline contours or original hand/leg pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "pantalones",
+      "size": [
+        128,
+        128
+      ],
+      "source": "fuentes_arquetipos and reused base",
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "compartido",
+      "cell": 32,
+      "file": "escudo_caminata.png",
+      "motion_source": "anatomical hand anchor from original skin pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "escudo",
+      "size": [
+        128,
+        128
+      ],
+      "state": "caminata"
+    },
+    {
+      "arquetipo": "compartido",
+      "cell": 32,
+      "file": "espada_caminata.png",
+      "motion_source": "anatomical hand anchor from original skin pixels",
+      "pivot": [
+        16,
+        32
+      ],
+      "ranura": "espada",
+      "size": [
+        128,
+        128
+      ],
+      "state": "caminata"
+    }
+  ],
+  "base_unchanged": true,
+  "grey_is_proposed": true,
+  "index": [
+    "ff0000",
+    "00ff00",
+    "0000ff",
+    "808080"
+  ],
+  "order": [
+    "frente",
+    "derecha",
+    "espalda",
+    "izquierda"
+  ],
+  "phase": "lote_1",
+  "profiles_inverted": false
+}

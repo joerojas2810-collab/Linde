@@ -1,0 +1,200 @@
+{
+  "atlas": {
+    "columns": "four repeated idle poses, NOT animation",
+    "rows": [
+      "frente",
+      "derecha",
+      "espalda",
+      "izquierda"
+    ],
+    "size": [
+      128,
+      128
+    ]
+  },
+  "date": "2026-10-23",
+  "entries": [
+    {
+      "actual_box": "[P: (8, 3), S: (16, 10)]",
+      "id": "casco_frente",
+      "steel_mask": true,
+      "target": [
+        8,
+        3,
+        16,
+        11
+      ]
+    },
+    {
+      "actual_box": "[P: (9, 3), S: (15, 10)]",
+      "id": "casco_derecha",
+      "steel_mask": true,
+      "target": [
+        9,
+        3,
+        15,
+        11
+      ]
+    },
+    {
+      "actual_box": "[P: (8, 3), S: (15, 11)]",
+      "id": "casco_espalda",
+      "steel_mask": true,
+      "target": [
+        8,
+        3,
+        16,
+        11
+      ]
+    },
+    {
+      "actual_box": "[P: (9, 3), S: (15, 11)]",
+      "id": "casco_izquierda",
+      "steel_mask": true,
+      "target": [
+        9,
+        3,
+        15,
+        11
+      ]
+    },
+    {
+      "actual_box": "[P: (12, 17), S: (8, 8)]",
+      "id": "coraza_frente",
+      "steel_mask": true,
+      "target": [
+        10,
+        17,
+        12,
+        8
+      ]
+    },
+    {
+      "actual_box": "[P: (13, 17), S: (7, 8)]",
+      "id": "coraza_derecha",
+      "steel_mask": true,
+      "target": [
+        12,
+        17,
+        9,
+        8
+      ]
+    },
+    {
+      "actual_box": "[P: (12, 17), S: (8, 8)]",
+      "id": "coraza_espalda",
+      "steel_mask": true,
+      "target": [
+        10,
+        17,
+        12,
+        8
+      ]
+    },
+    {
+      "actual_box": "[P: (13, 17), S: (7, 8)]",
+      "id": "coraza_izquierda",
+      "steel_mask": true,
+      "target": [
+        12,
+        17,
+        9,
+        8
+      ]
+    },
+    {
+      "actual_box": "[P: (19, 17), S: (10, 12)]",
+      "id": "escudo_frente",
+      "steel_mask": false,
+      "target": [
+        19,
+        17,
+        10,
+        12
+      ]
+    },
+    {
+      "actual_box": "[P: (10, 17), S: (6, 11)]",
+      "id": "escudo_derecha",
+      "steel_mask": false,
+      "target": [
+        10,
+        17,
+        7,
+        11
+      ]
+    },
+    {
+      "actual_box": "[P: (2, 17), S: (11, 12)]",
+      "id": "escudo_espalda",
+      "steel_mask": false,
+      "target": [
+        2,
+        17,
+        11,
+        12
+      ]
+    },
+    {
+      "actual_box": "[P: (14, 17), S: (9, 12)]",
+      "id": "escudo_izquierda",
+      "steel_mask": false,
+      "target": [
+        13,
+        17,
+        12,
+        12
+      ]
+    },
+    {
+      "actual_box": "[P: (5, 9), S: (8, 16)]",
+      "id": "espada_frente",
+      "steel_mask": false,
+      "target": [
+        5,
+        9,
+        8,
+        16
+      ]
+    },
+    {
+      "actual_box": "[P: (11, 9), S: (9, 16)]",
+      "id": "espada_derecha",
+      "steel_mask": false,
+      "target": [
+        10,
+        9,
+        11,
+        16
+      ]
+    },
+    {
+      "actual_box": "[P: (20, 9), S: (8, 16)]",
+      "id": "espada_espalda",
+      "steel_mask": false,
+      "target": [
+        20,
+        9,
+        8,
+        16
+      ]
+    },
+    {
+      "actual_box": "[P: (5, 13), S: (8, 12)]",
+      "id": "espada_izquierda",
+      "steel_mask": false,
+      "target": [
+        5,
+        11,
+        8,
+        16
+      ]
+    }
+  ],
+  "method": "Steel saturation<0.30,value>0.30; aspect fit into manual target; derived1px dark outline for metal",
+  "native_cell": [
+    32,
+    32
+  ],
+  "status": "technical adjustment candidate, static only"
+}

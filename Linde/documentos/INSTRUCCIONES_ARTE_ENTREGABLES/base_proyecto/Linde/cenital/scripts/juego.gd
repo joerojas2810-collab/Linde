@@ -1,0 +1,710 @@
+extends RefCounted
+# Autoridad única del estado: inventario, mundo, misiones, progresión. La UI (o un servidor) pide acciones y muestra resultados.
+# Estado persistente = d (JSON): lo COMPARTIDO (semilla, min, mundo, cofres, jefes, npcs) en la raíz y lo de cada
+# jugador en d.jugadores[id]. Todas las acciones reciben el id del jugador que las ejecuta (por defecto P.LOCAL).
+# Todo lo demás (enemigos, rutas, posición viva y temporizadores de cada jugador) es sesión y se reconstruye al cargar.
+const P = preload("res://scripts/params.gd")
+const C = preload("res://scripts/catalogos.gd")
+const Inv = preload("res://scripts/inventario.gd")
+const Mundo = preload("res://scripts/mundo.gd")
+const Guard = preload("res://scripts/guardado.gd")
+const Hab = preload("res://scripts/habitantes.gd")
+const Comb = preload("res://scripts/combate.gd")
+const Anim = preload("res://scripts/anim_pj.gd")
+const Eq = preload("res://scripts/equipo.gd")
+const LOCAL := P.LOCAL
+const CAP_COFRE := 30
+const ALCANCE_ESTACION := 2     # celdas (Chebyshev)
+const ALCANCE_NPC := 32.0       # px
+const EQUIPO_VACIO := {"casco": "", "torso": "", "guantes": "", "botas": "", "pantalones": "", "escudo": ""}   # = C.RANURAS
+
+var d := {}
+var mundo := Mundo.new()
+var habitantes
+var combate
+var rt := {}            # id -> {pies, mira, cd_obj, herr_t, msgs}: sesión de cada jugador (pies se vuelca a pos al guardar)
+var _acum := 0.0
+var _seg := 0.0
+
+# Compatibilidad: accesos directos al jugador local (UI de un jugador y pruebas existentes).
+var pies: Vector2:
+	get: return rt[LOCAL].pies
+	set(v): rt[LOCAL].pies = v
+var mira: Vector2i:
+	get: return rt[LOCAL].mira
+	set(v): rt[LOCAL].mira = v
+var cd_obj: float:
+	get: return rt[LOCAL].cd_obj
+	set(v): rt[LOCAL].cd_obj = v
+var herr_t: float:       # s restantes de la animación de herramienta (solo animación)
+	get: return rt[LOCAL].herr_t
+	set(v): rt[LOCAL].herr_t = v
+var msgs: Array:
+	get: return rt[LOCAL].msgs
+
+static func nuevo_jugador(nombre: String, look: Array, origen: String, p: Vector2) -> Dictionary:
+	return {"nombre": nombre.strip_edges().substr(0, 16) if nombre.strip_edges() != "" else "Viajero", "look": look.duplicate(),
+		"origen": origen, "pos": [p.x, p.y], "hp": C.HP_BASE, "cama": [], "inicio": [p.x, p.y],
+		"inv": {}, "equipo": EQUIPO_VACIO.duplicate(), "hab": [], "xp": 0, "misiones": {}, "eventos": {}, "recompensas": [],
+		"pendientes": {}, "relacion": {}}
+
+static func nueva(semilla: int, nombre: String, look: Array, origen: String = "viajero"):
+	var j = new()
+	j.d = {"semilla": semilla}
+	var p := Mundo.pies_de_celda(j.mundo.punto_inicio(semilla))
+	var rt_: RandomNumberGenerator = j._rng("botin", "tesoro_cantera")
+	var cont := {"gema": 1}
+	if rt_.randf() < 0.5: cont["lingote"] = 1
+	if rt_.randf() < 0.5: cont["mena"] = 3
+	j.d = {"formato": Guard.FORMATO, "contenido": 1, "gen": 1, "semilla": semilla, "min": 6 * 60,
+		"cofres": {"tesoro_cantera": {"inv": cont, "abierto": false}}, "mundo": j.mundo.estado, "jefes": {}, "npcs": {},
+		"jugadores": {LOCAL: nuevo_jugador(nombre, look, origen, p)}}
+	j._arrancar()
+	return j
+
+static func cargar(ruta: String):
+	var r := Guard.cargar(ruta)
+	if r.d.is_empty(): return null
+	var j = new()
+	j.d = _enteros(r.d)
+	for id in j.d.jugadores:
+		_sanear_equipo(j.d.jugadores[id])
+	j._arrancar()
+	j.aviso("Partida cargada (%s)." % r.origen)
+	return j
+
+# Equipo al cargar: ranuras que falten = ""; lo que no sea equipable en su ranura (clave desconocida, ranura vieja)
+# pasa a pendientes (nunca se borra ni se duplica) y se avisa. Las claves desconocidas del inventario se quedan
+# como «Pieza desconocida» (Equipo.info), no equipables.
+static func _sanear_equipo(pj: Dictionary) -> void:
+	var eq: Dictionary = pj.get("equipo", {})
+	pj["equipo"] = eq
+	if not pj.has("pendientes"): pj["pendientes"] = {}
+	for r in eq.keys():
+		var k := str(eq[r])
+		if k == "" or (r in C.RANURAS and str(Eq.info(k).get("equipo", "")) == r): continue
+		pj.pendientes[k] = int(pj.pendientes.get(k, 0)) + 1
+		push_warning("equipo: «%s» en la ranura %s no es equipable; pasa a pendientes" % [k, r])
+		if r in C.RANURAS: eq[r] = ""
+		else: eq.erase(r)
+	for r in C.RANURAS: if not eq.has(r): eq[r] = ""
+	for k in pj.get("inv", {}):
+		if Eq.info(k).get("desconocida", false): push_warning("inventario: clave desconocida «%s» (Pieza desconocida)" % k)
+
+# JSON devuelve todo como float; los enteros vuelven a ser enteros.
+static func _enteros(v):
+	match typeof(v):
+		TYPE_FLOAT: return int(v) if v == floorf(v) else v
+		TYPE_DICTIONARY:
+			for k in v: v[k] = _enteros(v[k])
+		TYPE_ARRAY:
+			for i in v.size(): v[i] = _enteros(v[i])
+	return v
+
+func _arrancar() -> void:
+	mundo.estado = d.mundo
+	mundo.cambiar()
+	for id in d.jugadores: _sesion(id)
+	habitantes = Hab.new(self)
+	habitantes.restaurar()
+	combate = Comb.new(self)
+	combate.reiniciar()
+	evaluar_misiones()
+
+func _sesion(id: String) -> void:
+	var pos: Array = d.jugadores[id].pos
+	rt[id] = {"pies": Vector2(pos[0], pos[1]), "mira": Vector2i.DOWN, "cd_obj": 0.0, "herr_t": 0.0, "msgs": []}
+
+# Añade un jugador al mundo (servidor/pruebas). Empieza en el inicio de la semilla, con estado propio vacío.
+func unir(id: String, nombre: String, look: Array, origen: String = "viajero") -> Dictionary:
+	if d.jugadores.has(id): return _no("Ese jugador ya está en el mundo", id)
+	var p := Mundo.pies_de_celda(mundo.punto_inicio(int(d.semilla)))
+	d.jugadores[id] = nuevo_jugador(nombre, look, origen, p)
+	_sesion(id)
+	evaluar_misiones(id)
+	return _ok("Entras al mundo.", id)
+
+# Red: un jugador desconectado se retira del mundo (sin cuerpo ni sesión) y conserva todo su estado, pos incluida.
+# Los bucles de simulación recorren rt (presentes), no d.jugadores (todos los que han entrado alguna vez).
+func salir(id: String) -> void:
+	if not rt.has(id): return
+	var p: Vector2 = rt[id].pies
+	d.jugadores[id].pos = [p.x, p.y]
+	rt.erase(id)
+	combate.pjs.erase(id)
+	combate.olvidar(id)
+
+func entrar(id: String) -> void:
+	if d.jugadores.has(id) and not rt.has(id): _sesion(id)
+
+func jug(id: String = LOCAL) -> Dictionary:
+	return d.jugadores[id]
+
+func pies_de(id: String = LOCAL) -> Vector2:
+	return rt[id].pies
+
+func guardar(ruta: String) -> bool:
+	for id in rt:
+		var p: Vector2 = rt[id].pies
+		d.jugadores[id].pos = [p.x, p.y]
+	return Guard.guardar(ruta, d)
+
+func aviso(t: String, id: String = LOCAL) -> void:
+	if not rt.has(id): return
+	var m: Array = rt[id].msgs
+	m.append(t)
+	if m.size() > 6: m.pop_front()
+
+func aviso_todos(t: String) -> void:
+	for id in rt: aviso(t, id)
+
+func _rng(nombre: String, clave: String) -> RandomNumberGenerator:
+	var r := RandomNumberGenerator.new()
+	r.seed = Mundo.h(int(d.semilla), nombre.hash() & 0xffffff, clave.hash() & 0xffffff)
+	return r
+
+func _ok(msg: String = "", id: String = LOCAL) -> Dictionary:
+	if msg != "": aviso(msg, id)
+	return {"ok": true, "msg": msg}
+
+func _no(msg: String, id: String = LOCAL) -> Dictionary:
+	aviso(msg, id)
+	return {"ok": false, "msg": msg}
+
+# ---------- tiempo (reloj compartido) ----------
+func hora_dia() -> float:
+	return fmod(d.min / 60.0, 24.0)
+
+func dia() -> int:
+	return floori(d.min / 1440.0) + 1
+
+func tick(dt: float) -> void:
+	_acum += dt * C.MIN_POR_SEG
+	while _acum >= 1.0:
+		_acum -= 1.0
+		d.min += 1
+		if d.min % 60 == 0: _hora_en_punto()
+	for id in rt:
+		var s: Dictionary = rt[id]
+		s.cd_obj = maxf(0.0, s.cd_obj - dt)
+		s.herr_t = maxf(0.0, s.herr_t - dt)
+	habitantes.paso(dt)
+	combate.paso(dt)
+	_seg += dt
+	if _seg >= 0.5:
+		_seg = 0.0
+		_chequeos()
+
+func _hora_en_punto() -> void:
+	mundo.regenerar(d.min, ocupada)
+	combate.revisar_reaparicion()
+
+func _chequeos() -> void:
+	for id in rt:
+		var pj: Dictionary = d.jugadores[id]
+		if Mundo.ARENA.has_point(Mundo.celda_de(pies_de(id))): pj.eventos["visito_ruinas"] = true
+		if not pj.pendientes.is_empty() and Inv.anadir(pj.inv, pj.pendientes, stats(id).slots):
+			aviso("Recibes lo pendiente.", id)
+			pj.pendientes = {}
+	evaluar_misiones()
+
+# ---------- estadísticas derivadas (se recalculan, nunca se acumulan) ----------
+func stats(id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var s := {"hp": C.HP_BASE, "dmg": C.DMG_BASE, "vel": 1.0, "slots": C.MAX_SLOTS_BASE, "golpes_menos": 0, "def": 0}
+	for h in pj.hab:
+		for k in C.HAB[h].efe: s[k] += C.HAB[h].efe[k]
+	var mejor := 0
+	for it in pj.inv: mejor = maxi(mejor, int(Eq.info(it).get("dmg", 0)))
+	s.dmg += mejor
+	var f: Dictionary = Eq.finales(pj.equipo, int(s.hp) - C.HP_BASE, float(s.vel) - 1.0, C.HP_BASE)   # 3.2: redondeo único
+	s.def = f.def
+	s.hp = f.hp
+	s.vel = f.vel
+	return s
+
+## Bono de set activo del jugador (para la interfaz).
+func bono_set(id: String = LOCAL) -> Dictionary:
+	return Eq.bono_set(jug(id).equipo)
+
+func nivel(id: String = LOCAL) -> int:
+	return C.nivel_de(jug(id).xp)
+
+func puntos_libres(id: String = LOCAL) -> int:
+	var g := 0
+	for h in jug(id).hab: g += C.HAB[h].coste
+	return nivel(id) - 1 - g
+
+func ganar_xp(n: int, id: String = LOCAL) -> void:
+	var antes := nivel(id)
+	jug(id).xp += n
+	if nivel(id) > antes: aviso("¡Nivel %d! Tienes %d punto(s) de habilidad." % [nivel(id), puntos_libres(id)], id)
+
+func aprender(hid: String, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	if not C.HAB.has(hid): return _no("Habilidad desconocida", id)
+	if pj.hab.has(hid): return _no("Ya la tienes", id)
+	var h: Dictionary = C.HAB[hid]
+	if nivel(id) < h.niv: return _no("Requiere nivel %d" % h.niv, id)
+	for r in h.req: if not pj.hab.has(r): return _no("Requiere %s" % C.HAB[r].n, id)
+	if puntos_libres(id) < h.coste: return _no("Faltan puntos", id)
+	pj.hab.append(hid)
+	return _ok("Aprendes %s" % h.n, id)
+
+func danar_pj(n: int, id: String = LOCAL) -> void:
+	var pj := jug(id)
+	pj.hp -= Eq.dano(n, int(stats(id).def))   # 3.7 PROVISIONAL: max(1, round(n * 20 / (20 + DEF)))
+	if pj.hp <= 0: _derrota(id)
+
+# A01 provisional: sin pérdida de objetos; vuelves a tu cama (o al inicio) con la mitad de vida.
+# Solo: el encuentro se reinicia. Con más jugadores no se toca a los demás: los enemigos que te seguían te olvidan.
+func _derrota(id: String) -> void:
+	var pj := jug(id)
+	var c: Array = pj.cama if not pj.cama.is_empty() else pj.inicio
+	rt[id].pies = Vector2(c[0], c[1])
+	pj.hp = int(stats(id).hp / 2.0)
+	if rt.size() == 1: combate.reiniciar()
+	else: combate.olvidar(id)
+	combate.ataque(id).est = "libre"
+	aviso("Caes derrotado. Despiertas a salvo.", id)
+
+# ---------- acciones ----------
+func mover_pj(dir: Vector2i, dt: float, id: String = LOCAL) -> void:
+	var e: String = combate.ataque(id).est
+	if dir == Vector2i.ZERO or e == "aviso" or e == "activo": return
+	rt[id].mira = dir
+	rt[id].pies = mundo.mover(pies_de(id), Vector2(dir) * P.VELOCIDAD * stats(id).vel * dt)
+
+func accion(id: String = LOCAL) -> Dictionary:
+	var s: Dictionary = rt[id]
+	var c: Vector2i = Mundo.celda_de(s.pies) + s.mira
+	if not combate.hay_enemigo_cerca(24.0, id):
+		for cc in [c, Mundo.celda_de(s.pies)]:
+			var oid := mundo.objeto_presente(cc)
+			if oid != "" and mundo.objetos[oid].t != "cofre_fijo" and not mundo.objetos[oid].t in Mundo.DECO:
+				if s.cd_obj > 0.0: return {"ok": false, "msg": ""}
+				s.cd_obj = 0.3
+				s.herr_t = C.ANIM_PJ.herramienta.dur
+				return golpear_objeto(cc, id)
+	combate.atacar(s.mira, id)
+	return _ok("", id)
+
+func anim_pj(mov: bool, t_mov: float, id: String = LOCAL) -> Dictionary:
+	var a: Dictionary = combate.ataque(id)
+	return Anim.estado_y_cuadro({"mov": mov, "t_mov": t_mov, "herr_t": rt[id].herr_t, "ataque_est": a.est,
+		"ataque_t": a.t, "inv_t": a.inv_t})
+
+func golpear_objeto(c: Vector2i, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var oid := mundo.objeto_presente(c)
+	if oid == "": return _no("No hay nada que golpear", id)
+	var ot: String = mundo.objetos[oid].t
+	if ot == "cofre_fijo": return _no("Se abre con E", id)
+	if ot in Mundo.DECO: return _no("No se puede romper", id)
+	var def: Dictionary = C.OBJETOS[ot]
+	var tags := {}
+	for it in pj.inv: if Eq.info(it).has("tag"): tags[Eq.info(it).tag] = true
+	var necesarios := 9999
+	for tag in def.golpes: if tag == "" or tags.has(tag): necesarios = mini(necesarios, def.golpes[tag])
+	if necesarios == 9999: return _no("%s: necesitas una herramienta (%s)" % [def.n, ", ".join(def.golpes.keys())], id)
+	necesarios = maxi(1, necesarios - stats(id).golpes_menos)
+	var g: int = d.mundo.golpes.get(oid, 0) + 1      # golpes acumulados: compartidos (cualquiera puede rematar)
+	if g < necesarios:
+		d.mundo.golpes[oid] = g
+		return _ok("%s %d/%d" % [def.n, g, necesarios], id)
+	var drops: Dictionary = def.drops.duplicate()
+	var rng := _rng("botin", "%s:%d" % [oid, d.min / 60])
+	for p in def.prob + Eq.caidas_objeto(ot): if rng.randf() < p.p: drops[p.item] = drops.get(p.item, 0) + p.q   # piedras al final: no altera el flujo previo
+	if not Inv.anadir(pj.inv, drops, stats(id).slots):
+		d.mundo.golpes[oid] = necesarios - 1
+		return _no("Inventario lleno: %s no se rompe" % def.n, id)
+	mundo.romper(oid, d.min)
+	ganar_xp(def.xp, id)
+	return _ok("Obtienes " + _txt_items(drops), id)
+
+static func _txt_items(m: Dictionary) -> String:
+	var l: Array = []
+	for k in m: l.append("%d %s" % [m[k], Eq.info(k).n])
+	return ", ".join(l)
+
+# Las estaciones son del mundo: cualquiera puede usar la mesa u horno de otro.
+func estacion_cerca(est: String, id: String = LOCAL) -> bool:
+	if est == "": return true
+	var c := Mundo.celda_de(pies_de(id))
+	for k in d.mundo.constr:
+		if C.CONSTR[d.mundo.constr[k].t].get("est", "") != est: continue
+		var p: PackedStringArray = k.split(",")
+		if maxi(absi(int(p[0]) - c.x), absi(int(p[1]) - c.y)) <= ALCANCE_ESTACION: return true
+	return false
+
+func fabricar(rid: String, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var rs: Dictionary = Eq.recetas()      # C.RECETAS + piezas fabricables y joyas generadas desde datos
+	if not rs.has(rid): return _no("Receta desconocida", id)
+	var r: Dictionary = rs[rid]
+	if r.hab != "" and not pj.hab.has(r.hab): return _no("Requiere habilidad %s" % C.HAB[r.hab].n, id)
+	if r.herr != "" and pj.inv.get(r.herr, 0) < 1: return _no("Falta la herramienta %s" % Eq.info(r.herr).n, id)
+	if not estacion_cerca(r.est, id): return _no("Necesitas estar junto a: %s" % r.est, id)
+	if not Inv.tiene(pj.inv, r.ent): return _no("Faltan materiales", id)
+	if not Inv.cambiar(pj.inv, r.ent, r.sal, stats(id).slots): return _no("Inventario lleno", id)
+	return _ok("Fabricas %s" % r.n, id)
+
+func usar(item: String, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var it: Dictionary = Eq.info(item)
+	if not it.has("cura"): return _no("No se puede usar", id)
+	if pj.inv.get(item, 0) < 1: return _no("No tienes", id)
+	if pj.hp >= stats(id).hp: return _no("Vida completa", id)
+	Inv.quitar(pj.inv, {item: 1})
+	pj.hp = mini(stats(id).hp, pj.hp + it.cura)
+	return _ok("Recuperas vida", id)
+
+# Equipo: atómico (Inv.cambiar valida la capacidad con el resultado final, también en intercambios).
+# La ranura sale de la clave (Equipo.info: `eq:` -> ranura de la pieza; escudo -> C.ITEMS). Desconocida: no equipable.
+func equipar(item: String, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var it: Dictionary = Eq.info(item)
+	if not it.has("equipo") or not it.equipo in C.RANURAS: return _no("No se puede equipar", id)
+	if pj.inv.get(item, 0) < 1: return _no("No tienes", id)
+	var r: String = it.equipo
+	var prev: String = pj.equipo.get(r, "")
+	if not Inv.cambiar(pj.inv, {item: 1}, {prev: 1} if prev != "" else {}, stats(id).slots): return _no("Inventario lleno", id)
+	pj.equipo[r] = item
+	return _ok("Equipas %s" % it.n, id)
+
+func desequipar(ranura: String, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var item: String = pj.equipo.get(ranura, "")
+	if item == "": return _no("Ranura vacía", id)
+	if not Inv.anadir(pj.inv, {item: 1}, stats(id).slots): return _no("Inventario lleno", id)
+	pj.equipo[ranura] = ""
+	return _ok("Te quitas %s" % Eq.info(item).n, id)
+
+# Pieza propia: primero la del inventario, si no la equipada. Devuelve "inv", la ranura o "".
+func _donde(clave: String, id: String) -> String:
+	var pj := jug(id)
+	if pj.inv.get(clave, 0) > 0: return "inv"
+	var p := Eq.leer(clave)
+	return p.ranura if not p.is_empty() and pj.equipo.get(p.ranura, "") == clave else ""
+
+# Sustituye una pieza propia (inventario o equipada) por `nueva` pagando `coste`; atómico.
+func _transformar(clave: String, nueva: String, coste: Dictionary, id: String) -> bool:
+	var pj := jug(id)
+	var donde := _donde(clave, id)
+	if donde == "": return false
+	if donde == "inv":
+		var rem := coste.duplicate()
+		rem[clave] = 1
+		return Inv.cambiar(pj.inv, rem, {nueva: 1}, stats(id).slots)
+	if not Inv.quitar(pj.inv, coste): return false
+	pj.equipo[donde] = nueva
+	return true
+
+## Chispa de Temple (3.6): sube +N -> +N+1 siempre; coste creciente; en +5 o sin joyas se rechaza sin cambios.
+func mejorar(clave: String, id: String = LOCAL) -> Dictionary:
+	if _donde(clave, id) == "": return _no("No tienes esa pieza", id)
+	var r: Dictionary = Eq.mejorar(clave)
+	if not r.ok: return _no(r.motivo, id)
+	if not Inv.tiene(jug(id).inv, r.coste): return _no("Faltan joyas: " + _txt_items(r.coste), id)
+	if not _transformar(clave, r.nueva, r.coste, id): return _no("No se pudo mejorar", id)
+	return _ok("%s -> %s" % [Eq.info(clave).n, Eq.info(r.nueva).n], id)
+
+## Piedra (5.4): cambia la variante conservando nivel; consume la piedra nueva y la anterior se pierde.
+func engarzar(clave: String, variante: String, id: String = LOCAL) -> Dictionary:
+	if _donde(clave, id) == "": return _no("No tienes esa pieza", id)
+	var r: Dictionary = Eq.cambiar_variante(clave, variante)
+	if not r.ok: return _no(r.motivo, id)
+	if not Inv.tiene(jug(id).inv, r.coste): return _no("Falta " + _txt_items(r.coste), id)
+	if not _transformar(clave, r.nueva, r.coste, id): return _no("No se pudo engarzar", id)
+	return _ok("Ahora: %s" % Eq.info(r.nueva).n, id)
+
+## Intercambio directo (5.9): `a` entrega `de_a` y recibe `de_b` del jugador `b`. Todo o nada: ambos deben tener
+## lo que dan y caberles lo que reciben. Solo lo ejecuta la autoridad (servidor o partida local).
+func intercambiar(a: String, b: String, de_a: Dictionary, de_b: Dictionary) -> Dictionary:
+	if a == b or not d.jugadores.has(a) or not d.jugadores.has(b): return _no("Intercambio no válido", a)
+	for lote in [de_a, de_b]:
+		for k in lote: if not Eq.existe(str(k)) or typeof(lote[k]) != TYPE_INT or lote[k] <= 0: return _no("Intercambio no válido", a)
+	var ia: Dictionary = jug(a).inv.duplicate()
+	var ib: Dictionary = jug(b).inv.duplicate()
+	if not Inv.cambiar(ia, de_a, de_b, stats(a).slots) or not Inv.cambiar(ib, de_b, de_a, stats(b).slots):
+		aviso("Intercambio rechazado: faltan objetos o espacio", b)
+		return _no("Intercambio rechazado: faltan objetos o espacio", a)
+	jug(a).inv.clear()
+	jug(a).inv.merge(ia)
+	jug(b).inv.clear()
+	jug(b).inv.merge(ib)
+	aviso("Intercambio hecho con %s" % jug(a).nombre, b)
+	return _ok("Intercambio hecho con %s" % jug(b).nombre, a)
+
+# Actores (jugadores, habitantes, enemigos) como cajas de suelo.
+func actores() -> Array:
+	var l: Array = []
+	for id in rt: l.append([rt[id].pies, P.PIES])
+	for nid in Hab.NPCS: l.append([habitantes.pos(nid), P.PIES])
+	for e in combate.enemigos:
+		if e.est != "muerto": l.append([e.pos, Vector2(e.tam, e.tam * 0.6)])
+	return l
+
+func ocupada(c: Vector2i) -> bool:
+	var r := Rect2(Vector2(c) * P.CELDA, Vector2(P.CELDA, P.CELDA))
+	for a in actores():
+		if r.intersects(Rect2(a[0] - Vector2(a[1].x / 2.0, a[1].y), a[1])): return true
+	return false
+
+func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	if not C.CONSTR.has(pieza): return _no("Pieza desconocida", id)
+	var def: Dictionary = C.CONSTR[pieza]
+	var motivo := mundo.puede_poner(c)
+	if motivo != "": return _no("No se puede: " + motivo, id)
+	if ocupada(c): return _no("Hay alguien en esa celda", id)
+	if not Inv.tiene(pj.inv, def.coste): return _no("Faltan materiales: " + _txt_items(def.coste), id)
+	mundo.poner(c, pieza, true, id)
+	if def.bloquea:    # no se permiten bloqueos irreversibles de lugares esenciales ni de ningún jugador
+		var alc := mundo.alcanzables()
+		var ok := true
+		for k in rt:
+			var ck := Mundo.celda_de(rt[k].pies)
+			if not (alc.has(ck) or mundo.bloquea(ck)): ok = false
+		for e in Mundo.ESENCIALES: if not alc.has(e): ok = false
+		if not ok:
+			mundo.quitar(c)
+			return _no("Eso cerraría un camino esencial", id)
+	Inv.quitar(pj.inv, def.coste)
+	if def.get("cofre", false): d.cofres["c@" + Mundo.clave(c)] = {"inv": {}}
+	return _ok("Construyes %s" % def.n, id)
+
+func retirar(c: Vector2i, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var k := Mundo.clave(c)
+	var cs: Dictionary = mundo.constr_en(c)
+	if cs.is_empty(): return _no("No hay construcción", id)
+	if cs.get("dueno", "") != id: return _no("Esa construcción no es tuya", id)
+	var def: Dictionary = C.CONSTR[cs.t]
+	var cid := "c@" + k
+	if d.cofres.has(cid) and not d.cofres[cid].inv.is_empty(): return _no("El cofre no está vacío", id)
+	if not Inv.anadir(pj.inv, def.coste, stats(id).slots): return _no("Inventario lleno", id)
+	mundo.quitar(c)
+	d.cofres.erase(cid)
+	return _ok("Recuperas " + _txt_items(def.coste), id)
+
+# Cofres (compartidos): el del tesoro se vacía una vez al abrirse (para el mundo); los construidos transfieren por pila.
+func abrir_tesoro(cid: String, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var cf: Dictionary = d.cofres[cid]
+	if cf.get("abierto", false): return _no("Está vacío", id)
+	if not Inv.cambiar(pj.inv, {}, cf.inv, stats(id).slots): return _no("Inventario lleno", id)
+	var txt := _txt_items(cf.inv)
+	cf.inv = {}
+	cf.abierto = true
+	pj.eventos["abrio_" + cid] = true
+	return _ok("Abres el cofre: " + txt, id)
+
+func mover_cofre(cid: String, item: String, hacia_cofre: bool, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var cf: Dictionary = d.cofres.get(cid, {})
+	if cf.is_empty(): return _no("Cofre inexistente", id)
+	var n: int = pj.inv.get(item, 0) if hacia_cofre else cf.inv.get(item, 0)
+	if n <= 0: return _no("No hay", id)
+	var lote := {item: n}
+	if hacia_cofre:
+		if not Inv.cabe(cf.inv, lote, CAP_COFRE): return _no("El cofre está lleno", id)
+		Inv.quitar(pj.inv, lote)
+		Inv.anadir(cf.inv, lote, CAP_COFRE)
+	else:
+		if not Inv.cabe(pj.inv, lote, stats(id).slots): return _no("Inventario lleno", id)
+		Inv.quitar(cf.inv, lote)
+		Inv.anadir(pj.inv, lote, stats(id).slots)
+	return _ok("", id)
+
+# E: habitante cercano, cofre o cama delante.
+func interactuar(id: String = LOCAL) -> Dictionary:
+	var p := pies_de(id)
+	for nid in Hab.NPCS:
+		if habitantes.pos(nid).distance_to(p) <= ALCANCE_NPC:
+			var r := hablar(nid, id)
+			return {"ok": true, "panel": "dialogo", "npc": nid, "texto": r.texto, "tipo": r.tipo}
+	var base := Mundo.celda_de(p)
+	var m: Vector2i = rt[id].mira
+	for c in [base + m, base]:
+		var oid := mundo.objeto_presente(c)
+		if oid != "" and mundo.objetos[oid].t == "cofre_fijo": return {"ok": true, "panel": "tesoro", "id": oid, "r": abrir_tesoro(oid, id)}
+		var cs := mundo.constr_en(c)
+		if cs.is_empty(): continue
+		if cs.t == "cofre": return {"ok": true, "panel": "cofre", "id": "c@" + Mundo.clave(c)}
+		if cs.t == "cama":
+			if not cs.propia: return {"ok": false, "r": _no("Es la cama de Maren", id)}
+			if cs.get("dueno", "") != id: return {"ok": false, "r": _no("Es la cama de otro jugador", id)}
+			return {"ok": true, "panel": "dormir", "r": dormir(c, id)}
+	return {"ok": false, "r": _no("Nada con qué interactuar", id)}
+
+# PROVISIONAL multijugador: dormir adelanta el reloj COMPARTIDO (con varios jugadores habrá que exigir que duerman todos).
+func dormir(c: Vector2i, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	var m: int = d.min % 1440
+	var salto := (6 * 60 - m) if m < 6 * 60 else (1440 - m + 6 * 60)
+	for i in salto:
+		d.min += 1
+		if d.min % 60 == 0: mundo.regenerar(d.min, func(_c): return false)
+	pj.hp = stats(id).hp
+	var p := Mundo.pies_de_celda(c)
+	pj.cama = [p.x, p.y + 16]
+	habitantes.resincronizar()
+	combate.revisar_reaparicion()
+	return _ok("Duermes hasta el amanecer. Día %d." % dia(), id)
+
+# ---------- misiones (por jugador) ----------
+func estado_mision(mid: String, id: String = LOCAL) -> String:
+	return jug(id).misiones.get(mid, {}).get("estado", "")
+
+func mision_disponible(mid: String, id: String = LOCAL) -> bool:
+	if estado_mision(mid, id) != "": return false
+	for r in C.MISIONES[mid].req: if estado_mision(r, id) != "entregada": return false
+	return true
+
+func aceptar(mid: String, id: String = LOCAL) -> Dictionary:
+	if not mision_disponible(mid, id): return _no("No disponible", id)
+	jug(id).misiones[mid] = {"estado": "activa"}
+	aviso("Misión: " + C.MISIONES[mid].n, id)
+	return _ok("", id)
+
+func contar_constr(pieza: String, id: String = LOCAL) -> int:
+	var n := 0
+	for k in d.mundo.constr:
+		if d.mundo.constr[k].t == pieza and d.mundo.constr[k].get("dueno", "") == id: n += 1
+	return n
+
+# Actuales (tener, construccion) se miden AHORA; históricos (visita, derrotar, hablar, abrir) usan hechos guardados.
+# derrotar y abrir son hechos del MUNDO (el jefe cayó / el cofre se abrió, lo hiciera quien lo hiciera).
+func objetivo_ok(o: Dictionary, id: String = LOCAL) -> bool:
+	var pj := jug(id)
+	match o.t:
+		"hablar": return pj.eventos.get("hablo_" + o.npc, 0) > 0
+		"tener": return pj.inv.get(o.item, 0) >= o.n
+		"construccion": return contar_constr(o.pieza, id) >= o.n
+		"visita": return pj.eventos.has(o.evento)
+		"derrotar": return d.jefes.get(o.jefe, {}).get("veces", 0) > 0
+		"abrir": return d.cofres.get(o.cofre, {}).get("abierto", false)
+	return false
+
+func objetivo_txt(o: Dictionary, id: String = LOCAL) -> String:
+	match o.t:
+		"hablar": return "Hablar con %s" % o.npc.capitalize()
+		"tener": return "%s %d/%d" % [Eq.info(o.item).n, mini(jug(id).inv.get(o.item, 0), o.n), o.n]
+		"construccion": return "Construir %s (%d/%d en pie)" % [C.CONSTR[o.pieza].n, mini(contar_constr(o.pieza, id), o.n), o.n]
+		"visita": return "Visitar el lugar"
+		"derrotar": return "Derrotar a %s" % C.ENEMIGOS[o.jefe].n
+		"abrir": return "Abrir el cofre"
+	return ""
+
+func progreso_txt(mid: String, id: String = LOCAL) -> String:
+	var l: Array = []
+	for o in C.MISIONES[mid].obj: l.append(("[x] " if objetivo_ok(o, id) else "[ ] ") + objetivo_txt(o, id))
+	return " ".join(l)
+
+func _cumple(mid: String, id: String) -> bool:
+	for o in C.MISIONES[mid].obj: if not objetivo_ok(o, id): return false
+	return true
+
+# Sin id: evalúa a todos los jugadores.
+func evaluar_misiones(id: String = "") -> void:
+	for k in ([id] if id != "" else d.jugadores.keys()):
+		var ms: Dictionary = jug(k).misiones
+		for mid in ms:
+			var m: Dictionary = ms[mid]
+			if m.estado == "activa" and _cumple(mid, k):
+				m.estado = "cumplida"
+				aviso("Cumplida: " + C.MISIONES[mid].n, k)
+			elif m.estado == "cumplida" and not _cumple(mid, k):
+				m.estado = "activa"
+				aviso("Ya no se cumple: " + C.MISIONES[mid].n, k)
+
+func entregar(mid: String, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	evaluar_misiones(id)
+	if estado_mision(mid, id) != "cumplida": return _no("Aún no se cumple", id)
+	if pj.recompensas.has("mision:" + mid): return _no("Ya entregada", id)
+	var m: Dictionary = C.MISIONES[mid]
+	if not Inv.cambiar(pj.inv, m.consume, m.rec.items, stats(id).slots): return _no("Sin espacio para la recompensa", id)
+	pj.recompensas.append("mision:" + mid)
+	pj.misiones[mid].estado = "entregada"
+	ganar_xp(m.rec.xp, id)
+	return _ok("Entregada: " + m.n, id)
+
+func hablar(npc: String, id: String = LOCAL) -> Dictionary:
+	var pj := jug(id)
+	evaluar_misiones(id)
+	pj.eventos["hablo_" + npc] = pj.eventos.get("hablo_" + npc, 0) + 1
+	var veces: int = pj.eventos["hablo_" + npc]
+	for mid in C.MISIONES:
+		var m: Dictionary = C.MISIONES[mid]
+		if m.da != npc: continue
+		var dl: Dictionary = C.DIALOGOS[mid]
+		var e := estado_mision(mid, id)
+		if e == "" and mision_disponible(mid, id):
+			aceptar(mid, id)
+			evaluar_misiones(id)
+			var extra: String = C.DIALOGOS.origen[pj.origen] + " " if veces == 1 else ""
+			return {"texto": extra + dl.oferta, "tipo": "mision"}
+		if e == "activa": return {"texto": dl.recordar + "  " + progreso_txt(mid, id), "tipo": "expresivo"}
+		if e == "cumplida":
+			var r := entregar(mid, id)
+			if r.ok:
+				pj.relacion[npc] = int(pj.relacion.get(npc, 0)) + 1
+				return {"texto": dl.gracias, "tipo": "relacion"}
+			return {"texto": r.msg, "tipo": "expresivo"}
+	var done := true
+	for mid in C.MISIONES: if C.MISIONES[mid].da == npc and estado_mision(mid, id) != "entregada": done = false
+	if done: return {"texto": C.DIALOGOS.final, "tipo": "expresivo"}
+	return {"texto": C.DIALOGOS.base[veces % C.DIALOGOS.base.size()], "tipo": "expresivo"}
+
+# ---------- botín y jefes ----------
+# Farmeo (4, decisión 7): por cada derrota de una fuente, tirada propia del jugador por familia de zona.
+# Flujo determinista por semilla, familia y jugador:intento; garantía tras `garantia` intentos sin caída.
+func caida_equipo(fuente: String, id: String = LOCAL) -> void:
+	var pj := jug(id)
+	if not pj.has("botin_eq"): pj["botin_eq"] = {}
+	for fam in Eq.familias_zona(fuente):
+		var st: Dictionary = pj.botin_eq.get(fam, {"n": 0, "sin": 0})
+		st.n = int(st.n) + 1
+		var r: String = Eq.tirada_zona(fam, int(st.sin), _rng("eq:" + fam, "%s:%d" % [id, st.n]))
+		st.sin = 0 if r != "" else int(st.sin) + 1
+		pj.botin_eq[fam] = st
+		if r != "": dar_o_pendiente({Eq.construir(fam, r, "", 0): 1}, id)
+
+# Jefe repetible: una pieza de su familia que el jugador aún no tenga (inventario, equipo o pendientes);
+# con el set completo, una cualquiera. Tirada propia por jugador y derrota.
+func _botin_jefe(jid: String, veces: int, id: String) -> void:
+	var pj := jug(id)
+	for fam in Eq.familias_jefe(jid):
+		var tiene := {}
+		for k in pj.inv.keys() + pj.equipo.values() + pj.pendientes.keys():
+			var p := Eq.leer(str(k))
+			if not p.is_empty() and p.familia == fam: tiene[p.ranura] = true
+		var piezas: Array = Eq.datos().familias[fam].piezas
+		var faltan: Array = piezas.filter(func(r): return not tiene.has(r))
+		if faltan.is_empty(): faltan = piezas
+		var rng := _rng("eq:" + fam, "%s:jefe:%d" % [id, veces])
+		dar_o_pendiente({Eq.construir(fam, faltan[rng.randi() % faltan.size()], "", 0): 1}, id)
+
+func dar_o_pendiente(items: Dictionary, id: String = LOCAL) -> void:
+	var pj := jug(id)
+	if Inv.anadir(pj.inv, items, stats(id).slots): aviso("Obtienes " + _txt_items(items), id)
+	else:
+		for k in items: pj.pendientes[k] = pj.pendientes.get(k, 0) + items[k]
+		aviso("Inventario lleno: la recompensa queda pendiente", id)
+
+# La derrota es del mundo (jefes[jid]); la recompensa, del jugador que dio el golpe final (id).
+func jefe_derrotado(jid: String, id: String = LOCAL) -> void:
+	var st: Dictionary = d.jefes.get(jid, {"veces": 0})
+	st.veces = int(st.veces) + 1
+	st.derrotado = true
+	st.hora = d.min
+	d.jefes[jid] = st
+	var clave := "jefe:%s:%d" % [jid, st.veces]
+	var rec: Array = jug(id).recompensas
+	if not rec.has(clave):
+		rec.append(clave)
+		dar_o_pendiente(C.ENEMIGOS[jid].recompensa, id)
+		_botin_jefe(jid, int(st.veces), id)
+	aviso_todos("¡%s derrotado!" % C.ENEMIGOS[jid].n)

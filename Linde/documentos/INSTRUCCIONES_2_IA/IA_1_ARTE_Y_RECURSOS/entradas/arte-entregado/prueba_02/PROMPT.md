@@ -1,0 +1,5 @@
+# Preparación visual
+
+Herramienta integrada de imágenes; 2026-10-23. Fuente: personaje aprobado en la prueba 01. Después se convirtió técnicamente en Godot a celdas nativas, sin editar el original.
+
+Edit the provided four-view original character strip for a native pixel art production test. Preserve the SAME character design, dark teal hair, teal tunic, belt, trousers and brown boots; preserve front / right / back / left order, standing empty-handed and equal foot baseline. Change ONLY rendering: simplify into clean discrete pixel clusters on a consistent coarse pixel grid, with fully opaque painted pixels and fully transparent background, no partial-opacity edge fringe, no antialiasing, no blur. Each character should be designed as if occupying about 16x28 pixels within a 32x32 cell, enlarged uniformly with nearest-neighbor blocks for viewing. Four cells evenly spaced, no text, no grid, no extra objects, no equipment, no shadows. Restrained palette with two or three tones per material, preserve face and hair silhouette and short separated legs. Do not redesign or add detail. This output will undergo technical cell-size conversion and testing in Godot.

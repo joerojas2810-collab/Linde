@@ -1,0 +1,74 @@
+{
+  "base_sha256": "ca27efc8830dbe165bee7188f143b21a6a99c809791735d4a0e4df0bc1734347",
+  "validator_sha256": "18eb68a6c4a02f24e75ed7fa9a4f0408e4cb3f922addf58095de756e5f6a5ca0",
+  "contract_sha256": "624358038c5d3077dc8625b3d7e6ca0fc42176cd2408dca9711591c7665ecfde",
+  "sources": [
+    {
+      "file": "fuentes_reutilizadas/casco.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/equipo/overlays_ajustados/personaje_casco.png",
+      "sha256": "b0d274470a5b32b3c8f427ed2ebed7c7be30fd94a346e167cfc66577fa7636db",
+      "unchanged": true
+    },
+    {
+      "file": "fuentes_reutilizadas/coraza.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/equipo/overlays_ajustados/personaje_coraza.png",
+      "sha256": "30afbe692f43baf9f00ec8fa11b5864e2bdd8c45679c66e910b10d48e2c33417",
+      "unchanged": true
+    },
+    {
+      "file": "fuentes_reutilizadas/escudo.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/equipo/overlays_ajustados/personaje_escudo.png",
+      "sha256": "ac3159cd4bae4faa51c1397fa107096737dd68a29282466dd810bb79ca3aac6f",
+      "unchanged": true
+    },
+    {
+      "file": "fuentes_reutilizadas/espada.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/equipo/overlays_ajustados/personaje_espada.png",
+      "sha256": "1505b84a88e5f7e9f68b68aeb17a9bf2ad749e324537ee4b6a4b9b69fd91a8ad",
+      "unchanged": true
+    },
+    {
+      "file": "base/capas/botas.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/personaje/capas/botas.png",
+      "sha256": "e8bcc73f0fa1844794462e89747ce603f24f5314dcb29a708d33716211367da3",
+      "unchanged": true
+    },
+    {
+      "file": "base/capas/cinturon.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/personaje/capas/cinturon.png",
+      "sha256": "44dcc93147a8b894b7f41a7879be6255cc0eeaae84b345ce7db2f9e445347ff1",
+      "unchanged": true
+    },
+    {
+      "file": "base/capas/cuerpo.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/personaje/capas/cuerpo.png",
+      "sha256": "63e01859fef914048708807d4bfa5c4dbf7d10efb2997b5808192e8e9bea385b",
+      "unchanged": true
+    },
+    {
+      "file": "base/capas/pantalon.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/personaje/capas/pantalon.png",
+      "sha256": "daefcca5600622e8b3e11311309382445bbfc310a837e4fabbe3145e5a1c26a4",
+      "unchanged": true
+    },
+    {
+      "file": "base/capas/pelo.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/personaje/capas/pelo.png",
+      "sha256": "4a46fd059cf4f59ab94cec2e0632faf805f1a89d7972d63b9cd5222f4409a751",
+      "unchanged": true
+    },
+    {
+      "file": "base/capas/piel.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/personaje/capas/piel.png",
+      "sha256": "bd5e0dd98fd2f776fb3c070646b347b7bad69b4b573c6742704f3deaa8ead1ca",
+      "unchanged": true
+    },
+    {
+      "file": "base/capas/tunica.png",
+      "prior": "outputs/LINDE_Biblioteca_Arte_01/personaje/capas/tunica.png",
+      "sha256": "03a230dc6857633549bd40d9ac58261c373a4fcd6554ee0870afce0556c5de1e",
+      "unchanged": true
+    }
+  ],
+  "note": "Generated new light/heavy helmet/torso silhouettes are recorded separately under fuentes_arquetipos."
+}

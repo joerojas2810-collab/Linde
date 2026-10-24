@@ -1,0 +1,10 @@
+{
+  "capas": [
+    "casco",
+    "coraza",
+    "escudo",
+    "espada"
+  ],
+  "celda": 32,
+  "note": "Merge layer names into main personaje.json; this fragment contains no base body. Equipment columns are repeated static poses."
+}

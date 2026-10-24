@@ -1,0 +1,32 @@
+{
+  "_nota": "PROVISIONAL: potencias, bonos, recetas y caídas (sistema-de-equipo.md 3.3, 3.5, 4 y 6). Paletas: ids de paletas.json.",
+  "familias": [
+    {"id": "vigia", "nombre": "Vigía", "arquetipo": "media", "potencia": 1.00, "paleta": "pal_vigia", "rareza": "comun",
+     "origen": {"tipo": "fabricable", "estacion": "mesa", "habilidad": "artesano",
+       "recetas": {
+         "casco": {"lingote": 2, "madera": 1},
+         "torso": {"lingote": 4, "madera": 1},
+         "guantes": {"lingote": 1, "fibra": 1},
+         "botas": {"lingote": 2, "fibra": 1},
+         "pantalones": {"lingote": 2, "fibra": 2}}},
+     "piezas": ["casco", "torso", "guantes", "botas", "pantalones"],
+     "bono_set": [
+       {"piezas": 2, "efecto": {"def_pct": 0.05}},
+       {"piezas": 3, "efecto": {"hp_pct": 0.05}},
+       {"piezas": 5, "efecto": {"def_pct": 0.05, "vel_pct": 0.02}}]},
+    {"id": "zarzal", "nombre": "Zarzal", "arquetipo": "ligera", "potencia": 1.10, "paleta": "pal_zarzal", "rareza": "rara",
+     "origen": {"tipo": "zona", "zona": "bosque", "fuentes": ["slime"], "prob": 0.06, "garantia": 15},
+     "piezas": ["casco", "torso", "guantes", "botas", "pantalones"],
+     "bono_set": [
+       {"piezas": 2, "efecto": {"vel_pct": 0.03}},
+       {"piezas": 3, "efecto": {"hp_pct": 0.05}},
+       {"piezas": 5, "efecto": {"hp_pct": 0.05, "vel_pct": 0.03}}]},
+    {"id": "albor", "nombre": "Albor", "arquetipo": "pesada", "potencia": 1.20, "paleta": "pal_albor", "rareza": "unica",
+     "origen": {"tipo": "jefe", "jefe": "ciervo"},
+     "piezas": ["casco", "torso", "guantes", "botas", "pantalones"],
+     "bono_set": [
+       {"piezas": 2, "efecto": {"def_pct": 0.04}},
+       {"piezas": 3, "efecto": {"def_pct": 0.04}},
+       {"piezas": 5, "efecto": {"def_pct": 0.04, "hp_pct": 0.05}}]}
+  ]
+}

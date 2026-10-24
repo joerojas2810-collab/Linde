@@ -1,0 +1,9 @@
+config_version=5
+[application]
+config/name="Linde equipo indice 01"
+run/main_scene="res://previews/vista.tscn"
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=880
+[rendering]
+renderer/rendering_method="gl_compatibility"

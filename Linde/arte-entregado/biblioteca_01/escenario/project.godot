@@ -1,0 +1,6 @@
+config_version=5
+[application]
+config/name="LINDE Escenario Biblioteca"
+[rendering]
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0

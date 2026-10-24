@@ -1,0 +1,14 @@
+{
+  "capas": [
+    "cuerpo",
+    "pantalon",
+    "tunica",
+    "cinturon",
+    "pelo",
+    "casco",
+    "coraza",
+    "escudo",
+    "espada"
+  ],
+  "celda": 32
+}

@@ -1,0 +1,16 @@
+# Prompts de generación
+
+Herramienta: image_gen integrada. Imágenes de referencia: pueblo cenital original LINDE, usada como guía visual. Fecha: 2026-10-23. Sin recursos extraídos de juegos comerciales.
+
+## Objetos
+
+Use case: stylized-concept. Generate production-oriented sprite atlas for original LINDE overhead RPG. Style match reference image: simple clear handheld pixel art, green rounded foliage, warm wood, grey stone, terracotta roofs, visible top and front, NOT isometric. TRANSPARENT background, no text, no grid lines, no shadows outside object. Exactly 4 columns by 4 rows equal cells filling a square canvas, every sprite fully contained with 10% margin, each centered horizontally feet at 90% cell height. One object per cell. Row1: broadleaf tree round crown, pine tree, young fruit tree, grey rock. Row2: copper ore rock, red berry bush, wooden barrel, horizontal wood fence section. Row3: closed wooden chest, same chest open empty, same chest open golden treasure, workbench with tools. Row4: stone furnace, simple wooden bed with blue blanket, timber palisade section, short wooden footbridge top-down vertical crossing. Consistent pixels approximately 32x32 logical per object and each cell conceptually 48x48, nearest neighbor chunky edges. No painterly detail, no labels, no people, avoid overlap. Reference only for visual language.
+
+## Terreno
+
+Use case: stylized-concept. Original LINDE game square terrain atlas in simple readable overhead handheld pixel art, matched green grass and tan village paths of reference. EXACT 4 columns x 4 rows no spacing no text no grid lines. Each cell a complete 16x16 logical tile, enlarged with nearest neighbor sharp edges. Row1: plain grass low texture; grass small flecks variant; tan earth path fill; blue water fill. Row2: tan path with grass along north edge; tan path grass south edge; tan path grass west edge; tan path grass east edge. Row3: water with sandy shore north; water sandy shore south; water sandy shore west; water sandy shore east. Row4: wood floor planks; grey stone wall visible front; weathered stone ruins floor; grey stone steps ascending north. All cell boundaries exactly aligned 25%,50%,75%, no margins. Surfaces topdown not isometric. Warm limited palette, no realistic painting, no objects, no titles. Full opaque square image.
+
+## Edificios
+
+Use case: stylized-concept. Original LINDE overhead RPG architectural sprite atlas matching reference image village, simple readable chunky handheld pixel art, warm terracotta roof, ochre timber facade, blue small windows, stone chimney, visible roof top and frontal facade, straight orthographic top down oblique NOT isometric. Transparent background. EXACT 2x2 equal square cells with generous clear margins. Row1 left: small complete timber cottage with closed central wooden door and two windows, roof and chimney. Row1 right: same cottage with dark open doorway. Row2 left: complete open-front crafting shed with timber workbench under terracotta roof. Row2 right: grey rocky cave entrance with dark opening and 3 stone steps facing south. Center objects each cell, feet at90%, all fit within80% width/height. Crisp pixel clusters, only 3tones per material, no decorative overdetail. No people, trees, fences, ground, text, grids. Each building logical footprint80x64 inside96x96 cell.
+

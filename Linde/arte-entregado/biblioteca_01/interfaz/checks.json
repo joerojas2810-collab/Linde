@@ -1,0 +1,265 @@
+{
+  "checks": [
+    {
+      "color_count": 360,
+      "id": "madera",
+      "opaque_pixels": 385,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 398,
+      "id": "piedra",
+      "opaque_pixels": 447,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 392,
+      "id": "fibra",
+      "opaque_pixels": 429,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 422,
+      "id": "mena_hierro",
+      "opaque_pixels": 460,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 311,
+      "id": "lingote_hierro",
+      "opaque_pixels": 359,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 450,
+      "id": "baya",
+      "opaque_pixels": 486,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 287,
+      "id": "gelatina",
+      "opaque_pixels": 307,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 431,
+      "id": "unguento",
+      "opaque_pixels": 487,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 344,
+      "id": "gema",
+      "opaque_pixels": 359,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 271,
+      "id": "hacha_piedra",
+      "opaque_pixels": 278,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 288,
+      "id": "pico_piedra",
+      "opaque_pixels": 302,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 257,
+      "id": "espada_hierro",
+      "opaque_pixels": 273,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 519,
+      "id": "casco",
+      "opaque_pixels": 564,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 458,
+      "id": "coraza",
+      "opaque_pixels": 485,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 485,
+      "id": "escudo",
+      "opaque_pixels": 498,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 373,
+      "id": "categoria_oficio",
+      "opaque_pixels": 428,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 469,
+      "id": "categoria_exploracion",
+      "opaque_pixels": 493,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 361,
+      "id": "categoria_combate",
+      "opaque_pixels": 381,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 333,
+      "id": "categoria_comunidad",
+      "opaque_pixels": 349,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 203,
+      "id": "mision_icono",
+      "opaque_pixels": 235,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 1426,
+      "id": "panel",
+      "opaque_pixels": 2358,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 578,
+      "id": "slot_normal",
+      "opaque_pixels": 710,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 533,
+      "id": "slot_selected",
+      "opaque_pixels": 661,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 399,
+      "id": "slot_disabled",
+      "opaque_pixels": 656,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 676,
+      "id": "button_normal",
+      "opaque_pixels": 896,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 719,
+      "id": "button_hover",
+      "opaque_pixels": 855,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 545,
+      "id": "button_pressed",
+      "opaque_pixels": 816,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 523,
+      "id": "healthbar_frame",
+      "opaque_pixels": 686,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 852,
+      "id": "healthbar_full",
+      "opaque_pixels": 1063,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 451,
+      "id": "skill_locked",
+      "opaque_pixels": 494,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 479,
+      "id": "skill_unlocked",
+      "opaque_pixels": 493,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 472,
+      "id": "skill_selected",
+      "opaque_pixels": 481,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 404,
+      "id": "quest_marker",
+      "opaque_pixels": 413,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 256,
+      "id": "interact_indicator",
+      "opaque_pixels": 274,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 1379,
+      "id": "tooltip_panel",
+      "opaque_pixels": 3016,
+      "partial_alpha": 0,
+      "pass": true
+    },
+    {
+      "color_count": 727,
+      "id": "counter_panel",
+      "opaque_pixels": 897,
+      "partial_alpha": 0,
+      "pass": true
+    }
+  ],
+  "count": 37,
+  "source_icon_size": [
+    1254,
+    1254
+  ],
+  "source_ui_size": [
+    1254,
+    1254
+  ]
+}

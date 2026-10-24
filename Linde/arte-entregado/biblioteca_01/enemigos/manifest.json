@@ -1,0 +1,299 @@
+{
+  "assets": [
+    {
+      "alpha": "binary_threshold_0.5",
+      "animations": {
+        "attack": {
+          "frames": [
+            3,
+            4,
+            0
+          ],
+          "seconds": 0.2
+        },
+        "idle": {
+          "frames": [
+            0
+          ],
+          "seconds": 0.5
+        },
+        "walk": {
+          "frames": [
+            1,
+            0,
+            2,
+            0
+          ],
+          "seconds": 0.15
+        }
+      },
+      "atlas_size": [
+        160,
+        128
+      ],
+      "cell_size": [
+        32,
+        32
+      ],
+      "columns": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "anticipation",
+        "attack"
+      ],
+      "content_status": "proposal_not_canon",
+      "directions": [
+        "south",
+        "east",
+        "north",
+        "west"
+      ],
+      "frame_hashes": [
+        3841141625,
+        1189935258,
+        3311534672,
+        664895278,
+        1311029200,
+        1790371601,
+        4018901807,
+        182858243,
+        981771783,
+        1887958580,
+        3804328032,
+        4054529180,
+        505192973,
+        1938618164,
+        736539555,
+        3859493266,
+        1196139442,
+        2303946575,
+        1513453980,
+        25165941
+      ],
+      "id": "slime",
+      "license_note": "AI generated; no third party game assets; not legal clearance",
+      "pivot": [
+        16,
+        29
+      ],
+      "source_size": [
+        1402,
+        1122
+      ],
+      "timing_status": "provisional",
+      "uniform_scale": 0.0701754385964912,
+      "walk_identical_rows": [],
+      "path": "enemigos/nativos/slime.png",
+      "local_path": "nativos/slime.png",
+      "frameSize": [
+        32,
+        32
+      ],
+      "expectedDrawSize": [
+        32,
+        32
+      ],
+      "max_visible_dimension": 16,
+      "rows": 4,
+      "columns_count": 5
+    },
+    {
+      "alpha": "binary_threshold_0.5",
+      "animations": {
+        "attack": {
+          "frames": [
+            3,
+            4,
+            0
+          ],
+          "seconds": 0.2
+        },
+        "idle": {
+          "frames": [
+            0
+          ],
+          "seconds": 0.5
+        },
+        "walk": {
+          "frames": [
+            1,
+            0,
+            2,
+            0
+          ],
+          "seconds": 0.15
+        }
+      },
+      "atlas_size": [
+        240,
+        192
+      ],
+      "cell_size": [
+        48,
+        48
+      ],
+      "columns": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "anticipation",
+        "attack"
+      ],
+      "content_status": "proposal_not_canon",
+      "directions": [
+        "south",
+        "east",
+        "north",
+        "west"
+      ],
+      "frame_hashes": [
+        2867236288,
+        890646951,
+        2507331654,
+        1583693486,
+        27070212,
+        1344088978,
+        3212761884,
+        3591051623,
+        1462240652,
+        2184818681,
+        1631567980,
+        1047941969,
+        1644878129,
+        917772535,
+        1143593297,
+        2674447087,
+        1442315651,
+        1344162360,
+        2273554459,
+        1308755916
+      ],
+      "id": "guardian",
+      "license_note": "AI generated; no third party game assets; not legal clearance",
+      "pivot": [
+        24,
+        45
+      ],
+      "source_size": [
+        1402,
+        1122
+      ],
+      "timing_status": "provisional",
+      "uniform_scale": 0.141791044776119,
+      "walk_identical_rows": [],
+      "path": "enemigos/nativos/guardian.png",
+      "local_path": "nativos/guardian.png",
+      "frameSize": [
+        48,
+        48
+      ],
+      "expectedDrawSize": [
+        48,
+        48
+      ],
+      "max_visible_dimension": 38,
+      "rows": 4,
+      "columns_count": 5
+    },
+    {
+      "alpha": "binary_threshold_0.5",
+      "animations": {
+        "attack": {
+          "frames": [
+            3,
+            4,
+            0
+          ],
+          "seconds": 0.2
+        },
+        "idle": {
+          "frames": [
+            0
+          ],
+          "seconds": 0.5
+        },
+        "walk": {
+          "frames": [
+            1,
+            0,
+            2,
+            0
+          ],
+          "seconds": 0.15
+        }
+      },
+      "atlas_size": [
+        240,
+        192
+      ],
+      "cell_size": [
+        48,
+        48
+      ],
+      "columns": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "anticipation",
+        "attack"
+      ],
+      "content_status": "proposal_not_canon",
+      "directions": [
+        "south",
+        "east",
+        "north",
+        "west"
+      ],
+      "frame_hashes": [
+        775828085,
+        624953474,
+        4137423061,
+        813128953,
+        3391054690,
+        3157540179,
+        2414097317,
+        925669991,
+        3163780631,
+        4056483156,
+        1345075026,
+        589987938,
+        1596048161,
+        782735699,
+        1414697603,
+        1634057634,
+        1833334874,
+        457642570,
+        1590392538,
+        1744927019
+      ],
+      "id": "ciervo",
+      "license_note": "AI generated; no third party game assets; not legal clearance",
+      "pivot": [
+        24,
+        45
+      ],
+      "source_size": [
+        1402,
+        1122
+      ],
+      "timing_status": "provisional",
+      "uniform_scale": 0.131782945736434,
+      "walk_identical_rows": [],
+      "path": "enemigos/nativos/ciervo.png",
+      "local_path": "nativos/ciervo.png",
+      "frameSize": [
+        48,
+        48
+      ],
+      "expectedDrawSize": [
+        48,
+        48
+      ],
+      "max_visible_dimension": 34,
+      "rows": 4,
+      "columns_count": 5
+    }
+  ],
+  "status": "prototype_library_not_game_integration"
+}

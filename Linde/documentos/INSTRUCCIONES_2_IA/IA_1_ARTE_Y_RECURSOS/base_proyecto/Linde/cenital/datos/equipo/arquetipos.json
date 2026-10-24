@@ -1,0 +1,19 @@
+{
+  "_nota": "PROVISIONAL: todos los valores (Linde/documentos/sistema-de-equipo.md 3.1, 3.2, 3.5, 3.7 y 12). vel_pct = fracción por unidad de peso.",
+  "constantes": {
+    "tope_def_pct": 0.25, "tope_hp_pct": 0.25, "vel_min": 0.70, "vel_max": 1.30,
+    "k_def": 20, "bono_max_def": 0.12, "bono_max_hp": 0.10, "potencia_razon_max": 1.20
+  },
+  "ranuras": [
+    {"id": "casco", "n": "Casco", "def_base": 2, "hp_base": 3, "peso": 1.0},
+    {"id": "torso", "n": "Torso", "def_base": 4, "hp_base": 6, "peso": 1.0},
+    {"id": "guantes", "n": "Guantes", "def_base": 1, "hp_base": 1, "peso": 0.5},
+    {"id": "botas", "n": "Botas", "def_base": 1, "hp_base": 2, "peso": 2.0},
+    {"id": "pantalones", "n": "Pantalones", "def_base": 2, "hp_base": 3, "peso": 0.5}
+  ],
+  "arquetipos": [
+    {"id": "ligera", "silueta": "sil_ligera", "mult": {"def": 0.70, "hp": 1.20}, "vel_pct": 0.010},
+    {"id": "media", "silueta": "sil_media", "mult": {"def": 1.00, "hp": 1.00}, "vel_pct": 0.0},
+    {"id": "pesada", "silueta": "sil_pesada", "mult": {"def": 1.40, "hp": 1.00}, "vel_pct": -0.015}
+  ]
+}

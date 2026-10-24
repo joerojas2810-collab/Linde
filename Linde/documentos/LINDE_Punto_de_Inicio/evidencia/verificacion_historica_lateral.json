@@ -1,0 +1,11 @@
+{
+  "version": "0.2",
+  "desktop_test_exit": 0,
+  "desktop_render_exit": 0,
+  "active_project": "beta/lateral",
+  "launch": "Iniciar-Beta.command",
+  "prior_reference": "Iniciar-Referencia-MineWorld.command",
+  "checks_passed": 31,
+  "checks_failed": 0,
+  "causal_roof_regression_test": true
+}

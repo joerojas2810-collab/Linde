@@ -1,0 +1,387 @@
+{
+  "combination_order": "Right profile shield behind; left profile sword behind; other equipment in front",
+  "edit_size": [
+    1368,
+    1149
+  ],
+  "entries": [
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "casco_frente.png",
+      "id": "casco_frente",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        15,
+        27
+      ],
+      "original_source_box": [
+        95,
+        23,
+        151,
+        264
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "casco_derecha.png",
+      "id": "casco_derecha",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        16,
+        27
+      ],
+      "original_source_box": [
+        429,
+        21,
+        154,
+        266
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "casco_espalda.png",
+      "id": "casco_espalda",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        15,
+        27
+      ],
+      "original_source_box": [
+        788,
+        21,
+        152,
+        266
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "casco_izquierda.png",
+      "id": "casco_izquierda",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        16,
+        27
+      ],
+      "original_source_box": [
+        1126,
+        21,
+        155,
+        266
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "coraza_frente.png",
+      "id": "coraza_frente",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        16,
+        27
+      ],
+      "original_source_box": [
+        94,
+        307,
+        155,
+        267
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "coraza_derecha.png",
+      "id": "coraza_derecha",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        15,
+        27
+      ],
+      "original_source_box": [
+        429,
+        307,
+        153,
+        267
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "coraza_espalda.png",
+      "id": "coraza_espalda",
+      "native_offset": [
+        7,
+        5
+      ],
+      "native_size": [
+        17,
+        27
+      ],
+      "original_source_box": [
+        781,
+        307,
+        166,
+        267
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "coraza_izquierda.png",
+      "id": "coraza_izquierda",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        15,
+        27
+      ],
+      "original_source_box": [
+        1132,
+        307,
+        149,
+        267
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "escudo_frente.png",
+      "id": "escudo_frente",
+      "native_offset": [
+        7,
+        5
+      ],
+      "native_size": [
+        18,
+        27
+      ],
+      "original_source_box": [
+        94,
+        584,
+        179,
+        265
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "escudo_derecha.png",
+      "id": "escudo_derecha",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        16,
+        27
+      ],
+      "original_source_box": [
+        429,
+        585,
+        153,
+        264
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "escudo_espalda.png",
+      "id": "escudo_espalda",
+      "native_offset": [
+        6,
+        5
+      ],
+      "native_size": [
+        19,
+        27
+      ],
+      "original_source_box": [
+        760,
+        585,
+        183,
+        263
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "escudo_izquierda.png",
+      "id": "escudo_izquierda",
+      "native_offset": [
+        8,
+        5
+      ],
+      "native_size": [
+        15,
+        27
+      ],
+      "original_source_box": [
+        1133,
+        585,
+        148,
+        263
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "espada_frente.png",
+      "id": "espada_frente",
+      "native_offset": [
+        6,
+        5
+      ],
+      "native_size": [
+        20,
+        27
+      ],
+      "original_source_box": [
+        57,
+        862,
+        192,
+        264
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "espada_derecha.png",
+      "id": "espada_derecha",
+      "native_offset": [
+        7,
+        5
+      ],
+      "native_size": [
+        18,
+        27
+      ],
+      "original_source_box": [
+        429,
+        862,
+        181,
+        265
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "espada_espalda.png",
+      "id": "espada_espalda",
+      "native_offset": [
+        5,
+        5
+      ],
+      "native_size": [
+        21,
+        27
+      ],
+      "original_source_box": [
+        781,
+        862,
+        204,
+        265
+      ],
+      "status": "experimental_unapproved_alignment"
+    },
+    {
+      "cell": [
+        32,
+        32
+      ],
+      "file": "espada_izquierda.png",
+      "id": "espada_izquierda",
+      "native_offset": [
+        7,
+        5
+      ],
+      "native_size": [
+        18,
+        27
+      ],
+      "original_source_box": [
+        1106,
+        862,
+        175,
+        265
+      ],
+      "status": "experimental_unapproved_alignment"
+    }
+  ],
+  "native_cell": [
+    32,
+    32
+  ],
+  "source_original_size": [
+    1368,
+    1149
+  ],
+  "status": "EXPERIMENTAL; not production modular layers",
+  "transform": "Original costume bbox and scale; equipment bbox never recentered"
+}

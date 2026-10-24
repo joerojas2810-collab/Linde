@@ -1,0 +1,288 @@
+{
+  "atlas": "equipo_estatico_128x128.png",
+  "date": "2026-10-23",
+  "entries": [
+    {
+      "direction": "frente",
+      "equipment": "casco",
+      "file": "assets/casco_frente.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "casco_frente",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "derecha",
+      "equipment": "casco",
+      "file": "assets/casco_derecha.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "casco_derecha",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "espalda",
+      "equipment": "casco",
+      "file": "assets/casco_espalda.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "casco_espalda",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "izquierda",
+      "equipment": "casco",
+      "file": "assets/casco_izquierda.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "casco_izquierda",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "frente",
+      "equipment": "coraza",
+      "file": "assets/coraza_frente.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "coraza_frente",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "derecha",
+      "equipment": "coraza",
+      "file": "assets/coraza_derecha.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "coraza_derecha",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "espalda",
+      "equipment": "coraza",
+      "file": "assets/coraza_espalda.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "coraza_espalda",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "izquierda",
+      "equipment": "coraza",
+      "file": "assets/coraza_izquierda.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "coraza_izquierda",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "frente",
+      "equipment": "escudo",
+      "file": "assets/escudo_frente.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "escudo_frente",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "derecha",
+      "equipment": "escudo",
+      "file": "assets/escudo_derecha.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "escudo_derecha",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "espalda",
+      "equipment": "escudo",
+      "file": "assets/escudo_espalda.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "escudo_espalda",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "izquierda",
+      "equipment": "escudo",
+      "file": "assets/escudo_izquierda.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "escudo_izquierda",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "frente",
+      "equipment": "espada",
+      "file": "assets/espada_frente.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "espada_frente",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "derecha",
+      "equipment": "espada",
+      "file": "assets/espada_derecha.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "espada_derecha",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "espalda",
+      "equipment": "espada",
+      "file": "assets/espada_espalda.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "espada_espalda",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "direction": "izquierda",
+      "equipment": "espada",
+      "file": "assets/espada_izquierda.png",
+      "foot_anchor": [
+        16,
+        32
+      ],
+      "frames": 1,
+      "id": "espada_izquierda",
+      "kind": "complete_static_costume",
+      "overlay": false,
+      "size": [
+        32,
+        32
+      ]
+    }
+  ],
+  "layer_status": "NOT modular; complete static costumes only",
+  "layout": {
+    "cell": [
+      32,
+      32
+    ],
+    "columns": "frente,derecha,espalda,izquierda",
+    "rows": "casco,coraza,escudo,espada"
+  },
+  "status": "proposed visual fallback, not integrated"
+}

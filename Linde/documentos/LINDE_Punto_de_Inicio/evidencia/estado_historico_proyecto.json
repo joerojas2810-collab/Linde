@@ -1,0 +1,24 @@
+{
+  "name": "Linde — RPG Mundo Vivo",
+  "version": "0.2",
+  "stage": "playable_lateral_vertical_slice",
+  "engine": "Godot 4.7.1",
+  "active_project": "beta/lateral",
+  "view": "2D side view",
+  "main_launch": "Iniciar-Beta.command",
+  "reference_mineworld_launch": "Iniciar-Referencia-MineWorld.command",
+  "sources_used": {
+    "Blocktest Unity": "adapted terrain, building and platform-controller parameters; five block textures",
+    "Blocktest MonoGame": "grid/layer architecture and dimensions",
+    "MineWorld": "needs and bread rates only"
+  },
+  "not_integrated": [
+    "Source of Mana RPG combat and progression",
+    "Cataclysm crafting",
+    "LibColony scheduler",
+    "MineWorld server/persistence"
+  ],
+  "current_graph": "beta/lateral/graphify-out/graph.html",
+  "source_library_graph": "mapa-proyecto/graphify-out/graph.html",
+  "test_results": "beta/lateral/test-results/results.json"
+}

@@ -1,0 +1,154 @@
+{
+	"ligera_casco": [
+		{
+			"destino": "[P: (8, 3), S: (16, 11)]",
+			"direccion": 0,
+			"extraccion": "[P: (180, 75), S: (203, 145)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 3), S: (16, 11)]",
+			"direccion": 1,
+			"extraccion": "[P: (575, 75), S: (205, 145)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 3), S: (16, 11)]",
+			"direccion": 2,
+			"extraccion": "[P: (996, 75), S: (203, 145)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 3), S: (16, 11)]",
+			"direccion": 3,
+			"extraccion": "[P: (1392, 75), S: (202, 145)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		}
+	],
+	"ligera_torso": [
+		{
+			"destino": "[P: (10, 17), S: (12, 8)]",
+			"direccion": 0,
+			"extraccion": "[P: (180, 278), S: (203, 87)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (10, 17), S: (12, 8)]",
+			"direccion": 1,
+			"extraccion": "[P: (575, 278), S: (205, 87)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (10, 17), S: (12, 8)]",
+			"direccion": 2,
+			"extraccion": "[P: (996, 278), S: (203, 87)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (10, 17), S: (12, 8)]",
+			"direccion": 3,
+			"extraccion": "[P: (1392, 278), S: (202, 87)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		}
+	],
+	"pesada_casco": [
+		{
+			"destino": "[P: (8, 3), S: (16, 14)]",
+			"direccion": 0,
+			"extraccion": "[P: (180, 483), S: (203, 191)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 3), S: (16, 14)]",
+			"direccion": 1,
+			"extraccion": "[P: (575, 483), S: (205, 191)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 3), S: (16, 14)]",
+			"direccion": 2,
+			"extraccion": "[P: (996, 483), S: (203, 191)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 3), S: (16, 14)]",
+			"direccion": 3,
+			"extraccion": "[P: (1392, 483), S: (202, 191)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		}
+	],
+	"pesada_torso": [
+		{
+			"destino": "[P: (8, 17), S: (16, 8)]",
+			"direccion": 0,
+			"extraccion": "[P: (180, 670), S: (203, 92)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 17), S: (16, 8)]",
+			"direccion": 1,
+			"extraccion": "[P: (575, 670), S: (205, 92)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 17), S: (16, 8)]",
+			"direccion": 2,
+			"extraccion": "[P: (996, 670), S: (203, 92)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		},
+		{
+			"destino": "[P: (8, 17), S: (16, 8)]",
+			"direccion": 3,
+			"extraccion": "[P: (1392, 670), S: (202, 92)]",
+			"pivot_pies": [
+				16,
+				32
+			]
+		}
+	]
+}

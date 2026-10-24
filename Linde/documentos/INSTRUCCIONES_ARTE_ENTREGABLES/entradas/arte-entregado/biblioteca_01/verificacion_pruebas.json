@@ -1,0 +1,16 @@
+[
+  {
+    "suite": "prueba",
+    "exit": 0,
+    "script_errors": false,
+    "summary_zero_failures": true,
+    "passed_lines": 159
+  },
+  {
+    "suite": "prueba_ui",
+    "exit": 0,
+    "script_errors": false,
+    "summary_zero_failures": true,
+    "passed_lines": 12
+  }
+]

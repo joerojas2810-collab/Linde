@@ -1,0 +1,34 @@
+# Todo lo que se puede descargar o regenerar queda fuera del repositorio.
+
+# Motor Godot: el lanzador lo descarga (Iniciar-Cenital.command / .bat)
+herramientas/runtime/
+
+# Respaldos de fuentes de terceros y builds exportados
+archivos-originales/
+Linde/distribucion/
+
+# Caché de Godot (se regenera al abrir); los .import y .uid SÍ se versionan
+.godot/
+.import/
+export_credentials.cfg
+
+# Partidas y registros de prueba (las capturas de evidencia sí se versionan)
+partidas/
+Linde/cenital/tests/resultados_red.txt
+*.log
+
+# Configuración local de Claude Code y del estudio
+.claude/settings.local.json
+CLAUDE.local.md
+project.local.yaml
+production/session-state/
+production/session-logs/
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Zips: duplican las carpetas ya descomprimidas (se comparten aparte)
+*.zip

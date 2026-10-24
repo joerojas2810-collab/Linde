@@ -1,0 +1,714 @@
+{
+  "date": "2026-10-23",
+  "entries": [
+    {
+      "alpha": "binary",
+      "file": "assets/madera.png",
+      "id": "madera",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        314.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/piedra.png",
+      "id": "piedra",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        314.0,
+        0.0,
+        313.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/fibra.png",
+      "id": "fibra",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        627.0,
+        0.0,
+        314.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/mena_hierro.png",
+      "id": "mena_hierro",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        941.0,
+        0.0,
+        313.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/lingote_hierro.png",
+      "id": "lingote_hierro",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        0.0,
+        251.0,
+        314.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/baya.png",
+      "id": "baya",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        314.0,
+        251.0,
+        313.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/gelatina.png",
+      "id": "gelatina",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        627.0,
+        251.0,
+        314.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/unguento.png",
+      "id": "unguento",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        941.0,
+        251.0,
+        313.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/gema.png",
+      "id": "gema",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        0.0,
+        502.0,
+        314.0,
+        250.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/hacha_piedra.png",
+      "id": "hacha_piedra",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        314.0,
+        502.0,
+        313.0,
+        250.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/pico_piedra.png",
+      "id": "pico_piedra",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        627.0,
+        502.0,
+        314.0,
+        250.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/espada_hierro.png",
+      "id": "espada_hierro",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        941.0,
+        502.0,
+        313.0,
+        250.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/casco.png",
+      "id": "casco",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        0.0,
+        752.0,
+        314.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/coraza.png",
+      "id": "coraza",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        314.0,
+        752.0,
+        313.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/escudo.png",
+      "id": "escudo",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        627.0,
+        752.0,
+        314.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/categoria_oficio.png",
+      "id": "categoria_oficio",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        941.0,
+        752.0,
+        313.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/categoria_exploracion.png",
+      "id": "categoria_exploracion",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        0.0,
+        1003.0,
+        314.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/categoria_combate.png",
+      "id": "categoria_combate",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        314.0,
+        1003.0,
+        313.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/categoria_comunidad.png",
+      "id": "categoria_comunidad",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        627.0,
+        1003.0,
+        314.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/mision_icono.png",
+      "id": "mision_icono",
+      "kind": "inventory_icon",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        941.0,
+        1003.0,
+        313.0,
+        251.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/panel.png",
+      "id": "panel",
+      "kind": "ui_widget",
+      "ninepatch": true,
+      "ninepatch_check": "ninepatch_check.json",
+      "ninepatch_margins": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "scale": "integer_nearest",
+      "size": [
+        64.0,
+        48.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        364.0,
+        351.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/slot_normal.png",
+      "id": "slot_normal",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        364.0,
+        0.0,
+        276.0,
+        351.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/slot_selected.png",
+      "id": "slot_selected",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        640.0,
+        0.0,
+        301.0,
+        351.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/slot_disabled.png",
+      "id": "slot_disabled",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        941.0,
+        0.0,
+        313.0,
+        351.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/button_normal.png",
+      "id": "button_normal",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        64.0,
+        24.0
+      ],
+      "source_crop": [
+        0.0,
+        376.0,
+        339.0,
+        213.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/button_hover.png",
+      "id": "button_hover",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        64.0,
+        24.0
+      ],
+      "source_crop": [
+        339.0,
+        376.0,
+        301.0,
+        213.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/button_pressed.png",
+      "id": "button_pressed",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        64.0,
+        24.0
+      ],
+      "source_crop": [
+        640.0,
+        376.0,
+        301.0,
+        213.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/healthbar_frame.png",
+      "id": "healthbar_frame",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        64.0,
+        24.0
+      ],
+      "source_crop": [
+        941.0,
+        376.0,
+        313.0,
+        213.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/healthbar_full.png",
+      "id": "healthbar_full",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        64.0,
+        24.0
+      ],
+      "source_crop": [
+        0.0,
+        614.0,
+        339.0,
+        276.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/skill_locked.png",
+      "id": "skill_locked",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        339.0,
+        614.0,
+        301.0,
+        276.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/skill_unlocked.png",
+      "id": "skill_unlocked",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        640.0,
+        614.0,
+        301.0,
+        276.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/skill_selected.png",
+      "id": "skill_selected",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        941.0,
+        614.0,
+        313.0,
+        276.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/quest_marker.png",
+      "id": "quest_marker",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        32.0,
+        32.0
+      ],
+      "source_crop": [
+        0.0,
+        903.0,
+        326.0,
+        351.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/interact_indicator.png",
+      "id": "interact_indicator",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        24.0,
+        32.0
+      ],
+      "source_crop": [
+        326.0,
+        903.0,
+        201.0,
+        351.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/tooltip_panel.png",
+      "id": "tooltip_panel",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        80.0,
+        48.0
+      ],
+      "source_crop": [
+        527.0,
+        903.0,
+        426.0,
+        351.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "alpha": "binary",
+      "file": "assets/counter_panel.png",
+      "id": "counter_panel",
+      "kind": "ui_widget",
+      "ninepatch": false,
+      "scale": "integer_nearest",
+      "size": [
+        64.0,
+        24.0
+      ],
+      "source_crop": [
+        953.0,
+        903.0,
+        301.0,
+        351.0
+      ],
+      "status": "proposed_native_asset"
+    },
+    {
+      "file": "assets/healthbar_fill.png",
+      "id": "healthbar_fill",
+      "kind": "ui_fill",
+      "ninepatch": false,
+      "size": [
+        44.0,
+        5.0
+      ],
+      "source": "healthbar_full generated red interior"
+    }
+  ],
+  "license_note": "AI-generated original candidate art; no third-party asset import; no warranty of exclusive copyright",
+  "ninepatch_note": "panel tested at three sizes with exact corners; other widgets fixed-size textures.",
+  "proposed_icon_canvas": [
+    32.0,
+    32.0
+  ],
+  "tool": "built-in image_gen + Godot 4.7.1 Image nearest crop/resize"
+}

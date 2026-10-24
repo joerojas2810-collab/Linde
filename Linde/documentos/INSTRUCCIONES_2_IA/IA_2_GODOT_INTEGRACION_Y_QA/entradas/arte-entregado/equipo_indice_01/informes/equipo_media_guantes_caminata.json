@@ -1,0 +1,79 @@
+{
+	"avisos": [],
+	"colores": 1,
+	"comprobaciones": [
+		{
+			"detalle": "128x128",
+			"estado": "OK",
+			"n": 1,
+			"nombre": "archivo legible"
+		},
+		{
+			"detalle": "128x128",
+			"estado": "OK",
+			"n": 2,
+			"nombre": "tamano exacto"
+		},
+		{
+			"detalle": "0 pixeles con alfa parcial",
+			"estado": "OK",
+			"n": 3,
+			"nombre": "alfa solo 0/255"
+		},
+		{
+			"detalle": "ok",
+			"estado": "OK",
+			"n": 4,
+			"nombre": "solo colores indice"
+		},
+		{
+			"detalle": "ok",
+			"estado": "OK",
+			"n": 5,
+			"nombre": "16 celdas con contenido"
+		},
+		{
+			"detalle": "ok",
+			"estado": "OK",
+			"n": 6,
+			"nombre": "contenido a >=1 px del borde"
+		},
+		{
+			"detalle": "ok",
+			"estado": "OK",
+			"n": 7,
+			"nombre": "columnas de cada fila no identicas"
+		},
+		{
+			"detalle": "ok",
+			"estado": "OK",
+			"n": 8,
+			"nombre": "silueta dentro de la base +-3 px"
+		},
+		{
+			"detalle": "mismo tamano",
+			"estado": "OK",
+			"n": 9,
+			"nombre": "base compatible"
+		},
+		{
+			"detalle": "1 colores opacos distintos",
+			"estado": "OK",
+			"n": 10,
+			"nombre": "numero de colores"
+		},
+		{
+			"detalle": "ok",
+			"estado": "OK",
+			"n": 11,
+			"nombre": "usa el rojo principal"
+		},
+		{
+			"detalle": "ok",
+			"estado": "OK",
+			"n": 12,
+			"nombre": "celdas no rellenas"
+		}
+	],
+	"errores": []
+}

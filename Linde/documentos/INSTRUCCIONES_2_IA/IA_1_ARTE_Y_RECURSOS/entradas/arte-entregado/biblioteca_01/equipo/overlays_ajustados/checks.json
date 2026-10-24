@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "four_frames_identical": true,
+      "id": "casco",
+      "partial_alpha": 0,
+      "pass": true,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "four_frames_identical": true,
+      "id": "coraza",
+      "partial_alpha": 0,
+      "pass": true,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "four_frames_identical": true,
+      "id": "escudo",
+      "partial_alpha": 0,
+      "pass": true,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "four_frames_identical": true,
+      "id": "espada",
+      "partial_alpha": 0,
+      "pass": true,
+      "size": [
+        128,
+        128
+      ]
+    }
+  ],
+  "static_art_review": "candidate readable, armor now torso only; no hand-occlusion or walking acceptance"
+}

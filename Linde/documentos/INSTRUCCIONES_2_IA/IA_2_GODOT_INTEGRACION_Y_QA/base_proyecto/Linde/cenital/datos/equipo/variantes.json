@@ -1,0 +1,13 @@
+{
+  "_nota": "PROVISIONAL: multiplicadores (sistema-de-equipo.md 6) y orígenes de piedra (4: estanque, bosque, ruinas; aquí como caída de objetos del mundo). paleta_delta = id de paletas.json. vel_pct_delta = fracción por unidad de peso.",
+  "piedras": [
+    {"id": "piedra_alma", "n": "Piedra de Alma", "pila": 20, "c": "#f0e6a0", "caida": [{"objeto": "arbusto", "p": 0.10}]},
+    {"id": "piedra_armonia", "n": "Piedra de Armonía", "pila": 20, "c": "#9ad0f0", "caida": [{"objeto": "arbol", "p": 0.10}]},
+    {"id": "piedra_bendicion", "n": "Piedra de Bendición", "pila": 20, "c": "#6a4a8a", "caida": [{"objeto": "veta", "p": 0.15}]}
+  ],
+  "variantes": [
+    {"id": "divino", "nombre": "Divino", "piedra": "piedra_alma", "paleta_delta": "delta_divino", "mult": {"def": 0.90, "hp": 1.15}, "vel_pct_delta": 0.005},
+    {"id": "brillante", "nombre": "Brillante", "piedra": "piedra_armonia", "paleta_delta": "delta_brillante", "mult": {"def": 1.00, "hp": 0.90}, "vel_pct_delta": 0.010},
+    {"id": "oscuro", "nombre": "Oscuro", "piedra": "piedra_bendicion", "paleta_delta": "delta_oscuro", "mult": {"def": 1.20, "hp": 1.00}, "vel_pct_delta": -0.010}
+  ]
+}
