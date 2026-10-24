@@ -1,0 +1,556 @@
+{
+  "id": "E01_QA_Godot_v001",
+  "motor": {
+    "build": "official",
+    "hash": "a13da4feb8d8aefc283c3763d33a2f170a18d541",
+    "hex": 263937,
+    "major": 4,
+    "minor": 7,
+    "patch": 1,
+    "status": "stable",
+    "string": "4.7.1-stable (official)",
+    "timestamp": 0
+  },
+  "resultado": "validado_en_escena_aislada",
+  "comprobaciones": 10883,
+  "fallos": 0,
+  "capturas": 9,
+  "recursos": [
+    {
+      "ruta": "candidato/ataque/base/ataque_sin_espada.png",
+      "sha256": "de07d6c088f735fbbdb5b00348ffb8c5e1148d240d52bec9cf093ac202f18e5f"
+    },
+    {
+      "ruta": "candidato/ataque/base/capas/botas.png",
+      "sha256": "3a484ce60280320c00c0f114592c2b694229d6ead66ef6621fc0717cd3c58090"
+    },
+    {
+      "ruta": "candidato/ataque/base/capas/cinturon.png",
+      "sha256": "43b9504037b4d37cd746a95d83295feb6e7d40e871e0fe7376f2de5362e956e0"
+    },
+    {
+      "ruta": "candidato/ataque/base/capas/cuerpo.png",
+      "sha256": "d327d15c1efdf7ec2759b190bbafa5689bcf4d51fb9089b21897410c46a23bdd"
+    },
+    {
+      "ruta": "candidato/ataque/base/capas/pantalon.png",
+      "sha256": "1a109fe460c2478a6b25d1ff0540b00bbd8900da57e0c7d011c8c67528898559"
+    },
+    {
+      "ruta": "candidato/ataque/base/capas/pelo.png",
+      "sha256": "8e25465ca7bd2ead2084f87193efce4cf02b4a4f9ec03eb63f731ecd05474cc0"
+    },
+    {
+      "ruta": "candidato/ataque/base/capas/piel.png",
+      "sha256": "95bf03340fc2e2e9abda0b14a2bc22e5a8bed3cf4e9fc145c407e79cda2800c5"
+    },
+    {
+      "ruta": "candidato/ataque/base/capas/tunica.png",
+      "sha256": "d39754c4f4d1662263768341f9b9a60d9710d58b5eee1c1cad6ebc0b1189145e"
+    },
+    {
+      "ruta": "candidato/ataque/E01_estela_ataque.png",
+      "sha256": "9b098bad0fe1ca7f96e0a879983a29fe5e89a2b0922fb584600281547d69a893"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_ligera_botas_ataque.png",
+      "sha256": "8c8e0a546ccf887243b7b6ff4057f44ce8ba972b63b46ffe4951002d95aad8d0"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_ligera_casco_ataque.png",
+      "sha256": "8b7d5262bc1ac7da36f8d6e9537c849d500133e4cfcc141e822082d032b1025e"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_ligera_guantes_ataque.png",
+      "sha256": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_ligera_pantalones_ataque.png",
+      "sha256": "61f38a7979ff9eff2ada24afd41abea26446d8090a80e61efc53bd19677dc7ac"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_ligera_torso_ataque.png",
+      "sha256": "ea5ca47291323ad78f9ef3b5e3445279eb2d754a381b8c196a276984cbafedc6"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_media_botas_ataque.png",
+      "sha256": "e47f338cf19fa67175aec3546b7067d5e3aad9da1749e407cd3af1580a6d7f15"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_media_casco_ataque.png",
+      "sha256": "08c5eb3dc28e7664daeb224ebce561f21778016d85d0e1aa1c72f428c8e11629"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_media_guantes_ataque.png",
+      "sha256": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_media_pantalones_ataque.png",
+      "sha256": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_media_torso_ataque.png",
+      "sha256": "f30805264eec2f6a178cce4d9a4eb76342906aea0f2b6a4f1767fdbe72b8c7a5"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_pesada_botas_ataque.png",
+      "sha256": "6809723d790fedf8f496cf2f8e5644eacc276c18bfb265ec6991eb20747d5cab"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_pesada_casco_ataque.png",
+      "sha256": "4795df23e771fbf5263ff080496fc315859cfd920b016a0c52dd1a38cbdc049b"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_pesada_guantes_ataque.png",
+      "sha256": "7f7111dd3bcc95fe94e8ee916c406c06781cc5c93d4a4230279cb698e1190ef0"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_pesada_pantalones_ataque.png",
+      "sha256": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e"
+    },
+    {
+      "ruta": "candidato/ataque/equipo_pesada_torso_ataque.png",
+      "sha256": "92412c052a3350381c0232a954a2023f6873a4dbd756533bdfff7dbf7af91d07"
+    },
+    {
+      "ruta": "candidato/ataque/escudo_ataque.png",
+      "sha256": "cb7f34facbe1298443885778133e45e9c122d0744ba243419bbfbf3b32aeb249"
+    },
+    {
+      "ruta": "candidato/ataque/espada_ataque.png",
+      "sha256": "30c7299efee40e6b4a97b4772ee77b0e50c469665ccde67a3288b843f116558c"
+    },
+    {
+      "ruta": "candidato/ataque/manifiesto.json",
+      "sha256": "24bd14f83ee18f722e7ec33de81b7fde1b84262175eff201657b78e19f6bb28a"
+    },
+    {
+      "ruta": "candidato/ataque/PENDIENTE_DE_ARTE.md",
+      "sha256": "fa077db062f93529ec403b3c5164ef38526ac86f48ff47759dbabfae02f41360"
+    },
+    {
+      "ruta": "candidato/ataque/referencia/ataque.png",
+      "sha256": "2ceaeb5add2a6b1eeb1e31c4b2e2276b902667ad36c253c7fc964938896800ad"
+    },
+    {
+      "ruta": "candidato/base/caminata.png",
+      "sha256": "ca27efc8830dbe165bee7188f143b21a6a99c809791735d4a0e4df0bc1734347"
+    },
+    {
+      "ruta": "candidato/base/capas/botas.png",
+      "sha256": "e8bcc73f0fa1844794462e89747ce603f24f5314dcb29a708d33716211367da3"
+    },
+    {
+      "ruta": "candidato/base/capas/cinturon.png",
+      "sha256": "44dcc93147a8b894b7f41a7879be6255cc0eeaae84b345ce7db2f9e445347ff1"
+    },
+    {
+      "ruta": "candidato/base/capas/cuerpo.png",
+      "sha256": "63e01859fef914048708807d4bfa5c4dbf7d10efb2997b5808192e8e9bea385b"
+    },
+    {
+      "ruta": "candidato/base/capas/pantalon.png",
+      "sha256": "daefcca5600622e8b3e11311309382445bbfc310a837e4fabbe3145e5a1c26a4"
+    },
+    {
+      "ruta": "candidato/base/capas/pelo.png",
+      "sha256": "4a46fd059cf4f59ab94cec2e0632faf805f1a89d7972d63b9cd5222f4409a751"
+    },
+    {
+      "ruta": "candidato/base/capas/piel.png",
+      "sha256": "bd5e0dd98fd2f776fb3c070646b347b7bad69b4b573c6742704f3deaa8ead1ca"
+    },
+    {
+      "ruta": "candidato/base/capas/tunica.png",
+      "sha256": "03a230dc6857633549bd40d9ac58261c373a4fcd6554ee0870afce0556c5de1e"
+    },
+    {
+      "ruta": "candidato/equipo_ligera_botas_caminata.png",
+      "sha256": "07769212622c1515e9bc83a46f4681ebd96a91b9436009e8c92affc309e55e12"
+    },
+    {
+      "ruta": "candidato/equipo_ligera_casco_caminata.png",
+      "sha256": "9f3cf2d08eefc8eba33e40464f7e47b4165b7fe21b39f6f877d05799ee3ecf9c"
+    },
+    {
+      "ruta": "candidato/equipo_ligera_guantes_caminata.png",
+      "sha256": "bc51cd0e669e361c342ec62fe87caf0af7b92cb8b54801f5613a2a349ec375a1"
+    },
+    {
+      "ruta": "candidato/equipo_ligera_pantalones_caminata.png",
+      "sha256": "cc7dc8884c1bdd853c7a274f74acdd90c48cc59a935385f55f2293dc1e83df9e"
+    },
+    {
+      "ruta": "candidato/equipo_ligera_torso_caminata.png",
+      "sha256": "2c6cbf78c71b8c5a0f4f81da7df4ef1fc3bf40eff57d9026fa40afc6cb598d77"
+    },
+    {
+      "ruta": "candidato/equipo_media_botas_caminata.png",
+      "sha256": "cd9fce5f66311ccc1bb541a92e38e050a7a7fcf41bf39575a2807a413d992b0f"
+    },
+    {
+      "ruta": "candidato/equipo_media_casco_caminata.png",
+      "sha256": "55eebd4cae29ff22d95cf438fec569681fd56349e28b1ffee87d01a1b26fd0c2"
+    },
+    {
+      "ruta": "candidato/equipo_media_guantes_caminata.png",
+      "sha256": "bc51cd0e669e361c342ec62fe87caf0af7b92cb8b54801f5613a2a349ec375a1"
+    },
+    {
+      "ruta": "candidato/equipo_media_pantalones_caminata.png",
+      "sha256": "2e00c3787a951ac71552793a04cea6fc253b56be4ab127a75fe0de6a043d46b7"
+    },
+    {
+      "ruta": "candidato/equipo_media_torso_caminata.png",
+      "sha256": "694da2e27a42cde48a76e26b2d434c105b9fa60df2e566274de88f76e6a88891"
+    },
+    {
+      "ruta": "candidato/equipo_pesada_botas_caminata.png",
+      "sha256": "0c4d1cd82c19d901fdc9cb984d7ae828f7a64cfd58bc986a4774c83d98c48f18"
+    },
+    {
+      "ruta": "candidato/equipo_pesada_casco_caminata.png",
+      "sha256": "beb53b3d691e8ced38b34f89f8927ea3f899afe46ef85521d2b265d1fbb22e00"
+    },
+    {
+      "ruta": "candidato/equipo_pesada_guantes_caminata.png",
+      "sha256": "b32104502741368dc9b3e544438bd19675a5270069293373eefc178632f9f110"
+    },
+    {
+      "ruta": "candidato/equipo_pesada_pantalones_caminata.png",
+      "sha256": "2e00c3787a951ac71552793a04cea6fc253b56be4ab127a75fe0de6a043d46b7"
+    },
+    {
+      "ruta": "candidato/equipo_pesada_torso_caminata.png",
+      "sha256": "5ffb1a1049e34509c29eff64c8b3fb9e102b52b1aadb332e2c71050c0f78814c"
+    },
+    {
+      "ruta": "candidato/escudo_caminata.png",
+      "sha256": "43c6da88043ace9f2b7d55767a0563d4ae25e872cf2c599700b75068f2d2539c"
+    },
+    {
+      "ruta": "candidato/espada_caminata.png",
+      "sha256": "0e1d1d0123bce851f30096bf113f3ebb30979deb4363fb69a018adae6ca0118d"
+    },
+    {
+      "ruta": "candidato/manifiesto.json",
+      "sha256": "88c9e337d3e4fbd13e772f9c44f8f93ebdb2ffe50060bfdab05d060b1ce34348"
+    },
+    {
+      "ruta": "evidencia/E01_godot_ligera_pal_albor.png",
+      "sha256": "5dbe3bb473c828c8626ad44ccc21250eecb8242df737e7b6154cde441546afef"
+    },
+    {
+      "ruta": "evidencia/E01_godot_ligera_pal_vigia.png",
+      "sha256": "f8d3696d7f54e06e87b616e17a806b0acf7b94c57a6b23fac7de1f65c7487ac1"
+    },
+    {
+      "ruta": "evidencia/E01_godot_ligera_pal_zarzal.png",
+      "sha256": "a6962fc85851e210901da134d9bec7917e872ba551656aa2521fc7462ac46168"
+    },
+    {
+      "ruta": "evidencia/E01_godot_media_pal_albor.png",
+      "sha256": "e71c60d48b26be32f3f67dd504966466be51bff9981c9a3c4c911e6895656801"
+    },
+    {
+      "ruta": "evidencia/E01_godot_media_pal_vigia.png",
+      "sha256": "2e7b83d2f7db1971e9c0950f490d73b784e78fd77f0af3627d7716d2f0eaf05b"
+    },
+    {
+      "ruta": "evidencia/E01_godot_media_pal_zarzal.png",
+      "sha256": "5c4bfcdb9fb7a8d0caefd0181634a0e4bbb8c39b46b6718c8498365bb779a856"
+    },
+    {
+      "ruta": "evidencia/E01_godot_pesada_pal_albor.png",
+      "sha256": "10f504724e473dcf79e6c519a176ff2b3df8add9a2d35a800951cc0bd7d26d1c"
+    },
+    {
+      "ruta": "evidencia/E01_godot_pesada_pal_vigia.png",
+      "sha256": "bb140bd9b2e6e437f6de8966fc169ed6e2ca6a54a91a68aa9ec3795717399702"
+    },
+    {
+      "ruta": "evidencia/E01_godot_pesada_pal_zarzal.png",
+      "sha256": "81edf92eb76788b97106a2fd8ef0df3fd04a97937b1f1f4b0157555a102bebd3"
+    },
+    {
+      "ruta": "evidencia/E01_motor.log",
+      "sha256": "c5a555c6cc269f60f06b391bcafaed7370ef266eec648536fb7796cfd0963eb4"
+    },
+    {
+      "ruta": "evidencia/E01_pruebas_godot.json",
+      "sha256": "cfb46174593a78160b08ac0b4e9f6eb5fbac39f53bf42b3c1fbb15deb6b41a99"
+    },
+    {
+      "ruta": "INFORME_GODOT.md",
+      "sha256": "8a8cf17e025278a7c04b55c91494195e9a0278487cfd862dbceca814a4baf191"
+    },
+    {
+      "ruta": "original/ataque/base/ataque_sin_espada.png",
+      "sha256": "de07d6c088f735fbbdb5b00348ffb8c5e1148d240d52bec9cf093ac202f18e5f"
+    },
+    {
+      "ruta": "original/ataque/base/capas/botas.png",
+      "sha256": "3a484ce60280320c00c0f114592c2b694229d6ead66ef6621fc0717cd3c58090"
+    },
+    {
+      "ruta": "original/ataque/base/capas/cinturon.png",
+      "sha256": "43b9504037b4d37cd746a95d83295feb6e7d40e871e0fe7376f2de5362e956e0"
+    },
+    {
+      "ruta": "original/ataque/base/capas/cuerpo.png",
+      "sha256": "d327d15c1efdf7ec2759b190bbafa5689bcf4d51fb9089b21897410c46a23bdd"
+    },
+    {
+      "ruta": "original/ataque/base/capas/pantalon.png",
+      "sha256": "1a109fe460c2478a6b25d1ff0540b00bbd8900da57e0c7d011c8c67528898559"
+    },
+    {
+      "ruta": "original/ataque/base/capas/pelo.png",
+      "sha256": "8e25465ca7bd2ead2084f87193efce4cf02b4a4f9ec03eb63f731ecd05474cc0"
+    },
+    {
+      "ruta": "original/ataque/base/capas/piel.png",
+      "sha256": "95bf03340fc2e2e9abda0b14a2bc22e5a8bed3cf4e9fc145c407e79cda2800c5"
+    },
+    {
+      "ruta": "original/ataque/base/capas/tunica.png",
+      "sha256": "d39754c4f4d1662263768341f9b9a60d9710d58b5eee1c1cad6ebc0b1189145e"
+    },
+    {
+      "ruta": "original/ataque/equipo_ligera_botas_ataque.png",
+      "sha256": "64a80dfaf06855dcc337e1214ba9a340ad2fc0b6099660ddff910a49ec01b7f6"
+    },
+    {
+      "ruta": "original/ataque/equipo_ligera_casco_ataque.png",
+      "sha256": "8b7d5262bc1ac7da36f8d6e9537c849d500133e4cfcc141e822082d032b1025e"
+    },
+    {
+      "ruta": "original/ataque/equipo_ligera_guantes_ataque.png",
+      "sha256": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c"
+    },
+    {
+      "ruta": "original/ataque/equipo_ligera_pantalones_ataque.png",
+      "sha256": "61f38a7979ff9eff2ada24afd41abea26446d8090a80e61efc53bd19677dc7ac"
+    },
+    {
+      "ruta": "original/ataque/equipo_ligera_torso_ataque.png",
+      "sha256": "3c50133364c3b83f112519fb707172be8396f08f1736cc49e0fc0af73a2167b8"
+    },
+    {
+      "ruta": "original/ataque/equipo_media_botas_ataque.png",
+      "sha256": "44ff2cdadc469f1279f29d359b6b0ea9a961866a26530109d6cfb9990f967cac"
+    },
+    {
+      "ruta": "original/ataque/equipo_media_casco_ataque.png",
+      "sha256": "08c5eb3dc28e7664daeb224ebce561f21778016d85d0e1aa1c72f428c8e11629"
+    },
+    {
+      "ruta": "original/ataque/equipo_media_guantes_ataque.png",
+      "sha256": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c"
+    },
+    {
+      "ruta": "original/ataque/equipo_media_pantalones_ataque.png",
+      "sha256": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e"
+    },
+    {
+      "ruta": "original/ataque/equipo_media_torso_ataque.png",
+      "sha256": "1bb7ad9763d3ad7ea188250ada2c3bf5b539620353fed50257eabed6d5df6e5a"
+    },
+    {
+      "ruta": "original/ataque/equipo_pesada_botas_ataque.png",
+      "sha256": "6809723d790fedf8f496cf2f8e5644eacc276c18bfb265ec6991eb20747d5cab"
+    },
+    {
+      "ruta": "original/ataque/equipo_pesada_casco_ataque.png",
+      "sha256": "4795df23e771fbf5263ff080496fc315859cfd920b016a0c52dd1a38cbdc049b"
+    },
+    {
+      "ruta": "original/ataque/equipo_pesada_guantes_ataque.png",
+      "sha256": "7f7111dd3bcc95fe94e8ee916c406c06781cc5c93d4a4230279cb698e1190ef0"
+    },
+    {
+      "ruta": "original/ataque/equipo_pesada_pantalones_ataque.png",
+      "sha256": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e"
+    },
+    {
+      "ruta": "original/ataque/equipo_pesada_torso_ataque.png",
+      "sha256": "b42afd8f7a509155c3486fabf8b52e890e26f3dd6bec029f7e9b89484d1276f3"
+    },
+    {
+      "ruta": "original/ataque/escudo_ataque.png",
+      "sha256": "5e5cb023306543596dfc2572caa053a314d66b9b31077093e53c4bf4380d3d1f"
+    },
+    {
+      "ruta": "original/ataque/espada_ataque.png",
+      "sha256": "30c7299efee40e6b4a97b4772ee77b0e50c469665ccde67a3288b843f116558c"
+    },
+    {
+      "ruta": "original/ataque/manifiesto.json",
+      "sha256": "179b0bae70b1d51c7c9705a2bb0c30e8e5a9583001f8cda1c71613b41c830893"
+    },
+    {
+      "ruta": "original/ataque/PENDIENTE_DE_ARTE.md",
+      "sha256": "fa077db062f93529ec403b3c5164ef38526ac86f48ff47759dbabfae02f41360"
+    },
+    {
+      "ruta": "original/ataque/referencia/ataque.png",
+      "sha256": "2ceaeb5add2a6b1eeb1e31c4b2e2276b902667ad36c253c7fc964938896800ad"
+    },
+    {
+      "ruta": "original/base/caminata.png",
+      "sha256": "ca27efc8830dbe165bee7188f143b21a6a99c809791735d4a0e4df0bc1734347"
+    },
+    {
+      "ruta": "original/base/capas/botas.png",
+      "sha256": "e8bcc73f0fa1844794462e89747ce603f24f5314dcb29a708d33716211367da3"
+    },
+    {
+      "ruta": "original/base/capas/cinturon.png",
+      "sha256": "44dcc93147a8b894b7f41a7879be6255cc0eeaae84b345ce7db2f9e445347ff1"
+    },
+    {
+      "ruta": "original/base/capas/cuerpo.png",
+      "sha256": "63e01859fef914048708807d4bfa5c4dbf7d10efb2997b5808192e8e9bea385b"
+    },
+    {
+      "ruta": "original/base/capas/pantalon.png",
+      "sha256": "daefcca5600622e8b3e11311309382445bbfc310a837e4fabbe3145e5a1c26a4"
+    },
+    {
+      "ruta": "original/base/capas/pelo.png",
+      "sha256": "4a46fd059cf4f59ab94cec2e0632faf805f1a89d7972d63b9cd5222f4409a751"
+    },
+    {
+      "ruta": "original/base/capas/piel.png",
+      "sha256": "bd5e0dd98fd2f776fb3c070646b347b7bad69b4b573c6742704f3deaa8ead1ca"
+    },
+    {
+      "ruta": "original/base/capas/tunica.png",
+      "sha256": "03a230dc6857633549bd40d9ac58261c373a4fcd6554ee0870afce0556c5de1e"
+    },
+    {
+      "ruta": "original/equipo_ligera_botas_caminata.png",
+      "sha256": "07769212622c1515e9bc83a46f4681ebd96a91b9436009e8c92affc309e55e12"
+    },
+    {
+      "ruta": "original/equipo_ligera_casco_caminata.png",
+      "sha256": "9f3cf2d08eefc8eba33e40464f7e47b4165b7fe21b39f6f877d05799ee3ecf9c"
+    },
+    {
+      "ruta": "original/equipo_ligera_guantes_caminata.png",
+      "sha256": "bc51cd0e669e361c342ec62fe87caf0af7b92cb8b54801f5613a2a349ec375a1"
+    },
+    {
+      "ruta": "original/equipo_ligera_pantalones_caminata.png",
+      "sha256": "cc7dc8884c1bdd853c7a274f74acdd90c48cc59a935385f55f2293dc1e83df9e"
+    },
+    {
+      "ruta": "original/equipo_ligera_torso_caminata.png",
+      "sha256": "2c6cbf78c71b8c5a0f4f81da7df4ef1fc3bf40eff57d9026fa40afc6cb598d77"
+    },
+    {
+      "ruta": "original/equipo_media_botas_caminata.png",
+      "sha256": "cd9fce5f66311ccc1bb541a92e38e050a7a7fcf41bf39575a2807a413d992b0f"
+    },
+    {
+      "ruta": "original/equipo_media_casco_caminata.png",
+      "sha256": "55eebd4cae29ff22d95cf438fec569681fd56349e28b1ffee87d01a1b26fd0c2"
+    },
+    {
+      "ruta": "original/equipo_media_guantes_caminata.png",
+      "sha256": "bc51cd0e669e361c342ec62fe87caf0af7b92cb8b54801f5613a2a349ec375a1"
+    },
+    {
+      "ruta": "original/equipo_media_pantalones_caminata.png",
+      "sha256": "2e00c3787a951ac71552793a04cea6fc253b56be4ab127a75fe0de6a043d46b7"
+    },
+    {
+      "ruta": "original/equipo_media_torso_caminata.png",
+      "sha256": "694da2e27a42cde48a76e26b2d434c105b9fa60df2e566274de88f76e6a88891"
+    },
+    {
+      "ruta": "original/equipo_pesada_botas_caminata.png",
+      "sha256": "0c4d1cd82c19d901fdc9cb984d7ae828f7a64cfd58bc986a4774c83d98c48f18"
+    },
+    {
+      "ruta": "original/equipo_pesada_casco_caminata.png",
+      "sha256": "beb53b3d691e8ced38b34f89f8927ea3f899afe46ef85521d2b265d1fbb22e00"
+    },
+    {
+      "ruta": "original/equipo_pesada_guantes_caminata.png",
+      "sha256": "b32104502741368dc9b3e544438bd19675a5270069293373eefc178632f9f110"
+    },
+    {
+      "ruta": "original/equipo_pesada_pantalones_caminata.png",
+      "sha256": "2e00c3787a951ac71552793a04cea6fc253b56be4ab127a75fe0de6a043d46b7"
+    },
+    {
+      "ruta": "original/equipo_pesada_torso_caminata.png",
+      "sha256": "5ffb1a1049e34509c29eff64c8b3fb9e102b52b1aadb332e2c71050c0f78814c"
+    },
+    {
+      "ruta": "original/escudo_caminata.png",
+      "sha256": "43c6da88043ace9f2b7d55767a0563d4ae25e872cf2c599700b75068f2d2539c"
+    },
+    {
+      "ruta": "original/espada_caminata.png",
+      "sha256": "0e1d1d0123bce851f30096bf113f3ebb30979deb4363fb69a018adae6ca0118d"
+    },
+    {
+      "ruta": "original/manifiesto.json",
+      "sha256": "88c9e337d3e4fbd13e772f9c44f8f93ebdb2ffe50060bfdab05d060b1ce34348"
+    },
+    {
+      "ruta": "paletas.json",
+      "sha256": "6e67b2690b5df156afefe1a8df2b868376206301dceebf3bf59248f07a92d339"
+    },
+    {
+      "ruta": "preview.gd",
+      "sha256": "2e5814e8b71ea4acfa50aabee5080038b5270d96ca0c6eef7dbd2ae5458870c0"
+    },
+    {
+      "ruta": "preview.gd.uid",
+      "sha256": "653d8f64617be1074b5466c1e5cb7a622ce5e88c243837f09a7fa119d7c917bd"
+    },
+    {
+      "ruta": "preview.tscn",
+      "sha256": "8bbda605fcaa2ab48d414eb3e76e0f9d1c784a42e271bfc886a62b187a07ee4e"
+    },
+    {
+      "ruta": "project.godot",
+      "sha256": "92a740321bdf03b07528542ac23671b4bbc9b0158346ee16ec3957da4e9e6b1c"
+    },
+    {
+      "ruta": "scripts/arte_equipo.gd",
+      "sha256": "0f5db820c0970f5ee2636ed10b43f75d3014d3ac65d1c2e044ede92e351cba5f"
+    },
+    {
+      "ruta": "scripts/arte_equipo.gd.uid",
+      "sha256": "9b2e3ad05eea47552dce32fdfa223843c71671986c4c60eda6d9220ea03689e9"
+    },
+    {
+      "ruta": "scripts/imagen_util.gd",
+      "sha256": "f44164318b5177432e1f529b6198d6b76c416d063fd5e36537b28f1a3aae8b60"
+    },
+    {
+      "ruta": "scripts/imagen_util.gd.uid",
+      "sha256": "8c22db0ec703af057c296f824d2e04f1eee8ef079517b0d84a56c40e996bf63f"
+    },
+    {
+      "ruta": "scripts/params.gd",
+      "sha256": "087699464e984084bc8d092ff6d305f6dda78e60c29a7784ef3834fc64dcf45d"
+    },
+    {
+      "ruta": "scripts/params.gd.uid",
+      "sha256": "2f0fe6d974ed37319334f218f9f4d140ca70e882f117192c83dd49183a625b35"
+    },
+    {
+      "ruta": "scripts/validar_hoja.gd",
+      "sha256": "79b161d24334898fa6d170b5ceb879f485e7d5ec586de508272b6a67937a3fa7"
+    },
+    {
+      "ruta": "scripts/validar_hoja.gd.uid",
+      "sha256": "22dc3b4291019edd0a3976699254cbe2f128b340aaf8affea733f8caf269acca"
+    }
+  ]
+}

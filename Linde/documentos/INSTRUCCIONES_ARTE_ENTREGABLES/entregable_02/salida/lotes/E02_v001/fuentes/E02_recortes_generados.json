@@ -1,0 +1,326 @@
+{
+  "escala_uniforme": 0.14713896457765668,
+  "regla": "Altura mediana de las ocho poses de daño =27 px; misma escala para todas las poses, sin estirar por celda. Nearest, alfa umbral128, paleta existente.",
+  "rectangulos": [
+    {
+      "fila": 0,
+      "columna": 0,
+      "rect_fuente": [
+        0,
+        0,
+        280,
+        280
+      ],
+      "bbox_dentro_rect": [
+        95,
+        109,
+        210,
+        280
+      ]
+    },
+    {
+      "fila": 0,
+      "columna": 1,
+      "rect_fuente": [
+        280,
+        0,
+        561,
+        280
+      ],
+      "bbox_dentro_rect": [
+        88,
+        101,
+        202,
+        280
+      ]
+    },
+    {
+      "fila": 0,
+      "columna": 2,
+      "rect_fuente": [
+        561,
+        0,
+        841,
+        280
+      ],
+      "bbox_dentro_rect": [
+        76,
+        139,
+        195,
+        280
+      ]
+    },
+    {
+      "fila": 0,
+      "columna": 3,
+      "rect_fuente": [
+        841,
+        0,
+        1122,
+        280
+      ],
+      "bbox_dentro_rect": [
+        38,
+        176,
+        235,
+        280
+      ]
+    },
+    {
+      "fila": 0,
+      "columna": 4,
+      "rect_fuente": [
+        1122,
+        0,
+        1402,
+        280
+      ],
+      "bbox_dentro_rect": [
+        31,
+        176,
+        229,
+        280
+      ]
+    },
+    {
+      "fila": 1,
+      "columna": 0,
+      "rect_fuente": [
+        0,
+        280,
+        280,
+        561
+      ],
+      "bbox_dentro_rect": [
+        96,
+        0,
+        213,
+        263
+      ]
+    },
+    {
+      "fila": 1,
+      "columna": 1,
+      "rect_fuente": [
+        280,
+        280,
+        561,
+        561
+      ],
+      "bbox_dentro_rect": [
+        96,
+        0,
+        218,
+        263
+      ]
+    },
+    {
+      "fila": 1,
+      "columna": 2,
+      "rect_fuente": [
+        561,
+        280,
+        841,
+        561
+      ],
+      "bbox_dentro_rect": [
+        64,
+        0,
+        223,
+        263
+      ]
+    },
+    {
+      "fila": 1,
+      "columna": 3,
+      "rect_fuente": [
+        841,
+        280,
+        1122,
+        561
+      ],
+      "bbox_dentro_rect": [
+        34,
+        0,
+        241,
+        262
+      ]
+    },
+    {
+      "fila": 1,
+      "columna": 4,
+      "rect_fuente": [
+        1122,
+        280,
+        1402,
+        561
+      ],
+      "bbox_dentro_rect": [
+        31,
+        0,
+        232,
+        262
+      ]
+    },
+    {
+      "fila": 2,
+      "columna": 0,
+      "rect_fuente": [
+        0,
+        561,
+        280,
+        842
+      ],
+      "bbox_dentro_rect": [
+        95,
+        58,
+        213,
+        233
+      ]
+    },
+    {
+      "fila": 2,
+      "columna": 1,
+      "rect_fuente": [
+        280,
+        561,
+        561,
+        842
+      ],
+      "bbox_dentro_rect": [
+        95,
+        46,
+        206,
+        233
+      ]
+    },
+    {
+      "fila": 2,
+      "columna": 2,
+      "rect_fuente": [
+        561,
+        561,
+        841,
+        842
+      ],
+      "bbox_dentro_rect": [
+        67,
+        88,
+        200,
+        233
+      ]
+    },
+    {
+      "fila": 2,
+      "columna": 3,
+      "rect_fuente": [
+        841,
+        561,
+        1122,
+        842
+      ],
+      "bbox_dentro_rect": [
+        34,
+        132,
+        236,
+        233
+      ]
+    },
+    {
+      "fila": 2,
+      "columna": 4,
+      "rect_fuente": [
+        1122,
+        561,
+        1402,
+        842
+      ],
+      "bbox_dentro_rect": [
+        31,
+        132,
+        229,
+        233
+      ]
+    },
+    {
+      "fila": 3,
+      "columna": 0,
+      "rect_fuente": [
+        0,
+        842,
+        280,
+        1122
+      ],
+      "bbox_dentro_rect": [
+        107,
+        28,
+        226,
+        208
+      ]
+    },
+    {
+      "fila": 3,
+      "columna": 1,
+      "rect_fuente": [
+        280,
+        842,
+        561,
+        1122
+      ],
+      "bbox_dentro_rect": [
+        88,
+        20,
+        208,
+        208
+      ]
+    },
+    {
+      "fila": 3,
+      "columna": 2,
+      "rect_fuente": [
+        561,
+        842,
+        841,
+        1122
+      ],
+      "bbox_dentro_rect": [
+        54,
+        55,
+        212,
+        208
+      ]
+    },
+    {
+      "fila": 3,
+      "columna": 3,
+      "rect_fuente": [
+        841,
+        842,
+        1122,
+        1122
+      ],
+      "bbox_dentro_rect": [
+        24,
+        100,
+        237,
+        208
+      ]
+    },
+    {
+      "fila": 3,
+      "columna": 4,
+      "rect_fuente": [
+        1122,
+        842,
+        1402,
+        1122
+      ],
+      "bbox_dentro_rect": [
+        29,
+        100,
+        229,
+        208
+      ]
+    }
+  ]
+}

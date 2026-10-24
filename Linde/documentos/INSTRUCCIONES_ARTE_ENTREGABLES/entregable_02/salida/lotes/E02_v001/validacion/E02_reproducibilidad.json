@@ -1,0 +1,7 @@
+{
+  "comando": "python lotes/E02_v001/fuentes/herramientas/E02_producir.py",
+  "exit_code": 0,
+  "stdout": "E02: 4 estados, capas base, equipo y hacha separados; previews producidos",
+  "assets_identicos_sha256": 129,
+  "nota": "Reproducción desde fuentes congeladas, no nueva llamada a image_gen."
+}

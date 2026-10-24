@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "id": "E02_PJ_HERRAMIENTA_Y_ESTADOS_v001",
+  "estado": "candidato_validado_y_revisado_en_preview",
+  "estados": {
+    "herramienta": {
+      "manifiesto": "assets/herramienta/E02_estado.json",
+      "atlas": [
+        192,
+        192
+      ],
+      "celda": [
+        48,
+        48
+      ],
+      "pivote": [
+        24,
+        48
+      ],
+      "filas": [
+        "frente",
+        "derecha",
+        "espalda",
+        "izquierda"
+      ],
+      "poses": [
+        "preparado",
+        "anticipacion",
+        "golpe",
+        "recuperacion"
+      ],
+      "mapping_cuadro_logico_a_columna": [
+        1,
+        2,
+        3
+      ],
+      "duracion_ms": [
+        100,
+        100,
+        100
+      ],
+      "escala_nativa": 1,
+      "escala_dibujada": 1,
+      "zoom": 3,
+      "filtro": "nearest"
+    },
+    "dano": {
+      "manifiesto": "assets/dano/E02_estado.json",
+      "atlas": [
+        96,
+        192
+      ],
+      "celda": [
+        48,
+        48
+      ],
+      "pivote": [
+        24,
+        48
+      ],
+      "filas": [
+        "frente",
+        "derecha",
+        "espalda",
+        "izquierda"
+      ],
+      "poses": [
+        "reaccion",
+        "recuperacion"
+      ],
+      "mapping_cuadro_logico_a_columna": [
+        0,
+        1
+      ],
+      "duracion_ms": [
+        300,
+        300
+      ],
+      "escala_nativa": 1,
+      "escala_dibujada": 1,
+      "zoom": 3,
+      "filtro": "nearest"
+    },
+    "caida": {
+      "manifiesto": "assets/caida/E02_estado.json",
+      "atlas": [
+        96,
+        192
+      ],
+      "celda": [
+        48,
+        48
+      ],
+      "pivote": [
+        24,
+        48
+      ],
+      "filas": [
+        "frente",
+        "derecha",
+        "espalda",
+        "izquierda"
+      ],
+      "poses": [
+        "rodillas",
+        "suelo"
+      ],
+      "mapping_cuadro_logico_a_columna": [
+        0,
+        1
+      ],
+      "duracion_ms": null,
+      "escala_nativa": 1,
+      "escala_dibujada": 1,
+      "zoom": 3,
+      "filtro": "nearest"
+    },
+    "dormir": {
+      "manifiesto": "assets/dormir/E02_estado.json",
+      "atlas": [
+        48,
+        192
+      ],
+      "celda": [
+        48,
+        48
+      ],
+      "pivote": [
+        24,
+        48
+      ],
+      "filas": [
+        "frente",
+        "derecha",
+        "espalda",
+        "izquierda"
+      ],
+      "poses": [
+        "reposo_acostado"
+      ],
+      "mapping_cuadro_logico_a_columna": [
+        0
+      ],
+      "duracion_ms": null,
+      "escala_nativa": 1,
+      "escala_dibujada": 1,
+      "zoom": 3,
+      "filtro": "nearest"
+    }
+  },
+  "autoridad": "Dimensiones propuestas al integrador, no cambio unilateral de tamaños del juego.",
+  "decisiones_usuario_confirmadas": [
+    {
+      "decision": "herramienta",
+      "texto": "Sí: tres poses en 0,30 s",
+      "mapping": [
+        1,
+        2,
+        3
+      ],
+      "ms": [
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "decision": "oclusiones",
+      "texto": "Conservar cinturón y pelo bajo casco",
+      "cinturon": "visible",
+      "pelo": "debajo_del_casco"
+    }
+  ],
+  "base_capas": [
+    "cuerpo",
+    "piel",
+    "pelo",
+    "tunica",
+    "pantalon",
+    "botas",
+    "cinturon"
+  ],
+  "indices": {
+    "principal": "#ff0000",
+    "sombra": "#00ff00",
+    "acento": "#0000ff",
+    "detalle": "#808080"
+  },
+  "alpha": [
+    0,
+    255
+  ],
+  "equipo": "Cinco ranuras originales por ligera/media/pesada, escudo/espada compartidos y hacha separada. Familia/variante/paleta conservan el esquema existente.",
+  "guantes": "Guantes cercanos y lejanos separados; union RGBA exacta igual al atlas combinado. No dibujar atlas combinado además de los dos desdoblados.",
+  "orden_abajo_a_arriba": [
+    "cuerpo",
+    "piel",
+    "ropa_base_no_oculta",
+    "guantes_lejana",
+    "escudo_en_perfil_derecha",
+    "tunica_si_no_hay_torso",
+    "cinturon",
+    "botas",
+    "pantalones",
+    "torso",
+    "guantes_cercana",
+    "escudo_frente_espalda_izquierda",
+    "espada_solo_dano",
+    "pelo",
+    "casco",
+    "hacha_solo_herramienta"
+  ],
+  "oculta": {
+    "torso": "tunica",
+    "pantalones": "pantalon",
+    "botas": "botas"
+  },
+  "escudo_herramienta": "Ancla propuesta junto al torso; la mano que levanta el hacha no es mano libre de escudo. Validar agarre oculto en integración.",
+  "herramienta": "Solo hacha de la fuente, con handle/acero originales; islas sueltas se conservan en fuentes, no en la capa de hacha.",
+  "visibilidad_propuesta": {
+    "herramienta": [
+      "hacha",
+      "escudo"
+    ],
+    "dano": [
+      "espada",
+      "escudo"
+    ],
+    "caida": [],
+    "dormir": []
+  },
+  "tiempos_no_definidos": "Caída y dormir no tienen duración de juego propuesta. Los ciclos de preview usan 450 ms de demostración, sin significado de gameplay.",
+  "bbox": "Cada PNG/celda tiene bbox [x0,y0,x1,y1] de extremo superior exclusivo en validacion/E02_resultados.json; celdas transparentes explícitas allí.",
+  "bordes": "52 incidencias de contenido en borde solo en herramienta, heredadas de su fuente; no desplazar el pivote ni reducir al personaje para esconderlas.",
+  "colision": "Sin cambios; el lienzo no define hitbox. Conservar PIES 10x6, alcance, daño, cadencias, invulnerabilidad y parpadeo.",
+  "instrucciones_integracion": "Ver PARA_INTEGRAR.md. No sustituir todo el compositor por el prototipo; conservar E01 y los consumidores local/remoto.",
+  "pendientes": [
+    "Aceptación artística de las nuevas poses y anclas",
+    "Integración local/remota y prueba de red",
+    "Pico si se requiere representar picar",
+    "Conexión de caída/dormir sin modificar sus reglas"
+  ]
+}

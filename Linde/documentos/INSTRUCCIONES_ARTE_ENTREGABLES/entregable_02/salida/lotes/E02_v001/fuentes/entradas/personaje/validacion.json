@@ -1,0 +1,57 @@
+{
+  "sheets": [
+    {
+      "id": "caminata",
+      "size": [
+        128,
+        128
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "unique_frames_per_direction": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "herramienta",
+      "size": [
+        192,
+        192
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "unique_frames_per_direction": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "ataque",
+      "size": [
+        192,
+        192
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "unique_frames_per_direction": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "layer_reconstruction_exact": true,
+  "layers_disjoint": true
+}

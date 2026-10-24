@@ -1,0 +1,299 @@
+{
+  "id": "E02_herramienta",
+  "estado": "candidato",
+  "atlas": [
+    192,
+    192
+  ],
+  "celda": [
+    48,
+    48
+  ],
+  "pivote": [
+    24,
+    48
+  ],
+  "filas": [
+    "frente",
+    "derecha",
+    "espalda",
+    "izquierda"
+  ],
+  "columnas": 4,
+  "base": {
+    "hoja": "base/E02_base.png",
+    "capas": {
+      "cuerpo": "base/capas/cuerpo.png",
+      "piel": "base/capas/piel.png",
+      "pelo": "base/capas/pelo.png",
+      "tunica": "base/capas/tunica.png",
+      "pantalon": "base/capas/pantalon.png",
+      "botas": "base/capas/botas.png",
+      "cinturon": "base/capas/cinturon.png"
+    }
+  },
+  "equipo": {
+    "ligera/casco": "E02_ligera_casco.png",
+    "ligera/torso": "E02_ligera_torso.png",
+    "ligera/pantalones": "E02_ligera_pantalones.png",
+    "ligera/botas": "E02_ligera_botas.png",
+    "ligera/guantes": "E02_ligera_guantes.png",
+    "ligera/guantes_cercana": "E02_ligera_guantes_cercana.png",
+    "ligera/guantes_lejana": "E02_ligera_guantes_lejana.png",
+    "media/casco": "E02_media_casco.png",
+    "media/torso": "E02_media_torso.png",
+    "media/pantalones": "E02_media_pantalones.png",
+    "media/botas": "E02_media_botas.png",
+    "media/guantes": "E02_media_guantes.png",
+    "media/guantes_cercana": "E02_media_guantes_cercana.png",
+    "media/guantes_lejana": "E02_media_guantes_lejana.png",
+    "pesada/casco": "E02_pesada_casco.png",
+    "pesada/torso": "E02_pesada_torso.png",
+    "pesada/pantalones": "E02_pesada_pantalones.png",
+    "pesada/botas": "E02_pesada_botas.png",
+    "pesada/guantes": "E02_pesada_guantes.png",
+    "pesada/guantes_cercana": "E02_pesada_guantes_cercana.png",
+    "pesada/guantes_lejana": "E02_pesada_guantes_lejana.png",
+    "compartido/escudo": "E02_compartido_escudo.png",
+    "compartido/espada": "E02_compartido_espada.png"
+  },
+  "herramienta": "E02_hacha.png",
+  "cuadros_runtime_a_fuente": [
+    1,
+    2,
+    3
+  ],
+  "duracion_cuadro_ms": [
+    100,
+    100,
+    100
+  ],
+  "observaciones": [
+    {
+      "celda": [
+        0,
+        0
+      ],
+      "bbox": [
+        18,
+        21,
+        34,
+        48
+      ],
+      "mano_cercana_pixels": 5,
+      "mano_lejana_pixels": 8
+    },
+    {
+      "celda": [
+        0,
+        1
+      ],
+      "bbox": [
+        15,
+        21,
+        35,
+        48
+      ],
+      "mano_cercana_pixels": 5,
+      "mano_lejana_pixels": 10
+    },
+    {
+      "celda": [
+        0,
+        2
+      ],
+      "bbox": [
+        14,
+        22,
+        38,
+        48
+      ],
+      "mano_cercana_pixels": 7,
+      "mano_lejana_pixels": 0
+    },
+    {
+      "celda": [
+        0,
+        3
+      ],
+      "bbox": [
+        17,
+        21,
+        33,
+        48
+      ],
+      "mano_cercana_pixels": 47,
+      "mano_lejana_pixels": 6
+    },
+    {
+      "celda": [
+        1,
+        0
+      ],
+      "bbox": [
+        16,
+        21,
+        32,
+        48
+      ],
+      "mano_cercana_pixels": 1,
+      "mano_lejana_pixels": 5
+    },
+    {
+      "celda": [
+        1,
+        1
+      ],
+      "bbox": [
+        18,
+        21,
+        35,
+        48
+      ],
+      "mano_cercana_pixels": 7,
+      "mano_lejana_pixels": 11
+    },
+    {
+      "celda": [
+        1,
+        2
+      ],
+      "bbox": [
+        13,
+        22,
+        39,
+        48
+      ],
+      "mano_cercana_pixels": 7,
+      "mano_lejana_pixels": 0
+    },
+    {
+      "celda": [
+        1,
+        3
+      ],
+      "bbox": [
+        17,
+        21,
+        33,
+        48
+      ],
+      "mano_cercana_pixels": 1,
+      "mano_lejana_pixels": 7
+    },
+    {
+      "celda": [
+        2,
+        0
+      ],
+      "bbox": [
+        15,
+        21,
+        34,
+        48
+      ],
+      "mano_cercana_pixels": 5,
+      "mano_lejana_pixels": 8
+    },
+    {
+      "celda": [
+        2,
+        1
+      ],
+      "bbox": [
+        13,
+        21,
+        34,
+        48
+      ],
+      "mano_cercana_pixels": 9,
+      "mano_lejana_pixels": 7
+    },
+    {
+      "celda": [
+        2,
+        2
+      ],
+      "bbox": [
+        11,
+        22,
+        34,
+        48
+      ],
+      "mano_cercana_pixels": 7,
+      "mano_lejana_pixels": 5
+    },
+    {
+      "celda": [
+        2,
+        3
+      ],
+      "bbox": [
+        15,
+        21,
+        31,
+        48
+      ],
+      "mano_cercana_pixels": 8,
+      "mano_lejana_pixels": 7
+    },
+    {
+      "celda": [
+        3,
+        0
+      ],
+      "bbox": [
+        15,
+        21,
+        31,
+        48
+      ],
+      "mano_cercana_pixels": 1,
+      "mano_lejana_pixels": 7
+    },
+    {
+      "celda": [
+        3,
+        1
+      ],
+      "bbox": [
+        14,
+        21,
+        31,
+        48
+      ],
+      "mano_cercana_pixels": 8,
+      "mano_lejana_pixels": 8
+    },
+    {
+      "celda": [
+        3,
+        2
+      ],
+      "bbox": [
+        9,
+        21,
+        35,
+        48
+      ],
+      "mano_cercana_pixels": 8,
+      "mano_lejana_pixels": 0
+    },
+    {
+      "celda": [
+        3,
+        3
+      ],
+      "bbox": [
+        15,
+        21,
+        31,
+        48
+      ],
+      "mano_cercana_pixels": 1,
+      "mano_lejana_pixels": 7
+    }
+  ],
+  "orden": "Mano lejana detrás de túnica/torso; mano cercana y herramienta delante; pelo bajo casco; cinturón visible. Ver CONTRATO_PROPUESTO.",
+  "presentacion": "Recurso y preview solamente; caída/dormir no crean eventos de juego ni tiempos nuevos."
+}

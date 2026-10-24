@@ -1,0 +1,382 @@
+{
+  "estado": "validado_estructural",
+  "python": "3.12.14",
+  "pillow": "12.3.0",
+  "numpy": "2.3.5",
+  "hojas": [
+    {
+      "archivo": "equipo_ligera_casco_ataque.png",
+      "sha256": "8b7d5262bc1ac7da36f8d6e9537c849d500133e4cfcc141e822082d032b1025e",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_ligera_torso_ataque.png",
+      "sha256": "ea5ca47291323ad78f9ef3b5e3445279eb2d754a381b8c196a276984cbafedc6",
+      "celdas_cambiadas": [
+        [
+          0,
+          2
+        ]
+      ],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_ligera_pantalones_ataque.png",
+      "sha256": "61f38a7979ff9eff2ada24afd41abea26446d8090a80e61efc53bd19677dc7ac",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_ligera_botas_ataque.png",
+      "sha256": "8c8e0a546ccf887243b7b6ff4057f44ce8ba972b63b46ffe4951002d95aad8d0",
+      "celdas_cambiadas": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_ligera_guantes_ataque.png",
+      "sha256": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_media_casco_ataque.png",
+      "sha256": "08c5eb3dc28e7664daeb224ebce561f21778016d85d0e1aa1c72f428c8e11629",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_media_torso_ataque.png",
+      "sha256": "f30805264eec2f6a178cce4d9a4eb76342906aea0f2b6a4f1767fdbe72b8c7a5",
+      "celdas_cambiadas": [
+        [
+          0,
+          2
+        ]
+      ],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_media_pantalones_ataque.png",
+      "sha256": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_media_botas_ataque.png",
+      "sha256": "e47f338cf19fa67175aec3546b7067d5e3aad9da1749e407cd3af1580a6d7f15",
+      "celdas_cambiadas": [
+        [
+          1,
+          2
+        ]
+      ],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_media_guantes_ataque.png",
+      "sha256": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_pesada_casco_ataque.png",
+      "sha256": "4795df23e771fbf5263ff080496fc315859cfd920b016a0c52dd1a38cbdc049b",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_pesada_torso_ataque.png",
+      "sha256": "92412c052a3350381c0232a954a2023f6873a4dbd756533bdfff7dbf7af91d07",
+      "celdas_cambiadas": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_pesada_pantalones_ataque.png",
+      "sha256": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_pesada_botas_ataque.png",
+      "sha256": "6809723d790fedf8f496cf2f8e5644eacc276c18bfb265ec6991eb20747d5cab",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "equipo_pesada_guantes_ataque.png",
+      "sha256": "7f7111dd3bcc95fe94e8ee916c406c06781cc5c93d4a4230279cb698e1190ef0",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "escudo_ataque.png",
+      "sha256": "cb7f34facbe1298443885778133e45e9c122d0744ba243419bbfbf3b32aeb249",
+      "celdas_cambiadas": [
+        [
+          0,
+          2
+        ]
+      ],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    },
+    {
+      "archivo": "espada_ataque.png",
+      "sha256": "30c7299efee40e6b4a97b4772ee77b0e50c469665ccde67a3288b843f116558c",
+      "celdas_cambiadas": [],
+      "estructura": "correcta",
+      "indices": "correctos",
+      "alfa": "binaria",
+      "margen_1": "correcto",
+      "silueta_margen_3": "correcta"
+    }
+  ],
+  "celdas_cambiadas": [
+    {
+      "archivo": "equipo_ligera_torso_ataque.png",
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 32,
+      "bbox": [
+        16,
+        35,
+        23,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_ligera_botas_ataque.png",
+      "celda": [
+        1,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 14,
+      "bbox": [
+        11,
+        44,
+        25,
+        47
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_ligera_botas_ataque.png",
+      "celda": [
+        3,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 17,
+      "bbox": [
+        22,
+        44,
+        37,
+        47
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_media_torso_ataque.png",
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 32,
+      "bbox": [
+        16,
+        35,
+        23,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_media_botas_ataque.png",
+      "celda": [
+        1,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 20,
+      "bbox": [
+        11,
+        43,
+        25,
+        47
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_pesada_torso_ataque.png",
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 41,
+      "bbox": [
+        15,
+        34,
+        23,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_pesada_torso_ataque.png",
+      "celda": [
+        1,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 46,
+      "bbox": [
+        13,
+        32,
+        24,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_pesada_torso_ataque.png",
+      "celda": [
+        1,
+        3
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 38,
+      "bbox": [
+        23,
+        33,
+        33,
+        42
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "escudo_ataque.png",
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 56,
+      "bbox": [
+        20,
+        35,
+        28,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    }
+  ],
+  "celdas_intactas": 263,
+  "celdas_totales": 272,
+  "entradas_inmutables": true,
+  "limitaciones": [
+    "No valida calidad artística, agarre oculto ni render/red en Godot.",
+    "IoU del seguimiento rígido original no se reutiliza como aprobación de estas máscaras ajustadas."
+  ]
+}

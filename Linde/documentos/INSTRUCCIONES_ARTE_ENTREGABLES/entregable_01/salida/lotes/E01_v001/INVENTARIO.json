@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "commit_fuente": "42292a0b25554ef46cd914d95e91fc0590f68d9e",
+  "hojas": [
+    {
+      "id": "E01_equipo_ligera_casco_ataque",
+      "recurso": "equipo_ligera_casco_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_ligera_casco_ataque.png",
+      "ruta_salida_lote": "assets/equipo_ligera_casco_ataque.png",
+      "sha256_entrada": "8b7d5262bc1ac7da36f8d6e9537c849d500133e4cfcc141e822082d032b1025e",
+      "sha256_salida": "8b7d5262bc1ac7da36f8d6e9537c849d500133e4cfcc141e822082d032b1025e",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_ligera_torso_ataque",
+      "recurso": "equipo_ligera_torso_ataque.png",
+      "tipo": "ajustado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_ligera_torso_ataque.png",
+      "ruta_salida_lote": "assets/equipo_ligera_torso_ataque.png",
+      "sha256_entrada": "3c50133364c3b83f112519fb707172be8396f08f1736cc49e0fc0af73a2167b8",
+      "sha256_salida": "ea5ca47291323ad78f9ef3b5e3445279eb2d754a381b8c196a276984cbafedc6",
+      "celdas_cambiadas": [
+        [
+          0,
+          2
+        ]
+      ],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_ligera_pantalones_ataque",
+      "recurso": "equipo_ligera_pantalones_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_ligera_pantalones_ataque.png",
+      "ruta_salida_lote": "assets/equipo_ligera_pantalones_ataque.png",
+      "sha256_entrada": "61f38a7979ff9eff2ada24afd41abea26446d8090a80e61efc53bd19677dc7ac",
+      "sha256_salida": "61f38a7979ff9eff2ada24afd41abea26446d8090a80e61efc53bd19677dc7ac",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_ligera_botas_ataque",
+      "recurso": "equipo_ligera_botas_ataque.png",
+      "tipo": "ajustado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_ligera_botas_ataque.png",
+      "ruta_salida_lote": "assets/equipo_ligera_botas_ataque.png",
+      "sha256_entrada": "64a80dfaf06855dcc337e1214ba9a340ad2fc0b6099660ddff910a49ec01b7f6",
+      "sha256_salida": "8c8e0a546ccf887243b7b6ff4057f44ce8ba972b63b46ffe4951002d95aad8d0",
+      "celdas_cambiadas": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_ligera_guantes_ataque",
+      "recurso": "equipo_ligera_guantes_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_ligera_guantes_ataque.png",
+      "ruta_salida_lote": "assets/equipo_ligera_guantes_ataque.png",
+      "sha256_entrada": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c",
+      "sha256_salida": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_media_casco_ataque",
+      "recurso": "equipo_media_casco_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_media_casco_ataque.png",
+      "ruta_salida_lote": "assets/equipo_media_casco_ataque.png",
+      "sha256_entrada": "08c5eb3dc28e7664daeb224ebce561f21778016d85d0e1aa1c72f428c8e11629",
+      "sha256_salida": "08c5eb3dc28e7664daeb224ebce561f21778016d85d0e1aa1c72f428c8e11629",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_media_torso_ataque",
+      "recurso": "equipo_media_torso_ataque.png",
+      "tipo": "ajustado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_media_torso_ataque.png",
+      "ruta_salida_lote": "assets/equipo_media_torso_ataque.png",
+      "sha256_entrada": "1bb7ad9763d3ad7ea188250ada2c3bf5b539620353fed50257eabed6d5df6e5a",
+      "sha256_salida": "f30805264eec2f6a178cce4d9a4eb76342906aea0f2b6a4f1767fdbe72b8c7a5",
+      "celdas_cambiadas": [
+        [
+          0,
+          2
+        ]
+      ],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_media_pantalones_ataque",
+      "recurso": "equipo_media_pantalones_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_media_pantalones_ataque.png",
+      "ruta_salida_lote": "assets/equipo_media_pantalones_ataque.png",
+      "sha256_entrada": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e",
+      "sha256_salida": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_media_botas_ataque",
+      "recurso": "equipo_media_botas_ataque.png",
+      "tipo": "ajustado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_media_botas_ataque.png",
+      "ruta_salida_lote": "assets/equipo_media_botas_ataque.png",
+      "sha256_entrada": "44ff2cdadc469f1279f29d359b6b0ea9a961866a26530109d6cfb9990f967cac",
+      "sha256_salida": "e47f338cf19fa67175aec3546b7067d5e3aad9da1749e407cd3af1580a6d7f15",
+      "celdas_cambiadas": [
+        [
+          1,
+          2
+        ]
+      ],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_media_guantes_ataque",
+      "recurso": "equipo_media_guantes_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_media_guantes_ataque.png",
+      "ruta_salida_lote": "assets/equipo_media_guantes_ataque.png",
+      "sha256_entrada": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c",
+      "sha256_salida": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_pesada_casco_ataque",
+      "recurso": "equipo_pesada_casco_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_pesada_casco_ataque.png",
+      "ruta_salida_lote": "assets/equipo_pesada_casco_ataque.png",
+      "sha256_entrada": "4795df23e771fbf5263ff080496fc315859cfd920b016a0c52dd1a38cbdc049b",
+      "sha256_salida": "4795df23e771fbf5263ff080496fc315859cfd920b016a0c52dd1a38cbdc049b",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_pesada_torso_ataque",
+      "recurso": "equipo_pesada_torso_ataque.png",
+      "tipo": "ajustado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_pesada_torso_ataque.png",
+      "ruta_salida_lote": "assets/equipo_pesada_torso_ataque.png",
+      "sha256_entrada": "b42afd8f7a509155c3486fabf8b52e890e26f3dd6bec029f7e9b89484d1276f3",
+      "sha256_salida": "92412c052a3350381c0232a954a2023f6873a4dbd756533bdfff7dbf7af91d07",
+      "celdas_cambiadas": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_pesada_pantalones_ataque",
+      "recurso": "equipo_pesada_pantalones_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_pesada_pantalones_ataque.png",
+      "ruta_salida_lote": "assets/equipo_pesada_pantalones_ataque.png",
+      "sha256_entrada": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e",
+      "sha256_salida": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_pesada_botas_ataque",
+      "recurso": "equipo_pesada_botas_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_pesada_botas_ataque.png",
+      "ruta_salida_lote": "assets/equipo_pesada_botas_ataque.png",
+      "sha256_entrada": "6809723d790fedf8f496cf2f8e5644eacc276c18bfb265ec6991eb20747d5cab",
+      "sha256_salida": "6809723d790fedf8f496cf2f8e5644eacc276c18bfb265ec6991eb20747d5cab",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_equipo_pesada_guantes_ataque",
+      "recurso": "equipo_pesada_guantes_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/equipo_pesada_guantes_ataque.png",
+      "ruta_salida_lote": "assets/equipo_pesada_guantes_ataque.png",
+      "sha256_entrada": "7f7111dd3bcc95fe94e8ee916c406c06781cc5c93d4a4230279cb698e1190ef0",
+      "sha256_salida": "7f7111dd3bcc95fe94e8ee916c406c06781cc5c93d4a4230279cb698e1190ef0",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_escudo_ataque",
+      "recurso": "escudo_ataque.png",
+      "tipo": "ajustado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/escudo_ataque.png",
+      "ruta_salida_lote": "assets/escudo_ataque.png",
+      "sha256_entrada": "5e5cb023306543596dfc2572caa053a314d66b9b31077093e53c4bf4380d3d1f",
+      "sha256_salida": "cb7f34facbe1298443885778133e45e9c122d0744ba243419bbfbf3b32aeb249",
+      "celdas_cambiadas": [
+        [
+          0,
+          2
+        ]
+      ],
+      "coincide_produccion_checkout": true
+    },
+    {
+      "id": "E01_espada_ataque",
+      "recurso": "espada_ataque.png",
+      "tipo": "reutilizado",
+      "ruta_entrada_paquete": "base_proyecto/Linde/cenital/arte/equipo/ataque/espada_ataque.png",
+      "ruta_salida_lote": "assets/espada_ataque.png",
+      "sha256_entrada": "30c7299efee40e6b4a97b4772ee77b0e50c469665ccde67a3288b843f116558c",
+      "sha256_salida": "30c7299efee40e6b4a97b4772ee77b0e50c469665ccde67a3288b843f116558c",
+      "celdas_cambiadas": [],
+      "coincide_produccion_checkout": true
+    }
+  ],
+  "nuevo": [
+    "assets/E01_estela_ataque.png",
+    "fuentes/E01_overrides.json",
+    "GALERIA.html"
+  ],
+  "pendientes": [
+    "Aceptación visual del usuario",
+    "Prueba real en Godot por integrador",
+    "Agarre oculto escudo frontal",
+    "Temporización estela izquierda anticipación"
+  ]
+}

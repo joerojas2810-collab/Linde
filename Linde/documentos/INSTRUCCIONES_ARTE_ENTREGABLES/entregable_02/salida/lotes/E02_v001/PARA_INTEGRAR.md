@@ -1,0 +1,12 @@
+# Integrar E02 sin alterar reglas
+
+1. Verificar los hashes del lote y de los scripts/manifiestos actuales. La salida E01 se conserva como dependencia inmutable; no regenerar sus hojas.
+2. Cargar cada estado por su propio atlas y número de columnas: herramienta 192×192; daño/caída 96×192; dormir 48×192. Celda 48 y pivote [24,48] para todos. El cargador actual solo conoce ataque/caminata y supone 4 columnas: no copiar estos atlas bajo esos nombres.
+3. Para herramienta, cuadro lógico 0→columna1, 1→2, 2→3. Mantener 3 cuadros/0,30 s sin tocar ANIM_PJ ni cd_obj. El preparado (columna0) queda disponible en el archivo fuente; no añadirlo al ciclo lógico. Local/remoto deben usar la misma tabla.
+4. Daño: dos cuadros/0,60 s; conservar prioridad sobre ataque/herramienta e invulnerabilidad/parpadeo existentes. _cuadro_arte debe permitir estos estados, en vez de devolver 0. No añadir golpes, retrasos ni rediseñar derrota.
+5. Las siete capas de base y el equipo siguen el esquema de ranuras/familias/paletas. Ocultar solo la ropa correspondiente cuando la ranura realmente esté equipada y tenga una pieza válida. El prototipo muestra sets completos para inspección, no implementa el inventario del juego.
+6. Dibujar guantes lejanos detrás del torso y cercanos delante; ambos consumen la misma paleta de la ranura guantes. No dibujar dos veces el atlas combinado. Respetar el cinturón visible y pelo bajo casco confirmados por el usuario.
+7. Hacha es una capa propia, no equipo de espada ni un efecto de impacto. Mostrarla solo cuando la acción real corresponda a talar con hacha. La fuente no es un pico: no mostrar hacha al picar ni por tener cualquier herramienta en inventario. El protocolo actual no transmite identidad de herramienta de la acción; coordinar un dato de presentación con la integración, sin cambiar reglas. No adivinarlo para remotos.
+8. Para acciones sin herramienta, mostrar las manos y base/equipo apropiados. Las manos que no se ven en la fuente no fueron reconstruidas. El escudo durante herramienta usa ancla propuesta al torso porque el hacha ocupa una mano; requiere revisión del agarre.
+9. Caída/dormir son propuestas de presentación. No conectar eventos nuevos, retrasar reaparición, alterar hora/cura ni exigir nuevas condiciones de cama sin autorización. No declarar la animación integrada por tener un PNG.
+10. Revalidar carga, mapping, pivote, variantes y oclusiones con el compositor del juego, ranuras ausentes, daños, herramienta correcta y dos clientes. Los 5.836 checks del preview E02 no sustituyen esa prueba.

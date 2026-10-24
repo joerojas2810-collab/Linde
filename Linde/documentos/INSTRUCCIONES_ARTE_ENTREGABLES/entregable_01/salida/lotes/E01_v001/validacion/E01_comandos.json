@@ -1,0 +1,15 @@
+{
+  "comandos_ejecutados": [
+    "python E01_inspeccionar.py",
+    "python E01_producir.py",
+    "python E01_finalizar.py"
+  ],
+  "versiones": {
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "numpy": "2.3.5"
+  },
+  "validacion": "17 hojas, 9 celdas cambiadas, 263 idénticas, estela 102 píxeles; ejecución con assertions habilitadas",
+  "godot": "no ejecutado; no disponible en PATH/ubicaciones inspeccionadas",
+  "codigo_productor_sha256": "1f23021b4084eec16bf6c6c5eb06b3fb5748d943dd6a9c4a57255876d2f92440"
+}

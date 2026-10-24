@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "id": "E01_ATAQUE_EQUIPO_v001",
+  "estado": "candidato_validado_estructural_no_aceptado",
+  "alcance": "Nueve celdas de seis hojas completas; once hojas intactas; estela independiente. Sin cambios del juego.",
+  "atlas": [
+    192,
+    192
+  ],
+  "celda": [
+    48,
+    48
+  ],
+  "pivote": [
+    24,
+    48
+  ],
+  "coordenadas": "[fila,columna] cero-base; píxeles locales x,y",
+  "filas": [
+    "frente",
+    "derecha",
+    "espalda",
+    "izquierda"
+  ],
+  "poses": [
+    "preparado",
+    "anticipacion",
+    "impacto",
+    "recuperacion"
+  ],
+  "fases": {
+    "aviso": [
+      0,
+      1
+    ],
+    "activo": [
+      2
+    ],
+    "rec": [
+      3
+    ]
+  },
+  "duracion_cuadro_ms": [
+    50,
+    50,
+    100,
+    250
+  ],
+  "tiempos_fuente": "base_proyecto/Linde/cenital/scripts/catalogos.gd: ANIM_PJ.ataque + anim_pj.gd",
+  "escala": {
+    "nativa": 1,
+    "dibujada": 1,
+    "zoom_juego": 3,
+    "filtro": "nearest",
+    "pivote_en_suelo": true
+  },
+  "colision": {
+    "modificada": false,
+    "pies_existentes": [
+      10,
+      6
+    ],
+    "nota": "Lienzo y estela no redefinen alcance ni área de golpe."
+  },
+  "indices": {
+    "principal": "#ff0000",
+    "sombra": "#00ff00",
+    "acento": "#0000ff",
+    "detalle": "#808080"
+  },
+  "alfa": [
+    0,
+    255
+  ],
+  "orden_capas_frente_espalda": [
+    "b_cuerpo",
+    "b_piel",
+    "b_botas",
+    "b_pantalon",
+    "b_tunica",
+    "b_cinturon",
+    "botas",
+    "pantalones",
+    "torso",
+    "guantes",
+    "escudo",
+    "espada",
+    "b_pelo",
+    "casco"
+  ],
+  "orden_perfiles": "Copiar arte_equipo.gd: derecha escudo antes de túnica; izquierda espada antes de túnica. Aplicar espada_delante después de guantes y antes de pelo/casco.",
+  "espada_delante": [
+    "0,1",
+    "0,2",
+    "0,0",
+    "0,3",
+    "1,1",
+    "1,2",
+    "1,3",
+    "1,0",
+    "2,1",
+    "2,2",
+    "2,3",
+    "3,1",
+    "3,2",
+    "3,0",
+    "3,3"
+  ],
+  "oculta": {
+    "torso": "b_tunica",
+    "pantalones": "b_pantalon",
+    "botas": "b_botas"
+  },
+  "conservar": [
+    "cinturón visible",
+    "pelo bajo casco",
+    "INVERTIR_PERFILES=false",
+    "paletas y variantes existentes"
+  ],
+  "celdas": [
+    {
+      "archivo": "equipo_ligera_torso_ataque.png",
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 32,
+      "bbox": [
+        16,
+        35,
+        23,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_ligera_botas_ataque.png",
+      "celda": [
+        1,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 14,
+      "bbox": [
+        11,
+        44,
+        25,
+        47
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_ligera_botas_ataque.png",
+      "celda": [
+        3,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 17,
+      "bbox": [
+        22,
+        44,
+        37,
+        47
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_media_torso_ataque.png",
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 32,
+      "bbox": [
+        16,
+        35,
+        23,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_media_botas_ataque.png",
+      "celda": [
+        1,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 20,
+      "bbox": [
+        11,
+        43,
+        25,
+        47
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_pesada_torso_ataque.png",
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 41,
+      "bbox": [
+        15,
+        34,
+        23,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_pesada_torso_ataque.png",
+      "celda": [
+        1,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 46,
+      "bbox": [
+        13,
+        32,
+        24,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "equipo_pesada_torso_ataque.png",
+      "celda": [
+        1,
+        3
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 38,
+      "bbox": [
+        23,
+        33,
+        33,
+        42
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    },
+    {
+      "archivo": "escudo_ataque.png",
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_antes": 0,
+      "pixels_despues": 56,
+      "bbox": [
+        20,
+        35,
+        28,
+        44
+      ],
+      "fuera_silueta_margen_1": 0,
+      "fuera_silueta_margen_3": 0
+    }
+  ],
+  "bbox_convencion": "[x0,y0,x1,y1], extremos x1/y1 exclusivos; coordenadas locales",
+  "propuesta_muestra": "previews/E01_comparacion_nueve_celdas.png",
+  "fuente_editable": "fuentes/E01_overrides.json",
+  "fuente_efecto": "fuentes/E01_estela.json",
+  "estela": {
+    "archivo": "assets/E01_estela_ataque.png",
+    "ancla": [
+      24,
+      48
+    ],
+    "fases_contenido": {
+      "0,3": 13,
+      "1,2": 12,
+      "1,3": 41,
+      "2,3": 24,
+      "3,1": 12
+    },
+    "area": "Solo píxeles recuperados del original; bboxes en manifiesto de recursos. Sin efecto de impacto.",
+    "capa_propuesta": "sobre espada, validar delante/detrás en runtime",
+    "recoloreado": false
+  },
+  "decisiones_no_resueltas": [
+    "El escudo frontal se ancla al torso con mano libre oculta; no es una medición anatómica.",
+    "Mantener o retimar la estela de [3,1] anticipación: se conserva fuente para no alterar fases sin acuerdo.",
+    "Aprobación artística y recepción del coordinador pendientes."
+  ],
+  "integracion_propuesta": "assets/E01_manifiesto_ataque_propuesto.json es un candidato para la carpeta ataque; el cargador actual no consume efecto_estela_propuesto. El integrador debe añadir esa capa sin variar combate.",
+  "esquema": "Campos descriptivos; celdas relaciona archivo/celda con bbox y métricas del validador. IDs E01 exclusivos. Colores RGB índice exactos, no colores de presentación."
+}

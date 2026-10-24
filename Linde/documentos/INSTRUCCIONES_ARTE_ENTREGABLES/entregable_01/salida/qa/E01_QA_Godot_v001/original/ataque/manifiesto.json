@@ -1,0 +1,2603 @@
+{
+  "_nota": "Derivado por herramientas/arte/derivar_ataque.gd desde ataque.png (biblioteca_01, solo lectura) y las hojas de caminata de arte/equipo. PROVISIONAL. Ver PENDIENTE_DE_ARTE.md.",
+  "fuente": {
+    "ataque": "Linde/arte-entregado/biblioteca_01/personaje/ataque.png",
+    "sha256": "2ceaeb5add2a6b1eeb1e31c4b2e2276b902667ad36c253c7fc964938896800ad",
+    "derivador_sha256": "4759b1b4cfdec90ec8b3fbae67515e0d35f70dfb450972dbdf96a188b029a079"
+  },
+  "celda": 48,
+  "pivote": [
+    24,
+    48
+  ],
+  "filas": [
+    "frente",
+    "derecha",
+    "espalda",
+    "izquierda"
+  ],
+  "cuadros": 4,
+  "poses": [
+    "preparado",
+    "anticipacion",
+    "impacto",
+    "recuperacion"
+  ],
+  "fases": {
+    "aviso": [
+      0,
+      1
+    ],
+    "activo": [
+      2
+    ],
+    "rec": [
+      3
+    ]
+  },
+  "indices": {
+    "principal": "#ff0000",
+    "sombra": "#00ff00",
+    "acento": "#0000ff",
+    "detalle": "#808080"
+  },
+  "base": {
+    "hoja": "base/ataque_sin_espada.png",
+    "capas": {
+      "cuerpo": "base/capas/cuerpo.png",
+      "piel": "base/capas/piel.png",
+      "pelo": "base/capas/pelo.png",
+      "tunica": "base/capas/tunica.png",
+      "pantalon": "base/capas/pantalon.png",
+      "botas": "base/capas/botas.png",
+      "cinturon": "base/capas/cinturon.png"
+    }
+  },
+  "hojas": {
+    "ligera": {
+      "casco": {
+        "archivo": "equipo_ligera_casco_ataque.png",
+        "sha256": "8b7d5262bc1ac7da36f8d6e9537c849d500133e4cfcc141e822082d032b1025e",
+        "pendientes": []
+      },
+      "torso": {
+        "archivo": "equipo_ligera_torso_ataque.png",
+        "sha256": "3c50133364c3b83f112519fb707172be8396f08f1736cc49e0fc0af73a2167b8",
+        "pendientes": [
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      "pantalones": {
+        "archivo": "equipo_ligera_pantalones_ataque.png",
+        "sha256": "61f38a7979ff9eff2ada24afd41abea26446d8090a80e61efc53bd19677dc7ac",
+        "pendientes": []
+      },
+      "botas": {
+        "archivo": "equipo_ligera_botas_ataque.png",
+        "sha256": "64a80dfaf06855dcc337e1214ba9a340ad2fc0b6099660ddff910a49ec01b7f6",
+        "pendientes": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      },
+      "guantes": {
+        "archivo": "equipo_ligera_guantes_ataque.png",
+        "sha256": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c",
+        "pendientes": []
+      }
+    },
+    "media": {
+      "casco": {
+        "archivo": "equipo_media_casco_ataque.png",
+        "sha256": "08c5eb3dc28e7664daeb224ebce561f21778016d85d0e1aa1c72f428c8e11629",
+        "pendientes": []
+      },
+      "torso": {
+        "archivo": "equipo_media_torso_ataque.png",
+        "sha256": "1bb7ad9763d3ad7ea188250ada2c3bf5b539620353fed50257eabed6d5df6e5a",
+        "pendientes": [
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      "pantalones": {
+        "archivo": "equipo_media_pantalones_ataque.png",
+        "sha256": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e",
+        "pendientes": []
+      },
+      "botas": {
+        "archivo": "equipo_media_botas_ataque.png",
+        "sha256": "44ff2cdadc469f1279f29d359b6b0ea9a961866a26530109d6cfb9990f967cac",
+        "pendientes": [
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "guantes": {
+        "archivo": "equipo_media_guantes_ataque.png",
+        "sha256": "7c5e926744cc1444ce8d6fdca816f6cbb400feb890c3d04f4560777d2a7ca91c",
+        "pendientes": []
+      }
+    },
+    "pesada": {
+      "casco": {
+        "archivo": "equipo_pesada_casco_ataque.png",
+        "sha256": "4795df23e771fbf5263ff080496fc315859cfd920b016a0c52dd1a38cbdc049b",
+        "pendientes": []
+      },
+      "torso": {
+        "archivo": "equipo_pesada_torso_ataque.png",
+        "sha256": "b42afd8f7a509155c3486fabf8b52e890e26f3dd6bec029f7e9b89484d1276f3",
+        "pendientes": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "pantalones": {
+        "archivo": "equipo_pesada_pantalones_ataque.png",
+        "sha256": "2c266e126a59a863a54f079b6d21eefeacb78c3ffe6e438b79c134a2ac25f19e",
+        "pendientes": []
+      },
+      "botas": {
+        "archivo": "equipo_pesada_botas_ataque.png",
+        "sha256": "6809723d790fedf8f496cf2f8e5644eacc276c18bfb265ec6991eb20747d5cab",
+        "pendientes": []
+      },
+      "guantes": {
+        "archivo": "equipo_pesada_guantes_ataque.png",
+        "sha256": "7f7111dd3bcc95fe94e8ee916c406c06781cc5c93d4a4230279cb698e1190ef0",
+        "pendientes": []
+      }
+    },
+    "compartido": {
+      "escudo": {
+        "archivo": "escudo_ataque.png",
+        "sha256": "5e5cb023306543596dfc2572caa053a314d66b9b31077093e53c4bf4380d3d1f",
+        "pendientes": [
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      "espada": {
+        "archivo": "espada_ataque.png",
+        "sha256": "30c7299efee40e6b4a97b4772ee77b0e50c469665ccde67a3288b843f116558c",
+        "pendientes": []
+      }
+    }
+  },
+  "seguimiento": {
+    "ligera/casco": {
+      "0,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.687,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.71,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.715,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.701,
+        "fuera": 0.021,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.682,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.782,
+        "fuera": 0.01,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          6,
+          0
+        ],
+        "iou": 0.699,
+        "fuera": 0.021,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.857,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -1,
+          -1
+        ],
+        "iou": 0.846,
+        "fuera": 0.048,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -7,
+          -1
+        ],
+        "iou": 0.799,
+        "fuera": 0.067,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.844,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.735,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.711,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          0,
+          0
+        ],
+        "iou": 0.722,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "ligera/torso": {
+      "0,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.508,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.492,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -6,
+          -2
+        ],
+        "iou": 0.333,
+        "fuera": 0.0,
+        "aceptada": false
+      },
+      "0,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.517,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.514,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          3,
+          1
+        ],
+        "iou": 0.456,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.548,
+        "fuera": 0.038,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          3,
+          -1
+        ],
+        "iou": 0.529,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.464,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          -1
+        ],
+        "iou": 0.466,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          -1
+        ],
+        "iou": 0.388,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.437,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.667,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.478,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.511,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.6,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "ligera/pantalones": {
+      "0,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.686,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.537,
+        "fuera": 0.073,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.59,
+        "fuera": 0.049,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.673,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.774,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.6,
+        "fuera": 0.03,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.479,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          6,
+          0
+        ],
+        "iou": 0.558,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.636,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.538,
+        "fuera": 0.073,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          0
+        ],
+        "iou": 0.593,
+        "fuera": 0.073,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.681,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.783,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.653,
+        "fuera": 0.028,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.513,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          0,
+          0
+        ],
+        "iou": 0.551,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "ligera/botas": {
+      "0,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.486,
+        "fuera": 0.05,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.535,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.662,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.825,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.573,
+        "fuera": 0.067,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.415,
+        "fuera": 0.167,
+        "aceptada": false
+      },
+      "1,3": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          5,
+          0
+        ],
+        "iou": 0.615,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.608,
+        "fuera": 0.038,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.484,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          0
+        ],
+        "iou": 0.547,
+        "fuera": 0.038,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.658,
+        "fuera": 0.038,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.833,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.687,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.463,
+        "fuera": 0.143,
+        "aceptada": false
+      },
+      "3,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.582,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "media/casco": {
+      "0,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.687,
+        "fuera": 0.025,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.71,
+        "fuera": 0.025,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.715,
+        "fuera": 0.025,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.017,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.701,
+        "fuera": 0.043,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.682,
+        "fuera": 0.033,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.782,
+        "fuera": 0.033,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          6,
+          0
+        ],
+        "iou": 0.699,
+        "fuera": 0.043,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.857,
+        "fuera": 0.017,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -1,
+          -1
+        ],
+        "iou": 0.846,
+        "fuera": 0.072,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -7,
+          -1
+        ],
+        "iou": 0.799,
+        "fuera": 0.099,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.844,
+        "fuera": 0.026,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.735,
+        "fuera": 0.027,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.027,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.711,
+        "fuera": 0.027,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          0,
+          0
+        ],
+        "iou": 0.722,
+        "fuera": 0.027,
+        "aceptada": true
+      }
+    },
+    "media/torso": {
+      "0,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.508,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.492,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -6,
+          -2
+        ],
+        "iou": 0.333,
+        "fuera": 0.0,
+        "aceptada": false
+      },
+      "0,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.517,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.514,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          3,
+          1
+        ],
+        "iou": 0.456,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.548,
+        "fuera": 0.026,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          3,
+          -1
+        ],
+        "iou": 0.529,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.464,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          -1
+        ],
+        "iou": 0.466,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          -1
+        ],
+        "iou": 0.388,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.437,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.667,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.478,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.511,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.6,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "media/pantalones": {
+      "0,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.686,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.537,
+        "fuera": 0.064,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.59,
+        "fuera": 0.043,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.673,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.774,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.6,
+        "fuera": 0.024,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.479,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          6,
+          0
+        ],
+        "iou": 0.558,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.636,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.538,
+        "fuera": 0.061,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          0
+        ],
+        "iou": 0.593,
+        "fuera": 0.061,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.681,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.783,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.653,
+        "fuera": 0.023,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.513,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          0,
+          0
+        ],
+        "iou": 0.551,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "media/botas": {
+      "0,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.486,
+        "fuera": 0.036,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.535,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.662,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.825,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.573,
+        "fuera": 0.053,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.415,
+        "fuera": 0.132,
+        "aceptada": false
+      },
+      "1,3": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          5,
+          0
+        ],
+        "iou": 0.615,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.608,
+        "fuera": 0.029,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.484,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          0
+        ],
+        "iou": 0.547,
+        "fuera": 0.029,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.658,
+        "fuera": 0.029,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.833,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.687,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.463,
+        "fuera": 0.105,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.582,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "pesada/casco": {
+      "0,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.687,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.71,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.715,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.701,
+        "fuera": 0.011,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.682,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.782,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          6,
+          0
+        ],
+        "iou": 0.699,
+        "fuera": 0.011,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.857,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -1,
+          -1
+        ],
+        "iou": 0.846,
+        "fuera": 0.034,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -7,
+          -1
+        ],
+        "iou": 0.799,
+        "fuera": 0.042,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.844,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.735,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.711,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          0,
+          0
+        ],
+        "iou": 0.722,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "pesada/torso": {
+      "0,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.508,
+        "fuera": 0.017,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.492,
+        "fuera": 0.017,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -6,
+          -2
+        ],
+        "iou": 0.333,
+        "fuera": 0.117,
+        "aceptada": false
+      },
+      "0,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.517,
+        "fuera": 0.017,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.514,
+        "fuera": 0.105,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          3,
+          1
+        ],
+        "iou": 0.456,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.548,
+        "fuera": 0.211,
+        "aceptada": false
+      },
+      "1,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          3,
+          -1
+        ],
+        "iou": 0.529,
+        "fuera": 0.154,
+        "aceptada": false
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.464,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -2,
+          -1
+        ],
+        "iou": 0.466,
+        "fuera": 0.032,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          -1
+        ],
+        "iou": 0.388,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.437,
+        "fuera": 0.015,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.667,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.478,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.511,
+        "fuera": 0.029,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 2,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.6,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "pesada/pantalones": {
+      "0,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.686,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.537,
+        "fuera": 0.064,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.59,
+        "fuera": 0.043,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.673,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.774,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.6,
+        "fuera": 0.024,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.479,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          6,
+          0
+        ],
+        "iou": 0.558,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.636,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.538,
+        "fuera": 0.061,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          0
+        ],
+        "iou": 0.593,
+        "fuera": 0.061,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.681,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.783,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.653,
+        "fuera": 0.023,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.513,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          0,
+          0
+        ],
+        "iou": 0.551,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    },
+    "pesada/botas": {
+      "0,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          4,
+          0
+        ],
+        "iou": 0.677,
+        "fuera": 0.034,
+        "aceptada": true
+      },
+      "0,1": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.486,
+        "fuera": 0.103,
+        "aceptada": true
+      },
+      "0,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.535,
+        "fuera": 0.069,
+        "aceptada": true
+      },
+      "0,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.662,
+        "fuera": 0.017,
+        "aceptada": true
+      },
+      "1,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -1,
+          0
+        ],
+        "iou": 0.825,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "1,1": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.573,
+        "fuera": 0.035,
+        "aceptada": true
+      },
+      "1,2": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          -3,
+          0
+        ],
+        "iou": 0.415,
+        "fuera": 0.105,
+        "aceptada": true
+      },
+      "1,3": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          5,
+          0
+        ],
+        "iou": 0.615,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "2,0": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -4,
+          0
+        ],
+        "iou": 0.608,
+        "fuera": 0.032,
+        "aceptada": true
+      },
+      "2,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -5,
+          0
+        ],
+        "iou": 0.484,
+        "fuera": 0.023,
+        "aceptada": true
+      },
+      "2,2": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          -6,
+          0
+        ],
+        "iou": 0.547,
+        "fuera": 0.095,
+        "aceptada": true
+      },
+      "2,3": {
+        "cuadro_caminata": 0,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.658,
+        "fuera": 0.016,
+        "aceptada": true
+      },
+      "3,0": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          2,
+          0
+        ],
+        "iou": 0.833,
+        "fuera": 0.0,
+        "aceptada": true
+      },
+      "3,1": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          -2,
+          0
+        ],
+        "iou": 0.687,
+        "fuera": 0.032,
+        "aceptada": true
+      },
+      "3,2": {
+        "cuadro_caminata": 1,
+        "traslacion": [
+          3,
+          0
+        ],
+        "iou": 0.463,
+        "fuera": 0.113,
+        "aceptada": true
+      },
+      "3,3": {
+        "cuadro_caminata": 3,
+        "traslacion": [
+          1,
+          0
+        ],
+        "iou": 0.582,
+        "fuera": 0.0,
+        "aceptada": true
+      }
+    }
+  },
+  "manos": {
+    "0,0": {
+      "espada": [
+        21.5,
+        39.0
+      ],
+      "escudo": [
+        33.0,
+        40.5
+      ],
+      "otras": 0
+    },
+    "0,1": {
+      "espada": [
+        18.6,
+        34.9
+      ],
+      "escudo": [
+        33.2,
+        39.6
+      ],
+      "otras": 0
+    },
+    "0,2": {
+      "espada": [
+        22.8,
+        37.3
+      ],
+      "escudo": null,
+      "otras": 0
+    },
+    "0,3": {
+      "espada": [
+        19.7,
+        39.9
+      ],
+      "escudo": [
+        32.0,
+        40.5
+      ],
+      "otras": 0
+    },
+    "1,0": {
+      "espada": [
+        26.0,
+        40.0
+      ],
+      "escudo": [
+        17.1,
+        40.1
+      ],
+      "otras": 1
+    },
+    "1,1": {
+      "espada": [
+        19.2,
+        32.4
+      ],
+      "escudo": [
+        32.2,
+        40.2
+      ],
+      "otras": 0
+    },
+    "1,2": {
+      "espada": [
+        28.0,
+        37.0
+      ],
+      "escudo": [
+        24.3,
+        37.3
+      ],
+      "otras": 0
+    },
+    "1,3": {
+      "espada": [
+        29.0,
+        39.5
+      ],
+      "escudo": [
+        23.9,
+        40.7
+      ],
+      "otras": 1
+    },
+    "2,0": {
+      "espada": [
+        26.6,
+        40.2
+      ],
+      "escudo": [
+        14.0,
+        40.5
+      ],
+      "otras": 3
+    },
+    "2,1": {
+      "espada": [
+        31.0,
+        29.0
+      ],
+      "escudo": [
+        15.7,
+        40.0
+      ],
+      "otras": 2
+    },
+    "2,2": {
+      "espada": [
+        26.3,
+        36.4
+      ],
+      "escudo": [
+        11.0,
+        40.3
+      ],
+      "otras": 2
+    },
+    "2,3": {
+      "espada": [
+        32.1,
+        40.5
+      ],
+      "escudo": [
+        19.0,
+        40.3
+      ],
+      "otras": 2
+    },
+    "3,0": {
+      "espada": [
+        21.5,
+        40.0
+      ],
+      "escudo": [
+        30.1,
+        39.7
+      ],
+      "otras": 1
+    },
+    "3,1": {
+      "espada": [
+        29.0,
+        29.0
+      ],
+      "escudo": [
+        28.1,
+        31.9
+      ],
+      "otras": 2
+    },
+    "3,2": {
+      "espada": [
+        19.0,
+        36.5
+      ],
+      "escudo": [
+        21.9,
+        36.9
+      ],
+      "otras": 0
+    },
+    "3,3": {
+      "espada": [
+        23.0,
+        39.5
+      ],
+      "escudo": [
+        27.5,
+        40.4
+      ],
+      "otras": 1
+    }
+  },
+  "escudo": {
+    "0,0": {
+      "ancla": "mano libre",
+      "traslacion": [
+        4,
+        0
+      ],
+      "fuera": 0.0,
+      "mano_caminata": [
+        21.0,
+        24.2857151031494
+      ]
+    },
+    "0,1": {
+      "ancla": "mano libre",
+      "traslacion": [
+        4,
+        -1
+      ],
+      "fuera": 0.054,
+      "mano_caminata": [
+        21.0,
+        24.2857151031494
+      ]
+    },
+    "0,3": {
+      "ancla": "mano libre",
+      "traslacion": [
+        3,
+        0
+      ],
+      "fuera": 0.036,
+      "mano_caminata": [
+        21.0,
+        24.2857151031494
+      ]
+    },
+    "1,0": {
+      "ancla": "torso",
+      "traslacion": [
+        -3,
+        0
+      ],
+      "fuera": 0.0,
+      "mano_caminata": [
+        18.0,
+        24.0
+      ]
+    },
+    "1,1": {
+      "ancla": "mano libre",
+      "traslacion": [
+        6,
+        0
+      ],
+      "fuera": 0.0,
+      "mano_caminata": [
+        18.0,
+        24.0
+      ]
+    },
+    "1,2": {
+      "ancla": "mano libre",
+      "traslacion": [
+        -2,
+        -3
+      ],
+      "fuera": 0.0,
+      "mano_caminata": [
+        18.0,
+        24.0
+      ]
+    },
+    "1,3": {
+      "ancla": "torso",
+      "traslacion": [
+        3,
+        -1
+      ],
+      "fuera": 0.0,
+      "mano_caminata": [
+        18.0,
+        24.0
+      ]
+    },
+    "2,0": {
+      "ancla": "mano libre",
+      "traslacion": [
+        -4,
+        0
+      ],
+      "fuera": 0.018,
+      "mano_caminata": [
+        10.5,
+        25.0
+      ]
+    },
+    "2,1": {
+      "ancla": "torso",
+      "traslacion": [
+        -2,
+        -1
+      ],
+      "fuera": 0.035,
+      "mano_caminata": [
+        10.5,
+        25.0
+      ]
+    },
+    "2,2": {
+      "ancla": "mano libre",
+      "traslacion": [
+        -7,
+        -1
+      ],
+      "fuera": 0.018,
+      "mano_caminata": [
+        10.5,
+        25.0
+      ]
+    },
+    "2,3": {
+      "ancla": "mano libre",
+      "traslacion": [
+        1,
+        -1
+      ],
+      "fuera": 0.088,
+      "mano_caminata": [
+        10.5,
+        25.0
+      ]
+    },
+    "3,0": {
+      "ancla": "torso",
+      "traslacion": [
+        1,
+        0
+      ],
+      "fuera": 0.0,
+      "mano_caminata": null
+    },
+    "3,1": {
+      "ancla": "torso",
+      "traslacion": [
+        -1,
+        0
+      ],
+      "fuera": 0.085,
+      "mano_caminata": null
+    },
+    "3,2": {
+      "ancla": "torso",
+      "traslacion": [
+        3,
+        0
+      ],
+      "fuera": 0.043,
+      "mano_caminata": null
+    },
+    "3,3": {
+      "ancla": "torso",
+      "traslacion": [
+        1,
+        0
+      ],
+      "fuera": 0.0,
+      "mano_caminata": null
+    }
+  },
+  "espada_separada": {
+    "empunadura_px": 32,
+    "huecos_rellenados_px": 30,
+    "islas_px": 12,
+    "estela_suelta_descartada_px": {
+      "0,3": 13,
+      "1,2": 12,
+      "1,3": 41,
+      "2,3": 24,
+      "3,1": 12
+    }
+  },
+  "espada_delante": [
+    "0,1",
+    "0,2",
+    "0,0",
+    "0,3",
+    "1,1",
+    "1,2",
+    "1,3",
+    "1,0",
+    "2,1",
+    "2,2",
+    "2,3",
+    "3,1",
+    "3,2",
+    "3,0",
+    "3,3"
+  ],
+  "umbrales": {
+    "iou_min": 0.38,
+    "fuera_max": 0.12,
+    "busqueda": [
+      10,
+      8
+    ]
+  },
+  "validacion": {
+    "equipo_ligera_casco_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_ligera_torso_ataque.png": {
+      "errores": [
+        "5 16 celdas con contenido: celdas vacias (indice fila*4+col): [2]"
+      ],
+      "avisos": []
+    },
+    "equipo_ligera_pantalones_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_ligera_botas_ataque.png": {
+      "errores": [
+        "5 16 celdas con contenido: celdas vacias (indice fila*4+col): [6, 14]"
+      ],
+      "avisos": []
+    },
+    "equipo_media_casco_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_media_torso_ataque.png": {
+      "errores": [
+        "5 16 celdas con contenido: celdas vacias (indice fila*4+col): [2]"
+      ],
+      "avisos": []
+    },
+    "equipo_media_pantalones_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_media_botas_ataque.png": {
+      "errores": [
+        "5 16 celdas con contenido: celdas vacias (indice fila*4+col): [6]"
+      ],
+      "avisos": []
+    },
+    "equipo_pesada_casco_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_pesada_torso_ataque.png": {
+      "errores": [
+        "5 16 celdas con contenido: celdas vacias (indice fila*4+col): [2, 6, 7]"
+      ],
+      "avisos": []
+    },
+    "equipo_pesada_pantalones_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_pesada_botas_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_ligera_guantes_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_media_guantes_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "equipo_pesada_guantes_ataque.png": {
+      "errores": [],
+      "avisos": []
+    },
+    "escudo_ataque.png": {
+      "errores": [
+        "5 16 celdas con contenido: celdas vacias (indice fila*4+col): [2]"
+      ],
+      "avisos": []
+    },
+    "espada_ataque.png": {
+      "errores": [],
+      "avisos": []
+    }
+  }
+}

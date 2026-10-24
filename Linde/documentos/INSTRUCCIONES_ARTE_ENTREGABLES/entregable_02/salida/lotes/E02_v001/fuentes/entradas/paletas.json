@@ -1,0 +1,16 @@
+{
+  "_nota": "PROVISIONAL: todos los colores y deltas (sistema-de-equipo.md 8.1; contrato-equipo.md d). Paletas = color de cada rol índice (principal=#ff0000, sombra=#00ff00, acento=#0000ff, detalle=#808080); sin 'detalle' el gris no se recolorea. Delta de variante sobre HSV de cada color: tono se suma (vuelta 0..1), saturacion y brillo se suman y se recortan a 0..1. 'sin_piedra' = pieza sin variante.",
+  "paletas": {
+    "pal_vigia": {"principal": "#7d8794", "sombra": "#454c57", "acento": "#c9a227", "detalle": "#a3a9b1"},
+    "pal_zarzal": {"principal": "#5f8a3c", "sombra": "#344d22", "acento": "#a8323e", "detalle": "#8e7a55"},
+    "pal_albor": {"principal": "#e6e1d3", "sombra": "#9c9583", "acento": "#d9b44a", "detalle": "#b9c4cf"},
+    "pal_escudo_madera": {"principal": "#9b6b3a", "sombra": "#5e3d1f", "acento": "#b8b8c0", "detalle": "#7a7a84"},
+    "pal_espada_hierro": {"principal": "#e0e4ea", "sombra": "#8d929c", "acento": "#7a4a25", "detalle": "#c9a227"}
+  },
+  "deltas": {
+    "sin_piedra": {"brillo": 0.0, "saturacion": 0.0, "tono": 0.0},
+    "delta_divino": {"brillo": 0.15, "saturacion": -0.10, "tono": 0.0},
+    "delta_brillante": {"brillo": 0.25, "saturacion": 0.10, "tono": 0.0},
+    "delta_oscuro": {"brillo": -0.30, "saturacion": 0.0, "tono": 0.0}
+  }
+}

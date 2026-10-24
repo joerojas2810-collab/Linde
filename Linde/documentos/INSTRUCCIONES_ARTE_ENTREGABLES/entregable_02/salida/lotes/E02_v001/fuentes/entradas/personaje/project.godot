@@ -1,0 +1,9 @@
+config_version=5
+[application]
+config/name="Linde biblioteca personaje"
+run/main_scene="res://vista.tscn"
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=900
+[rendering]
+renderer/rendering_method="gl_compatibility"

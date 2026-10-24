@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Linde · Entregable 01</title>
+<style>body{margin:32px auto;padding:0 20px;max-width:1080px;background:#20272f;color:#e8ecee;font:16px system-ui}h1{font-size:28px}button,select{font:inherit;padding:8px;background:#364350;color:white;border:1px solid #8192a3;border-radius:4px}label{display:inline-block;margin:6px 14px 14px 0}canvas{background:repeating-conic-gradient(#303b42 0% 25%,#354149 0% 50%) 0/24px 24px;image-rendering:pixelated;max-width:100%;height:auto}a{color:#a6d9ff}small{color:#b8c5ce}.links{display:flex;gap:20px;flex-wrap:wrap}img{max-width:100%;image-rendering:pixelated}#error{color:#ffb0aa}</style>
+<h1>Linde · Ataque y equipo</h1><p>Candidato E01_v001 · 9 celdas corregidas · 263 celdas conservadas · estela recuperada del original.</p>
+<p><small>Preview aislado: no prueba la integración ni la red de Godot. El agarre oculto del escudo requiere aceptación visual. Paletas existentes, sin nueva paleta global.</small></p>
+<label>Equipo <select id="arq"><option>ligera</option><option>media</option><option>pesada</option></select></label>
+<label>Familia <select id="pal"><option value="pal_vigia">Vigía</option><option value="pal_zarzal">Zarzal</option><option value="pal_albor">Albor</option></select></label>
+<label>Vista <select id="mode"><option value="compuesto">Completo</option><option value="sin_escudo">Sin escudo</option><option value="sin_equipo">Base con espada y escudo</option></select></label>
+<label>Escala <select id="zoom"><option>1</option><option selected>3</option><option>5</option></select></label>
+<button id="play">Pausar</button> <button id="next">Siguiente cuadro</button>
+<p id="phase"></p><p id="error" role="alert"></p>
+<p>Antes · frente / derecha / espalda / izquierda</p><canvas id="before" aria-label="Cuatro direcciones antes de corregir"></canvas>
+<p>Candidato · frente / derecha / espalda / izquierda</p><canvas id="after" aria-label="Cuatro direcciones del candidato"></canvas>
+<p><small>Fases reales: preparado 50 ms, anticipación 50 ms, impacto 100 ms, recuperación 250 ms. Al pausar puedes inspeccionar cada cuadro. La estela de anticipación izquierda se conserva como en la fuente.</small></p>
+<div class="links"><a href="INFORME.md">Informe y pendientes</a><a href="CONTRATO_PROPUESTO.json">Contrato</a><a href="MANIFIESTO.json">Manifiesto y hashes</a><a href="validacion/E01_resultados.json">Validación</a><a href="previews/E01_comparacion_nueve_celdas.png">Comparación por celda</a></div>
+<h2>Comparación de las nueve celdas</h2><p>Antes / después de aplicar solo esa celda / pieza indexada / diferencia.</p>
+<img src="previews/E01_comparacion_nueve_celdas.png" alt="Nueve comparaciones independientes a zoom 3">
+<script>
+const $=id=>document.getElementById(id), times=[50,50,100,250], names=['preparado','anticipación','impacto','recuperación'];
+let frame=0,playing=true,last=performance.now(),elapsed=0,imgs={},revision=0;
+function load(src){return new Promise((resolve,reject)=>{let i=new Image;i.onload=()=>resolve(i);i.onerror=()=>reject(Error('No se pudo cargar '+src));i.src=src})}
+async function refresh(){const rev=++revision,a=$('arq').value,p=$('pal').value,m=$('mode').value;try{const loaded=await Promise.all([load(`previews/E01_antes_${a}_${p}.png`),load(`previews/E01_${m}_${a}_${p}${m==='compuesto'?'_x1':''}.png`)]);if(rev===revision){imgs={before:loaded[0],after:loaded[1]};$('error').textContent='';draw()}}catch(e){$('error').textContent=e.message}}
+function draw(){const z=Number($('zoom').value);for(const id of ['before','after']){const cv=$(id);cv.width=192*z;cv.height=48*z;const ctx=cv.getContext('2d');ctx.imageSmoothingEnabled=false;if(imgs[id])for(let r=0;r<4;r++)ctx.drawImage(imgs[id],frame*48,r*48,48,48,r*48*z,0,48*z,48*z)}$('phase').textContent=`Cuadro ${frame} · ${names[frame]} · ${times[frame]} ms`}
+function tick(t){const dt=t-last;last=t;if(playing){elapsed+=dt;while(elapsed>=times[frame]){elapsed-=times[frame];frame=(frame+1)%4}draw()}requestAnimationFrame(tick)}
+for(const id of ['arq','pal','mode'])$(id).onchange=refresh;$('zoom').onchange=draw;
+$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'Pausar':'Reproducir';last=performance.now()};
+$('next').onclick=()=>{playing=false;$('play').textContent='Reproducir';frame=(frame+1)%4;elapsed=0;draw()};
+refresh();requestAnimationFrame(tick);
+</script></html>

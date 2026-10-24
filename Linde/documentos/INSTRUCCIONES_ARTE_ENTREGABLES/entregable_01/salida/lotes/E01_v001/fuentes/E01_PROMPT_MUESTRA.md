@@ -1,0 +1,9 @@
+# Muestra generada, no productiva
+
+Herramienta: image_gen integrada, 24/10/2026. Entrada: previews/E01_entradas_fila_0.png y E01_entradas_fila_1.png. Salida: E01_muestra_generada_no_productiva.png.
+
+La muestra cambia densidad de píxel y anatomía; se conserva solo como propuesta orientativa. **No se extrajeron píxeles de ella ni se usó como atlas final.** Las piezas finales compilan píxeles índice de fuentes existentes sobre geometría de ataque, con overrides editables. No hay certificado jurídico de exclusividad.
+
+## Prompt enviado (comillas tipográficas normalizadas)
+
+Use case: precise-object-edit. Asset type: visual proposal for missing pixel-art equipment attack frames in an existing game, NOT a redesign. Reference images show exact existing pixel-art sprite, missing armor overlays and existing equipment. Create a single contact sheet with 3 rows, 4 columns of COMPOSED characters in the same tiny pixel style at large nearest-neighbor zoom. Row 1 light leather equipment; row 2 medium armor; row 3 heavy armor. Columns: front-facing sword impact (body twisting, sword sweeping toward viewer’s right), right-facing sword impact with feet spread, right-facing recovery, left-facing impact. Keep the same character identity, teal hair, face, height and small pixel scale shown. Armor follows the bent torso; boots follow feet without floating. Shield round wooden in the free hand, held near torso in front impact, anatomically plausible and clearly separate from sword arm. Preserve dark hard outlines, simple 2-3 tones per material, no blur, no antialias, no gradients, no text, no extra weapons, no impact bursts. Show proposed armor fit, not index mask colors. Neutral dark background. This is supporting reference for precise reproducible native-pixel overrides, not production-ready atlas.

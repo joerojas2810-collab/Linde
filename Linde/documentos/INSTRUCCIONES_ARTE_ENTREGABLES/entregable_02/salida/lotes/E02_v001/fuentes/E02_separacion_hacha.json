@@ -1,0 +1,134 @@
+{
+  "reconstruccion_original_exacta_con_islas_excluidas": true,
+  "por_celda": [
+    {
+      "celda": [
+        0,
+        0
+      ],
+      "pixels_hacha": 17,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        0,
+        1
+      ],
+      "pixels_hacha": 35,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        0,
+        2
+      ],
+      "pixels_hacha": 26,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        0,
+        3
+      ],
+      "pixels_hacha": 16,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        1,
+        0
+      ],
+      "pixels_hacha": 22,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        1,
+        1
+      ],
+      "pixels_hacha": 34,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        1,
+        2
+      ],
+      "pixels_hacha": 27,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        1,
+        3
+      ],
+      "pixels_hacha": 19,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        2,
+        0
+      ],
+      "pixels_hacha": 12,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        2,
+        1
+      ],
+      "pixels_hacha": 27,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        2,
+        2
+      ],
+      "pixels_hacha": 21,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        2,
+        3
+      ],
+      "pixels_hacha": 16,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        3,
+        0
+      ],
+      "pixels_hacha": 17,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        3,
+        1
+      ],
+      "pixels_hacha": 31,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        3,
+        2
+      ],
+      "pixels_hacha": 27,
+      "pixels_islas_excluidas": 0
+    },
+    {
+      "celda": [
+        3,
+        3
+      ],
+      "pixels_hacha": 21,
+      "pixels_islas_excluidas": 0
+    }
+  ],
+  "limite": "El original solo representa hacha. No reutilizarla como pico. No se reconstruye anatomía oculta; propuesta de anclas en manifiestos."
+}

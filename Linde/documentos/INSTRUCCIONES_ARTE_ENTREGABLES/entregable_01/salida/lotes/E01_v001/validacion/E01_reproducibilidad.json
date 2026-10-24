@@ -1,0 +1,7 @@
+{
+  "comando": "python lotes/E01_v001/fuentes/herramientas/E01_producir.py",
+  "exit_code": 0,
+  "stdout": "{\"hojas\": 17, \"celdas_corregidas\": 9, \"celdas_intactas\": 263, \"estela_pixels\": 102, \"estado\": \"validado_estructural\"}",
+  "archivos_assets_reproducidos_identicos": 27,
+  "observacion": "Igualdad SHA-256 de cada archivo, incluidas hojas, base, estela y manifiesto propuesto."
+}

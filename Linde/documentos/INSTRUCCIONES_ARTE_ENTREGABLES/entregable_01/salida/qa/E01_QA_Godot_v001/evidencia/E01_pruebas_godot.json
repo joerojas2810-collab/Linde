@@ -1,0 +1,104 @@
+{
+  "comprobaciones": 10883,
+  "fallos": [],
+  "hojas": [
+    {
+      "archivo": "equipo_ligera_casco_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_ligera_torso_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_ligera_pantalones_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_ligera_botas_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_ligera_guantes_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_media_casco_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_media_torso_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_media_pantalones_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_media_botas_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_media_guantes_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_pesada_casco_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_pesada_torso_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_pesada_pantalones_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_pesada_botas_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "equipo_pesada_guantes_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "escudo_ataque.png",
+      "avisos": [],
+      "errores": []
+    },
+    {
+      "archivo": "espada_ataque.png",
+      "avisos": [],
+      "errores": []
+    }
+  ],
+  "motor": {
+    "build": "official",
+    "hash": "a13da4feb8d8aefc283c3763d33a2f170a18d541",
+    "hex": 263937,
+    "major": 4,
+    "minor": 7,
+    "patch": 1,
+    "status": "stable",
+    "string": "4.7.1-stable (official)",
+    "timestamp": 0
+  },
+  "nota": "Compositor real copiado, prueba aislada. Estela dibujada solo por el preview.",
+  "red_real": false
+}
