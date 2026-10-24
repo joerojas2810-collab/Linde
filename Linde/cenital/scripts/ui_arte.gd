@@ -1,5 +1,5 @@
 extends RefCounted
-## Recursos de interfaz de E06_v001: paneles de 9 parches, botones, barras, ranuras, iconos y tipografía Pixelify Sans (OFL).
+## Recursos de interfaz de E06_v001: paneles de 9 parches, botones, barras, ranuras, iconos y tipografías Nunito Sans (interfaz) y Lora (diálogos), ambas OFL.
 ## Datos en res://arte/interfaz. Un recurso inexistente se registra en `faltantes` (push_error una vez) y se dibuja un marcador
 ## magenta visible; nunca un dibujo de reserva.
 const RAIZ := "res://arte/interfaz/"
@@ -15,21 +15,33 @@ const M_TOOLTIP := [8, 8, 8, 8]
 const ICONO_RANURA := {"casco": "reutilizados/casco.png", "torso": "reutilizados/coraza.png", "guantes": "nuevos/guantes.png",
 	"botas": "nuevos/botas.png", "pantalones": "nuevos/pantalones.png", "escudo": "reutilizados/escudo.png"}
 
-var fuente: FontFile
+var fuente: FontVariation
+var fuente_dialogo: FontVariation
 var texturas: Dictionary = {}
 var estilos: Dictionary = {}
 var faltantes: Dictionary = {}
 var iconos_items: Dictionary = {}
 
 func _init() -> void:
-	var ruta := RAIZ + "tipografia/PixelifySans.ttf"
-	if ResourceLoader.exists(ruta):
-		fuente = load(ruta) as FontFile
-		if fuente != null: fuente.antialiasing = TextServer.FONT_ANTIALIASING_NONE
-	if fuente == null: _falta(ruta)
+	fuente = _cargar_fuente("NunitoSans.ttf")
+	fuente_dialogo = _cargar_fuente("Lora.ttf")
 	var js = JSON.parse_string(FileAccess.get_file_as_string(RAIZ + "ICONOS_POR_ID.json"))
 	if js is Dictionary: iconos_items = js.get("items", {})
 	else: _falta(RAIZ + "ICONOS_POR_ID.json")
+
+## Fija el peso de las fuentes variables: Nunito tiene un peso inicial muy fino.
+func _cargar_fuente(nombre: String) -> FontVariation:
+	var ruta := RAIZ + "tipografia/" + nombre
+	var base: FontFile = load(ruta) as FontFile if ResourceLoader.exists(ruta) else null
+	if base == null:
+		_falta(ruta)
+		return null
+	base.antialiasing = TextServer.FONT_ANTIALIASING_GRAY
+	base.multichannel_signed_distance_field = true
+	var variante := FontVariation.new()
+	variante.base_font = base
+	variante.variation_opentype = {TextServerManager.get_primary_interface().name_to_tag("wght"): 400.0}
+	return variante
 
 func _falta(ruta: String) -> void:
 	if faltantes.has(ruta): return

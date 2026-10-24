@@ -1,0 +1,1 @@
+Tipografía: Nunito Sans regular (peso 400) para interfaz y rótulos; Lora regular (400) para el cuerpo de diálogos. Fuentes variables originales de google/fonts (ofl/nunitosans y ofl/lora), licencias OFL junto a los archivos. Suavizado y MSDF para lectura a distintas escalas.

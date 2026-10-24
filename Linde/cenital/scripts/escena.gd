@@ -665,7 +665,7 @@ func _draw() -> void:
 		for gid in j.autonomia.sociedad.cfg.grupos:
 			var pos := Mundo.pies_de_celda(j.autonomia.sociedad._ancla(gid))
 			if marcador != null: draw_texture_rect(marcador, Rect2(pos - Vector2(8, 28), Vector2(16, 16)), false)
-			draw_string(ThemeDB.fallback_font, pos + Vector2(-18, -30), j.autonomia.sociedad.nombre_grupo(gid), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
+			draw_string(hud.ui.fuente, pos + Vector2(-18, -30), j.autonomia.sociedad.nombre_grupo(gid), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
 	if build:
 		var c: Vector2i = Mundo.celda_de(j.pies) + j.mira
 		var id: String = C.ORDEN_CONSTR[pieza_i]
@@ -701,7 +701,7 @@ func _dibujar_pj() -> void:
 	if auto_ataque >= 0.0:
 		var fase: String = j.combate.est
 		var txt := fase if _anim.estado != "ataque" else "%s %d %s" % [fase, _anim.cuadro, POSES_ATAQUE[posmod(int(_anim.cuadro), 4)]]
-		draw_string(ThemeDB.fallback_font, origen + Vector2(-18, -26), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
+		draw_string(hud.ui.fuente, origen + Vector2(-18, -26), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
 		print("AUTOATQ cuadro_proceso=%d fase=%s estado=%s cuadro=%d" % [Engine.get_process_frames(), fase, _anim.estado, _anim.cuadro])
 
 ## Sombra de pies E06 (máscara 16×8 a opacidad .25, escala entera; solo presentación, sin tocar la colisión).
@@ -738,7 +738,7 @@ func _dibujar_otro(o: Dictionary) -> void:
 		var eq: Dictionary = o.get("equipo") if o.get("equipo") is Dictionary else {}
 		arte_eq.dibujar(self, o.pies, o.mira, cuadro, _equipo_visible(eq), o.look, str(o.estado))
 	else: _arte_faltante(origen)
-	draw_string(ThemeDB.fallback_font, origen + Vector2(-6, -4), o.nombre, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color("f1c40f"))
+	draw_string(hud.ui.fuente, origen + Vector2(-6, -4), o.nombre, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color("f1c40f"))
 
 func _dibujar_npc(id: String) -> void:
 	var p: Vector2 = j.habitantes.pos(id)
@@ -748,7 +748,7 @@ func _dibujar_npc(id: String) -> void:
 	var st: Dictionary = actores.npc_estado(id, p)
 	var cuadro := int(Time.get_ticks_msec() / 120.0) % 4 if st.mueve else 0
 	arte_eq.dibujar(self, p, st.dir, cuadro, [], j.habitantes.aspecto(id), "caminar" if st.mueve else "reposo")
-	var f := ThemeDB.fallback_font
+	var f: Font = hud.ui.fuente
 	draw_string(f, origen + Vector2(-6, -4), j.habitantes.fichas[id].n + (" (zzz)" if act == "dormir" else ""), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
 
 func _dibujar_enemigo(e: Dictionary) -> void:

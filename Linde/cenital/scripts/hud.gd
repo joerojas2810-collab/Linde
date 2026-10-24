@@ -97,8 +97,8 @@ func _panel(vs: Vector2) -> void:
 		ui.panel(self, d)
 		ui.icono(self, "reutilizados/categoria_comunidad.png", Rect2(d.position + Vector2(24, 24), Vector2(64, 64)))
 		_t(esc.dialogo_nombre, d.position + Vector2(112, 24), 32)
-		if ui.fuente != null:
-			draw_multiline_string(ui.fuente, d.position + Vector2(112, 100), esc.dialogo_txt, HORIZONTAL_ALIGNMENT_LEFT, 912, 24, -1, UiArte.TINTA)
+		if ui.fuente_dialogo != null:
+			draw_multiline_string(ui.fuente_dialogo, d.position + Vector2(112, 100), esc.dialogo_txt, HORIZONTAL_ALIGNMENT_LEFT, 912, 24, -1, UiArte.TINTA)
 		_t("[E / Enter] cerrar", d.position + Vector2(112, 212), 16)
 		return
 	var r := Rect2(vs.x / 2 - 448, 40, 896, 600)
