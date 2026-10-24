@@ -1,0 +1,245 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Inicialización del proyecto (5 steps)
+[   0% ] first_scan_filesystem | Escaneando la estructura del archivo...
+WARNING: Detected another project.godot at res://fuentes/entradas/personaje. The folder will be ignored.
+   at: _should_skip_directory (editor/file_system/editor_file_system.cpp:3497)
+[  16% ] first_scan_filesystem | Cargando nombres de clases globales...
+[  33% ] first_scan_filesystem | Verificando GDExtensions...
+[  50% ] first_scan_filesystem | Creando scripts de carga automática...
+[  66% ] first_scan_filesystem | Inicializando plugins...
+[  83% ] first_scan_filesystem | Iniciando escaneo de archivos...
+[ DONE ] first_scan_filesystem
+
+[   0% ] update_scripts_classes | Started Registrando clases globales... (2 steps)
+[   0% ] update_scripts_classes | 
+[  33% ] update_scripts_classes | 
+[ DONE ] update_scripts_classes
+
+[   0% ] _update_scan_actions | Started Escaneando acciones... (168 steps)
+[   0% ] _update_scan_actions | botas.png
+[   0% ] _update_scan_actions | cinturon.png
+[   1% ] _update_scan_actions | cuerpo.png
+[   1% ] _update_scan_actions | pantalon.png
+[   2% ] _update_scan_actions | pelo.png
+[   2% ] _update_scan_actions | piel.png
+[   3% ] _update_scan_actions | tunica.png
+[   4% ] _update_scan_actions | E02_base.png
+[   4% ] _update_scan_actions | E02_compartido_escudo.png
+[   5% ] _update_scan_actions | E02_compartido_espada.png
+[   5% ] _update_scan_actions | E02_ligera_botas.png
+[   6% ] _update_scan_actions | E02_ligera_casco.png
+[   7% ] _update_scan_actions | E02_ligera_guantes.png
+[   7% ] _update_scan_actions | E02_ligera_guantes_cercana.png
+[   8% ] _update_scan_actions | E02_ligera_guantes_lejana.png
+[   8% ] _update_scan_actions | E02_ligera_pantalones.png
+[   9% ] _update_scan_actions | E02_ligera_torso.png
+[  10% ] _update_scan_actions | E02_media_botas.png
+[  10% ] _update_scan_actions | E02_media_casco.png
+[  11% ] _update_scan_actions | E02_media_guantes.png
+[  11% ] _update_scan_actions | E02_media_guantes_cercana.png
+[  12% ] _update_scan_actions | E02_media_guantes_lejana.png
+[  13% ] _update_scan_actions | E02_media_pantalones.png
+[  13% ] _update_scan_actions | E02_media_torso.png
+[  14% ] _update_scan_actions | E02_pesada_botas.png
+[  14% ] _update_scan_actions | E02_pesada_casco.png
+[  15% ] _update_scan_actions | E02_pesada_guantes.png
+[  15% ] _update_scan_actions | E02_pesada_guantes_cercana.png
+[  16% ] _update_scan_actions | E02_pesada_guantes_lejana.png
+[  17% ] _update_scan_actions | E02_pesada_pantalones.png
+[  17% ] _update_scan_actions | E02_pesada_torso.png
+[  18% ] _update_scan_actions | botas.png
+[  18% ] _update_scan_actions | cinturon.png
+[  19% ] _update_scan_actions | cuerpo.png
+[  20% ] _update_scan_actions | pantalon.png
+[  20% ] _update_scan_actions | pelo.png
+[  21% ] _update_scan_actions | piel.png
+[  21% ] _update_scan_actions | tunica.png
+[  22% ] _update_scan_actions | E02_base.png
+[  23% ] _update_scan_actions | E02_compartido_escudo.png
+[  23% ] _update_scan_actions | E02_compartido_espada.png
+[  24% ] _update_scan_actions | E02_ligera_botas.png
+[  24% ] _update_scan_actions | E02_ligera_casco.png
+[  25% ] _update_scan_actions | E02_ligera_guantes.png
+[  26% ] _update_scan_actions | E02_ligera_guantes_cercana.png
+[  26% ] _update_scan_actions | E02_ligera_guantes_lejana.png
+[  27% ] _update_scan_actions | E02_ligera_pantalones.png
+[  27% ] _update_scan_actions | E02_ligera_torso.png
+[  28% ] _update_scan_actions | E02_media_botas.png
+[  28% ] _update_scan_actions | E02_media_casco.png
+[  29% ] _update_scan_actions | E02_media_guantes.png
+[  30% ] _update_scan_actions | E02_media_guantes_cercana.png
+[  30% ] _update_scan_actions | E02_media_guantes_lejana.png
+[  31% ] _update_scan_actions | E02_media_pantalones.png
+[  31% ] _update_scan_actions | E02_media_torso.png
+[  32% ] _update_scan_actions | E02_pesada_botas.png
+[  33% ] _update_scan_actions | E02_pesada_casco.png
+[  33% ] _update_scan_actions | E02_pesada_guantes.png
+[  34% ] _update_scan_actions | E02_pesada_guantes_cercana.png
+[  34% ] _update_scan_actions | E02_pesada_guantes_lejana.png
+[  35% ] _update_scan_actions | E02_pesada_pantalones.png
+[  36% ] _update_scan_actions | E02_pesada_torso.png
+[  36% ] _update_scan_actions | botas.png
+[  37% ] _update_scan_actions | cinturon.png
+[  37% ] _update_scan_actions | cuerpo.png
+[  38% ] _update_scan_actions | pantalon.png
+[  39% ] _update_scan_actions | pelo.png
+[  39% ] _update_scan_actions | piel.png
+[  40% ] _update_scan_actions | tunica.png
+[  40% ] _update_scan_actions | E02_base.png
+[  41% ] _update_scan_actions | E02_compartido_escudo.png
+[  42% ] _update_scan_actions | E02_compartido_espada.png
+[  42% ] _update_scan_actions | E02_ligera_botas.png
+[  43% ] _update_scan_actions | E02_ligera_casco.png
+[  43% ] _update_scan_actions | E02_ligera_guantes.png
+[  44% ] _update_scan_actions | E02_ligera_guantes_cercana.png
+[  44% ] _update_scan_actions | E02_ligera_guantes_lejana.png
+[  45% ] _update_scan_actions | E02_ligera_pantalones.png
+[  46% ] _update_scan_actions | E02_ligera_torso.png
+[  46% ] _update_scan_actions | E02_media_botas.png
+[  47% ] _update_scan_actions | E02_media_casco.png
+[  47% ] _update_scan_actions | E02_media_guantes.png
+[  48% ] _update_scan_actions | E02_media_guantes_cercana.png
+[  49% ] _update_scan_actions | E02_media_guantes_lejana.png
+[  49% ] _update_scan_actions | E02_media_pantalones.png
+[  50% ] _update_scan_actions | E02_media_torso.png
+[  50% ] _update_scan_actions | E02_pesada_botas.png
+[  51% ] _update_scan_actions | E02_pesada_casco.png
+[  52% ] _update_scan_actions | E02_pesada_guantes.png
+[  52% ] _update_scan_actions | E02_pesada_guantes_cercana.png
+[  53% ] _update_scan_actions | E02_pesada_guantes_lejana.png
+[  53% ] _update_scan_actions | E02_pesada_pantalones.png
+[  54% ] _update_scan_actions | E02_pesada_torso.png
+[  55% ] _update_scan_actions | botas.png
+[  55% ] _update_scan_actions | cinturon.png
+[  56% ] _update_scan_actions | cuerpo.png
+[  56% ] _update_scan_actions | pantalon.png
+[  57% ] _update_scan_actions | pelo.png
+[  57% ] _update_scan_actions | piel.png
+[  58% ] _update_scan_actions | tunica.png
+[  59% ] _update_scan_actions | E02_base.png
+[  59% ] _update_scan_actions | E02_compartido_escudo.png
+[  60% ] _update_scan_actions | E02_compartido_espada.png
+[  60% ] _update_scan_actions | E02_hacha.png
+[  61% ] _update_scan_actions | E02_ligera_botas.png
+[  62% ] _update_scan_actions | E02_ligera_casco.png
+[  62% ] _update_scan_actions | E02_ligera_guantes.png
+[  63% ] _update_scan_actions | E02_ligera_guantes_cercana.png
+[  63% ] _update_scan_actions | E02_ligera_guantes_lejana.png
+[  64% ] _update_scan_actions | E02_ligera_pantalones.png
+[  65% ] _update_scan_actions | E02_ligera_torso.png
+[  65% ] _update_scan_actions | E02_media_botas.png
+[  66% ] _update_scan_actions | E02_media_casco.png
+[  66% ] _update_scan_actions | E02_media_guantes.png
+[  67% ] _update_scan_actions | E02_media_guantes_cercana.png
+[  68% ] _update_scan_actions | E02_media_guantes_lejana.png
+[  68% ] _update_scan_actions | E02_media_pantalones.png
+[  69% ] _update_scan_actions | E02_media_torso.png
+[  69% ] _update_scan_actions | E02_pesada_botas.png
+[  70% ] _update_scan_actions | E02_pesada_casco.png
+[  71% ] _update_scan_actions | E02_pesada_guantes.png
+[  71% ] _update_scan_actions | E02_pesada_guantes_cercana.png
+[  72% ] _update_scan_actions | E02_pesada_guantes_lejana.png
+[  72% ] _update_scan_actions | E02_pesada_pantalones.png
+[  73% ] _update_scan_actions | E02_pesada_torso.png
+[  73% ] _update_scan_actions | E02_herramienta_sin_hacha.png
+[  74% ] _update_scan_actions | E02_islas_fuente_excluidas.png
+[  75% ] _update_scan_actions | E02_caida_ligera_x1.png
+[  75% ] _update_scan_actions | E02_caida_ligera_x3.png
+[  76% ] _update_scan_actions | E02_caida_media_x1.png
+[  76% ] _update_scan_actions | E02_caida_media_x3.png
+[  77% ] _update_scan_actions | E02_caida_pesada_x1.png
+[  78% ] _update_scan_actions | E02_caida_pesada_x3.png
+[  78% ] _update_scan_actions | E02_contacto_caida.png
+[  79% ] _update_scan_actions | E02_contacto_dano.png
+[  79% ] _update_scan_actions | E02_contacto_dormir.png
+[  80% ] _update_scan_actions | E02_contacto_herramienta.png
+[  81% ] _update_scan_actions | E02_dano_ligera_x1.png
+[  81% ] _update_scan_actions | E02_dano_ligera_x3.png
+[  82% ] _update_scan_actions | E02_dano_media_x1.png
+[  82% ] _update_scan_actions | E02_dano_media_x3.png
+[  83% ] _update_scan_actions | E02_dano_pesada_x1.png
+[  84% ] _update_scan_actions | E02_dano_pesada_x3.png
+[  84% ] _update_scan_actions | E02_dormir_ligera_x1.png
+[  85% ] _update_scan_actions | E02_dormir_ligera_x3.png
+[  85% ] _update_scan_actions | E02_dormir_media_x1.png
+[  86% ] _update_scan_actions | E02_dormir_media_x3.png
+[  86% ] _update_scan_actions | E02_dormir_pesada_x1.png
+[  87% ] _update_scan_actions | E02_dormir_pesada_x3.png
+[  88% ] _update_scan_actions | E02_herramienta_ligera_x1.png
+[  88% ] _update_scan_actions | E02_herramienta_ligera_x3.png
+[  89% ] _update_scan_actions | E02_herramienta_media_x1.png
+[  89% ] _update_scan_actions | E02_herramienta_media_x3.png
+[  90% ] _update_scan_actions | E02_herramienta_pesada_x1.png
+[  91% ] _update_scan_actions | E02_herramienta_pesada_x3.png
+[  91% ] _update_scan_actions | E02_oclusiones_alternativas.png
+[  92% ] _update_scan_actions | E02_godot_caida_ligera.png
+[  92% ] _update_scan_actions | E02_godot_caida_media.png
+[  93% ] _update_scan_actions | E02_godot_caida_pesada.png
+[  94% ] _update_scan_actions | E02_godot_dano_ligera.png
+[  94% ] _update_scan_actions | E02_godot_dano_media.png
+[  95% ] _update_scan_actions | E02_godot_dano_pesada.png
+[  95% ] _update_scan_actions | E02_godot_dormir_ligera.png
+[  96% ] _update_scan_actions | E02_godot_dormir_media.png
+[  97% ] _update_scan_actions | E02_godot_dormir_pesada.png
+[  97% ] _update_scan_actions | E02_godot_herramienta_ligera.png
+[  98% ] _update_scan_actions | E02_godot_herramienta_media.png
+[  98% ] _update_scan_actions | E02_godot_herramienta_pesada.png
+[ DONE ] _update_scan_actions
+
+[   0% ] reimport | Started (Re)Importación de Assets (21 steps)
+[   0% ] reimport | Preparando archivos para reimportarlos...
+[   4% ] reimport | Preparando archivos para reimportarlos...
+[   9% ] reimport | Preparando archivos para reimportarlos...
+[  13% ] reimport | Preparando archivos para reimportarlos...
+[  18% ] reimport | Preparando archivos para reimportarlos...
+[  22% ] reimport | Preparando archivos para reimportarlos...
+[  27% ] reimport | Preparando archivos para reimportarlos...
+[  31% ] reimport | Preparando archivos para reimportarlos...
+[  36% ] reimport | Preparando archivos para reimportarlos...
+[  40% ] reimport | Preparando archivos para reimportarlos...
+[  45% ] reimport | Preparando archivos para reimportarlos...
+[  50% ] reimport | Preparando archivos para reimportarlos...
+[  54% ] reimport | Preparando archivos para reimportarlos...
+[  59% ] reimport | Preparando archivos para reimportarlos...
+[  63% ] reimport | Preparando archivos para reimportarlos...
+[  68% ] reimport | Preparando archivos para reimportarlos...
+[  72% ] reimport | Preparando archivos para reimportarlos...
+[  77% ] reimport | Preparando archivos para reimportarlos...
+[  81% ] reimport | Preparando archivos para reimportarlos...
+[  86% ] reimport | Preparando archivos para reimportarlos...
+[  90% ] reimport | Preparando archivos para reimportarlos...
+[   0% ] reimport | Ejecutando operaciones de pre-reimportación...
+[   0% ] reimport | E02_godot_herramienta_pesada.png
+[   4% ] reimport | E02_godot_herramienta_media.png
+[   9% ] reimport | E02_godot_herramienta_ligera.png
+[  13% ] reimport | E02_godot_dormir_pesada.png
+[  18% ] reimport | E02_godot_dormir_media.png
+[  22% ] reimport | E02_godot_dormir_ligera.png
+[  27% ] reimport | E02_godot_dano_pesada.png
+[  31% ] reimport | E02_godot_dano_media.png
+[  36% ] reimport | E02_godot_dano_ligera.png
+[  40% ] reimport | E02_godot_caida_pesada.png
+[  45% ] reimport | E02_godot_caida_media.png
+[  50% ] reimport | E02_godot_caida_ligera.png
+[  54% ] reimport | E02_oclusiones_alternativas.png
+[  59% ] reimport | E02_herramienta_pesada_x3.png
+[  63% ] reimport | E02_herramienta_pesada_x1.png
+[  68% ] reimport | E02_herramienta_media_x3.png
+[  72% ] reimport | E02_herramienta_media_x1.png
+[  77% ] reimport | E02_herramienta_ligera_x3.png
+[  81% ] reimport | E02_herramienta_ligera_x1.png
+[  86% ] reimport | E02_contacto_herramienta.png
+[  90% ] reimport | E02_compartido_escudo.png
+[  95% ] reimport | Finalizando la importación de recursos...
+[ DONE ] reimport
+
+[   0% ] reimport | Started (Re)Importación de Assets (21 steps)
+[   0% ] reimport | Ejecutando operaciones post-reimportación...
+[ DONE ] reimport
+
+[   0% ] loading_editor_layout | Started Cargando editor (5 steps)
+[   0% ] loading_editor_layout | Cargando diseño del editor...
+[  16% ] loading_editor_layout | Cargando docks...
+[ DONE ] loading_editor_layout
+
