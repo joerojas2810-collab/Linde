@@ -1,0 +1,586 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS catálogos: referencias, ciclos y alcanzabilidad de habilidades válidos
+PASS niveles por xp
+PASS lugares esenciales alcanzables desde el inicio del camino
+PASS spawns de slimes generados
+PASS 200 semillas: inicio libre, con salida y lejos de enemigos/jefes
+PASS misma semilla, mismo inicio
+PASS semillas distintas dan inicios distintos
+PASS velocidad = 64 px/s
+PASS pared de la casa bloquea desde fuera
+PASS diagonal contra pared desliza
+PASS tronco bloquea
+PASS se puede rodear la casa
+PASS entra por la puerta bajo el techo
+PASS conserva dirección pulsada
+PASS sin teclas, quieto
+PASS mapa de autor determinista
+PASS inventario lleno se detecta
+PASS cambio atómico: si no cabe, nada cambia
+PASS cambio atómico válido
+PASS quitar sin existencias no altera
+PASS veta sin pico: se rechaza
+PASS roca a mano: 10 golpes (arranque sin ciclo pico<->piedra)
+PASS roca aguanta 3 golpes
+PASS 4º golpe: se rompe, 2 piedra y xp, una sola vez
+PASS la celda queda libre
+PASS no se puede romper dos veces (sin duplicar)
+PASS botín probabilístico determinista por semilla y objeto
+PASS habilidad Recolector: un golpe menos
+PASS inventario lleno: el objeto no se rompe ni se pierde nada
+PASS sin materiales: falla sin cambios
+PASS fabricar consume y entrega
+PASS lingote exige habilidad y horno
+PASS con habilidad pero lejos del horno: falla
+PASS junto al horno: fabrica
+PASS espada: tenerla en el inventario no da daño
+PASS espada: el daño sale del arma equipada en la ranura arma
+PASS espada: desequipar el arma devuelve la espada al inventario y quita el daño
+PASS construir: coste y colisión
+PASS no se construye sobre otra construcción
+PASS no se construye sobre el jugador
+PASS no se construye en la puerta
+PASS no se construye sobre un árbol
+PASS bloquear un lugar esencial se rechaza y revierte
+PASS no se encierra la cama de Maren
+PASS muros laterales válidos
+PASS no se puede encerrar al propio jugador
+PASS retirar devuelve el coste
+PASS no se retiran construcciones ajenas
+PASS construir cofre
+PASS depositar en cofre
+PASS cofre con contenido no se retira (no se pierde nada)
+PASS vaciar y retirar cofre
+PASS dormir en cama propia: cura sin avanzar el reloj
+PASS cama propia fija el punto de reaparición
+PASS nivel 1: sin puntos
+PASS nivel 3 = 2 puntos
+PASS requisitos de rama
+PASS aprender una vez
+PASS efecto derivado de la habilidad
+PASS cargar no vuelve a aplicar el bonus
+PASS cargas repetidas dan lo mismo
+PASS sin puntos o requisito, no se aprende
+PASS flujo: materiales básicos a mano
+PASS flujo: pico y hacha
+PASS flujo: piedra suficiente con el pico
+PASS flujo: misión 1 cumplida
+PASS flujo: misión 1 entregada
+PASS flujo: materiales de la mesa
+PASS flujo: mesa construida
+PASS flujo: misión 2 entregada
+PASS flujo: entrar a la arena registra la visita
+PASS flujo: guardián (80 hp) cae con 16 golpes de 5
+PASS flujo: capítulo 1 completo (3+2 gemas)
+PASS flujo: el progreso da niveles (xp 274)
+PASS flujo: diálogo final
+PASS diálogo abre misión con línea de origen
+PASS 5/6 piedras: sigue activa
+PASS 6 piedras: cumplida
+PASS condición actual perdida: vuelve a activa
+PASS entrega: consume, premia y sube relación
+PASS relación cambia solo con entrega
+PASS recompensa una sola vez
+PASS recargar no repite la recompensa
+PASS siguiente misión tras entregar
+PASS construcción en pie cumple
+PASS mesa retirada: ya no se cumple
+PASS mesa entregada y premiada
+PASS misión de ruinas activa
+PASS visitar sin derrotar al jefe no basta
+PASS tesoro: mismo resultado por semilla
+PASS tesoro: cargar no cambia el premio
+PASS inventario lleno: el cofre conserva su contenido
+PASS abrir entrega el contenido
+PASS no se abre dos veces
+PASS misión de mundo por hecho histórico (abrió el cofre)
+PASS enemigo avisa antes de golpear
+PASS un ataque = un impacto (invulnerabilidad evita repetir)
+PASS slime (12 hp) cae en 3 golpes de 5
+PASS drop y xp una sola vez
+PASS jefe: señal previa de 0,8 s y luego impacto
+PASS jefe cambia de fase al 50%
+PASS fase 2 añade un ataque distinto, no solo más vida
+PASS jefe de capítulo: derrota y recompensa fija
+PASS tras cargar: sigue derrotado y sin recompensa repetida
+PASS jefe de mundo derrotado no está
+PASS no reaparece antes de 72 h
+PASS reaparece tras 72 h; la historia se conserva
+PASS derrota: sin perder objetos, vuelve al inicio con media vida
+PASS muros nuevos alargan la ruta (la navegación se actualiza)
+PASS Maren no atraviesa paredes nuevas
+PASS Maren llega a su destino rodeando
+PASS habitante encerrado: estado bloqueado, no atraviesa
+PASS al retirar el muro retoma la ruta
+PASS de noche llega a la cama y recupera energía
+PASS asignar dormir sin cama no equivale a dormir
+PASS guardar
+PASS guardar/cargar conserva todo el estado
+PASS mundo modificado se conserva
+PASS se mantiene respaldo
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] desempaquetar (res://scripts/guardado.gd:19)
+       [1] cargar (res://scripts/guardado.gd:98)
+       [2] cargar (res://scripts/juego.gd:70)
+       [3] t_persistencia (res://tests/prueba.gd:412)
+       [4] _init (res://tests/prueba.gd:44)
+PASS principal truncado: recupera del respaldo
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] desempaquetar (res://scripts/guardado.gd:19)
+       [1] cargar (res://scripts/guardado.gd:98)
+       [2] cargar (res://scripts/juego.gd:70)
+       [3] t_persistencia (res://tests/prueba.gd:417)
+       [4] _init (res://tests/prueba.gd:44)
+ERROR: Parse JSON failed. Error at line 0: Expected 'true', 'false', or 'null', got 'basura'
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] desempaquetar (res://scripts/guardado.gd:19)
+       [1] cargar (res://scripts/guardado.gd:98)
+       [2] cargar (res://scripts/juego.gd:70)
+       [3] t_persistencia (res://tests/prueba.gd:417)
+       [4] _init (res://tests/prueba.gd:44)
+PASS ambos corruptos: no se inventa una partida
+PASS el archivo corrupto no se borra
+ERROR: Parse JSON failed. Error at line 0: Unterminated string
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] desempaquetar (res://scripts/guardado.gd:19)
+       [1] guardar (res://scripts/guardado.gd:88)
+       [2] guardar (res://scripts/juego.gd:161)
+       [3] t_persistencia (res://tests/prueba.gd:419)
+       [4] _init (res://tests/prueba.gd:44)
+PASS guardar sobre corrupto lo conserva aparte y deja una partida válida
+PASS restos de escritura interrumpida no afectan
+PASS formato futuro se rechaza
+PASS migración v0 -> v1 -> v2
+PASS checksum erróneo se detecta
+PASS arbusto recolectado
+PASS no regenera sobre construcción del jugador
+PASS regenera cuando la celda queda libre
+PASS no regenera antes de su plazo
+PASS anim: reposo por defecto
+PASS anim: caminar
+PASS anim: herramienta > caminar
+PASS anim: ataque > herramienta
+PASS anim: dano > ataque
+PASS anim: cuadro de caminar avanza con t_mov
+PASS anim: cuadros de ataque 0/1 (aviso), 2 (activo), 0 (rec: vuelve al preparado, ciclo 1-2-3-1)
+PASS anim: cuadro de herramienta por progreso
+PASS anim: juego en reposo
+PASS anim: herr_t aparece al golpear un objeto
+PASS anim: herr_t expira con tick
+PASS anim: dano no oculta el ataque para la logica
+PASS equipo: validar() vacío
+PASS equipo: estado inicial (7 ranuras vacías: set, escudo y arma)
+PASS equipo: recetas fabricables (casco y torso de Vigía, escudo)
+PASS equipo: salidas (y materiales consumidos)
+PASS equipar 3 ranuras
+PASS def = floor((2 + 4 + 3) * 1,05 de bono de 2 piezas) = 9
+PASS equipar rechaza no equipable / sin item
+PASS desequipar devuelve ítem (sin bono: 4 + 3)
+PASS desequipar ranura vacía falla
+PASS intercambio en ranura ocupada
+PASS inventario lleno (20)
+PASS desequipar con inventario lleno: rechaza sin perder
+PASS intercambio neutro con inventario lleno
+PASS daño 10 con def 4 = round(10*20/24) = 8
+PASS daño mínimo 1
+PASS equipo: guardar
+PASS equipo: cargar conserva equipo y def
+PASS equipo: def no se acumula al recargar
+PASS equipo: guardado sin clave
+PASS equipo: carga sin clave equipo usa valores por defecto
+PASS eq1: cada familia tiene exactamente las 5 ranuras de set
+PASS eq1: validar() rechaza una familia con 4, con 6 o con una ranura repetida
+PASS eq2: ninguno de los 6 pares {sin piedra, Divino, Brillante, Oscuro} domina
+PASS eq2: validar() rechaza una variante dominante
+PASS eq3: stats() idénticos en llamadas seguidas y tras guardar/cargar
+PASS eq4: de +0 a +5 con 11 joyas: 1, 1, 2, 3 y 4, un nivel por intento
+PASS eq4: en +5 se rechaza sin gastar la joya
+PASS eq4: joyas insuficientes: rechazo sin cambios
+PASS eq4: también mejora la pieza equipada
+PASS piedra: Oscuro +3 -> Divino +3, consume la Piedra de Alma y no devuelve la de Bendición
+PASS piedra: sin la piedra se rechaza sin cambios
+PASS piedra: la misma variante se rechaza sin gastar
+PASS eq5: con el inventario lleno, desequipar se rechaza y deja todo igual
+PASS eq5: cambiar la pieza puesta por una del inventario no pierde ni duplica
+PASS eq6: 3 Vigía + 2 Zarzal: solo el bono de Vigía (2 y 3 piezas)
+PASS eq6: empate 2+2 gana la del torso, si no la del casco; 1+1 sin bono
+PASS eq6: mismo resultado en las 120 permutaciones del orden de equipar
+PASS eq7: bono acumulado de cada familia <= 12 % def y <= 10 % vida
+PASS eq7: Zarzal Brillante completo + pies_ligeros + explorador = VEL 1,30 (tope)
+PASS eq7: VEL siempre en [0,70, 1,30]; un bono de +40 % se recorta a +25 % en DEF y HP
+PASS eq8: se escribe un guardado de formato 2
+PASS eq8: 2 -> 3: mismo total, coraza -> torso, ranuras nuevas vacías (incluida el arma)
+PASS eq8: el .bak conserva la partida previa a migrar (formato 2)
+PASS eq8: formato 1 recorre 1 -> 2 -> 3 sin perder objetos
+PASS eq9: sin cabida en un lado, ninguno cambia
+PASS eq9: sin los objetos que se dan, ninguno cambia
+PASS eq9: con cabida, ambos cambian y el total se conserva
+PASS eq10: max(1, round(n*20/(20+DEF))) nunca 0, = n con DEF 0, no crece con DEF (slime 2, jefe 7 con DEF 13)
+WARNING: equipo: «eq:vigia:casco::6» en la ranura casco no es equipable; pasa a pendientes
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:91)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq::::» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq:VIGIA:casco::0» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq:nada:casco::0» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq:vigia:casco» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq:vigia:casco::-1» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq:vigia:casco::02» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq:vigia:casco::0:x» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq:vigia:casco:rojo:0» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+WARNING: inventario: clave desconocida «eq:vigia:escudo::0» (Pieza desconocida)
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _sanear_equipo (res://scripts/juego.gd:96)
+         [1] cargar (res://scripts/juego.gd:75)
+         [2] t_equipo2 (res://tests/prueba.gd:803)
+         [3] _init (res://tests/prueba.gd:44)
+PASS eq11: 10 claves malformadas quedan como «Pieza desconocida», no equipables, sin perderse ni duplicarse
+PASS eq11: claves desconocidas no rompen inventario ni estadísticas
+PASS eq12: Vigía Oscuro completa +0: DEF 13, HP 57, VEL 0,97; potencia max/min <= 1,20
+PASS cifras de la tabla 3.3 (def_eq, hp_eq, vel_eq sin bono)
+PASS nombres y lectura de claves
+PASS Vigía: sin artesano no se fabrica
+PASS Vigía: las 5 piezas con sus recetas (mesa + artesano) consumen exactamente los materiales
+PASS Zarzal: ~6 % por derrota con garantía (nunca más de 15 fallos seguidos), piezas sueltas +0
+PASS Zarzal: flujo determinista por semilla y propio de cada jugador
+PASS Gran Ciervo: una pieza de Albor que falta por derrota (5 distintas en 5); con el set completo, una más
+PASS piedras y Chispa tienen origen (alcanzables)
+PASS capas: el equipo visible lleva ranura, arquetipo y paleta/variante como datos
+PASS migración v1: se escribe un guardado de formato 1
+PASS migración v1: carga como formato actual (3) con jugadores[local]
+PASS migración v1: todo lo del jugador pasa a jugadores[local]
+PASS migración v1: la raíz solo guarda lo compartido
+PASS migración v1: la relación con Maren pasa al jugador
+PASS migración v1: posición y estadísticas derivadas (casco de Vigía: def 2, vida 3)
+PASS migración v1: misiones siguen encadenando
+PASS migración v1: construcción propia pasa a ser del jugador local
+PASS migración v1: se vuelve a guardar en formato 3 sin pérdidas
+PASS multi: unir un segundo jugador (id único)
+PASS multi: inventarios independientes
+PASS multi: recolectar da botín y xp solo a quien rompe
+PASS multi: lo roto por uno está roto para el otro (mundo compartido)
+PASS multi: construir paga del que construye
+PASS multi: el segundo jugador construye
+PASS multi: el mundo compartido refleja las construcciones de ambos
+PASS multi: solo el dueño retira
+PASS multi: las construcciones cuentan para su dueño
+PASS multi: fabricar con la mesa de otro jugador
+PASS multi: la habilidad de uno no habilita al otro
+PASS multi: estadísticas por jugador (el arma equipada de uno no afecta al otro)
+PASS multi: habilidades y puntos independientes
+PASS multi: la misión la recibe solo quien habla
+PASS multi: el progreso se mide con el inventario de cada uno
+PASS multi: entrega y relación por jugador
+PASS multi: el otro empieza su propia cadena
+PASS multi: el enemigo ataca al jugador más cercano
+PASS multi: ciclos de ataque independientes
+PASS multi: el derrotado vuelve a su inicio con media vida
+PASS multi: la derrota de uno no reinicia el combate del otro
+PASS multi: el jefe derrotado lo está para el mundo
+PASS multi: el botín y la xp del jefe van al golpe final
+PASS multi: recompensa registrada solo en quien remató
+PASS multi: la derrota del jefe cuenta para las misiones de todos
+PASS multi: guardar
+PASS multi: guardar/cargar conserva todo el estado de ambos
+PASS multi: tras cargar, posiciones, inventarios, stats y misiones por jugador
+PASS multi: tras cargar el jefe sigue derrotado y sin botín repetido
+PASS red: entrar crea un jugador propio sin tocar al local
+PASS red: se guarda solo un hash con sal de la clave
+PASS red: el estado enviado no lleva el hash ni datos privados de otros
+PASS red: validación de nombres
+PASS red: entrar rechaza versión, nombre, clave, apariencia y campos de más
+PASS red: no se entra dos veces con el mismo jugador
+PASS red: un nombre remoto nunca suplanta al jugador local
+PASS red: al desconectarse sale del mundo y conserva su estado
+PASS red: clave incorrecta se rechaza
+PASS red: reconectar con nombre y clave recupera al mismo jugador (inventario y posición)
+PASS red: intenciones inválidas, desconocidas o fuera de alcance se ignoran sin cambiar el estado
+PASS red: cada pedido rechazado queda registrado
+PASS red: construir junto al jugador se ejecuta con su id
+PASS red: el mismo pedido (mismo seq) no se aplica dos veces
+PASS red: intención de movimiento válida
+PASS red: el servidor mueve según la intención sin superar la velocidad por tick
+PASS red: la instantánea lleva a todos los presentes
+PASS red: límite de pedidos por segundo y conexión
+PASS red: sin identificarse no se actúa; tras un rechazo la conexión queda fuera
+PASS red: equipar, mejorar y engarzar con claves eq: se ejecutan en el servidor
+PASS red: claves eq: inválidas y ofertas mal formadas se rechazan
+PASS red: estado privado y pedidos con claves eq: viajan intactos (serialización del RPC)
+PASS red: segundo jugador remoto para intercambiar
+PASS red: ofrecer + aceptar_oferta intercambia de forma atómica en el servidor
+PASS arte equipo: 17 hojas y 7 capas base cargadas
+PASS arte equipo: el recoloreado da exactamente paleta de familia + delta de variante en las 17 hojas
+PASS arte equipo: ningún píxel índice residual tras recolorear
+PASS arte equipo: sin 'detalle' en la paleta el gris índice no se recolorea (contrato d)
+PASS arte equipo: sin piedra no cambia el color; Oscuro lo oscurece
+PASS arte equipo: derecha escudo detrás del torso y espada delante; izquierda al revés
+PASS arte equipo: INVERTIR_PERFILES intercambia solo los perfiles (por defecto false, como el contrato)
+PASS arte equipo: comandos respetan el orden y la inversión de perfiles
+PASS arte equipo: torso/pantalones/botas ocultan túnica/pantalón/botas base; el cinturón queda
+PASS arte equipo: el casco no oculta nada y va sobre el pelo
+PASS arte equipo: pieza sin paleta no se dibuja ni oculta la base
+PASS arte equipo: pivote 16/32 en los pies, fila izquierda y cuadro de caminata (mód. 4)
+PASS arte equipo: caché estable por (arquetipo, ranura, familia, variante) y por apariencia
+PASS arte equipo: otra variante genera otra textura
+PASS arte equipo: la piel toma el tono del look; el cuerpo residual no se toca
+PASS arte equipo: sin manifiesto no está disponible (la escena dibuja procedural)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/base/capas/cuerpo.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/base/capas/piel.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/base/capas/pelo.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/base/capas/tunica.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/base/capas/pantalon.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/base/capas/botas.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/base/capas/cinturon.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_ligera_casco_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_ligera_torso_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_ligera_guantes_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_ligera_botas_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_ligera_pantalones_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_media_casco_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_media_torso_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_media_guantes_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_media_botas_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_media_pantalones_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_pesada_casco_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_pesada_torso_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_pesada_guantes_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_pesada_botas_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/equipo_pesada_pantalones_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/escudo_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+WARNING: arte_equipo: falta /Users/josephrojas/Library/Application Support/Godot/app_userdata/Linde — Cenital/pruebas_linde/arte_incompleto/espada_caminata.png
+     at: push_warning (core/variant/variant_utility.cpp:1033)
+     GDScript backtrace (most recent call first):
+         [0] _init (res://scripts/arte_equipo.gd:65)
+         [1] t_arte_equipo (res://tests/prueba.gd:1169)
+         [2] _init (res://tests/prueba.gd:44)
+PASS arte equipo: faltan hojas o base -> no disponible, con mensaje y sin error
+PASS arte equipo: las 17 hojas copiadas conservan el hash del original (17 comparadas con design/art)
+PASS arte equipo: paletas.json validado (color índice, falta sin_piedra, delta fuera de rango)
+PASS ataque equipo: conjunto de ataque cargado (celda 48, pivote 24/48, 17 hojas, 7 capas base)
+PASS ataque equipo: las 17 hojas conservan el sha256 del manifiesto
+PASS ataque equipo: ninguna pieza suelta (isla a más de 1 px del cuerpo) []
+PASS ataque equipo: por dirección y pose, el centroide de casco/torso/pantalones/botas cae en su región del cuerpo []
+PASS ataque equipo: ninguna capa sale del cuerpo de ataque.png +3 px y las celdas pendientes están vacías (272 celdas)
+PASS ataque equipo: en perfil, espada y guantes en la mano de la espada medida y escudo con la mano libre []
+PASS ataque equipo: las fases dan los cuadros 0,1 (aviso) 2 (activo) y vuelven a 0 (rec): ciclo 1-2-3-1 [["aviso", 0], ["aviso", 1], ["activo", 2], ["rec", 0]]
+PASS ataque equipo: en ataque la base y las piezas usan celda 48, pivote en los pies y el cuadro = pose
+PASS ataque equipo (E01): torso completo en frente/impacto -> sin celdas pendientes y la pieza se dibuja
+PASS ataque equipo (E01): la estela de la espada se carga como capa propia
+PASS ataque equipo: una celda PENDIENTE no se dibuja y deja ver la túnica base de la pose (el resto sí)
+PASS ataque equipo: orden de capas por orientación del contrato también en ataque
+PASS ataque equipo: izquierda/recuperación (espada sobre el cuerpo en ataque.png) la pone delante del torso; caminata e INVERTIR_PERFILES intactos
+PASS ataque equipo: sin conjunto de ataque cae a la caminata sin error
+PASS estados E02: herramienta, daño, caída y dormir cargan (celda 48, pivote 24/48, 7 capas base y 23 hojas)
+PASS estados E02: los guantes se dibujan desdoblados y nunca con el atlas combinado
+PASS estados E02: el hacha va encima solo cuando se pide (talar con hacha)
+PASS estados E02: herramienta muestra escudo sin espada; el hacha no aparece fuera de herramienta
+PASS estados E02: daño muestra espada y escudo
+PASS estados E02: caída y dormir no muestran armas
+PASS estados E02: cuadro lógico 2 de herramienta usa la columna 3 y la fila de la derecha; pies en el pivote
+PASS estados E02: el cuadro de daño se reduce a sus 2 columnas (cuadro 5 -> columna 1)
+PASS estados E02: escudo detrás del torso en perfil derecho y delante en frente
+PASS estados E02: un estado sin hoja cae al render de caminata sin error
+PASS mundo arte: catálogos E04/E05 cargan y definen camino, agua, ruinas y muro
+PASS mundo arte: toda celda de camino, agua, ruina y muro del mapa tiene su conexión de 47 (0 sin mapeo)
+PASS mundo arte: la diagonal solo cuenta si sus dos vecinos cardinales coinciden
+PASS mundo arte: las texturas de terreno, casa, valla, cofre y barril cargan sin faltantes
+PASS mundo arte: los 96 archivos copiados de E04/E05 conservan el sha256 del manifiesto
+ERROR: Arte faltante: res://arte/mundo/no_existe.png
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _falta (res://scripts/mundo_arte.gd:43)
+       [1] tex (res://scripts/mundo_arte.gd:49)
+       [2] t_mundo_arte (res://tests/prueba.gd:1417)
+       [3] _init (res://tests/prueba.gd:44)
+PASS mundo arte: un recurso inexistente se registra como faltante, sin dibujar arte anterior
+PASS actores arte: un golpe confirmado crea el efecto de impacto, la reacción de daño y la marcha
+PASS actores arte: al morir el enemigo queda un residuo gráfico sin colisión
+PASS actores arte: residuo y efectos terminan por duración y no se acumulan
+PASS actores arte: perder vida el jugador local crea el efecto de daño
+PASS actores arte: un cliente de red no deduce eventos por enemigo (sin identidad estable)
+PASS actores arte: la dirección se reduce a las 4 filas sur/este/norte/oeste
+PASS sin arte procedural: ningún script dibuja con primitivas fuera de la lista blanca []
+PASS sin arte procedural: los módulos y hojas del arte anterior ya no existen
+PASS sin arte procedural: la escena no tiene interruptor ni llamadas al dibujo anterior
+PASS imagen_util: res:// importado devuelve imagen cuadrada de 4 celdas
+PASS imagen_util: PNG temporal en user:// sigue funcionando
+PASS imagen_util: ruta inexistente devuelve null
+FALLOS: 0
+WARNING: 470 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 7 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

@@ -196,6 +196,9 @@ class Replica extends "res://scripts/juego.gd":
 	var _frame_mov := 0
 	var _t_accion := -1000
 
+	func es_autoridad() -> bool:
+		return false
+
 	func tick(_dt: float) -> void:
 		pass                                   # el mundo lo avanza el servidor
 
@@ -222,6 +225,12 @@ class Replica extends "res://scripts/juego.gd":
 	func interactuar(_id: String = LOCAL) -> Dictionary:
 		red.enviar(["interactuar", mira])      # la respuesta llega como evento «interaccion»
 		return {"ok": false}
+
+	func aportar_grupo(grupo: String, _id: String = LOCAL) -> Dictionary:
+		return _env(["aportar_grupo", grupo])
+
+	func ayudar_habitante(npc: String, rechazar: bool = false, _id: String = LOCAL) -> Dictionary:
+		return _env(["ayudar_habitante", npc, rechazar])
 
 	func construir(pieza: String, c: Vector2i, _id: String = LOCAL) -> Dictionary: return _env(["construir", pieza, c])
 	func retirar(c: Vector2i, _id: String = LOCAL) -> Dictionary: return _env(["retirar", c])

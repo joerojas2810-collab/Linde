@@ -11,6 +11,10 @@ Juego cenital (vista superior) en Godot 4.7.1. Estado, controles y decisiones: `
 
 `--equipo=` y `--mira=` solo aplican junto a `--nueva=`. El arte anterior (dibujo por código) ya no existe.
 
+## Prueba de autonomía
+
+Abrir `Iniciar-Prueba-Autonomia.command` para una partida separada donde los habitantes recolectan, fabrican, desgastan y reparan herramientas, negocian entregas y abastecen grupos según sus carencias, sin tarjetas de misión. `J` muestra necesidades y permite ayudar estando cerca; `E` habla con ellos. [Instrucciones y límites](Linde/cenital/docs/AUTONOMIA.md).
+
 ## Estructura
 
 | Carpeta | Contenido |

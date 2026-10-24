@@ -96,7 +96,7 @@ func _panel(vs: Vector2) -> void:
 		var d := Rect2(112, 392, 1056, 256)
 		ui.panel(self, d)
 		ui.icono(self, "reutilizados/categoria_comunidad.png", Rect2(d.position + Vector2(24, 24), Vector2(64, 64)))
-		_t("Maren", d.position + Vector2(112, 24), 32)
+		_t(esc.dialogo_nombre, d.position + Vector2(112, 24), 32)
 		if ui.fuente != null:
 			draw_multiline_string(ui.fuente, d.position + Vector2(112, 100), esc.dialogo_txt, HORIZONTAL_ALIGNMENT_LEFT, 912, 24, -1, UiArte.TINTA)
 		_t("[E / Enter] cerrar", d.position + Vector2(112, 212), 16)

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "nota": "Gramática propia provisional. Congelar esta versión para conservar las propiedades de las piezas guardadas.",
+  "calidad_max": 3,
+  "practica_por_rango": 3,
+  "practica_max": 120,
+  "bonus_recoleccion_max": 2,
+  "max_artefactos_npc": 2,
+  "rango_prototipo": 1,
+  "suelo_por_rango": 2,
+  "suelo_max": 8,
+  "radio_taller": 5,
+  "materiales": {
+    "madera": {"nombre":"madera", "item":"madera", "coste":3, "potencia":0.65, "vel":0.01, "arquetipo":"ligera", "color":"#a8794f", "formas":["espada","escudo"], "fuente":"Árboles; talar con hacha requiere menos golpes."},
+    "piedra": {"nombre":"piedra", "item":"piedra", "coste":3, "potencia":0.8, "vel":-0.02, "arquetipo":"pesada", "color":"#899197", "formas":["espada","escudo"], "fuente":"Rocas; se pueden romper a mano o con pico."},
+    "fibra": {"nombre":"tejido", "item":"fibra", "coste":4, "potencia":0.65, "vel":0.02, "arquetipo":"ligera", "color":"#7b9855", "formas":["casco","torso","guantes","botas","pantalones"], "fuente":"Arbustos; también pueden dar bayas."},
+    "hierro": {"nombre":"hierro", "item":"lingote", "coste":2, "potencia":1.2, "vel":-0.01, "arquetipo":"media", "color":"#a7b8c4", "formas":["espada","escudo","casco","torso","guantes","botas","pantalones"], "fuente":"Mena de las vetas, refinada con madera en un horno."}
+  },
+  "formas": {
+    "espada":{"nombre":"Espada", "ranura":"arma", "dmg":5, "def":0, "hp":0, "coste":1},
+    "escudo":{"nombre":"Escudo", "ranura":"escudo", "dmg":0, "def":3, "hp":0, "coste":1},
+    "casco":{"nombre":"Casco", "ranura":"casco", "dmg":0, "def":2, "hp":2, "coste":1},
+    "torso":{"nombre":"Armadura", "ranura":"torso", "dmg":0, "def":4, "hp":4, "coste":2},
+    "guantes":{"nombre":"Guantes", "ranura":"guantes", "dmg":0, "def":1, "hp":1, "coste":1},
+    "botas":{"nombre":"Botas", "ranura":"botas", "dmg":0, "def":1, "hp":2, "coste":1},
+    "pantalones":{"nombre":"Pantalones", "ranura":"pantalones", "dmg":0, "def":2, "hp":2, "coste":1}
+  },
+  "tecnicas": {
+    "simple":{"nombre":"sencilla", "rango":0, "potencia":1.0, "vel":0.0, "extra":{}, "suelo":0},
+    "ligera":{"nombre":"ligera", "rango":1, "potencia":0.9, "vel":0.02, "extra":{"fibra":1}, "suelo":2},
+    "reforzada":{"nombre":"reforzada", "rango":2, "potencia":1.1, "vel":-0.02, "extra":{"piedra":1}, "suelo":4}
+  },
+  "calidades":["común","cuidada","experta","maestra"],
+  "extra_calidad":0.08,
+  "formas_por_grupo":{"talleres":["torso","casco"],"canteros":["espada","escudo"]},
+  "fuentes_adicionales":{
+    "mena":"Vetas: requieren un pico. Se refina en un horno.",
+    "lingote":"Fabricar con 2 menas y 1 madera en un horno; también mantiene herramientas y estaciones.",
+    "baya":"Puede salir de arbustos; alimento para habitantes y curación para el jugador.",
+    "gelatina":"Botín de slimes; sirve para fabricar ungüentos.",
+    "unguento":"Fabricar con gelatina y fibra en una mesa; restaura vida.",
+    "gema":"Puede salir de vetas y tesoros; se usa en fabricación y mejoras de equipo."
+  }
+}

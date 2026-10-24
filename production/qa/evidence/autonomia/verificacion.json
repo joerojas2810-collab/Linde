@@ -1,0 +1,36 @@
+{
+  "fecha": "2026-10-24",
+  "motor": "Godot 4.7.1",
+  "autonomia": {
+    "comprobaciones": 33,
+    "fallos": 0
+  },
+  "regresion": {
+    "pass": 326,
+    "fallos": 0
+  },
+  "interfaz": {
+    "pass": 13,
+    "fallos": 0
+  },
+  "red": "localhost, suite existente, 0 fallos; prueba nueva de réplica y pedidos en la suite de autonomía",
+  "visual": "escena real con render, panel y diálogo inspeccionados; panel no congela simulación",
+  "limitaciones": [
+    "Sin revisión independiente",
+    "Sin sesión de autonomía multijugador completa en Internet",
+    "Avisos de recursos/objetos al cerrar; también presentes en pruebas anteriores"
+  ],
+  "sha256": {
+    "Iniciar-Prueba-Autonomia.command": "57d9088ce6fb4e91339656c25bef190bbbe621e4d9dd0b98429d0a97ece468d8",
+    "Linde/cenital/datos/autonomia/reglas.json": "00db0cdd538bb0ccda50c994b7aeb15bf2fd5d356ee05e2ac00c1ad4b5117a44",
+    "Linde/cenital/scripts/autonomia.gd": "7523c22286ae9518b3aa7750e542410e1264af742b30309630b97bb484ab80aa",
+    "Linde/cenital/scripts/juego.gd": "f5e5c882b9e9e38987d30aed675ec1bdcad9dbd972de71c775482b82465ced22",
+    "Linde/cenital/scripts/habitantes.gd": "da7276ff4f340ddd1d3b1f4164066c559c23c7e1bdb340456040b8c314d13e41",
+    "Linde/cenital/scripts/escena.gd": "80b3b5aabfbc39ceca9db8f5d490329145c356768437edd135367057995ccc98",
+    "Linde/cenital/scripts/hud.gd": "93dc14a644cd735fe2bd57d1acf93bf7df4a53ea674e3a2728c7a5e9a5a28ff8",
+    "Linde/cenital/scripts/red_servidor.gd": "9b5840d341b92eba0d646b2eb92a6b075114aa91fbcac4139743392a6976e03b",
+    "Linde/cenital/scripts/red_cliente.gd": "0d21c197cf10eefcdce10efe29600a419f603450a919d12e654d1343cb509890",
+    "Linde/cenital/tests/prueba_autonomia.gd": "7717e60967ffe68f501013603e46d963ee80678a5dbfe5e153a8c1d70d425e8e",
+    "Linde/cenital/tests/captura_autonomia.gd": "2b57ba757af59eb9c7829cde85c789f91fe1b7b9a1e0a14ef7473e814d49ebb4"
+  }
+}

@@ -4,6 +4,8 @@
 
 Documento único de estado. Para el plan original y las decisiones de diseño ver [README.md](README.md); para las reglas, [design/gdd/mundo-vivo.md](../../../design/gdd/mundo-vivo.md).
 
+> **Prueba posterior de autonomía (24/10):** se añadió un modo optativo separado de este epic. Ver §10–11 y `Linde/cenital/docs/AUTONOMIA.md`. El cierre 5/5 de arriba corresponde al director de tarjetas, no a la visión completa del juego.
+
 ## 1. Qué hace hoy el sistema
 
 El valle cambia solo mientras el servidor está encendido, sin historia fija. Un **director** evalúa cada hora de juego (60 s reales) unas tarjetas de datos, elige una con azar sembrado y aplica su efecto.
@@ -98,3 +100,41 @@ Registrada en [docs/tech-debt-register.md](../../../docs/tech-debt-register.md):
 - **Datos**: `Linde/cenital/datos/mundo/` (manifiesto y entidades JSON).
 - **Documentos**: `design/gdd/mundo-vivo.md`, este epic (`EPIC.md`, `README.md`, `story-001…005`), `docs/tech-debt-register.md`.
 - **Evidencia**: `production/qa/evidence/story-001…005-*/`.
+
+
+## 10. Prueba de autonomía sin cadena narrativa preparada (2026-10-24)
+
+**Implementada como prueba optativa**, por pedido del usuario: comprobar si aparecen situaciones sin escribir cada evento. Abrir `Iniciar-Prueba-Autonomia.command`; usa una partida separada. J muestra necesidades, inventarios y recuerdos; E permite hablar. No es todavía la economía completa ni el cumplimiento global de la visión.
+
+- Reglas generales en `datos/autonomia/reglas.json`; ejecución en `scripts/autonomia.gd`.
+- Hambre, reservas propias, recolección de objetos reales con ruta, producción con consumo de recetas y estación accesible, peticiones calculadas por carencia.
+- Memoria persistente por habitante y jugador: recuerda ayuda, busca a ayudantes conocidos, respeta negativas recientes. Los recuerdos no son diálogos de una misión.
+- Donar requiere proximidad, mueve objetos reales y no crea premios. Servidor autoritativo; réplica recibe el estado con `mundo_vivo`.
+- Con la prueba activa no se ejecutan tarjetas ni se ofrecen nuevas plantillas del director. La campaña habitual se conserva en su partida normal.
+- No se simulan facciones, mercado, descubrimiento limitado ni planificación arbitraria. Las herramientas del oficio son capacidades provisionales; los lingotes se guardan como reservas. Hambre no causa muerte.
+
+Verificación: `tests/prueba_autonomia.gd` (33 comprobaciones, 0 fallos), suite general (326 PASS, 0 fallos), UI (13 PASS, 0 fallos), integración de red existente en localhost (0 comprobaciones fallidas). La prueba nueva verifica serialización hacia la réplica e intenciones de ayuda, no una partida de autonomía multijugador completa en Internet. Evidencia de la escena real en `production/qa/evidence/autonomia/`; documentación y límites en `Linde/cenital/docs/AUTONOMIA.md`. Persisten avisos de recursos/objetos al cerrar, también presentes en las suites anteriores.
+
+## 11. Decisión del usuario: la autonomía pasa a ser el modo principal (2026-10-24)
+
+- **La autonomía es el modo principal.** El director de tarjetas y las misiones de plantilla (epic mundo-vivo, historias 001–005) quedan como código suspendido mientras la autonomía esté activa; no se borran.
+- **El juego se genera a partir de las decisiones del jugador**, no de una campaña escrita de principio a fin. Las misiones de capítulo ya no son el eje del juego.
+- **Límites aceptados por ahora:** solo Maren y Ordal actúan, sin habitantes ni zonas nuevas, sin economía ni mercado, y con números provisionales sin balance.
+- **La campaña del capítulo 1 se retira de la partida principal.** La partida nueva arranca en autonomía sin cadena de misiones; el Guardián y el Gran Ciervo siguen en el mundo como peligros, sin misión asociada. La campaña queda en el código y en las partidas antiguas.
+- **Aún no hecho:** activar la autonomía por defecto en partidas nuevas, el GDD de la autonomía, y su epic de historias. Hasta entonces sigue siendo el modo optativo de `Iniciar-Prueba-Autonomia.command`.
+
+
+## 11. Sociedad: cinco capacidades conectadas (2026-10-24)
+
+La prueba optativa se amplió por pedido del usuario. `sociedad.gd` conecta producción con consumo real (herramientas y mantenimiento), cooperación mediante trueque y garantías, metas alternativas, confianza por compromisos y grupos con reservas, territorio y reputación. El mismo lanzador de prueba usa ahora esta versión; la primera prueba se conserva como regresión aislada.
+
+- Los NPC arrancan sin herramientas ni estaciones regaladas. Fabrican desde recursos del mapa, negocian excedentes, se encuentran para entregar y construyen estaciones pagando materiales.
+- Desgaste y reparación vuelven a crear demanda; los acuerdos vencidos devuelven garantías y modifican confianza.
+- Talleres y Cantera tienen reservas compartidas, prioridades y protección de recursos escasos. El jugador puede contribuir. Una extracción protegida vista por un miembro cercano afecta reputación; no se atribuye conocimiento a testigos distantes.
+- J muestra necesidades, usos, grupos, acuerdos y diario; los depósitos tienen marcador en el mundo. E explica el estado del habitante.
+- El guardado conserva acuerdos en tránsito y sus materiales; la migración añade campos a la primera prueba. El servidor valida aportes; la réplica no simula.
+
+Es una rebanada de economía y grupos, no la visión completa: sin guerras, facciones generadas, inventarios limitados, nuevos mapas, habilidades aprendidas ni equipo procedimental. Reglas propias provisionales; recetas conocidas. Diseño: `design/gdd/sociedad-emergente.md`. Uso y límites: `Linde/cenital/docs/AUTONOMIA.md`. Evidencia y resultados retenidos: `production/qa/evidence/sociedad/`.
+
+
+Verificación de §11: 48 comprobaciones de sociedad y 33 de la primera autonomía, sin fallos; suite general 326 PASS; UI 13 PASS; integración de red existente en localhost con 0 fallos. En tres días de simulación sin intervención, semilla 123: 15 acuerdos, 14 entregas, 13 fabricaciones, 1 construcción, 1 reparación y 1 vencimiento. Los contadores representan hechos ejecutados por reglas, no un guion. Los avisos de recursos al cerrar continúan; no hay revisión independiente ni playtest de diversión. No se probó una sesión completa de sociedad multijugador en Internet.

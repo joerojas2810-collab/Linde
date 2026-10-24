@@ -38,6 +38,7 @@ var acc: Array = []
 var iconos: Array = []   # ruta de icono (res://arte/interfaz) por línea de panel; "" = sin icono
 var sel := 0
 var dialogo_txt := ""
+var dialogo_nombre := ""
 var cofre_id := ""
 var build := false
 var pieza_i := 0
@@ -436,8 +437,50 @@ func _armar() -> void:
 				var e := "APRENDIDA" if j.jug().hab.has(id) else "coste %d · nv %d%s" % [h.coste, h.niv, (" · req:" + req) if req != "" else ""]
 				_l("[%s] %s  (%s)" % [h.rama.substr(0, 3), h.n, e], func(): j.aprender(id))
 		"mis":
-			_l("MISIONES  ·  las de capítulo se piden y entregan hablando con quien las da")
+			_l("SOCIEDAD DEL VALLE  ·  necesidades, acuerdos y grupos" if j.autonomia.activa() else "MISIONES  ·  las de capítulo se piden y entregan hablando con quien las da")
+			if j.autonomia.activa():
+				_l("— HABITANTES: necesidades reales (Enter ayuda; requiere cercanía) —")
+				for nid in j.habitantes.ids:
+					if j.autonomia.perfil(nid).is_empty(): continue
+					var n: Dictionary = j.autonomia.estado(nid)
+					var falta: Dictionary = j.autonomia.necesidad(nid)
+					_l("%s · hambre %d/100 · %s" % [j.habitantes.fichas[nid].n, int(n.hambre), str(n.plan.get("act", "rutina"))])
+					if j.autonomia.sociedad.activa():
+						_l("  Grupo: " + j.autonomia.sociedad.nombre_grupo(j.autonomia.sociedad.grupo_de(nid)) + " · " + str(n.get("objetivo", "buscar oportunidades")))
+					_l("  Reservas: " + (Hud.J_txt(n.inv) if not n.inv.is_empty() else "vacías"))
+					if j.autonomia.sociedad.activa() and not n.durabilidad.is_empty():
+						var herramientas: Array = []
+						for item in n.durabilidad: herramientas.append("%s %d/%d" % [C.ITEMS[item].n, n.durabilidad[item], j.autonomia.sociedad.cfg.durabilidad_herramienta])
+						_l("  Usos restantes: " + ", ".join(herramientas))
+					if falta.has("item"):
+						_l("  Dar hasta %d %s para %s" % [falta.cantidad, C.ITEMS[falta.item].n, falta.motivo], func(): j.ayudar_habitante(nid))
+						_l("  Responder que no puedo ayudar", func(): j.ayudar_habitante(nid, true))
+					elif falta.has("estacion"):
+						_l("  Trabajo pendiente: %s (estación %s)" % [falta.motivo, falta.estacion])
+					if not n.recuerdos.is_empty():
+						var recuerdo: Dictionary = n.recuerdos.back()
+						_l("  " + j.autonomia.texto_recuerdo(recuerdo))
+			if j.autonomia.sociedad.activa():
+				var sociedad = j.autonomia.sociedad
+				var observador: String = red.yo if red is Cli else J.LOCAL
+				_l("— GRUPOS Y RESERVAS COMPARTIDAS —")
+				for gid in sociedad.cfg.grupos:
+					var g: Dictionary = sociedad.grupo(gid)
+					_l("%s · relación contigo %d · %s" % [sociedad.nombre_grupo(gid), sociedad.reputacion(gid, observador), sociedad.cfg.grupos[gid].referencia])
+					_l("  Aportar materiales al grupo (requiere cercanía)", func(): j.aportar_grupo(gid))
+					for item in sociedad.cfg.grupos[gid].reservas:
+						_l("  %s: %d / %d" % [C.ITEMS[item].n, int(g.inv.get(item, 0)), int(sociedad.cfg.grupos[gid].reservas[item])])
+				_l("— ACUERDOS EN CURSO —")
+				for cid in sociedad.datos().acuerdos:
+					var acuerdo: Dictionary = sociedad.datos().acuerdos[cid]
+					if acuerdo.estado != "activo": continue
+					_l("%s y %s: %s" % [j.habitantes.fichas[acuerdo.solicitante].n, j.habitantes.fichas[acuerdo.proveedor].n, Hud.J_txt(acuerdo.bien)])
+				_l("— LO QUE PASÓ EN EL VALLE —")
+				for hecho in sociedad.datos().sucesos.slice(-6):
+					_l("  %02d:%02d · %s" % [int(hecho.min / 60) % 24, int(hecho.min) % 60, sociedad.texto_suceso(hecho)])
+				_l("Volver a los habitantes", func(): _abrir("mis"))
 			for id in C.MISIONES:
+				if j.autonomia.activa(): break
 				var m: Dictionary = C.MISIONES[id]
 				var e: String = j.estado_mision(id)
 				if e == "" and not j.mision_disponible(id): continue
@@ -447,7 +490,7 @@ func _armar() -> void:
 					elif m.da == "" and e == "cumplida": j.entregar(id))
 				if e == "activa" or e == "cumplida":
 					for o in m.obj: _l("      " + ("[x] " if j.objetivo_ok(o) else "[ ] ") + j.objetivo_txt(o))
-			if j.vivo != null:   # misiones de plantilla (story-004); el cliente de red no tiene vivo
+			if j.vivo != null and not j.autonomia.activa():   # misiones de plantilla (story-004); el cliente de red no tiene vivo
 				for mi: Dictionary in j.vivo.instancias_visibles(J.LOCAL):
 					var iid: String = str(mi.iid)
 					var act: bool = mi.estado == "activa"
@@ -488,6 +531,7 @@ func _tras_interactuar(r: Dictionary) -> void:
 	match r.panel:
 		"dialogo":
 			dialogo_txt = r.texto
+			dialogo_nombre = str(j.habitantes.fichas.get(r.get("npc", ""), {}).get("n", "Habitante"))
 			panel = "dialogo"
 		"cofre":
 			cofre_id = r.id
@@ -515,6 +559,13 @@ func _process(delta: float) -> void:
 	if material is ShaderMaterial: (material as ShaderMaterial).set_shader_parameter("noche", oscuridad(j.hora_dia()) / 0.5)
 	actores.actualizar(delta, j.combate.enemigos, int(j.jug().hp), j.combate.centro_pj(), j.mundo, red is Cli)
 	if panel != "":
+		# En la prueba, mirar las necesidades no detiene la vida del valle. Esc sí pausa.
+		if red == null and j.autonomia.activa() and panel != "pausa":
+			j.tick(minf(delta, 1.0 / 30.0))
+			auto_t += delta
+			if auto_t >= AUTOGUARDADO_S:
+				auto_t = 0.0
+				j.guardar(ruta)
 		if panel != "dialogo": _armar()
 		return
 	delta = minf(delta, 1.0 / 30.0)    # evita saltos mayores que la caja de pies
@@ -538,6 +589,10 @@ func _process(delta: float) -> void:
 func _pista() -> String:
 	for id in j.habitantes.ids:
 		if j.habitantes.pos(id).distance_to(j.pies) <= J.ALCANCE_NPC: return "E: hablar con %s" % j.habitantes.fichas[id].n
+	if j.autonomia.sociedad.activa():
+		for gid in j.autonomia.sociedad.cfg.grupos:
+			if Vector2(Mundo.celda_de(j.pies)).distance_to(Vector2(j.autonomia.sociedad._ancla(gid))) <= 2.0:
+				return "J: aportar al depósito de " + j.autonomia.sociedad.nombre_grupo(gid)
 	var base := Mundo.celda_de(j.pies)
 	for c in [base + j.mira, base]:
 		var oid: String = j.mundo.objeto_presente(c)
@@ -605,6 +660,12 @@ func _draw() -> void:
 		var ind: Texture2D = hud.ui.tex("reutilizados/interact_indicator.png")
 		if ind != null: draw_texture_rect(ind, Rect2((j.pies - Vector2(12, 46 + 2.0 * sin(Time.get_ticks_msec() / 200.0))).round(), Vector2(24, 32)), false)
 	arte_mundo.casa_tejado(self, 0.0 if dentro else 1.0)
+	if j.autonomia.sociedad.activa():
+		var marcador: Texture2D = hud.ui.tex("reutilizados/quest_marker.png")
+		for gid in j.autonomia.sociedad.cfg.grupos:
+			var pos := Mundo.pies_de_celda(j.autonomia.sociedad._ancla(gid))
+			if marcador != null: draw_texture_rect(marcador, Rect2(pos - Vector2(8, 28), Vector2(16, 16)), false)
+			draw_string(ThemeDB.fallback_font, pos + Vector2(-18, -30), j.autonomia.sociedad.nombre_grupo(gid), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
 	if build:
 		var c: Vector2i = Mundo.celda_de(j.pies) + j.mira
 		var id: String = C.ORDEN_CONSTR[pieza_i]

@@ -1,0 +1,1249 @@
+{
+  "activa": true,
+  "modo": "sociedad",
+  "npcs": {
+    "maren": {
+      "accion_min": 4680,
+      "bloqueos": {
+        "lingote": 3735
+      },
+      "durabilidad": {
+        "pico_piedra": 5
+      },
+      "hambre": 44.3999999999999,
+      "inv": {
+        "fibra": 65,
+        "hacha_piedra": 1,
+        "madera": 2,
+        "pico_piedra": 2
+      },
+      "objetivo": "alimentarme",
+      "peticion": {
+        "cantidad": 2,
+        "item": "baya",
+        "motivo": "alimentarme",
+        "objetivo_total": 2
+      },
+      "plan": {
+        "act": "recolectar",
+        "celda": [
+          41,
+          14
+        ],
+        "motivo": "alimentarme"
+      },
+      "recuerdos": [
+        {
+          "actor": "ordal",
+          "detalle": "1 Piedra",
+          "hecho": "cumplio",
+          "min": 3420
+        },
+        {
+          "actor": "",
+          "detalle": "1 Pico de piedra",
+          "hecho": "fabrico",
+          "min": 3425
+        },
+        {
+          "actor": "ordal",
+          "detalle": "Piedra",
+          "hecho": "promesa",
+          "min": 3430
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 3442
+        },
+        {
+          "actor": "ordal",
+          "detalle": "2 Piedra",
+          "hecho": "cumplio",
+          "min": 3445
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 3460
+        },
+        {
+          "actor": "",
+          "detalle": "1 Hacha de piedra",
+          "hecho": "fabrico",
+          "min": 3465
+        },
+        {
+          "actor": "",
+          "detalle": "1 hacha_piedra",
+          "hecho": "aporte",
+          "min": 3495
+        },
+        {
+          "actor": "ordal",
+          "detalle": "Pico de piedra",
+          "hecho": "promesa",
+          "min": 3555
+        },
+        {
+          "actor": "ordal",
+          "detalle": "1 Pico de piedra",
+          "hecho": "cumplio",
+          "min": 3585
+        },
+        {
+          "actor": "ordal",
+          "detalle": "Piedra",
+          "hecho": "promesa",
+          "min": 3590
+        },
+        {
+          "actor": "ordal",
+          "detalle": "3 Piedra",
+          "hecho": "cumplio",
+          "min": 3595
+        },
+        {
+          "actor": "",
+          "detalle": "1 Pico de piedra",
+          "hecho": "fabrico",
+          "min": 3605
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 3623
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 3630
+        },
+        {
+          "actor": "",
+          "detalle": "3 Madera",
+          "hecho": "recolecto",
+          "min": 3650
+        },
+        {
+          "actor": "",
+          "detalle": "1 madera",
+          "hecho": "aporte",
+          "min": 3670
+        },
+        {
+          "actor": "",
+          "detalle": "Lingote: sin ruta, existencias o acuerdo viable",
+          "hecho": "pospuso",
+          "min": 3675
+        },
+        {
+          "actor": "",
+          "detalle": "Hacha de piedra",
+          "hecho": "herramienta_rota",
+          "min": 3695
+        },
+        {
+          "actor": "",
+          "detalle": "3 Madera",
+          "hecho": "recolecto",
+          "min": 3695
+        },
+        {
+          "actor": "",
+          "detalle": "1 madera",
+          "hecho": "aporte",
+          "min": 3710
+        },
+        {
+          "actor": "ordal",
+          "detalle": "Piedra",
+          "hecho": "promesa",
+          "min": 3720
+        },
+        {
+          "actor": "ordal",
+          "detalle": "2 Piedra",
+          "hecho": "cumplio",
+          "min": 3730
+        },
+        {
+          "actor": "",
+          "detalle": "1 Hacha de piedra",
+          "hecho": "fabrico",
+          "min": 3735
+        },
+        {
+          "actor": "",
+          "detalle": "1 hacha_piedra",
+          "hecho": "aporte",
+          "min": 3740
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 3804
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra",
+          "hecho": "recolecto",
+          "min": 3820
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 3850
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 3985
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 3995
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 4166
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 4347
+        }
+      ],
+      "vinculos": {
+        "npc:ordal": {
+          "confianza": 10
+        }
+      }
+    },
+    "ordal": {
+      "accion_min": 4680,
+      "bloqueos": {
+        "lingote": 940,
+        "mena": 940,
+        "pico_piedra": 940
+      },
+      "durabilidad": {
+        "pico_piedra": 6
+      },
+      "hambre": 61.1999999999998,
+      "inv": {
+        "fibra": 78,
+        "mena": 2,
+        "pico_piedra": 1
+      },
+      "objetivo": "alimentarme",
+      "peticion": {
+        "cantidad": 2,
+        "item": "baya",
+        "motivo": "alimentarme",
+        "objetivo_total": 2
+      },
+      "plan": {
+        "act": "recolectar",
+        "celda": [
+          27,
+          2
+        ],
+        "motivo": "alimentarme"
+      },
+      "recuerdos": [
+        {
+          "actor": "maren",
+          "detalle": "Piedra",
+          "hecho": "promesa",
+          "min": 3390
+        },
+        {
+          "actor": "maren",
+          "detalle": "2 Piedra",
+          "hecho": "cumplio",
+          "min": 3415
+        },
+        {
+          "actor": "maren",
+          "detalle": "Pico de piedra",
+          "hecho": "promesa",
+          "min": 3415
+        },
+        {
+          "actor": "maren",
+          "detalle": "1 Pico de piedra",
+          "hecho": "cumplio",
+          "min": 3415
+        },
+        {
+          "actor": "maren",
+          "detalle": "Piedra",
+          "hecho": "promesa",
+          "min": 3420
+        },
+        {
+          "actor": "maren",
+          "detalle": "1 Piedra",
+          "hecho": "cumplio",
+          "min": 3420
+        },
+        {
+          "actor": "maren",
+          "detalle": "Piedra",
+          "hecho": "promesa",
+          "min": 3430
+        },
+        {
+          "actor": "maren",
+          "detalle": "2 Piedra",
+          "hecho": "cumplio",
+          "min": 3445
+        },
+        {
+          "actor": "",
+          "detalle": "2 Piedra",
+          "hecho": "recolecto",
+          "min": 3460
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 3497
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 3515
+        },
+        {
+          "actor": "",
+          "detalle": "Pico de piedra",
+          "hecho": "herramienta_rota",
+          "min": 3550
+        },
+        {
+          "actor": "",
+          "detalle": "2 Piedra",
+          "hecho": "recolecto",
+          "min": 3550
+        },
+        {
+          "actor": "maren",
+          "detalle": "Pico de piedra",
+          "hecho": "promesa",
+          "min": 3555
+        },
+        {
+          "actor": "maren",
+          "detalle": "1 Pico de piedra",
+          "hecho": "cumplio",
+          "min": 3585
+        },
+        {
+          "actor": "maren",
+          "detalle": "Piedra",
+          "hecho": "promesa",
+          "min": 3590
+        },
+        {
+          "actor": "maren",
+          "detalle": "3 Piedra",
+          "hecho": "cumplio",
+          "min": 3595
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 3678
+        },
+        {
+          "actor": "maren",
+          "detalle": "Piedra",
+          "hecho": "promesa",
+          "min": 3720
+        },
+        {
+          "actor": "maren",
+          "detalle": "2 Piedra",
+          "hecho": "cumplio",
+          "min": 3730
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra",
+          "hecho": "recolecto",
+          "min": 3740
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 3770
+        },
+        {
+          "actor": "",
+          "detalle": "2 Piedra",
+          "hecho": "recolecto",
+          "min": 3810
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 3859
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 3865
+        },
+        {
+          "actor": "",
+          "detalle": "2 Piedra",
+          "hecho": "recolecto",
+          "min": 3875
+        },
+        {
+          "actor": "",
+          "detalle": "Horno",
+          "hecho": "construyo",
+          "min": 3890
+        },
+        {
+          "actor": "",
+          "detalle": "1 Lingote",
+          "hecho": "fabrico",
+          "min": 3895
+        },
+        {
+          "actor": "",
+          "detalle": "Pico de piedra",
+          "hecho": "reparo",
+          "min": 3900
+        },
+        {
+          "actor": "",
+          "detalle": "2 Mena de hierro",
+          "hecho": "recolecto",
+          "min": 3935
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 4040
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 4221
+        }
+      ],
+      "vinculos": {
+        "npc:maren": {
+          "confianza": 10
+        }
+      }
+    }
+  },
+  "sociedad": {
+    "acuerdos": {
+      "acuerdo:1": {
+        "bien": {
+          "pico_piedra": 1
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 6
+        },
+        "proveedor": "maren",
+        "solicitante": "ordal",
+        "vence": 1320
+      },
+      "acuerdo:10": {
+        "bien": {
+          "pico_piedra": 1
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 6
+        },
+        "proveedor": "maren",
+        "solicitante": "ordal",
+        "vence": 3775
+      },
+      "acuerdo:11": {
+        "bien": {
+          "piedra": 1
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 1
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 3780
+      },
+      "acuerdo:12": {
+        "bien": {
+          "piedra": 2
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 2
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 3790
+      },
+      "acuerdo:13": {
+        "bien": {
+          "pico_piedra": 1
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 6
+        },
+        "proveedor": "maren",
+        "solicitante": "ordal",
+        "vence": 3915
+      },
+      "acuerdo:14": {
+        "bien": {
+          "piedra": 3
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 3
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 3950
+      },
+      "acuerdo:15": {
+        "bien": {
+          "piedra": 2
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 2
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 4080
+      },
+      "acuerdo:2": {
+        "bien": {
+          "madera": 1
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 1
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 1501
+      },
+      "acuerdo:3": {
+        "bien": {
+          "madera": 1
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 1
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 1531
+      },
+      "acuerdo:4": {
+        "bien": {
+          "pico_piedra": 1
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 6
+        },
+        "proveedor": "maren",
+        "solicitante": "ordal",
+        "vence": 2420
+      },
+      "acuerdo:5": {
+        "bien": {
+          "piedra": 3
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 3
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 2465
+      },
+      "acuerdo:6": {
+        "bien": {
+          "pico_piedra": 1
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 6
+        },
+        "proveedor": "maren",
+        "solicitante": "ordal",
+        "vence": 2690
+      },
+      "acuerdo:7": {
+        "bien": {
+          "piedra": 3
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 3
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 2740
+      },
+      "acuerdo:8": {
+        "bien": {
+          "pico_piedra": 1
+        },
+        "estado": "vencido",
+        "pago": {
+          "fibra": 6
+        },
+        "proveedor": "maren",
+        "solicitante": "ordal",
+        "vence": 2870
+      },
+      "acuerdo:9": {
+        "bien": {
+          "piedra": 2
+        },
+        "estado": "cumplido",
+        "pago": {
+          "fibra": 2
+        },
+        "proveedor": "ordal",
+        "solicitante": "maren",
+        "vence": 3750
+      }
+    },
+    "estaciones": {
+      "10,8": 1
+    },
+    "estadisticas": {
+      "acuerdo": 15,
+      "alternativa": 27,
+      "aporte": 14,
+      "construccion": 1,
+      "desgaste": 7,
+      "entrega": 14,
+      "fabricacion": 13,
+      "incumplimiento": 1,
+      "reparacion": 1,
+      "retiro": 7
+    },
+    "grupos": {
+      "canteros": {
+        "inv": {},
+        "reputacion": {
+          "grupo:talleres": 10
+        }
+      },
+      "talleres": {
+        "inv": {
+          "fibra": 3,
+          "hacha_piedra": 1,
+          "madera": 3
+        },
+        "reputacion": {
+          "grupo:canteros": 10
+        }
+      }
+    },
+    "siguiente": 16,
+    "sucesos": [
+      {
+        "detalle": "2 madera",
+        "min": 821,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 826,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "Pospuso pico_piedra: sin ruta, existencias o acuerdo viable",
+        "min": 880,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 880,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "Pospuso mena: sin ruta, existencias o acuerdo viable",
+        "min": 880,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "2 madera",
+        "min": 891,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "retiro"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 896,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "1 madera",
+        "min": 956,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "1 Pico de piedra a cambio de 6 Fibra",
+        "min": 960,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 986,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "pico_piedra",
+        "min": 1051,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "desgaste"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 1056,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "1 madera",
+        "min": 1136,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "retiro"
+      },
+      {
+        "detalle": "1 Madera a cambio de 1 Fibra",
+        "min": 1141,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "1 Madera",
+        "min": 1161,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 1166,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "1 Madera a cambio de 1 Fibra",
+        "min": 1171,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "1 Madera",
+        "min": 1181,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "2 madera",
+        "min": 1850,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 1950,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "1 madera",
+        "min": 1990,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 2010,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "1 Hacha de piedra",
+        "min": 2030,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "1 hacha_piedra",
+        "min": 2055,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "pico_piedra",
+        "min": 2055,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "desgaste"
+      },
+      {
+        "detalle": "1 Pico de piedra a cambio de 6 Fibra",
+        "min": 2060,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 2075,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 2105,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "3 Piedra a cambio de 3 Fibra",
+        "min": 2105,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "3 Piedra",
+        "min": 2120,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 2125,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 2165,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 2225,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 2325,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "pico_piedra",
+        "min": 2325,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "desgaste"
+      },
+      {
+        "detalle": "1 Pico de piedra a cambio de 6 Fibra",
+        "min": 2330,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 2375,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "3 Piedra a cambio de 3 Fibra",
+        "min": 2380,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "3 Piedra",
+        "min": 2385,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 2390,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "2 madera",
+        "min": 2415,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "retiro"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 2435,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 2450,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "hacha_piedra",
+        "min": 2455,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "desgaste"
+      },
+      {
+        "detalle": "1 hacha_piedra",
+        "min": 2475,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "retiro"
+      },
+      {
+        "detalle": "pico_piedra",
+        "min": 2505,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "desgaste"
+      },
+      {
+        "detalle": "1 Pico de piedra a cambio de 6 Fibra",
+        "min": 2510,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "Plazo vencido; materiales devueltos",
+        "min": 2870,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "incumplimiento"
+      },
+      {
+        "detalle": "1 madera",
+        "min": 3295,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "1 madera",
+        "min": 3385,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "2 Piedra a cambio de 2 Fibra",
+        "min": 3390,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "2 Piedra",
+        "min": 3415,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "1 Pico de piedra a cambio de 6 Fibra",
+        "min": 3415,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 3415,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "1 Piedra a cambio de 1 Fibra",
+        "min": 3420,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "1 Piedra",
+        "min": 3420,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 3425,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "2 Piedra a cambio de 2 Fibra",
+        "min": 3430,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "2 Piedra",
+        "min": 3445,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "1 Hacha de piedra",
+        "min": 3465,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "1 hacha_piedra",
+        "min": 3495,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "pico_piedra",
+        "min": 3550,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "desgaste"
+      },
+      {
+        "detalle": "1 Pico de piedra a cambio de 6 Fibra",
+        "min": 3555,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 3585,
+        "otro": "maren",
+        "quien": "ordal",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "3 Piedra a cambio de 3 Fibra",
+        "min": 3590,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "3 Piedra",
+        "min": 3595,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "2 madera",
+        "min": 3600,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "retiro"
+      },
+      {
+        "detalle": "1 Pico de piedra",
+        "min": 3605,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "1 madera",
+        "min": 3670,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "Pospuso lingote: sin ruta, existencias o acuerdo viable",
+        "min": 3675,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "alternativa"
+      },
+      {
+        "detalle": "hacha_piedra",
+        "min": 3695,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "desgaste"
+      },
+      {
+        "detalle": "1 madera",
+        "min": 3710,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "1 hacha_piedra",
+        "min": 3715,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "retiro"
+      },
+      {
+        "detalle": "2 Piedra a cambio de 2 Fibra",
+        "min": 3720,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "acuerdo"
+      },
+      {
+        "detalle": "2 Piedra",
+        "min": 3730,
+        "otro": "ordal",
+        "quien": "maren",
+        "tipo": "entrega"
+      },
+      {
+        "detalle": "1 Hacha de piedra",
+        "min": 3735,
+        "otro": "",
+        "quien": "maren",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "1 hacha_piedra",
+        "min": 3740,
+        "otro": "talleres",
+        "quien": "maren",
+        "tipo": "aporte"
+      },
+      {
+        "detalle": "Horno",
+        "min": 3890,
+        "otro": "canteros",
+        "quien": "ordal",
+        "tipo": "construccion"
+      },
+      {
+        "detalle": "1 Lingote",
+        "min": 3895,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "fabricacion"
+      },
+      {
+        "detalle": "pico_piedra con un lingote",
+        "min": 3900,
+        "otro": "",
+        "quien": "ordal",
+        "tipo": "reparacion"
+      }
+    ],
+    "version": 2
+  },
+  "ultimo_min": 4680
+}

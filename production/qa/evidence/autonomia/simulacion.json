@@ -1,0 +1,126 @@
+{
+  "activa": true,
+  "npcs": {
+    "maren": {
+      "accion_min": 541,
+      "hambre": 0.133333333333333,
+      "inv": {
+        "baya": 1,
+        "fibra": 4
+      },
+      "plan": {
+        "act": "recolectar",
+        "celda": [
+          33,
+          13
+        ],
+        "motivo": "alimentarme",
+        "objeto": "arbusto@33,13"
+      },
+      "recuerdos": [
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 371
+        },
+        {
+          "actor": "",
+          "detalle": "gelatina",
+          "hecho": "sin_recurso",
+          "min": 391
+        },
+        {
+          "actor": "",
+          "detalle": "gelatina",
+          "hecho": "sin_recurso",
+          "min": 451
+        },
+        {
+          "actor": "",
+          "detalle": "gelatina",
+          "hecho": "sin_recurso",
+          "min": 511
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 541
+        }
+      ],
+      "vinculos": {}
+    },
+    "ordal": {
+      "accion_min": 541,
+      "hambre": 0.133333333333333,
+      "inv": {
+        "baya": 1,
+        "fibra": 8,
+        "madera": 3,
+        "mena": 2
+      },
+      "plan": {
+        "act": "recolectar",
+        "celda": [
+          10,
+          25
+        ],
+        "motivo": "alimentarme",
+        "objeto": "arbusto@10,25"
+      },
+      "recuerdos": [
+        {
+          "actor": "",
+          "detalle": "2 Fibra",
+          "hecho": "recolecto",
+          "min": 366
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 381
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra",
+          "hecho": "recolecto",
+          "min": 396
+        },
+        {
+          "actor": "",
+          "detalle": "2 Fibra, 1 Baya",
+          "hecho": "recolecto",
+          "min": 411
+        },
+        {
+          "actor": "",
+          "detalle": "2 Mena de hierro",
+          "hecho": "recolecto",
+          "min": 446
+        },
+        {
+          "actor": "",
+          "detalle": "3 Madera",
+          "hecho": "recolecto",
+          "min": 486
+        },
+        {
+          "actor": "",
+          "detalle": "horno",
+          "hecho": "sin_estacion",
+          "min": 491
+        },
+        {
+          "actor": "",
+          "detalle": "baya",
+          "hecho": "comio",
+          "min": 541
+        }
+      ],
+      "vinculos": {}
+    }
+  },
+  "ultimo_min": 542
+}

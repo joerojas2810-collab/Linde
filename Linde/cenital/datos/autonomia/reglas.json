@@ -1,0 +1,135 @@
+{
+  "nota": "Prototipo propio, balance provisional. Son reglas y oficios, no eventos ni misiones.",
+  "hambre_por_hora": 8.0,
+  "umbral_comer": 24.0,
+  "saciedad": 32.0,
+  "reserva_comida": 2,
+  "comida": "baya",
+  "intervalo_accion_min": 5,
+  "intervalo_recuerdo_min": 60,
+  "tope_recuerdos": 32,
+  "perfiles": {
+    "maren": {
+      "receta": "pico_piedra",
+      "reserva_producto": 2,
+      "herramientas": [],
+      "grupo": "talleres",
+      "recetas": [
+        "pico_piedra",
+        "hacha_piedra",
+        "unguento"
+      ],
+      "herramientas_necesarias": [
+        "hacha_piedra"
+      ]
+    },
+    "ordal": {
+      "receta": "lingote",
+      "reserva_producto": 3,
+      "herramientas": [
+        "picar"
+      ],
+      "grupo": "canteros",
+      "recetas": [
+        "lingote"
+      ],
+      "herramientas_necesarias": [
+        "pico_piedra"
+      ]
+    },
+    "nerea": {
+      "receta": "hacha_piedra",
+      "reserva_producto": 2,
+      "herramientas": [],
+      "grupo": "talleres",
+      "recetas": [
+        "hacha_piedra",
+        "pico_piedra"
+      ],
+      "herramientas_necesarias": [
+        "hacha_piedra"
+      ]
+    }
+  },
+  "sociedad": {
+    "activa": true,
+    "version": 2,
+    "durabilidad_herramienta": 12,
+    "umbral_reparar": 3,
+    "desgaste_estacion_max": 4,
+    "plazo_acuerdo_min": 360,
+    "reintento_min": 60,
+    "tope_sucesos": 80,
+    "tope_acuerdos_cerrados": 24,
+    "confianza_minima": -2,
+    "confianza_inicial": 0,
+    "ganancia_confianza": 1,
+    "perdida_incumplimiento": 2,
+    "reputacion_ayuda": 1,
+    "reputacion_extraccion": -1,
+    "radio_testigo_celdas": 6,
+    "radio_construccion": 5,
+    "moneda_trueque": "fibra",
+    "valor_items": {
+      "fibra": 1,
+      "madera": 1,
+      "piedra": 1,
+      "baya": 2,
+      "mena": 2,
+      "lingote": 5,
+      "pico_piedra": 6,
+      "hacha_piedra": 5,
+      "unguento": 4
+    },
+    "grupos": {
+      "talleres": {
+        "nombre": "Talleres",
+        "deposito": [
+          28,
+          20
+        ],
+        "territorio": [
+          38,
+          3,
+          24,
+          14
+        ],
+        "protegidos": [
+          "arbol"
+        ],
+        "reservas": {
+          "madera": 3,
+          "fibra": 3,
+          "hacha_piedra": 1
+        },
+        "referencia": "en la casa del taller"
+      },
+      "canteros": {
+        "nombre": "Cantera",
+        "deposito": [
+          10,
+          9
+        ],
+        "territorio": [
+          4,
+          4,
+          13,
+          11
+        ],
+        "protegidos": [
+          "veta"
+        ],
+        "reservas": {
+          "mena": 2,
+          "lingote": 2,
+          "pico_piedra": 1
+        },
+        "referencia": "en el pasillo de la cantera"
+      }
+    },
+    "confianza_min": -10,
+    "confianza_max": 10,
+    "material_reparacion": "lingote",
+    "coste_reparacion": 1
+  }
+}

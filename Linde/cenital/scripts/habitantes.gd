@@ -116,6 +116,15 @@ func pos(id: String) -> Vector2:
 
 ## Franja que toca ahora: {act, lugar, desde, hasta}. Si la energía está bajo el umbral de la ficha, prevalece dormir.
 func deseada(id: String) -> Dictionary:
+	var base := rutina(id)
+	if base.act in ["dormir", "descansar"] or j.autonomia == null: return base
+	var plan: Dictionary = j.autonomia.plan(id)
+	if plan.get("quieto", false): return {"act": "descansar", "lugar": ""}
+	if plan.has("celda"): return {"act": plan.act, "lugar": "autonomia", "celda": plan.celda}
+	return base
+
+## Horario y energía conservan la prioridad sobre el trabajo autónomo.
+func rutina(id: String) -> Dictionary:
 	var f: Dictionary = fichas[id]
 	if j.d.npcs[id].energia < f.nec.umbral_descanso: return {"act": "dormir", "lugar": ""}
 	var m: int = int(j.d.min) % 1440
@@ -126,6 +135,9 @@ func cama_existe(id: String) -> bool:
 	return j.mundo.constr_en(cama(id)).get("t", "") in ["cama", "cama_huesped"]
 
 func _meta(id: String, d: Dictionary) -> Callable:
+	if d.has("celda"):
+		var objetivo := Vector2i(int(d.celda[0]), int(d.celda[1]))
+		return func(c): return j.mundo.es_adyacente(c, objetivo)
 	if d.act == "dormir":
 		var lecho: Vector2i = cama(id)
 		return func(c): return j.mundo.es_adyacente(c, lecho)
@@ -162,7 +174,7 @@ func paso(dt: float) -> void:
 			r.ruta = []
 			continue
 		n.energia = clampf(n.energia + gasto, nec.minimo, nec.maximo)
-		var clave: String = act + ":" + d.lugar
+		var clave: String = act + ":" + d.lugar + str(d.get("celda", []))
 		if r.act != clave or r.v != j.mundo.version:
 			r.ruta = j.mundo.camino(c, meta)
 			r.act = clave

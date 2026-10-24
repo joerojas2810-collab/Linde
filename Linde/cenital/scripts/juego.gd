@@ -9,6 +9,7 @@ const Inv = preload("res://scripts/inventario.gd")
 const Mundo = preload("res://scripts/mundo.gd")
 const Guard = preload("res://scripts/guardado.gd")
 const Hab = preload("res://scripts/habitantes.gd")
+const Autonomia = preload("res://scripts/autonomia.gd")
 const Vivo = preload("res://scripts/mundo_vivo.gd")
 const Comb = preload("res://scripts/combate.gd")
 const Anim = preload("res://scripts/anim_pj.gd")
@@ -22,6 +23,7 @@ const EQUIPO_VACIO := {"casco": "", "torso": "", "guantes": "", "botas": "", "pa
 var d := {}
 var mundo := Mundo.new()
 var habitantes
+var autonomia
 var vivo    # director de Mundo vivo (variables + eventos)
 var combate
 var rt := {}            # id -> {pies, mira, cd_obj, herr_t, msgs}: sesión de cada jugador (pies se vuelca a pos al guardar)
@@ -103,6 +105,10 @@ static func _enteros(v):
 			for i in v.size(): v[i] = _enteros(v[i])
 	return v
 
+## Distingue la simulación autoritativa de las réplicas sin efectos locales.
+func es_autoridad() -> bool:
+	return true
+
 func _arrancar() -> void:
 	mundo.estado = d.mundo
 	mundo.cambiar()
@@ -111,6 +117,7 @@ func _arrancar() -> void:
 	vivo.restaurar()
 	habitantes = Hab.new(self)
 	habitantes.restaurar()
+	autonomia = Autonomia.new(self)
 	combate = Comb.new(self)
 	combate.reiniciar()
 	evaluar_misiones()
@@ -187,6 +194,7 @@ func tick(dt: float) -> void:
 	while _acum >= 1.0:
 		_acum -= 1.0
 		d.min += 1
+		autonomia.paso()
 		if d.min % 60 == 0: _hora_en_punto()
 	for id in rt:
 		var s: Dictionary = rt[id]
@@ -202,7 +210,7 @@ func tick(dt: float) -> void:
 func _hora_en_punto() -> void:
 	mundo.regenerar(d.min, ocupada)
 	combate.revisar_reaparicion()
-	var ev: String = vivo.evaluar()
+	var ev: String = "" if autonomia.activa() else vivo.evaluar()
 	if ev != "":
 		habitantes.reconciliar()
 		aviso_todos(vivo.nombre(ev))
@@ -215,7 +223,7 @@ func _chequeos() -> void:
 			aviso("Recibes lo pendiente.", id)
 			pj.pendientes = {}
 	evaluar_misiones()
-	vivo.evaluar_misiones()
+	if not autonomia.activa(): vivo.evaluar_misiones()
 
 # ---------- estadísticas derivadas (se recalculan, nunca se acumulan) ----------
 func stats(id: String = LOCAL) -> Dictionary:
@@ -327,6 +335,7 @@ func golpear_objeto(c: Vector2i, id: String = LOCAL) -> Dictionary:
 		d.mundo.golpes[oid] = necesarios - 1
 		return _no("Inventario lleno: %s no se rompe" % def.n, id)
 	mundo.romper(oid, d.min)
+	if autonomia.sociedad.activa(): autonomia.sociedad.observar_extraccion(id, oid)
 	ganar_xp(def.xp, id)
 	return _ok("Obtienes " + _txt_items(drops), id)
 
@@ -493,6 +502,7 @@ func retirar(c: Vector2i, id: String = LOCAL) -> Dictionary:
 	if d.cofres.has(cid) and not d.cofres[cid].inv.is_empty(): return _no("El cofre no está vacío", id)
 	if not Inv.anadir(pj.inv, def.coste, stats(id).slots): return _no("Inventario lleno", id)
 	mundo.quitar(c)
+	if autonomia.sociedad.activa(): autonomia.sociedad.datos().estaciones.erase(k)
 	d.cofres.erase(cid)
 	return _ok("Recuperas " + _txt_items(def.coste), id)
 
@@ -640,7 +650,16 @@ func aceptar_mision_plantilla(iid: String, id: String = LOCAL) -> Dictionary:
 func entregar_mision_plantilla(iid: String, id: String = LOCAL) -> Dictionary:
 	return vivo.entregar_plantilla(iid, id)
 
+## Resuelve una petición nacida de una carencia real, con autoridad y proximidad.
+func aportar_grupo(grupo: String, id: String = LOCAL) -> Dictionary:
+	return autonomia.sociedad.aportar_grupo(grupo, id)
+
+func ayudar_habitante(npc: String, rechazar: bool = false, id: String = LOCAL) -> Dictionary:
+	return autonomia.ayudar(npc, id, rechazar)
+
 func hablar(npc: String, id: String = LOCAL) -> Dictionary:
+	if autonomia.activa() and not autonomia.perfil(npc).is_empty():
+		return {"texto": autonomia.dialogo(npc, id), "tipo": "necesidad"}
 	var pj := jug(id)
 	evaluar_misiones(id)
 	pj.eventos["hablo_" + npc] = pj.eventos.get("hablo_" + npc, 0) + 1

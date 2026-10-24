@@ -1,0 +1,24 @@
+Resultados prueba_red  2026-10-24T17:52:35  Godot 4.7.1-stable (official)
+semilla 54 · puerto 7791 · localhost, procesos separados
+escenario de clientes terminado a los 18.9 s
+duración total 35.4 s
+
+[OK] A y B conectan -- conexión ms A=21.0 B=4.0 · bienvenida ms A=73.0 B=59.0
+[OK] ambos se ven moverse -- A vio ["@bea"] · B vio ["@ana"]
+[OK] A rompe una roca y B la ve desaparecer -- roca=roca@40,38 (ruta 4.0 celdas) · B vio=roca@40,38 · piedra de A=2.0
+[OK] inventarios independientes -- A={ "piedra": 2 } · B={ "baya": 1, "fibra": 2, "piedra_alma": 1 } (B rompió arbusto@40,35)
+[OK] acciones inválidas o fuera de alcance de A ignoradas -- { "constr_igual": true, "inv_igual": true, "pos_igual": true } · rechazos del servidor para @ana=9 (9 enviados; la instantánea y el evento falsos los descarta el motor) · salto máx tras trampas=0.00 px
+[OK] la posición nunca supera la velocidad por tick -- máx px por tick A=3.20 B=3.20 (límite 3.20)
+[OK] la desconexión de B no afecta a A -- A dejó de ver a @bea tras 0.0 instantáneas y recibió 145.0 más
+[OK] clave incorrecta rechazada -- Bmala: Clave incorrecta
+[OK] reconectar recupera inventario y posición -- B al salir { "baya": 1, "fibra": 2, "piedra_alma": 1 } en [609.599914550781, 572.0] · B2 { "baya": 1, "fibra": 2, "piedra_alma": 1 } en [609.599914550781, 572.0] · A la vio volver=true
+[OK] el servidor se cierra solo y guarda el mundo -- cerró solo=true · guardado con @ana y @bea, la roca rota y sin claves en claro
+[OK] tick del servidor < 16,67 ms (p95) -- p95=2.158 ms máx=5.960 ms en 700.0 ticks · enviados 26.1 KB/s en total (13.0 KB/s por jugador conectado, media de 35 s)
+
+TOTAL: 0 comprobaciones fallidas
+
+NO comprobado aquí:
+- Red real (Wi-Fi/Internet, NAT, pérdida o latencia reales): todo es 127.0.0.1 en una máquina. Sin relay ni NAT.
+- 10-15 clientes con juego real (el prototipo red-minima midió 15 con ENet; aquí hay 2).
+- Latencia simulada de 100 ms, 60 s de movimiento continuo y 4 clientes simultáneos (criterios de la historia 002).
+- La ventana del anfitrión y del cliente (dibujo de los demás, menú Unirse): solo se comprobó que la escena carga sin errores.

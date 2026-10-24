@@ -199,6 +199,12 @@ func ejecutar(id: String, datos) -> bool:
 			_mirar(id, a[0])
 			if tipo == "accion": j.accion(id)
 			else: _enviar(ids.get(id, 0), ["interaccion", j.interactuar(id)])
+		"aportar_grupo":
+			if not _sig(a, [TYPE_STRING]): return _rechazo(id, tipo)
+			j.aportar_grupo(a[0], id)
+		"ayudar_habitante":
+			if not _sig(a, [TYPE_STRING, TYPE_BOOL]) or not j.habitantes.ids.has(a[0]): return _rechazo(id, tipo)
+			j.ayudar_habitante(a[0], a[1], id)
 		"dormir":
 			if not a.is_empty(): return _rechazo(id, tipo)
 			_dormir(id)

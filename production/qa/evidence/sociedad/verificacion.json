@@ -1,0 +1,64 @@
+{
+  "fecha": "2026-10-24",
+  "motor": "Godot 4.7.1",
+  "sociedad": {
+    "comprobaciones": 48,
+    "fallos": 0
+  },
+  "autonomia_anterior": {
+    "comprobaciones": 33,
+    "fallos": 0
+  },
+  "regresion_general": {
+    "pass": 326,
+    "fallos": 0
+  },
+  "interfaz": {
+    "pass": 13,
+    "fallos": 0
+  },
+  "red_existente": "localhost, procesos separados, 0 fallos; sociedad prueba la réplica y los pedidos de aportes",
+  "simulacion": {
+    "semilla": 123,
+    "dias": 3,
+    "intervenciones_jugador": 0,
+    "tarjetas": 0,
+    "misiones_director": 0,
+    "estadisticas": {
+      "acuerdo": 15,
+      "alternativa": 27,
+      "aporte": 14,
+      "construccion": 1,
+      "desgaste": 7,
+      "entrega": 14,
+      "fabricacion": 13,
+      "incumplimiento": 1,
+      "reparacion": 1,
+      "retiro": 7
+    }
+  },
+  "visual": "escena real con render, habitantes/grupos/diario/diálogo/depósito inspeccionados",
+  "limites": [
+    "Sin revisión independiente",
+    "Sin prueba de diversión ni balance definitivo",
+    "Sin sesión completa de sociedad en Internet",
+    "Avisos de objetos y recursos al cerrar, también presentes en las suites anteriores"
+  ],
+  "sha256": {
+    "Iniciar-Prueba-Autonomia.command": "57d9088ce6fb4e91339656c25bef190bbbe621e4d9dd0b98429d0a97ece468d8",
+    "Linde/cenital/datos/autonomia/reglas.json": "c4ab73e26465ed1ee19b61ae4e62a37a1efbfab9459955df6d0138f77f888a61",
+    "Linde/cenital/docs/AUTONOMIA.md": "30db46b0ed5ab5b13d0c5c259688458267be8501e225bf8d0bef36855ebc8f2d",
+    "design/gdd/sociedad-emergente.md": "b9cc0f13d947e699b094e59f9150a1e39289f0dcd7eaed035f0c9ffa70d1c423",
+    "Linde/cenital/scripts/autonomia.gd": "385dac85c107c70fd73b086f4cc09a4288909c4c89791dd4700390649956dad3",
+    "Linde/cenital/scripts/sociedad.gd": "80018187ebe0862d39e347fa01af6a7fab442d38fdf2dc5c1c5d67e824955380",
+    "Linde/cenital/scripts/juego.gd": "adcb23be5ba44a90d0cbd9978cd094f8706b05d208c94c434ca7ad3de019ce49",
+    "Linde/cenital/scripts/habitantes.gd": "cd7ca6ce71c1ab0da246ba80def6d5eb9b982767d7d1ddb78047bd6686b0f72d",
+    "Linde/cenital/scripts/escena.gd": "819958c7fe0825e0c172327a1b0085edbb8bffcf80221bda60c047daf35a376a",
+    "Linde/cenital/scripts/hud.gd": "93dc14a644cd735fe2bd57d1acf93bf7df4a53ea674e3a2728c7a5e9a5a28ff8",
+    "Linde/cenital/scripts/red_servidor.gd": "002e67c1cee4905317a337adc2f5fc0ce3585b5cd213aad664cca655ccf148f7",
+    "Linde/cenital/scripts/red_cliente.gd": "c74ed748d9128143273089f2125d68f8363c8734915f1e44a289df886abebd73",
+    "Linde/cenital/tests/prueba_sociedad.gd": "e0e4ced2c07f301cc91e592baec1d2c383d5c87675cb468e81031215c732928f",
+    "Linde/cenital/tests/prueba_autonomia.gd": "25805855391ae98e24d1f15df7807ef0708a815516a4a81ce6f0575637fa5405",
+    "Linde/cenital/tests/captura_sociedad.gd": "d63d74c0c33d25d3e64e67b90b6209055124c4367de3d27039ad0773acb2cba1"
+  }
+}
