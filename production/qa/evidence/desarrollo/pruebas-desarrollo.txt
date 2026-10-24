@@ -1,0 +1,65 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS la gramática solo utiliza materiales y costes existentes
+PASS espada y armadura salen de combinar reglas, sin catálogo individual
+PASS no se fabrica una espada de tejido incompatible
+PASS rechaza clave inválida art1:espada:madera:simple:99
+PASS rechaza clave inválida art1:espada:madera:simple:01
+PASS rechaza clave inválida art1:espada:madera:simple:-1
+PASS rechaza clave inválida art2:espada:madera:simple:0
+PASS el inventario reconoce el equipo generado
+PASS la pieza tiene representación con el arte existente
+PASS no se conocen planos de materiales nunca obtenidos
+PASS un pedido no concede conocimiento ni consume si no se conoce el plano
+PASS recolectar un material descubre sus combinaciones iniciales
+PASS los golpes intermedios no dan múltiples prácticas por un mismo recurso
+PASS fabricar exige una mesa y no pierde materiales al fallar
+PASS la estación de prueba se construye pagando materiales reales
+PASS se fabrica una variante conocida junto a la mesa
+PASS la pieza consume exactamente la receta generada
+PASS la fabricación exitosa aporta práctica
+PASS una espada generada equipada cambia el combate real
+PASS tener la espada en la mochila no concede su daño
+PASS la práctica material desbloquea un rango especializado
+PASS una técnica avanzada también necesita espacio de taller
+PASS ampliar un taller habilita una técnica aprendida
+PASS la variante avanzada tiene un coste y una fabricación reales
+PASS aprender no cambia retroactivamente las propiedades de una pieza
+PASS no se puede pedir una calidad o técnica aún no aprendida
+PASS la armadura generada funciona en la ranura y la defensa
+PASS mochila llena rechaza la pieza sin consumir ni entrenar
+PASS la práctica de construcción permite organizar un taller más eficiente
+PASS un laminado es material de inventario y no equipo gratuito
+PASS no se permiten mezclas inválidas ni cadenas de mezclas ilimitadas
+PASS tener componentes no sustituye la práctica necesaria para transformarlos
+PASS se transforma hierro y fibra en un laminado pagando componentes
+PASS se transforma hierro y fibra en un laminado pagando componentes
+PASS se transforma hierro y fibra en un laminado pagando componentes
+PASS la mezcla conserva las cantidades y consume el metal
+PASS el material elaborado abre planos nuevos y se consume al fabricar
+PASS el equipo de material elaborado tiene propiedades jugables
+PASS se guardan materiales y piezas elaboradas
+PASS cargar conserva el material elaborado y la pieza sin perderlos
+PASS no se compran obras a distancia
+PASS el trueque paga con materiales y entrega una obra existente
+PASS repetir la compra de una pieza agotada no consume más
+PASS se guarda equipo y conocimiento generado
+PASS cargar conserva las piezas y los rangos sin acumular bonus
+PASS cargar no vuelve a sumar efectos de equipo o práctica
+PASS la red rechaza un tipo de plano inválido
+PASS el servidor rechaza una calidad no aprendida sin confiar en el cliente
+PASS la réplica consulta la identidad correcta de conocimientos del jugador
+PASS el atlas explica los nueve recursos y consumibles actuales
+PASS el atlas conecta origen, refinado y usos del hierro
+DESARROLLO_LIBRE: {"creaciones":2,"sociedad":{"acuerdo":16,"alternativa":25,"aporte":10,"construccion":16,"descubrimiento":2,"desgaste":1,"entrega":16,"fabricacion":10,"reparacion":2,"retiro":3},"suelos":14}
+PASS los habitantes amplían sus talleres según práctica y necesidades
+PASS sin intervención llegan a crear piezas mediante la gramática
+PASS los prototipos también desgastan la mesa utilizada
+PASS los descubrimientos no dependen de tarjetas o misiones preparadas
+DESARROLLO: 55 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 58 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 8 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

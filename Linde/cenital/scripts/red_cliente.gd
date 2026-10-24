@@ -196,6 +196,9 @@ class Replica extends "res://scripts/juego.gd":
 	var _frame_mov := 0
 	var _t_accion := -1000
 
+	func actor_desarrollo(_id: String = LOCAL) -> String:
+		return "pj:" + red.yo
+
 	func es_autoridad() -> bool:
 		return false
 
@@ -225,6 +228,15 @@ class Replica extends "res://scripts/juego.gd":
 	func interactuar(_id: String = LOCAL) -> Dictionary:
 		red.enviar(["interactuar", mira])      # la respuesta llega como evento «interaccion»
 		return {"ok": false}
+
+	func refinar_material(material: String, _id: String = LOCAL) -> Dictionary:
+		return _env(["refinar_material",material])
+
+	func fabricar_artefacto(clave: String, _id: String = LOCAL) -> Dictionary:
+		return _env(["fabricar_artefacto",clave])
+
+	func comprar_artefacto(npc: String, clave: String, _id: String = LOCAL) -> Dictionary:
+		return _env(["comprar_artefacto",npc,clave])
 
 	func aportar_grupo(grupo: String, _id: String = LOCAL) -> Dictionary:
 		return _env(["aportar_grupo", grupo])

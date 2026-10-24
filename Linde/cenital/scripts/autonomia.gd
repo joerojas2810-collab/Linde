@@ -6,6 +6,8 @@ const C = preload("res://scripts/catalogos.gd")
 const Mundo = preload("res://scripts/mundo.gd")
 const Inv = preload("res://scripts/inventario.gd")
 const Sociedad = preload("res://scripts/sociedad.gd")
+const Desarrollo = preload("res://scripts/desarrollo.gd")
+var desarrollo
 var sociedad
 var j
 var reglas: Dictionary
@@ -14,14 +16,18 @@ func _init(juego) -> void:
 	j = juego
 	reglas = JSON.parse_string(FileAccess.get_file_as_string("res://datos/autonomia/reglas.json"))
 	sociedad = Sociedad.new(self)
+	desarrollo = Desarrollo.new(self)
 	if j.es_autoridad() and "--autonomia" in OS.get_cmdline_user_args(): activar()
-	else: sociedad.restaurar()
+	else:
+		sociedad.restaurar()
+		desarrollo.restaurar()
 
 ## Activa la prueba en esta partida. Las partidas normales conservan sus reglas anteriores.
 func activar() -> void:
 	if not j.d.mundo_vivo.has("autonomia"):
 		j.d.mundo_vivo.autonomia = {"activa": true, "modo": "sociedad" if reglas.sociedad.activa else "necesidades", "ultimo_min": int(j.d.min), "npcs": {}}
 	sociedad.restaurar()
+	desarrollo.restaurar()
 
 ## Consulta sin modificar la réplica ni activar partidas antiguas.
 func activa() -> bool:
@@ -36,8 +42,10 @@ func estado(nid: String) -> Dictionary:
 		if not n.has(campo): n[campo] = {}
 	return n
 
+## Perfil del habitante: los de reglas.json o el de un colono llegado después (guardado en la partida).
 func perfil(nid: String) -> Dictionary:
-	return reglas.perfiles.get(nid, {})
+	if reglas.perfiles.has(nid): return reglas.perfiles[nid]
+	return j.d.get("mundo_vivo", {}).get("autonomia", {}).get("colonos", {}).get(nid, {}).get("perfil", {})
 
 func _recordar(nid: String, hecho: String, detalle: String, actor: String = "") -> void:
 	var recuerdos: Array = estado(nid).recuerdos
@@ -254,5 +262,5 @@ func dialogo(nid: String, jugador: String) -> String:
 
 ## Expresión legible de un recuerdo para la interfaz.
 func texto_recuerdo(r: Dictionary) -> String:
-	var nombres := {"sin_recurso": "No encontré el recurso", "sin_estacion": "Me faltó una estación", "recolecto": "Recolecté", "fabrico": "Fabriqué", "comio": "Comí", "ayuda": "Recibí ayuda", "rechazo": "No pudieron ayudarme", "herramienta_rota": "Se rompió mi herramienta", "reparo": "Reparé", "extraccion_vista": "Vi extraer", "aporte": "Aporté al grupo", "promesa": "Acordé entregar", "cumplio": "Cumplimos el acuerdo", "incumplio": "No cumplió el plazo", "plazo_vencido": "Venció el acuerdo", "pospuso": "Busqué otra solución", "construyo": "Construí"}
+	var nombres := {"sin_recurso": "No encontré el recurso", "sin_estacion": "Me faltó una estación", "recolecto": "Recolecté", "fabrico": "Fabriqué", "comio": "Comí", "ayuda": "Recibí ayuda", "rechazo": "No pudieron ayudarme", "herramienta_rota": "Se rompió mi herramienta", "reparo": "Reparé", "extraccion_vista": "Vi extraer", "aporte": "Aporté al grupo", "promesa": "Acordé entregar", "cumplio": "Cumplimos el acuerdo", "incumplio": "No cumplió el plazo", "plazo_vencido": "Venció el acuerdo", "pospuso": "Busqué otra solución", "construyo": "Construí", "descubrio": "Creé un nuevo plano", "estafado": "Me engañaron", "estafo": "Engañé", "hurto": "Robé", "hurto_visto": "Vi un robo", "llego": "Llegué", "robado": "Me robaron"}
 	return str(nombres.get(r.hecho, r.hecho)) + ": " + str(r.detalle)

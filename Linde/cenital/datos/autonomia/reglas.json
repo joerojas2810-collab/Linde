@@ -10,6 +10,7 @@
   "tope_recuerdos": 32,
   "perfiles": {
     "maren": {
+      "caracter": {"honestidad": 90, "codicia": 20, "rencor": 40},
       "receta": "pico_piedra",
       "reserva_producto": 2,
       "herramientas": [],
@@ -24,6 +25,7 @@
       ]
     },
     "ordal": {
+      "caracter": {"honestidad": 40, "codicia": 70, "rencor": 60},
       "receta": "lingote",
       "reserva_producto": 3,
       "herramientas": [
@@ -31,13 +33,15 @@
       ],
       "grupo": "canteros",
       "recetas": [
-        "lingote"
+        "lingote",
+        "pico_piedra"
       ],
       "herramientas_necesarias": [
         "pico_piedra"
       ]
     },
     "nerea": {
+      "caracter": {"honestidad": 75, "codicia": 35, "rencor": 25},
       "receta": "hacha_piedra",
       "reserva_producto": 2,
       "herramientas": [],
@@ -130,6 +134,47 @@
     "confianza_min": -10,
     "confianza_max": 10,
     "material_reparacion": "lingote",
-    "coste_reparacion": 1
+    "coste_reparacion": 1,
+    "caracter": {
+      "nota": "Disposiciones 0-100 por habitante (perfiles.*.caracter). Provisional: gente buena y mala, no todos cumplen.",
+      "defecto": {"honestidad": 70, "codicia": 30, "rencor": 30},
+      "prob_estafa_max": 0.5,
+      "sobreprecio_max": 0.6,
+      "acaparar_max": 2,
+      "perdida_estafa": 4,
+      "castigo_grupo_estafa": 3,
+      "umbral_hurto": 50,
+      "hurto_max": 2,
+      "castigo_hurto": 3,
+      "rencor_dias_por_punto": 40
+    },
+    "propiedad": {
+      "nota": "Quien tiene excedente de la moneda de trueque se hace un cofre propio junto a su cama y ahorra en él. Provisional.",
+      "activa": true,
+      "umbral_cofre": 20,
+      "conservar": 10,
+      "lote_min": 10
+    },
+    "vivienda": {
+      "nota": "Quien tiene excedente y no hay camas libres construye una cama de huésped cerca del depósito de su grupo. Provisional.",
+      "activa": true,
+      "requiere_excedente": {"fibra": 10},
+      "espera_min": 720
+    },
+    "inmigracion": {
+      "nota": "Sin número objetivo de habitantes: max_habitantes es solo un techo técnico provisional por rendimiento y red. Llega alguien cuando hay cama libre y riqueza.",
+      "activa": true,
+      "intervalo_min": 120,
+      "espera_min": 1440,
+      "max_habitantes": 12,
+      "riqueza_minima": 120,
+      "nombres": ["Iria", "Tomás", "Bruno", "Lía", "Aldo", "Sira", "Mateo", "Nuria", "Hugo", "Elena", "Raúl", "Clara"],
+      "caracter_rango": {"honestidad": [15, 95], "codicia": [10, 90], "rencor": [10, 80]},
+      "oficios": {
+        "cantero": {"molde": "ordal", "grupo": "canteros", "receta": "lingote", "reserva_producto": 3, "herramientas": ["picar"], "recetas": ["lingote", "pico_piedra"], "herramientas_necesarias": ["pico_piedra"]},
+        "artesano": {"molde": "maren", "grupo": "talleres", "receta": "pico_piedra", "reserva_producto": 2, "herramientas": [], "recetas": ["pico_piedra", "hacha_piedra"], "herramientas_necesarias": ["hacha_piedra"]},
+        "recolector": {"molde": "nerea", "grupo": "talleres", "receta": "hacha_piedra", "reserva_producto": 2, "herramientas": [], "recetas": ["hacha_piedra", "pico_piedra"], "herramientas_necesarias": ["hacha_piedra"]}
+      }
+    }
   }
 }

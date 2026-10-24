@@ -4,7 +4,7 @@
 
 Documento único de estado. Para el plan original y las decisiones de diseño ver [README.md](README.md); para las reglas, [design/gdd/mundo-vivo.md](../../../design/gdd/mundo-vivo.md).
 
-> **Prueba posterior de autonomía (24/10):** se añadió un modo optativo separado de este epic. Ver §10–11 y `Linde/cenital/docs/AUTONOMIA.md`. El cierre 5/5 de arriba corresponde al director de tarjetas, no a la visión completa del juego.
+> **Prueba posterior de autonomía (24/10):** se añadió un modo optativo separado de este epic. Ver §10–12 y `Linde/cenital/docs/AUTONOMIA.md`. El cierre 5/5 de arriba corresponde al director de tarjetas, no a la visión completa del juego.
 
 ## 1. Qué hace hoy el sistema
 
@@ -138,3 +138,39 @@ Es una rebanada de economía y grupos, no la visión completa: sin guerras, facc
 
 
 Verificación de §11: 48 comprobaciones de sociedad y 33 de la primera autonomía, sin fallos; suite general 326 PASS; UI 13 PASS; integración de red existente en localhost con 0 fallos. En tres días de simulación sin intervención, semilla 123: 15 acuerdos, 14 entregas, 13 fabricaciones, 1 construcción, 1 reparación y 1 vencimiento. Los contadores representan hechos ejecutados por reglas, no un guion. Los avisos de recursos al cerrar continúan; no hay revisión independiente ni playtest de diversión. No se probó una sesión completa de sociedad multijugador en Internet.
+
+
+## 12. Desarrollo: materiales, equipo y pericia (2026-10-24)
+
+Ampliación solicitada por el usuario después de §11. El modo de prueba añade una gramática de forma/material/técnica/calidad en `artesania.gd`, progreso por acciones confirmadas y ampliación de talleres en `desarrollo.gd`. `G` abre el atlas de los 9 recursos/consumibles actuales, planos con costes/propiedades, laminados y práctica.
+
+- Materias base existentes: madera, piedra, fibra e hierro refinado. Los laminados se derivan de hierro + refuerzo (madera/piedra/fibra), consumiendo componentes en un horno; no se añadieron minerales al mapa.
+- Espadas, escudos y armaduras generados funcionan en inventario, equipo, estadísticas, combate, guardado y red. Reutilizan geometría recoloreada; no hay siluetas nuevas.
+- La práctica desbloquea técnicas y calidad para piezas futuras. Recolección, construcción y combate tienen efectos acotados. Las piezas anteriores no cambian por aprender.
+- Los NPC amplían superficie pagando madera, construyen mesas y producen obras con excedentes. Pueden ofrecerlas por materiales; comprar requiere proximidad y stock real.
+- Claves `art1:`/`mat1:` y reglas v1 conservables; partidas anteriores reconocen recursos sin regalar práctica. El servidor valida calidad, conocimiento y costes.
+
+No es generación ilimitada: las formas, efectos y acciones siguen implementados en código. Diseño `design/gdd/desarrollo-generativo.md`; uso y reglas `Linde/cenital/docs/DESARROLLO.md`; evidencia `production/qa/evidence/desarrollo/`. Los resultados de §11 son históricos de esa versión, sin activar esta nueva capa.
+
+
+Verificación de §12: 55 comprobaciones de desarrollo sin fallos (incluyen laminados y equipo compuesto), 326 PASS generales, 13 PASS de interfaz y 0 fallos en la integración de red existente en localhost. En tres días de simulación sin intervención se produjeron 2 obras generadas y 14 suelos de taller; continuaron 16 acuerdos entregados, 10 fabricaciones de recetas anteriores y 2 reparaciones. Capturas inspeccionadas de atlas, hierro, planos, práctica, laminados, ofertas e inventario. Sigue sin revisión independiente, prueba de balance o sesión completa de desarrollo multijugador en Internet. Los avisos de recursos al cerrar permanecen.
+
+
+## 13. Mundo que crece: carácter, vivienda, población y propiedad (2026-10-24)
+
+Cambios hechos tras el aviso de «haz los cambios tuyos», sobre la sociedad de §11. Todo en datos (`datos/autonomia/reglas.json`, bloques `perfiles.*.caracter`, `sociedad.caracter`, `propiedad`, `vivienda`, `inmigracion`) y en `scripts/sociedad.gd`. Ritmo de desarrollo: pruebas mínimas, balance provisional.
+
+- **Gente buena y mala.** Cada habitante tiene honestidad, codicia y rencor (0-100). Quien tiene poca honestidad puede **estafar** en un acuerdo (se queda con lo prometido y con el pago); el codicioso **cobra de más** y **acapara**; quien guarda rencor pierde más confianza y perdona más despacio. Nadie compra a quien le falló. Maren es honrada; Ordal, codicioso y poco honrado.
+- **Hurto.** Con poca honestidad y sin otra vía, un habitante toma de un depósito de otro grupo o de un cofre ajeno si el dueño no está cerca. Solo los testigos cercanos lo saben y cambian su confianza.
+- **Propiedad.** Con excedente de fibra, cada habitante se construye un **cofre propio** junto a su cama y ahorra en él. Los cofres tienen dueño (habitante, jugador o grupo). **Tomar de un cofre ajeno es un hurto** también para el jugador: hay testigos, memoria y reputación, y si el dueño es otro jugador conectado recibe un aviso.
+- **Vivienda y crecimiento.** Con excedente y sin camas libres, un habitante construye una **cama de huésped**; la cama libre y la riqueza del valle atraen a un **colono** con oficio (cantero, artesano o recolector) y carácter sorteados. Se guarda entero en `mundo_vivo.autonomia.colonos` y sobrevive a guardar y cargar. **No hay número objetivo de habitantes**: `max_habitantes` (12) es solo un techo técnico por rendimiento y red.
+- **Error corregido.** Al cargar una partida con habitantes llegados después, la simulación fallaba (`rutas[...]` sin preparar). Afectaba también a Nerea en el epic anterior.
+- **Prueba de humo (10 días, sin jugador):** la población pasa de 2 a unos 10, con 12 a 15 construcciones, ahorros en cofres propios y entre 40 y 60 estafas; según la semilla, algunas relaciones se rompen y otras no. Con la misma semilla el resultado se repite.
+
+**Límites y pendientes**
+- Se acumula fibra sin freno (cientos por habitante): falta un sumidero real o precios que suban con la abundancia.
+- Muchas estafas (alrededor del 15 % de los acuerdos): `prob_estafa_max` y las honestidades son provisionales.
+- Los colonos usan los mismos tres oficios y horarios de Maren, Ordal y Nerea; sin diálogos propios (TD-005) y con aspecto derivado del id.
+- No verificado: que un **cliente de red** vea a los colonos y los cofres de los habitantes (el estado viaja en `mundo_vivo`, pero solo se probó guardar y cargar); el panel J con 10 habitantes; ni una partida jugada a mano.
+- Sigue sin activarse la autonomía por defecto en partidas nuevas ni retirarse la campaña del capítulo 1 (§11).
+- Ajustada una comprobación de `tests/prueba_sociedad.gd`: la reparación ya no se exige en la simulación libre, porque depende de la secuencia; su mecanismo sigue comprobado aparte.

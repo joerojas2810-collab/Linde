@@ -106,6 +106,10 @@ static func _enteros(v):
 	return v
 
 ## Distingue la simulación autoritativa de las réplicas sin efectos locales.
+## Identidad persistente para conocimientos y práctica, también en red.
+func actor_desarrollo(id: String = LOCAL) -> String:
+	return "pj:" + id
+
 func es_autoridad() -> bool:
 	return true
 
@@ -231,6 +235,10 @@ func stats(id: String = LOCAL) -> Dictionary:
 	var s := {"hp": C.HP_BASE, "dmg": C.DMG_BASE, "vel": 1.0, "slots": C.MAX_SLOTS_BASE, "golpes_menos": 0, "def": 0}
 	for h in pj.hab:
 		for k in C.HAB[h].efe: s[k] += C.HAB[h].efe[k]
+	if autonomia != null and autonomia.desarrollo.activa():
+		var actor := actor_desarrollo(id)
+		s.golpes_menos += mini(int(autonomia.desarrollo.cfg.bonus_recoleccion_max), autonomia.desarrollo.rango(actor,"recoleccion"))
+		s.dmg += mini(int(autonomia.desarrollo.cfg.bonus_combate_max), autonomia.desarrollo.rango(actor,"combate"))
 	var arma: String = str(pj.equipo.get("arma", ""))   # el daño de arma sale solo del arma equipada, no del inventario
 	if arma != "": s.dmg += int(Eq.info(arma).get("dmg", 0))
 	var f: Dictionary = Eq.finales(pj.equipo, int(s.hp) - C.HP_BASE, float(s.vel) - 1.0, C.HP_BASE)   # 3.2: redondeo único
@@ -336,6 +344,7 @@ func golpear_objeto(c: Vector2i, id: String = LOCAL) -> Dictionary:
 		return _no("Inventario lleno: %s no se rompe" % def.n, id)
 	mundo.romper(oid, d.min)
 	if autonomia.sociedad.activa(): autonomia.sociedad.observar_extraccion(id, oid)
+	autonomia.desarrollo.registrar(actor_desarrollo(id),"recoleccion",drops)
 	ganar_xp(def.xp, id)
 	return _ok("Obtienes " + _txt_items(drops), id)
 
@@ -364,6 +373,9 @@ func fabricar(rid: String, id: String = LOCAL) -> Dictionary:
 	if not estacion_cerca(r.est, id): return _no("Necesitas estar junto a: %s" % r.est, id)
 	if not Inv.tiene(pj.inv, r.ent): return _no("Faltan materiales", id)
 	if not Inv.cambiar(pj.inv, r.ent, r.sal, stats(id).slots): return _no("Inventario lleno", id)
+	var materiales: Dictionary = r.ent.duplicate()
+	materiales.merge(r.sal, true)
+	autonomia.desarrollo.registrar(actor_desarrollo(id),"artesania",materiales)
 	return _ok("Fabricas %s" % r.n, id)
 
 func usar(item: String, id: String = LOCAL) -> Dictionary:
@@ -489,6 +501,7 @@ func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
 			return _no("Eso cerraría un camino esencial", id)
 	Inv.quitar(pj.inv, def.coste)
 	if def.get("cofre", false): d.cofres["c@" + Mundo.clave(c)] = {"inv": {}}
+	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",def.coste)
 	return _ok("Construyes %s" % def.n, id)
 
 func retirar(c: Vector2i, id: String = LOCAL) -> Dictionary:
@@ -533,6 +546,7 @@ func mover_cofre(cid: String, item: String, hacia_cofre: bool, id: String = LOCA
 		if not Inv.cabe(pj.inv, lote, stats(id).slots): return _no("Inventario lleno", id)
 		Inv.quitar(cf.inv, lote)
 		Inv.anadir(pj.inv, lote, stats(id).slots)
+		autonomia.sociedad.observar_hurto_cofre(id, cid, item, n)   # tomar de un cofre ajeno tiene testigos y consecuencias
 	return _ok("", id)
 
 # E: habitante cercano, cofre o cama delante.
@@ -651,6 +665,16 @@ func entregar_mision_plantilla(iid: String, id: String = LOCAL) -> Dictionary:
 	return vivo.entregar_plantilla(iid, id)
 
 ## Resuelve una petición nacida de una carencia real, con autoridad y proximidad.
+## Piezas derivadas de reglas: el servidor valida conocimiento, calidad, coste y capacidad.
+func refinar_material(material: String, id: String = LOCAL) -> Dictionary:
+	return autonomia.desarrollo.refinar(material,id)
+
+func fabricar_artefacto(clave: String, id: String = LOCAL) -> Dictionary:
+	return autonomia.desarrollo.fabricar(clave,id)
+
+func comprar_artefacto(npc: String, clave: String, id: String = LOCAL) -> Dictionary:
+	return autonomia.desarrollo.comprar(npc,clave,id)
+
 func aportar_grupo(grupo: String, id: String = LOCAL) -> Dictionary:
 	return autonomia.sociedad.aportar_grupo(grupo, id)
 

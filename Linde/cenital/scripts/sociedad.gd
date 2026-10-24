@@ -40,6 +40,16 @@ func grupo(gid: String) -> Dictionary:
 func grupo_de(nid: String) -> String:
 	return str(a.perfil(nid).get("grupo", ""))
 
+## Disposición moral del habitante (honestidad, codicia, rencor; 0-100). Sin perfil usa el valor por defecto de las reglas.
+func caracter(nid: String) -> Dictionary:
+	var c: Dictionary = cfg.caracter.defecto.duplicate()
+	c.merge(a.perfil(nid).get("caracter", {}), true)
+	return c
+
+## Azar repetible por habitante, motivo y minuto: la misma partida decide igual al repetirse.
+func _azar(nid: String, clave: String) -> float:
+	return j._rng("caracter", "%s:%s:%d" % [nid, clave, int(j.d.min)]).randf()
+
 func suceso(tipo: String, detalle: String, quien: String = "", otro: String = "") -> void:
 	var d: Dictionary = datos()
 	d.estadisticas[tipo] = int(d.estadisticas.get(tipo, 0)) + 1
@@ -51,6 +61,7 @@ func confianza(nid: String, otro: String) -> int:
 	return int(a.estado(nid).vinculos.get("npc:" + otro, {}).get("confianza", cfg.confianza_inicial))
 
 func _vinculo(nid: String, otro: String, delta: int) -> void:
+	if delta < 0: delta = -ceili(float(-delta) * (1.0 + float(caracter(nid).rencor) / 100.0))   # quien guarda rencor pierde más confianza
 	var n: Dictionary = a.estado(nid)
 	var clave := "npc:" + otro
 	var v: Dictionary = n.vinculos.get(clave, {})
@@ -90,8 +101,9 @@ func reserva(nid: String, item: String) -> int:
 	if item == str(a.reglas.comida): return int(a.reglas.reserva_comida)
 	if item in a.perfil(nid).get("herramientas_necesarias", []): return 1
 	var receta: Dictionary = C.RECETAS[a.perfil(nid).receta]
-	if receta.sal.has(item): return 1
-	return int(receta.ent.get(item, 0))
+	var base: int = 1 if receta.sal.has(item) else int(receta.ent.get(item, 0))
+	if base > 0: base += floori(float(caracter(nid).codicia) / 100.0 * float(cfg.caracter.acaparar_max))   # solo el muy codicioso acapara lo que usa
+	return base
 
 func excedente(nid: String, item: String) -> int:
 	return maxi(0, int(a.estado(nid).inv.get(item, 0)) - reserva(nid, item))
@@ -132,7 +144,10 @@ func _herramienta_para(nid: String, def: Dictionary) -> String:
 
 func golpes(nid: String, def: Dictionary) -> int:
 	var tag := _herramienta_para(nid, def)
-	return int(def.golpes.get(tag, 9999))
+	var necesarios := int(def.golpes.get(tag, 9999))
+	if necesarios < 9999 and a.desarrollo != null and a.desarrollo.activa():
+		necesarios = maxi(1, necesarios - mini(int(a.desarrollo.cfg.bonus_recoleccion_max), a.desarrollo.rango("npc:"+nid,"recoleccion")))
+	return necesarios
 
 ## Territorialidad: se protege un recurso escaso o se restringe acceso por mala relación.
 func propietario_recurso(oid: String) -> String:
@@ -224,12 +239,14 @@ func acordar(solicitante: String, proveedor: String, item: String, cantidad: int
 	if _ocupado(solicitante) != "" or _ocupado(proveedor) != "": return ""
 	if excedente(proveedor, item) < cantidad: return ""
 	if confianza(proveedor, solicitante) < int(cfg.confianza_minima): return ""
+	if confianza(solicitante, proveedor) < int(cfg.confianza_minima): return ""   # nadie compra a quien le falló
 	var uno := grupo_de(solicitante)
 	var otro := grupo_de(proveedor)
 	if reputacion(otro, "grupo:" + uno) < int(cfg.confianza_minima): return ""
 	var pago := {}
 	if uno != otro:
-		var restante: int = int(cfg.valor_items.get(item, 1)) * cantidad
+		var recargo: float = 1.0 + float(caracter(proveedor).codicia) / 100.0 * float(cfg.caracter.sobreprecio_max)   # el codicioso cobra de más
+		var restante: int = ceili(float(cfg.valor_items.get(item, 1)) * cantidad * recargo)
 		var claves: Array = a.estado(solicitante).inv.keys()
 		claves.sort()
 		for moneda in claves:
@@ -261,8 +278,13 @@ func entregar(cid: String) -> bool:
 	if c.is_empty() or c.estado != "activo" or int(j.d.min) >= int(c.vence): return false
 	if not j.habitantes.ids.has(c.solicitante) or not j.habitantes.ids.has(c.proveedor): return false
 	if j.habitantes.pos(c.solicitante).distance_to(j.habitantes.pos(c.proveedor)) > j.ALCANCE_NPC: return false
+	if _azar(c.proveedor, cid) < (1.0 - float(caracter(c.proveedor).honestidad) / 100.0) * float(cfg.caracter.prob_estafa_max):
+		_estafar(cid, c)
+		return true
 	_anadir(a.estado(c.solicitante).inv, c.bien)
 	_anadir(a.estado(c.proveedor).inv, c.pago)
+	a.desarrollo.observar("npc:"+c.solicitante,c.bien)
+	a.desarrollo.observar("npc:"+c.proveedor,c.pago)
 	c.estado = "cumplido"
 	_vinculo(c.solicitante, c.proveedor, int(cfg.ganancia_confianza))
 	_vinculo(c.proveedor, c.solicitante, int(cfg.ganancia_confianza))
@@ -271,10 +293,72 @@ func entregar(cid: String) -> bool:
 	suceso("entrega", a.j._txt_items(c.bien), c.solicitante, c.proveedor)
 	return true
 
+## Quien promete y no entrega se queda con lo prometido y con el pago; la víctima lo recuerda y deja de comerciar con él.
+func _estafar(cid: String, c: Dictionary) -> void:
+	_anadir(a.estado(c.proveedor).inv, c.bien)
+	_anadir(a.estado(c.proveedor).inv, c.pago)
+	c.estado = "estafado"
+	_vinculo(c.solicitante, c.proveedor, -int(cfg.caracter.perdida_estafa))
+	_relacion_grupos(grupo_de(c.solicitante), grupo_de(c.proveedor), -int(cfg.caracter.castigo_grupo_estafa))
+	a._recordar(c.solicitante, "estafado", a.j._txt_items(c.bien), c.proveedor)
+	a._recordar(c.proveedor, "estafo", a.j._txt_items(c.bien), c.solicitante)
+	suceso("estafa", "No entregó %s y se quedó con el pago" % a.j._txt_items(c.bien), c.proveedor, c.solicitante)
+
+## Con poca honestidad y sin otra vía, toma de un depósito ajeno. Solo los testigos cercanos del grupo lo saben.
+func _hurtar(nid: String, item: String, cantidad: int) -> bool:
+	var propio := grupo_de(nid)
+	for gid in cfg.grupos:
+		if gid == propio or int(grupo(gid).inv.get(item, 0)) <= 0: continue
+		var ancla := _ancla(gid)
+		if not _ir(nid, ancla, "hurtar", "conseguir " + str(C.ITEMS.get(item, {}).get("n", item)) + " sin pedirlo"): return true
+		var n: int = mini(mini(cantidad, int(cfg.caracter.hurto_max)), int(grupo(gid).inv[item]))
+		a._quitar(grupo(gid).inv, item, n)
+		_anadir(a.estado(nid).inv, {item: n})
+		var visto := false
+		for otro in j.habitantes.ids:
+			if otro == nid or grupo_de(otro) != gid: continue
+			if Vector2(M.celda_de(j.habitantes.pos(otro))).distance_to(Vector2(ancla)) > float(cfg.radio_testigo_celdas): continue
+			a._recordar(otro, "hurto_visto", "%d %s" % [n, item], nid)
+			_vinculo(otro, nid, -int(cfg.caracter.perdida_estafa))
+			visto = true
+		if visto:
+			_relacion_grupos(gid, propio, -int(cfg.caracter.castigo_hurto))
+			_reputacion(gid, nid, -int(cfg.caracter.castigo_hurto))
+		a._recordar(nid, "hurto", "%d %s" % [n, item], gid)
+		suceso("hurto", "%d %s del depósito de %s%s" % [n, item, nombre_grupo(gid), " (lo vieron)" if visto else ""], nid, gid)
+		return true
+	var cofres: Array = j.d.cofres.keys()
+	cofres.sort()
+	for cid in cofres:   # también de cofres ajenos (de habitantes o de jugadores) si el dueño no está cerca
+		if not str(cid).begins_with("c@") or int(j.d.cofres[cid].inv.get(item, 0)) <= 0: continue
+		var dueno: String = str(j.d.mundo.constr.get(str(cid).trim_prefix("c@"), {}).get("dueno", ""))
+		if dueno == "" or dueno == "npc:" + nid or dueno == "grupo:" + propio: continue
+		var celda := _celda_cofre(str(cid))
+		var guardian := dueno.trim_prefix("npc:")
+		if dueno.begins_with("npc:") and j.habitantes.ids.has(guardian) and _cerca(guardian, celda): continue
+		if not _ir(nid, celda, "hurtar", "conseguir " + str(C.ITEMS.get(item, {}).get("n", item)) + " sin pedirlo"): return true
+		var tomado: int = mini(mini(cantidad, int(cfg.caracter.hurto_max)), int(j.d.cofres[cid].inv[item]))
+		a._quitar(j.d.cofres[cid].inv, item, tomado)
+		_anadir(a.estado(nid).inv, {item: tomado})
+		a._recordar(nid, "hurto", "%d %s" % [tomado, item], dueno)
+		observar_hurto_cofre(nid, str(cid), item, tomado)
+		return true
+	return false
+
 ## Vencer devuelve las garantías exactamente una vez; conserva el resultado y su causa.
 func actualizar() -> void:
 	restaurar()
 	var d: Dictionary = datos()
+	var dia: int = floori(float(j.d.min) / 1440.0)
+	if dia > int(d.get("dia_perdon", dia)):   # el rencor se perdona con los días: cuanto más rencoroso, más despacio
+		for nid in j.habitantes.ids:
+			if a.perfil(nid).is_empty(): continue
+			var cada: int = 1 + floori(float(caracter(nid).rencor) / float(cfg.caracter.rencor_dias_por_punto))
+			if dia % cada != 0: continue
+			var vinculos: Dictionary = a.estado(nid).vinculos
+			for clave in vinculos:
+				if str(clave).begins_with("npc:") and int(vinculos[clave].get("confianza", 0)) < 0: vinculos[clave].confianza = int(vinculos[clave].confianza) + 1
+	d.dia_perdon = dia
 	for cid in d.acuerdos:
 		var c: Dictionary = d.acuerdos[cid]
 		if c.estado != "activo" or int(j.d.min) < int(c.vence): continue
@@ -292,6 +376,9 @@ func actualizar() -> void:
 		if d.acuerdos[cid].estado != "activo": cerrados.append(cid)
 	cerrados.sort_custom(func(x,y): return int(d.acuerdos[x].vence) < int(d.acuerdos[y].vence))
 	while cerrados.size() > int(cfg.tope_acuerdos_cerrados): d.acuerdos.erase(cerrados.pop_front())
+	if int(j.d.min) - int(d.get("inmigracion_min", -99999)) >= int(cfg.inmigracion.intervalo_min):
+		d.inmigracion_min = int(j.d.min)
+		_inmigrar()
 
 func _plan_acuerdo(nid: String) -> bool:
 	var cid := _ocupado(nid)
@@ -350,7 +437,10 @@ func decidir(nid: String) -> void:
 	for herramienta in a.perfil(nid).get("herramientas_necesarias",[]):
 		if int(n.durabilidad.get(herramienta,cfg.durabilidad_herramienta)) <= int(cfg.umbral_reparar) and reparar_herramienta(nid,herramienta): return
 	var urgente: bool = n.hambre >= float(a.reglas.umbral_comer)
+	if not urgente and a.desarrollo.decidir(nid): return
 	if not urgente and _depositar(nid): return
+	if not urgente and _vivienda(nid): return
+	if not urgente and _acumular(nid): return
 	for meta in objetivos(nid):
 		var item: String = meta.item
 		if int(n.bloqueos.get(item,-1)) > int(j.d.min): continue
@@ -377,7 +467,7 @@ func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: S
 		if gx != gy: return gx
 		return confianza(nid,x)>confianza(nid,y) if confianza(nid,x)!=confianza(nid,y) else x<y)
 	for otro in proveedores:
-		if otro==nid or excedente(otro,item)<=0: continue
+		if otro==nid or excedente(otro,item)<=0 or confianza(nid,otro)<int(cfg.confianza_minima): continue
 		var cid := acordar(nid,otro,item,mini(cantidad,excedente(otro,item)))
 		if cid!="": _plan_acuerdo(nid);return true
 	# Oficios con recetas explícitas: fabricar requiere insumos y estación reales.
@@ -406,6 +496,9 @@ func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: S
 		if not Inv.tiene(n.inv,r.ent): return false
 		Inv.quitar(n.inv,r.ent);_anadir(n.inv,r.sal)
 		n.peticion={}
+		var materiales: Dictionary = r.ent.duplicate()
+		materiales.merge(r.sal,true)
+		a.desarrollo.registrar("npc:"+nid,"artesania",materiales)
 		a._recordar(nid,"fabrico",j._txt_items(r.sal))
 		suceso("fabricacion",j._txt_items(r.sal),nid)
 		return true
@@ -416,6 +509,7 @@ func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: S
 	if item!=moneda and int(n.inv.get(moneda,0)) < int(cfg.valor_items.get(item,1))+reserva(nid,moneda):
 		var recurso: String=a._recurso(nid,moneda)
 		if recurso!="": return _recolectar(nid,recurso,"preparar un intercambio")
+	if int(caracter(nid).honestidad)<int(cfg.caracter.umbral_hurto) and _hurtar(nid,item,cantidad): return true
 	return false
 
 func _recolectar(nid: String, oid: String, motivo: String) -> bool:
@@ -435,6 +529,7 @@ func _recolectar(nid: String, oid: String, motivo: String) -> bool:
 		if rng.randf()<prob.p:drops[prob.item]=int(drops.get(prob.item,0))+int(prob.q)
 	_anadir(a.estado(nid).inv,drops)
 	j.mundo.romper(oid,j.d.min)
+	a.desarrollo.registrar("npc:"+nid,"recoleccion",drops)
 	a._recordar(nid,"recolecto",j._txt_items(drops))
 	return true
 
@@ -449,11 +544,15 @@ func _construir_estacion(nid: String, tipo: String, cadena: Array) -> bool:
 	for t in C.CONSTR:
 		if C.CONSTR[t].get("est","")==tipo:pieza=t;break
 	if pieza=="":return false
+	return _construir_cerca(nid,pieza,cadena)
+
+## Reúne los materiales y construye la pieza junto al depósito del grupo, validando rutas. true = sigue en ello o la construyó.
+func _construir_cerca(nid: String, pieza: String, cadena: Array, centro_p: Vector2i = Vector2i(-1, -1), dueno: String = "") -> bool:
 	var n: Dictionary=a.estado(nid)
 	for item in C.CONSTR[pieza].coste:
 		var falta: int=int(C.CONSTR[pieza].coste[item])-int(n.inv.get(item,0))
 		if falta>0:return _obtener(nid,item,falta,cadena,"construir " + C.CONSTR[pieza].n)
-	var centro:=_ancla(grupo_de(nid))
+	var centro: Vector2i=_ancla(grupo_de(nid)) if centro_p==Vector2i(-1,-1) else centro_p
 	for radio in range(1,int(cfg.radio_construccion)+1):
 		for y in range(centro.y-radio,centro.y+radio+1):
 			for x in range(centro.x-radio,centro.x+radio+1):
@@ -461,15 +560,20 @@ func _construir_estacion(nid: String, tipo: String, cadena: Array) -> bool:
 				if M.ESENCIALES.has(c) or c == centro or j.mundo.puede_poner(c)!="" or j.ocupada(c):continue
 				if j.mundo.camino(M.celda_de(j.habitantes.pos(nid)),func(z):return j.mundo.es_adyacente(z,c)).is_empty():continue
 				if not _ir(nid,c,"construir","construir " + C.CONSTR[pieza].n):return true
-				if construir_estacion(nid,pieza,c):return true
+				if construir_pieza(nid,pieza,c,dueno):return true
 	return false
 
 ## Construir valida huella, coste, ocupación y rutas de todos antes de consumir materiales.
 func construir_estacion(nid: String, pieza: String, c: Vector2i) -> bool:
-	if not C.CONSTR.has(pieza) or C.CONSTR[pieza].get("est","")=="" or not _cerca(nid,c):return false
+	if not C.CONSTR.has(pieza) or C.CONSTR[pieza].get("est","")=="": return false
+	return construir_pieza(nid,pieza,c)
+
+## También permite suelo de ampliación, con las mismas validaciones y materiales.
+func construir_pieza(nid: String, pieza: String, c: Vector2i, dueno: String = "") -> bool:
+	if not C.CONSTR.has(pieza) or not _cerca(nid,c):return false
 	var n: Dictionary=a.estado(nid)
 	if not Inv.tiene(n.inv,C.CONSTR[pieza].coste) or M.ESENCIALES.has(c) or j.mundo.puede_poner(c)!="" or j.ocupada(c):return false
-	j.mundo.poner(c,pieza,false,"grupo:"+grupo_de(nid))
+	j.mundo.poner(c,pieza,false,dueno if dueno!="" else "grupo:"+grupo_de(nid))
 	var alc: Dictionary=j.mundo.alcanzables()
 	var valido:=true
 	for e in M.ESENCIALES:
@@ -482,13 +586,142 @@ func construir_estacion(nid: String, pieza: String, c: Vector2i) -> bool:
 		if not alc.has(M.celda_de(j.pies_de(jugador))):valido=false
 	if not valido:j.mundo.quitar(c);return false
 	Inv.quitar(n.inv,C.CONSTR[pieza].coste)
+	if C.CONSTR[pieza].get("cofre",false): j.d.cofres["c@"+M.clave(c)]={"inv":{}}
+	a.desarrollo.registrar("npc:"+nid,"construccion",C.CONSTR[pieza].coste)
 	a._recordar(nid,"construyo",C.CONSTR[pieza].n)
 	suceso("construccion",C.CONSTR[pieza].n,nid,grupo_de(nid))
 	return true
 
+## Nombre legible de un actor o dueño: habitante, jugador o grupo.
+func _nombre(id: String) -> String:
+	var k := id.trim_prefix("npc:")
+	if j.habitantes.fichas.has(k): return str(j.habitantes.fichas[k].n)
+	if j.d.jugadores.has(id): return str(j.d.jugadores[id].nombre)
+	return nombre_grupo(id.trim_prefix("grupo:"))
+
+func _celda_cofre(cid: String) -> Vector2i:
+	var clave := cid.trim_prefix("c@")
+	return Vector2i(int(clave.get_slice(",", 0)), int(clave.get_slice(",", 1)))
+
+## Cofre que pertenece al habitante ("" si aún no tiene).
+func cofre_propio(nid: String) -> String:
+	var claves: Array = j.d.mundo.constr.keys()
+	claves.sort()
+	for k in claves:
+		var cs: Dictionary = j.d.mundo.constr[k]
+		if cs.t == "cofre" and cs.get("dueno", "") == "npc:" + nid: return "c@" + k
+	return ""
+
+## Propiedad: con excedente de la moneda de trueque, el habitante se hace un cofre junto a su cama y guarda en él sus ahorros.
+func _acumular(nid: String) -> bool:
+	var p: Dictionary = cfg.propiedad
+	var moneda: String = cfg.moneda_trueque
+	if not bool(p.activa): return false
+	var cid := cofre_propio(nid)
+	if cid == "":
+		if excedente(nid, moneda) < int(p.umbral_cofre): return false
+		var lecho: Vector2i = j.habitantes.cama(nid)
+		if lecho == Vector2i(-1, -1): return false
+		a.estado(nid).objetivo = "tener un lugar donde guardar lo mío"
+		return _construir_cerca(nid, "cofre", [], lecho, "npc:" + nid)
+	var sobra: int = excedente(nid, moneda) - int(p.conservar)
+	if sobra < int(p.lote_min): return false
+	if not _ir(nid, _celda_cofre(cid), "guardar", "guardar mis ahorros"): return true
+	var cof: Dictionary = j.d.cofres[cid]
+	var lote := {moneda: sobra}
+	if not Inv.cabe(cof.inv, lote, j.CAP_COFRE): return false
+	a._quitar(a.estado(nid).inv, moneda, sobra)
+	Inv.anadir(cof.inv, lote, j.CAP_COFRE)
+	suceso("ahorro", "%d %s en su cofre" % [sobra, moneda], nid)
+	return true
+
+## Tomar de un cofre ajeno es un hurto: lo notan los testigos cercanos y el dueño se entera de que faltan objetos.
+func observar_hurto_cofre(actor: String, cid: String, item: String, n: int) -> void:
+	if not activa() or not cid.begins_with("c@"): return
+	var dueno: String = str(j.d.mundo.constr.get(cid.trim_prefix("c@"), {}).get("dueno", ""))
+	if dueno == "" or dueno == actor or dueno == "npc:" + actor or dueno == "grupo:" + grupo_de(actor): return
+	var celda := _celda_cofre(cid)
+	var testigos: Array = []
+	for otro in j.habitantes.ids:
+		if otro != actor and Vector2(M.celda_de(j.habitantes.pos(otro))).distance_to(Vector2(celda)) <= float(cfg.radio_testigo_celdas): testigos.append(otro)
+	var detalle := "%d %s" % [n, item]
+	var humano: bool = j.d.jugadores.has(actor)
+	for w in testigos:
+		a._recordar(w, "hurto_visto", detalle, actor)
+		if humano: _reputacion(grupo_de(w), actor, -int(cfg.caracter.castigo_hurto))
+		else: _vinculo(w, actor, -int(cfg.caracter.perdida_estafa))
+	var victima := dueno.trim_prefix("npc:") if dueno.begins_with("npc:") else ""
+	if victima != "" and j.habitantes.ids.has(victima):
+		a._recordar(victima, "robado", detalle, actor if not testigos.is_empty() else "")
+		if not testigos.is_empty() and not humano: _vinculo(victima, actor, -int(cfg.caracter.perdida_estafa))
+	elif j.rt.has(dueno):
+		j.aviso("%s se llevó %s de tu cofre." % [_nombre(actor) if not testigos.is_empty() else "Alguien", j._txt_items({item: n})], dueno)
+	suceso("hurto", "%s del cofre de %s%s" % [detalle, _nombre(dueno), " (lo vieron)" if not testigos.is_empty() else ""], actor, dueno)
+
+## Vivienda: con excedente y sin camas libres, un habitante próspero construye una cama de huésped. La vivienda libre atrae a quien llegue.
+func _vivienda(nid: String) -> bool:
+	var v: Dictionary = cfg.vivienda
+	if not bool(v.activa) or not bool(cfg.inmigracion.activa) or j.habitantes.ids.size() >= int(cfg.inmigracion.max_habitantes): return false
+	if not j.vivo.camas_libres_lista().is_empty(): return false
+	if int(j.d.min) - int(datos().get("vivienda_min", -99999)) < int(v.espera_min): return false
+	for item in v.requiere_excedente:
+		if excedente(nid, item) < int(v.requiere_excedente[item]): return false
+	a.estado(nid).objetivo = "dar vivienda a quien llegue"
+	var hecho: bool = _construir_cerca(nid, "cama_huesped", [])
+	if not j.vivo.camas_libres_lista().is_empty(): datos().vivienda_min = int(j.d.min)
+	return hecho
+
+## Riqueza del valle: valor de lo que guardan habitantes y depósitos. Mide si hay con qué sostener a un recién llegado.
+func _riqueza() -> int:
+	var total := 0
+	for nid in j.habitantes.ids:
+		for item in a.estado(nid).inv: total += int(cfg.valor_items.get(item, 0)) * int(a.estado(nid).inv[item])
+	for gid in cfg.grupos:
+		for item in grupo(gid).inv: total += int(cfg.valor_items.get(item, 0)) * int(grupo(gid).inv[item])
+	for nid in j.habitantes.ids:   # los ahorros en cofres propios también son riqueza del valle
+		var cid := cofre_propio(nid)
+		if cid != "": for item in j.d.cofres.get(cid, {"inv": {}}).inv: total += int(cfg.valor_items.get(item, 0)) * int(j.d.cofres[cid].inv[item])
+	return total
+
+## Población abierta: con cama libre, riqueza y espacio llega alguien con oficio y carácter sorteados. No hay un número objetivo.
+func _inmigrar() -> void:
+	var ci: Dictionary = cfg.inmigracion
+	var d: Dictionary = datos()
+	if not bool(ci.activa) or j.habitantes.ids.size() >= int(ci.max_habitantes): return
+	if int(j.d.min) - int(d.get("llegada_min", -99999)) < int(ci.espera_min): return
+	if j.vivo.camas_libres_lista().is_empty() or _riqueza() < int(ci.riqueza_minima): return
+	var raiz: Dictionary = j.d.mundo_vivo.autonomia
+	if not raiz.has("colonos"): raiz.colonos = {}
+	var rng = j._rng("inmigracion", "%d:%d" % [int(j.d.min), raiz.colonos.size()])
+	var oficios: Array = ci.oficios.keys()
+	oficios.sort()
+	var oficio: String = oficios[rng.randi() % oficios.size()]
+	var of: Dictionary = ci.oficios[oficio]
+	var usados: Array = []
+	for c in raiz.colonos.values(): usados.append(c.npc.name)
+	var libres: Array = ci.nombres.filter(func(x): return not x in usados)
+	var nombre: String = str(libres[rng.randi() % libres.size()]) if not libres.is_empty() else "Colono %d" % (raiz.colonos.size() + 1)
+	var rango: Dictionary = ci.caracter_rango
+	var carac := {}
+	for k in rango: carac[k] = rng.randi_range(int(rango[k][0]), int(rango[k][1]))
+	var id := "colono_%d" % (raiz.colonos.size() + 1)
+	var molde: Dictionary = j.habitantes._paq.entidades.npc[of.molde]
+	var npc := {"name": nombre, "data": {"objetivo_propio": "Hacerse un lugar en el valle", "horario": molde.data.horario.duplicate(true), "necesidades": molde.data.necesidades.duplicate(true)}}
+	if j.habitantes.registrar_colono(id, npc) != "": return
+	var perfil: Dictionary = of.duplicate(true)
+	perfil.erase("molde")
+	perfil["caracter"] = carac
+	raiz.colonos[id] = {"npc": npc, "perfil": perfil}
+	j.vivo.restaurar().vars[id + "_presente"] = true
+	j.habitantes.reconciliar()
+	d.llegada_min = int(j.d.min)
+	a._recordar(id, "llego", "al valle")
+	suceso("llegada", "%s, de oficio %s, llega al valle" % [nombre, oficio], id)
+	j.aviso_todos("%s llega al valle." % nombre)
+
 ## Diario legible: muestra actor, acción y resultado en lugar de identificadores internos.
 func texto_suceso(e: Dictionary) -> String:
-	var acciones := {"acuerdo":"acordó", "entrega":"entregó", "fabricacion":"fabricó", "construccion":"construyó", "reparacion":"reparó", "desgaste":"agotó", "aporte":"aportó", "retiro":"retiró", "alternativa":"buscó otra solución", "incumplimiento":"no concretó el acuerdo", "conflicto":"tuvo un conflicto", "ayuda":"recibió ayuda"}
+	var acciones := {"acuerdo":"acordó", "entrega":"entregó", "fabricacion":"fabricó", "construccion":"construyó", "reparacion":"reparó", "desgaste":"agotó", "aporte":"aportó", "retiro":"retiró", "alternativa":"buscó otra solución", "incumplimiento":"no concretó el acuerdo", "llegada":"llegó", "estafa":"engañó en un acuerdo", "hurto":"robó", "ahorro":"ahorró", "conflicto":"tuvo un conflicto", "ayuda":"recibió ayuda", "descubrimiento":"creó", "venta":"intercambió", "material":"elaboró"}
 	var nombre: String = j.habitantes.fichas.get(e.quien, {}).get("n", "Alguien")
 	if j.d.jugadores.has(e.quien): nombre = j.d.jugadores[e.quien].nombre
 	var detalle: String = e.detalle

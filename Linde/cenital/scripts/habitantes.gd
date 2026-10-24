@@ -95,9 +95,11 @@ func aspecto(id: String) -> Array:
 ## Idempotente. Un recién llegado nace en Mundo.ENTRADA y recibe la primera cama de huésped libre (j.vivo.camas_libres_lista()).
 func reconciliar() -> void:
 	var mv: Dictionary = j.vivo.restaurar()
+	_cargar_colonos()
 	for id in fichas:
 		if not mv.vars.get(id + "_presente", id in ids): continue
 		if not id in ids: ids.append(id)
+		if not rutas.has(id): rutas[id] = {"act": "", "ruta": [], "v": -1, "i": 0, "fallo": false}   # también al cargar una partida con llegados
 		if j.d.npcs.has(id): continue
 		if cama(id) == Vector2i(-1, -1):
 			var libres: Array = j.vivo.camas_libres_lista()
@@ -109,6 +111,18 @@ func reconciliar() -> void:
 		j.d.npcs[id] = n
 		rutas[id] = {"act": "", "ruta": [], "v": -1, "i": 0, "fallo": false}
 		if not id in mv.llegados and not id in _inicial: mv.llegados.append(id)
+
+## Recrea las fichas de los colonos llegados en esta partida (se guardan enteras en mundo_vivo.autonomia.colonos; el cliente también las recibe).
+func _cargar_colonos() -> void:
+	var colonos: Dictionary = j.d.get("mundo_vivo", {}).get("autonomia", {}).get("colonos", {})
+	for id in colonos:
+		if not fichas.has(id): registrar_colono(id, colonos[id].npc)
+
+## Registra la ficha de un habitante generado en tiempo de ejecución ("" si es válida, o el motivo).
+func registrar_colono(id: String, npc: Dictionary) -> String:
+	var e := _ficha(id, npc)
+	if e != "": _fallo("colono «%s»: %s" % [id, e])
+	return e
 
 func pos(id: String) -> Vector2:
 	var a: Array = j.d.npcs[id].pos

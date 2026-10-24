@@ -1,0 +1,86 @@
+{
+  "fecha": "2026-10-24",
+  "motor": "Godot 4.7.1",
+  "desarrollo": {
+    "comprobaciones": 55,
+    "fallos": 0
+  },
+  "regresion_sociedad": {
+    "comprobaciones": 48,
+    "fallos": 0
+  },
+  "regresion_autonomia": {
+    "comprobaciones": 33,
+    "fallos": 0
+  },
+  "general": {
+    "pass": 326,
+    "fallos": 0
+  },
+  "ui": {
+    "pass": 13,
+    "fallos": 0
+  },
+  "red": "suite existente en localhost, procesos separados, 0 fallos; pruebas de nuevas intenciones y réplica en prueba_desarrollo",
+  "simulacion": {
+    "dias": 3,
+    "semilla": 123,
+    "intervenciones": 0,
+    "creaciones": [
+      {
+        "actor": "npc:maren",
+        "insumos": {
+          "fibra": 5
+        },
+        "min": 1096,
+        "pieza": "art1:casco:fibra:ligera:1"
+      },
+      {
+        "actor": "npc:maren",
+        "insumos": {
+          "fibra": 9
+        },
+        "min": 1101,
+        "pieza": "art1:torso:fibra:ligera:1"
+      }
+    ],
+    "actividad": {
+      "acuerdo": 16,
+      "alternativa": 25,
+      "aporte": 10,
+      "construccion": 16,
+      "descubrimiento": 2,
+      "desgaste": 1,
+      "entrega": 16,
+      "fabricacion": 10,
+      "reparacion": 2,
+      "retiro": 3
+    }
+  },
+  "visual": "inspección de escena real, atlas, planos, práctica, laminados, ofertas y armadura compuesta; las pantallas del jugador se preparan con acciones de juego y posicionamiento QA",
+  "limites": [
+    "Balance provisional",
+    "Gramática acotada; no genera código ni mecánicas nuevas",
+    "Sin revisión independiente ni sesión completa de desarrollo en Internet",
+    "Permanecen avisos de objetos/recursos al cerrar"
+  ],
+  "sha256": {
+    "Linde/cenital/datos/desarrollo/reglas_v1.json": "1bee5c095680be9fa34d839686c3eb79822b543c81f20745f2859ef9c276caad",
+    "Linde/cenital/docs/DESARROLLO.md": "b89f1d7317bd2063a59976396727b9f63fe6457d423d866aedd3028318cd6721",
+    "design/gdd/desarrollo-generativo.md": "7efa90d28b2d2cb42bd3b60239f4ec3d9dc829b16788bfee9dbf6e32b14071a1",
+    "Linde/cenital/scripts/artesania.gd": "86c3fe3c2d2d6efdeed954d8c95b49b31e6e2c464d6138d0add4d30deb4fe128",
+    "Linde/cenital/scripts/desarrollo.gd": "89d73e158034162358d5447ff2bd0c6878c688916aad928cc8dcb6d4999ade8c",
+    "Linde/cenital/scripts/autonomia.gd": "152a3c45c081c02669885b9a76f573e13ca2b48c4281529ec2de33b7ef3ac062",
+    "Linde/cenital/scripts/sociedad.gd": "94b8ca6aded637e65b190144177eeb27f9718611cf91aab2ca9767f429a1eaa3",
+    "Linde/cenital/scripts/juego.gd": "06ce67942025ec1fbcbd0dba17b45837e64af662226180da91f15111275c9a53",
+    "Linde/cenital/scripts/equipo.gd": "b0c89f6c984408abfb7587d0a68c410ec75881b740081bb61cf0874d6306729c",
+    "Linde/cenital/scripts/combate.gd": "debf4b8ac77da09d3d03419442897a7fb7dd8d23eaf3826683ffa2319aa469f4",
+    "Linde/cenital/scripts/escena.gd": "9661487d170c728cf48a9021733cb02a7b4c1cb269f8b262370197e73ccc64d7",
+    "Linde/cenital/scripts/hud.gd": "37bf409cbdcb3844359f2f3fb53d1a0ef89873b202bb8551a0b338db5203e093",
+    "Linde/cenital/scripts/red_cliente.gd": "890aed34d04b8f666e93229cd0cd204be0ab4d9ae1162c7df8fb3d0666405ec8",
+    "Linde/cenital/scripts/red_servidor.gd": "5945442023abe99d3fd631c1cbab1d6d18e6ec800452e5135ac5c549a5291d09",
+    "Linde/cenital/tests/prueba_desarrollo.gd": "8502210f096a728f6a287cc7f08d3d86feec54179578028df683226e5237bf51",
+    "Linde/cenital/tests/captura_desarrollo.gd": "dd7af2fa771192ea0f64bbf39070c1358637d8970a9b2b2b5aadbe6aab9419f7",
+    "Linde/cenital/tests/prueba_sociedad.gd": "7babf7ad07965e12ff1b22e49541370236228c9b5b331b33364ccf01abb9c8e1"
+  }
+}

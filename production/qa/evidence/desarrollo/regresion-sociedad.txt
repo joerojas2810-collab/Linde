@@ -1,0 +1,58 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS las cinco capacidades están habilitadas en el modo de prueba
+PASS no se regalan herramientas ni materiales iniciales
+PASS usar una herramienta reduce su durabilidad
+PASS reparación usa una herramienta existente y un lingote real
+PASS reparar consume el lingote exactamente una vez
+PASS herramienta agotada sale del inventario y genera nueva demanda
+PASS NPC pueden negociar excedentes sin intervención del jugador
+PASS ambos lados reservan recursos reales al acordar
+PASS el acuerdo no teletransporta materiales a distancia
+PASS la entrega exige encuentro físico
+PASS al encontrarse reciben exactamente el trueque acordado
+PASS una segunda entrega no duplica materiales
+PASS cumplir genera confianza recíproca observada
+PASS se puede concertar otro acuerdo después del anterior
+PASS al vencer, ambas garantías vuelven a sus propietarios
+PASS incumplir cambia la confianza y futuras decisiones
+PASS procesar dos veces el vencimiento no duplica las devoluciones
+PASS la desconfianza bloquea acuerdos futuros aunque existan materiales
+PASS un conflicto entre grupos restringe el comercio entre sus miembros
+PASS un miembro retira existencias de su depósito estando allí
+PASS la pertenencia protege las reservas colectivas
+PASS el conflicto usa un recurso real del valle
+PASS el grupo reserva recursos escasos de su territorio
+PASS la extracción del jugador usa la acción real sobre el mapa
+PASS una extracción vista afecta reputación con el grupo
+PASS un habitante distante no conoce mágicamente la extracción
+PASS el jugador puede aportar recursos reales al grupo
+PASS contribuir mejora reputación y cambia relaciones
+PASS el servidor rechaza aportes con tipo inválido
+PASS un grupo inexistente no consume recursos
+PASS la IA registra por qué pospuso una necesidad sin solución
+PASS sin comida disponible prueba una meta alternativa mientras no hay urgencia
+PASS la petición calcula la carencia desde las reservas actuales
+PASS repetir la ayuda antes de la siguiente decisión no consume recursos extra
+PASS guarda un acuerdo con materiales en tránsito
+PASS carga mantiene grupos, herramientas, acuerdos, garantías y memorias
+PASS un acuerdo restaurado se entrega una sola vez
+PASS la réplica recibe compromisos, garantías y relaciones de grupo
+PASS un cliente no ejecuta decisiones ni caduca acuerdos por su cuenta
+PASS guarda una partida con el estado de autonomía anterior
+PASS la migración añade grupos conservando los recursos de la primera prueba
+PASS la construcción autónoma protege entradas y no consume al fallar
+SUCESOS_DIA: {"acuerdo":15,"alternativa":27,"aporte":14,"construccion":1,"desgaste":7,"entrega":14,"fabricacion":13,"incumplimiento":1,"reparacion":1,"retiro":7}
+PASS tres días sin jugador modifica recursos reales
+PASS sin jugador llegan a fabricar a partir de recursos del mapa
+PASS sin jugador negocian y completan una entrega física
+PASS sin jugador construyen una estación consumiendo materiales
+PASS el desgaste vuelve a generar consumo de productos fabricados
+PASS las cinco capacidades funcionan con las tarjetas desactivadas
+SOCIEDAD: 48 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 90 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 8 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

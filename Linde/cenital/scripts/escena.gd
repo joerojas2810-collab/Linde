@@ -40,6 +40,7 @@ var sel := 0
 var dialogo_txt := ""
 var dialogo_nombre := ""
 var cofre_id := ""
+var forma_plano := "espada"
 var build := false
 var pieza_i := 0
 var activa := Vector2i.ZERO
@@ -151,6 +152,7 @@ func _unhandled_key_input(e: InputEvent) -> void:
 			else: _abrir("pausa")
 		KEY_I: _abrir("inv")
 		KEY_F: _abrir("forja")
+		KEY_G: _abrir("desarrollo")
 		KEY_C: _abrir("craft")
 		KEY_K: _abrir("hab")
 		KEY_J: _abrir("mis")
@@ -337,6 +339,7 @@ func _tecla_panel(e: InputEvent) -> void:
 		KEY_C: if panel == "craft": _cerrar()
 		KEY_K: if panel == "hab": _cerrar()
 		KEY_J: if panel == "mis": _cerrar()
+		KEY_G: _cerrar()
 		KEY_UP:
 			sel -= 1
 			_sel_valida(-1)
@@ -346,14 +349,18 @@ func _tecla_panel(e: InputEvent) -> void:
 		KEY_ENTER, KEY_KP_ENTER, KEY_E:
 			if sel < acc.size() and acc[sel] != null:
 				var antes := sel
+				var pagina := panel
 				acc[sel].call()
 				if panel != "":
 					_armar()
-					sel = mini(antes, lineas.size() - 1)
-					_sel_valida(-1)
+					if panel == pagina: sel = mini(antes, lineas.size() - 1)
+					_sel_valida(-1 if panel == pagina else 1)
 
 func _sel_valida(paso: int) -> void:
 	if lineas.is_empty(): return
+	if panel in ["materiales","practica"]:
+		sel=clampi(sel,1,maxi(1,lineas.size()-1))
+		return
 	sel = clampi(sel, 0, lineas.size() - 1)
 	var n := 0
 	while acc[sel] == null and n < lineas.size():
@@ -367,14 +374,32 @@ func _l(t: String, f = null, ic: String = "") -> void:
 
 ## Icono de un ítem del inventario (piezas de set por su ranura; desconocido = sin icono, sin sustituto).
 func _ic(k: String) -> String:
+	var artesanal: Dictionary = Eq.Artesania.leer(k)
+	if not artesanal.is_empty(): return hud.ui.ruta_icono("espada_hierro" if artesanal.forma=="espada" else "", str(Eq.info(k).equipo))
 	var l: Dictionary = Eq.leer(k)
 	return hud.ui.ruta_icono(k, str(l.get("ranura", "")) if not l.is_empty() else "")
+
+## Divide explicaciones por ancho real para que el atlas no desborde el panel.
+func _parrafo(texto: String) -> void:
+	var linea := ""
+	for palabra in texto.split(" "):
+		if hud.ui.ancho_texto(linea + " " + palabra,16)>780.0:
+			_l("  " + linea)
+			linea=palabra
+		else: linea+=(" " if linea!="" else "")+palabra
+	if linea!="": _l("  "+linea)
+
+func _cambiar_forma() -> void:
+	var formas: Array=Eq.Artesania.reglas().formas.keys()
+	forma_plano=formas[(formas.find(forma_plano)+1)%formas.size()]
+	_abrir("planos")
 
 func _armar() -> void:
 	lineas = []
 	acc = []
 	iconos = []
 	var st: Dictionary = j.stats()
+	if panel in ["planos","practica","laminados"] and not j.autonomia.desarrollo.activa(): panel="desarrollo"
 	match panel:
 		"inv":
 			_l("INVENTARIO  %d/%d  ·  Nv %d  Daño %d  Def %d  Vida %d  Vel x%.2f" % [Inv.slots(j.jug().inv), st.slots, j.nivel(), st.dmg, st.def, st.hp, st.vel])
@@ -395,10 +420,69 @@ func _armar() -> void:
 					elif eq: j.equipar(k), _ic(k))
 			if ks.is_empty(): _l("(vacío)")
 			if not j.jug().pendientes.is_empty(): _l("Pendiente de recibir: " + Hud.J_txt(j.jug().pendientes))
+		"desarrollo":
+			_l("TALLER Y DESCUBRIMIENTOS")
+			_l("Materiales: dónde encontrarlos y para qué sirven", func(): _abrir("materiales"))
+			if not j.autonomia.desarrollo.activa():
+				_parrafo("Los nuevos planos y la práctica están disponibles en la partida de prueba de autonomía.")
+			else:
+				_l("Planos: crear equipo con lo que aprendiste", func(): _abrir("planos"))
+				_l("Materiales elaborados: experimentar con laminados",func():_abrir("laminados"))
+				_l("Práctica: ver técnicas y especializaciones", func(): _abrir("practica"))
+				_l("— OBRAS QUE OFRECEN LOS HABITANTES —")
+				for nid in j.habitantes.ids:
+					for pieza in j.autonomia.estado(nid).inv:
+						if Eq.Artesania.leer(str(pieza)).is_empty(): continue
+						_l(j.habitantes.fichas[nid].n + ": " + Eq.info(pieza).n)
+						_parrafo("Pide: " + Hud.J_txt(Eq.Artesania.receta(pieza).ent))
+						_l("  Intercambiar materiales por esta pieza (requiere cercanía)", func(): j.comprar_artefacto(nid,pieza))
+			_l("Cerrar",func():_cerrar())
+		"materiales":
+			_l("MATERIALES DEL VALLE  ·  origen y usos")
+			for mat in j.autonomia.desarrollo.materiales():
+				_l("%s · llevas %d" % [mat.nombre,int(j.jug().inv.get(mat.id,0))])
+				_parrafo(mat.fuente)
+				_parrafo("Sirve para: " + ", ".join(mat.usos))
+			_l("Volver al taller",func():_abrir("desarrollo"))
+		"planos":
+			_l("PLANOS  ·  el material, la técnica y la pericia definen la pieza")
+			_l("Cambiar forma: " + Eq.Artesania.reglas().formas[forma_plano].nombre,func():_cambiar_forma())
+			var planos: Array=j.autonomia.desarrollo.planos(j.actor_desarrollo(),forma_plano)
+			if planos.is_empty(): _parrafo("Obtén materiales del valle para descubrir sus primeros planos. Fabrica para aprender técnicas y amplía tu taller para poder aplicarlas.")
+			for clave in planos:
+				var it: Dictionary=Eq.info(clave)
+				_l(it.n)
+				_l("  Daño %d · Defensa %d · Vida %d · Velocidad %+.2f" % [it.dmg,it.def,it.hp,it.vel])
+				_parrafo("Materiales: " + Hud.J_txt(Eq.Artesania.receta(clave).ent))
+				_l("  Fabricar junto a una mesa de trabajo",func():j.fabricar_artefacto(clave),_ic(clave))
+			_l("Volver al taller",func():_abrir("desarrollo"))
+		"laminados":
+			_l("MATERIALES ELABORADOS  ·  conocimiento y componentes reales")
+			_parrafo("Conoce los componentes y alcanza rango 1 de artesanía del hierro. Un horno permite elaborar laminados para nuevos planos.")
+			for material in Eq.Artesania.combinaciones():
+				var receta: Dictionary=Eq.Artesania.receta_material(material)
+				_l(receta.n)
+				_parrafo("Componentes: "+Hud.J_txt(receta.ent))
+				_l("  Elaborar junto a un horno",func():j.refinar_material(material))
+			_l("Volver al taller",func():_abrir("desarrollo"))
+		"practica":
+			_l("PRÁCTICA Y TÉCNICAS  ·  se aprenden jugando")
+			var d=j.autonomia.desarrollo
+			var actor: String=j.actor_desarrollo()
+			for disciplina in ["recoleccion","artesania","construccion","combate"]:
+				_l("%s · %d acciones · rango %d" % [{"recoleccion":"Recolección","artesania":"Artesanía","construccion":"Construcción","combate":"Combate"}[disciplina],int(d.estado(actor).practica.get(disciplina,0)),d.rango(actor,disciplina)])
+			for material in d.estado(actor).materiales:
+				_l("Oficio de " + Eq.Artesania.material(material).nombre + " · rango %d" % d.rango(actor,"artesania",material))
+				for tecnica in d.cfg.tecnicas:
+					var t: Dictionary=d.cfg.tecnicas[tecnica]
+					_l("  Técnica %s: rango %d y %d suelos de taller" % [t.nombre,int(t.rango),d.suelo_requerido(actor,tecnica)])
+			_parrafo("La práctica mejora las piezas futuras. No altera el equipo ya fabricado ni gasta puntos del árbol de habilidades.")
+			_l("Volver al taller",func():_abrir("desarrollo"))
 		"forja":
 			var inv: Dictionary = j.jug().inv
 			var jm: Dictionary = Eq.joya_mejora()
 			_l("FORJA  ·  %s: %d  ·  la mejora siempre sube; la piedra anterior se pierde" % [jm.nombre, inv.get(jm.id, 0)])
+			_l("Taller: materiales, planos y técnicas (G)",func():_abrir("desarrollo"))
 			var piezas: Array = []
 			for r in C.RANURAS:
 				var q: String = j.jug().equipo.get(r, "")
@@ -430,6 +514,7 @@ func _armar() -> void:
 				_l("%s %s  <-  %s%s" % ["[ok]" if listo else "[--]", r.n, Hud.J_txt(r.ent), nota], func(): j.fabricar(id), _ic(str(r.sal.keys()[0]) if not r.sal.is_empty() else ""))
 		"hab":
 			_l("HABILIDADES  ·  puntos libres: %d  ·  nivel %d" % [j.puntos_libres(), j.nivel()])
+			if j.autonomia.desarrollo.activa(): _l("Ver práctica y técnicas aprendidas",func():_abrir("practica"))
 			for id in C.HAB:
 				var h: Dictionary = C.HAB[id]
 				var req := ""

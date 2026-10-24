@@ -199,6 +199,15 @@ func ejecutar(id: String, datos) -> bool:
 			_mirar(id, a[0])
 			if tipo == "accion": j.accion(id)
 			else: _enviar(ids.get(id, 0), ["interaccion", j.interactuar(id)])
+		"refinar_material":
+			if not _sig(a,[TYPE_STRING]): return _rechazo(id,tipo)
+			j.refinar_material(a[0],id)
+		"fabricar_artefacto":
+			if not _sig(a, [TYPE_STRING]): return _rechazo(id,tipo)
+			j.fabricar_artefacto(a[0],id)
+		"comprar_artefacto":
+			if not _sig(a, [TYPE_STRING,TYPE_STRING]): return _rechazo(id,tipo)
+			j.comprar_artefacto(a[0],a[1],id)
 		"aportar_grupo":
 			if not _sig(a, [TYPE_STRING]): return _rechazo(id, tipo)
 			j.aportar_grupo(a[0], id)

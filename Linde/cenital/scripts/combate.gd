@@ -128,6 +128,7 @@ func _golpe_pj(id: String) -> void:
 func _danar(e: Dictionary, dmg: int, id: String = P.LOCAL) -> void:
 	if e.est == "muerto": return
 	e.hp -= dmg
+	j.autonomia.desarrollo.registrar(j.actor_desarrollo(id),"combate",{str(j.jug(id).equipo.get("arma","")):1})
 	if not C.ENEMIGOS[e.tipo].has("fases"):
 		e.pos = _mover(e, Vector2(ataque(id).dir) * KNOCKBACK_PX)
 	if e.hp <= 0: _morir(e, id)

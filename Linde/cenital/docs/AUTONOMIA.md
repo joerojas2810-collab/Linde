@@ -1,6 +1,6 @@
 # Sociedad del valle — prueba de autonomía
 
-Actualizada el 24 de octubre de 2026. Amplía la primera prueba con cinco capacidades conectadas. Es un modo experimental, con reglas y balance propios provisionales; no cambia la partida habitual ni establece canon.
+Actualizada el 24 de octubre de 2026. **Ampliación posterior:** el mismo modo ahora incluye equipo combinatorio, materiales elaborados, práctica y ampliación de talleres; ver `DESARROLLO.md`. La sección de límites distingue la primera rebanada histórica de esta ampliación. Amplía la primera prueba con cinco capacidades conectadas. Es un modo experimental, con reglas y balance propios provisionales; no cambia la partida habitual ni establece canon.
 
 ## Abrir y observar
 
@@ -50,7 +50,7 @@ Solo el servidor avanza el mundo. Los clientes reciben la sección fiable `mundo
 
 No hay eventos escritos para producir una historia concreta, ni un LLM inventando misiones. Sí hay acciones, recetas, prioridades y restricciones implementadas: de ellas salen las situaciones. Los habitantes conocen las fuentes del mapa y las ofertas potenciales de otros habitantes; no se simula descubrimiento o negociación hablada. Las sanciones por extracción sí requieren un testigo cercano.
 
-Hambre no mata; los NPC no combaten ni desarrollan nuevas habilidades. Los depósitos son ubicaciones marcadas con reservas lógicas, no cofres retirables. Los inventarios no tienen capacidad ni deterioro de alimentos; pueden acumular subproductos. No hay generador de espadas, armaduras, recetas o árboles de habilidades nuevos. Las estaciones se amplían construyendo piezas conocidas; todavía no se diseñan edificios completos ni barrios. Estas son capacidades posteriores, no algo que este prototipo ya prometa.
+Hambre no mata y los NPC no combaten. La ampliación de `DESARROLLO.md` añade pericia y técnicas aprendidas mediante acciones reales. Los depósitos son ubicaciones marcadas con reservas lógicas, no cofres retirables. Los inventarios no tienen capacidad ni deterioro de alimentos; pueden acumular subproductos. La primera rebanada no incluía generador de espadas o armaduras; la ampliación de `DESARROLLO.md` añade combinaciones y aprendizaje acotados, sin generar mecánicas o árboles arbitrarios. Las estaciones se amplían construyendo piezas conocidas; todavía no se diseñan edificios completos ni barrios. Estas son capacidades posteriores, no algo que este prototipo ya prometa.
 
 ## Verificación
 

@@ -3,6 +3,7 @@ extends RefCounted
 # `eq:<familia>:<ranura>:<variante>:<nivel>`: el estado de la pieza vive en la clave y el inventario atómico no cambia.
 # Datos en res://datos/equipo/*.json (TODOS los números son PROVISIONALES); se cargan una vez.
 # Regla: todo acceso a nombre, pila o estadísticas de un ítem que pueda ser `eq:` pasa por info(clave).
+const Artesania = preload("res://scripts/artesania.gd")
 const C = preload("res://scripts/catalogos.gd")
 const DIR := "res://datos/equipo/"
 const DESCONOCIDA := "Pieza desconocida"
@@ -89,11 +90,13 @@ static func nombre(p: Dictionary) -> String:
 
 static func existe(clave: String) -> bool:
 	var dd := datos()
-	return C.ITEMS.has(clave) or dd.piedras.has(clave) or dd.joyas.has(clave) or not leer(clave).is_empty()
+	return not Artesania.info(clave).is_empty() or C.ITEMS.has(clave) or dd.piedras.has(clave) or dd.joyas.has(clave) or not leer(clave).is_empty()
 
 ## Lo mismo que una entrada de C.ITEMS (n, pila, c, y equipo/def/hp/vel en piezas) para cualquier clave.
 ## Clave desconocida o `eq:` inválida: «Pieza desconocida», pila 1, no equipable (nunca falla ni se pierde).
 static func info(clave: String) -> Dictionary:
+	var artesanal := Artesania.info(clave)
+	if not artesanal.is_empty(): return artesanal
 	if C.ITEMS.has(clave): return C.ITEMS[clave]
 	if _info.has(clave): return _info[clave]
 	var dd := datos()
@@ -174,6 +177,9 @@ static func stats_de(equipo: Dictionary) -> Dictionary:
 			s.vel_eq += ps.vel
 		elif str(info(k).get("equipo", "")) == r:
 			s.def_eq += float(info(k).get("def", 0))
+			if not Artesania.leer(k).is_empty():
+				s.hp_eq += float(info(k).get("hp", 0))
+				s.vel_eq += float(info(k).get("vel", 0))
 	var b := bono_set(equipo)
 	s.vel_eq += b.vel_pct
 	s["bono"] = b
@@ -276,6 +282,10 @@ static func visible(equipo: Dictionary) -> Array:
 	for r in equipo:
 		var k := str(equipo[r])
 		if k == "": continue
+		var artesanal := Artesania.visible(k)
+		if not artesanal.is_empty():
+			l.append(artesanal)
+			continue
 		var p := leer(k)
 		if p.is_empty():
 			l.append({"ranura": "espada" if r == "arma" else r, "item": k, "paleta": dd.paletas.get(str(info(k).get("paleta", "")), {})})

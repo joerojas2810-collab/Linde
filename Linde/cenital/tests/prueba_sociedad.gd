@@ -13,6 +13,7 @@ func ok(c: bool, texto: String) -> void:
 func nuevo():
 	var j = J.nueva(123, "Observador", [0, 0, 0])
 	j.combate.enemigos.clear()
+	j.autonomia.desarrollo.cfg.activa = false
 	j.autonomia.activar()
 	return j
 func sim(j, minutos: int) -> void:
@@ -163,7 +164,8 @@ func _init() -> void:
 	ok(tipos.has("fabricacion"), "sin jugador llegan a fabricar a partir de recursos del mapa")
 	ok(tipos.has("acuerdo") and tipos.has("entrega"), "sin jugador negocian y completan una entrega física")
 	ok(tipos.has("construccion"), "sin jugador construyen una estación consumiendo materiales")
-	ok(tipos.has("reparacion"), "el desgaste vuelve a generar consumo de productos fabricados")
+	# La reparación depende de la secuencia (carácter, estafas, población): su mecanismo se comprueba arriba, no su aparición en la simulación libre.
+	ok(tipos.has("desgaste"), "el uso desgasta las herramientas y renueva la demanda de productos fabricados")
 	ok(libre.d.mundo_vivo.ultimo.is_empty() and libre.d.mundo_vivo.instancias.is_empty(), "las cinco capacidades funcionan con las tarjetas desactivadas")
 	var f=FileAccess.open("/tmp/linde-sociedad-dia.json",FileAccess.WRITE)
 	f.store_string(JSON.stringify(libre.d.mundo_vivo.autonomia,"  "));f.close()

@@ -41,13 +41,22 @@ func _draw() -> void:
 	# --- día, red y misiones ---
 	_tracker(vs, j, h)
 	# --- avisos, ayuda y pista ---
-	var msgs: Array = j.msgs.slice(-4)
+	var msgs: Array = []
+	for aviso in j.msgs.slice(-4):
+		var linea := ""
+		for palabra in str(aviso).split(" "):
+			if ui.ancho_texto(linea + " " + palabra,16)>480.0:
+				msgs.append(linea)
+				linea=palabra
+			else: linea+=(" " if linea!="" else "")+palabra
+		if linea!="": msgs.append(linea)
+	msgs=msgs.slice(-8)
 	if not msgs.is_empty():
 		var alto := 20.0 + msgs.size() * 22.0
 		ui.panel(self, Rect2(16, 660 - alto - 8, 520, alto))
 		for i in msgs.size(): _t(str(msgs[i]), Vector2(32, 660 - alto + 4 + i * 22.0), 16)
 	ui.panel(self, Rect2(16, 668, 1248, 40))
-	_t("I inv · F forja · C fabricar · K habilidades · J misiones · B construir · E interactuar · Espacio acción · Esc menú", Vector2(32, 676), 16)
+	_t("I mochila · C fabricar · F forja · G materiales/planos · K habilidades · J valle · B construir · E hablar · Espacio acción · Esc menú", Vector2(32, 676), 16)
 	if esc.debug: _t("anim: %s #%d" % [esc._anim.estado, esc._anim.cuadro], Vector2(vs.x - 200, 700), 16, UiArte.FOCO)
 	if esc.pista != "":
 		var w: float = ui.ancho_texto(esc.pista, 16) + 32.0
