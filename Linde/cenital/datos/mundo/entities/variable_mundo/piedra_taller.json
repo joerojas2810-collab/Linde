@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "piedra_taller",
+  "type": "variable_mundo",
+  "name": "Piedra disponible para el taller",
+  "summary": "",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 2,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "tipo_valor": "integer",
+    "inicial": 0,
+    "minimo": 0,
+    "maximo": 100,
+    "persistir": true,
+    "descripcion": "Contador compartido de ejemplo; no es el inventario de ningún jugador.",
+    "origen": "persistida"
+  }
+}

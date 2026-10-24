@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "id": "ordal_presente",
+  "type": "variable_mundo",
+  "name": "Presencia solicitada de Ordal",
+  "summary": "Propuesta; no prueba de que el NPC esté materializado.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "origen": "persistida",
+    "tipo_valor": "boolean",
+    "inicial": true,
+    "persistir": true,
+    "descripcion": "Estado deseado de presencia; el adaptador reconcilia la instancia de Ordal sin duplicarla."
+  }
+}

@@ -127,7 +127,7 @@ func _bienvenida(e: Dictionary) -> void:
 	perfiles = e.perfiles
 	var r := Replica.new()
 	r.red = self
-	r.d = {"semilla": e.semilla, "min": e.min, "mundo": e.mundo, "cofres": e.cofres, "jefes": e.jefes, "npcs": e.npcs, "jugadores": e.jugadores}
+	r.d = {"semilla": e.semilla, "min": e.min, "mundo": e.mundo, "cofres": e.cofres, "jefes": e.jefes, "mundo_vivo": e.mundo_vivo, "npcs": e.npcs, "jugadores": e.jugadores}
 	r.d.mundo.constr = _traducir(r.d.mundo.constr)
 	var m: Array = r.d.jugadores[P.LOCAL].get("msgs", [])
 	r.d.jugadores[P.LOCAL].erase("msgs")
@@ -144,6 +144,9 @@ func _mundo(cambios: Dictionary) -> void:
 			"rotos", "golpes": j.d.mundo[k] = cambios[k]
 			"constr": j.d.mundo.constr = _traducir(cambios[k])
 			"cofres", "jefes": j.d[k] = cambios[k]
+			"mundo_vivo":
+				j.d.mundo_vivo = cambios[k]
+				j.habitantes.reconciliar()    # crea al recién llegado en la réplica; su posición sigue viniendo de la instantánea
 	j.mundo.cambiar()
 
 func _privado(pr: Dictionary) -> void:

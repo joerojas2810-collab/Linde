@@ -1,0 +1,5 @@
+Reviewed-Content-Hash: Linde/cenital/scripts/mundo_vivo.gd dc5a60e927cc330c5874472afd5c3d68f2f722af
+Reviewed-Content-Hash: Linde/cenital/scripts/mundo_datos.gd c5b2ee08a7d9e08521c2713414db733ecd27d290
+Reviewed-Content-Hash: Linde/cenital/scripts/juego.gd f48edcbd346632ea66f8d8bbbf419e1a1efa84f1
+Reviewed-Content-Hash: Linde/cenital/scripts/escena.gd 707f73d7e032b5f671941612330a747a007a00ce
+Reviewed-Content-Hash: Linde/cenital/scripts/hud.gd 86d801b65fee14c2f0f6e283c445f4603f83a035

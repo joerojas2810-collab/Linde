@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "id": "abrir_taller",
+  "type": "evento",
+  "name": "Abrir el taller",
+  "summary": "Ejemplo de evento de mundo; no reemplaza misiones existentes.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 2,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "condiciones": {
+      "y": [
+        {
+          "variable": "taller_abierto",
+          "operador": "eq",
+          "valor": false
+        },
+        {
+          "variable": "piedra_taller",
+          "operador": "gte",
+          "valor": 6
+        }
+      ]
+    },
+    "efectos": [
+      {
+        "operacion": "sumar",
+        "variable": "piedra_taller",
+        "valor": -6
+      },
+      {
+        "operacion": "asignar",
+        "variable": "taller_abierto",
+        "valor": true
+      }
+    ],
+    "peso": 1,
+    "enfriamiento_minutos": 1440
+  }
+}

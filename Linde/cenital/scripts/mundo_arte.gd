@@ -128,6 +128,7 @@ func constr(ci: CanvasItem, t: String, c: Vector2i, abierto: bool = false, tinte
 		"mesa": prop(ci, "workbench", pies, tinte)
 		"horno": prop(ci, "furnace", pies, tinte)
 		"cama": prop(ci, "bed", pies, tinte)
+		"cama_huesped": prop(ci, "bed", pies, tinte * Color(0.6, 0.85, 1.3))
 		"cofre": cofre(ci, c, abierto, tinte)
 		"suelo": constr_suelo(ci, c, tinte)
 

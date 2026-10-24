@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "entrada_sur",
+  "type": "lugar",
+  "name": "Entrada sur",
+  "summary": "Pendiente de celda. Entrada sur: referencia facilitada por el usuario (32,46), aún sin fijar en celda.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos",
+    "usuario_revision2"
+  ],
+  "relations": [],
+  "data": {
+    "descripcion": "Lugar lógico; celda pendiente de confirmación e integración.",
+    "celda": {
+      "x": 32,
+      "y": 46
+    }
+  }
+}

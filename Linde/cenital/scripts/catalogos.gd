@@ -43,8 +43,9 @@ const CONSTR := {
 	"horno": {"n": "Horno", "coste": {"piedra": 8}, "bloquea": true, "est": "horno", "c": "#6c6c74"},
 	"cofre": {"n": "Cofre", "coste": {"madera": 4}, "bloquea": true, "cofre": true, "c": "#c08a2b"},
 	"cama": {"n": "Cama", "coste": {"madera": 4, "fibra": 4}, "bloquea": true, "cama": true, "c": "#b84a5a"},
+	"cama_huesped": {"n": "Cama de huésped", "coste": {"madera": 4, "fibra": 3}, "bloquea": true, "c": "#4a8fb8"},   # sin "cama": no sirve para dormir; la asigna Mundo vivo
 }
-const ORDEN_CONSTR := ["muro", "suelo", "mesa", "horno", "cofre", "cama"]
+const ORDEN_CONSTR := ["muro", "suelo", "mesa", "horno", "cofre", "cama", "cama_huesped"]
 
 # est: estación cercana (≤2 celdas); herr: ítem requerido sin consumir; hab: habilidad requerida.
 const RECETAS := {

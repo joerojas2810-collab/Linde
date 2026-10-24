@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "taller",
+  "type": "lugar",
+  "name": "Taller",
+  "summary": "Representación lógica propuesta, sin ubicación ejecutable.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 2,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "narrativa",
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "descripcion": "Punto lógico de reunión usado por las ocho tarjetas de contrato.",
+    "celda": {
+      "x": 28,
+      "y": 20
+    }
+  }
+}

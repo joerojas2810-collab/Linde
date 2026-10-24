@@ -1,0 +1,74 @@
+{
+  "schema_version": 2,
+  "id": "nerea",
+  "type": "npc",
+  "name": "Nerea",
+  "summary": "PROPUESTA: personaje y rutina sin implementar.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 2,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "narrativa",
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "objetivo_propio": "Cartografiar el bosque y observar si el Gran Ciervo se acerca al lindero.",
+    "horario": [
+      {
+        "desde_minuto": 0,
+        "hasta_minuto": 300,
+        "actividad": "dormir",
+        "destino": null
+      },
+      {
+        "desde_minuto": 300,
+        "hasta_minuto": 720,
+        "actividad": "explorar",
+        "destino": {
+          "type": "lugar",
+          "id": "bosque"
+        }
+      },
+      {
+        "desde_minuto": 720,
+        "hasta_minuto": 900,
+        "actividad": "socializar",
+        "destino": {
+          "type": "lugar",
+          "id": "plaza"
+        }
+      },
+      {
+        "desde_minuto": 900,
+        "hasta_minuto": 1200,
+        "actividad": "explorar",
+        "destino": {
+          "type": "lugar",
+          "id": "bosque"
+        }
+      },
+      {
+        "desde_minuto": 1200,
+        "hasta_minuto": 1440,
+        "actividad": "dormir",
+        "destino": null
+      }
+    ],
+    "necesidades": [
+      {
+        "id": "energia",
+        "minimo": 0,
+        "maximo": 100,
+        "inicial": 80,
+        "cambio_por_hora_activo": -4,
+        "cambio_por_hora_descanso": 12,
+        "umbral_descanso": 15
+      }
+    ],
+    "notas": "PROPUESTA. Horas exactas y necesidades son ejemplos nuevos. Destinos de bosque, aldea y lindero pendientes. Referencias lógicas sin celda confirmada: exportación de rutina bloqueada; no usar coordenadas implícitas."
+  }
+}

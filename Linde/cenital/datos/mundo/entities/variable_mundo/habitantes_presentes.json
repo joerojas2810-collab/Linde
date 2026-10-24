@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "id": "habitantes_presentes",
+  "type": "variable_mundo",
+  "name": "Habitantes presentes",
+  "summary": "Solo lectura; la calcula el motor (mundo_vivo.gd).",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "prototype",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "origen": "derivada",
+    "tipo_valor": "integer",
+    "minimo": 0,
+    "persistir": false,
+    "descripcion": "Número de habitantes (npc) presentes en el mundo."
+  }
+}

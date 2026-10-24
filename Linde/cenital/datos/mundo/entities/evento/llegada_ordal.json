@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "id": "llegada_ordal",
+  "type": "evento",
+  "name": "Llegada de Ordal",
+  "summary": "Propuesta. Solicita presencia; materialización pendiente de entrada_sur con celda y proveedor camas_libres.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [
+    {
+      "type": "solicita_presencia",
+      "target": {
+        "type": "npc",
+        "id": "ordal"
+      },
+      "status": "proposed"
+    },
+    {
+      "type": "llega_por",
+      "target": {
+        "type": "lugar",
+        "id": "entrada_sur"
+      },
+      "status": "proposed"
+    }
+  ],
+  "data": {
+    "condiciones": {
+      "y": [
+        {
+          "variable": "ordal_presente",
+          "operador": "eq",
+          "valor": false
+        },
+        {
+          "variable": "camas_libres",
+          "operador": "gte",
+          "valor": 1
+        }
+      ]
+    },
+    "efectos": [
+      {
+        "operacion": "asignar",
+        "variable": "ordal_presente",
+        "valor": true
+      }
+    ],
+    "peso": 1,
+    "enfriamiento_minutos": 1440
+  }
+}

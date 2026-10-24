@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "id": "plaza",
+  "type": "lugar",
+  "name": "Plaza",
+  "summary": "Pendiente de celda.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "descripcion": "Lugar lógico; celda pendiente de confirmación e integración.",
+    "celda": {
+      "x": 34,
+      "y": 25
+    }
+  }
+}

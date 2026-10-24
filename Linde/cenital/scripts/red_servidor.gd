@@ -3,20 +3,21 @@ extends Node
 # Tiene el Juego único del mundo, acepta hasta MAX_CLIENTES por ENet, identifica cada conexión por nombre + clave,
 # ejecuta sus INTENCIONES (validadas aquí: nunca se confía en el cliente) con el id de quien las envía y difunde a 20 Hz.
 # El nodo vive en /root/Red y declara los MISMOS RPC que red_cliente.gd (Godot los identifica por ruta y nombre).
+const Aspecto = preload("res://scripts/aspecto.gd")
 const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Mundo = preload("res://scripts/mundo.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const PUERTO := 7777
 const MAX_CLIENTES := 15
-const VERSION := 2              # versión del protocolo; el cliente la manda en «hola»
+const VERSION := 3              # versión del protocolo; el cliente la manda en «hola»
 const TICK := 0.05              # 20 Hz
 const ALCANCE := 2              # celdas (Chebyshev) para construir, retirar y usar cofres
 const MAX_PEDIDOS_S := 40       # pedidos por segundo y conexión; el resto se descarta
 const ESPERA_HOLA_S := 10.0     # una conexión que no se identifica en este tiempo se corta
 const GUARDADO_S := 30.0
 const DIRS := [Vector2i.ZERO, Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
-const SECCIONES := ["rotos", "golpes", "constr", "cofres", "jefes"]
+const SECCIONES := ["rotos", "golpes", "constr", "cofres", "jefes", "mundo_vivo"]
 const MAX_TEXTO := 48           # longitud máxima de un texto de pedido (las claves `eq:` más largas rondan 32)
 const MAX_LOTE := 12            # entradas por lado de una oferta de intercambio
 
@@ -135,11 +136,7 @@ func entrar(pid: int, datos) -> Dictionary:
 	return {"ok": true, "id": id}
 
 static func _look(v) -> Array:
-	if typeof(v) != TYPE_ARRAY or v.size() != 3: return []
-	var lim := [P.PIEL.size(), P.PELO.size(), P.ROPA.size()]
-	for i in 3:
-		if typeof(v[i]) != TYPE_INT or v[i] < 0 or v[i] >= lim[i]: return []
-	return [int(v[0]), int(v[1]), int(v[2])]
+	return v.duplicate() if Aspecto.valido(v) else []
 
 # ---------- RPC (mismos nombres y modos que red_cliente.gd) ----------
 ## Cliente -> servidor: única entrada. Sin tipo a propósito: se valida en recibir().
@@ -407,7 +404,7 @@ func estado_para(id: String) -> Dictionary:
 	var p: Vector2 = j.pies_de(id)
 	pr["pos"] = [p.x, p.y]
 	return {"yo": id, "semilla": j.d.semilla, "min": j.d.min, "mundo": j.d.mundo.duplicate(true), "cofres": j.d.cofres.duplicate(true),
-		"jefes": j.d.jefes.duplicate(true), "npcs": j.d.npcs.duplicate(true), "jugadores": {P.LOCAL: pr}, "perfiles": perfiles()}
+		"jefes": j.d.jefes.duplicate(true), "mundo_vivo": j.d.mundo_vivo.duplicate(true), "npcs": j.d.npcs.duplicate(true), "jugadores": {P.LOCAL: pr}, "perfiles": perfiles()}
 
 # Para dibujar a los demás en el anfitrión con ventana (mismo formato que red_cliente.otros_jugadores).
 func otros_jugadores() -> Array:

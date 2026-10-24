@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "id": "nerea_presente",
+  "type": "variable_mundo",
+  "name": "Presencia solicitada de Nerea",
+  "summary": "Añadida solo en la copia de prueba (regla 12 del GDD): Nerea con false.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "origen": "persistida",
+    "tipo_valor": "boolean",
+    "inicial": false,
+    "persistir": true,
+    "descripcion": "Estado deseado de presencia; el adaptador reconcilia la instancia de Ordal sin duplicarla."
+  }
+}

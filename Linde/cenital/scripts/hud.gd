@@ -1,6 +1,7 @@
 extends Control
 # Dibuja la interfaz en espacio de pantalla (1280x720) con los recursos de E06 (res://arte/interfaz).
 # Solo lee estado de la escena; no concede nada. La luz de día y noche se aplica al mundo (escena), no aquí.
+const Aspecto = preload("res://scripts/aspecto.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const UiArte = preload("res://scripts/ui_arte.gd")
@@ -72,6 +73,11 @@ func _tracker(vs: Vector2, j, h: float) -> void:
 		lineas.append([C.MISIONES[id].n + (" (¡cumplida!)" if e == "cumplida" else ""), 16])
 		if C.MISIONES[id].da != "" and e == "cumplida": lineas.append(["→ vuelve con " + C.MISIONES[id].da.capitalize(), 16])
 		for o in C.MISIONES[id].obj: lineas.append([("[x] " if j.objetivo_ok(o) else "[ ] ") + j.objetivo_txt(o), 16])
+	if j.vivo != null:   # misiones de plantilla activas (story-004)
+		for mi: Dictionary in j.vivo.instancias_visibles(j.LOCAL):
+			if mi.estado != "activa": continue
+			lineas.append([str(mi.nombre) + (" (¡cumplida!)" if mi.cumplida else ""), 16])
+			lineas.append([str(mi.texto), 16])
 	var extra := 1 if esc.red != null else 0
 	var alto := 52.0 + (extra + lineas.size()) * 22.0 + (8.0 if not lineas.is_empty() else 0.0)
 	var r := Rect2(vs.x - 16 - 328, 16, 328, alto)
@@ -132,23 +138,26 @@ func _menu(vs: Vector2) -> void:
 
 func _creador(vs: Vector2) -> void:
 	var cr: Dictionary = esc.cr
-	var p := Rect2(vs.x / 2 - 480, 40, 960, 620)
+	var p := Rect2(vs.x / 2 - 540, 20, 1080, 680)
 	ui.panel(self, p)
-	_t("CREA TU PERSONAJE", p.position + Vector2(24, 16), 32)
-	var nombres: Array = ["Nombre", "Piel", "Pelo", "Ropa", "Comenzar"]
-	var vals: Array = [cr.nombre + ("_" if cr.campo == 0 else ""), "%d/3" % (cr.piel + 1), "%d/4" % (cr.pelo + 1), "%d/3" % (cr.ropa + 1), "Enter"]
+	_t("CREA TU PERSONAJE", p.position + Vector2(24, 12), 32)
+	var nombres: Array = ["Nombre"] + Aspecto.ETIQUETAS + ["Usar aspecto" if esc.destino_creador == "unirse" else "Comenzar"]
+	var vals: Array = [cr.nombre + ("_" if cr.campo == 0 else "")]
+	for i in Aspecto.CAMPOS.size(): vals.append(Aspecto.etiqueta(i, cr[Aspecto.CAMPOS[i]], cr.identidad))
+	vals.append("Enter")
 	for i in nombres.size():
-		var b := Rect2(p.position.x + 32, p.position.y + 80 + i * 68, 460, 60)
+		var b := Rect2(p.position.x + 24, p.position.y + 60 + i * 52, 496, 48)
 		ui.boton(self, b, i == cr.campo)
-		_t(nombres[i], b.position + Vector2(28, 18), 24, UiArte.PAPEL)
-		_t(str(vals[i]), b.position + Vector2(190, 18), 24, UiArte.PAPEL)
-	var look := [cr.piel, cr.pelo, cr.ropa]
+		_t(nombres[i], b.position + Vector2(20, 14), 20, UiArte.PAPEL)
+		_t(str(vals[i]), b.position + Vector2(240, 14), 20, UiArte.PAPEL)
+	var look := Aspecto.de_creador(cr)
 	for k in 4:
 		var d: Vector2i = [Vector2i.DOWN, Vector2i.LEFT, Vector2i.UP, Vector2i.RIGHT][k]
-		draw_set_transform(p.position + Vector2(540 + (k % 2) * 200, 100 + (k / 2) * 220), 0, Vector2(5, 5))
+		draw_set_transform(p.position + Vector2(560 + (k % 2) * 220, 100 + (k / 2) * 220), 0, Vector2(5, 5))
 		esc.arte_eq.dibujar(self, Vector2(16, 32), d, 0, [], look, "reposo")
 	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
-	_t("↑↓ campo · ←→ cambiar · escribe el nombre · Esc volver", p.position + Vector2(32, 556), 16)
+	_t("10 peinados para hombre y 10 para mujer.", p.position + Vector2(560, 564), 16)
+	_t("↑↓ / Tab campo · ←→ cambiar · escribe el nombre · Esc volver", p.position + Vector2(24, 626), 16)
 
 func _unirse(vs: Vector2) -> void:
 	var un: Dictionary = esc.un
@@ -163,6 +172,6 @@ func _unirse(vs: Vector2) -> void:
 		_t(nombres[i], b.position + Vector2(28, 20), 24, UiArte.PAPEL)
 		_t("%s%s" % [vals[i], "_" if i == un.campo and i < 3 else ""], b.position + Vector2(220, 20), 24, UiArte.PAPEL)
 	if esc.modo == "conectando": _t("Conectando… (Esc cancela)", p.position + Vector2(32, 400), 24)
-	_t("↑↓ campo · escribe · Enter conectar · Esc volver", p.position + Vector2(32, 450), 16)
+	_t("↑↓ campo · Enter conectar · P en Conectar: aspecto · Esc volver", p.position + Vector2(32, 450), 16)
 	_t("La clave identifica a tu personaje en ese mundo: guárdala (se recuerda en este equipo).", p.position + Vector2(32, 476), 16, Color(UiArte.TINTA, 0.8))
 	if esc.menu_msg != "": _t(esc.menu_msg, p.position + Vector2(32, 520), 16, Color("8a2020"))

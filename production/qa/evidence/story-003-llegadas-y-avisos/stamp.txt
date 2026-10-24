@@ -1,0 +1,4 @@
+Reviewed-Content-Hash: Linde/cenital/scripts/habitantes.gd 8f04ce18da7e9d50081a3468d784dd401e9c24aa
+Reviewed-Content-Hash: Linde/cenital/scripts/mundo_vivo.gd 6233c8cfad455a2f5805e7f74bb5af63d3695ac8
+Reviewed-Content-Hash: Linde/cenital/scripts/juego.gd 275bbf1b9e373e590124128451598a49f98141d2
+Reviewed-Content-Hash: Linde/cenital/scripts/escena.gd 1ae2adff28396661d5959508517c169e42673092

@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "id": "taller_abierto",
+  "type": "variable_mundo",
+  "name": "Taller abierto",
+  "summary": "",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 2,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "tipo_valor": "boolean",
+    "inicial": false,
+    "persistir": true,
+    "descripcion": "Indica apertura del taller en este ejemplo.",
+    "origen": "persistida"
+  }
+}

@@ -9,6 +9,7 @@ const Inv = preload("res://scripts/inventario.gd")
 const Mundo = preload("res://scripts/mundo.gd")
 const Guard = preload("res://scripts/guardado.gd")
 const Hab = preload("res://scripts/habitantes.gd")
+const Vivo = preload("res://scripts/mundo_vivo.gd")
 const Comb = preload("res://scripts/combate.gd")
 const Anim = preload("res://scripts/anim_pj.gd")
 const Eq = preload("res://scripts/equipo.gd")
@@ -21,6 +22,7 @@ const EQUIPO_VACIO := {"casco": "", "torso": "", "guantes": "", "botas": "", "pa
 var d := {}
 var mundo := Mundo.new()
 var habitantes
+var vivo    # director de Mundo vivo (variables + eventos)
 var combate
 var rt := {}            # id -> {pies, mira, cd_obj, herr_t, msgs}: sesión de cada jugador (pies se vuelca a pos al guardar)
 var _acum := 0.0
@@ -105,6 +107,8 @@ func _arrancar() -> void:
 	mundo.estado = d.mundo
 	mundo.cambiar()
 	for id in d.jugadores: _sesion(id)
+	vivo = Vivo.new(self)
+	vivo.restaurar()
 	habitantes = Hab.new(self)
 	habitantes.restaurar()
 	combate = Comb.new(self)
@@ -198,6 +202,10 @@ func tick(dt: float) -> void:
 func _hora_en_punto() -> void:
 	mundo.regenerar(d.min, ocupada)
 	combate.revisar_reaparicion()
+	var ev: String = vivo.evaluar()
+	if ev != "":
+		habitantes.reconciliar()
+		aviso_todos(vivo.nombre(ev))
 
 func _chequeos() -> void:
 	for id in rt:
@@ -207,6 +215,7 @@ func _chequeos() -> void:
 			aviso("Recibes lo pendiente.", id)
 			pj.pendientes = {}
 	evaluar_misiones()
+	vivo.evaluar_misiones()
 
 # ---------- estadísticas derivadas (se recalculan, nunca se acumulan) ----------
 func stats(id: String = LOCAL) -> Dictionary:
@@ -439,7 +448,7 @@ func intercambiar(a: String, b: String, de_a: Dictionary, de_b: Dictionary) -> D
 func actores() -> Array:
 	var l: Array = []
 	for id in rt: l.append([rt[id].pies, P.PIES])
-	for nid in Hab.NPCS: l.append([habitantes.pos(nid), P.PIES])
+	for nid in habitantes.ids: l.append([habitantes.pos(nid), P.PIES])
 	for e in combate.enemigos:
 		if e.est != "muerto": l.append([e.pos, Vector2(e.tam, e.tam * 0.6)])
 	return l
@@ -519,7 +528,7 @@ func mover_cofre(cid: String, item: String, hacia_cofre: bool, id: String = LOCA
 # E: habitante cercano, cofre o cama delante.
 func interactuar(id: String = LOCAL) -> Dictionary:
 	var p := pies_de(id)
-	for nid in Hab.NPCS:
+	for nid in habitantes.ids:
 		if habitantes.pos(nid).distance_to(p) <= ALCANCE_NPC:
 			var r := hablar(nid, id)
 			return {"ok": true, "panel": "dialogo", "npc": nid, "texto": r.texto, "tipo": r.tipo}
@@ -532,25 +541,19 @@ func interactuar(id: String = LOCAL) -> Dictionary:
 		if cs.is_empty(): continue
 		if cs.t == "cofre": return {"ok": true, "panel": "cofre", "id": "c@" + Mundo.clave(c)}
 		if cs.t == "cama":
-			if not cs.propia: return {"ok": false, "r": _no("Es la cama de Maren", id)}
+			if not cs.propia: return {"ok": false, "r": _no("Es la cama de un habitante", id)}
 			if cs.get("dueno", "") != id: return {"ok": false, "r": _no("Es la cama de otro jugador", id)}
 			return {"ok": true, "panel": "dormir", "r": dormir(c, id)}
 	return {"ok": false, "r": _no("Nada con qué interactuar", id)}
 
-# PROVISIONAL multijugador: dormir adelanta el reloj COMPARTIDO (con varios jugadores habrá que exigir que duerman todos).
+# Dormir NO avanza el reloj compartido (design/gdd/mundo-vivo.md regla 17): cura y fija la cama. El tiempo sigue por el tick
+# normal, que ya regenera objetos cada hora y hace avanzar a los habitantes. PROVISIONAL: sin consecuencias de dormir aún.
 func dormir(c: Vector2i, id: String = LOCAL) -> Dictionary:
 	var pj := jug(id)
-	var m: int = d.min % 1440
-	var salto := (6 * 60 - m) if m < 6 * 60 else (1440 - m + 6 * 60)
-	for i in salto:
-		d.min += 1
-		if d.min % 60 == 0: mundo.regenerar(d.min, func(_c): return false)
 	pj.hp = stats(id).hp
 	var p := Mundo.pies_de_celda(c)
 	pj.cama = [p.x, p.y + 16]
-	habitantes.resincronizar()
-	combate.revisar_reaparicion()
-	return _ok("Duermes hasta el amanecer. Día %d." % dia(), id)
+	return _ok("Descansas: recuperas la vida y fijas tu cama.", id)
 
 # ---------- misiones (por jugador) ----------
 func estado_mision(mid: String, id: String = LOCAL) -> String:
@@ -629,6 +632,13 @@ func entregar(mid: String, id: String = LOCAL) -> Dictionary:
 	pj.misiones[mid].estado = "entregada"
 	ganar_xp(m.rec.xp, id)
 	return _ok("Entregada: " + m.n, id)
+
+## Fachadas de misiones por plantilla (UI y red futura).
+func aceptar_mision_plantilla(iid: String, id: String = LOCAL) -> Dictionary:
+	return vivo.aceptar_plantilla(iid, id)
+
+func entregar_mision_plantilla(iid: String, id: String = LOCAL) -> Dictionary:
+	return vivo.entregar_plantilla(iid, id)
 
 func hablar(npc: String, id: String = LOCAL) -> Dictionary:
 	var pj := jug(id)

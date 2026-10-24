@@ -1,0 +1,2 @@
+Reviewed-Content-Hash: Linde/cenital/scripts/red_servidor.gd ea850c647756b27ca10863bf2b5b5d37e1b3d996
+Reviewed-Content-Hash: Linde/cenital/scripts/red_cliente.gd 243bba62e996280e7a2e2d711df4838a497f217a

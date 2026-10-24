@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "id": "mesa_construida",
+  "type": "variable_mundo",
+  "name": "Mesa construida",
+  "summary": "Solo lectura; la calcula el motor (mundo_vivo.gd).",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "prototype",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "origen": "derivada",
+    "tipo_valor": "boolean",
+    "persistir": false,
+    "descripcion": "Hay al menos una mesa de trabajo construida."
+  }
+}

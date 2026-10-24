@@ -5,13 +5,13 @@ extends Node2D
 # + escudo + espada) · --mira=frente|derecha|espalda|izquierda · --auto-ataque (el jugador local ataca cada
 # AUTO_ATAQUE_S s, con el ciclo real de combate; muestra fase/pose sobre el PJ e imprime una línea por cuadro dibujado)
 # Servidor sin ventana: --servidor [--puerto=7777] [--guardado=ruta] [--semilla=N] [--duracion=s] [--registro=ruta.json]
+const Aspecto = preload("res://scripts/aspecto.gd")
 const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Inv = preload("res://scripts/inventario.gd")
 const Mundo = preload("res://scripts/mundo.gd")
 const J = preload("res://scripts/juego.gd")
 const Hud = preload("res://scripts/hud.gd")
-const Hab = preload("res://scripts/habitantes.gd")
 const MundoArte = preload("res://scripts/mundo_arte.gd")
 const ActoresArte = preload("res://scripts/actores_arte.gd")
 const Srv = preload("res://scripts/red_servidor.gd")
@@ -25,7 +25,6 @@ const MIRA := {"frente": Vector2i.DOWN, "derecha": Vector2i.RIGHT, "espalda": Ve
 const COLORES := {Mundo.T.PASTO: Color("5a9b4a"), Mundo.T.CAMINO: Color("c9b27a"), Mundo.T.AGUA: Color("3f7fbf"),
 	Mundo.T.PARED: Color("a8794f"), Mundo.T.SUELO: Color("8a6a4a"), Mundo.T.PUERTA: Color("5b3a22"),
 	Mundo.T.RUINA: Color("8c8a86"), Mundo.T.MURO_RUINA: Color("5e5c63")}
-const MAREN_LOOK := [1, 0, 2]
 const AUTOGUARDADO_S := 30.0
 const AUTO_ATAQUE_S := 0.8      # depuración (--auto-ataque): intervalo entre ataques; el ciclo dura 0,45 s
 const POSES_ATAQUE := ["prep", "antic", "impac", "recup"]   # preparado, anticipación, impacto, recuperación
@@ -54,7 +53,8 @@ var auto_t := 0.0
 var menu_items: Array = []
 var menu_sel := 0
 var menu_msg := ""
-var cr := {"nombre": "Viajero", "piel": 0, "pelo": 1, "ropa": 0, "campo": 0}
+var cr := {"nombre": "Viajero", "piel": 0, "pelo": 1, "ropa": 0, "identidad": 0, "peinado": 0, "pantalon": 0, "botas": 0, "cinturon": 0, "campo": 0}
+var destino_creador := "juego"
 var red: Node = null          # red_servidor (alojando) o red_cliente (unido); null = un jugador sin red
 var un := {"dir": "127.0.0.1:7777", "nombre": "", "clave": "", "campo": 0}   # formulario «Unirse»
 const RED_CFG := "user://red.cfg"
@@ -103,7 +103,7 @@ func _ready() -> void:
 	if pantalla_ini == "creador": modo = "creador"       # depuración/capturas: abre la pantalla sin teclear
 	elif pantalla_ini == "unirse": _abrir_unirse()
 	if nueva >= 0:
-		j = J.nueva(nueva, cr.nombre, [cr.piel, cr.pelo, cr.ropa])
+		j = J.nueva(nueva, cr.nombre, Aspecto.de_creador(cr))
 		modo = "juego"
 		if ir != "":
 			var p := ir.split(",")
@@ -179,28 +179,43 @@ func _tecla_menu(e: InputEvent) -> void:
 						j = g
 						modo = "juego"
 				1:
+					destino_creador = "juego"
 					cr.campo = 0
 					modo = "creador"
-				2: _alojar()
+				2:
+					if not FileAccess.file_exists(ruta) and not FileAccess.file_exists(ruta + ".bak"):
+						destino_creador = "alojar"
+						cr.campo = 0
+						modo = "creador"
+					else: _alojar()
 				3: _abrir_unirse()
 				4: get_tree().quit()
 
 func _tecla_creador(e: InputEvent) -> void:
-	var lim := [0, 3, 4, 3, 0]
+	var total: int = Aspecto.CAMPOS.size() + 2
 	match e.keycode:
-		KEY_ESCAPE: return _menu_inicial()
-		KEY_UP: cr.campo = (cr.campo + 4) % 5
-		KEY_DOWN: cr.campo = (cr.campo + 1) % 5
+		KEY_ESCAPE:
+			if destino_creador == "unirse": modo = "unirse"
+			else: _menu_inicial()
+			return
+		KEY_UP: cr.campo = posmod(cr.campo - 1, total)
+		KEY_DOWN, KEY_TAB: cr.campo = posmod(cr.campo + 1, total)
 		KEY_LEFT, KEY_RIGHT:
-			var s: int = 1 if e.keycode == KEY_RIGHT else -1
-			var k: String = ["", "piel", "pelo", "ropa"][cr.campo] if cr.campo > 0 and cr.campo < 4 else ""
-			if k != "": cr[k] = (cr[k] + s + lim[cr.campo]) % lim[cr.campo]
+			if cr.campo > 0 and cr.campo < total - 1:
+				var i: int = cr.campo - 1
+				var k: String = Aspecto.CAMPOS[i]
+				cr[k] = posmod(cr[k] + (1 if e.keycode == KEY_RIGHT else -1), Aspecto.limites()[i])
 		KEY_BACKSPACE: if cr.campo == 0: cr.nombre = cr.nombre.substr(0, cr.nombre.length() - 1)
 		KEY_ENTER, KEY_KP_ENTER:
-			if cr.campo == 4:
-				j = J.nueva(randi() % 100000, cr.nombre, [cr.piel, cr.pelo, cr.ropa])   # el mapa es único; la semilla solo elige dónde apareces
+			if cr.campo == total - 1:
+				if destino_creador == "unirse":
+					un.nombre = cr.nombre
+					modo = "unirse"
+					return
+				j = J.nueva(randi() % 100000, cr.nombre, Aspecto.de_creador(cr))
 				j.guardar(ruta)
 				modo = "juego"
+				if destino_creador == "alojar": _alojar()
 		_:
 			if cr.campo == 0 and e.unicode >= 32 and e.unicode != 127 and cr.nombre.length() < 16: cr.nombre += char(e.unicode)
 
@@ -229,7 +244,7 @@ func _servidor_sin_ventana(o: Dictionary) -> void:
 func _alojar() -> void:
 	var g = J.cargar(ruta)
 	if g == null:
-		g = J.nueva(randi() % 100000, cr.nombre, [cr.piel, cr.pelo, cr.ropa])
+		g = J.nueva(randi() % 100000, cr.nombre, Aspecto.de_creador(cr))
 		g.guardar(ruta)
 	var s = Srv.new()
 	s.name = "Red"
@@ -258,6 +273,12 @@ func _tecla_unirse(e: InputEvent) -> void:
 	if modo == "conectando":
 		if e.keycode == KEY_ESCAPE: _menu_inicial()
 		return
+	if e.keycode == KEY_P and un.campo == 3:
+		cr.nombre = un.nombre
+		cr.campo = 0
+		destino_creador = "unirse"
+		modo = "creador"
+		return
 	var k: String = ["dir", "nombre", "clave", ""][un.campo]
 	match e.keycode:
 		KEY_ESCAPE: _menu_inicial()
@@ -276,7 +297,7 @@ func _unirse() -> void:
 	c.puerto = int(partes[1]) if partes.size() > 1 and partes[1].is_valid_int() else Srv.PUERTO
 	c.nombre = un.nombre.strip_edges()
 	c.clave = un.clave
-	c.look = [cr.piel, cr.pelo, cr.ropa]
+	c.look = Aspecto.de_creador(cr)
 	var cfg := ConfigFile.new()
 	for kk in ["dir", "nombre", "clave"]: cfg.set_value("red", kk, un[kk])
 	cfg.save(RED_CFG)
@@ -426,6 +447,15 @@ func _armar() -> void:
 					elif m.da == "" and e == "cumplida": j.entregar(id))
 				if e == "activa" or e == "cumplida":
 					for o in m.obj: _l("      " + ("[x] " if j.objetivo_ok(o) else "[ ] ") + j.objetivo_txt(o))
+			if j.vivo != null:   # misiones de plantilla (story-004); el cliente de red no tiene vivo
+				for mi: Dictionary in j.vivo.instancias_visibles(J.LOCAL):
+					var iid: String = str(mi.iid)
+					var act: bool = mi.estado == "activa"
+					var ok: bool = mi.cumplida
+					_l("%s  [%s]  (mundo)" % [mi.nombre, ("CUMPLIDA" if ok else "activa") if act else "disponible"], func():
+						if not act: j.aceptar_mision_plantilla(iid, J.LOCAL)
+						elif ok: j.entregar_mision_plantilla(iid, J.LOCAL))
+					if act: _l("      " + str(mi.texto))
 		"cofre":
 			_l("COFRE  ·  Enter mueve la pila completa al otro lado")
 			_l("— Tu inventario —")
@@ -506,8 +536,8 @@ func _process(delta: float) -> void:
 	pista = _pista()
 
 func _pista() -> String:
-	for id in Hab.NPCS:
-		if j.habitantes.pos(id).distance_to(j.pies) <= J.ALCANCE_NPC: return "E: hablar con %s" % Hab.NPCS[id].n
+	for id in j.habitantes.ids:
+		if j.habitantes.pos(id).distance_to(j.pies) <= J.ALCANCE_NPC: return "E: hablar con %s" % j.habitantes.fichas[id].n
 	var base := Mundo.celda_de(j.pies)
 	for c in [base + j.mira, base]:
 		var oid: String = j.mundo.objeto_presente(c)
@@ -517,7 +547,7 @@ func _pista() -> String:
 			return "E: abrir cofre" if ot == "cofre_fijo" else "Espacio: golpear %s" % C.OBJETOS[ot].n
 		var cs: Dictionary = j.mundo.constr_en(c)
 		if cs.get("t", "") == "cofre": return "E: abrir cofre"
-		if cs.get("t", "") == "cama": return "E: dormir" if cs.get("dueno", "") == J.LOCAL else ("Cama de otro jugador" if cs.propia else "Cama de Maren")
+		if cs.get("t", "") == "cama": return "E: dormir" if cs.get("dueno", "") == J.LOCAL else ("Cama de otro jugador" if cs.propia else "Cama de un habitante")
 	return ""
 
 ## Marcador visible cuando falta el arte del personaje: nunca se dibuja el arte anterior.
@@ -546,7 +576,7 @@ func _draw() -> void:
 	for e in j.combate.enemigos: if e.est == "aviso": _telegrafo(e)
 	var dentro := Mundo.CASA.has_point(Mundo.celda_de(j.pies))
 	var lista: Array = [[j.pies.y, "pj", null], [Mundo.CASA.end.y * 16.0 - 8.0, "fachada", null]]
-	for id in Hab.NPCS: lista.append([j.habitantes.pos(id).y, "npc", id])
+	for id in j.habitantes.ids: lista.append([j.habitantes.pos(id).y, "npc", id])
 	if red != null:
 		for o in red.otros_jugadores(): lista.append([o.pies.y, "otro", o])
 	for e in j.combate.enemigos: lista.append([e.pos.y, "enemigo", e])
@@ -656,9 +686,9 @@ func _dibujar_npc(id: String) -> void:
 	var act: String = j.d.npcs[id].act
 	var st: Dictionary = actores.npc_estado(id, p)
 	var cuadro := int(Time.get_ticks_msec() / 120.0) % 4 if st.mueve else 0
-	arte_eq.dibujar(self, p, st.dir, cuadro, [], MAREN_LOOK, "caminar" if st.mueve else "reposo")
+	arte_eq.dibujar(self, p, st.dir, cuadro, [], j.habitantes.aspecto(id), "caminar" if st.mueve else "reposo")
 	var f := ThemeDB.fallback_font
-	draw_string(f, origen + Vector2(-6, -4), Hab.NPCS[id].n + (" (zzz)" if act == "dormir" else ""), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
+	draw_string(f, origen + Vector2(-6, -4), j.habitantes.fichas[id].n + (" (zzz)" if act == "dormir" else ""), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
 
 func _dibujar_enemigo(e: Dictionary) -> void:
 	var t: float = e.tam

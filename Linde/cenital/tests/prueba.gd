@@ -186,7 +186,7 @@ func t_construccion() -> void:
 	j.mira = Vector2i.RIGHT
 	j.jug().hp = 3
 	var r: Dictionary = j.interactuar()
-	ok(r.panel == "dormir" and j.d.min % 1440 == 360 and j.dia() == 2 and j.jug().hp == j.stats().hp, "dormir en cama propia: amanece, cura, nuevo día")
+	ok(r.panel == "dormir" and j.d.min == 20 * 60 and j.dia() == 1 and j.jug().hp == j.stats().hp, "dormir en cama propia: cura sin avanzar el reloj")
 	ok(j.jug().cama.size() == 2, "cama propia fija el punto de reaparición")
 
 func t_progresion() -> void:
@@ -918,7 +918,7 @@ func t_multi() -> void:
 	j.jug("b").inv = {"madera": 5, "piedra": 2}
 	ok(j.construir("muro", Vector2i(33, 40)).ok and j.jug().inv.is_empty() and j.jug("b").inv == {"madera": 5, "piedra": 2}, "multi: construir paga del que construye")
 	ok(j.construir("mesa", Vector2i(31, 38), "b").ok and j.jug("b").inv.is_empty(), "multi: el segundo jugador construye")
-	ok(j.mundo.bloquea(Vector2i(33, 40)) and j.mundo.constr_en(Vector2i(31, 38)).t == "mesa" and j.d.mundo.constr.size() == 3, "multi: el mundo compartido refleja las construcciones de ambos")
+	ok(j.mundo.bloquea(Vector2i(33, 40)) and j.mundo.constr_en(Vector2i(31, 38)).t == "mesa" and j.d.mundo.constr.size() == 4, "multi: el mundo compartido refleja las construcciones de ambos")
 	ok(not j.retirar(Vector2i(33, 40), "b").ok and not j.retirar(Vector2i(31, 38)).ok, "multi: solo el dueño retira")
 	ok(j.contar_constr("mesa", "b") == 1 and j.contar_constr("mesa") == 0 and j.contar_constr("muro") == 1, "multi: las construcciones cuentan para su dueño")
 	# fabricar (estación de otro jugador) y habilidades

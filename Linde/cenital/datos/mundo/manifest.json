@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "content_revision": 2,
+  "status": "examples_only",
+  "entities": [
+    "entities/npc/maren.json",
+    "entities/npc/ordal.json",
+    "entities/npc/nerea.json",
+    "entities/lugar/taller.json",
+    "entities/variable_mundo/taller_abierto.json",
+    "entities/variable_mundo/piedra_taller.json",
+    "entities/evento/abrir_taller.json",
+    "entities/plantilla_mision/reunir_piedra_taller.json",
+    "entities/plantilla_mision/cama_huesped.json",
+    "entities/lugar/entrada_sur.json",
+    "entities/lugar/plaza.json",
+    "entities/lugar/cantera.json",
+    "entities/lugar/bosque.json",
+    "entities/variable_mundo/ordal_presente.json",
+    "entities/variable_mundo/camas_libres.json",
+    "entities/evento/llegada_ordal.json",
+    "entities/evento/llegada_nerea.json",
+    "entities/variable_mundo/nerea_presente.json",
+    "entities/variable_mundo/dia.json",
+    "entities/variable_mundo/habitantes_presentes.json",
+    "entities/variable_mundo/mesa_construida.json",
+    "entities/variable_mundo/guardian_derrotado.json"
+  ],
+  "sources": "sources.json",
+  "runtime_consumers": [],
+  "export_enabled": false,
+  "catalog_bindings": {
+    "items": {
+      "source": "catalogos",
+      "section": "ITEMS",
+      "validated_ids": [
+        "piedra"
+      ],
+      "note": "Comprobación puntual del ID, no importación completa ni validación del adaptador."
+    }
+  },
+  "fixture": true,
+  "fixture_nota": "COPIA DE PRUEBA de world/ del Atlas (examples_only). Cambios: celda en lugares, ordal_presente.inicial=true, variable nerea_presente (false). No es el paquete exportado del Atlas. Story 002: añadidas variables derivadas dia, habitantes_presentes, mesa_construida, guardian_derrotado."
+}

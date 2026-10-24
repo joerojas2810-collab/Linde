@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "id": "reunir_piedra_taller",
+  "type": "plantilla_mision",
+  "name": "Reunir piedra para el taller",
+  "summary": "",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 2,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos",
+    "catalogos"
+  ],
+  "relations": [],
+  "data": {
+    "ambito": "mundo",
+    "parametros": [],
+    "condiciones_oferta": {
+      "variable": "piedra_taller",
+      "operador": "gt",
+      "valor": 0
+    },
+    "condiciones_completar": {
+      "y": [
+        {
+          "variable": "taller_abierto",
+          "operador": "eq",
+          "valor": false
+        },
+        {
+          "variable": "piedra_taller",
+          "operador": "gte",
+          "valor": 6
+        }
+      ]
+    },
+    "efectos_completar": [],
+    "repetible": false,
+    "texto": "Reunir al menos seis piedras en el depósito compartido del taller.",
+    "notas": "Pago propuesto al completador, no por cada jugador conectado. La condición se observa sin consumir el contador; el evento abrir_taller es independiente. Ítem piedra requiere validación contra catálogo fijado. Copia de prueba: condiciones_oferta inalcanzable por diseño (nada actualiza piedra_taller) para que no aparezca desde el inicio sin poder completarse.",
+    "recompensa": {
+      "destinatario": "completador",
+      "xp": 20,
+      "items": [
+        {
+          "item": "piedra",
+          "cantidad": 2
+        }
+      ]
+    }
+  }
+}

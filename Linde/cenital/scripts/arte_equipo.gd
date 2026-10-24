@@ -4,6 +4,7 @@ extends RefCounted
 # Recoloreado por CPU (Image), sin shaders: cada color índice -> color de la paleta de la familia -> delta de la variante.
 # Las texturas se cachean por (arquetipo, ranura, familia, variante); la base, por apariencia (look).
 # Si falta el manifiesto, la base o cualquier hoja, disponible() es false y la escena usa el dibujo procedural.
+const Aspecto = preload("res://scripts/aspecto.gd")
 const P = preload("res://scripts/params.gd")
 
 ## Lateralidad de los perfiles (decisión abierta 2 del contrato). false = como propone el contrato: mirando a la
@@ -12,11 +13,11 @@ const INVERTIR_PERFILES := false
 const FILA := {Vector2i.DOWN: 0, Vector2i.RIGHT: 1, Vector2i.UP: 2, Vector2i.LEFT: 3}
 const RANURAS_COMPARTIDAS := ["escudo", "espada"]    # una hoja para todos los arquetipos
 # Capas de abajo a arriba (contrato e). b_ = capa de la base; sin prefijo = equipo. b_piel va con el cuerpo.
-const ORDEN_FRENTE := ["b_cuerpo", "b_piel", "b_botas", "b_pantalon", "b_tunica", "b_cinturon",
+const ORDEN_FRENTE := ["b_pelo_fondo", "b_cuerpo", "b_piel", "b_botas", "b_pantalon", "b_tunica", "b_cinturon",
 	"botas", "pantalones", "torso", "guantes", "escudo", "espada", "b_pelo", "casco"]
-const ORDEN_DERECHA := ["b_cuerpo", "b_piel", "b_botas", "b_pantalon", "escudo", "b_tunica", "b_cinturon",
+const ORDEN_DERECHA := ["b_pelo_fondo", "b_cuerpo", "b_piel", "b_botas", "b_pantalon", "escudo", "b_tunica", "b_cinturon",
 	"botas", "pantalones", "torso", "guantes", "espada", "b_pelo", "casco"]
-const ORDEN_IZQUIERDA := ["b_cuerpo", "b_piel", "b_botas", "b_pantalon", "espada", "b_tunica", "b_cinturon",
+const ORDEN_IZQUIERDA := ["b_pelo_fondo", "b_cuerpo", "b_piel", "b_botas", "b_pantalon", "espada", "b_tunica", "b_cinturon",
 	"botas", "pantalones", "torso", "guantes", "escudo", "b_pelo", "casco"]
 ## Capa base que oculta cada ranura equipada (PROPUESTA a confirmar en el mapa; el cinturón no se oculta).
 const OCULTA := {"torso": "b_tunica", "pantalones": "b_pantalon", "botas": "b_botas"}
@@ -228,20 +229,175 @@ static func valor_medio(img: Image) -> float:
 				n += 1
 	return suma / n if n > 0 else 0.0
 
-## Capas base con la apariencia del jugador: piel, pelo y túnica según look [piel, pelo, ropa] (params.gd); el pantalón
-## con P.PANTALON. Cuerpo (contorno y ojos), botas y cinturón quedan con su color original: no hay color de apariencia.
-## conjunto "ataque": las capas base de ataque (sin espada), teñidas con la media de la caminata.
+## Apariencia ampliada aditiva; arrays antiguos de tres valores conservan exactamente el dibujo anterior.
+## Las variantes de pelo son tratamientos provisionales de la máscara propia, aplicados a todas las poses.
 func capas_base(look: Array, conjunto: String = "") -> Dictionary:
 	var k := conjunto + str(look)
 	if cache_base.has(k): return cache_base[k]
 	var tinte := {"piel": _de(P.PIEL, look, 0), "pelo": _de(P.PELO, look, 1), "tunica": _de(P.ROPA, look, 2), "pantalon": P.PANTALON}
+	if look.size() == 8:
+		tinte.pantalon = Aspecto.PANTALONES[Aspecto.indice(look, 5)]
+		tinte.botas = Aspecto.BOTAS[Aspecto.indice(look, 6)]
+		tinte.cinturon = Aspecto.CINTURONES[Aspecto.indice(look, 7)]
 	var out := {}
 	var fuente: Dictionary = atq.base if conjunto == "ataque" else (estados[conjunto].base if estados.has(conjunto) else base)
 	for c in fuente:
 		var media := valor_medio(base[c]) if conjunto != "" and base.has(c) else -1.0
-		out["b_" + c] = ImageTexture.create_from_image(tenir(fuente[c], tinte[c], media) if tinte.has(c) else fuente[c])
+		var img: Image = tenir(fuente[c], tinte[c], media) if tinte.has(c) else fuente[c]
+		if c == "pelo" and look.size() == 8:
+			img = _peinado(img, Aspecto.estilo_visual(look), _de(P.PELO, look, 1))
+			if Aspecto.estilo_visual(look) in [9, 11]:
+				var extension := _cola(fuente[c], Aspecto.estilo_visual(look), _de(P.PELO, look, 1))
+				var fondo: Image = extension.duplicate()
+				var delante: Image = extension.duplicate()
+				var cel := img.get_height() / 4
+				for y in img.get_height():
+					for x in img.get_width():
+						if int(y / cel) == 2: fondo.set_pixel(x, y, Color.TRANSPARENT)
+						else: delante.set_pixel(x, y, Color.TRANSPARENT)
+				# Por detrás, cola visible sobre la espalda pero bajo el pelo de la cabeza.
+				delante.blend_rect(img, Rect2i(Vector2i.ZERO, img.get_size()), Vector2i.ZERO)
+				img = delante
+				out.b_pelo_fondo = ImageTexture.create_from_image(fondo)
+		out["b_" + c] = ImageTexture.create_from_image(img)
 	cache_base[k] = out
 	return out
+
+# Tratamiento por celda: no invade celdas vecinas ni mueve el pivote de pies/equipo.
+static func _peinado(img: Image, estilo: int, pelo: Color) -> Image:
+	if estilo == 0: return img
+	var out: Image = img.duplicate()
+	var cel := img.get_height() / 4
+	for fila in 4:
+		for col in img.get_width() / cel:
+			var origen := Vector2i(col * cel, fila * cel)
+			var minimo := Vector2i(cel, cel)
+			var maximo := Vector2i(-1, -1)
+			for y in cel:
+				for x in cel:
+					if img.get_pixelv(origen + Vector2i(x, y)).a8 == 0: continue
+					minimo = minimo.min(Vector2i(x, y))
+					maximo = maximo.max(Vector2i(x, y))
+			if maximo.x < 0: continue
+			var cx := (minimo.x + maximo.x) / 2
+			var cy := minimo.y + 1
+			if estilo == 1:   # corto uniforme: conserva íntegra la cobertura y el contorno originales
+				for y in range(minimo.y, maximo.y + 1):
+					for x in range(minimo.x, maximo.x + 1):
+						var pt := origen + Vector2i(x, y)
+						var px := img.get_pixelv(pt)
+						if px.a8 == 0: continue
+						# Mechones muy cortos y unidos, sin mezclar el cabello con el tono de piel.
+						var sombra := 0.08 + 0.18 * (y - minimo.y) / maxf(1.0, maximo.y - minimo.y)
+						var tono := pelo.darkened(sombra)
+						if px.v < pelo.v * 0.72: tono = pelo.darkened(0.42)
+						tono.a = px.a
+						out.set_pixelv(pt, tono)
+			if estilo in [2, 8, 13]:   # tres longitudes; flequillo y rostro permanecen visibles
+				var largo := 2 if estilo == 13 else (4 if estilo == 2 else 7)
+				for y in range(maximo.y - 1, mini(cel - 1, maximo.y + largo)):
+					for x in range(minimo.x + 1, maximo.x):
+						if fila != 2 and x > minimo.x + 2 and x < maximo.x - 2: continue
+						if estilo == 8 and y >= maximo.y + largo - 2 and (x == minimo.x + 1 or x == maximo.x - 1): continue
+						out.set_pixelv(origen + Vector2i(x, y), pelo.darkened(0.12 if x % 2 == 0 else 0.25))
+				# Pose acostada: prolongar lateralmente cuando la cabeza ya toca el borde inferior.
+				if maximo.y + largo >= cel:
+					var paso: int = 1 if maximo.x + largo < cel else -1
+					var inicio: int = maximo.x if paso == 1 else minimo.x
+					for d in range(1, largo + 1):
+						for y in range(maximo.y - 3, maximo.y): _pixel_peinado(out, origen, Vector2i(inicio + d * paso, y), cel, pelo.darkened(0.2))
+			elif estilo == 3:   # moño unido al borde posterior de la cabeza
+				if fila == 1: cx = minimo.x + 1
+				elif fila in [0, 3]: cx = maximo.x - 1
+				for dy in range(-2, 3):
+					for dx in range(-2, 3):
+						if dx * dx + dy * dy <= 5: _pixel_peinado(out, origen, Vector2i(cx + dx, cy + dy), cel, pelo.lightened(0.08) if dy < 0 else pelo.darkened(0.14))
+			elif estilo == 4:   # despeinado: mechones cortos que nacen del pelo existente
+				for x in range(minimo.x + 3, maximo.x - 2, 4):
+					var top := -1
+					for y in range(minimo.y, mini(maximo.y, minimo.y + 5)):
+						if img.get_pixelv(origen + Vector2i(x, y)).a8 > 0:
+							top = y
+							break
+					if top < 0: continue
+					# Raíz de dos píxeles sobre la máscara y punta inclinada, siempre conectada.
+					_pixel_peinado(out, origen, Vector2i(x, top), cel, pelo)
+					_pixel_peinado(out, origen, Vector2i(x + 1, top), cel, pelo.darkened(0.12))
+					_pixel_peinado(out, origen, Vector2i(x, top - 1), cel, pelo)
+					_pixel_peinado(out, origen, Vector2i(x + 1, top - 2), cel, pelo.lightened(0.1))
+			elif estilo in [5, 6]:   # raya lateral: contraste y mechón asimétrico
+				var raya: int = minimo.x + 3 if estilo == 5 else maximo.x - 3
+				for y in range(minimo.y + 1, maximo.y - 1):
+					_pixel_peinado(out, origen, Vector2i(raya, y), cel, pelo.darkened(0.5))
+				var borde: int = minimo.x + 1 if estilo == 5 else maximo.x - 1
+				for y in range(maximo.y - 1, maximo.y + 2): _pixel_peinado(out, origen, Vector2i(borde, y), cel, pelo)
+			elif estilo == 7:   # rizos sobre la máscara: curvas compactas, sin púas flotantes
+				for y in range(minimo.y, maximo.y + 1):
+					for x in range(minimo.x, maximo.x + 1):
+						var pt := origen + Vector2i(x, y)
+						var px := img.get_pixelv(pt)
+						if px.a8 == 0: continue
+						var fase := posmod(x + 2 * (y / 3), 4)
+						var tono := pelo.lightened(0.18) if fase == 0 and y % 3 == 1 else pelo.darkened(0.24 if fase == 2 else 0.04)
+						out.set_pixelv(pt, tono)
+				# Mechones redondos solo donde ya existe pelo y siempre conectados.
+				for x in range(minimo.x + 2, maximo.x - 1, 4):
+					var top := -1
+					for y in range(minimo.y, minimo.y + 4):
+						if img.get_pixelv(origen + Vector2i(x, y)).a8 > 0:
+							top = y
+							break
+					if top >= 0: _pixel_peinado(out, origen, Vector2i(x, top - 1), cel, pelo.darkened(0.18))
+			elif estilo == 10:   # pixie: pelo compacto, sien descubierta y sin relleno de piel sobre las orejas
+				for y in range(minimo.y, maximo.y + 1):
+					for x in range(minimo.x, maximo.x + 1):
+						var pt := origen + Vector2i(x, y)
+						if img.get_pixelv(pt).a8 == 0: continue
+						var borde := x < minimo.x + 2 or x > maximo.x - 2
+						if borde and y >= minimo.y + 5: out.set_pixelv(pt, Color.TRANSPARENT)
+						elif y >= maximo.y - 2 and (x < cx - 3 or x > cx + 3): out.set_pixelv(pt, Color.TRANSPARENT)
+						elif y == minimo.y + 2 and x >= cx: out.set_pixelv(pt, pelo.lightened(0.16))
+			elif estilo == 12:   # flequillo recto sin tapar los ojos
+				if fila != 2:
+					for x in range(minimo.x + 2, maximo.x - 1): _pixel_peinado(out, origen, Vector2i(x, minimo.y + 4), cel, pelo.darkened(0.12))
+				else:
+					for x in range(minimo.x + 2, maximo.x - 1): _pixel_peinado(out, origen, Vector2i(x, maximo.y), cel, pelo)
+
+	return out
+
+# Cola/trenza separada de la cara y del torso: se compone detrás salvo en vista de espalda.
+static func _cola(img: Image, estilo: int, pelo: Color) -> Image:
+	var out := Image.create(img.get_width(), img.get_height(), false, Image.FORMAT_RGBA8)
+	var cel := img.get_height() / 4
+	for fila in 4:
+		for col in img.get_width() / cel:
+			var origen := Vector2i(col * cel, fila * cel)
+			var minimo := Vector2i(cel, cel)
+			var maximo := Vector2i(-1, -1)
+			for y in cel:
+				for x in cel:
+					if img.get_pixelv(origen + Vector2i(x, y)).a8 == 0: continue
+					minimo = minimo.min(Vector2i(x, y))
+					maximo = maximo.max(Vector2i(x, y))
+			if maximo.x < 0: continue
+			var cx := (minimo.x + maximo.x) / 2
+			if fila in [0, 3]: cx = maximo.x - 1
+			elif fila == 1: cx = minimo.x + 1
+			var inicio := minimo.y + 5
+			var fin: int = mini(cel - 2, maximo.y + 10)
+			for y in range(inicio, fin):
+				var curva: int = 0 if fila == 2 else (1 if fila in [0, 3] else -1)
+				var x: int = cx + curva * mini(2, (y - inicio) / 3)
+				if estilo == 11: x += (y / 2) % 2
+				var ancho: int = 1 if y < fin - 2 else 0
+				for dx in range(-ancho, ancho + 1):
+					var color := pelo.darkened(0.38) if absi(dx) == ancho and ancho > 0 else pelo.lightened(0.12 if estilo == 11 and y % 3 == 0 else 0.0)
+					_pixel_peinado(out, origen, Vector2i(x + dx, y), cel, color)
+				if y == inicio + 2: _pixel_peinado(out, origen, Vector2i(x, y), cel, Color("af8b49"))
+	return out
+
+static func _pixel_peinado(img: Image, origen: Vector2i, pt: Vector2i, cel: int, color: Color) -> void:
+	if pt.x >= 0 and pt.x < cel and pt.y >= 0 and pt.y < cel: img.set_pixelv(origen + pt, color)
 
 static func _de(lista: Array, look: Array, i: int) -> Color:
 	var n: int = int(look[i]) if i < look.size() and (look[i] is int or look[i] is float) else 0
@@ -276,7 +432,7 @@ func _comandos_estado(pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, 
 	var ocultas: Array = []
 	for r in piezas: if OCULTA.has(r): ocultas.append(OCULTA[r])
 	var b := capas_base(look, estado)
-	var orden: Array = ["b_cuerpo", "b_piel", "b_botas", "b_pantalon", "guantes_lejana"]
+	var orden: Array = ["b_pelo_fondo", "b_cuerpo", "b_piel", "b_botas", "b_pantalon", "guantes_lejana"]
 	if dir == Vector2i.RIGHT: orden.append("escudo")
 	if dir == Vector2i.LEFT: orden.append("espada")
 	orden += ["b_tunica", "b_cinturon", "botas", "pantalones", "torso", "guantes_cercana"]

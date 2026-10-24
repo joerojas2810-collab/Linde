@@ -17,7 +17,9 @@ const CLARO := Vector2i(50, 10)
 const SPAWN_GUARDIAN := Vector2i(52, 43)
 const COFRE_TESORO := Vector2i(6, 6)
 const CAMA_MAREN := Vector2i(30, 18)
-const ESENCIALES := [Vector2i(32, 46), Vector2i(27, 23), Vector2i(27, 21), Vector2i(30, 19), Vector2i(51, 37), Vector2i(52, 37),
+const CAMA_ORDAL := Vector2i(25, 18)     # decisión del usuario (2026-10-24); mundo-vivo story-001
+const CAMAS := {"maren": CAMA_MAREN, "ordal": CAMA_ORDAL}   # cama de cada habitante (una por habitante, sin compartir)
+const ESENCIALES := [Vector2i(32, 46), Vector2i(27, 23), Vector2i(27, 21), Vector2i(30, 19), Vector2i(25, 19), Vector2i(51, 37), Vector2i(52, 37),
 	Vector2i(6, 7), Vector2i(50, 10)]
 const N_SLIMES := 12
 const DECO := ["valla", "barril"]    # decoración sólida, no rompible
@@ -64,7 +66,7 @@ func _init() -> void:
 	_generar_objetos()
 	_agregar("cofre_fijo", COFRE_TESORO, "tesoro_cantera")
 	for t in DECORADO: for c in DECORADO[t]: _agregar(t, c)
-	estado.constr[clave(CAMA_MAREN)] = {"t": "cama", "propia": false}
+	for id in CAMAS: estado.constr[clave(CAMAS[id])] = {"t": "cama", "propia": false}
 	_generar_slimes()
 
 func _poner(x: int, y: int, t: int) -> void:

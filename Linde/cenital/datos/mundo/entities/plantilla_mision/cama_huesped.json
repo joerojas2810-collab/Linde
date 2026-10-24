@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "id": "cama_huesped",
+  "type": "plantilla_mision",
+  "name": "Una cama de huésped",
+  "summary": "",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "prototype",
+  "sources": [
+    "atlas_ejemplos",
+    "catalogos"
+  ],
+  "relations": [],
+  "data": {
+    "ambito": "mundo",
+    "parametros": [],
+    "condiciones_oferta": {
+      "y": [
+        {
+          "variable": "nerea_presente",
+          "operador": "eq",
+          "valor": false
+        },
+        {
+          "variable": "camas_libres",
+          "operador": "eq",
+          "valor": 0
+        }
+      ]
+    },
+    "condiciones_completar": {
+      "variable": "camas_libres",
+      "operador": "gte",
+      "valor": 1
+    },
+    "efectos_completar": [],
+    "repetible": false,
+    "texto": "Construye una cama de huésped para que alguien pueda quedarse en el valle.",
+    "notas": "Plantilla de prueba de la copia del paquete (historia 004).",
+    "recompensa": {
+      "destinatario": "completador",
+      "xp": 15,
+      "items": [
+        {
+          "item": "fibra",
+          "cantidad": 2
+        }
+      ]
+    }
+  }
+}
