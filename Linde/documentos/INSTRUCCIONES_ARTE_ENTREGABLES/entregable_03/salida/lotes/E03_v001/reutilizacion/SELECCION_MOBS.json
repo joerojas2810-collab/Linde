@@ -1,0 +1,1327 @@
+{
+  "date": "2026-10-24",
+  "base_designs": 24,
+  "family_rank_designs": 15,
+  "named_route_bosses": 9,
+  "visual_review": "First idle pose: 24 native painted/pixel pairs and all 75 painted family element variants. Not all frames or all pixel elemental variants.",
+  "items": [
+    {
+      "design_id": "enemy_slime_normal",
+      "family_art_key": "slime",
+      "tier": "normal",
+      "native_element_sample": "water",
+      "proposal_status": "ahora_referencia",
+      "reason": "Forma blanda pequeña; pixel amable de gota, pintado ancho de mirada agresiva.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_slime_normal_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/slime-animation-01.png",
+          "sha256": "b717f5a53ae5977d4156908c02a5dc2c9240eacf4c2081576e7e6fb6d4b79de3",
+          "frame_rect": {
+            "x": 44,
+            "y": 91,
+            "width": 323,
+            "height": 177
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_slime_normal_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-fire-atlas-01.png",
+          "sha256": "c69260fcb12dc36914d320731861b108a50cf862feec6ebcc2c103916812f04a",
+          "frame_rect": {
+            "x": 46,
+            "y": 83,
+            "width": 319,
+            "height": 184
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_slime_normal_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-earth-atlas-01.png",
+          "sha256": "493340416dcc219f87ac8e520756bb7f7476fba88fff8844382ec4ec8b178416",
+          "frame_rect": {
+            "x": 50,
+            "y": 96,
+            "width": 311,
+            "height": 171
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_slime_normal_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-wind-atlas-01.png",
+          "sha256": "1ea66d0ed6a3b3dfc7f5adc31e11c20316dcf9e55415c77b8a7785dacfb67299",
+          "frame_rect": {
+            "x": 54,
+            "y": 91,
+            "width": 307,
+            "height": 170
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_slime_normal_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-lightning-atlas-01.png",
+          "sha256": "2435c5e77788a3c0efb03d3645bd6e109fd51d397999e8749b8192efb7190859",
+          "frame_rect": {
+            "x": 49,
+            "y": 95,
+            "width": 316,
+            "height": 171
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_water_idle.png",
+        "sha256": "66ac7ff33e1875623744fd6a4866b094ba64911194e117caac0b856e153140d1"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_slime_elite",
+      "family_art_key": "slime",
+      "tier": "elite",
+      "native_element_sample": "water",
+      "proposal_status": "reserva",
+      "reason": "Pintado normal/élite casi misma silueta; pixel élite añade puntas. No nueva especie demostrada.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_slime_elite_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-water-atlas-02.png",
+          "sha256": "fb7ac151576245698220ca16678bdc5ba1f04dd705c6d02d2ed7c6d85e446794",
+          "frame_rect": {
+            "x": 31,
+            "y": 124,
+            "width": 266,
+            "height": 152
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_slime_elite_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-fire-atlas-01.png",
+          "sha256": "4d2ac482867f54cb3e0f10e3eaebb5a3b65eb0f8cdccc9c310de69ae3e4740d2",
+          "frame_rect": {
+            "x": 30,
+            "y": 123,
+            "width": 269,
+            "height": 156
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_slime_elite_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-earth-atlas-01.png",
+          "sha256": "d4908e661efa72c32a20e8873c0b9962d8baba4dc04a057f56923597aed504e6",
+          "frame_rect": {
+            "x": 30,
+            "y": 123,
+            "width": 268,
+            "height": 155
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_slime_elite_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-wind-atlas-01.png",
+          "sha256": "c7b0448b76ac28a47e703adf84619c353a8d47c092af09e39e8187fbfeca42d8",
+          "frame_rect": {
+            "x": 30,
+            "y": 123,
+            "width": 268,
+            "height": 156
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_slime_elite_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-lightning-atlas-01.png",
+          "sha256": "a718e0a0a8db12148ff0cecab990d455f6242a1725e5db7189c9cd8cc3123857",
+          "frame_rect": {
+            "x": 30,
+            "y": 123,
+            "width": 269,
+            "height": 155
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_water_idle.png",
+        "sha256": "4424bec8feebc121c4f1d553033a9ec93b9f665a85db120c8c8c674e37dec174"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_slime_boss",
+      "family_art_key": "slime",
+      "tier": "boss",
+      "native_element_sample": "water",
+      "proposal_status": "futuro",
+      "reason": "Corona y dientes grandes distinguen al jefe; no cabe como Slime común.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_slime_boss_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-water-atlas-01.png",
+          "sha256": "1191bb70bea3fe3c5c98233aaeafec96fd49ccde91df3e8eb03eb76f541364e5",
+          "frame_rect": {
+            "x": 77,
+            "y": 12,
+            "width": 286,
+            "height": 195
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_slime_boss_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-fire-idle-02.png",
+          "sha256": "21af6917a8877bf5988c2731862a318905c99eee0a057d0f2ff5c130df30950d",
+          "frame_rect": {
+            "x": 45,
+            "y": 167,
+            "width": 555,
+            "height": 393
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_slime_boss_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-earth-atlas-01.png",
+          "sha256": "0e775dc83e892c01e69eecfaf2e2f9fd61b04b93c2a14267fa4c1ec599cb7fbc",
+          "frame_rect": {
+            "x": 76,
+            "y": 12,
+            "width": 288,
+            "height": 196
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_slime_boss_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-wind-atlas-01.png",
+          "sha256": "ad187e8d4745444ea2b17cffb44507a550a4b2ab197dcc28848540a54bb2929e",
+          "frame_rect": {
+            "x": 76,
+            "y": 12,
+            "width": 287,
+            "height": 195
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_slime_boss_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-lightning-atlas-02.png",
+          "sha256": "e6a51e035bd1e7faa2e36855aaf0e4c54e2f2b7480312c5f96ec276ff93a59ea",
+          "frame_rect": {
+            "x": 40,
+            "y": 153,
+            "width": 223,
+            "height": 158
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_water_idle.png",
+        "sha256": "d3e4fe8a5b27addef9f95bb7181258fca181bd47f15866790745a0871a6b2c7c"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_imp_normal",
+      "family_art_key": "imp",
+      "tier": "normal",
+      "native_element_sample": "fire",
+      "proposal_status": "futuro_prioritario",
+      "reason": "Cuernos, alas pequeñas y cola: rasgos legibles si se simplifican.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_imp_normal_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-water-idle-01.png",
+          "sha256": "b10d6e35c7f6f446661f6ba0da72d6affa3a01535dd1c722741ed73c297bdd98",
+          "frame_rect": {
+            "x": 193,
+            "y": 40,
+            "width": 481,
+            "height": 445
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_imp_normal_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/imp-animation-01.png",
+          "sha256": "73ed4111f392835b87e47e9b028dcc448d38761511d46a03d78f8dabd72a722b",
+          "frame_rect": {
+            "x": 45,
+            "y": 51,
+            "width": 277,
+            "height": 241
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_imp_normal_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-earth-idle-02.png",
+          "sha256": "d33a21d2510c5acbe4750acb4ec736ffeb8de7d22dc540d5bfc3d393f7ea8592",
+          "frame_rect": {
+            "x": 193,
+            "y": 40,
+            "width": 482,
+            "height": 445
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_imp_normal_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-wind-atlas-01.png",
+          "sha256": "bb0619788c447a08bafd52cdda93647b38af6fc27f0b98a26f1bda2311cd34ea",
+          "frame_rect": {
+            "x": 43,
+            "y": 51,
+            "width": 280,
+            "height": 242
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_imp_normal_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-lightning-atlas-01.png",
+          "sha256": "11df7524edb3c268a3ce0557ae80202f79f1e756f8234b50acf7d1c4ad664c31",
+          "frame_rect": {
+            "x": 45,
+            "y": 51,
+            "width": 277,
+            "height": 242
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_fire_idle.png",
+        "sha256": "276a69e0bc5cdefed10999728dddcfe1538d740baae037902bd41c91429231bd"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_imp_elite",
+      "family_art_key": "imp",
+      "tier": "elite",
+      "native_element_sample": "fire",
+      "proposal_status": "reserva",
+      "reason": "Armadura y cresta/llama; complejidad mayor y rol no existente.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_imp_elite_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-water-atlas-01.png",
+          "sha256": "113016f3b39b10b6e8f55a2bacf94baedc05ba5a5d70ad84be5ee29eae8435a4",
+          "frame_rect": {
+            "x": 37,
+            "y": 37,
+            "width": 287,
+            "height": 252
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_imp_elite_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-fire-atlas-01.png",
+          "sha256": "488bb55ee73420717c6030591a657dca08e8d2cf39c187844fe45f505d29dd08",
+          "frame_rect": {
+            "x": 40,
+            "y": 38,
+            "width": 283,
+            "height": 250
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_imp_elite_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-earth-atlas-01.png",
+          "sha256": "409d76441086ec880dc2705c2fb7db6501d6bbebef74ce5a8d0431feade486e1",
+          "frame_rect": {
+            "x": 38,
+            "y": 35,
+            "width": 285,
+            "height": 254
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_imp_elite_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-wind-atlas-01.png",
+          "sha256": "d63cebecf7597cd0be6731acec4d3e5afecd670b4f7264452946e3671d75a144",
+          "frame_rect": {
+            "x": 38,
+            "y": 35,
+            "width": 285,
+            "height": 254
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_imp_elite_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-lightning-atlas-01.png",
+          "sha256": "90bbc0056504e222b02854cc15b213072e463d57fde8c1a7baef9798fe0e95fd",
+          "frame_rect": {
+            "x": 37,
+            "y": 37,
+            "width": 286,
+            "height": 252
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_fire_idle.png",
+        "sha256": "0d8c8d3f104ad8bd5db4753915897ab72f008a989834c21fd3c1d57ac25b4716"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_imp_boss",
+      "family_art_key": "imp",
+      "tier": "boss",
+      "native_element_sample": "fire",
+      "proposal_status": "reserva",
+      "reason": "Masa más robusta y grietas luminosas; diferencia real frente al normal, sin rol actual.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_imp_boss_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-water-atlas-01.png",
+          "sha256": "ba776e444513b9fee148b89644500aacdd27efc7fe79978fc2a1fcb874abba20",
+          "frame_rect": {
+            "x": 28,
+            "y": 79,
+            "width": 227,
+            "height": 189
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_imp_boss_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-fire-atlas-02.png",
+          "sha256": "a805b49952998460eb3d91a1c42e8e7575d9af7aa20d3f1b110b200f50ca7d6e",
+          "frame_rect": {
+            "x": 30,
+            "y": 80,
+            "width": 225,
+            "height": 186
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_imp_boss_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-earth-atlas-01.png",
+          "sha256": "3ab4bbdb4c7cad7b5c6e41ff8a7a7962fd8aa820ff928dff96d45e0cb0fbf4ff",
+          "frame_rect": {
+            "x": 30,
+            "y": 79,
+            "width": 227,
+            "height": 190
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_imp_boss_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-wind-atlas-01.png",
+          "sha256": "f44b394584d3adee7120aa4b448b07b0b1de365db104126121a2f92b83fc931b",
+          "frame_rect": {
+            "x": 29,
+            "y": 79,
+            "width": 226,
+            "height": 190
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_imp_boss_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-lightning-atlas-01.png",
+          "sha256": "d1426570afda71ab506aa2536e2a7ff33b608376b9602ea3a0cef9f03d7e9c4d",
+          "frame_rect": {
+            "x": 29,
+            "y": 79,
+            "width": 227,
+            "height": 190
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_fire_idle.png",
+        "sha256": "086ddc604d9d33bae53239d985551c7bb39a34f9e157b0f27803a2cfe7545236"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_harpy_normal",
+      "family_art_key": "harpy",
+      "tier": "normal",
+      "native_element_sample": "wind",
+      "proposal_status": "futuro",
+      "reason": "Arpía alada sin corona; pintado humanoide y pixel aviar son identidades distintas.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_harpy_normal_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-water-atlas-01.png",
+          "sha256": "313eec5dd7c362917cf55802715cce25375902d55e16f06733d0bcd8e247e93a",
+          "frame_rect": {
+            "x": 88,
+            "y": 17,
+            "width": 277,
+            "height": 233
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_harpy_normal_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-fire-atlas-01.png",
+          "sha256": "a8c7ad5ab903e71dd56f3c906d94239d218afe2220d5f1d28a5d817fb000f8b7",
+          "frame_rect": {
+            "x": 91,
+            "y": 18,
+            "width": 269,
+            "height": 231
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_harpy_normal_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-earth-atlas-01.png",
+          "sha256": "b6b5a77093590398dddeef2fd14019147214e07efe91c83d7f47bb8f9595ff35",
+          "frame_rect": {
+            "x": 92,
+            "y": 18,
+            "width": 270,
+            "height": 232
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_harpy_normal_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/harpy-animation-01.png",
+          "sha256": "d6d8cda42815b8f229424ff564541d69856ecd87e8cc12bb2fa607ceb66ea2b8",
+          "frame_rect": {
+            "x": 92,
+            "y": 17,
+            "width": 267,
+            "height": 231
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_harpy_normal_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-lightning-atlas-01.png",
+          "sha256": "520fe3da236ad84694083b54ca595a7472d2a62182b1c92c154e86c7e6a42352",
+          "frame_rect": {
+            "x": 91,
+            "y": 17,
+            "width": 272,
+            "height": 233
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_wind_idle.png",
+        "sha256": "b063f7a8c2fec9cab0df29ebcd830e5fed6453c2d3e495c23404803483219556"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_harpy_elite",
+      "family_art_key": "harpy",
+      "tier": "elite",
+      "native_element_sample": "wind",
+      "proposal_status": "reserva",
+      "reason": "Hombreras/pechera más marcadas; pixel corona de plumas. Preferir solo una base futura.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_harpy_elite_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-water-atlas-01.png",
+          "sha256": "fda060d3a14d6126dee9effbcf0c7a9e88050b00ebcf67adb9cdae6eec1b9223",
+          "frame_rect": {
+            "x": 45,
+            "y": 64,
+            "width": 261,
+            "height": 238
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_harpy_elite_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-fire-atlas-01.png",
+          "sha256": "de22540454ad82e0a630613b5628a7ebd0d92a00ee2b2e611832c8681baa30e2",
+          "frame_rect": {
+            "x": 44,
+            "y": 63,
+            "width": 262,
+            "height": 239
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_harpy_elite_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-earth-atlas-01.png",
+          "sha256": "3d8305155f57be6d6f26b458da67edf96d6031edddc638d8fcdf57a7ea5dfc1b",
+          "frame_rect": {
+            "x": 46,
+            "y": 65,
+            "width": 263,
+            "height": 236
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_harpy_elite_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-wind-atlas-02.png",
+          "sha256": "7af8324314674577dd4502731f4f4ca4cedbacb014dd7b19fccea7457eae1996",
+          "frame_rect": {
+            "x": 48,
+            "y": 66,
+            "width": 257,
+            "height": 234
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_harpy_elite_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-lightning-atlas-01.png",
+          "sha256": "87e1d16be92913f1acee540423ba0113c7f45feb41715ee2b57b0e8da2413345",
+          "frame_rect": {
+            "x": 47,
+            "y": 64,
+            "width": 259,
+            "height": 238
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_wind_idle.png",
+        "sha256": "6dc52927526849b6a42444d79fd7f8e3ca99abe83b20c608a52b27efe4970d5c"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_harpy_boss",
+      "family_art_key": "harpy",
+      "tier": "boss",
+      "native_element_sample": "wind",
+      "proposal_status": "reserva",
+      "reason": "Corona/crestas, alas grandes y adornos; detalle difícil a escala Linde.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_harpy_boss_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-water-atlas-01.png",
+          "sha256": "15d45b028b7ddf23168b444a39aeae04a9ac3a510d0c7d58729a470e45ea65f9",
+          "frame_rect": {
+            "x": 32,
+            "y": 67,
+            "width": 231,
+            "height": 207
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_harpy_boss_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-fire-atlas-01.png",
+          "sha256": "ec1cce42040c4bcc8984f8d4551b990f9ded03f54b3349f4f02809b33973ed10",
+          "frame_rect": {
+            "x": 33,
+            "y": 68,
+            "width": 230,
+            "height": 205
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_harpy_boss_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-earth-atlas-01.png",
+          "sha256": "81cc787b031f32fe473dc4ebf72f9d6d97ca5a3cc9b88a70a1542f849f95ba6d",
+          "frame_rect": {
+            "x": 33,
+            "y": 70,
+            "width": 231,
+            "height": 204
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_harpy_boss_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-wind-atlas-03.png",
+          "sha256": "8ef0a4c42baac908643de04eb30db025e88a7a944c8d6b8d14872f11e51762ff",
+          "frame_rect": {
+            "x": 34,
+            "y": 71,
+            "width": 229,
+            "height": 201
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_harpy_boss_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-lightning-atlas-01.png",
+          "sha256": "9625c5379f20f3e28b73242db6df6d69391785a15d90ea7a7dd56e5c4ec9dee5",
+          "frame_rect": {
+            "x": 33,
+            "y": 70,
+            "width": 231,
+            "height": 203
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_wind_idle.png",
+        "sha256": "015ec484f657a1f2187c44f0f4e5c115bc1a129d4f75fb39358f98dea45def05"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_golem_normal",
+      "family_art_key": "golem",
+      "tier": "normal",
+      "native_element_sample": "earth",
+      "proposal_status": "ahora_referencia",
+      "reason": "Masa rocosa simple y núcleo: la referencia más afín al Guardián existente.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_golem_normal_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-normal-water-atlas-01.png",
+          "sha256": "501013f569e24c149d38501b3745fb07956d388f4dfd9d9e855e8ecf46f6106f",
+          "frame_rect": {
+            "x": 53,
+            "y": 20,
+            "width": 269,
+            "height": 222
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_golem_normal_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-normal-fire-atlas-01.png",
+          "sha256": "7e2c62281aa68b2a87d3cb21b3f75dfe40e7de9f523263fa60926b487d76828b",
+          "frame_rect": {
+            "x": 56,
+            "y": 27,
+            "width": 263,
+            "height": 213
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_golem_normal_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/golem-animation-01.png",
+          "sha256": "3c74ea6703be385e563d96ac470e182b25550341671aea09cb9f382456a2d3bf",
+          "frame_rect": {
+            "x": 51,
+            "y": 19,
+            "width": 270,
+            "height": 222
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_golem_normal_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-normal-wind-atlas-01.png",
+          "sha256": "c207dc11edf7b3c16cc2e2684dc5c120e3985894f6f1a2ac79c585e286adcace",
+          "frame_rect": {
+            "x": 56,
+            "y": 28,
+            "width": 261,
+            "height": 213
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_golem_normal_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-normal-lightning-atlas-01.png",
+          "sha256": "1680f759d40fc381d37bc4932e468e8a27bc75849048ecbf044e48ec75ff9f3e",
+          "frame_rect": {
+            "x": 56,
+            "y": 26,
+            "width": 262,
+            "height": 214
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_earth_idle.png",
+        "sha256": "4d98e74b2dc1c9db90a17616804c0e94a8dce166bc273932748d2527049b6739"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_golem_elite",
+      "family_art_key": "golem",
+      "tier": "elite",
+      "native_element_sample": "earth",
+      "proposal_status": "reserva",
+      "reason": "Cristales/espinas en hombros y placas; alternativa futura para élite.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_golem_elite_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-water-atlas-01.png",
+          "sha256": "65e34db4bf8dd183fe1bab2c3029d0296bfc4e168044c2bf57059ca871ae45a9",
+          "frame_rect": {
+            "x": 50,
+            "y": 25,
+            "width": 289,
+            "height": 227
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_golem_elite_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-fire-atlas-01.png",
+          "sha256": "7370fa03c15a952765ba0854fdaea3541d1c8d2db411980f596296a94ec8800a",
+          "frame_rect": {
+            "x": 49,
+            "y": 25,
+            "width": 290,
+            "height": 228
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_golem_elite_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-earth-atlas-01.png",
+          "sha256": "ca9909f7db1a6f38c7c97b9ce4468b478514ab5f6ec6e8bebc6692d167e70b35",
+          "frame_rect": {
+            "x": 50,
+            "y": 25,
+            "width": 287,
+            "height": 227
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_golem_elite_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-wind-idle-02.png",
+          "sha256": "4c2d530f7e13606608f845c65a7c44a9fc987a8463556d61841818d195a0d860",
+          "frame_rect": {
+            "x": 50,
+            "y": 91,
+            "width": 548,
+            "height": 449
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_golem_elite_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-lightning-atlas-01.png",
+          "sha256": "bd1065bc2130ac683fb4c76e7e2999ddd338a5b9df939f7d89f0a3cbab23a73c",
+          "frame_rect": {
+            "x": 50,
+            "y": 24,
+            "width": 292,
+            "height": 229
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_earth_idle.png",
+        "sha256": "d1872c36e24363d8d7e9254bdae4025ecba4ffcd7f4bff0f3430a6dea716a383"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_golem_boss",
+      "family_art_key": "golem",
+      "tier": "boss",
+      "native_element_sample": "earth",
+      "proposal_status": "reserva",
+      "reason": "Crestas altas, núcleo grande, masa y armadura mayores: jefe familiar distinto.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_golem_boss_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-water-atlas-01.png",
+          "sha256": "2e121d0a20a03966db08b0177c9eef44a4736597d3762e9faca5ff9389797a66",
+          "frame_rect": {
+            "x": 37,
+            "y": 58,
+            "width": 220,
+            "height": 215
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_golem_boss_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-fire-atlas-01.png",
+          "sha256": "29dec294a49bfd8c8e6e0a2eb40245125d454ded4abedc1cc715c173ee4c180e",
+          "frame_rect": {
+            "x": 38,
+            "y": 63,
+            "width": 219,
+            "height": 210
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_golem_boss_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-earth-atlas-02.png",
+          "sha256": "0414b3b3b9fcab0e7ef76b02c9e77887a51ba27fc5908ee97a2bd187a765bcf6",
+          "frame_rect": {
+            "x": 44,
+            "y": 69,
+            "width": 212,
+            "height": 202
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_golem_boss_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-wind-atlas-01.png",
+          "sha256": "54f5291e49a9a5b5e1d108e5b34e3a80b4c1a1c88a5179d071dab97edeabf831",
+          "frame_rect": {
+            "x": 36,
+            "y": 61,
+            "width": 221,
+            "height": 212
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_golem_boss_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-lightning-atlas-01.png",
+          "sha256": "8eee1cd21ecc20c2f48582df67f9cdc4d8c31ad4dc2027e2fe28bd03c8036a2d",
+          "frame_rect": {
+            "x": 38,
+            "y": 59,
+            "width": 218,
+            "height": 214
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_earth_idle.png",
+        "sha256": "60fdf42792e20ba2e313d73a42abe47675f624e520f0f73298b87f5ba444ad0b"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_specter_normal",
+      "family_art_key": "specter",
+      "tier": "normal",
+      "native_element_sample": "water",
+      "proposal_status": "futuro_prioritario",
+      "reason": "Capucha, ojos y manos; silueta sencilla adaptable, sin armadura extra.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_specter_normal_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/specter-animation-01.png",
+          "sha256": "dacbd25f02437a5402f9aea455cbae012e0acb7f9e94ac877e1bf80e5a2b8e87",
+          "frame_rect": {
+            "x": 46,
+            "y": 52,
+            "width": 298,
+            "height": 199
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_specter_normal_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-fire-atlas-01.png",
+          "sha256": "6434d49c5ee16fb8243bbf4e2b2cbd9f402fe75bfb89e4d9b2207ecc6f460789",
+          "frame_rect": {
+            "x": 45,
+            "y": 51,
+            "width": 302,
+            "height": 195
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_specter_normal_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-earth-atlas-01.png",
+          "sha256": "16a0de29f8a0526fd300bbea94699caf33dfe3e6ccb0bac7411154b4480922b4",
+          "frame_rect": {
+            "x": 51,
+            "y": 56,
+            "width": 293,
+            "height": 186
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_specter_normal_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-wind-atlas-01.png",
+          "sha256": "4ac3c6941011f4458ddfa12ee4868b336cad368ccd156ddf9dcd473b11b29501",
+          "frame_rect": {
+            "x": 51,
+            "y": 59,
+            "width": 301,
+            "height": 194
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_specter_normal_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-lightning-atlas-01.png",
+          "sha256": "406eacd09edd0d3cef46101a5961734043da1bf7eb06521188a9052839d367ca",
+          "frame_rect": {
+            "x": 46,
+            "y": 51,
+            "width": 301,
+            "height": 193
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_water_idle.png",
+        "sha256": "6bbbb9233a613f048b58ef3a850d1a063c4fd6fefaf50c39265191c238f19d75"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_specter_elite",
+      "family_art_key": "specter",
+      "tier": "elite",
+      "native_element_sample": "water",
+      "proposal_status": "reserva",
+      "reason": "Cuernos/diadema lateral y pechera metálica: diferenciación geométrica real.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_specter_elite_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-water-atlas-01.png",
+          "sha256": "3acf27a82c82f9ef5eb97aa2b52e5f032ae29e063a9398651aae4e8d31184c59",
+          "frame_rect": {
+            "x": 46,
+            "y": 43,
+            "width": 325,
+            "height": 228
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_specter_elite_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-fire-atlas-01.png",
+          "sha256": "7169b356b8f81d02015922a02a88dd5875f39ad0fd19656600fa0502db4dde6f",
+          "frame_rect": {
+            "x": 46,
+            "y": 42,
+            "width": 326,
+            "height": 230
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_specter_elite_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-earth-atlas-01.png",
+          "sha256": "fe8a3d5ee94d453a63d790c8e90fffe46f226303c4fb50f515ac114af3ccf2d0",
+          "frame_rect": {
+            "x": 46,
+            "y": 42,
+            "width": 326,
+            "height": 230
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_specter_elite_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-wind-atlas-01.png",
+          "sha256": "1a166ced1da1859cec98561224b91ec0e9f73f7edd56d9133ab6073f786712c6",
+          "frame_rect": {
+            "x": 46,
+            "y": 41,
+            "width": 328,
+            "height": 230
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_specter_elite_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-lightning-atlas-01.png",
+          "sha256": "2d9f3510b6b2dc0de80d28a9a103e5896ece7a001e9839420371b6078ce0a481",
+          "frame_rect": {
+            "x": 46,
+            "y": 42,
+            "width": 326,
+            "height": 229
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_water_idle.png",
+        "sha256": "98cad06c8730e22533a048187c2a78a0cd82aff82398dc483135064b9cca988b"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "enemy_specter_boss",
+      "family_art_key": "specter",
+      "tier": "boss",
+      "native_element_sample": "water",
+      "proposal_status": "reserva",
+      "reason": "Corona alta, bordes ornamentados y capa más compleja; rol de jefe no existente.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "enemy_specter_boss_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-water-atlas-02.png",
+          "sha256": "1f859602c1e89cf53125c297b9aef0c910e9c0fd331bbbeb2ddd8abb21147a37",
+          "frame_rect": {
+            "x": 27,
+            "y": 86,
+            "width": 259,
+            "height": 200
+          }
+        },
+        "fire": {
+          "registry_key": "enemy_specter_boss_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-fire-atlas-01.png",
+          "sha256": "d09e08fa7cd80dec42cb4e26d91e5eff9505acc6339d0a0c4b52d0e5ba98f2e9",
+          "frame_rect": {
+            "x": 27,
+            "y": 85,
+            "width": 260,
+            "height": 203
+          }
+        },
+        "earth": {
+          "registry_key": "enemy_specter_boss_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-earth-atlas-01.png",
+          "sha256": "f2481dcd4f65892d31d455c0405fdc5717dfc7bd55efa338b6b030f77937c67b",
+          "frame_rect": {
+            "x": 25,
+            "y": 85,
+            "width": 261,
+            "height": 203
+          }
+        },
+        "wind": {
+          "registry_key": "enemy_specter_boss_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-wind-atlas-01.png",
+          "sha256": "e90c36467bf03873057aba225c6829a2d79bec6e39c64b9271bc0c47c6db63de",
+          "frame_rect": {
+            "x": 26,
+            "y": 85,
+            "width": 260,
+            "height": 203
+          }
+        },
+        "lightning": {
+          "registry_key": "enemy_specter_boss_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-lightning-idle-02.png",
+          "sha256": "098d534d009d27052fe61c50bad61f09674dbec36903dd1c1a21feb33151b1c7",
+          "frame_rect": {
+            "x": 72,
+            "y": 157,
+            "width": 547,
+            "height": 417
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_water_idle.png",
+        "sha256": "5e22ccc4b74328608d72c464b6e7fecf4ee1279dc5c92ec1c81ffa5bc7c1e3bf"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_lord_of_flies",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "water",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "boss_lord_of_flies_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_fly_lord-animation-01.png",
+          "sha256": "267324a4ffaef0677d5fef9ffd09b4703102a73997a66fcc2c2615cb8ae6914d",
+          "frame_rect": {
+            "x": 78,
+            "y": 17,
+            "width": 299,
+            "height": 243
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_water_idle.png",
+        "sha256": "9745a4f9a1e062100c8694141cbe117eb1cc5f53f465376a76aaad7376b3f548"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_ash_king",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "fire",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "fire": {
+          "registry_key": "boss_ash_king_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_ash_king-idle-02.png",
+          "sha256": "af551b7fbfdff5fcdfb49acf2d8ab40e7bb69a8e15b7f0dbb75ff1b916c1be3e",
+          "frame_rect": {
+            "x": 112,
+            "y": 48,
+            "width": 493,
+            "height": 479
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_fire_idle.png",
+        "sha256": "17af4ae62e2443759d8b9c66024f16fafa97a299a0d793c3f623e8ec445b2e6d"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_eternal_watcher",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "wind",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "wind": {
+          "registry_key": "boss_eternal_watcher_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_eternal_watcher-animation-01.png",
+          "sha256": "f026f3ce16ce50fcbdaa7a928e1437cd100b8e8cad4e9c0a940b5c8487567a78",
+          "frame_rect": {
+            "x": 98,
+            "y": 20,
+            "width": 265,
+            "height": 243
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_wind_idle.png",
+        "sha256": "443b67b04c090cc55b049e2bfcc525bb02bea4820213d3cbf30ba44829405481"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_hollow_colossus",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "earth",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "earth": {
+          "registry_key": "boss_hollow_colossus_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_hollow_colossus-animation-01.png",
+          "sha256": "95678001298b92f09003422d982e76319b88e7c72ce102dc3edc33e1961f0bdd",
+          "frame_rect": {
+            "x": 64,
+            "y": 21,
+            "width": 287,
+            "height": 235
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_earth_idle.png",
+        "sha256": "379b7bcb20fa04ad562ad02e0e598d7f7b002cf67058905c273a12a337b3252d"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_thunder_king",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "lightning",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "lightning": {
+          "registry_key": "boss_thunder_king_lightning_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_thunder_king-idle-02.png",
+          "sha256": "cc0f30c79664c7ceba208b74454489b554a66d89f541df4687869ffa3418a296",
+          "frame_rect": {
+            "x": 115,
+            "y": 149,
+            "width": 460,
+            "height": 418
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_lightning_idle.png",
+        "sha256": "e0a29fff5538f9e741960d2407fd6080839b4a68e6b894f86005821b96eba011"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_mother_hydra",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "water",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "water": {
+          "registry_key": "boss_mother_hydra_water_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_mother_hydra-animation-01.png",
+          "sha256": "4739355e292090e9a33669782cf8bc0cefd9a09da7f0b0a65b4974c94eb75c93",
+          "frame_rect": {
+            "x": 41,
+            "y": 12,
+            "width": 335,
+            "height": 241
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_water_idle.png",
+        "sha256": "9bf8256148f48f24a07552538db29239b2497e4921bc28815ad2d154306c4908"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_withered_queen",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "earth",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "earth": {
+          "registry_key": "boss_withered_queen_earth_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_withered_queen-animation-01.png",
+          "sha256": "d7cea0ab80c59f80e35956d3c54b223bf74250c80a3ecb659c1e253dbf1cdc95",
+          "frame_rect": {
+            "x": 77,
+            "y": 12,
+            "width": 260,
+            "height": 242
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_earth_idle.png",
+        "sha256": "99b265d762fe4c2fa2522423fd5766c56279ec5d57adba547f2b4a2c67fcd597"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_faceless_one",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "fire",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "fire": {
+          "registry_key": "boss_faceless_one_fire_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_faceless-animation-01.png",
+          "sha256": "0206b537850af59a6ae214799736e52f92e5b680d4602f1f46112f9c3e964d0a",
+          "frame_rect": {
+            "x": 48,
+            "y": 27,
+            "width": 328,
+            "height": 224
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_fire_idle.png",
+        "sha256": "17bda85a4a20ce813aedad2dc40ff541441d5966c57e1331f53bfcf3082ce13e"
+      },
+      "logic_imported": false,
+      "approved": false
+    },
+    {
+      "design_id": "boss_great_devourer",
+      "family_art_key": null,
+      "tier": "named_boss",
+      "native_element_sample": "wind",
+      "proposal_status": "futuro",
+      "reason": "Diseño único de ruta; no sustituye automáticamente un jefe actual de Linde.",
+      "painted_idle_variants": {
+        "wind": {
+          "registry_key": "boss_great_devourer_wind_idle",
+          "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_great_devourer-animation-01.png",
+          "sha256": "1a58c1a798e84a7093acd64baa9ff587499931213bf69239e758a98c75c18ad3",
+          "frame_rect": {
+            "x": 30,
+            "y": 48,
+            "width": 304,
+            "height": 242
+          }
+        }
+      },
+      "pixel_native_idle": {
+        "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_wind_idle.png",
+        "sha256": "966b24b1e4b2fc6cc3f04bc0a01ed5ec2528d416a357f6bfc1e24817b5d830db"
+      },
+      "logic_imported": false,
+      "approved": false
+    }
+  ],
+  "additional_sources": [
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/src/lib/game/characters.ts",
+      "sha256": "18f6e4434d43c132babac3d57ef8490bbb6d1533ae56d05090b9bb797dd739a4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/src/lib/game/stage.ts",
+      "sha256": "bc4b0f23a9c3de6443f496b876c57d442c727359735189cbdbb97bc40554f3b4"
+    }
+  ]
+}

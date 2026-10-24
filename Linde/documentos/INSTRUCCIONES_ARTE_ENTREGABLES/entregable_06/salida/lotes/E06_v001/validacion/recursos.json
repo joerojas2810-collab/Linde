@@ -1,0 +1,550 @@
+[
+  {
+    "archivo": "assets/nuevos/botas.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 540,
+    "partial_alpha": 0,
+    "opaque_colors": 11,
+    "nonempty": true,
+    "palette_max25": true,
+    "size32": true
+  },
+  {
+    "archivo": "assets/nuevos/chispa.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 355,
+    "partial_alpha": 0,
+    "opaque_colors": 12,
+    "nonempty": true,
+    "palette_max25": true,
+    "size32": true
+  },
+  {
+    "archivo": "assets/nuevos/experiencia.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 295,
+    "partial_alpha": 0,
+    "opaque_colors": 10,
+    "nonempty": true,
+    "palette_max25": true,
+    "size32": true
+  },
+  {
+    "archivo": "assets/nuevos/guantes.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 429,
+    "partial_alpha": 0,
+    "opaque_colors": 11,
+    "nonempty": true,
+    "palette_max25": true,
+    "size32": true
+  },
+  {
+    "archivo": "assets/nuevos/pantalones.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 518,
+    "partial_alpha": 0,
+    "opaque_colors": 9,
+    "nonempty": true,
+    "palette_max25": true,
+    "size32": true
+  },
+  {
+    "archivo": "assets/nuevos/piedra_alma.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 265,
+    "partial_alpha": 0,
+    "opaque_colors": 12,
+    "nonempty": true,
+    "palette_max25": true,
+    "size32": true
+  },
+  {
+    "archivo": "assets/nuevos/piedra_armonia.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 319,
+    "partial_alpha": 0,
+    "opaque_colors": 11,
+    "nonempty": true,
+    "palette_max25": true,
+    "size32": true
+  },
+  {
+    "archivo": "assets/nuevos/piedra_bendicion.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 311,
+    "partial_alpha": 0,
+    "opaque_colors": 10,
+    "nonempty": true,
+    "palette_max25": true,
+    "size32": true
+  },
+  {
+    "archivo": "assets/reutilizados/baya.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 486,
+    "partial_alpha": 0,
+    "opaque_colors": 450,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/button_hover.png",
+    "size": [
+      64,
+      24
+    ],
+    "opaque_pixels": 855,
+    "partial_alpha": 0,
+    "opaque_colors": 719,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/button_normal.png",
+    "size": [
+      64,
+      24
+    ],
+    "opaque_pixels": 896,
+    "partial_alpha": 0,
+    "opaque_colors": 676,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/button_pressed.png",
+    "size": [
+      64,
+      24
+    ],
+    "opaque_pixels": 816,
+    "partial_alpha": 0,
+    "opaque_colors": 545,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/casco.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 564,
+    "partial_alpha": 0,
+    "opaque_colors": 519,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/categoria_combate.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 381,
+    "partial_alpha": 0,
+    "opaque_colors": 361,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/categoria_comunidad.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 349,
+    "partial_alpha": 0,
+    "opaque_colors": 333,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/categoria_exploracion.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 493,
+    "partial_alpha": 0,
+    "opaque_colors": 469,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/categoria_oficio.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 428,
+    "partial_alpha": 0,
+    "opaque_colors": 373,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/coraza.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 485,
+    "partial_alpha": 0,
+    "opaque_colors": 458,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/counter_panel.png",
+    "size": [
+      64,
+      24
+    ],
+    "opaque_pixels": 897,
+    "partial_alpha": 0,
+    "opaque_colors": 727,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/escudo.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 498,
+    "partial_alpha": 0,
+    "opaque_colors": 485,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/espada_hierro.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 273,
+    "partial_alpha": 0,
+    "opaque_colors": 257,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/fibra.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 429,
+    "partial_alpha": 0,
+    "opaque_colors": 392,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/gelatina.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 307,
+    "partial_alpha": 0,
+    "opaque_colors": 287,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/gema.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 359,
+    "partial_alpha": 0,
+    "opaque_colors": 344,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/hacha_piedra.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 278,
+    "partial_alpha": 0,
+    "opaque_colors": 271,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/healthbar_fill.png",
+    "size": [
+      44,
+      5
+    ],
+    "opaque_pixels": 220,
+    "partial_alpha": 0,
+    "opaque_colors": 166,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/healthbar_frame.png",
+    "size": [
+      64,
+      24
+    ],
+    "opaque_pixels": 686,
+    "partial_alpha": 0,
+    "opaque_colors": 523,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/healthbar_full.png",
+    "size": [
+      64,
+      24
+    ],
+    "opaque_pixels": 1063,
+    "partial_alpha": 0,
+    "opaque_colors": 852,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/interact_indicator.png",
+    "size": [
+      24,
+      32
+    ],
+    "opaque_pixels": 274,
+    "partial_alpha": 0,
+    "opaque_colors": 256,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/lingote_hierro.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 359,
+    "partial_alpha": 0,
+    "opaque_colors": 311,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/madera.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 385,
+    "partial_alpha": 0,
+    "opaque_colors": 360,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/mena_hierro.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 460,
+    "partial_alpha": 0,
+    "opaque_colors": 422,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/mision_icono.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 235,
+    "partial_alpha": 0,
+    "opaque_colors": 203,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/panel.png",
+    "size": [
+      64,
+      48
+    ],
+    "opaque_pixels": 2358,
+    "partial_alpha": 0,
+    "opaque_colors": 1426,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/pico_piedra.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 302,
+    "partial_alpha": 0,
+    "opaque_colors": 288,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/piedra.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 447,
+    "partial_alpha": 0,
+    "opaque_colors": 398,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/quest_marker.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 413,
+    "partial_alpha": 0,
+    "opaque_colors": 404,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/skill_locked.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 494,
+    "partial_alpha": 0,
+    "opaque_colors": 451,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/skill_selected.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 481,
+    "partial_alpha": 0,
+    "opaque_colors": 472,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/skill_unlocked.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 493,
+    "partial_alpha": 0,
+    "opaque_colors": 479,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/slot_disabled.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 656,
+    "partial_alpha": 0,
+    "opaque_colors": 399,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/slot_normal.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 710,
+    "partial_alpha": 0,
+    "opaque_colors": 578,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/slot_selected.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 661,
+    "partial_alpha": 0,
+    "opaque_colors": 533,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/tooltip_panel.png",
+    "size": [
+      80,
+      48
+    ],
+    "opaque_pixels": 3016,
+    "partial_alpha": 0,
+    "opaque_colors": 1379,
+    "nonempty": true,
+    "source_hash_equal": true
+  },
+  {
+    "archivo": "assets/reutilizados/unguento.png",
+    "size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 487,
+    "partial_alpha": 0,
+    "opaque_colors": 431,
+    "nonempty": true,
+    "source_hash_equal": true
+  }
+]

@@ -1,0 +1,7 @@
+{
+	"errores": [],
+	"limite": "Pruebas de geometria visual. No ejecutan combate ni certifican red/prediccion en juego.",
+	"motor": "4.7.1-stable (official)",
+	"pruebas": 15,
+	"resultado": "OK"
+}

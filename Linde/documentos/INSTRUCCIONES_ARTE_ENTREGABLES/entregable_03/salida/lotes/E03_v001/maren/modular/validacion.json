@@ -1,0 +1,49 @@
+{
+  "checks": {
+    "piel.png": true,
+    "botas.png": true,
+    "cinturon.png": true,
+    "pelo.png": true,
+    "cuerpo.png": true,
+    "tunica.png": true,
+    "pantalon.png": true,
+    "algoritmo_original_identico": true
+  },
+  "previews": {
+    "Maren_compuesto.png": {
+      "lienzo": [
+        128,
+        128
+      ],
+      "alfa": [
+        0,
+        255
+      ],
+      "sha256": "745955698b728aeff3a89aaa85b0a69256a30cb75a26c94d29aa47325dff3502"
+    },
+    "demostracion_A_compuesto.png": {
+      "lienzo": [
+        128,
+        128
+      ],
+      "alfa": [
+        0,
+        255
+      ],
+      "sha256": "e617f6cda2072802958d2f2ea54a593d3bc4efe214174fbc38d5bb776730372a"
+    },
+    "demostracion_B_compuesto.png": {
+      "lienzo": [
+        128,
+        128
+      ],
+      "alfa": [
+        0,
+        255
+      ],
+      "sha256": "af343875a073c7c5cbbe1674b463b8f9bb78610dcf75c67c42059cbdd3a7f645"
+    }
+  },
+  "runtime_modificado": false,
+  "resultado": "correcto"
+}

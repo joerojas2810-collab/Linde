@@ -1,0 +1,1098 @@
+{
+  "lote": "E06_v001",
+  "base_commit": "42292a0b25554ef46cd914d95e91fc0590f68d9e",
+  "repo": "https://github.com/joerojas2810-collab/Linde.git",
+  "fecha": "2026-10-24",
+  "resources": [
+    {
+      "id": "E06_botas",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/botas.png",
+      "sha256": "0b6e233597e5367bab8318e4f55bb0a637d1be9709d10304f25ee4e53426e613",
+      "origen": "fuentes/iconos_complementarios_original.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_chispa",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/chispa.png",
+      "sha256": "078c34e11f596610dc5b405d4d28e4e100710f7feb426f9d2b9e1181fb140d64",
+      "origen": "fuentes/iconos_complementarios_original.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_experiencia",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/experiencia.png",
+      "sha256": "83903bb823583b12f71daf57d0217db9076f900ec2017f9572cd6361ab402bf7",
+      "origen": "fuentes/iconos_complementarios_original.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_guantes",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/guantes.png",
+      "sha256": "93eee508de276c1f8c9806aba16e9c1789ac23ba68ef628076f5adb907f1d1b0",
+      "origen": "fuentes/iconos_complementarios_original.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_luz_ambiente",
+      "tipo": "shader",
+      "archivo": "assets/nuevos/luz_ambiente.gdshader",
+      "sha256": "dea6ae6f89dd1bdcd47e764ee4aaab4f92fcd3ca5e95f53c5ad05c212145691d",
+      "origen": "autoría código E06",
+      "autor_herramienta": "Codex/código nativo",
+      "licencia": "Código original para LINDE; seguir licencia general del proyecto",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ]
+    },
+    {
+      "id": "E06_pantalones",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/pantalones.png",
+      "sha256": "678eefdb5ef16609536fe4148952273fd694d39224ee2184c386bbcccb4710ab",
+      "origen": "fuentes/iconos_complementarios_original.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_piedra_alma",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/piedra_alma.png",
+      "sha256": "88e99dc1a6d388f980dbb7a9301db3208496adbdbef2cdfc837a409534adeeaa",
+      "origen": "fuentes/iconos_complementarios_original.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_piedra_armonia",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/piedra_armonia.png",
+      "sha256": "f4a208145130a299650ef184f433d475726c7a2c40bfa7400d8e0f21c48f0c75",
+      "origen": "fuentes/iconos_complementarios_original.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_piedra_bendicion",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/piedra_bendicion.png",
+      "sha256": "55519655d744548cb2adf1c69272aa03593dcadc58dc16b1b3e18dc19d172de0",
+      "origen": "fuentes/iconos_complementarios_original.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_sombra_pies",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/sombra_pies.svg",
+      "sha256": "34db64b369b4e3f8b249de12a9db447650b94d6f4031a4c2affbc404a38f500f",
+      "origen": "autoría código E06",
+      "autor_herramienta": "Codex/código nativo",
+      "licencia": "Código original para LINDE; seguir licencia general del proyecto",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ]
+    },
+    {
+      "id": "E06_xp_fill",
+      "tipo": "ui_asset",
+      "archivo": "assets/nuevos/xp_fill.svg",
+      "sha256": "90a3a02e3003e90ad015ceea1a3649c20ebe0b26e8f03f13643402a932152fd2",
+      "origen": "autoría código E06",
+      "autor_herramienta": "Codex/código nativo",
+      "licencia": "Código original para LINDE; seguir licencia general del proyecto",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ]
+    },
+    {
+      "id": "E06_baya",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/baya.png",
+      "sha256": "6db148dfd993c4a6190fcec538c4e7d2068e4a377e809f426165b974c3430d40",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/baya.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_button_hover",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/button_hover.png",
+      "sha256": "3370dbbc9e19a3db72d7639599a193b2e6a042ab552ab5cfaca771a9b592d73c",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/button_hover.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        64,
+        24
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16",
+      "ninepatch_propuesto": {
+        "margenes": [
+          20,
+          10,
+          20,
+          8
+        ],
+        "minimo": [
+          64,
+          24
+        ],
+        "preview": [
+          384,
+          72
+        ],
+        "nota": "Revisión visual normal/hover; pressed aún requiere comprobación de interacción e integración."
+      }
+    },
+    {
+      "id": "E06_button_normal",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/button_normal.png",
+      "sha256": "5ea9e031858e9178639445a7aa875199474dde50caef7afecc79e9dfc7a05124",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/button_normal.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        64,
+        24
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16",
+      "ninepatch_propuesto": {
+        "margenes": [
+          20,
+          10,
+          20,
+          8
+        ],
+        "minimo": [
+          64,
+          24
+        ],
+        "preview": [
+          384,
+          72
+        ],
+        "nota": "Revisión visual normal/hover; pressed aún requiere comprobación de interacción e integración."
+      }
+    },
+    {
+      "id": "E06_button_pressed",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/button_pressed.png",
+      "sha256": "bab5ad9313c1c56af2966e2a66368e9c8e6a1593130a5a7789838e2599405341",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/button_pressed.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        64,
+        24
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16",
+      "ninepatch_propuesto": {
+        "margenes": [
+          20,
+          10,
+          20,
+          8
+        ],
+        "minimo": [
+          64,
+          24
+        ],
+        "preview": [
+          384,
+          72
+        ],
+        "nota": "Revisión visual normal/hover; pressed aún requiere comprobación de interacción e integración."
+      }
+    },
+    {
+      "id": "E06_casco",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/casco.png",
+      "sha256": "21231eba47da222c48fe1379f09fdf54dacf056f44030c414dc0ffc50c6f912c",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/casco.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_categoria_combate",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/categoria_combate.png",
+      "sha256": "94847896547a283ee187bae4897811a4e71cef3073e6c936e59017e7b1214471",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/categoria_combate.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_categoria_comunidad",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/categoria_comunidad.png",
+      "sha256": "4aa5e2363498ecafcf403b74e21a65880ec633ddc6312a99c716d6baf9c63da2",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/categoria_comunidad.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_categoria_exploracion",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/categoria_exploracion.png",
+      "sha256": "d23e7a13f48a97b4c75da29ad258501c053593dabf21bed6e80e073fbdd49c8d",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/categoria_exploracion.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_categoria_oficio",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/categoria_oficio.png",
+      "sha256": "a253f79e9452bd5faf4ce4a202d04c0c9a014e5305d80ec7adc04272b843f5f7",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/categoria_oficio.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_coraza",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/coraza.png",
+      "sha256": "cbdda3665900109d07662216917f792c861f546bf22f9a7028a89c9586de1d7a",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/coraza.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_counter_panel",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/counter_panel.png",
+      "sha256": "5bb068ffc55f76e16f776ee1e4daa1fbc56d945d57f25ff2ef3609020c23513a",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/counter_panel.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        64,
+        24
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_escudo",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/escudo.png",
+      "sha256": "23ba62490c59690f0e29a4369df5a8cd8464cf80063c97bf7504c26fa28eaad8",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/escudo.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_espada_hierro",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/espada_hierro.png",
+      "sha256": "13ba6e52257a6a5ec2e562fea8536fcfcb0bbc981ddb024982918eb5edfd1de6",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/espada_hierro.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_fibra",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/fibra.png",
+      "sha256": "fc8f72bf3f60f51870a7688512841f91ecd43591e62282ca0b9590a926e7e08b",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/fibra.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_gelatina",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/gelatina.png",
+      "sha256": "ca99a95219f97a6dfdc22b64fdf52cb9290fa213492701bcca6d5955a37f5f36",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/gelatina.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_gema",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/gema.png",
+      "sha256": "3498697b4912d7ba9dbb7caea09325f13fc6085af3ad7e094bfaad7d95294874",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/gema.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_hacha_piedra",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/hacha_piedra.png",
+      "sha256": "e597ac9a5d4e373d3620b06c2e8fa811c8b960e84e733d5ea616a3799968cdcf",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/hacha_piedra.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_healthbar_fill",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/healthbar_fill.png",
+      "sha256": "1de6c98dc9a4b5cb9858ec1d7be8e631c11375e4f2ca1e1debc8f3ba4149fea3",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/healthbar_fill.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        44,
+        5
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16",
+      "composicion": {
+        "interior_nativo": [
+          10,
+          9,
+          44,
+          5
+        ],
+        "frame": [
+          64,
+          24
+        ],
+        "escala_preview": 3,
+        "relleno": "recorte horizontal por fracción, sin escalar el marco"
+      }
+    },
+    {
+      "id": "E06_healthbar_frame",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/healthbar_frame.png",
+      "sha256": "e003be410d9010c9537a24cd769966ebc8372d498a325c75ced6d16a5c3077d5",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/healthbar_frame.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        64,
+        24
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_healthbar_full",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/healthbar_full.png",
+      "sha256": "27b8e9c20252a9a7a3c828dc94363343782fdb5782c9e9eb17c83a27ec7fae1a",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/healthbar_full.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        64,
+        24
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_interact_indicator",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/interact_indicator.png",
+      "sha256": "563803ada2808182a4895beedf363c43e1bb574aed7de5c061f4c50894b513fa",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/interact_indicator.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        24,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_lingote_hierro",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/lingote_hierro.png",
+      "sha256": "205ca43ad1c3596a2e2d3d76730ec5a7ad5fbaad7ff1cc84b0148bce0cc33888",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/lingote_hierro.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_madera",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/madera.png",
+      "sha256": "0faa0afbe73567ce7ac276d59961d6caf1f2564b80d514f4be9ade6648d7a78c",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/madera.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_mena_hierro",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/mena_hierro.png",
+      "sha256": "b7849670842b4e4fca2177b60acd7c5a35cbfd4cecfd76d019f9b6df1a1ab1dc",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/mena_hierro.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_mision_icono",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/mision_icono.png",
+      "sha256": "8c8f434d552a3bd1aeadf3ebb4d59bdc2eac6c96adda37654f42fea34a505ad4",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/mision_icono.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_panel",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/panel.png",
+      "sha256": "7f950e5944c2e8372d5b57d0fd40004e5b771b990b5b6f93cae3552c1c328b0c",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/panel.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        64,
+        48
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16",
+      "ninepatch": {
+        "historico": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "propuesta_preview": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "orden": "izquierda,arriba,derecha,abajo",
+        "minimo": [
+          64,
+          48
+        ],
+        "nota": "Nueva propuesta top/bottom16 conserva borde y evita estirar bandas oscuras; observada en capturas, no aprobación global."
+      }
+    },
+    {
+      "id": "E06_pico_piedra",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/pico_piedra.png",
+      "sha256": "116d3cb9d6a7338c1c0c85a859852f0478cdd083eb972a5e42061bcc8fdb9368",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/pico_piedra.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_piedra",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/piedra.png",
+      "sha256": "d46ba9e50e6e4b3cd397afde278fb4d0f6623771694bab083c8ffa36273da3d9",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/piedra.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_quest_marker",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/quest_marker.png",
+      "sha256": "717d0512e66afc7cd22ce4a61f0f8bb62783d7c1c65200edc39e041eff9b431a",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/quest_marker.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_skill_locked",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/skill_locked.png",
+      "sha256": "46c06d229a25dd5cf0a7cceb63e0b3d9c2398c15e26d8ca64b5783c5d95b0439",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/skill_locked.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_skill_selected",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/skill_selected.png",
+      "sha256": "e8ea9150f914451986ad8652faa35cbb0d4ecd8cdf7d649670c063ab9e472854",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/skill_selected.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_skill_unlocked",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/skill_unlocked.png",
+      "sha256": "2ea6b4efd3e9b859ae3d1468bf19ebb8bcf02b7eecc550edc6bf136b7dfc98b6",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/skill_unlocked.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_slot_disabled",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/slot_disabled.png",
+      "sha256": "20c913893983340b959ceb8b4c5ea7c3a5ba76e6ebb29117cc31d6eb19b9ad95",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/slot_disabled.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_slot_normal",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/slot_normal.png",
+      "sha256": "826b7a77a68263d6cca82696fae2cfbf0092e119d097b2557266929f890ab0c4",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/slot_normal.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_slot_selected",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/slot_selected.png",
+      "sha256": "2064cbef44e801cd78cecfb57b0de6f72b4c913d6445f0a456fe1128a8baedef",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/slot_selected.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_tooltip_panel",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/tooltip_panel.png",
+      "sha256": "490c8282e71479980babd0037118f06800ce9ad5cdbc18e0be933c27dbb84ffe",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/tooltip_panel.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        80,
+        48
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_unguento",
+      "tipo": "ui_asset",
+      "archivo": "assets/reutilizados/unguento.png",
+      "sha256": "e8695c42996fd2fe52a7041deb3ab70a2933318b83fd16deab5f9f32dd805db4",
+      "origen": "Linde/arte-entregado/biblioteca_01/interfaz/assets/unguento.png",
+      "autor_herramienta": "image_gen + Godot",
+      "licencia": "procedencia generativa conservada; sin licencia ajena ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual e integración productiva"
+      ],
+      "lienzo": [
+        32,
+        32
+      ],
+      "filtro": "nearest",
+      "mipmaps": false,
+      "alfa": "binaria",
+      "escala": "entera; no reducir iconos a16"
+    },
+    {
+      "id": "E06_tipografia",
+      "tipo": "font",
+      "archivo": "fuentes/tipografia/PixelifySans[wght].ttf",
+      "sha256": "9ba86cd010a4de309d263ceff8e8044092c9db7efda869620cb9ff1c4389e8a5",
+      "origen": "https://github.com/google/fonts/tree/main/ofl/pixelifysans",
+      "autor_herramienta": "The Pixelify Sans Project Authors",
+      "licencia": "OFL-1.1; copia en fuentes/tipografia/OFL.txt",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aprobación de elección tipográfica"
+      ],
+      "glifos_espanol": "verificados en Godot sin faltantes",
+      "tamanos_preview": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "antialiasing": "TextServer.FONT_ANTIALIASING_NONE"
+    }
+  ]
+}

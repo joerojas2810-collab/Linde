@@ -1,0 +1,10 @@
+{
+  "captures": 7,
+  "resolution": [
+    1280,
+    720
+  ],
+  "hud_health_region_identical_day_night": true,
+  "world_changed_day_night": true,
+  "scope": "preview only; no gameplay or network tests"
+}

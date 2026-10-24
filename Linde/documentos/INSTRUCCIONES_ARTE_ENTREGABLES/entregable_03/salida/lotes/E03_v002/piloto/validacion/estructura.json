@@ -1,0 +1,55 @@
+{
+  "atlas": [
+    48,
+    192
+  ],
+  "celda": [
+    48,
+    48
+  ],
+  "pivote": [
+    24,
+    45
+  ],
+  "filas": [
+    "sur",
+    "este",
+    "norte",
+    "oeste"
+  ],
+  "estado": "reposo_unicamente",
+  "colores_opacos": 15,
+  "alfa_binaria": true,
+  "bbox_por_vista": [
+    [
+      7,
+      13,
+      41,
+      45
+    ],
+    [
+      14,
+      13,
+      33,
+      45
+    ],
+    [
+      7,
+      14,
+      41,
+      45
+    ],
+    [
+      14,
+      13,
+      33,
+      45
+    ]
+  ],
+  "captura": [
+    1280,
+    720
+  ],
+  "zoom": 3,
+  "scope": "piloto de calidad; no hoja completa ni integración"
+}

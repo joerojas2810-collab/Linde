@@ -1,0 +1,170 @@
+[
+  {
+    "bbox_source": [
+      77,
+      128,
+      312,
+      261
+    ],
+    "crop": [
+      0,
+      0,
+      443,
+      443
+    ],
+    "error": 0,
+    "file": "guantes.png",
+    "id": "E06_guantes",
+    "size": [
+      32,
+      32
+    ]
+  },
+  {
+    "bbox_source": [
+      74,
+      103,
+      303,
+      297
+    ],
+    "crop": [
+      443,
+      0,
+      444,
+      443
+    ],
+    "error": 0,
+    "file": "botas.png",
+    "id": "E06_botas",
+    "size": [
+      32,
+      32
+    ]
+  },
+  {
+    "bbox_source": [
+      96,
+      84,
+      285,
+      324
+    ],
+    "crop": [
+      887,
+      0,
+      443,
+      443
+    ],
+    "error": 0,
+    "file": "pantalones.png",
+    "id": "E06_pantalones",
+    "size": [
+      32,
+      32
+    ]
+  },
+  {
+    "bbox_source": [
+      138,
+      82,
+      171,
+      327
+    ],
+    "crop": [
+      1330,
+      0,
+      444,
+      443
+    ],
+    "error": 0,
+    "file": "piedra_alma.png",
+    "id": "E06_piedra_alma",
+    "size": [
+      32,
+      32
+    ]
+  },
+  {
+    "bbox_source": [
+      128,
+      58,
+      210,
+      302
+    ],
+    "crop": [
+      0,
+      443,
+      443,
+      444
+    ],
+    "error": 0,
+    "file": "piedra_armonia.png",
+    "id": "E06_piedra_armonia",
+    "size": [
+      32,
+      32
+    ]
+  },
+  {
+    "bbox_source": [
+      121,
+      50,
+      213,
+      309
+    ],
+    "crop": [
+      443,
+      443,
+      444,
+      444
+    ],
+    "error": 0,
+    "file": "piedra_bendicion.png",
+    "id": "E06_piedra_bendicion",
+    "size": [
+      32,
+      32
+    ]
+  },
+  {
+    "bbox_source": [
+      85,
+      71,
+      275,
+      269
+    ],
+    "crop": [
+      887,
+      443,
+      443,
+      444
+    ],
+    "error": 0,
+    "file": "chispa.png",
+    "id": "E06_chispa",
+    "size": [
+      32,
+      32
+    ]
+  },
+  {
+    "bbox_source": [
+      74,
+      61,
+      291,
+      289
+    ],
+    "crop": [
+      1330,
+      443,
+      444,
+      444
+    ],
+    "error": 0,
+    "file": "experiencia.png",
+    "id": "E06_experiencia",
+    "size": [
+      32,
+      32
+    ]
+  }
+]

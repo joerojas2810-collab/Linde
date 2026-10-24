@@ -1,0 +1,34 @@
+{
+  "id": "E03_v002_piloto_guardian",
+  "tipo": "muestra_de_direccion_artistica",
+  "estado": "candidato_sin_aprobacion",
+  "reemplaza_v001": false,
+  "archivo": "piloto/nativos/guardian_piloto.png",
+  "sha256": "bf13c12d9e690ac48e8a2c5a1b3f76c5e7ffe3bd443a0a8f23d557e75a7fbeef",
+  "celda": [
+    48,
+    48
+  ],
+  "pivote": [
+    24,
+    45
+  ],
+  "filas": [
+    "sur",
+    "este",
+    "norte",
+    "oeste"
+  ],
+  "estados": [
+    "reposo"
+  ],
+  "origen": "image_gen integrado + conversión Godot",
+  "fuente": "piloto/fuentes/guardian_piloto_original.png",
+  "prompt": "piloto/fuentes/PROMPT_segunda_pasada.txt",
+  "preview": "piloto/previews/comparacion_guardian_v002.png",
+  "pendientes": [
+    "valoración visual del usuario",
+    "hoja completa y resto03",
+    "integración"
+  ]
+}

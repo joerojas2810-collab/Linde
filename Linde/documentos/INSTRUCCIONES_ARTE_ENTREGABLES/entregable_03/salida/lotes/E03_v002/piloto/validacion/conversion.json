@@ -1,0 +1,54 @@
+{
+  "atlas": [
+    48,
+    192
+  ],
+  "celda": [
+    48,
+    48
+  ],
+  "max_visible": 34,
+  "palette_max": 16,
+  "pivot": [
+    24,
+    45
+  ],
+  "rows": [
+    "sur",
+    "este",
+    "norte",
+    "oeste"
+  ],
+  "save_error": 0,
+  "scale_common": 0.0619307832422587,
+  "views": [
+    {
+      "bbox_visible": [
+        34,
+        32
+      ],
+      "fila": 0
+    },
+    {
+      "bbox_visible": [
+        19,
+        32
+      ],
+      "fila": 1
+    },
+    {
+      "bbox_visible": [
+        34,
+        31
+      ],
+      "fila": 2
+    },
+    {
+      "bbox_visible": [
+        19,
+        32
+      ],
+      "fila": 3
+    }
+  ]
+}

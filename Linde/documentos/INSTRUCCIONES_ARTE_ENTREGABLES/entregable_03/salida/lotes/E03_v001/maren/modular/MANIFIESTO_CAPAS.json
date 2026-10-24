@@ -1,0 +1,73 @@
+{
+  "celda": [
+    32,
+    32
+  ],
+  "pivote": [
+    16,
+    32
+  ],
+  "atlas": [
+    128,
+    128
+  ],
+  "direcciones": [
+    "sur",
+    "este",
+    "norte",
+    "oeste"
+  ],
+  "orden_base": [
+    "cuerpo",
+    "piel",
+    "botas",
+    "pantalon",
+    "tunica",
+    "cinturon",
+    "pelo"
+  ],
+  "oclusiones": {
+    "torso": "b_tunica",
+    "pantalones": "b_pantalon",
+    "botas": "b_botas"
+  },
+  "cinturon_se_oculta": false,
+  "pelo_antes_de_casco": true,
+  "archivos": [
+    {
+      "ruta": "capas/botas.png",
+      "origen": "Linde/cenital/arte/equipo/base/capas/botas.png",
+      "sha256": "e8bcc73f0fa1844794462e89747ce603f24f5314dcb29a708d33716211367da3"
+    },
+    {
+      "ruta": "capas/cinturon.png",
+      "origen": "Linde/cenital/arte/equipo/base/capas/cinturon.png",
+      "sha256": "44dcc93147a8b894b7f41a7879be6255cc0eeaae84b345ce7db2f9e445347ff1"
+    },
+    {
+      "ruta": "capas/cuerpo.png",
+      "origen": "Linde/cenital/arte/equipo/base/capas/cuerpo.png",
+      "sha256": "63e01859fef914048708807d4bfa5c4dbf7d10efb2997b5808192e8e9bea385b"
+    },
+    {
+      "ruta": "capas/pantalon.png",
+      "origen": "Linde/cenital/arte/equipo/base/capas/pantalon.png",
+      "sha256": "daefcca5600622e8b3e11311309382445bbfc310a837e4fabbe3145e5a1c26a4"
+    },
+    {
+      "ruta": "capas/pelo.png",
+      "origen": "Linde/cenital/arte/equipo/base/capas/pelo.png",
+      "sha256": "4a46fd059cf4f59ab94cec2e0632faf805f1a89d7972d63b9cd5222f4409a751"
+    },
+    {
+      "ruta": "capas/piel.png",
+      "origen": "Linde/cenital/arte/equipo/base/capas/piel.png",
+      "sha256": "bd5e0dd98fd2f776fb3c070646b347b7bad69b4b573c6742704f3deaa8ead1ca"
+    },
+    {
+      "ruta": "capas/tunica.png",
+      "origen": "Linde/cenital/arte/equipo/base/capas/tunica.png",
+      "sha256": "03a230dc6857633549bd40d9ac58261c373a4fcd6554ee0870afce0556c5de1e"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+	"errores": [],
+	"limite": "No demuestra integracion ni fidelidad visual. Requiere revision en juego.",
+	"motor": "4.7.1-stable (official)",
+	"pruebas_estructurales": "3 PNG releidos, 12 celdas no vacias, dimensiones y alfa comprobadas",
+	"resultado": "OK"
+}

@@ -1,0 +1,190 @@
+{
+  "lienzo": [
+    128,
+    128
+  ],
+  "alfa": [
+    0,
+    255
+  ],
+  "colores_opacos": 23,
+  "celdas": [
+    {
+      "fila": 0,
+      "columna": 0,
+      "bbox": [
+        8,
+        9,
+        23,
+        32
+      ],
+      "colores_opacos": 19
+    },
+    {
+      "fila": 0,
+      "columna": 1,
+      "bbox": [
+        8,
+        9,
+        23,
+        32
+      ],
+      "colores_opacos": 20
+    },
+    {
+      "fila": 0,
+      "columna": 2,
+      "bbox": [
+        8,
+        9,
+        23,
+        32
+      ],
+      "colores_opacos": 19
+    },
+    {
+      "fila": 0,
+      "columna": 3,
+      "bbox": [
+        8,
+        9,
+        23,
+        32
+      ],
+      "colores_opacos": 20
+    },
+    {
+      "fila": 1,
+      "columna": 0,
+      "bbox": [
+        9,
+        8,
+        23,
+        32
+      ],
+      "colores_opacos": 17
+    },
+    {
+      "fila": 1,
+      "columna": 1,
+      "bbox": [
+        9,
+        8,
+        23,
+        32
+      ],
+      "colores_opacos": 19
+    },
+    {
+      "fila": 1,
+      "columna": 2,
+      "bbox": [
+        9,
+        8,
+        23,
+        32
+      ],
+      "colores_opacos": 17
+    },
+    {
+      "fila": 1,
+      "columna": 3,
+      "bbox": [
+        9,
+        8,
+        23,
+        32
+      ],
+      "colores_opacos": 19
+    },
+    {
+      "fila": 2,
+      "columna": 0,
+      "bbox": [
+        8,
+        9,
+        23,
+        32
+      ],
+      "colores_opacos": 16
+    },
+    {
+      "fila": 2,
+      "columna": 1,
+      "bbox": [
+        9,
+        9,
+        23,
+        32
+      ],
+      "colores_opacos": 18
+    },
+    {
+      "fila": 2,
+      "columna": 2,
+      "bbox": [
+        8,
+        9,
+        23,
+        32
+      ],
+      "colores_opacos": 16
+    },
+    {
+      "fila": 2,
+      "columna": 3,
+      "bbox": [
+        9,
+        9,
+        23,
+        32
+      ],
+      "colores_opacos": 14
+    },
+    {
+      "fila": 3,
+      "columna": 0,
+      "bbox": [
+        9,
+        8,
+        23,
+        32
+      ],
+      "colores_opacos": 18
+    },
+    {
+      "fila": 3,
+      "columna": 1,
+      "bbox": [
+        8,
+        8,
+        23,
+        32
+      ],
+      "colores_opacos": 18
+    },
+    {
+      "fila": 3,
+      "columna": 2,
+      "bbox": [
+        9,
+        8,
+        23,
+        32
+      ],
+      "colores_opacos": 18
+    },
+    {
+      "fila": 3,
+      "columna": 3,
+      "bbox": [
+        9,
+        8,
+        23,
+        32
+      ],
+      "colores_opacos": 18
+    }
+  ],
+  "idle_repetido": true
+}

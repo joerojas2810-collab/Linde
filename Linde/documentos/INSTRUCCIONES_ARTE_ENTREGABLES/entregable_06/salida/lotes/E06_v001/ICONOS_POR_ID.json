@@ -1,0 +1,49 @@
+{
+  "items": {
+    "madera": "E06_madera",
+    "piedra": "E06_piedra",
+    "fibra": "E06_fibra",
+    "baya": "E06_baya",
+    "gelatina": "E06_gelatina",
+    "unguento": "E06_unguento",
+    "gema": "E06_gema",
+    "hacha_piedra": "E06_hacha_piedra",
+    "pico_piedra": "E06_pico_piedra",
+    "espada_hierro": "E06_espada_hierro",
+    "piedra_alma": "E06_piedra_alma",
+    "piedra_armonia": "E06_piedra_armonia",
+    "piedra_bendicion": "E06_piedra_bendicion",
+    "chispa": "E06_chispa",
+    "mena": "E06_mena_hierro",
+    "lingote": "E06_lingote_hierro",
+    "escudo_madera": "E06_escudo"
+  },
+  "equipo_dinamico": {
+    "formato": "eq:<familia>:<ranura>:<variante>:<nivel>",
+    "validar_antes": "Equipo.leer(id); no interpretar claves inválidas",
+    "ranuras": {
+      "casco": "E06_casco",
+      "torso": "E06_coraza",
+      "guantes": "E06_guantes",
+      "botas": "E06_botas",
+      "pantalones": "E06_pantalones"
+    },
+    "representacion": "icono genérico por ranura + nombre/familia/variante/nivel textuales de Equipo.info; no simula geometría exclusiva por familia",
+    "variantes": [
+      "",
+      "divino",
+      "brillante",
+      "oscuro"
+    ],
+    "familias": [
+      "vigia",
+      "zarzal",
+      "albor"
+    ],
+    "nivel": [
+      0,
+      5
+    ]
+  },
+  "desconocido": "error explícito de recurso pendiente; sin icono sustituto silencioso"
+}

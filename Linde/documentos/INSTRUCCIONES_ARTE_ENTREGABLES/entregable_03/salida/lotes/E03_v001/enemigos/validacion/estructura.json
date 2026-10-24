@@ -1,0 +1,1235 @@
+[
+  {
+    "id": "slime",
+    "size": [
+      288,
+      128
+    ],
+    "cell": 32,
+    "alpha_binary": true,
+    "nonempty_cells": 36,
+    "old_columns_exact": true,
+    "recovery_equal_old_idle": true,
+    "colors_from_previous": true,
+    "frames": [
+      {
+        "fila": 0,
+        "columna": 0,
+        "bbox": [
+          9,
+          18,
+          23,
+          29
+        ],
+        "sha256_pixels": "1c7ab18eddf436c2feba5d7eb82da4f4dd6d6dd0c5db10e10e2371e1125d377f"
+      },
+      {
+        "fila": 0,
+        "columna": 1,
+        "bbox": [
+          8,
+          20,
+          23,
+          29
+        ],
+        "sha256_pixels": "2f46208bf0fa98551e901f35af1347b76148493b4de92cef54b79a8509fe544f"
+      },
+      {
+        "fila": 0,
+        "columna": 2,
+        "bbox": [
+          9,
+          15,
+          22,
+          29
+        ],
+        "sha256_pixels": "de928bf26266a38ba0ebef708c764072e9be94acaad82fdb8652aaad573902d2"
+      },
+      {
+        "fila": 0,
+        "columna": 3,
+        "bbox": [
+          8,
+          20,
+          23,
+          29
+        ],
+        "sha256_pixels": "f3a4547e963aa640a19a88b9698bc9209f07ebbf6370ab450f9ece93afe868bf"
+      },
+      {
+        "fila": 0,
+        "columna": 4,
+        "bbox": [
+          8,
+          17,
+          23,
+          29
+        ],
+        "sha256_pixels": "a27a7793b062222180000f34a9b8bd6956bbdfb1dff72f069f94efac9cc33529"
+      },
+      {
+        "fila": 0,
+        "columna": 5,
+        "bbox": [
+          8,
+          20,
+          23,
+          29
+        ],
+        "sha256_pixels": "bf6e356055e9577e24307f5b932b6889d8668d823fdfaaebd46bd0c61b121739"
+      },
+      {
+        "fila": 0,
+        "columna": 6,
+        "bbox": [
+          9,
+          18,
+          23,
+          29
+        ],
+        "sha256_pixels": "1c7ab18eddf436c2feba5d7eb82da4f4dd6d6dd0c5db10e10e2371e1125d377f"
+      },
+      {
+        "fila": 0,
+        "columna": 7,
+        "bbox": [
+          8,
+          22,
+          23,
+          29
+        ],
+        "sha256_pixels": "20bafa9855a80dcc4efb0ad66280c471d86a1f23693d5c948c7e70c1c94acccf"
+      },
+      {
+        "fila": 0,
+        "columna": 8,
+        "bbox": [
+          8,
+          24,
+          23,
+          29
+        ],
+        "sha256_pixels": "68b9dc5f619b73601891e675236135633f36bb81011e886e3535518bca6a5ce0"
+      },
+      {
+        "fila": 1,
+        "columna": 0,
+        "bbox": [
+          9,
+          18,
+          22,
+          29
+        ],
+        "sha256_pixels": "ab61bfd57417d97398fc3176d51eeea4666e6dbe9f1de5bfea0d2c9b5f1d759f"
+      },
+      {
+        "fila": 1,
+        "columna": 1,
+        "bbox": [
+          8,
+          21,
+          23,
+          29
+        ],
+        "sha256_pixels": "8d2779d7b5b17f735a79d6e48521148c7f73582189c95339aa7a6c4bd5b389ef"
+      },
+      {
+        "fila": 1,
+        "columna": 2,
+        "bbox": [
+          9,
+          16,
+          23,
+          29
+        ],
+        "sha256_pixels": "59493d91380e07741c3f7b2fa454b9d4062ee3db5ff4acfab73c9170cf5acf58"
+      },
+      {
+        "fila": 1,
+        "columna": 3,
+        "bbox": [
+          8,
+          21,
+          24,
+          29
+        ],
+        "sha256_pixels": "841f2f695826ab1bdee0d3ea5cfa2d777d0524f967f659d574b345f1b40274de"
+      },
+      {
+        "fila": 1,
+        "columna": 4,
+        "bbox": [
+          8,
+          17,
+          23,
+          29
+        ],
+        "sha256_pixels": "974722c427796f2a348c42b30d2a1063cb28325ac725d0ca642bb90db70cd469"
+      },
+      {
+        "fila": 1,
+        "columna": 5,
+        "bbox": [
+          9,
+          20,
+          23,
+          29
+        ],
+        "sha256_pixels": "4162982dff371d77263f306aa155d569ee80d07e294c557b6d33b77acb3dc783"
+      },
+      {
+        "fila": 1,
+        "columna": 6,
+        "bbox": [
+          9,
+          18,
+          22,
+          29
+        ],
+        "sha256_pixels": "ab61bfd57417d97398fc3176d51eeea4666e6dbe9f1de5bfea0d2c9b5f1d759f"
+      },
+      {
+        "fila": 1,
+        "columna": 7,
+        "bbox": [
+          8,
+          21,
+          23,
+          29
+        ],
+        "sha256_pixels": "c0bc79702b1ef38ecec8c25b9d9ab943b3366c7ae8136ca3694cd2d8efdf70c0"
+      },
+      {
+        "fila": 1,
+        "columna": 8,
+        "bbox": [
+          8,
+          24,
+          24,
+          29
+        ],
+        "sha256_pixels": "5789eb62537586755698e160a4eb123ba7f38bb6b45bbac7f783c979e114f314"
+      },
+      {
+        "fila": 2,
+        "columna": 0,
+        "bbox": [
+          9,
+          18,
+          23,
+          29
+        ],
+        "sha256_pixels": "406ffe0bd7d3a91cbc14e6287effb496cc1517b1f5edd603f5d7fa9f9fcb2be3"
+      },
+      {
+        "fila": 2,
+        "columna": 1,
+        "bbox": [
+          8,
+          21,
+          23,
+          29
+        ],
+        "sha256_pixels": "84795febe18fa64ec14343cade7b663fc6f935567d34eb0eb612c913c94cc171"
+      },
+      {
+        "fila": 2,
+        "columna": 2,
+        "bbox": [
+          9,
+          16,
+          23,
+          29
+        ],
+        "sha256_pixels": "72ae07cd57984fbb77285f79cfaa2a6f7353dd40fe5d529f01d54e3e8471cf35"
+      },
+      {
+        "fila": 2,
+        "columna": 3,
+        "bbox": [
+          8,
+          21,
+          23,
+          29
+        ],
+        "sha256_pixels": "cd26d0810fc0280382ac562b803bd192a2b7a1b0ee602885b257f0e9731caca0"
+      },
+      {
+        "fila": 2,
+        "columna": 4,
+        "bbox": [
+          8,
+          17,
+          24,
+          29
+        ],
+        "sha256_pixels": "3eca7ab5e5e62524a997f5ba1b367187fd6e9d25890d92afc0b90cfe67c79105"
+      },
+      {
+        "fila": 2,
+        "columna": 5,
+        "bbox": [
+          8,
+          20,
+          23,
+          29
+        ],
+        "sha256_pixels": "498d7e8fdc54bfcb57d23925efe72e74d1c0d681b2f901131871124f3f53041a"
+      },
+      {
+        "fila": 2,
+        "columna": 6,
+        "bbox": [
+          9,
+          18,
+          23,
+          29
+        ],
+        "sha256_pixels": "406ffe0bd7d3a91cbc14e6287effb496cc1517b1f5edd603f5d7fa9f9fcb2be3"
+      },
+      {
+        "fila": 2,
+        "columna": 7,
+        "bbox": [
+          8,
+          22,
+          23,
+          29
+        ],
+        "sha256_pixels": "7398813ab03fd66d040e12ac30c27ccd5fad3219e543c525ec0a444b0f2eaa70"
+      },
+      {
+        "fila": 2,
+        "columna": 8,
+        "bbox": [
+          8,
+          24,
+          24,
+          29
+        ],
+        "sha256_pixels": "3484c7a4d9d45e52633613626db86eb510d3dc264d0c6f67edef979caaec570f"
+      },
+      {
+        "fila": 3,
+        "columna": 0,
+        "bbox": [
+          9,
+          17,
+          23,
+          29
+        ],
+        "sha256_pixels": "a7b37bf0cc3890b1e6f20168643ded536f18a38e8b846e56dd5f6e41ae25b365"
+      },
+      {
+        "fila": 3,
+        "columna": 1,
+        "bbox": [
+          8,
+          21,
+          24,
+          29
+        ],
+        "sha256_pixels": "f5ecdf08be74370530336814542ce951e5e2b7bfc51ed06fa393fb25a94f5ec8"
+      },
+      {
+        "fila": 3,
+        "columna": 2,
+        "bbox": [
+          9,
+          16,
+          23,
+          29
+        ],
+        "sha256_pixels": "745ea4207783a71ddff48f5ff3b0bbaf2cd9b2ec94b04090cee3f814644e433f"
+      },
+      {
+        "fila": 3,
+        "columna": 3,
+        "bbox": [
+          8,
+          21,
+          24,
+          29
+        ],
+        "sha256_pixels": "7c0b5ac0400958b9e986d3b7c57cc3aedafaa28ad53ef580d4826883a41f5206"
+      },
+      {
+        "fila": 3,
+        "columna": 4,
+        "bbox": [
+          8,
+          17,
+          23,
+          29
+        ],
+        "sha256_pixels": "aefa892c2bec0cbfed705028fa66e0f232f202b8d198575d5347574665f1b52c"
+      },
+      {
+        "fila": 3,
+        "columna": 5,
+        "bbox": [
+          9,
+          20,
+          23,
+          29
+        ],
+        "sha256_pixels": "a1bd9b8676a142d074a7ab12e1c7e9dd30cb49bf0698bd8ac912d17f8156196b"
+      },
+      {
+        "fila": 3,
+        "columna": 6,
+        "bbox": [
+          9,
+          17,
+          23,
+          29
+        ],
+        "sha256_pixels": "a7b37bf0cc3890b1e6f20168643ded536f18a38e8b846e56dd5f6e41ae25b365"
+      },
+      {
+        "fila": 3,
+        "columna": 7,
+        "bbox": [
+          8,
+          21,
+          23,
+          29
+        ],
+        "sha256_pixels": "ee419e87ad12d6804c6c05339ceebf817919774389e92a9dd149dfc2c2e01c8d"
+      },
+      {
+        "fila": 3,
+        "columna": 8,
+        "bbox": [
+          8,
+          24,
+          24,
+          29
+        ],
+        "sha256_pixels": "e457f5c01e3b23bf2ffd24f9926a2f111e50cbb91cc018d32c9aa3b59f749419"
+      }
+    ]
+  },
+  {
+    "id": "guardian",
+    "size": [
+      432,
+      192
+    ],
+    "cell": 48,
+    "alpha_binary": true,
+    "nonempty_cells": 36,
+    "old_columns_exact": true,
+    "recovery_equal_old_idle": true,
+    "colors_from_previous": true,
+    "frames": [
+      {
+        "fila": 0,
+        "columna": 0,
+        "bbox": [
+          8,
+          17,
+          40,
+          45
+        ],
+        "sha256_pixels": "bd7adef07dfb8f79838b10dd606c26e8ad11b6648e4d4f10341af5887058cec8"
+      },
+      {
+        "fila": 0,
+        "columna": 1,
+        "bbox": [
+          9,
+          16,
+          38,
+          45
+        ],
+        "sha256_pixels": "16c732eca0ceae9c51c2fea77fb6f61fcf4d308611b984dd719572a02ecee313"
+      },
+      {
+        "fila": 0,
+        "columna": 2,
+        "bbox": [
+          9,
+          16,
+          38,
+          45
+        ],
+        "sha256_pixels": "ae4d7bda1fae21e68aba2953bd2805ec1a9995cba86c2733e6dbee649a028696"
+      },
+      {
+        "fila": 0,
+        "columna": 3,
+        "bbox": [
+          5,
+          13,
+          43,
+          45
+        ],
+        "sha256_pixels": "24f4c05c030b0641ae761e7a62e02adce097afeab30319e4b8c74c1d492a7188"
+      },
+      {
+        "fila": 0,
+        "columna": 4,
+        "bbox": [
+          9,
+          22,
+          39,
+          45
+        ],
+        "sha256_pixels": "476c80adb98c17910b0fb9fbed6143818866b4385e39c123509a041f018b60d4"
+      },
+      {
+        "fila": 0,
+        "columna": 5,
+        "bbox": [
+          5,
+          11,
+          42,
+          45
+        ],
+        "sha256_pixels": "1688bf64b733605dfd18998cab66371180dd25558f1a67b0004e3db0d83cde53"
+      },
+      {
+        "fila": 0,
+        "columna": 6,
+        "bbox": [
+          8,
+          17,
+          40,
+          45
+        ],
+        "sha256_pixels": "bd7adef07dfb8f79838b10dd606c26e8ad11b6648e4d4f10341af5887058cec8"
+      },
+      {
+        "fila": 0,
+        "columna": 7,
+        "bbox": [
+          8,
+          18,
+          39,
+          45
+        ],
+        "sha256_pixels": "653a5ca5aa9b4c402aabec1c4cc8b5d2c47a00c2add1d1f58f630ca3ef834516"
+      },
+      {
+        "fila": 0,
+        "columna": 8,
+        "bbox": [
+          6,
+          25,
+          42,
+          45
+        ],
+        "sha256_pixels": "f275013580a9f5873ff4af56707a089036a31feee7718cc825d518d7622cf564"
+      },
+      {
+        "fila": 1,
+        "columna": 0,
+        "bbox": [
+          13,
+          15,
+          35,
+          45
+        ],
+        "sha256_pixels": "241bacdcd021cb6617f39e08fee64f4c7e5d4c52f2320ec9251c0265a5f3f6f0"
+      },
+      {
+        "fila": 1,
+        "columna": 1,
+        "bbox": [
+          13,
+          16,
+          35,
+          45
+        ],
+        "sha256_pixels": "a495df7d8b739a36cc83df1249f7550a7ad4c7f61e89bb2a33bbab23f0feceae"
+      },
+      {
+        "fila": 1,
+        "columna": 2,
+        "bbox": [
+          14,
+          14,
+          33,
+          45
+        ],
+        "sha256_pixels": "78ba4106087a272386921aa07f5510fe8849bb8bc1a1729d84438a0c7d266282"
+      },
+      {
+        "fila": 1,
+        "columna": 3,
+        "bbox": [
+          12,
+          10,
+          35,
+          45
+        ],
+        "sha256_pixels": "ac6afdf191b5bde19106455fd06e9c876643f0fef7731ced8a48fca1397328a0"
+      },
+      {
+        "fila": 1,
+        "columna": 4,
+        "bbox": [
+          9,
+          20,
+          38,
+          45
+        ],
+        "sha256_pixels": "112a5b0e27af99cffc772fa66af21e7f955a5fee1380888cff682c7accf5a3d1"
+      },
+      {
+        "fila": 1,
+        "columna": 5,
+        "bbox": [
+          9,
+          11,
+          39,
+          45
+        ],
+        "sha256_pixels": "15a04045a7d9b3a98283c1c90b79dd551e34fc1e5d930965b434efcd02ad4e28"
+      },
+      {
+        "fila": 1,
+        "columna": 6,
+        "bbox": [
+          13,
+          15,
+          35,
+          45
+        ],
+        "sha256_pixels": "241bacdcd021cb6617f39e08fee64f4c7e5d4c52f2320ec9251c0265a5f3f6f0"
+      },
+      {
+        "fila": 1,
+        "columna": 7,
+        "bbox": [
+          9,
+          17,
+          38,
+          45
+        ],
+        "sha256_pixels": "e45522778390c3096d203ee473d2c3b096ea0337c73f6b8181a53999ed650a28"
+      },
+      {
+        "fila": 1,
+        "columna": 8,
+        "bbox": [
+          6,
+          24,
+          42,
+          45
+        ],
+        "sha256_pixels": "aaaa819627e8bf399616d0d8bb5042927d0155490178a9e44797632851e6cd5a"
+      },
+      {
+        "fila": 2,
+        "columna": 0,
+        "bbox": [
+          8,
+          17,
+          40,
+          45
+        ],
+        "sha256_pixels": "117d11eda394b2edaf0e38d1362943768977acd1c20e7df36266497a3d2358cb"
+      },
+      {
+        "fila": 2,
+        "columna": 1,
+        "bbox": [
+          9,
+          16,
+          38,
+          45
+        ],
+        "sha256_pixels": "fcefa8ac8e49064e4046186abcf1a70f46e97c60a985db6bb76b1895e82a8a06"
+      },
+      {
+        "fila": 2,
+        "columna": 2,
+        "bbox": [
+          9,
+          17,
+          38,
+          45
+        ],
+        "sha256_pixels": "e05f72882e04cd6e22688186bd3f9bac9b4eb7659d9f87da11e7deec53e213dd"
+      },
+      {
+        "fila": 2,
+        "columna": 3,
+        "bbox": [
+          5,
+          8,
+          43,
+          45
+        ],
+        "sha256_pixels": "fbdbfe0e285803aed4631c311da634403bb0ea4566639c6085d060346110cd54"
+      },
+      {
+        "fila": 2,
+        "columna": 4,
+        "bbox": [
+          9,
+          21,
+          39,
+          45
+        ],
+        "sha256_pixels": "5f75686be1f897526dd16e2716ff1eba56fcd8712fbfde53a80482ffd1669f33"
+      },
+      {
+        "fila": 2,
+        "columna": 5,
+        "bbox": [
+          5,
+          13,
+          43,
+          45
+        ],
+        "sha256_pixels": "b33b65580782bb39884dad44a012a42a7ac07fbc5e970c3494c84cdbd5450d39"
+      },
+      {
+        "fila": 2,
+        "columna": 6,
+        "bbox": [
+          8,
+          17,
+          40,
+          45
+        ],
+        "sha256_pixels": "117d11eda394b2edaf0e38d1362943768977acd1c20e7df36266497a3d2358cb"
+      },
+      {
+        "fila": 2,
+        "columna": 7,
+        "bbox": [
+          9,
+          19,
+          39,
+          45
+        ],
+        "sha256_pixels": "458c25f060b53ebdcc6414ecddc94329d5414488ea61bbe15fc62f8b1b3ddc6f"
+      },
+      {
+        "fila": 2,
+        "columna": 8,
+        "bbox": [
+          5,
+          25,
+          42,
+          45
+        ],
+        "sha256_pixels": "84c6d232546c795c5f1e7d50aea41ce14f2d2ef23b97c2d1caeb1f8c68a7a66a"
+      },
+      {
+        "fila": 3,
+        "columna": 0,
+        "bbox": [
+          13,
+          15,
+          34,
+          45
+        ],
+        "sha256_pixels": "73ae67eb511ccfaacb8e37666b1eb424af0d7464340f6b7ebc98dd9b34945b70"
+      },
+      {
+        "fila": 3,
+        "columna": 1,
+        "bbox": [
+          13,
+          16,
+          35,
+          45
+        ],
+        "sha256_pixels": "300fd2e68848af00d2a7b2f5480d2aee1f27db8bd0eb1835b0df8fa156284549"
+      },
+      {
+        "fila": 3,
+        "columna": 2,
+        "bbox": [
+          14,
+          15,
+          34,
+          45
+        ],
+        "sha256_pixels": "2ec93b0c88afee5ac71fded33e36353ed4434a8ed8c0f7fe8793c35d868f80da"
+      },
+      {
+        "fila": 3,
+        "columna": 3,
+        "bbox": [
+          13,
+          10,
+          34,
+          45
+        ],
+        "sha256_pixels": "8b23c0c32b713d236eae0715eff041dbc6150d0e538b1c2a190197cc5098d119"
+      },
+      {
+        "fila": 3,
+        "columna": 4,
+        "bbox": [
+          9,
+          20,
+          38,
+          45
+        ],
+        "sha256_pixels": "0d4ccfc1b3610e99537f40a0934b5b3f37a933a050ef5936fd38ffaaf9486bff"
+      },
+      {
+        "fila": 3,
+        "columna": 5,
+        "bbox": [
+          8,
+          11,
+          39,
+          45
+        ],
+        "sha256_pixels": "f43c86a06d5d5d2a0c25fbefa627ae6797b72f525a99b877654417d785a1ea37"
+      },
+      {
+        "fila": 3,
+        "columna": 6,
+        "bbox": [
+          13,
+          15,
+          34,
+          45
+        ],
+        "sha256_pixels": "73ae67eb511ccfaacb8e37666b1eb424af0d7464340f6b7ebc98dd9b34945b70"
+      },
+      {
+        "fila": 3,
+        "columna": 7,
+        "bbox": [
+          9,
+          17,
+          39,
+          45
+        ],
+        "sha256_pixels": "34fc9d4dac96727413754e5ba09de8ba2f4f98251235c8804a147684f5c81fbf"
+      },
+      {
+        "fila": 3,
+        "columna": 8,
+        "bbox": [
+          5,
+          24,
+          42,
+          45
+        ],
+        "sha256_pixels": "054ccbcff557a790f875cfc5c30cef4c297a14597442aa29f9e8ea93d841334f"
+      }
+    ]
+  },
+  {
+    "id": "ciervo",
+    "size": [
+      432,
+      192
+    ],
+    "cell": 48,
+    "alpha_binary": true,
+    "nonempty_cells": 36,
+    "old_columns_exact": true,
+    "recovery_equal_old_idle": true,
+    "colors_from_previous": true,
+    "frames": [
+      {
+        "fila": 0,
+        "columna": 0,
+        "bbox": [
+          14,
+          16,
+          33,
+          45
+        ],
+        "sha256_pixels": "cb0edba5b9ea71e0e038a2343e8b8cc78846add3bf804abbc14f6df3d71363ee"
+      },
+      {
+        "fila": 0,
+        "columna": 1,
+        "bbox": [
+          14,
+          16,
+          33,
+          45
+        ],
+        "sha256_pixels": "f7c9666478687b99fd52ab2d62497d39a1489d6f9ea93a5d2d48772866467a12"
+      },
+      {
+        "fila": 0,
+        "columna": 2,
+        "bbox": [
+          14,
+          16,
+          33,
+          45
+        ],
+        "sha256_pixels": "9a23ec4f3c7730959d52806ffa3e1e56d076d33464aeaeb40638076cdf96af66"
+      },
+      {
+        "fila": 0,
+        "columna": 3,
+        "bbox": [
+          14,
+          21,
+          33,
+          45
+        ],
+        "sha256_pixels": "c24d26d47e8aad2bdd7d49c1d41c0023d6c1ffcdc26fcfac288f89ede66206f8"
+      },
+      {
+        "fila": 0,
+        "columna": 4,
+        "bbox": [
+          14,
+          17,
+          33,
+          45
+        ],
+        "sha256_pixels": "104c77c1c845927dadeb6f944ff6b3fdd2880056745f921193ce6151ab22f8fd"
+      },
+      {
+        "fila": 0,
+        "columna": 5,
+        "bbox": [
+          13,
+          16,
+          34,
+          45
+        ],
+        "sha256_pixels": "ddec79d8f6858701bd3f9260944ad21acfdf8d1d022acb8c503e7a93f968facd"
+      },
+      {
+        "fila": 0,
+        "columna": 6,
+        "bbox": [
+          14,
+          16,
+          33,
+          45
+        ],
+        "sha256_pixels": "cb0edba5b9ea71e0e038a2343e8b8cc78846add3bf804abbc14f6df3d71363ee"
+      },
+      {
+        "fila": 0,
+        "columna": 7,
+        "bbox": [
+          14,
+          22,
+          34,
+          45
+        ],
+        "sha256_pixels": "bae274c6df8483aa943748fc1c899fe71feae463b669eab47b145009325ad462"
+      },
+      {
+        "fila": 0,
+        "columna": 8,
+        "bbox": [
+          8,
+          26,
+          39,
+          45
+        ],
+        "sha256_pixels": "e7711f45c17f564f201915e5a24df4b531dd3ed9d69ce86a594c60f9f05537b0"
+      },
+      {
+        "fila": 1,
+        "columna": 0,
+        "bbox": [
+          11,
+          16,
+          36,
+          45
+        ],
+        "sha256_pixels": "db88be7887b7a5597bbb212b68e3c107881e7db3de8b4ec3f184df752d04bbb3"
+      },
+      {
+        "fila": 1,
+        "columna": 1,
+        "bbox": [
+          12,
+          16,
+          36,
+          45
+        ],
+        "sha256_pixels": "0c43a0c4bc0e5322c831ab98b49a4d993fa13abf22875f9308ea5095e3d53f47"
+      },
+      {
+        "fila": 1,
+        "columna": 2,
+        "bbox": [
+          12,
+          15,
+          36,
+          45
+        ],
+        "sha256_pixels": "cc6c0afa4521033a9a8e949b0f49776ad2aa7224066563c32525b0e2dd2d7184"
+      },
+      {
+        "fila": 1,
+        "columna": 3,
+        "bbox": [
+          10,
+          21,
+          38,
+          45
+        ],
+        "sha256_pixels": "b052ddecbd5a33ea81e0d24d2cb34bccbd3946e74c00cbcd1ccff0e6fdbccee0"
+      },
+      {
+        "fila": 1,
+        "columna": 4,
+        "bbox": [
+          7,
+          21,
+          40,
+          45
+        ],
+        "sha256_pixels": "0fb531270e987065e4a7d41bba22f3e73b7273ea7071a3ef53b008f435393bf6"
+      },
+      {
+        "fila": 1,
+        "columna": 5,
+        "bbox": [
+          13,
+          15,
+          35,
+          45
+        ],
+        "sha256_pixels": "88b86d392e190afa915af9a198a3e5ef0a9d561da7381e516f291ac1b4096c61"
+      },
+      {
+        "fila": 1,
+        "columna": 6,
+        "bbox": [
+          11,
+          16,
+          36,
+          45
+        ],
+        "sha256_pixels": "db88be7887b7a5597bbb212b68e3c107881e7db3de8b4ec3f184df752d04bbb3"
+      },
+      {
+        "fila": 1,
+        "columna": 7,
+        "bbox": [
+          10,
+          21,
+          38,
+          45
+        ],
+        "sha256_pixels": "c000a6d6f6146fef275b73821ce90713a89b98ab4524a1d7a0427aff2cb8381e"
+      },
+      {
+        "fila": 1,
+        "columna": 8,
+        "bbox": [
+          7,
+          27,
+          41,
+          45
+        ],
+        "sha256_pixels": "2f0ab60f1c0e23a28b981a3a9fa57ca843ee6d4af08bc54705526dc3d3a0cb04"
+      },
+      {
+        "fila": 2,
+        "columna": 0,
+        "bbox": [
+          14,
+          15,
+          33,
+          45
+        ],
+        "sha256_pixels": "8b9f338c6372c6b44447251d81011bb26377deb5acf68304825bca899fe4ee83"
+      },
+      {
+        "fila": 2,
+        "columna": 1,
+        "bbox": [
+          14,
+          16,
+          33,
+          45
+        ],
+        "sha256_pixels": "d2e620b3dba2096feb27825d86c7449c85d82254e798ec2af888bb94e5f728e8"
+      },
+      {
+        "fila": 2,
+        "columna": 2,
+        "bbox": [
+          14,
+          15,
+          33,
+          45
+        ],
+        "sha256_pixels": "5137846d3d125b333e0add5df687cb53cb997eeff84e143a44194b4a807495eb"
+      },
+      {
+        "fila": 2,
+        "columna": 3,
+        "bbox": [
+          14,
+          20,
+          34,
+          45
+        ],
+        "sha256_pixels": "75ed12f2054aed8d83bd0c0da47a5de2151f2010ba23e611065dd2d66b3c5735"
+      },
+      {
+        "fila": 2,
+        "columna": 4,
+        "bbox": [
+          14,
+          16,
+          34,
+          45
+        ],
+        "sha256_pixels": "426dd9e8c0621045ee97aafa57d9f93bd90f57dc65b9ac04436abadaab2cfdf6"
+      },
+      {
+        "fila": 2,
+        "columna": 5,
+        "bbox": [
+          13,
+          15,
+          34,
+          45
+        ],
+        "sha256_pixels": "4b5329dae174ee1d813c6b4cda784148ecb400356a37cc393c10da0cf5e0c22f"
+      },
+      {
+        "fila": 2,
+        "columna": 6,
+        "bbox": [
+          14,
+          15,
+          33,
+          45
+        ],
+        "sha256_pixels": "8b9f338c6372c6b44447251d81011bb26377deb5acf68304825bca899fe4ee83"
+      },
+      {
+        "fila": 2,
+        "columna": 7,
+        "bbox": [
+          14,
+          21,
+          34,
+          45
+        ],
+        "sha256_pixels": "2fe73de0dbe36ca0f82d75f3d9696cac973d8e5bd5113c7d04dce97bbbc4591d"
+      },
+      {
+        "fila": 2,
+        "columna": 8,
+        "bbox": [
+          11,
+          27,
+          36,
+          45
+        ],
+        "sha256_pixels": "b6ec8dd0407b1cb8b2fb6f9e793f53039ac97b1485db333fa0ba95f636f419ea"
+      },
+      {
+        "fila": 3,
+        "columna": 0,
+        "bbox": [
+          11,
+          15,
+          36,
+          45
+        ],
+        "sha256_pixels": "853a3bb02027b32dfad45f466e5cd539513b62235757a441a5367a1d1e10c74b"
+      },
+      {
+        "fila": 3,
+        "columna": 1,
+        "bbox": [
+          12,
+          16,
+          36,
+          45
+        ],
+        "sha256_pixels": "05aca01b705617c6aec76d6b3270c5835c3fff040bd2b57b0eafcd9aeb781a72"
+      },
+      {
+        "fila": 3,
+        "columna": 2,
+        "bbox": [
+          11,
+          15,
+          36,
+          45
+        ],
+        "sha256_pixels": "4b98231f7618a7b9b4cf5b9c40183b547f0f1aed8e81c22c6157b4c4dbf4a0c6"
+      },
+      {
+        "fila": 3,
+        "columna": 3,
+        "bbox": [
+          8,
+          22,
+          39,
+          45
+        ],
+        "sha256_pixels": "61753bcaceac2c9783abe97c4281d88a6f0ca9590a6e2a15a8eadb11c6d0f6e5"
+      },
+      {
+        "fila": 3,
+        "columna": 4,
+        "bbox": [
+          7,
+          20,
+          41,
+          45
+        ],
+        "sha256_pixels": "8c89758909eccb2ef1224682ce7425f957e41b1a4f2e916fe27a4b7a1ccd62e1"
+      },
+      {
+        "fila": 3,
+        "columna": 5,
+        "bbox": [
+          12,
+          15,
+          36,
+          45
+        ],
+        "sha256_pixels": "17219230ac9f84ce67a1412d8c72554fa2ccc4cdc18ea1550fa04f573ac22eed"
+      },
+      {
+        "fila": 3,
+        "columna": 6,
+        "bbox": [
+          11,
+          15,
+          36,
+          45
+        ],
+        "sha256_pixels": "853a3bb02027b32dfad45f466e5cd539513b62235757a441a5367a1d1e10c74b"
+      },
+      {
+        "fila": 3,
+        "columna": 7,
+        "bbox": [
+          10,
+          20,
+          38,
+          45
+        ],
+        "sha256_pixels": "2e5b6b52aa0861f9b5c8571b5098b392467bd6026b8dc04284c19d359ad31b47"
+      },
+      {
+        "fila": 3,
+        "columna": 8,
+        "bbox": [
+          7,
+          27,
+          41,
+          45
+        ],
+        "sha256_pixels": "9a8e250d2f17e929c350741f81b2ffca5838bf164a664d227aed42693e084335"
+      }
+    ]
+  }
+]

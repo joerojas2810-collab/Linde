@@ -1,0 +1,106 @@
+{
+  "id": "E06_contrato_v001",
+  "estado": "propuesta_revisada_en_preview",
+  "resolucion": [
+    1280,
+    720
+  ],
+  "iconos": {
+    "nativo": [
+      32,
+      32
+    ],
+    "dibujo_preview": [
+      64,
+      64
+    ],
+    "filtro": "nearest",
+    "mipmaps": false
+  },
+  "panel": {
+    "nativo": [
+      64,
+      48
+    ],
+    "ninepatch": [
+      8,
+      16,
+      8,
+      16
+    ],
+    "minimo": [
+      64,
+      48
+    ],
+    "padding_contenido": 24
+  },
+  "botones": {
+    "ninepatch_propuesto": [
+      20,
+      10,
+      20,
+      8
+    ],
+    "minimo": [
+      64,
+      24
+    ]
+  },
+  "barra": {
+    "marco": [
+      64,
+      24
+    ],
+    "interior": [
+      10,
+      9,
+      44,
+      5
+    ],
+    "fill": "recortar, no reducir marco",
+    "limites": [
+      0,
+      1
+    ]
+  },
+  "texto": {
+    "fuente": "Pixelify Sans",
+    "tam_minimo_preview": 16,
+    "cuerpo": 24,
+    "titulos": [
+      32,
+      48
+    ],
+    "wrap": "integrador debe envolver según anchura; preview usa saltos explícitos",
+    "cantidades": "texto dinámico; no exceder anchura del slot",
+    "variantes": "texto además de color"
+  },
+  "foco": {
+    "borde": "#92edee",
+    "grosor": 2,
+    "senal_no_color": "selección/etiqueta",
+    "ejemplo": "teclas←→"
+  },
+  "luz": {
+    "noche": [
+      0.44,
+      0.55,
+      0.76
+    ],
+    "mezcla": [
+      0,
+      1
+    ],
+    "aplicar": "solo mundo; HUD en CanvasLayer separado",
+    "horario": "no se fija curva ni reloj nuevos"
+  },
+  "sombra": {
+    "mask": [
+      16,
+      8
+    ],
+    "opacidad_propuesta": 0.25,
+    "escala": "entera, ancla pies; ajustar a cada actor sin cambiar hitbox"
+  },
+  "integracion": "a cargo de integrador único; no contiene cambios a hud.gd"
+}

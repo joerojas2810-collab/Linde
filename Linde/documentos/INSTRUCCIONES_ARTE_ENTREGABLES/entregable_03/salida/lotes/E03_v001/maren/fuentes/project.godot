@@ -1,0 +1,5 @@
+config_version=5
+[application]
+config/name="E03 Maren conversión aislada"
+[rendering]
+renderer/rendering_method="gl_compatibility"

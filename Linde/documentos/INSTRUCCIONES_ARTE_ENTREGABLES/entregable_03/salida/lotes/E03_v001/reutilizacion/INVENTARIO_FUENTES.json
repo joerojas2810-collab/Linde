@@ -1,0 +1,3589 @@
+{
+  "audit_date": "2026-10-24",
+  "source_root": "/Users/josephrojas/Desktop/Nuevo Juego",
+  "registry_entries": 370,
+  "painted_unique_files": 159,
+  "registry_missing_files": [],
+  "source_code": [
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/src/lib/art/enemies.ts",
+      "bytes": 3392,
+      "sha256": "3d620d5b7e9819bf66f66407a96322dd4bec7b7a85e5004c360c3ec0d39a4b6a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/src/lib/art/enemies.generated.ts",
+      "bytes": 55783,
+      "sha256": "b0ffeb663dd873656726e0afab8ac90e098f2f1c13bb91b56c8e21b49788eb8a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/src/lib/art/pixel-enemies.generated.json",
+      "bytes": 139,
+      "sha256": "159b4a18e0383fb883ab01b25cb9ac6547ab8d97393b34b0abef0520011a2689"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/src/lib/art/painted-villains.generated.json",
+      "bytes": 287593,
+      "sha256": "f0f6d0d805a5d2f660c4d27df6d640bf500dffcb4caf10a90582fb920e8785e4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/src/lib/game/worlds.ts",
+      "bytes": 1428,
+      "sha256": "e60a403ff017df0b457c00413f997fafff84525c81242e16d1c6b87879f8c6d4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/src/lib/game/levels.ts",
+      "bytes": 4646,
+      "sha256": "2c34a29c1edbb2cb6cc3035c627d787d7b5f49897edd69747396f7da775ddf72"
+    }
+  ],
+  "painted_runtime_sources": [
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_ash_king-animation-01.png",
+      "bytes": 2780719,
+      "sha256": "73a7cc29f049b76987b8fc1a440c1e29c8b8eeb99305b20043407ad769ea2931"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_ash_king-attack-02.png",
+      "bytes": 1221188,
+      "sha256": "1052e3e98adf016b90c9a901c961449e35ba0c199af810304f062f06cf37e251"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_ash_king-entrance-02.png",
+      "bytes": 1297407,
+      "sha256": "796f5524285e0e0081fdecfbc70ec9b4dd3bde652785a48f185e9c3b98d4c25a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_ash_king-hit-02.png",
+      "bytes": 1360047,
+      "sha256": "9a4c339a57ec365ad4d3011b2faa5b16f1efa6a98d2f424b4740b31df41637ec"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_ash_king-idle-02.png",
+      "bytes": 1487514,
+      "sha256": "af551b7fbfdff5fcdfb49acf2d8ab40e7bb69a8e15b7f0dbb75ff1b916c1be3e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_eternal_watcher-animation-01.png",
+      "bytes": 2720462,
+      "sha256": "f026f3ce16ce50fcbdaa7a928e1437cd100b8e8cad4e9c0a940b5c8487567a78"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_eternal_watcher-attack-02.png",
+      "bytes": 1707745,
+      "sha256": "5c1958ac466e5c78f0f23d99aea135710a82a8c4a971facb6f7bbedd1d308423"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_eternal_watcher-defeat-02.png",
+      "bytes": 1992226,
+      "sha256": "2bd88b75efa82164102335728bd319dff49bfd335ec8b212b2d0bc0a35c1f914"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_eternal_watcher-entrance-02.png",
+      "bytes": 1637743,
+      "sha256": "3a1df86069ddb1fede2547dd887db6d4dc21443b01d8494bcd605df483610b83"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_faceless-animation-01.png",
+      "bytes": 2555201,
+      "sha256": "0206b537850af59a6ae214799736e52f92e5b680d4602f1f46112f9c3e964d0a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_faceless-entrance-02.png",
+      "bytes": 1232157,
+      "sha256": "4c25c40c7d197c70ff062d3ba07d56c0781f50025d9b991ab915677895a13a50"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_faceless-hit-02.png",
+      "bytes": 2221874,
+      "sha256": "2384269c54cd7950f78a009565f64947d577821863865e7a6dbd64c5a46e0d2a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_fly_lord-animation-01.png",
+      "bytes": 2928001,
+      "sha256": "267324a4ffaef0677d5fef9ffd09b4703102a73997a66fcc2c2615cb8ae6914d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_fly_lord-attack-02.png",
+      "bytes": 2070184,
+      "sha256": "8e7861a4b7b2f27807df571b19ff6195528433bd8b8bfc5d0067a34428d2e6ba"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_fly_lord-entrance-02.png",
+      "bytes": 1793117,
+      "sha256": "e779eea95047f29ae6d2798df5f64930fe731d69d5dcadf5c8708fb3c7690d36"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_great_devourer-animation-01.png",
+      "bytes": 2487422,
+      "sha256": "1a58c1a798e84a7093acd64baa9ff587499931213bf69239e758a98c75c18ad3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_great_devourer-entrance-02.png",
+      "bytes": 1874685,
+      "sha256": "ed3d4160b9d9d045612f518348d716dbdc31b3aaa1b5377ffe2469c535c8af41"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_hollow_colossus-animation-01.png",
+      "bytes": 2846664,
+      "sha256": "95678001298b92f09003422d982e76319b88e7c72ce102dc3edc33e1961f0bdd"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_hollow_colossus-attack-02.png",
+      "bytes": 1853391,
+      "sha256": "d85623c240877867b8b7c4e06917df163ad50f90f4cc763cd49040ebbf4d8e0e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_hollow_colossus-entrance-02.png",
+      "bytes": 1380037,
+      "sha256": "fead77f08efb8b66d1175e12519d05603d125b7cf53fb854a2ddc0724e7cfc88"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_mother_hydra-animation-01.png",
+      "bytes": 2934173,
+      "sha256": "4739355e292090e9a33669782cf8bc0cefd9a09da7f0b0a65b4974c94eb75c93"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_mother_hydra-attack-03.png",
+      "bytes": 1616186,
+      "sha256": "d24de15e271b6190dbc7a77605f61b551f7f1e8a7538109dfc547a89ac96c7e4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_mother_hydra-entrance-02.png",
+      "bytes": 1972325,
+      "sha256": "bceb97faade5846305005c4e13563d581c55b2dde9fc0573edf942653d931753"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_thunder_king-attack-02.png",
+      "bytes": 1372363,
+      "sha256": "3105a93b181c27376c87e3fe532f9b712db7c7763c2a86069197bfa794cf18fc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_thunder_king-defeat-02.png",
+      "bytes": 961505,
+      "sha256": "b8194fc4c7d16d7028b8515553be0aab51a48f5852a567446521dbe0d9a9aa86"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_thunder_king-entrance-02.png",
+      "bytes": 1661087,
+      "sha256": "f05583eca8c23f79dc47e30e1b526de42db837f72a1e80608233dbd4ff14423d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_thunder_king-hit-02.png",
+      "bytes": 1325051,
+      "sha256": "a7f50c3fea78afd71e476b962dfc7f0a3564f22cfe87f780637b7a4d3e694af4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_thunder_king-idle-02.png",
+      "bytes": 1353836,
+      "sha256": "cc0f30c79664c7ceba208b74454489b554a66d89f541df4687869ffa3418a296"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_withered_queen-animation-01.png",
+      "bytes": 2822130,
+      "sha256": "d7cea0ab80c59f80e35956d3c54b223bf74250c80a3ecb659c1e253dbf1cdc95"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_withered_queen-attack-03.png",
+      "bytes": 921813,
+      "sha256": "6c116d6d83b34a31dd986bad9a3f0b636293453cc18f330d19685054e8ac2837"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_withered_queen-defeat-02.png",
+      "bytes": 2157071,
+      "sha256": "486dcda5745cd965b3570ebdb876687e2c244f1ad8833bc4d4bf66d89e6c841c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_withered_queen-entrance-02.png",
+      "bytes": 1750489,
+      "sha256": "0509e0a7250976f490fa8cfc27883272f3e5372fdf95d0b30e64ada228dec6cf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/boss_withered_queen-hit-02.png",
+      "bytes": 2020835,
+      "sha256": "50b0d18d6ccf06a487c34a0755cb4786de819f309740c584c511791b6e216da0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/golem-animation-01.png",
+      "bytes": 2524155,
+      "sha256": "3c74ea6703be385e563d96ac470e182b25550341671aea09cb9f382456a2d3bf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/golem-defeat-02.png",
+      "bytes": 1555188,
+      "sha256": "b21511448d3d365554b520751e0894383e47a994f0d9dd80c34e575680d90c9e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/harpy-animation-01.png",
+      "bytes": 2723708,
+      "sha256": "d6d8cda42815b8f229424ff564541d69856ecd87e8cc12bb2fa607ceb66ea2b8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/harpy-attack-02.png",
+      "bytes": 2168068,
+      "sha256": "e7ab9f0a212f6d5f80ce020137c50deac1ea678f2be431b27e81f4806f9a8c53"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/harpy-defeat-02.png",
+      "bytes": 1511896,
+      "sha256": "22efd9296e39010e2bf67b19d7df3ca994e846a1c595d046d2890b75cfe7d0e7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/imp-animation-01.png",
+      "bytes": 2024780,
+      "sha256": "73ed4111f392835b87e47e9b028dcc448d38761511d46a03d78f8dabd72a722b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/slime-animation-01.png",
+      "bytes": 2313978,
+      "sha256": "b717f5a53ae5977d4156908c02a5dc2c9240eacf4c2081576e7e6fb6d4b79de3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/slime-attack-02.png",
+      "bytes": 1062426,
+      "sha256": "c8e8a612cc2b5b461446e028a1ad36a1ac4ee2dfa5925c850b21d8d2f7ee62cf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/specter-animation-01.png",
+      "bytes": 2342773,
+      "sha256": "dacbd25f02437a5402f9aea455cbae012e0acb7f9e94ac877e1bf80e5a2b8e87"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/specter-attack-02.png",
+      "bytes": 1533802,
+      "sha256": "50e85b9d7e9dbc97ef56e7530b30e230fe651712f2839553219bf66862588909"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/specter-defeat-02.png",
+      "bytes": 1214024,
+      "sha256": "112d405650d06fd6f287b6feea38c9ddc232ef8e7c61d8ff1a81ab3eb2b59bc4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-earth-atlas-02.png",
+      "bytes": 1891007,
+      "sha256": "0414b3b3b9fcab0e7ef76b02c9e77887a51ba27fc5908ee97a2bd187a765bcf6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-fire-atlas-01.png",
+      "bytes": 1887881,
+      "sha256": "29dec294a49bfd8c8e6e0a2eb40245125d454ded4abedc1cc715c173ee4c180e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-fire-attack-02.png",
+      "bytes": 1161011,
+      "sha256": "1be7ba7ac6b367bc29e63194bc73bd6c7567b4a65b38b8c98f49cb8dbdb220ed"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-fire-defeat-02.png",
+      "bytes": 1042711,
+      "sha256": "02c0a8970a1417d2b632b55120cf69c5a340eb3a63fdcec549111634b81959ff"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-fire-entrance-02.png",
+      "bytes": 1240185,
+      "sha256": "e4df011d53b616ed55b6d2ae1bd6a637d1b828b6ae8513d5b1d09b8a529e984f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-lightning-atlas-01.png",
+      "bytes": 2017155,
+      "sha256": "8eee1cd21ecc20c2f48582df67f9cdc4d8c31ad4dc2027e2fe28bd03c8036a2d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-water-atlas-01.png",
+      "bytes": 1986598,
+      "sha256": "2e121d0a20a03966db08b0177c9eef44a4736597d3762e9faca5ff9389797a66"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-boss-wind-atlas-01.png",
+      "bytes": 1979164,
+      "sha256": "54f5291e49a9a5b5e1d108e5b34e3a80b4c1a1c88a5179d071dab97edeabf831"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-earth-atlas-01.png",
+      "bytes": 2632363,
+      "sha256": "ca9909f7db1a6f38c7c97b9ce4468b478514ab5f6ec6e8bebc6692d167e70b35"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-fire-atlas-01.png",
+      "bytes": 2549569,
+      "sha256": "7370fa03c15a952765ba0854fdaea3541d1c8d2db411980f596296a94ec8800a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-lightning-atlas-01.png",
+      "bytes": 2631544,
+      "sha256": "bd1065bc2130ac683fb4c76e7e2999ddd338a5b9df939f7d89f0a3cbab23a73c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-water-atlas-01.png",
+      "bytes": 2617185,
+      "sha256": "65e34db4bf8dd183fe1bab2c3029d0296bfc4e168044c2bf57059ca871ae45a9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-wind-attack-02.png",
+      "bytes": 1341893,
+      "sha256": "4c275acb7c73704cb1da821c39c66a2079addaf8461a6047c731d5c13ca929a2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-wind-defeat-02.png",
+      "bytes": 1159335,
+      "sha256": "423178c978bdd29f454b8682965a5bb68f37c499f9ffdc892952c1919817671d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-wind-hit-02.png",
+      "bytes": 1290668,
+      "sha256": "6592c3c5090b22a0d9f2b44fa3a319c25a221d75427b2db93b689bf30335a061"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-elite-wind-idle-02.png",
+      "bytes": 1640123,
+      "sha256": "4c2d530f7e13606608f845c65a7c44a9fc987a8463556d61841818d195a0d860"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-normal-fire-atlas-01.png",
+      "bytes": 2449608,
+      "sha256": "7e2c62281aa68b2a87d3cb21b3f75dfe40e7de9f523263fa60926b487d76828b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-normal-lightning-atlas-01.png",
+      "bytes": 2512636,
+      "sha256": "1680f759d40fc381d37bc4932e468e8a27bc75849048ecbf044e48ec75ff9f3e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-normal-water-atlas-01.png",
+      "bytes": 2542815,
+      "sha256": "501013f569e24c149d38501b3745fb07956d388f4dfd9d9e855e8ecf46f6106f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/golem-normal-wind-atlas-01.png",
+      "bytes": 2475335,
+      "sha256": "c207dc11edf7b3c16cc2e2684dc5c120e3985894f6f1a2ac79c585e286adcace"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-earth-atlas-01.png",
+      "bytes": 1901553,
+      "sha256": "81cc787b031f32fe473dc4ebf72f9d6d97ca5a3cc9b88a70a1542f849f95ba6d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-earth-attack-02.png",
+      "bytes": 1459948,
+      "sha256": "3fe2cd4897721b0582fa0597a9cfd30d16a7ae43fb42ba57da465a1d1a4b7c79"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-earth-entrance-03.png",
+      "bytes": 1034496,
+      "sha256": "defe155595b1e18119d4aaec8a4542dd6cc4bce061a86254be161ed936df0afb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-fire-atlas-01.png",
+      "bytes": 1879545,
+      "sha256": "ec1cce42040c4bcc8984f8d4551b990f9ded03f54b3349f4f02809b33973ed10"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-fire-attack-03.png",
+      "bytes": 840297,
+      "sha256": "4b9272fcd3df988814085482f1087dfa01a86926677b5e11d6ef4299c90b7cd3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-lightning-atlas-01.png",
+      "bytes": 1922638,
+      "sha256": "9625c5379f20f3e28b73242db6df6d69391785a15d90ea7a7dd56e5c4ec9dee5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-lightning-attack-02.png",
+      "bytes": 1430547,
+      "sha256": "bb861720b432de04509f43b86236c037c4567c09fa340dfecb0b92e4a5272c7a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-water-atlas-01.png",
+      "bytes": 1971155,
+      "sha256": "15d45b028b7ddf23168b444a39aeae04a9ac3a510d0c7d58729a470e45ea65f9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-water-attack-02.png",
+      "bytes": 1427255,
+      "sha256": "46b8934f2cb48e7f51cc03fbdd5ac3698fd3f8e19e2b7e088268f75a871dc5cb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-wind-atlas-03.png",
+      "bytes": 1900467,
+      "sha256": "8ef0a4c42baac908643de04eb30db025e88a7a944c8d6b8d14872f11e51762ff"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-wind-attack-02.png",
+      "bytes": 1639566,
+      "sha256": "2c9c4bdabae85fd4ccb32570f2227e4d70da040de49eb66143330b21e9601c2e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-boss-wind-entrance-02.png",
+      "bytes": 1518088,
+      "sha256": "14bf0125d00a425a79d7680f98162dd31a7fd9a327da63ec1472b0a0008c0d5b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-earth-atlas-01.png",
+      "bytes": 2115494,
+      "sha256": "3d8305155f57be6d6f26b458da67edf96d6031edddc638d8fcdf57a7ea5dfc1b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-earth-attack-02.png",
+      "bytes": 1713097,
+      "sha256": "91563494159806418d311712638540327fdbdf776f6fc98d5713770a87d6cff6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-earth-defeat-02.png",
+      "bytes": 1112764,
+      "sha256": "80c7cdede8c5381a7237f4caf71a903f6762242bc364c026d56779479e4882ac"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-fire-atlas-01.png",
+      "bytes": 2101203,
+      "sha256": "de22540454ad82e0a630613b5628a7ebd0d92a00ee2b2e611832c8681baa30e2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-fire-attack-02.png",
+      "bytes": 1604667,
+      "sha256": "53b8464a40ca7c65f299f85e7af1fd15ed77d0c17cfc41cf37ae527ad8e3f022"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-fire-defeat-02.png",
+      "bytes": 1176569,
+      "sha256": "feeff666095bbec9f731f34ef8ce957dbf70bb41adaf62974f05fe4aa4c953e6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-lightning-atlas-01.png",
+      "bytes": 2204496,
+      "sha256": "87e1d16be92913f1acee540423ba0113c7f45feb41715ee2b57b0e8da2413345"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-lightning-attack-02.png",
+      "bytes": 1742556,
+      "sha256": "2964f13b9d43f873d34803c5697b0ad7deff91d926c2797b40c3633786cf7efe"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-lightning-defeat-02.png",
+      "bytes": 1235362,
+      "sha256": "7455e8543a6ee3d46a86d655d532d0b9ba7e113c5f63cb3b2f8fbd236ad844f5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-water-atlas-01.png",
+      "bytes": 2095252,
+      "sha256": "fda060d3a14d6126dee9effbcf0c7a9e88050b00ebcf67adb9cdae6eec1b9223"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-water-attack-02.png",
+      "bytes": 1698286,
+      "sha256": "09f5ff65f9b530c5252bbec3efe2f87e982f3a2dc67112123dc4bc228923c35e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-water-defeat-02.png",
+      "bytes": 1192385,
+      "sha256": "d3a872e198c34030f6ace211087e6aeb24bbf2d933f1962e86a4c3bfc05dbfb7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-wind-atlas-02.png",
+      "bytes": 2124721,
+      "sha256": "7af8324314674577dd4502731f4f4ca4cedbacb014dd7b19fccea7457eae1996"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-elite-wind-attack-02.png",
+      "bytes": 1757827,
+      "sha256": "7952de5d0e9798c108faf32e132850d38b5896ea1d0c061d168da10920c93b52"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-earth-atlas-01.png",
+      "bytes": 2720998,
+      "sha256": "b6b5a77093590398dddeef2fd14019147214e07efe91c83d7f47bb8f9595ff35"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-fire-atlas-01.png",
+      "bytes": 2720967,
+      "sha256": "a8c7ad5ab903e71dd56f3c906d94239d218afe2220d5f1d28a5d817fb000f8b7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-lightning-atlas-01.png",
+      "bytes": 2774584,
+      "sha256": "520fe3da236ad84694083b54ca595a7472d2a62182b1c92c154e86c7e6a42352"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-lightning-attack-02.png",
+      "bytes": 2243438,
+      "sha256": "2efaeb7a3189f695d75c258fb0bbe35a055a5482d6374f7b76b4786eefa50e20"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/harpy-normal-water-atlas-01.png",
+      "bytes": 2774165,
+      "sha256": "313eec5dd7c362917cf55802715cce25375902d55e16f06733d0bcd8e247e93a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-earth-atlas-01.png",
+      "bytes": 1849621,
+      "sha256": "3ab4bbdb4c7cad7b5c6e41ff8a7a7962fd8aa820ff928dff96d45e0cb0fbf4ff"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-fire-atlas-02.png",
+      "bytes": 1791426,
+      "sha256": "a805b49952998460eb3d91a1c42e8e7575d9af7aa20d3f1b110b200f50ca7d6e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-lightning-atlas-01.png",
+      "bytes": 1929201,
+      "sha256": "d1426570afda71ab506aa2536e2a7ff33b608376b9602ea3a0cef9f03d7e9c4d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-water-atlas-01.png",
+      "bytes": 1875418,
+      "sha256": "ba776e444513b9fee148b89644500aacdd27efc7fe79978fc2a1fcb874abba20"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-boss-wind-atlas-01.png",
+      "bytes": 1873571,
+      "sha256": "f44b394584d3adee7120aa4b448b07b0b1de365db104126121a2f92b83fc931b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-earth-atlas-01.png",
+      "bytes": 2124837,
+      "sha256": "409d76441086ec880dc2705c2fb7db6501d6bbebef74ce5a8d0431feade486e1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-fire-atlas-01.png",
+      "bytes": 2160576,
+      "sha256": "488bb55ee73420717c6030591a657dca08e8d2cf39c187844fe45f505d29dd08"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-lightning-atlas-01.png",
+      "bytes": 2244071,
+      "sha256": "90bbc0056504e222b02854cc15b213072e463d57fde8c1a7baef9798fe0e95fd"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-water-atlas-01.png",
+      "bytes": 2165318,
+      "sha256": "113016f3b39b10b6e8f55a2bacf94baedc05ba5a5d70ad84be5ee29eae8435a4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-elite-wind-atlas-01.png",
+      "bytes": 2188047,
+      "sha256": "d63cebecf7597cd0be6731acec4d3e5afecd670b4f7264452946e3671d75a144"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-earth-atlas-01.png",
+      "bytes": 2016852,
+      "sha256": "3208a9466d74f26fa8b1baf4e204615edd3081bb952414593cc0ca1800693740"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-earth-idle-02.png",
+      "bytes": 2059871,
+      "sha256": "d33a21d2510c5acbe4750acb4ec736ffeb8de7d22dc540d5bfc3d393f7ea8592"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-lightning-atlas-01.png",
+      "bytes": 2016709,
+      "sha256": "11df7524edb3c268a3ce0557ae80202f79f1e756f8234b50acf7d1c4ad664c31"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-water-attack-01.png",
+      "bytes": 2052961,
+      "sha256": "ddb72f905f4cf502980094a57dc8c11115c68f93e77fee1f03eea858a510a329"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-water-defeat-01.png",
+      "bytes": 1880310,
+      "sha256": "1145a6e49f8e9b630d464ffea40bfa567dad0ef85745a201b609748c4324e259"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-water-hit-01.png",
+      "bytes": 2026675,
+      "sha256": "ce1a4198e1340ae314e823d10982f10e0b73463b7051e9b32de698dc50dcfac2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-water-idle-01.png",
+      "bytes": 2068182,
+      "sha256": "b10d6e35c7f6f446661f6ba0da72d6affa3a01535dd1c722741ed73c297bdd98"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/imp-normal-wind-atlas-01.png",
+      "bytes": 2060331,
+      "sha256": "bb0619788c447a08bafd52cdda93647b38af6fc27f0b98a26f1bda2311cd34ea"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-earth-atlas-01.png",
+      "bytes": 2542657,
+      "sha256": "0e775dc83e892c01e69eecfaf2e2f9fd61b04b93c2a14267fa4c1ec599cb7fbc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-fire-atlas-02.png",
+      "bytes": 1420127,
+      "sha256": "c7b2b613ea5fef18706b0e8de46c501c9caa3c4a1e1d045b84fdfbfcfab0e761"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-fire-idle-02.png",
+      "bytes": 1195241,
+      "sha256": "21af6917a8877bf5988c2731862a318905c99eee0a057d0f2ff5c130df30950d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-lightning-atlas-02.png",
+      "bytes": 1590049,
+      "sha256": "e6a51e035bd1e7faa2e36855aaf0e4c54e2f2b7480312c5f96ec276ff93a59ea"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-water-atlas-01.png",
+      "bytes": 2570657,
+      "sha256": "1191bb70bea3fe3c5c98233aaeafec96fd49ccde91df3e8eb03eb76f541364e5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-boss-wind-atlas-01.png",
+      "bytes": 2539765,
+      "sha256": "ad187e8d4745444ea2b17cffb44507a550a4b2ab197dcc28848540a54bb2929e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-earth-atlas-01.png",
+      "bytes": 1274916,
+      "sha256": "d4908e661efa72c32a20e8873c0b9962d8baba4dc04a057f56923597aed504e6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-earth-attack-02.png",
+      "bytes": 913182,
+      "sha256": "7d9ba53e1748c08160eabfe9db077b7c2a7515c620b17e6907e5ce29cc4d0077"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-fire-atlas-01.png",
+      "bytes": 1202645,
+      "sha256": "4d2ac482867f54cb3e0f10e3eaebb5a3b65eb0f8cdccc9c310de69ae3e4740d2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-fire-attack-02.png",
+      "bytes": 863699,
+      "sha256": "1096862ed7bc8b7ee28f94018750270e2bc92939f19bc4e9b408fe9e8a8945d3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-lightning-atlas-01.png",
+      "bytes": 1357781,
+      "sha256": "a718e0a0a8db12148ff0cecab990d455f6242a1725e5db7189c9cd8cc3123857"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-lightning-attack-02.png",
+      "bytes": 966560,
+      "sha256": "c0636d005961c319d3e99ec9980f583ecae22b08ad367970bc468654162aecf1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-water-atlas-02.png",
+      "bytes": 1270008,
+      "sha256": "fb7ac151576245698220ca16678bdc5ba1f04dd705c6d02d2ed7c6d85e446794"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-water-attack-02.png",
+      "bytes": 917901,
+      "sha256": "16d395ccd78c75f28fe7d974aa333d609c95d290bff322ccba3186d01f1d10ed"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-wind-atlas-01.png",
+      "bytes": 1262647,
+      "sha256": "c7b0448b76ac28a47e703adf84619c353a8d47c092af09e39e8187fbfeca42d8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-elite-wind-attack-02.png",
+      "bytes": 931434,
+      "sha256": "7b1636ea8e33c9f0f07981bcf06f78b09f9642d6065a47a08538d5761eebd30e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-earth-atlas-01.png",
+      "bytes": 2266221,
+      "sha256": "493340416dcc219f87ac8e520756bb7f7476fba88fff8844382ec4ec8b178416"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-fire-atlas-01.png",
+      "bytes": 2199732,
+      "sha256": "c69260fcb12dc36914d320731861b108a50cf862feec6ebcc2c103916812f04a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-fire-attack-02.png",
+      "bytes": 962198,
+      "sha256": "7bb87e31eddfcea5ef4e0754d1c488c0f693f042487d8bc27a7a44d4d0b31e1c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-lightning-atlas-01.png",
+      "bytes": 2349523,
+      "sha256": "2435c5e77788a3c0efb03d3645bd6e109fd51d397999e8749b8192efb7190859"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-lightning-attack-02.png",
+      "bytes": 1111052,
+      "sha256": "6a6704a0d268a63a86224eb8f0e6ed17ebf03ac3a081ec976d134c3eb6b2ede8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/slime-normal-wind-atlas-01.png",
+      "bytes": 2175908,
+      "sha256": "1ea66d0ed6a3b3dfc7f5adc31e11c20316dcf9e55415c77b8a7785dacfb67299"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-earth-atlas-01.png",
+      "bytes": 1954170,
+      "sha256": "f2481dcd4f65892d31d455c0405fdc5717dfc7bd55efa338b6b030f77937c67b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-earth-entrance-02.png",
+      "bytes": 1242598,
+      "sha256": "af04194016e721260846081a04607484a05c36e27607506fb41ae98756d8026b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-fire-atlas-01.png",
+      "bytes": 1968811,
+      "sha256": "d09e08fa7cd80dec42cb4e26d91e5eff9505acc6339d0a0c4b52d0e5ba98f2e9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-fire-entrance-02.png",
+      "bytes": 1325516,
+      "sha256": "91de65b1a98401906c7162d7d22298a876e905d300f31a6eaab12e464947dd96"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-lightning-atlas-01.png",
+      "bytes": 1978682,
+      "sha256": "5bf880951972491df71cf88d547ab9a0507c9090ec221df402836f65c98fd8c2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-lightning-attack-03.png",
+      "bytes": 991277,
+      "sha256": "d468aef4d22d9fa3c0f700223513ef533e25284a666b2ebe31824f99e5543fd8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-lightning-entrance-02.png",
+      "bytes": 1300823,
+      "sha256": "c891269b8611e703332a6adc1aafdc6302415138458c407fe9d822f7708095c6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-lightning-idle-02.png",
+      "bytes": 1346518,
+      "sha256": "098d534d009d27052fe61c50bad61f09674dbec36903dd1c1a21feb33151b1c7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-water-atlas-02.png",
+      "bytes": 1970273,
+      "sha256": "1f859602c1e89cf53125c297b9aef0c910e9c0fd331bbbeb2ddd8abb21147a37"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-wind-atlas-01.png",
+      "bytes": 1968178,
+      "sha256": "e90c36467bf03873057aba225c6829a2d79bec6e39c64b9271bc0c47c6db63de"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-boss-wind-entrance-02.png",
+      "bytes": 1409566,
+      "sha256": "7aa7a67a0cb441f2bc168231a78e188e5a61f053b6e2f9f2d5a6a32c60ca878d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-earth-atlas-01.png",
+      "bytes": 2493822,
+      "sha256": "fe8a3d5ee94d453a63d790c8e90fffe46f226303c4fb50f515ac114af3ccf2d0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-fire-atlas-01.png",
+      "bytes": 2475372,
+      "sha256": "7169b356b8f81d02015922a02a88dd5875f39ad0fd19656600fa0502db4dde6f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-lightning-atlas-01.png",
+      "bytes": 2495096,
+      "sha256": "2d9f3510b6b2dc0de80d28a9a103e5896ece7a001e9839420371b6078ce0a481"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-water-atlas-01.png",
+      "bytes": 2521033,
+      "sha256": "3acf27a82c82f9ef5eb97aa2b52e5f032ae29e063a9398651aae4e8d31184c59"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-elite-wind-atlas-01.png",
+      "bytes": 2513649,
+      "sha256": "1a166ced1da1859cec98561224b91ec0e9f73f7edd56d9133ab6073f786712c6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-earth-atlas-01.png",
+      "bytes": 2276160,
+      "sha256": "16a0de29f8a0526fd300bbea94699caf33dfe3e6ccb0bac7411154b4480922b4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-earth-defeat-02.png",
+      "bytes": 1196382,
+      "sha256": "d20494abcf88c2990c0db22d418894b93fb09dce12275767d8552cee521fd468"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-fire-atlas-01.png",
+      "bytes": 2325319,
+      "sha256": "6434d49c5ee16fb8243bbf4e2b2cbd9f402fe75bfb89e4d9b2207ecc6f460789"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-fire-defeat-02.png",
+      "bytes": 1183829,
+      "sha256": "5d3da66bdcfc24daaf314b8e03ae52b4c0c93164171c26ab3122cc92e05c60e4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-lightning-atlas-01.png",
+      "bytes": 2351366,
+      "sha256": "406eacd09edd0d3cef46101a5961734043da1bf7eb06521188a9052839d367ca"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-lightning-defeat-02.png",
+      "bytes": 1209586,
+      "sha256": "6e098b97965220f21c1b6545adc00cde4517d1ad959aeb2a631b9de0abb11ec1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-wind-atlas-01.png",
+      "bytes": 2303464,
+      "sha256": "4ac3c6941011f4458ddfa12ee4868b336cad368ccd156ddf9dcd473b11b29501"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art-review/painted-enemies/production/variants/specter-normal-wind-defeat-02.png",
+      "bytes": 1203086,
+      "sha256": "0beccce790b6f040eae069edf18c6f81e0c5da0c76d6399af2c00f90d84c53eb"
+    }
+  ],
+  "pixel_runtime_sources": [
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_earth_attack.png",
+      "bytes": 24769,
+      "sha256": "d779bb469e439b051a8591a32f3b729f6f7fdc2e2c8f10c2cceca43fd5414f0c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_earth_defeat.png",
+      "bytes": 19511,
+      "sha256": "e963a6a7b790463367d53616d1dadcf2356737ceb901f4c0bd475edbafc366e1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_earth_entrance.png",
+      "bytes": 15258,
+      "sha256": "19e1302ee84f6e2604900d245d5da0a7d87d08a9324dcd1e990e21de629c7aa1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_earth_hit.png",
+      "bytes": 10791,
+      "sha256": "f061036e5bb86bf0c3126663be3116355abbdf0f10b4ceb6abeb482c3736bffe"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_earth_idle.png",
+      "bytes": 15161,
+      "sha256": "16a0f022fa6101525d454de6944ecb52867a3e1b62264eaef8bdd468875510fd"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_fire_attack.png",
+      "bytes": 24771,
+      "sha256": "1052889bc7be3b231504472920b1a23da81eda2450ea6e23b1e422610023c78a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_fire_defeat.png",
+      "bytes": 19509,
+      "sha256": "e6900b934ea473e9a0a67cf88df5b2f678d15a50a878b9164b2674158e6061d1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_fire_entrance.png",
+      "bytes": 15258,
+      "sha256": "cfaba9ff864cb5c40722ddd16bc149395dc0763919b93e87912eaa2f89d0a094"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_fire_hit.png",
+      "bytes": 10790,
+      "sha256": "9f8b6e4d594a75f5e5ddd54ed0c2d9f55aa0ccf66e381d1debfe4f8e3cd3817d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_fire_idle.png",
+      "bytes": 15160,
+      "sha256": "17af4ae62e2443759d8b9c66024f16fafa97a299a0d793c3f623e8ec445b2e6d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_lightning_attack.png",
+      "bytes": 24771,
+      "sha256": "42f80fb96b0b76fdf134e2540b72334342015648ff4bd73aa685b42c3e92d533"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_lightning_defeat.png",
+      "bytes": 19514,
+      "sha256": "4e5d76efbfec57f276b8daf8fa4098156748cd0708135292c1e4e26eeceaeb90"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_lightning_entrance.png",
+      "bytes": 15261,
+      "sha256": "89d7f59d39a2257dbfe7474fcc60acefd2a3b88be202fb70df503112396b3329"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_lightning_hit.png",
+      "bytes": 10794,
+      "sha256": "89b31fe5561ccd5057bfc1966decda16990ff744033d464d48ce531f906d3137"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_lightning_idle.png",
+      "bytes": 15166,
+      "sha256": "0778fbbb23aad8a09eec84fa943f3905f9d6d5d70bb4da923c4d09263bba3a6b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_water_attack.png",
+      "bytes": 24817,
+      "sha256": "92d3d12ce1a8a10a973cc91fb8366592a03db81e5507bcdd39d7ed77a12072bc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_water_defeat.png",
+      "bytes": 19541,
+      "sha256": "f5424632a64c03306e7f4afc26c7c2488f5723d3610a4b7c7932eabfc6dcd133"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_water_entrance.png",
+      "bytes": 15279,
+      "sha256": "2a37a8366dfaebb5ad75cc16cd95308c13f405501806bee623ce45724c413420"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_water_hit.png",
+      "bytes": 10812,
+      "sha256": "7cd2cae36a9f1734c40ff4743c78b0e2a51978d77762380eb15cdb9cbe1b87f0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_water_idle.png",
+      "bytes": 15187,
+      "sha256": "08983dc403d6bb23ee05b5cd02e001f5f65dbde5f936bc4084bf64ab86087d64"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_wind_attack.png",
+      "bytes": 24846,
+      "sha256": "9d879fbf4eeeceff50ac8fffada37ca2664ca7b33932a9e02bf434138f6486b9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_wind_defeat.png",
+      "bytes": 19558,
+      "sha256": "4219b7b45c4ae5b1974dd3ed6ec92143a7fa9acabe99e59dd078dfc5a7d3ffa4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_wind_entrance.png",
+      "bytes": 15295,
+      "sha256": "0c16a73ea7a14f7bbe319d9f1dd48a3a682f0548b0f9f0a771111b55808b85b3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_wind_hit.png",
+      "bytes": 10828,
+      "sha256": "a3e323cd1d91f0b7f40cd937893a747b1c0d0962acdffeacb9687656f9d4869b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_ash_king_wind_idle.png",
+      "bytes": 15202,
+      "sha256": "09565752d8697441ca3b51fd2b0ac72c5701ee6349ca98b9c6a4c54d7f9e88aa"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_earth_attack.png",
+      "bytes": 23095,
+      "sha256": "94fb73b6b0977cbd0747392cb28c62b47d127d7cba67b52b3a4aa0657b4bf33f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_earth_defeat.png",
+      "bytes": 19571,
+      "sha256": "2617fd28155d93842e4d3d53556021e3a2904d140638bf6a75f765e99591d6d4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_earth_entrance.png",
+      "bytes": 12508,
+      "sha256": "cf54c668ca28797413326bbf8b4b503e4918a88560f59bdb2b73b9ab3245383c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_earth_hit.png",
+      "bytes": 11459,
+      "sha256": "638aaf4c7eddcac4e89150bda84439c43d702a044dbe621dd3379253d4e1a949"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_earth_idle.png",
+      "bytes": 12530,
+      "sha256": "2ebd5d6a76a60bd3f981367b15dc464a824134f9ec07bd66ba122d64c4062ace"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_fire_attack.png",
+      "bytes": 22925,
+      "sha256": "195e204b23ba868a656a9acd92941ec4fa2e5c11298e0a0356d8b6b2b4e0c678"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_fire_defeat.png",
+      "bytes": 19465,
+      "sha256": "17b921a3e071a4aa4c4ea371be70dbacc1336cada850519732a9f16ac8459f59"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_fire_entrance.png",
+      "bytes": 12449,
+      "sha256": "f93d71cf3bf5516dff85386d17fe7bddda17483acaa2a5bdb03b3566490d6d0b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_fire_hit.png",
+      "bytes": 11387,
+      "sha256": "55e0583f035b05fb5a0c03f6898ecff363362f3a3b431ef22b6d25bbfabc2602"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_fire_idle.png",
+      "bytes": 12460,
+      "sha256": "3d31d63c24d75a8119679bb01afb1136308170a16d7aa4a4a2e8e286c07ed231"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_lightning_attack.png",
+      "bytes": 22925,
+      "sha256": "d69b2369aee5250ed201b694d5ddd7c5551a120de6d111daae48380bff69530e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_lightning_defeat.png",
+      "bytes": 19462,
+      "sha256": "0b73c096510d570b912af696ec10a61e56c45915ff13b6e76a392131b9032185"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_lightning_entrance.png",
+      "bytes": 12449,
+      "sha256": "69eeb82060b68ddbf36607653f3e23c44a9cd1b1e4b53373ce7ee5576464e60f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_lightning_hit.png",
+      "bytes": 11385,
+      "sha256": "c621b8deac70c9d1249120402010e16a31b8c77613773f49a4090a0112ca8ed1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_lightning_idle.png",
+      "bytes": 12461,
+      "sha256": "ac91a5c5824351681b63b3c3a1975b40db923a3bea99594176e8b5de378a0ebb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_water_attack.png",
+      "bytes": 23026,
+      "sha256": "83831f2a0fdc16e8966f641f2877bbe1fa7ce6818844fd679a19e370393db854"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_water_defeat.png",
+      "bytes": 19520,
+      "sha256": "12f14d31728838db9e50b826a34b50f959fd00bc9f380f4844ce5d355b6ee0a4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_water_entrance.png",
+      "bytes": 12493,
+      "sha256": "f6a52fdcd4fac7bfe3f9376aff4cb8d278eb4cc954b7afdb553ce3861b0e54d6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_water_hit.png",
+      "bytes": 11426,
+      "sha256": "87556ace8b827a1a6324ef8093ff7ee78efe2133f979add0b3eeaebe2592e75a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_water_idle.png",
+      "bytes": 12514,
+      "sha256": "dd05365b123303020e1ad1112c64cd6e1fe04e08c1737dfbc5d375ad45f505b1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_wind_attack.png",
+      "bytes": 22974,
+      "sha256": "f7ebcf43222e4b989c37eb999d8b82ff41eee2dd619e8ce8f8a925749d3a2704"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_wind_defeat.png",
+      "bytes": 19502,
+      "sha256": "f6fdc0b20aca97d3906e9c4ef9a0dfe8a15754f7615e4dba8751d43f183a56a5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_wind_entrance.png",
+      "bytes": 12472,
+      "sha256": "cd3482849587bd03f4d056fd9ef1319fcb60fd5b9af6994353de735f1dc39081"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_wind_hit.png",
+      "bytes": 11416,
+      "sha256": "2c38824a20a7737c4fbccf072286121c84a346a52a239bcc73cd3d29da8e61b8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_eternal_watcher_wind_idle.png",
+      "bytes": 12491,
+      "sha256": "443b67b04c090cc55b049e2bfcc525bb02bea4820213d3cbf30ba44829405481"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_earth_attack.png",
+      "bytes": 26396,
+      "sha256": "31abc53687e962f0975ebf15e656786d1e64c8990588f14f873ef489334e2130"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_earth_defeat.png",
+      "bytes": 19032,
+      "sha256": "df8a757a576a613dd9b73e4f2fffac79e8657521d175ce4d0a06b0dbe1a0c058"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_earth_entrance.png",
+      "bytes": 14623,
+      "sha256": "4d7606294a568c36badbe136f04b6bfddc1a459ba10a2fa335909889c9eac51f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_earth_hit.png",
+      "bytes": 11818,
+      "sha256": "a3a3271576c25511b500edfd3d8c8fd192e202c7dbfe86cf373b0765a6738e55"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_earth_idle.png",
+      "bytes": 14560,
+      "sha256": "187dd8539b38b0b80489a033086168718214fd93e30bfe159495ba8b0ae59e04"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_fire_attack.png",
+      "bytes": 26403,
+      "sha256": "24cdc23ca5ef346f2a1fb8a869916ddf266e75e7b93a0dc12ef2894b99fe6aee"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_fire_defeat.png",
+      "bytes": 19034,
+      "sha256": "9da94d2103a3dade196732263eb11c8b304b9b5eb6f51bd37f1ebbc6ec5e31b1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_fire_entrance.png",
+      "bytes": 14639,
+      "sha256": "25ff91b36a689afffcc883d73dbe592c29fff44c843056227e9380549300403a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_fire_hit.png",
+      "bytes": 11817,
+      "sha256": "7ffca79fa486db90166e3b664ca8c9290244f6391c8b1c9a757cc667ded78084"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_fire_idle.png",
+      "bytes": 14574,
+      "sha256": "17bda85a4a20ce813aedad2dc40ff541441d5966c57e1331f53bfcf3082ce13e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_lightning_attack.png",
+      "bytes": 26403,
+      "sha256": "25ec4dce7ba4f1191cd3988f097ca009cc175bbfdc38b6f30e414e3afcfc6a63"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_lightning_defeat.png",
+      "bytes": 19033,
+      "sha256": "750ab08f40cf09f0d8426245bc80abbde17111eeafc83bef9d4a04ab3d99dcf3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_lightning_entrance.png",
+      "bytes": 14637,
+      "sha256": "f4b9a27dc7dddd11f73de139371c37a36cc871b4a932dab07e342724c59fd83f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_lightning_hit.png",
+      "bytes": 11816,
+      "sha256": "288acaf645aadeb0082a3d489831fd9bed339b0ccb737c62e74ef2c104eac955"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_lightning_idle.png",
+      "bytes": 14574,
+      "sha256": "1746186eab5dcdcc300e6ce263e659ed616e1b57c6697a19fcae13934c7bb0b4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_water_attack.png",
+      "bytes": 26384,
+      "sha256": "babe730d07466ff0c10807518321b8ea94e6b23143919da0fce704b50ac90ce5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_water_defeat.png",
+      "bytes": 19017,
+      "sha256": "514f3fd9d5b9ba941ccc5094c16ca1fdd92bceadf7c5fa5d399d96cc74249c3b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_water_entrance.png",
+      "bytes": 14617,
+      "sha256": "a16edabc0f9e457c873eb5f638c77e4498f463a00fc423c824c6e6fa7a0119cf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_water_hit.png",
+      "bytes": 11807,
+      "sha256": "1fd4c137831635d1d034ded27cbd4ce2e23710f4e5a03502c8de5ac57ec77c58"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_water_idle.png",
+      "bytes": 14554,
+      "sha256": "8ed26b7e69c955675adbb70eb656f5e608d6765fb93d8860378b6030876cedba"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_wind_attack.png",
+      "bytes": 26361,
+      "sha256": "e14de6f0ae8e0daeaeffe994d6914971981aa7d784a77b8cccce85d2833957f5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_wind_defeat.png",
+      "bytes": 19002,
+      "sha256": "eaffb136d3318dc471f64bb39e0e7b9e41390415428caa3b16207c002338d968"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_wind_entrance.png",
+      "bytes": 14614,
+      "sha256": "1bde31dd3464088bc387f0532ca6cde33e1f98b4bf81457f207f7b0ef96e5112"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_wind_hit.png",
+      "bytes": 11804,
+      "sha256": "df6d05b1d65a700be5a58ab6c924371ee6b79ab58497d14cafa2b7e2197a43c6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_faceless_one_wind_idle.png",
+      "bytes": 14551,
+      "sha256": "b13d6627069f562b54cd25312b16d0f22799a8a43da9255bcd3285b3e1e14adf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_earth_attack.png",
+      "bytes": 12597,
+      "sha256": "e078e99e5301d474e188aac74116c57a610d26fbfd697aa44828ef1f0be309d4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_earth_defeat.png",
+      "bytes": 8551,
+      "sha256": "c65d9aa4deabfdf5108a5e0d88104d31a192f642c48e0b84403de869d839fb04"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_earth_entrance.png",
+      "bytes": 7311,
+      "sha256": "a16be9dcf6a04e8d16f81deec636a76d6185a8cc299d494d4e98826ef436065c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_earth_hit.png",
+      "bytes": 5029,
+      "sha256": "7e0ebcea057c253f69aedac1ca14743dad0f8ea4d614b690840968d9f7a4ef45"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_earth_idle.png",
+      "bytes": 7588,
+      "sha256": "1dc682a79ec7ef2a4688f6712fbdd8823ee0dbfceb4e4d77d70863ed83daae3d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_fire_attack.png",
+      "bytes": 12592,
+      "sha256": "08fdf16c5c32f4a1f3562b1a76e5afca9bef9d37f1972cb590a9a2f91011b13a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_fire_defeat.png",
+      "bytes": 8548,
+      "sha256": "0065895d72c43b44059daae69d90522a8f86906bc03466d65cb0a502cd48fabd"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_fire_entrance.png",
+      "bytes": 7309,
+      "sha256": "9cf6b61ff7280321b3daaefb93b9d1039a872a40ba46816d20ad4be5bafa190d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_fire_hit.png",
+      "bytes": 5026,
+      "sha256": "b1a42e2e6967d276896d521c98fac80bf5452dfca27e27ec0d7d8389fe539fb8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_fire_idle.png",
+      "bytes": 7587,
+      "sha256": "1a1f180d55119baa7acd870b508e9def9cd172ae7145dc059e2c32374fc42dc0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_lightning_attack.png",
+      "bytes": 12591,
+      "sha256": "423711534a1ce481c724a76c2a1283ef337a5f436ec3e64e9f187d7a3bf0a685"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_lightning_defeat.png",
+      "bytes": 8547,
+      "sha256": "4497f9f4c49c31fb5abaef0e94f4227b9efebda7b3c2cc4d58ea88f292d899a9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_lightning_entrance.png",
+      "bytes": 7306,
+      "sha256": "b42e06b08d0d8a9a5ff48e8e9908b14222808396f60a604f75632ae86fa33f36"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_lightning_hit.png",
+      "bytes": 5024,
+      "sha256": "77a65d84980e84f61e666dfa374f2c197e96169a6d643c842ce761dfd595ba8e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_lightning_idle.png",
+      "bytes": 7584,
+      "sha256": "651030c24c88c8a7e486ee637f40707ddbe6ea4bce2dae376a19f1b38584d7a5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_water_attack.png",
+      "bytes": 12613,
+      "sha256": "337787ac3a7c97cac09b7968e5534a0ea5ec8a817ef5228543fedfb6bfd83232"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_water_defeat.png",
+      "bytes": 8569,
+      "sha256": "23d7456ba8c3c0f460488fccb63dfb227169a290facb5db50f0de153f313a840"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_water_entrance.png",
+      "bytes": 7318,
+      "sha256": "df5fb68a4ef18909beff4761870a8f053731830ca973d93d9fdb066911135702"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_water_hit.png",
+      "bytes": 5034,
+      "sha256": "e27347c2f1f2f19e0f753d87a3b5e4119b00cdfdca89bad5b65da32cab59c5f2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_water_idle.png",
+      "bytes": 7596,
+      "sha256": "bd1789b0efc12fb7b591fba48e2777e5333b8ff7e2a239ffe4fe4f44127d69f4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_wind_attack.png",
+      "bytes": 12628,
+      "sha256": "0992220c904d736356eee6b0a930f8884ee3298d4e5932ff2b94a3fc6b922f95"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_wind_defeat.png",
+      "bytes": 8572,
+      "sha256": "8ade658059919f9142dae894aea14a06555607c80b261d6cd3178019b744232d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_wind_entrance.png",
+      "bytes": 7326,
+      "sha256": "57290e18beee6749e9ac01e8429161946d243540c46015dcf03fa1559ffda6a8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_wind_hit.png",
+      "bytes": 5034,
+      "sha256": "3622a290e60637e799322db3ce58ba5472e5d2d4483adcf7f3fc1af9fa53e6c4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_great_devourer_wind_idle.png",
+      "bytes": 7603,
+      "sha256": "966b24b1e4b2fc6cc3f04bc0a01ed5ec2528d416a357f6bfc1e24817b5d830db"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_earth_attack.png",
+      "bytes": 28182,
+      "sha256": "b1adab2d99250a786d75845d87c6e0ac9990c332c70f81cc4c47140be61cd71c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_earth_defeat.png",
+      "bytes": 20639,
+      "sha256": "1deeafd7864620e5cbdf41f448dafde3bbe47378ab4809fa11e1c2d567cae32b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_earth_entrance.png",
+      "bytes": 16332,
+      "sha256": "4450a0a033da1cf907f249baf627c336cdfae859cb1ce7dc5288ea3da148fe84"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_earth_hit.png",
+      "bytes": 12504,
+      "sha256": "61567678bb26654b78f9bd4586176ea03632566f641719211e0b2c58c4d1bfed"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_earth_idle.png",
+      "bytes": 16205,
+      "sha256": "379b7bcb20fa04ad562ad02e0e598d7f7b002cf67058905c273a12a337b3252d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_fire_attack.png",
+      "bytes": 28136,
+      "sha256": "23cdec8b41a58964730067a5f1ef734ba547f6f236cf85b93cd43d89a138c572"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_fire_defeat.png",
+      "bytes": 20608,
+      "sha256": "36923af33d6ffc1e5f6ab7b49e8de68ebb80dd0ded87753110591391460e1d73"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_fire_entrance.png",
+      "bytes": 16321,
+      "sha256": "41ce267709848f210380921813fece0f4e089a2f5df31c13e6f71df48640eb00"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_fire_hit.png",
+      "bytes": 12485,
+      "sha256": "f6d2dcac6493df43a821ad2635cf6f88fafcc2029fba5194992e525204a513c6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_fire_idle.png",
+      "bytes": 16188,
+      "sha256": "286a339446b86164b489772413bf6261fab98d0f8d866f3779f85e877089cd33"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_lightning_attack.png",
+      "bytes": 28134,
+      "sha256": "bd6433e27ea4fd381663f971fc5c24ff95517126f0e8b3cadb91b1369e1043bf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_lightning_defeat.png",
+      "bytes": 20608,
+      "sha256": "475004913c4606ea3c606c5641881b819cb690bf8bdee5fbb2a6b5704fbc286c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_lightning_entrance.png",
+      "bytes": 16317,
+      "sha256": "8bdee9e2d84c6c23b04a5ae4ea4929b1e4aabbb0e11c937f41d0ab3db7614825"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_lightning_hit.png",
+      "bytes": 12483,
+      "sha256": "08640611480bdaeb59fa3135e26b79e06bc511bf59f2ce5a757a160047035455"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_lightning_idle.png",
+      "bytes": 16184,
+      "sha256": "4c6fffe018ae5beadca869e57970b69d8d5e78fbaa020181d67fc6d6b8abefaa"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_water_attack.png",
+      "bytes": 28184,
+      "sha256": "26ad620ae30f8cf90b9de2d797199323a57f8c26cbb28c1aa50aaebbf4657c99"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_water_defeat.png",
+      "bytes": 20633,
+      "sha256": "4103c8eb99b42a2fca076c63baeaf2dceca49b6d9f2982169a0a6612246ee7df"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_water_entrance.png",
+      "bytes": 16348,
+      "sha256": "aa5666c89911c474aa1e53097f1b22b96d4cad40f96b60a301566ff89c4e45eb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_water_hit.png",
+      "bytes": 12508,
+      "sha256": "7eda5b9a571218bc6ae43e4591e3ed247bde6bc8df0e951b87cbaaed3295b54d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_water_idle.png",
+      "bytes": 16220,
+      "sha256": "a8056d2d7c4d6adb88065cb959fb800546ac53e038800d194af46ba011ff53ee"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_wind_attack.png",
+      "bytes": 28127,
+      "sha256": "01b77df0deb9e816180f5ab9e893edca216b1f676593365028c1e1e7c387b479"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_wind_defeat.png",
+      "bytes": 20602,
+      "sha256": "02c00ae5503dde1227108633c39b7371c6dbc0f54c17c70d3923406dc6b02d68"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_wind_entrance.png",
+      "bytes": 16301,
+      "sha256": "63d2a8bea75bed57918ec9439a3315876ab5a5e37b71cd8b921d9ce1a0dbc36f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_wind_hit.png",
+      "bytes": 12484,
+      "sha256": "13131906c06b085db70ec5ead1513faa22e8aa164421d5ad70014efbea80e48a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_hollow_colossus_wind_idle.png",
+      "bytes": 16169,
+      "sha256": "b0b9bcb162432d7aed6bbcb0687986d01b88f80a65233ef2d1fcb11a3545bc29"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_earth_attack.png",
+      "bytes": 25317,
+      "sha256": "93b2ad017891edb04e521961149384f0ed4c9c529f56b8d8dfaf43af7545b66a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_earth_defeat.png",
+      "bytes": 19220,
+      "sha256": "27f182da7de5c4ea169fc73c7f81759a3a84a1feecc11cb965cf141eb955caac"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_earth_entrance.png",
+      "bytes": 14147,
+      "sha256": "706c23dd2b6fa5b9f89bd0ac844fa7d065a6261999b31a39c4cb43cf8c58a851"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_earth_hit.png",
+      "bytes": 11161,
+      "sha256": "60074016a0f53a697b8fbc3d970035badca4eabea78cc23cb54f12dd49b3242e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_earth_idle.png",
+      "bytes": 14129,
+      "sha256": "df0e6da421b6c90a1f0640f85ce6cfcc32e03f385e17a4d707fc347a785e186d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_fire_attack.png",
+      "bytes": 25374,
+      "sha256": "9bc950351c4c7df78a17df240e2118c63154ce69181c948e1eeb709a42465023"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_fire_defeat.png",
+      "bytes": 19245,
+      "sha256": "fc463e5d496d359d2d52fc0d855620a8880bfca50418af5a190e2980868fccce"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_fire_entrance.png",
+      "bytes": 14173,
+      "sha256": "592994574c89d84dcb2e7ffb921c70d9236bce9b31738d990918fc87e2566dc6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_fire_hit.png",
+      "bytes": 11176,
+      "sha256": "56d45d9f53cebb8f20a52b8be90ab422f387e40f06fff712d262bb49dd0a3788"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_fire_idle.png",
+      "bytes": 14161,
+      "sha256": "4b3cfd78a30e7eeb7ebaa0e7fa47f8b2d911d36dd882dd7dcdb21a28454c1b5a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_lightning_attack.png",
+      "bytes": 25369,
+      "sha256": "96c49df419b126241c5d886603f4210702af4397aa5f9e641d33b7b634d5e8c9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_lightning_defeat.png",
+      "bytes": 19244,
+      "sha256": "675d43bed968b0de89ce5215a5994192affc56133a0c46f6c8b8b39119062f50"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_lightning_entrance.png",
+      "bytes": 14174,
+      "sha256": "def2656b2d4d6bec5ddc9a67444dd1e9459da9f807ccd79685ef274e12a7200d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_lightning_hit.png",
+      "bytes": 11177,
+      "sha256": "d264f07382c0e469d46d35246abd9a14e2ada1300468c81b84ffe793568faaa7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_lightning_idle.png",
+      "bytes": 14162,
+      "sha256": "cf1dc70d790679b5788ec5e4e9a056d5464db8d89cc763c61d70b6ae6e385914"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_water_attack.png",
+      "bytes": 25403,
+      "sha256": "a3fbbefa28eaac7142ae8fbca5c881edf00d29a487b27d63951a123ab4acb99f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_water_defeat.png",
+      "bytes": 19297,
+      "sha256": "cd932038f63c21bd4cead36cfb41f639c9298e31d1881d336df7f9c2b29a160c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_water_entrance.png",
+      "bytes": 14202,
+      "sha256": "cf875f438c2f81b0ff104e67f51f885c9cfa7337e1cb6dd4a11abbae8367c8f5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_water_hit.png",
+      "bytes": 11208,
+      "sha256": "dbed0585a024b685499e1ace4981e415f243b2850b9d2f053347028925ee708b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_water_idle.png",
+      "bytes": 14187,
+      "sha256": "9745a4f9a1e062100c8694141cbe117eb1cc5f53f465376a76aaad7376b3f548"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_wind_attack.png",
+      "bytes": 25418,
+      "sha256": "d77476daed136c5c554f172ff2a7f4ea80a87a0efab99fbc3f208c75ba89973a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_wind_defeat.png",
+      "bytes": 19306,
+      "sha256": "9ef9cc9cae2cb16c356c4118fd39a4e31dbcb40e0c4f17ab528977c7f52b81aa"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_wind_entrance.png",
+      "bytes": 14206,
+      "sha256": "812e55a5b194a107c035935813c605e382c0339c950b6a75a8041bd0f036b7f1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_wind_hit.png",
+      "bytes": 11211,
+      "sha256": "251849f09a45a0318b5c9ab7ebbff63a72284102a6af26ebfd9433f44ddf5609"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_lord_of_flies_wind_idle.png",
+      "bytes": 14193,
+      "sha256": "096727c26365e9c4711cb1153778384c304b4ceef179f893482c1765d72f94a2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_earth_attack.png",
+      "bytes": 27915,
+      "sha256": "6b948be80353b2156286194d619e23d9bfa3379b3546077b8429351c1bcb4b1d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_earth_defeat.png",
+      "bytes": 23241,
+      "sha256": "c42fcdb6e26db72ce105b3495a4fb440581df89f05dd2564c49cf76fc93876a1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_earth_entrance.png",
+      "bytes": 16398,
+      "sha256": "f67aa7484cdedc04048b189aa68498154a8037797684f649ee2630b38491b61b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_earth_hit.png",
+      "bytes": 14314,
+      "sha256": "1f7910a63d56eaae291c1440e289d239c52da8f9cd7f4c030aeef736aa9282bd"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_earth_idle.png",
+      "bytes": 16273,
+      "sha256": "e86aefda0d66914eb63ab4da73f1232626cadf8728f1d0bb7250742824cc0a7c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_fire_attack.png",
+      "bytes": 27854,
+      "sha256": "174e619fe7408a964062603c3686c3711cd7c59afa68c7d721017570883cc52d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_fire_defeat.png",
+      "bytes": 23192,
+      "sha256": "5bea3771d2c202f65e7ad29f0909571d1c88361ac3b092d7ab084d27808b83ca"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_fire_entrance.png",
+      "bytes": 16371,
+      "sha256": "3e813e119278146a75bd53a271a638cff53b143a7a49d56c9206c80bfe741f8f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_fire_hit.png",
+      "bytes": 14276,
+      "sha256": "08ad83cc561597cf9329a6ef8fc8f618692bdca4b19e6b8b1e40700db495d907"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_fire_idle.png",
+      "bytes": 16248,
+      "sha256": "61969b6cc0713de3983b218eec701a8ad59974322b2d1b33c0e4d67635ae91e7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_lightning_attack.png",
+      "bytes": 27853,
+      "sha256": "6f2d531d6d35a7e22fa1e14a4187293acf17e933079d8d2a8844e4e0a6e77378"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_lightning_defeat.png",
+      "bytes": 23190,
+      "sha256": "bb6bd6c4292674f9b4716aa3741e60be6d259dc4976682f00ee4b5edc9205be2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_lightning_entrance.png",
+      "bytes": 16374,
+      "sha256": "7fde168e866adb68e40eb3a7b8c1182f0cfafdafb94ac805145befbd5de60aa3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_lightning_hit.png",
+      "bytes": 14276,
+      "sha256": "45a91f682593581a2d5744be63d251e62b6549d2feaa94820e0eef0536eca8e7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_lightning_idle.png",
+      "bytes": 16250,
+      "sha256": "74b88ef21884221f82e5981cf178cc354c534beaa78bb6bb9fbddedab352683c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_water_attack.png",
+      "bytes": 27849,
+      "sha256": "d950ef1bf97f319db8480a96337455a2b5364e6655831f33ffcd5876aab9851a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_water_defeat.png",
+      "bytes": 23189,
+      "sha256": "8028603be50b811d77dcd94992c6855d5855b5ff475445ac0081f1cba8fd179a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_water_entrance.png",
+      "bytes": 16374,
+      "sha256": "ed6d6320bdff378d2386baba52fb1bd2a7a926d5572b3f71e63906fc53dd4579"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_water_hit.png",
+      "bytes": 14275,
+      "sha256": "3556f99e524e1739154e8f1a7237898a8d778a03d72a6c535c6f07995ff507e1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_water_idle.png",
+      "bytes": 16251,
+      "sha256": "9bf8256148f48f24a07552538db29239b2497e4921bc28815ad2d154306c4908"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_wind_attack.png",
+      "bytes": 27908,
+      "sha256": "79ded5ed6fc9c8c643f8c66fb53207e06c233e8dfd8cec3682612c49c332dbc9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_wind_defeat.png",
+      "bytes": 23218,
+      "sha256": "4dfcdc35a93ede24c9e162c0e61c3c3ca1aeac5105dfbb01c73d5640400d8ec3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_wind_entrance.png",
+      "bytes": 16395,
+      "sha256": "50092223ba7a15881d013485d25eee5e0a51bdc40eced1e5ca53166e88b1a2ed"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_wind_hit.png",
+      "bytes": 14301,
+      "sha256": "d3965f5ab3eec3db7bad5448eff5e6820ea7b74bd5d4c6ea596d97974a13bf17"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_mother_hydra_wind_idle.png",
+      "bytes": 16276,
+      "sha256": "f3679d6a5cc036b3e94553eae1185fde034614cfe5dae4491ce71d846936b738"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_earth_attack.png",
+      "bytes": 27205,
+      "sha256": "cf4a759cc5d497bcfd325ec33902cfeb445e8c5cd064fcc491bf1264cc39ded9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_earth_defeat.png",
+      "bytes": 22380,
+      "sha256": "97f6ba4418b5360b0baf92ecbeaffc8fc85c5aa7b122479ef46a267260e5b241"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_earth_entrance.png",
+      "bytes": 16572,
+      "sha256": "72e78447488cb4ed522e4491940c892ce5052b2238ef58360653eb25b23b83ef"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_earth_hit.png",
+      "bytes": 13379,
+      "sha256": "2960fd2a388f381e8fa5e10cca2e1f9426e536dc4f51710adb5ec23e2c9d8710"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_earth_idle.png",
+      "bytes": 16409,
+      "sha256": "6d3f06cad5813ddf0c1de1311941a5f2182462689cd9bc0c1216c779889a6b43"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_fire_attack.png",
+      "bytes": 27083,
+      "sha256": "12de0001287a45f778413dde4f939abf33fc8e7045a8781ffd8a395cbe2333f8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_fire_defeat.png",
+      "bytes": 22300,
+      "sha256": "daf0a37b600907f10e0fd40b9eda0a27769d8bbbe2f3751497a779bd46435e03"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_fire_entrance.png",
+      "bytes": 16503,
+      "sha256": "eff3f8d94663deb5d7bca108d069d56a6815c55f525ebb090b05eca76a31c21f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_fire_hit.png",
+      "bytes": 13332,
+      "sha256": "b364beae748d455aa34fcbefb2702dbfaa1af5dffcd3fcb8c1ee93f708202f17"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_fire_idle.png",
+      "bytes": 16349,
+      "sha256": "4a6e34540f12c01504e97bd9b5676b777ef7bc499f9ebff16696aec0a3f1cfb6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_lightning_attack.png",
+      "bytes": 27150,
+      "sha256": "e219deaafb4099508beca047eda5356c90511e7edcb286258b9278b46a013ecf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_lightning_defeat.png",
+      "bytes": 22358,
+      "sha256": "6cc27b589b313c6ea2a00d2b5f011ca5735878c922674198b93f866641b55ce8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_lightning_entrance.png",
+      "bytes": 16543,
+      "sha256": "1b238ac00d7ffb4a9fc8b637ced4739dbe71c01d7926cd6a82d82c031a8afdec"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_lightning_hit.png",
+      "bytes": 13372,
+      "sha256": "8546d5a4b0a6d829e4867a10101f59f834ac4edd8746e049a18c6dffcbd2bb40"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_lightning_idle.png",
+      "bytes": 16387,
+      "sha256": "e0a29fff5538f9e741960d2407fd6080839b4a68e6b894f86005821b96eba011"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_water_attack.png",
+      "bytes": 27172,
+      "sha256": "642f1572a1f98cb2117b94c4697de4690b9d99305b378b3d867c501ddf519187"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_water_defeat.png",
+      "bytes": 22362,
+      "sha256": "4eccdf626766d8de84f769926605004a368fdbeae3654101d4ff038caea15e7a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_water_entrance.png",
+      "bytes": 16543,
+      "sha256": "564647356dc42b79117fc1066db43a5ad3bc286ce8892d360ad126c031fda099"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_water_hit.png",
+      "bytes": 13363,
+      "sha256": "916801b38f7986b5def2345bbfbd6d513421c1eb2c52b79de8e2e1b8ec459e4a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_water_idle.png",
+      "bytes": 16387,
+      "sha256": "1efdfae1a1bdd7ac00f3d9ae173c5de7b35fe25fafda65cbe3fdb0ea4d133679"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_wind_attack.png",
+      "bytes": 27187,
+      "sha256": "74aa63f358de21d688d3abf5d1e88cb7437b03f65df9d8a45dbcb10b11cced24"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_wind_defeat.png",
+      "bytes": 22371,
+      "sha256": "180c629ee4c81292c7072ffec95381d98b92e4e4cb7250c72164ed050a62d586"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_wind_entrance.png",
+      "bytes": 16564,
+      "sha256": "0aaf5fa1b7e4ae41142892e1babd396de2e87b3249618c8b9abd73f65ab59851"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_wind_hit.png",
+      "bytes": 13363,
+      "sha256": "ee4c8d416fc17bc29ac6a413e7de8f4dc357df6f5c0295c9e8168437b97ca392"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_thunder_king_wind_idle.png",
+      "bytes": 16406,
+      "sha256": "30080e769ae32447fee077fc1652b3fdaf148d40c301b323c930c1d5bf0af92a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_earth_attack.png",
+      "bytes": 27217,
+      "sha256": "cb70a3b82ce6f9d18e73b88a6de72b1651f9597132b5e3549684eff70d829796"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_earth_defeat.png",
+      "bytes": 20668,
+      "sha256": "f3353ebfae66b367bae04639fe99cf217c2e5ff3f267887bc94fa4b0eeeb09d3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_earth_entrance.png",
+      "bytes": 15333,
+      "sha256": "4d7434ecb6cd038762384a7304ff8122f6129de3962d2856252873589aac5f48"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_earth_hit.png",
+      "bytes": 11812,
+      "sha256": "2820b1e3495e64f346f0f01214eed232536ee4cf9ad82d96cb680574fe7b88ed"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_earth_idle.png",
+      "bytes": 15289,
+      "sha256": "99b265d762fe4c2fa2522423fd5766c56279ec5d57adba547f2b4a2c67fcd597"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_fire_attack.png",
+      "bytes": 27165,
+      "sha256": "a2ee2253d5c6672041a89d4e544c5bbc1ae4af207dee41da7207a72a89bcda54"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_fire_defeat.png",
+      "bytes": 20631,
+      "sha256": "75793ade4bffc02ef2be9553f3bc968dc3cad6b73e29cea4400418c41ebeff62"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_fire_entrance.png",
+      "bytes": 15319,
+      "sha256": "25a78c7d08e2fa4a3517cf96cea174e12473b5bddab2483088a7396766021635"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_fire_hit.png",
+      "bytes": 11785,
+      "sha256": "39f5edb83849d274a55b42ab077394b2ac2006f1230d95bdee31428fa0d5e0ac"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_fire_idle.png",
+      "bytes": 15271,
+      "sha256": "4cf6e31cb8e0956c297fb9aacb8c6ffea36d83a986e49b88ce78f877e67e20fb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_lightning_attack.png",
+      "bytes": 27165,
+      "sha256": "a6789e1926641a9db83362a445323de88f1baddd79cb36358a7f0bd5458a744c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_lightning_defeat.png",
+      "bytes": 20632,
+      "sha256": "930b93863b86f43c4075328ee18a02aacea8bf55ca1cf3526b8726bca16eea18"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_lightning_entrance.png",
+      "bytes": 15319,
+      "sha256": "4616f88a6dc78b0742eda480a7a4a209aabf7fe02a4960007d1b2018285b6e64"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_lightning_hit.png",
+      "bytes": 11785,
+      "sha256": "83636b6cfa0ab79b653f30c93fe467f1da24ca98d5f6ee825d154504257833a6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_lightning_idle.png",
+      "bytes": 15269,
+      "sha256": "b722f76e2ac341ecaa8376739e4178bba328a3f2f3c3f3db6f75d77bf049931d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_water_attack.png",
+      "bytes": 27202,
+      "sha256": "4fe0da21e7d66403bf750c5320f20cfd8501373fb2b8ed302a0f84e5e8aaa6f2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_water_defeat.png",
+      "bytes": 20664,
+      "sha256": "453208da91bf8735964bdbc572b03937cf83ac97995c13dcf0e6857c7e226c3e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_water_entrance.png",
+      "bytes": 15342,
+      "sha256": "3b620e77a00edb9f17215e6bb14a602265de343417037fcfdc80486238415793"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_water_hit.png",
+      "bytes": 11806,
+      "sha256": "cddeddb6875ce6af6a07115e1cac99171fd88b324d42aee85495448bf955523a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_water_idle.png",
+      "bytes": 15294,
+      "sha256": "797b3e3904e0271b9cf2dce270a6577fe1c4cab29bccd8b07ae3c091b638a9e2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_wind_attack.png",
+      "bytes": 27193,
+      "sha256": "8528e163301bd64e19cf2fbe41768ed93c3dd7a2c0606eb0650d62689f9d6456"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_wind_defeat.png",
+      "bytes": 20650,
+      "sha256": "e88cd3a1fd6fc5558724b067f9a1b97563a9cda4d91c819c17f60c23869d31b4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_wind_entrance.png",
+      "bytes": 15335,
+      "sha256": "95598af4371bdbbcf844e7fb301b0fabce415f07ab459e3eeb53bf3c50c07730"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_wind_hit.png",
+      "bytes": 11799,
+      "sha256": "b9e818f1deeb8eec580a71b405eeebcabdb595cbba5499d5d7d5578625ebf3cc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/boss_withered_queen_wind_idle.png",
+      "bytes": 15287,
+      "sha256": "dd4fa659247d3299cc830058dc124cc378193af043d78458b985f05228eb4df8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_earth_attack.png",
+      "bytes": 23463,
+      "sha256": "949a1311d6a5d01e1d3c3f9cf0c25c1c4baae16f44942895fa5578fb10201645"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_earth_defeat.png",
+      "bytes": 19718,
+      "sha256": "2e834a2b4a6aee562fc6aba86becd618a2c774bb85873972c9411013958ee410"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_earth_entrance.png",
+      "bytes": 13891,
+      "sha256": "dc92d29b5848f472e384d00dff815ca12c402f1826fc4fca839b606a8f54d86f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_earth_hit.png",
+      "bytes": 10659,
+      "sha256": "0acd1064c18d3a83e3698cfdbc409ff64876c1925c56f7bd219cf89dae4fab40"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_earth_idle.png",
+      "bytes": 13856,
+      "sha256": "60fdf42792e20ba2e313d73a42abe47675f624e520f0f73298b87f5ba444ad0b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_fire_attack.png",
+      "bytes": 23371,
+      "sha256": "9e303850b7b5d787b171bf0cfda6cc1b126a20eb296440689fa3eba663134a80"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_fire_defeat.png",
+      "bytes": 19662,
+      "sha256": "1c3675ee2585ac97904747c44c9abedaa2511ee73cce6519212d378025ad62ab"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_fire_entrance.png",
+      "bytes": 13843,
+      "sha256": "db613bcd74d8ba41b73476a2126c41f440c3e0cd7be6c0400295d84985b9ed1e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_fire_hit.png",
+      "bytes": 10605,
+      "sha256": "b9aa7ec8a6c5aa50e9814a4fc777606343e0c4b6671189fc2aa0d1df31aa6566"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_fire_idle.png",
+      "bytes": 13796,
+      "sha256": "14920b83e5520373b75a305c7be2058cfd1d9c3ff31313dbca360c0130e36b9d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_lightning_attack.png",
+      "bytes": 23370,
+      "sha256": "52f0a8fb72d24dcdcb7c17130a298564482fdd0e432b87ffedc35aadb5a68ff0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_lightning_defeat.png",
+      "bytes": 19660,
+      "sha256": "c8f40e2ef5bdcc8103acf3cc1a4392eba86e30af21f4b0183bd0061aa37fbfec"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_lightning_entrance.png",
+      "bytes": 13842,
+      "sha256": "cb9076cf4a8cf074233e209b257891a5c72611cb6791b30ad955918ba6e1249f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_lightning_hit.png",
+      "bytes": 10604,
+      "sha256": "4f9ba7c4f4066004bc364d5c67ab3789d47fe605853fb2e7a47d43d62f5cc564"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_lightning_idle.png",
+      "bytes": 13796,
+      "sha256": "e0e356682aca3f6e571397723b12cdec5a7f25d8035355df2a00c84349b500f2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_water_attack.png",
+      "bytes": 23434,
+      "sha256": "32f90878dc51903e80c7112dfda4b68a3e368a59d440768dbc8797656f5906f0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_water_defeat.png",
+      "bytes": 19697,
+      "sha256": "a73fb1521ff50b7645a7b9d5cf5e85e7eacb5b487ae37afda3557f43b702d54b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_water_entrance.png",
+      "bytes": 13876,
+      "sha256": "e1db6f416a7a86f4137c768bdd0115a7db09430784bd99dec0da303814e1ce64"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_water_hit.png",
+      "bytes": 10628,
+      "sha256": "aa6975bf65ca5c8d5c3d121e14213d8cba2ae0581fb64f3e0d66a0f6f8b22f81"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_water_idle.png",
+      "bytes": 13837,
+      "sha256": "d97416c2699594c97e8306f1593f94bc4456eabdcaec63beab64e9906fb4c96b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_wind_attack.png",
+      "bytes": 23414,
+      "sha256": "12860ba7428340f2a8a1396f7fca72e6543b252fd7fd8697f2e00df577150b33"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_wind_defeat.png",
+      "bytes": 19683,
+      "sha256": "9a541b4e6a1ee744babe5162c03f6d763280ac7bb7aafc063554b0be44fdab63"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_wind_entrance.png",
+      "bytes": 13850,
+      "sha256": "e9763cb28cf0b8d81fc02acfc6f5d0b7c3e15101f9a7c3e201cdabcc44ef62e8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_wind_hit.png",
+      "bytes": 10618,
+      "sha256": "309840bf95f2f488fa8e4940a301f853350cb75ceeec45cd7252afd16a2c5c24"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_boss_wind_idle.png",
+      "bytes": 13816,
+      "sha256": "d21a345b3c75e0ff2f18c35e6fb7895ad7e17ffa8f6f15a78e869470e2374be7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_earth_attack.png",
+      "bytes": 23806,
+      "sha256": "b77c9d8f743ccc9d626376b6d6f319ab9b489cebd5e40942ed2fa3b68904bd63"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_earth_defeat.png",
+      "bytes": 21269,
+      "sha256": "5837ca474af44c370a21ab0df9755a551e4cc0f0e82fcb008e818fbe18247628"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_earth_hit.png",
+      "bytes": 10906,
+      "sha256": "8bd5ea70ade88aaf55ae098714ca5f50fa1d34b5c76232b7518e8657ca040b7e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_earth_idle.png",
+      "bytes": 14189,
+      "sha256": "d1872c36e24363d8d7e9254bdae4025ecba4ffcd7f4bff0f3430a6dea716a383"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_fire_attack.png",
+      "bytes": 23728,
+      "sha256": "5bd484aab331493048dcf32a0a480b6e7ecd07107262bb34f1bc66f7eef5b04c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_fire_defeat.png",
+      "bytes": 21210,
+      "sha256": "c7cab3afe2bc2e5e1787571a16e825dd85b227f5579c926b56de23cc01dfa00c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_fire_hit.png",
+      "bytes": 10877,
+      "sha256": "e4e6829c572bd30fbe05234c3f53abf458200a64c927d7ec988fe034237ba62a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_fire_idle.png",
+      "bytes": 14137,
+      "sha256": "da8fa70d73b2452644f5abcf4daa2479992b58c31e55ca8fcd6adb9d1acabb4a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_lightning_attack.png",
+      "bytes": 23730,
+      "sha256": "e53e6a10bef0dd595adc8144a4446b9180f59af49a4fe038744e3d258f9ba244"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_lightning_defeat.png",
+      "bytes": 21211,
+      "sha256": "92d4c92507c895e43f33e2ce126ba6aeff42abdeb082191e0ed5cadac4c512a7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_lightning_hit.png",
+      "bytes": 10880,
+      "sha256": "982153aacd4e54b26abd5d8a58770a36487b4b77383e158369b5a9ebce3ef046"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_lightning_idle.png",
+      "bytes": 14140,
+      "sha256": "471013948568d1ec1277306d07db91a6f073930c995cee1c2a263a259b4695c8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_water_attack.png",
+      "bytes": 23801,
+      "sha256": "aba621cace594e75563ad4b9d6237bb4e4ba53bb26bfcb1a6ce54d95af969b63"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_water_defeat.png",
+      "bytes": 21271,
+      "sha256": "1badd355823cc2291ff9b979690fb1fcb2104bf3e106e5aed1523213a8673b37"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_water_hit.png",
+      "bytes": 10910,
+      "sha256": "849f5c822f22776184dc04e38d1bfbe8a2e9c6476f4024c6819d298835aa7fa0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_water_idle.png",
+      "bytes": 14185,
+      "sha256": "1b5207ddba7b91671bc4e67bc326c4ce28e2a842e76af78053a79eab28a63c01"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_wind_attack.png",
+      "bytes": 23798,
+      "sha256": "49b8f017e6f36eb65df5a7d3a2eaff6e46449ac61b2773875e3db1f911ce7d27"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_wind_defeat.png",
+      "bytes": 21280,
+      "sha256": "18fd428bf8b69fcbcf644684c4830c6ee7e241fe216954ba2b88ea0019f3cc44"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_wind_hit.png",
+      "bytes": 10911,
+      "sha256": "f35d2f9272693bd99692a776af1b83af05bdf310177cddaa5d4385fd224dfff8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_elite_wind_idle.png",
+      "bytes": 14192,
+      "sha256": "a5f2b37ab9d04ef8fef7ca7a632e6ed2c8b0af76815755f337dc37acedaaf687"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_earth_attack.png",
+      "bytes": 18387,
+      "sha256": "5ab7c6ea1ae9b36e42a0873b46882c3257aba81274355d7edbb37a1656fed062"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_earth_defeat.png",
+      "bytes": 16384,
+      "sha256": "1f3a4872a86d43f44fc09ada940cad3c07bf9e3e97562f8fc79c8b86797fff53"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_earth_hit.png",
+      "bytes": 9282,
+      "sha256": "10083f68a5de0f5b63f63343811b338f8c2008b856726f8320402171569a54c2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_earth_idle.png",
+      "bytes": 10887,
+      "sha256": "4d98e74b2dc1c9db90a17616804c0e94a8dce166bc273932748d2527049b6739"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_fire_attack.png",
+      "bytes": 18331,
+      "sha256": "ac1ed1b76b907cf961413add7500d72c55f1ad8830cd98ac56b27f6663539580"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_fire_defeat.png",
+      "bytes": 16346,
+      "sha256": "f25f349b9fdb08aa3500d0a9a64da4720a1b01acec1ba791ea8d69339dc27185"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_fire_hit.png",
+      "bytes": 9265,
+      "sha256": "d1e98efc1cf82c13e8e8594c0aca83b0cb7cb41d90cd906ed0d2a17e7874faf6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_fire_idle.png",
+      "bytes": 10874,
+      "sha256": "8c5e0624282cd8e23771a5ab447cb95a8dab006b48a9d3cdc3a602fd0a079b17"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_lightning_attack.png",
+      "bytes": 18364,
+      "sha256": "7dc4de22ae69ebfb761f85f62f9575efe5d91b6d565ebc27a3fd9dbb64b602dc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_lightning_defeat.png",
+      "bytes": 16376,
+      "sha256": "48488a142d261a1068f09cf8df20d178e6d35012da669dce824117db4275cd34"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_lightning_hit.png",
+      "bytes": 9282,
+      "sha256": "49598634a9f5a9535520dc3ba1b0a913bc10ad6f24d59696bbf54e2a28a3543c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_lightning_idle.png",
+      "bytes": 10900,
+      "sha256": "27da7904b8fb02c94d56ad0c880fc1718942f33cd9688dc04dfb70f586be6b61"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_water_attack.png",
+      "bytes": 18358,
+      "sha256": "0168956474e055c4a4dcae6e2ea3157160669ea352f2bd68a4546e20a1f3c000"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_water_defeat.png",
+      "bytes": 16380,
+      "sha256": "897a2bc70eb144fb30679daf9cfa004b5b3d10ffb75abc8b4f1213bdde58b80f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_water_hit.png",
+      "bytes": 9271,
+      "sha256": "c80f8f2bacaee53332092b59ac9bd8de0a82d726480143ee40f7a5829c0837ba"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_water_idle.png",
+      "bytes": 10881,
+      "sha256": "1847445ea267a1a5c06661b77dd165c43a82a79f5c8f3159572cbeb5d61285d7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_wind_attack.png",
+      "bytes": 18310,
+      "sha256": "ebf99eed1a6b539f5267ec5ed3e27fceeee1c9d1dd4c067419bf58a8155d8314"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_wind_defeat.png",
+      "bytes": 16345,
+      "sha256": "af0a4d619fbadedb003391ab4bb6ad0e908018922eb7570e756f9a87e15cadf0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_wind_hit.png",
+      "bytes": 9258,
+      "sha256": "8d00bb6515a4f790f4f52fadb9011fa318625a3d03643b7c00928d6180975a82"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_golem_normal_wind_idle.png",
+      "bytes": 10861,
+      "sha256": "657fbdef91a16e9fd23bcede947cb496ea453ca17dd4e1c0fa8767f156da3e9a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_earth_attack.png",
+      "bytes": 18703,
+      "sha256": "5d58db2832247da1e34bf8fe20fcc5fd4d81ce265eb5fc361c06c7915bed3f8f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_earth_defeat.png",
+      "bytes": 14641,
+      "sha256": "8dd4cec4ec5556c53112f1e09318f49e73494ed8219da755285f4f0f7adf71c2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_earth_entrance.png",
+      "bytes": 11819,
+      "sha256": "d84dc619ccba75145c59b3758689d136868f8d0640cf6e6bf6ee0d60927554bf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_earth_hit.png",
+      "bytes": 9140,
+      "sha256": "eb9ab8a248f4a38f92b4ef3b8ba43bc66d692d48a38ff09c6029cab3e951c2c4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_earth_idle.png",
+      "bytes": 11988,
+      "sha256": "92cc6c16499c1d3fc4977b8039306246d0f4d210d2544a25e1b965e4c8f46e02"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_fire_attack.png",
+      "bytes": 18692,
+      "sha256": "2c6a98812669dba2addf1f26ae75642dd4a5151dee9475ddda87f260f06ac314"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_fire_defeat.png",
+      "bytes": 14621,
+      "sha256": "0adac8d7ef1457d74da89aa4e4d4c232ef71ae287779398574683f5f4048bf6c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_fire_entrance.png",
+      "bytes": 11815,
+      "sha256": "5cf203da91b2344263c38683aa392ab08d9363d1330e8a7701b16636bb117eee"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_fire_hit.png",
+      "bytes": 9127,
+      "sha256": "bddeb277296ff8ea2ccaffc4003b1c48ce6ad57cb5715fb276596c9133250d1a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_fire_idle.png",
+      "bytes": 11983,
+      "sha256": "9a67cd54da006dad3b2399243abc5ff49c17edd11c4118968c2cf1db8fb456af"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_lightning_attack.png",
+      "bytes": 18693,
+      "sha256": "897e9d7636317ab8853208d269c244c20bb3bd5b3b136accc20b80d5bdf1b65d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_lightning_defeat.png",
+      "bytes": 14620,
+      "sha256": "655f126286b3aac7f7709daf6d8dd6a4e62cd8e8d3c1d02bb28a58816fcac349"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_lightning_entrance.png",
+      "bytes": 11816,
+      "sha256": "ba76416a6e44ba1101b20aff95dca880ac7880d140310ea2910c33ebc71d711b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_lightning_hit.png",
+      "bytes": 9128,
+      "sha256": "4eb2d3b2a63300e5b5c11612458c2294aaff9810e1586a52708c4167c0bc187a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_lightning_idle.png",
+      "bytes": 11985,
+      "sha256": "9b34811264a109c4c1a9a2472bfdb48072eceb4e8452e20f226d311cd44c2ea1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_water_attack.png",
+      "bytes": 18691,
+      "sha256": "ab5bbe491f0bc41081e12dc28192fa1f47dec70698ffd03de13b5778bef6c50e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_water_defeat.png",
+      "bytes": 14622,
+      "sha256": "6189e8d303fa634c49153824fabdf3a8f32d915c317e4d0cfede7643ed8b11a2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_water_entrance.png",
+      "bytes": 11815,
+      "sha256": "0fb5265cfd1d5c276b90f95f518b54a742da98a5830a2ed3304605079f3756a2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_water_hit.png",
+      "bytes": 9127,
+      "sha256": "1fe5d98796b4473b0d118e0467e0082dcae052d7c2ca97577af395fe8735338a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_water_idle.png",
+      "bytes": 11983,
+      "sha256": "d5e023fdbbeba80d4c7c2cfcdd90eda39f94809ba6f30a24e70459f28c88a13b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_wind_attack.png",
+      "bytes": 18695,
+      "sha256": "85a1e35fffac60f22773b00ee44af3f53b77417e34de13e1eada83aad51411e8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_wind_defeat.png",
+      "bytes": 14629,
+      "sha256": "5eb99b2cff1320a40e3b1468d386d0f4a8af875fc1328761119f027da6c6e731"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_wind_entrance.png",
+      "bytes": 11818,
+      "sha256": "53329f0bce0c9bd890fc4dea53ccf64e799f8fcf9b89f2d7c40c561b2493ce4c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_wind_hit.png",
+      "bytes": 9132,
+      "sha256": "0e7757cd37693b4f5dfa2247860d446b17fa283dbb4467bf377ba18ca5ad5a7d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_boss_wind_idle.png",
+      "bytes": 11985,
+      "sha256": "015ec484f657a1f2187c44f0f4e5c115bc1a129d4f75fb39358f98dea45def05"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_earth_attack.png",
+      "bytes": 15116,
+      "sha256": "69d98b7eab1bacd731db7d8bf38879827fa5caa85114f783b576af4a707929ed"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_earth_defeat.png",
+      "bytes": 11401,
+      "sha256": "19d41f897d407d0869c76a4074b0180ff979d8d680304356642c66f5488fc346"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_earth_hit.png",
+      "bytes": 7300,
+      "sha256": "3eb0288f09848c792907f9077a4e14ce97f37ec64d3b7b7074d63915ffdfb13c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_earth_idle.png",
+      "bytes": 9662,
+      "sha256": "80addffdcd2da06e5c58689bec7d0bde03bef5132f6a7fd2fdde8c16bc6a436b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_fire_attack.png",
+      "bytes": 15124,
+      "sha256": "7bb414384008cba9478b0e09c54fed01073787a016102dac799e848ff774c6d6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_fire_defeat.png",
+      "bytes": 11407,
+      "sha256": "c5a39a09bc606da0f608326e9896a37e8eb5f64841dfcfb797ba85759bd7cee9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_fire_hit.png",
+      "bytes": 7297,
+      "sha256": "49d29a60120ef6e43062d4823537cd35d9dff3b270aca542e813399dc671eded"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_fire_idle.png",
+      "bytes": 9665,
+      "sha256": "6eb3891d0568a925f547effcaabef6f5b31b45b689c9ade9836df85124136f94"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_lightning_attack.png",
+      "bytes": 15123,
+      "sha256": "120e13097ffc0d48719c036605168c6ce5fc7da25156fe7f4be30452d9d8f6c7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_lightning_defeat.png",
+      "bytes": 11405,
+      "sha256": "fd2355d696a4f75507a3ce51ee2e539239bbbd0296edd6390984648ac78479d7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_lightning_hit.png",
+      "bytes": 7297,
+      "sha256": "4b32e7fdb385b1295bf880676571552df24349ba63220c86a4ed5ca3a0727637"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_lightning_idle.png",
+      "bytes": 9665,
+      "sha256": "0f1d4984050a26a4f26583b15662d8547e732f16e06f689d27d66c47144128f2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_water_attack.png",
+      "bytes": 15105,
+      "sha256": "57cd3e5e673b92e5390cedab549b90b32c255dea7f43274594baaf37882ea24c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_water_defeat.png",
+      "bytes": 11399,
+      "sha256": "e1ab414fbf5cf14556a6cdab4a29b46181f5008710fb7e5159af9ee320a4cf36"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_water_hit.png",
+      "bytes": 7298,
+      "sha256": "204fbe480d1d721d0d0a12c68ae18ea3258c93e3cdc56d3270ca2aa8bde0ef5d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_water_idle.png",
+      "bytes": 9653,
+      "sha256": "44197a181b00e609249ef0a231cf1cefb565b5a67ff9945ba7708a78e941e1c8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_wind_attack.png",
+      "bytes": 15100,
+      "sha256": "256b06d274be50b734b2ccd2a1ff1c6ed5872734e4bf0338013db7239d24f36a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_wind_defeat.png",
+      "bytes": 11392,
+      "sha256": "bb300be81f67edab97b801eee7b12be28c834f493e23e4a95ba72afb5c0c9441"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_wind_hit.png",
+      "bytes": 7290,
+      "sha256": "6ee7e000ad7f25fab9c033af5b67c2eedc4b113ffd9a6d9e1082e74a1523c44a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_elite_wind_idle.png",
+      "bytes": 9650,
+      "sha256": "6dc52927526849b6a42444d79fd7f8e3ca99abe83b20c608a52b27efe4970d5c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_earth_attack.png",
+      "bytes": 11380,
+      "sha256": "4f48b35258b900a6233cdff730fcf726e0892138ae0cf8cfdaf62c046b8cb44a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_earth_defeat.png",
+      "bytes": 9285,
+      "sha256": "063a1f16472960eeb7e6d300cfab9e277a2ec5a6835ba9263337c22f710a97ba"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_earth_hit.png",
+      "bytes": 5622,
+      "sha256": "3ff886bb285e081abfaaeb341e1683b9818a0034a0e3c2be9946c9a0e9950dc8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_earth_idle.png",
+      "bytes": 7287,
+      "sha256": "2dc4c239d23a19284bd67b525304caab1a17a14cbe6327e95a6b813f95d6d5d9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_fire_attack.png",
+      "bytes": 11360,
+      "sha256": "f292c60b440491ab2ea3023b4608ade42bf2b2fd8917ac394f2e29f865d2cc7a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_fire_defeat.png",
+      "bytes": 9267,
+      "sha256": "6db79ee292ed893d048a2943f95143abc2292e8f516c5f965e4c69d21d11c32d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_fire_hit.png",
+      "bytes": 5613,
+      "sha256": "19e8abbf2c65b43e1471793e193655ca39231f0d9239ac19c9ef5a9fb7ef88b3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_fire_idle.png",
+      "bytes": 7275,
+      "sha256": "391bb2961b55c66d5eb359f72f0300d9377ae1bdc83c94a3c314ab05c8c4a09a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_lightning_attack.png",
+      "bytes": 11362,
+      "sha256": "fa11607edc4355997bdaf8558819c7f1a318762b7800f23b8448076d5f8462eb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_lightning_defeat.png",
+      "bytes": 9266,
+      "sha256": "91f66480250a7bd61aeb90f4aa63109b37086270bcb14749f376e29ee713a1d5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_lightning_hit.png",
+      "bytes": 5612,
+      "sha256": "1e8dedfb26d8f0b8e0e0fb06c8566bac8d6fc291dfb6b639744470c155d2bb3d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_lightning_idle.png",
+      "bytes": 7275,
+      "sha256": "1a704b9ff5778ca4c5003518e805a651e2cabadb9b4d0bbb21141f0fffc2b7da"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_water_attack.png",
+      "bytes": 11361,
+      "sha256": "d0aa69893de30d18928ced0fc0f919712db0a1734e2a0504c6523c1b6fa07a0c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_water_defeat.png",
+      "bytes": 9269,
+      "sha256": "7b9fd985396fae8b25081b51a6b5fe478b2ac3f3263c1702c93711a5bccfa5fe"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_water_hit.png",
+      "bytes": 5615,
+      "sha256": "79f520acf39e08f49c64bef2fdce656cf7c2a8e92c949a090e8f7c415f3abcc3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_water_idle.png",
+      "bytes": 7276,
+      "sha256": "8356e38454bb61b98230329db0e9f71d4ff8a77f00179755a4309855050e750f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_wind_attack.png",
+      "bytes": 11365,
+      "sha256": "ae8079152bd7da3a52c0b1b899bbd8409ab54d3a3ee30d59d5caae08ee156856"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_wind_defeat.png",
+      "bytes": 9271,
+      "sha256": "4d540bec08172a4dbf61c40ec831ac4bf77f2ad645c07a53631645bc219dfa0d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_wind_hit.png",
+      "bytes": 5616,
+      "sha256": "d0e0d88fd2d6160d4473c50f284d693953f824e065f4fcbbfa3fe3504e4ece1a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_harpy_normal_wind_idle.png",
+      "bytes": 7279,
+      "sha256": "b063f7a8c2fec9cab0df29ebcd830e5fed6453c2d3e495c23404803483219556"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_earth_attack.png",
+      "bytes": 16952,
+      "sha256": "a1baffbe7e367d94dd59ee52b3250a07ef4738806598b0807d08bb303b6da186"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_earth_defeat.png",
+      "bytes": 13036,
+      "sha256": "5410be6b214a162f94a42ca9a8e4d35420a82f8b7a326f7f05c902b5c167b7df"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_earth_entrance.png",
+      "bytes": 10029,
+      "sha256": "c90a21eafd92cabb8460778371ca2a2aebf78158e5b8c6f97826ed1dc5117515"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_earth_hit.png",
+      "bytes": 7871,
+      "sha256": "43dd49fdd5feab4717c9db26d457df7f62b286ba5eb97486d843b6cd33d2957c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_earth_idle.png",
+      "bytes": 10082,
+      "sha256": "716a534cc61c55d86641ac83cec597be2d6beca6588edda14b22cbd43a5b162d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_fire_attack.png",
+      "bytes": 16998,
+      "sha256": "9642469ebd9fd641e7de243bdae0f5f883f890a0ab67b7eec72f1554feecd8aa"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_fire_defeat.png",
+      "bytes": 13092,
+      "sha256": "796ec6dd80e974a929010dacd01e8b60d85f13814fbb490f2f340cb888038113"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_fire_entrance.png",
+      "bytes": 10066,
+      "sha256": "7c3de7ddca01e0db33408c4db0892b3e4c24617edb6b9c0d2e96bb02db2285b8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_fire_hit.png",
+      "bytes": 7896,
+      "sha256": "070450b02a633b902df26ec5868f841b57f909cf3060fd2c170c83c7138a3cd4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_fire_idle.png",
+      "bytes": 10115,
+      "sha256": "086ddc604d9d33bae53239d985551c7bb39a34f9e157b0f27803a2cfe7545236"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_lightning_attack.png",
+      "bytes": 17000,
+      "sha256": "bd910460adf4a61f7561c8ed6408335e5b391e57b59c2fe65fe3acfaae13ecbb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_lightning_defeat.png",
+      "bytes": 13091,
+      "sha256": "82c48c26d28efc0058e0756d48a8041be431b4ca31bed05f5c6321a3f775afa9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_lightning_entrance.png",
+      "bytes": 10068,
+      "sha256": "1255e5bb3601c33eecee6a0e9c3113b89e9e3b2563dfa7eddcdc900eb0c48819"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_lightning_hit.png",
+      "bytes": 7895,
+      "sha256": "40ede2c466142a0d1a7965d3633d59bb868659e512e6e6157a373c382a814ecb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_lightning_idle.png",
+      "bytes": 10117,
+      "sha256": "eeba50ea0f937e913f10739f566a55f5bf1ad185c4c5433b5d13dd94c1f14d0c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_water_attack.png",
+      "bytes": 17011,
+      "sha256": "47986afde61d8e58a07b4bd6e3fe267e252637b052460bef907adc8f4a94e1bc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_water_defeat.png",
+      "bytes": 13071,
+      "sha256": "a81e1f2388a92902fe960f7adb9d0d5f88fdf01fb35fa875624c3a9fa390f809"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_water_entrance.png",
+      "bytes": 10049,
+      "sha256": "14e66f892d793b4dc446feeed684e9422b8a17d1f5682c0785303d4e05440122"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_water_hit.png",
+      "bytes": 7890,
+      "sha256": "8f6ada2ec15ba6056c5be05bc7e999920303eeef9e36ee00e5303cc9d7004f03"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_water_idle.png",
+      "bytes": 10098,
+      "sha256": "881482c9bf7a42c9f1f5d870124762fb1c8a1095fd25c0788b2af1cd84425877"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_wind_attack.png",
+      "bytes": 17011,
+      "sha256": "ff93f605332152eb8c150cfa79a09d98772f3e5207c56f9c09e2c7fb8ca5c761"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_wind_defeat.png",
+      "bytes": 13072,
+      "sha256": "6fb4a971b9fea64ec46cba4b2c8a0ac1a1b967ffe8287a47637493e11f0ef3c6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_wind_entrance.png",
+      "bytes": 10050,
+      "sha256": "ed6383a0f2838b2ba7b84d80eaf9616a1d4143c166038d4790ea2e6f09853c76"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_wind_hit.png",
+      "bytes": 7892,
+      "sha256": "79a20af30b3a3e541e1e7cf86928419a115b810ca41df081db38d22e1a9963d6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_boss_wind_idle.png",
+      "bytes": 10099,
+      "sha256": "2696beb5b0159b56d76f5ab9abc7e0bc8f74468561abe433507dcb042b0555df"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_earth_attack.png",
+      "bytes": 16824,
+      "sha256": "0fd23888e8f8394827f193c7463bb7f7f83c3e41f101199c015417f062b335c3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_earth_defeat.png",
+      "bytes": 13335,
+      "sha256": "c250a5375aae20d8d10e1573c1f53c9c584ee3000c1f50f032835663cf0b11e4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_earth_hit.png",
+      "bytes": 7453,
+      "sha256": "92e8fdfaee4dcf2b91cf1c1db47335b9de0364a0a0dd0ee3a02a6039586a4d94"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_earth_idle.png",
+      "bytes": 9664,
+      "sha256": "1813bafad88a3e9a09f0c54fb77d2f465da5322356c8b3a4772be65982eced7c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_fire_attack.png",
+      "bytes": 16805,
+      "sha256": "d74d672c61873343c322b6dd642296cd410b70d65a0348ad625a16a6482bded6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_fire_defeat.png",
+      "bytes": 13309,
+      "sha256": "cd8f906730bae1d77e56f7d085984c2af835dd72f633bac0b377e67c912d18f8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_fire_hit.png",
+      "bytes": 7437,
+      "sha256": "19113dd7e31fa5fb14d1b5d957e0e7a713193c7c478ed81f5e394fa82dfbddfa"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_fire_idle.png",
+      "bytes": 9645,
+      "sha256": "0d8c8d3f104ad8bd5db4753915897ab72f008a989834c21fd3c1d57ac25b4716"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_lightning_attack.png",
+      "bytes": 16804,
+      "sha256": "11c864a06ff10ef28c38d0368e655174981eea5e2cf4afae7e51867f7de4508c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_lightning_defeat.png",
+      "bytes": 13309,
+      "sha256": "e7b54b232ef267d699ce805ec4fb105dcc2b539d06315d7246991cafdcfbcf75"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_lightning_hit.png",
+      "bytes": 7437,
+      "sha256": "24425a4f319cc11d22dabcc5d430880bec5a17ed963f026d41326e8fdbf88e7d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_lightning_idle.png",
+      "bytes": 9644,
+      "sha256": "973d93a7a38bb2fe40187a5db595e8308da73966e9bca1273f2b187a7c403100"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_water_attack.png",
+      "bytes": 16839,
+      "sha256": "7e80c09c33dd66c4ec652e82ecd21aae7188df84ae01d5f7f4af13269b09c1b5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_water_defeat.png",
+      "bytes": 13335,
+      "sha256": "d55dae2722118e9b5fc8f6a2dd83ea46667d5d05546d8cd7399139b9bf474833"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_water_hit.png",
+      "bytes": 7460,
+      "sha256": "adf09d6037c5018a2dcd7d8195933d49c53e13c98f1d76ef38d11c80f70bcd8f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_water_idle.png",
+      "bytes": 9670,
+      "sha256": "bef6815d0e0bc2a4691c549770c3bed58aa9b5837a2158a8839ca3c0483606cd"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_wind_attack.png",
+      "bytes": 16869,
+      "sha256": "989c183937c1946d895e5fadd869622b8bfe0c3e460faad7010224b217e7428d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_wind_defeat.png",
+      "bytes": 13354,
+      "sha256": "6d81eba1d8037ccde572214d0c49a8a09b7eaa89b26a2844cd8f4f950d9db7de"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_wind_hit.png",
+      "bytes": 7466,
+      "sha256": "33caa40eeb34e109c0af86c12bc8093130e55bffcbfa6e4e5dfdb8dcd0160f4e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_elite_wind_idle.png",
+      "bytes": 9698,
+      "sha256": "02f91dafa6191539038fba7b8ed6f24a5c9c40fb5b65b744ada7d6014e892657"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_earth_attack.png",
+      "bytes": 13823,
+      "sha256": "0a64bf97ef4cd59472ba2a3586b4129086278e41d3c3c865f1b08eb9951c0029"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_earth_defeat.png",
+      "bytes": 11419,
+      "sha256": "cb2d867767f6a6c2b52641c7931cdad7da04949099021c1df940df7422644a9f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_earth_hit.png",
+      "bytes": 6656,
+      "sha256": "401e270a9365a72856cfa7a1c2448734619d7ca6e609f3ae9e9b3863e9ccc798"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_earth_idle.png",
+      "bytes": 7830,
+      "sha256": "363c519191d0c905edfe65c153201bc13ec3d17643945508c08c17afaf3a2698"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_fire_attack.png",
+      "bytes": 13800,
+      "sha256": "876595ce18d357604dd6009026cc683f10390714e1f16fe73ee4edaca9b70cd3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_fire_defeat.png",
+      "bytes": 11403,
+      "sha256": "921448d486decc17e27e2c1c9b8e380732ebaee1b84495f9ad4a6346339073e3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_fire_hit.png",
+      "bytes": 6639,
+      "sha256": "797bce7b2761b907b55c47c2331dcbe41850b04c4a04bc47860bcf9555c11114"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_fire_idle.png",
+      "bytes": 7823,
+      "sha256": "276a69e0bc5cdefed10999728dddcfe1538d740baae037902bd41c91429231bd"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_lightning_attack.png",
+      "bytes": 13802,
+      "sha256": "a2f16c05fadab56fc452e0072254f4ecf1ae7225fb1c8a7ee3589e6add2aa531"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_lightning_defeat.png",
+      "bytes": 11407,
+      "sha256": "a7288756e36e7be2506539e52c461c07e7ebfe47cdc5f788d3b7ade1811fe4fa"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_lightning_hit.png",
+      "bytes": 6639,
+      "sha256": "9791a0f63de45e1de59f46e85e3d9fb104efba55b7e0a7b9f8ec27165b75f791"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_lightning_idle.png",
+      "bytes": 7825,
+      "sha256": "2279295ca9015007fbf34c83ad0fda7d9529f3461fafb27e731c86057057fd98"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_water_attack.png",
+      "bytes": 13856,
+      "sha256": "b6a64c229b5454314bb198cc78810eeb49e3a951a459d9b22e57626f097cadde"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_water_defeat.png",
+      "bytes": 11448,
+      "sha256": "b525f0d41ea1ba5628962ba9410940d03fd957d30452077820884f059c96f937"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_water_hit.png",
+      "bytes": 6663,
+      "sha256": "d691b7072d4d25075c6b21123b582c655eabdf7e516ab3ce78e0dde3f0946da0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_water_idle.png",
+      "bytes": 7849,
+      "sha256": "a26801caa712e4999a70e6e82784270a3d0b416cc7633129f7489efb7f78198a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_wind_attack.png",
+      "bytes": 13879,
+      "sha256": "f2fb51cfcdc1ebec6b21ca44daa0cf64ba41e7828372a04a57b0970e34382a68"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_wind_defeat.png",
+      "bytes": 11465,
+      "sha256": "0e3a0f940f43862e0454cd457a4678af8119c01fbd26164505b6f8c4e0b6376c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_wind_hit.png",
+      "bytes": 6668,
+      "sha256": "e57c3ab14ef0a7cbf9a85ed25319bdbd35c4e2290fe35bd47b3c1c513008018e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_imp_normal_wind_idle.png",
+      "bytes": 7851,
+      "sha256": "5ad6ec9d635ca2ea24edfd4989768463fef65098856147a5b47aabc7ca8d8359"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_earth_attack.png",
+      "bytes": 11191,
+      "sha256": "5da774d48bd4ecec97ff30ddf4e509f5fc405b9ef178d729f35abdb28ed24042"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_earth_defeat.png",
+      "bytes": 9325,
+      "sha256": "ca2b21fe20d64db946d1ddc7c4b5613cbf53ffd118642e0e3ea991274c2421d8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_earth_entrance.png",
+      "bytes": 6667,
+      "sha256": "7cf32ca4ebc4bbe5920d3d3c2ebb63ab4270ad087d8dd909adde90c92efce4b3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_earth_hit.png",
+      "bytes": 5829,
+      "sha256": "476cf7e8dd814d3da81b4f61c4b25ac76bfc8430c60d29407742374c7d6cb08d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_earth_idle.png",
+      "bytes": 6870,
+      "sha256": "a5318d3440b37a32110c11165d0b93769ede038359491cd7c85180f8fbce710f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_fire_attack.png",
+      "bytes": 11181,
+      "sha256": "47e186421a7b0c9c7e16eb9caf1c17a91a1e8e6a926c24295063866ffe86bfa8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_fire_defeat.png",
+      "bytes": 9324,
+      "sha256": "819d70daf0f8004bcea83aa49d3d6f6a54d08bbe6ebebb8f6847c6feae1b3916"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_fire_entrance.png",
+      "bytes": 6661,
+      "sha256": "b9a8a981757184ccde9292d7a77654a68c2696493d108c6df23757e5fc052db4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_fire_hit.png",
+      "bytes": 5826,
+      "sha256": "dd5174c92b3f58cafc2e5c0f47cadaef16d96e4382a3ddfc1774f90cce0fa808"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_fire_idle.png",
+      "bytes": 6865,
+      "sha256": "905ea3ccf4596457b24dae2dfaa4a8e2e978b346671d410d267c36c4797bb71f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_lightning_attack.png",
+      "bytes": 11184,
+      "sha256": "d36553fffa42444ce330d42c4c3a10f6ef4b40993030dd97092acf6649f00cbf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_lightning_defeat.png",
+      "bytes": 9323,
+      "sha256": "6cd3aebb606f95a57554a492105f7d6046c37093d52999b129981723d457112d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_lightning_entrance.png",
+      "bytes": 6662,
+      "sha256": "18b2db2cd2d4b4be95fd4198ad89955dbc823053b9aa93d877be58ebf15330c9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_lightning_hit.png",
+      "bytes": 5827,
+      "sha256": "7123b15fd3539faaa25d9f12537bf83187a85cf9857171f8bac13000751f8aa7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_lightning_idle.png",
+      "bytes": 6866,
+      "sha256": "dd0ab1e090be7f134f159d74735d1990bbf34b61d579d541778b135e6686ceb3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_water_attack.png",
+      "bytes": 11199,
+      "sha256": "cae9f38ab681fe3e72645c1256325530ce22e45d27dbd2f6382a4dd24cf4c815"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_water_defeat.png",
+      "bytes": 9344,
+      "sha256": "9d5f2d79666e11a3bb9917663129adcc83e7bad119c6dc8d1399d83455293af5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_water_entrance.png",
+      "bytes": 6672,
+      "sha256": "1d9a4201b7e9569f842752e75c93c42bef3f6d7d90610d3622f1fa3282fca798"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_water_hit.png",
+      "bytes": 5836,
+      "sha256": "43059455c66bfcf709d43dc6ebe11bd592864b5232569143dd9ddeab2171677b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_water_idle.png",
+      "bytes": 6878,
+      "sha256": "d3e4fe8a5b27addef9f95bb7181258fca181bd47f15866790745a0871a6b2c7c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_wind_attack.png",
+      "bytes": 11197,
+      "sha256": "11d870ea8a0eca3324728830c79ac10cbef485bc33e4cfc2be1f98cfa3531a8b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_wind_defeat.png",
+      "bytes": 9343,
+      "sha256": "0cf0608e597094685a81ceaee8078e16b18585c28481ee1bcccaeebb91bf310a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_wind_entrance.png",
+      "bytes": 6672,
+      "sha256": "76900d216f9da572667487b30bfdeaaf6e0e5532047d3a29878f727b46aa9b76"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_wind_hit.png",
+      "bytes": 5835,
+      "sha256": "4f9ed820d57ac7a875fb41bed6805243f4ec3e40c23850c994331576ab3f53ab"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_boss_wind_idle.png",
+      "bytes": 6877,
+      "sha256": "7ea92cb655806a06cd339279b23617371821e340a931db76d926aee5484e5b61"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_earth_attack.png",
+      "bytes": 7396,
+      "sha256": "96881c9cef3d32911b799221e355b611c14b34dfcd7446d450f40e76e2b09bf8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_earth_defeat.png",
+      "bytes": 6304,
+      "sha256": "ad9e8ec9c0ca7802d16471f7a114740d182a38941ad2b534262ea775f6487b22"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_earth_hit.png",
+      "bytes": 4023,
+      "sha256": "3453b39340053e34439aee9497d3d5be5c08f67fcde10499c5d7b264e1b990ff"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_earth_idle.png",
+      "bytes": 4224,
+      "sha256": "2651564a2e305de15a0aed431088726a3b07cf9be378a52d9b4904dd392c70d9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_fire_attack.png",
+      "bytes": 7397,
+      "sha256": "8f87475a53bcee30692f279bdfc52d683cd276e3b23407d77b20981cdb78eeed"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_fire_defeat.png",
+      "bytes": 6310,
+      "sha256": "7f1a7413203d1d2121c744157d91b177aa4754f15844c301229716b2df631d5e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_fire_hit.png",
+      "bytes": 4024,
+      "sha256": "45e36f42b876a67281e0b9bac9a8d990fd4b66b54c7acadbad6fa4b3534c40a7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_fire_idle.png",
+      "bytes": 4221,
+      "sha256": "19f5382da2fbc999e576ce04a5ed5fe2588e535f84ac932b35d2811c166368c6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_lightning_attack.png",
+      "bytes": 7398,
+      "sha256": "692593fb12b6b51715997ff90b4e98ef404a46cfa9cfea2ba341679259046e62"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_lightning_defeat.png",
+      "bytes": 6309,
+      "sha256": "d2fe021b2cf65244d8a786e9d99bd7115141f26034420c31428d26dd695a66c6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_lightning_hit.png",
+      "bytes": 4024,
+      "sha256": "39be51e227da02111beaaae2e62e7845217abcab880f25c588363f8b0f8ccdc3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_lightning_idle.png",
+      "bytes": 4227,
+      "sha256": "c4ff5dbfa3aacd14fa62fa27bff5883ebae3a171d8dd0f052f2ce03f700d1e0f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_water_attack.png",
+      "bytes": 7397,
+      "sha256": "b8c0d848cf01c714a8a7322c3c013d4f36f71bdeed8d8f7b260d38b3b0573a84"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_water_defeat.png",
+      "bytes": 6307,
+      "sha256": "c624d112077acc2551a70a1886d1304d1d1b1650640a2f4d8bd4f6c366cbb06c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_water_hit.png",
+      "bytes": 4023,
+      "sha256": "d4ff65dd0f54685740852e1aa6c61a74d949e5fcb734fad227c67ad3ff5a7b84"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_water_idle.png",
+      "bytes": 4224,
+      "sha256": "4424bec8feebc121c4f1d553033a9ec93b9f665a85db120c8c8c674e37dec174"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_wind_attack.png",
+      "bytes": 7399,
+      "sha256": "b6a4cc7957822003b9c31ab50ed27efc42cae3fedb24903a1e240023dcf7ffcb"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_wind_defeat.png",
+      "bytes": 6310,
+      "sha256": "7b612a4a88e4f2503b64f38277e8cf7dc5249ccd1553576cffe81259232a706e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_wind_hit.png",
+      "bytes": 4025,
+      "sha256": "f8129faee5d9dbe7d4bf29890e3c9a5878cfdebc69743bae7e3062ad90ed2e39"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_elite_wind_idle.png",
+      "bytes": 4227,
+      "sha256": "8507239cd4bae8c3ecfb030877415e9a8623923a5ba0832428daa1e0709e6893"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_earth_attack.png",
+      "bytes": 6331,
+      "sha256": "fc05dc2a3e752058f0bf91b690f6f2b00c0709de52f4d825402b45c1b4f3da95"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_earth_defeat.png",
+      "bytes": 6029,
+      "sha256": "0df66618e1a6d7202fe5065e16c2b246a087ba55d1f11962acbd16b0c183ca5d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_earth_hit.png",
+      "bytes": 3591,
+      "sha256": "4cfcb74133a98e191ef8ec52330bc5518c93e68b98135299d94fc969a6624fe7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_earth_idle.png",
+      "bytes": 3588,
+      "sha256": "25ab485d15751315e668b076ee3ad53b742f7cdeeb7d4e6e7a9e249ae70a9020"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_fire_attack.png",
+      "bytes": 6323,
+      "sha256": "48ec700749f95d9674b697d54b0c3af23431a9908ed3ef749120b22ddb4b434c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_fire_defeat.png",
+      "bytes": 6021,
+      "sha256": "c4fbb4ee8cb2974ab0adf4e20e070200e582319c6a87e1a6d6d86fd9c93be8c9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_fire_hit.png",
+      "bytes": 3586,
+      "sha256": "381a11a3b1ea93f811280e1fbd4dae9e27d82888a7aa4cfb879fef821235f647"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_fire_idle.png",
+      "bytes": 3582,
+      "sha256": "685f6063dd81262ff922d9efb9b4497b59d24ff64378e73c2df83d5868fd391a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_lightning_attack.png",
+      "bytes": 6329,
+      "sha256": "3deb4f139ba1e81bc4a711c7f09628289cf192e0e39134ed20008818d51176fd"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_lightning_defeat.png",
+      "bytes": 6028,
+      "sha256": "7ab0c2bab57ba6d4dab4b14fae77626ff62c0fbd794a9d1613c7b470dd72a004"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_lightning_hit.png",
+      "bytes": 3589,
+      "sha256": "d719360ae67b1f74949add0399a96258ef34506f1b0e6351823b6f7bbf5408de"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_lightning_idle.png",
+      "bytes": 3586,
+      "sha256": "9f917921d988d695503d80d18826f4f88a24085abd10acaab2e00cf3a2192db0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_water_attack.png",
+      "bytes": 6330,
+      "sha256": "b455ae249ca4b56f4f0cfecde370eb2d802e921f977e6c7b0a27493e68640df5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_water_defeat.png",
+      "bytes": 6030,
+      "sha256": "c267ec695386fa015dda79213f1498bc49c6bcd0a1b838eee815ba4b5cb08206"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_water_hit.png",
+      "bytes": 3591,
+      "sha256": "7c7c0555b5ceb25eb32ab32992666bae08d4929a252175422745cc679fd66d2f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_water_idle.png",
+      "bytes": 3588,
+      "sha256": "66ac7ff33e1875623744fd6a4866b094ba64911194e117caac0b856e153140d1"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_wind_attack.png",
+      "bytes": 6329,
+      "sha256": "6b5f526fdca3f6136f2bbfd4c7a021ade5afc05419eb58745d9f36c2c3b397a8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_wind_defeat.png",
+      "bytes": 6028,
+      "sha256": "2d96140e5d23cf6dcaf5fee2fe067e5268b2b06975938e2d1b99b8fdc0ac139e"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_wind_hit.png",
+      "bytes": 3589,
+      "sha256": "640d8b6f4cdb505dbf6030e0ff8cc524941e3e2f97f4c6f9e5e035cb25a1867b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_slime_normal_wind_idle.png",
+      "bytes": 3585,
+      "sha256": "6f56637fd71f415846c4687ae7810fdde7c22079ff6dc8a120b114e8619dca77"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_earth_attack.png",
+      "bytes": 23255,
+      "sha256": "8904d9d0745d953a2e7ba18b1ebe3d61a909bd4b0ec9cbed0583f04964637dd3"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_earth_defeat.png",
+      "bytes": 18035,
+      "sha256": "d68f2bdf643b35eaf8c9933e1a3f91506398d19b3fd1e360102d859004d7f5c5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_earth_entrance.png",
+      "bytes": 12922,
+      "sha256": "df680a7ffc2edf2b1f55b0fc6583d3d042794143026272203f61e6039b9357fa"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_earth_hit.png",
+      "bytes": 10135,
+      "sha256": "e31037887b50f692765acc83c7467ca8b42266240c24d5cdfbf76bdce9b1af13"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_earth_idle.png",
+      "bytes": 12858,
+      "sha256": "5d521c5c74a46bce66b3ce56c340e398bd22d40ef420047e095082ebf0546a12"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_fire_attack.png",
+      "bytes": 23255,
+      "sha256": "1dbff60e107eba6f0e041d0017e1542746d0b764c49abc71e9e0f4ee9f0a9345"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_fire_defeat.png",
+      "bytes": 18019,
+      "sha256": "218b828ccbd6da89b4d435ee0d0e724cc1cb6a66d37bb4a4d47b00cc7c853a8b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_fire_entrance.png",
+      "bytes": 12921,
+      "sha256": "0b093c3dce72a5a5b6c5027fa76b82ca6f40fd74873c191065993637b006363a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_fire_hit.png",
+      "bytes": 10135,
+      "sha256": "d2e2c4165c98ec56bc9f6529663a42690fc14525396e09260047271abd5d1f80"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_fire_idle.png",
+      "bytes": 12859,
+      "sha256": "c547f2996a9415e5b42e5e81c79bcfba391ad9f3f5909c395b560f6be26a06b6"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_lightning_attack.png",
+      "bytes": 23254,
+      "sha256": "dd51b171d774cec3af361d1b4d30cf3dc72a8bb802f2039212ff9307d95a07a0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_lightning_defeat.png",
+      "bytes": 18020,
+      "sha256": "bc96668e6e24f5423327db93c6842206632ca4e8cfef412fb97014df122cd943"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_lightning_entrance.png",
+      "bytes": 12921,
+      "sha256": "1180d0461b9608d54e1af1464a8e363c2de8ea037f070105ccb0816d66b50a16"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_lightning_hit.png",
+      "bytes": 10134,
+      "sha256": "d74be8958d09459979ab7bd52d5f7df6769491bb0a89d162f1011b80e1430588"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_lightning_idle.png",
+      "bytes": 12859,
+      "sha256": "64020166b7a98bd5325083a67290abd45ed51dfd1d0ccc545f0848ec0e997c0a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_water_attack.png",
+      "bytes": 23273,
+      "sha256": "02217d81473a17419cee97cbeb9c7ca20456889e9421b717c93fbd5dd22f552b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_water_defeat.png",
+      "bytes": 18072,
+      "sha256": "e1e38f4180f6d62cd8a72a531befbb36bbe3a0014552cfebc1ac65040591cb40"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_water_entrance.png",
+      "bytes": 12932,
+      "sha256": "1d31ca1f08a75646fa69535024add7392347137348c4133b5baaad286e7bb6c0"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_water_hit.png",
+      "bytes": 10147,
+      "sha256": "1693f532187dafa05ce3ab9ddd2ce66de2f264f47dcbf83f000171b6d10dcaba"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_water_idle.png",
+      "bytes": 12871,
+      "sha256": "5e22ccc4b74328608d72c464b6e7fecf4ee1279dc5c92ec1c81ffa5bc7c1e3bf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_wind_attack.png",
+      "bytes": 23277,
+      "sha256": "5bfa768b69ded5bb86e6cff8cd7f2c3654486459d9d8b2ea7ef07bde775902cc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_wind_defeat.png",
+      "bytes": 18075,
+      "sha256": "dd1e6ace72d25f617b9ee719e8b440b8b267a597959dde797ccb3d503fc3050f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_wind_entrance.png",
+      "bytes": 12934,
+      "sha256": "db7aeb455a6111f6380dd6fa3885f625a509ce23c0d83029049a50663d68a712"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_wind_hit.png",
+      "bytes": 10153,
+      "sha256": "c36d15740475b0240734b68f4b5b75114db141e9da7d2b85f4b65c967b9ab672"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_boss_wind_idle.png",
+      "bytes": 12873,
+      "sha256": "bd2d7d99c1fd9be3d8acf3f71feac345a0e3d4e0e6bc5fe4a1fa384fa823affc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_earth_attack.png",
+      "bytes": 19095,
+      "sha256": "dede3dbaedadd92531b072219d3f1ef8f0af2e5d75c4bd778e549ff1a9619113"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_earth_defeat.png",
+      "bytes": 16436,
+      "sha256": "a2b769f664a8ede41a290a9e469d1c77fbf75e6452fa2d2d7395162401d96658"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_earth_hit.png",
+      "bytes": 9422,
+      "sha256": "60931563eae58957431e955f92a0997d93efe4b5742fb44fe413edc345846780"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_earth_idle.png",
+      "bytes": 10384,
+      "sha256": "ab51b530ec16c093afcf7b40f21d14b1ad5d2e6f35c9f0ff5af3c8fe4189e575"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_fire_attack.png",
+      "bytes": 19093,
+      "sha256": "302bd6534c4d7f63578fbdcba8e25c3724c3cd016d1ad9274c0cf2b311cdacb9"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_fire_defeat.png",
+      "bytes": 16420,
+      "sha256": "8a0bef91eae73c6c0385dd67443408a2c612b9544eacb557ea235a471b4011e5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_fire_hit.png",
+      "bytes": 9421,
+      "sha256": "36d3d48f3fb8e82d04011f14916941cc4e5613798ed7eb0ba1ba68b8ca85264d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_fire_idle.png",
+      "bytes": 10373,
+      "sha256": "43eb1070cf8e25d66fc5fc89acf95fbaaa1a2a03798d0b74d558d9f2e575d309"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_lightning_attack.png",
+      "bytes": 19084,
+      "sha256": "48c351cb91521f2ca18e35f0c08c7561436fab0d84679e844576caff1c3e1fcf"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_lightning_defeat.png",
+      "bytes": 16412,
+      "sha256": "01b2fd3b20176dac05f86980b36e043eeb2592df12468fc5c0228b2c786a5d9d"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_lightning_hit.png",
+      "bytes": 9410,
+      "sha256": "395e5b548e2657c15ff7f778c0b5da5dd98092b792b264712cbe3944e59e54ea"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_lightning_idle.png",
+      "bytes": 10371,
+      "sha256": "ab4d18a2dc4464017fe67de32cc2dd20506da45b4deba2a23e06f53951993b8c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_water_attack.png",
+      "bytes": 19126,
+      "sha256": "f8372b835bd01ae57fd5c358e2eb592a03727b2ca444b775f050ea75a7814768"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_water_defeat.png",
+      "bytes": 16463,
+      "sha256": "735f19d42958cfb71bd096d49299abe4913ac2bda3def09195091721059814ff"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_water_hit.png",
+      "bytes": 9430,
+      "sha256": "a02645f8b47668da2d9e5826b64a05ea975fbd94f33a7f910e3922a1d0738b69"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_water_idle.png",
+      "bytes": 10404,
+      "sha256": "98cad06c8730e22533a048187c2a78a0cd82aff82398dc483135064b9cca988b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_wind_attack.png",
+      "bytes": 19121,
+      "sha256": "d41123b547675827179fd37308773e319ccff498d5ce848ac8ed73b67b39db9f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_wind_defeat.png",
+      "bytes": 16460,
+      "sha256": "0026803d2a7338faf7fc46fafe8e27e3afd5fa3f42e69e60c314c90ef44d8b93"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_wind_hit.png",
+      "bytes": 9428,
+      "sha256": "dbca78cebaf50b824dbe04166bb3ef0840fe846472fbd532fa5ffbe0ea47fdc5"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_elite_wind_idle.png",
+      "bytes": 10397,
+      "sha256": "9b4de9c0516552cdb7b9e90dbce23e7004ed0ff4a3132ca38cbce7e3562e707f"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_earth_attack.png",
+      "bytes": 17286,
+      "sha256": "101b801ff740451135328329aa53c473a1653bea1e745e7a81e27abef47d707b"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_earth_defeat.png",
+      "bytes": 15563,
+      "sha256": "2719c8da4a9b7028c14b3b8f5b9acfb4b23a7bea4d8069450496b1f5b2a187b2"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_earth_hit.png",
+      "bytes": 8730,
+      "sha256": "f94074945828691f102a23a8d2e926dca6297ed7c9c699b891293d6d2b2d30a7"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_earth_idle.png",
+      "bytes": 9185,
+      "sha256": "6be8675b0330f45f81fa37207c69a1b9ad50a0da2e8cdbec7b4199ab91a413c4"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_fire_attack.png",
+      "bytes": 17300,
+      "sha256": "9c45cd5d6fee6ca6af3811c3c085e5aa58ddc5c7d0b8a7e1896c9b7f134aee42"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_fire_defeat.png",
+      "bytes": 15568,
+      "sha256": "ed15d1289339f12b902d26c45015749f6ae62df46cc3b833a8696a0da9df3594"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_fire_hit.png",
+      "bytes": 8739,
+      "sha256": "56c2c123afcfaa90b14a68851851ac8a23d5b50b921115c07f9696637dd2a3b8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_fire_idle.png",
+      "bytes": 9187,
+      "sha256": "11159d85587d70ee3962f33717fdf43406634f1f45c00122ee600644d02fcc12"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_lightning_attack.png",
+      "bytes": 17302,
+      "sha256": "9d62c7e10e6e5d9a516a255869c606de9572687a91d3527c881417724005681c"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_lightning_defeat.png",
+      "bytes": 15569,
+      "sha256": "65eb1b9f9523b023ba43b99b030a4a79d75e5224aa8d491ac2b5688c24cb2ddc"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_lightning_hit.png",
+      "bytes": 8740,
+      "sha256": "83f572c83e7953550ef7edd1cc4fc1666c96f0f49071c2d4a475893294c60e45"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_lightning_idle.png",
+      "bytes": 9189,
+      "sha256": "b046ff816e319ceabedcc3b5b367aab6ddc893b6c50384fe8fe2b159223a2e14"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_water_attack.png",
+      "bytes": 17287,
+      "sha256": "d11566d5cadb58ea5e883cd5d9cd9d1067577de75ef1a5899586c747203922a8"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_water_defeat.png",
+      "bytes": 15564,
+      "sha256": "39d6e4f2ccbbab449d2d4b8f4f0bf485c29de265038ad6458875f94357b75e01"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_water_hit.png",
+      "bytes": 8731,
+      "sha256": "bf13adf116afe67b1ab0d2bcf9755fec87db1b87643b5d111accaca9b0452a13"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_water_idle.png",
+      "bytes": 9186,
+      "sha256": "6bbbb9233a613f048b58ef3a850d1a063c4fd6fefaf50c39265191c238f19d75"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_wind_attack.png",
+      "bytes": 17289,
+      "sha256": "a35b8f7496cf73c979c8a4400e909e0ecdc7962262846909076390db605b7ffe"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_wind_defeat.png",
+      "bytes": 15566,
+      "sha256": "8967c799f7bd3dcd8ae017fc14e9980ac19692fe46077a015913fe4544bbf672"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_wind_hit.png",
+      "bytes": 8734,
+      "sha256": "eec35999d0d6b243710b3784a1cc15720be67c044eb237b08ae33f517774d98a"
+    },
+    {
+      "path": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px/enemy_specter_normal_wind_idle.png",
+      "bytes": 9188,
+      "sha256": "f6278bbaa213912968e7adbf029364e409ecbb6e2e637831f17d3cc28daa8df8"
+    }
+  ],
+  "note": "Inventario de procedencia, no licencia ni aprobación de estilo; no se copiaron ni modificaron imágenes."
+}

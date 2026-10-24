@@ -1,0 +1,416 @@
+[
+  {
+    "atlas": [
+      288,
+      128
+    ],
+    "cell": [
+      32,
+      32
+    ],
+    "columns": [
+      "reposo",
+      "paso_a",
+      "paso_b",
+      "aviso",
+      "impacto",
+      "dano",
+      "recuperacion",
+      "derrota_a",
+      "derrota_b"
+    ],
+    "file": "nativos/slime.png",
+    "id": "E03_slime",
+    "max_new_visible": 16,
+    "north_defeat_correction": false,
+    "old_columns_preserved": true,
+    "palette_from_previous": 1552,
+    "pivot": [
+      16,
+      29
+    ],
+    "recovery_reuses_original_idle": true,
+    "rows": [
+      "sur",
+      "este",
+      "norte",
+      "oeste"
+    ],
+    "save_error": 0,
+    "scale_uniform": 0.087431693989071,
+    "source_bounds": [
+      [
+        126,
+        226,
+        172,
+        106
+      ],
+      [
+        466,
+        198,
+        159,
+        134
+      ],
+      [
+        779,
+        248,
+        173,
+        84
+      ],
+      [
+        1112,
+        272,
+        172,
+        60
+      ],
+      [
+        122,
+        463,
+        160,
+        102
+      ],
+      [
+        465,
+        429,
+        156,
+        127
+      ],
+      [
+        787,
+        475,
+        169,
+        90
+      ],
+      [
+        1114,
+        500,
+        183,
+        62
+      ],
+      [
+        125,
+        688,
+        168,
+        104
+      ],
+      [
+        467,
+        652,
+        161,
+        134
+      ],
+      [
+        786,
+        710,
+        171,
+        82
+      ],
+      [
+        1112,
+        731,
+        178,
+        61
+      ],
+      [
+        139,
+        908,
+        158,
+        106
+      ],
+      [
+        467,
+        883,
+        158,
+        124
+      ],
+      [
+        791,
+        925,
+        172,
+        89
+      ],
+      [
+        1112,
+        953,
+        179,
+        61
+      ]
+    ]
+  },
+  {
+    "atlas": [
+      432,
+      192
+    ],
+    "cell": [
+      48,
+      48
+    ],
+    "columns": [
+      "reposo",
+      "paso_a",
+      "paso_b",
+      "aviso",
+      "impacto",
+      "dano",
+      "recuperacion",
+      "derrota_a",
+      "derrota_b"
+    ],
+    "file": "nativos/guardian.png",
+    "id": "E03_guardian",
+    "max_new_visible": 38,
+    "north_defeat_correction": false,
+    "old_columns_preserved": true,
+    "palette_from_previous": 7068,
+    "pivot": [
+      24,
+      45
+    ],
+    "recovery_reuses_original_idle": true,
+    "rows": [
+      "sur",
+      "este",
+      "norte",
+      "oeste"
+    ],
+    "save_error": 0,
+    "scale_uniform": 0.159663865546218,
+    "source_bounds": [
+      [
+        74,
+        50,
+        233,
+        211
+      ],
+      [
+        419,
+        64,
+        213,
+        197
+      ],
+      [
+        790,
+        97,
+        194,
+        167
+      ],
+      [
+        1115,
+        137,
+        223,
+        127
+      ],
+      [
+        105,
+        316,
+        187,
+        216
+      ],
+      [
+        459,
+        326,
+        122,
+        206
+      ],
+      [
+        783,
+        356,
+        184,
+        176
+      ],
+      [
+        1109,
+        403,
+        227,
+        129
+      ],
+      [
+        76,
+        595,
+        238,
+        199
+      ],
+      [
+        412,
+        601,
+        199,
+        192
+      ],
+      [
+        783,
+        635,
+        188,
+        161
+      ],
+      [
+        1109,
+        676,
+        234,
+        126
+      ],
+      [
+        93,
+        849,
+        195,
+        212
+      ],
+      [
+        456,
+        853,
+        128,
+        208
+      ],
+      [
+        798,
+        884,
+        186,
+        177
+      ],
+      [
+        1111,
+        927,
+        234,
+        134
+      ]
+    ]
+  },
+  {
+    "atlas": [
+      432,
+      192
+    ],
+    "cell": [
+      48,
+      48
+    ],
+    "columns": [
+      "reposo",
+      "paso_a",
+      "paso_b",
+      "aviso",
+      "impacto",
+      "dano",
+      "recuperacion",
+      "derrota_a",
+      "derrota_b"
+    ],
+    "file": "nativos/ciervo.png",
+    "id": "E03_ciervo",
+    "max_new_visible": 34,
+    "north_defeat_correction": true,
+    "old_columns_preserved": true,
+    "palette_from_previous": 4692,
+    "pivot": [
+      24,
+      45
+    ],
+    "recovery_reuses_original_idle": true,
+    "rows": [
+      "sur",
+      "este",
+      "norte",
+      "oeste"
+    ],
+    "save_error": 0,
+    "scale_uniform": 0.130769230769231,
+    "source_bounds": [
+      [
+        129,
+        48,
+        157,
+        225
+      ],
+      [
+        441,
+        49,
+        167,
+        226
+      ],
+      [
+        771,
+        96,
+        155,
+        179
+      ],
+      [
+        1075,
+        136,
+        240,
+        142
+      ],
+      [
+        100,
+        304,
+        172,
+        227
+      ],
+      [
+        430,
+        311,
+        200,
+        220
+      ],
+      [
+        763,
+        347,
+        214,
+        184
+      ],
+      [
+        1079,
+        387,
+        259,
+        137
+      ],
+      [
+        118,
+        562,
+        164,
+        229
+      ],
+      [
+        438,
+        566,
+        164,
+        225
+      ],
+      [
+        781,
+        611,
+        154,
+        180
+      ],
+      [
+        1117,
+        658,
+        194,
+        134
+      ],
+      [
+        108,
+        816,
+        183,
+        228
+      ],
+      [
+        411,
+        819,
+        217,
+        227
+      ],
+      [
+        753,
+        850,
+        212,
+        193
+      ],
+      [
+        1071,
+        897,
+        260,
+        136
+      ]
+    ]
+  }
+]

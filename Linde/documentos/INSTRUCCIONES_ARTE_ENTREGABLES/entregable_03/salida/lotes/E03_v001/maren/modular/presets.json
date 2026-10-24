@@ -1,0 +1,30 @@
+{
+  "Maren": {
+    "look": [
+      1,
+      0,
+      2
+    ],
+    "equipo": [],
+    "estado": "propuesta",
+    "canon_nuevo": false
+  },
+  "demostracion_A": {
+    "look": [
+      0,
+      1,
+      0
+    ],
+    "equipo": [],
+    "npc_canon": false
+  },
+  "demostracion_B": {
+    "look": [
+      2,
+      2,
+      1
+    ],
+    "equipo": [],
+    "npc_canon": false
+  }
+}

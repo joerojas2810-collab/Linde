@@ -1,0 +1,214 @@
+{
+  "id": "E03_contrato_v001",
+  "estado": "candidato",
+  "enemigos": [
+    {
+      "id": "E03_slime",
+      "archivo": "enemigos/nativos/slime.png",
+      "atlas": [
+        288,
+        128
+      ],
+      "celda": [
+        32,
+        32
+      ],
+      "pivote": [
+        16,
+        29
+      ],
+      "filas": [
+        "sur",
+        "este",
+        "norte",
+        "oeste"
+      ],
+      "columnas": [
+        "reposo",
+        "paso_a",
+        "paso_b",
+        "aviso",
+        "impacto",
+        "dano",
+        "recuperacion",
+        "derrota_a",
+        "derrota_b"
+      ],
+      "animaciones": {
+        "reposo": [
+          0
+        ],
+        "caminar": [
+          1,
+          0,
+          2,
+          0
+        ],
+        "aviso": [
+          3
+        ],
+        "impacto": [
+          4
+        ],
+        "dano": [
+          5
+        ],
+        "recuperacion": [
+          4,
+          6
+        ],
+        "derrota": [
+          7,
+          8
+        ]
+      },
+      "temporizacion": "aviso y recuperación normalizados al estado/t existentes de Linde; daño/derrota solo presentación",
+      "recuperacion_reutiliza_reposo": true,
+      "colision": "conservar catálogo; lienzo no es hitbox",
+      "filtro": "nearest",
+      "mipmaps": false,
+      "escala_nativa": 1,
+      "zoom": 3
+    },
+    {
+      "id": "E03_guardian",
+      "archivo": "enemigos/nativos/guardian.png",
+      "atlas": [
+        432,
+        192
+      ],
+      "celda": [
+        48,
+        48
+      ],
+      "pivote": [
+        24,
+        45
+      ],
+      "filas": [
+        "sur",
+        "este",
+        "norte",
+        "oeste"
+      ],
+      "columnas": [
+        "reposo",
+        "paso_a",
+        "paso_b",
+        "aviso",
+        "impacto",
+        "dano",
+        "recuperacion",
+        "derrota_a",
+        "derrota_b"
+      ],
+      "animaciones": {
+        "reposo": [
+          0
+        ],
+        "caminar": [
+          1,
+          0,
+          2,
+          0
+        ],
+        "aviso": [
+          3
+        ],
+        "impacto": [
+          4
+        ],
+        "dano": [
+          5
+        ],
+        "recuperacion": [
+          4,
+          6
+        ],
+        "derrota": [
+          7,
+          8
+        ]
+      },
+      "temporizacion": "aviso y recuperación normalizados al estado/t existentes de Linde; daño/derrota solo presentación",
+      "recuperacion_reutiliza_reposo": true,
+      "colision": "conservar catálogo; lienzo no es hitbox",
+      "filtro": "nearest",
+      "mipmaps": false,
+      "escala_nativa": 1,
+      "zoom": 3
+    },
+    {
+      "id": "E03_ciervo",
+      "archivo": "enemigos/nativos/ciervo.png",
+      "atlas": [
+        432,
+        192
+      ],
+      "celda": [
+        48,
+        48
+      ],
+      "pivote": [
+        24,
+        45
+      ],
+      "filas": [
+        "sur",
+        "este",
+        "norte",
+        "oeste"
+      ],
+      "columnas": [
+        "reposo",
+        "paso_a",
+        "paso_b",
+        "aviso",
+        "impacto",
+        "dano",
+        "recuperacion",
+        "derrota_a",
+        "derrota_b"
+      ],
+      "animaciones": {
+        "reposo": [
+          0
+        ],
+        "caminar": [
+          1,
+          0,
+          2,
+          0
+        ],
+        "aviso": [
+          3
+        ],
+        "impacto": [
+          4
+        ],
+        "dano": [
+          5
+        ],
+        "recuperacion": [
+          4,
+          6
+        ],
+        "derrota": [
+          7,
+          8
+        ]
+      },
+      "temporizacion": "aviso y recuperación normalizados al estado/t existentes de Linde; daño/derrota solo presentación",
+      "recuperacion_reutiliza_reposo": true,
+      "colision": "conservar catálogo; lienzo no es hitbox",
+      "filtro": "nearest",
+      "mipmaps": false,
+      "escala_nativa": 1,
+      "zoom": 3
+    }
+  ],
+  "npc": "lotes/E03_v001/maren/modular/presets.json",
+  "efectos": "lotes/E03_v001/efectos/MANIFIESTO_FX.json",
+  "reglas": "Linde actual; sin balance ni lógica del otro proyecto",
+  "integracion": "pendiente, dueño único"
+}

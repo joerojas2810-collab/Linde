@@ -1,0 +1,54 @@
+{
+  "id": "E03_MAREN_CAMINATA",
+  "archivo": "assets/maren_caminata.png",
+  "sha256": "05ae2b4d96912371fd2af4fbac77ceb2b9272f1bf7d9f76caee0101262daefc1",
+  "estado": "referencia_visual_opcional_no_canonica",
+  "lienzo": [
+    128,
+    128
+  ],
+  "celda": [
+    32,
+    32
+  ],
+  "pivote": [
+    16,
+    32
+  ],
+  "filas": [
+    "sur",
+    "este",
+    "norte",
+    "oeste"
+  ],
+  "columnas": [
+    "reposo",
+    "paso_A",
+    "reposo",
+    "paso_B"
+  ],
+  "secuencia_caminata": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "tiempos": "usar los tiempos actuales de NPC; no modificar lógica ni velocidades",
+  "filtro": "nearest",
+  "escala_nativa": 1,
+  "zoom_recomendado": 3,
+  "bbox": "véase validacion/estructura.json",
+  "colision": "no definida por PNG; conservar runtime",
+  "origen": "image_gen incorporado con referencias locales LINDE; conversión Godot nearest/escala común/alfa0.5/paleta24",
+  "licencia": "generado para el proyecto; no se atribuye licencia de terceros; referencias de LINDE suministradas por usuario",
+  "limitaciones": [
+    "No integrado en juego activo",
+    "No aprobado por usuario",
+    "No animación de trabajo/ataque/daño",
+    "No canon narrativo nuevo",
+    "Identidad nueva requiere visto bueno visual"
+  ],
+  "paleta": "24 colores opacos comunes por cuantización RGB nearest en Godot",
+  "propuesta_principal": "modular/presets.json: Maren look[1,0,2], base compartida PJ/NPC",
+  "runtime_propuesto": "ArteEquipo.capas_base y ArteEquipo.comandos, no atlas horneado independiente"
+}

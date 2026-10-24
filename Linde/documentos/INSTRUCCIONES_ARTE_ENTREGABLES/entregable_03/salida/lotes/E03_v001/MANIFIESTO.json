@@ -1,0 +1,293 @@
+{
+  "lote": "E03_v001",
+  "fecha": "2026-10-24",
+  "base_commit": "42292a0b25554ef46cd914d95e91fc0590f68d9e",
+  "recursos": [
+    {
+      "id": "E03_slime",
+      "tipo": "enemy_atlas",
+      "archivo": "enemigos/nativos/slime.png",
+      "sha256": "6c34e041eedc40077f8178cdf5adc67dd8cf5089118dbfe31a5708e6ab61002c",
+      "celda": [
+        32,
+        32
+      ],
+      "pivote": [
+        16,
+        29
+      ],
+      "filas": [
+        "sur",
+        "este",
+        "norte",
+        "oeste"
+      ],
+      "columnas": [
+        "reposo",
+        "paso_a",
+        "paso_b",
+        "aviso",
+        "impacto",
+        "dano",
+        "recuperacion",
+        "derrota_a",
+        "derrota_b"
+      ],
+      "origen": "primeras5columnas y recuperación de Linde; daño/derrota image_gen+conversiónGodot",
+      "fuentes": "enemigos/fuentes/",
+      "licencia": "Procedencia generativa conservada; sin licencia de terceros atribuida ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual",
+        "integración eventos y QA local/red"
+      ]
+    },
+    {
+      "id": "E03_guardian",
+      "tipo": "enemy_atlas",
+      "archivo": "enemigos/nativos/guardian.png",
+      "sha256": "9245dd5364633fcf95b5a9afae218072815852cf4ccb5d515c36bdf7d9b1e177",
+      "celda": [
+        48,
+        48
+      ],
+      "pivote": [
+        24,
+        45
+      ],
+      "filas": [
+        "sur",
+        "este",
+        "norte",
+        "oeste"
+      ],
+      "columnas": [
+        "reposo",
+        "paso_a",
+        "paso_b",
+        "aviso",
+        "impacto",
+        "dano",
+        "recuperacion",
+        "derrota_a",
+        "derrota_b"
+      ],
+      "origen": "primeras5columnas y recuperación de Linde; daño/derrota image_gen+conversiónGodot",
+      "fuentes": "enemigos/fuentes/",
+      "licencia": "Procedencia generativa conservada; sin licencia de terceros atribuida ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual",
+        "integración eventos y QA local/red"
+      ]
+    },
+    {
+      "id": "E03_ciervo",
+      "tipo": "enemy_atlas",
+      "archivo": "enemigos/nativos/ciervo.png",
+      "sha256": "c48740790ffa47ef558d7e23c957fd62e08c4f2f8d448df238608a87bdc09dec",
+      "celda": [
+        48,
+        48
+      ],
+      "pivote": [
+        24,
+        45
+      ],
+      "filas": [
+        "sur",
+        "este",
+        "norte",
+        "oeste"
+      ],
+      "columnas": [
+        "reposo",
+        "paso_a",
+        "paso_b",
+        "aviso",
+        "impacto",
+        "dano",
+        "recuperacion",
+        "derrota_a",
+        "derrota_b"
+      ],
+      "origen": "primeras5columnas y recuperación de Linde; daño/derrota image_gen+conversiónGodot",
+      "fuentes": "enemigos/fuentes/",
+      "licencia": "Procedencia generativa conservada; sin licencia de terceros atribuida ni garantía de exclusividad",
+      "estado": "revisado_visual_candidato",
+      "pendientes": [
+        "aceptación visual",
+        "integración eventos y QA local/red"
+      ]
+    },
+    {
+      "id": "E03_capa_piel",
+      "tipo": "shared_character_layer_reference",
+      "archivo": "maren/modular/capas/piel.png",
+      "sha256": "bd5e0dd98fd2f776fb3c070646b347b7bad69b4b573c6742704f3deaa8ead1ca",
+      "origen": "Linde/cenital/arte/equipo/base/capas/piel.png",
+      "estado": "reutilizado_byteidentico",
+      "licencia": "Conservar procedencia del arte existente de Linde",
+      "pendientes": [
+        "integrador debe referenciar base compartida, no duplicar en producción"
+      ]
+    },
+    {
+      "id": "E03_capa_botas",
+      "tipo": "shared_character_layer_reference",
+      "archivo": "maren/modular/capas/botas.png",
+      "sha256": "e8bcc73f0fa1844794462e89747ce603f24f5314dcb29a708d33716211367da3",
+      "origen": "Linde/cenital/arte/equipo/base/capas/botas.png",
+      "estado": "reutilizado_byteidentico",
+      "licencia": "Conservar procedencia del arte existente de Linde",
+      "pendientes": [
+        "integrador debe referenciar base compartida, no duplicar en producción"
+      ]
+    },
+    {
+      "id": "E03_capa_cinturon",
+      "tipo": "shared_character_layer_reference",
+      "archivo": "maren/modular/capas/cinturon.png",
+      "sha256": "44dcc93147a8b894b7f41a7879be6255cc0eeaae84b345ce7db2f9e445347ff1",
+      "origen": "Linde/cenital/arte/equipo/base/capas/cinturon.png",
+      "estado": "reutilizado_byteidentico",
+      "licencia": "Conservar procedencia del arte existente de Linde",
+      "pendientes": [
+        "integrador debe referenciar base compartida, no duplicar en producción"
+      ]
+    },
+    {
+      "id": "E03_capa_pelo",
+      "tipo": "shared_character_layer_reference",
+      "archivo": "maren/modular/capas/pelo.png",
+      "sha256": "4a46fd059cf4f59ab94cec2e0632faf805f1a89d7972d63b9cd5222f4409a751",
+      "origen": "Linde/cenital/arte/equipo/base/capas/pelo.png",
+      "estado": "reutilizado_byteidentico",
+      "licencia": "Conservar procedencia del arte existente de Linde",
+      "pendientes": [
+        "integrador debe referenciar base compartida, no duplicar en producción"
+      ]
+    },
+    {
+      "id": "E03_capa_cuerpo",
+      "tipo": "shared_character_layer_reference",
+      "archivo": "maren/modular/capas/cuerpo.png",
+      "sha256": "63e01859fef914048708807d4bfa5c4dbf7d10efb2997b5808192e8e9bea385b",
+      "origen": "Linde/cenital/arte/equipo/base/capas/cuerpo.png",
+      "estado": "reutilizado_byteidentico",
+      "licencia": "Conservar procedencia del arte existente de Linde",
+      "pendientes": [
+        "integrador debe referenciar base compartida, no duplicar en producción"
+      ]
+    },
+    {
+      "id": "E03_capa_tunica",
+      "tipo": "shared_character_layer_reference",
+      "archivo": "maren/modular/capas/tunica.png",
+      "sha256": "03a230dc6857633549bd40d9ac58261c373a4fcd6554ee0870afce0556c5de1e",
+      "origen": "Linde/cenital/arte/equipo/base/capas/tunica.png",
+      "estado": "reutilizado_byteidentico",
+      "licencia": "Conservar procedencia del arte existente de Linde",
+      "pendientes": [
+        "integrador debe referenciar base compartida, no duplicar en producción"
+      ]
+    },
+    {
+      "id": "E03_capa_pantalon",
+      "tipo": "shared_character_layer_reference",
+      "archivo": "maren/modular/capas/pantalon.png",
+      "sha256": "daefcca5600622e8b3e11311309382445bbfc310a837e4fabbe3145e5a1c26a4",
+      "origen": "Linde/cenital/arte/equipo/base/capas/pantalon.png",
+      "estado": "reutilizado_byteidentico",
+      "licencia": "Conservar procedencia del arte existente de Linde",
+      "pendientes": [
+        "integrador debe referenciar base compartida, no duplicar en producción"
+      ]
+    },
+    {
+      "id": "E03_presets_npc",
+      "tipo": "npc_visual_presets",
+      "archivo": "maren/modular/presets.json",
+      "sha256": "676951d9353cb3445ef0f9e97b45090b0c39dbe2f918833d17bf756261b3ecde",
+      "origen": "datos propuestos E03, compositor actual de Linde",
+      "licencia": "datos del proyecto",
+      "estado": "candidato",
+      "pendientes": [
+        "aceptación de Maren",
+        "integración usando compositor existente"
+      ]
+    },
+    {
+      "id": "E03_fx_recoleccion",
+      "tipo": "effect_atlas",
+      "archivo": "efectos/png/E03_fx_recoleccion.png",
+      "sha256": "b2512b296387b8f3baffa568f5d693240635f932335244c8a0592185ec7f9643",
+      "celda": [
+        32,
+        32
+      ],
+      "pivote": [
+        16,
+        16
+      ],
+      "cuadros": 4,
+      "origen": "geometría técnica original, generador Godot en efectos/fuentes",
+      "licencia": "Código/gráficos técnicos creados para Linde; sin recursos de terceros",
+      "estado": "validado_estructura_revisado_visual_candidato",
+      "pendientes": [
+        "eventos confirmados",
+        "QA integrado"
+      ]
+    },
+    {
+      "id": "E03_fx_impacto",
+      "tipo": "effect_atlas",
+      "archivo": "efectos/png/E03_fx_impacto.png",
+      "sha256": "f34b5c7610d04982d50a6521248d87e08ae86ffd50decf670a1a72272d2c8bd6",
+      "celda": [
+        32,
+        32
+      ],
+      "pivote": [
+        16,
+        16
+      ],
+      "cuadros": 4,
+      "origen": "geometría técnica original, generador Godot en efectos/fuentes",
+      "licencia": "Código/gráficos técnicos creados para Linde; sin recursos de terceros",
+      "estado": "validado_estructura_revisado_visual_candidato",
+      "pendientes": [
+        "eventos confirmados",
+        "QA integrado"
+      ]
+    },
+    {
+      "id": "E03_fx_dano",
+      "tipo": "effect_atlas",
+      "archivo": "efectos/png/E03_fx_dano.png",
+      "sha256": "933542f93e6987a5681f1b0ac73fc46fb5835ef3d52e2a070bc4ede065059e3e",
+      "celda": [
+        32,
+        32
+      ],
+      "pivote": [
+        16,
+        16
+      ],
+      "cuadros": 4,
+      "origen": "geometría técnica original, generador Godot en efectos/fuentes",
+      "licencia": "Código/gráficos técnicos creados para Linde; sin recursos de terceros",
+      "estado": "validado_estructura_revisado_visual_candidato",
+      "pendientes": [
+        "eventos confirmados",
+        "QA integrado"
+      ]
+    }
+  ],
+  "referencias_no_productivas": [
+    "maren/assets/maren_caminata.png",
+    "reutilizacion/CONTACTO_24_DISENOS.png",
+    "reutilizacion/CONTACTO_75_VARIANTES_PINTADAS.png"
+  ],
+  "regla": "Slime como terminología; Linde como lógica y estilo; NPC modular"
+}

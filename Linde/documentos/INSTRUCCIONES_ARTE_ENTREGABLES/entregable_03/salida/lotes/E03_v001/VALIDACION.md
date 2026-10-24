@@ -1,0 +1,10 @@
+# Validación consolidada E03
+
+- Tres atlas9×4,108celdas no vacías, alfa binaria. Primeras60celdas idénticas a las de Linde y12celdas de recuperación iguales al reposo anterior. Nuevas36celdas de daño/derrota dentro de32/48, sin recortes; paleta de cada actor contenida en su paleta anterior. Informe por celda en enemigos/validacion/estructura.json.
+- Siete capas modulares copiadas con SHA idéntico al juego; tres composiciones de ejemplo mediante tintado actual. maren/modular/validacion.json conserva comprobación del fragmento de tintado. Presets son propuestas visuales, no nuevos NPC mecánicos.
+- FX:3atlas/12celdas,15pruebas geométricas pasan según logs retenidos en efectos/qa; límites de alcance/objetivo documentados. Sin cambio al combate.
+- Preview independiente ejecutado con Godot4.7.1, renderer OpenGLCompatibility/AppleM3, exit0 y ocho capturas reales1280×720. Se revisaron comparación cardinal, NPC/PJ y campo a zoom3. El escenario usa biblioteca histórica, no assets definitivos de04/05. Las imágenes están también en production/qa/evidence del proyecto de preview, no en el juego activo.
+- Detectado/corregido durante revisión: recorte incorrecto por márgenes del Slime, ruido alfa aislado, derrota norte del Ciervo y salto visual de recuperación. Se conservan fuentes y las decisiones del pipeline. Los resultados preliminares no se consideran aceptados.
+- Revisión del otro proyecto:24diseños y75variantes pintadas en contactos diagnósticos; no revisión exhaustiva de todas sus acciones. Se documentan diferencias entre pintado y pixel por mob. No se importan sus valores/reglas.
+- Los primeros procesos sandbox emitieron avisos de user://, certificados y settings del entorno. El log gráfico final conserva salida real; los procesos headless con aviso de certificados terminaron0. No equivalen a fallos probados del juego.
+- Pendiente: aceptación visual, decisión de detalle casa/actores, integración/datos/eventos y pruebas de juego/red. No hay benchmark, prueba jugable completa ni aprobación humana de animaciones. Formato correcto no certifica anatomía o acabado perfecto.

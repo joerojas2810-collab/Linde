@@ -1,0 +1,9 @@
+# Producción complementaria E06
+
+Herramienta integrada image_gen, 24/10/2026. Fondo transparente solicitado. Referencia de estilo: origen_galeria.png; no es objetivo de edición. Fuente generada: iconos_complementarios_original.png. Ocho iconos se convierten a32x32 mediante herramientas/convertir_iconos.gd, umbral alfa0.5, encaje28px en lienzo32 y cuantización a25 colores. Se conserva fuente completa y conversion.json. No se usó Python para editar imágenes.
+
+Prompt exacto:
+
+Create ONE coherent pixel-art inventory icon SOURCE ATLAS for the original fantasy RPG LINDE, matching the attached existing inventory icon gallery: simple readable medieval objects, dark brown pixel outline, restrained highlights, blocky clusters, no anti-aliasing, no text or labels. The reference gallery is style only: do not include its old objects. Exactly EIGHT isolated icons on transparent background arranged in EXACTLY 4 columns by 2 rows, centered in equal cells with generous clear padding: top row left to right a pair of iron armor gauntlets, a pair of brown leather boots, brown medieval trousers, one pale gold soul stone crystal; bottom row left to right one icy pale blue harmony stone crystal, one violet blessing stone crystal, one small amber magical spark in a faceted holder, one blue four-point experience star. Every icon full object centered and separated, no frames, no decorative background, no letters/numbers. Intended reduction to 32x32 per cell in engine using nearest; therefore clear chunky silhouette and simple material blocks, NOT high-detail illustration. Whole source sheet landscape 2:1, 4x2 grid. Keep uniform style and relative scale.
+
+La forma definitiva de los nuevos iconos sigue siendo candidata. No se garantiza exclusividad jurídica de arte generado. Los SVG XP/sombra, shader y preview son recursos nuevos escritos en código para LINDE; la sombra es un tratamiento técnico simple. No cambian PNG de otros entregables.
