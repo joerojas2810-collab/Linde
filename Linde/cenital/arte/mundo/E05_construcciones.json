@@ -1,0 +1,12 @@
+{
+  "muro": "E05_palisade.png",
+  "suelo": "E05_floor_wood.png",
+  "mesa": "E05_workbench.png",
+  "horno": "E05_furnace.png",
+  "cofre": [
+    "E05_cofre_cerrado_alineado.png",
+    "E05_cofre_abierto_alineado.png"
+  ],
+  "cama": "E05_bed.png",
+  "ghost": "Reutiliza la misma textura con modulate RGBA; no atlas extra. Validar costes/ocupación con la lógica existente, no con el renderer."
+}

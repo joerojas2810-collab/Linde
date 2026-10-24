@@ -1,0 +1,42 @@
+{
+ "_nota": "Registro de procedencia del arte integrado (2026-10-24). Todos los lotes son candidatos: aceptación artística pendiente; licencia de redistribución no certificada (ver cada INFORME.md).",
+ "recursos": [
+  {
+   "carpeta": "Linde/cenital/arte/mundo",
+   "origen": "E04_v002 + E05_v002",
+   "contenido": "terreno 47 conexiones, naturaleza, casa modular, objetos, construcciones",
+   "manifiesto": "arte/mundo/manifiesto.json"
+  },
+  {
+   "carpeta": "Linde/cenital/arte/actores",
+   "origen": "E03_v001",
+   "contenido": "atlas de slime, guardián y ciervo; efectos de impacto, daño y recolección",
+   "manifiesto": "arte/actores/manifiesto.json"
+  },
+  {
+   "carpeta": "Linde/cenital/arte/equipo/ataque",
+   "origen": "E01_v001",
+   "contenido": "17 hojas de ataque (6 corregidas) y estela de la espada",
+   "manifiesto": "arte/equipo/ataque/manifiesto.json"
+  },
+  {
+   "carpeta": "Linde/cenital/arte/equipo/estados",
+   "origen": "E02_v001",
+   "contenido": "herramienta, daño, caída y dormir con equipo por capas",
+   "manifiesto": "arte/equipo/estados/*/E02_estado.json"
+  },
+  {
+   "carpeta": "Linde/cenital/arte/interfaz",
+   "origen": "E06_v001",
+   "contenido": "paneles, botones, barras, iconos, luz nocturna, sombra de pies y tipografía Pixelify Sans (OFL)",
+   "manifiesto": "arte/interfaz/manifiesto.json"
+  },
+  {
+   "carpeta": "Linde/cenital/arte/equipo (caminata y base)",
+   "origen": "equipo_indice_01 (arte-entregado)",
+   "contenido": "base y 17 hojas de caminata",
+   "manifiesto": "arte/equipo/manifiesto.json"
+  }
+ ],
+ "informes": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_0X/salida/lotes/*/INFORME.md"
+}

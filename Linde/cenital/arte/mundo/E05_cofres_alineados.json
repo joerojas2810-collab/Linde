@@ -1,0 +1,24 @@
+{
+  "cerrado": "E05_cofre_cerrado_alineado.png",
+  "abierto": "E05_cofre_abierto_alineado.png",
+  "canvas": [
+    48,
+    48
+  ],
+  "pivote": [
+    24,
+    44
+  ],
+  "base_compartida_rect": [
+    0,
+    29,
+    48,
+    19
+  ],
+  "fuentes": [
+    "chest_closed.png",
+    "chest_open.png"
+  ],
+  "metodo": "Mismo cuerpo inferior y ancla; tapa/interior reutilizados del abierto y ajustados con repetición de sección central, sin reducir el PNG.",
+  "estado": "candidato por revisar visualmente"
+}

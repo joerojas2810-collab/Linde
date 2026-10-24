@@ -3,10 +3,8 @@ const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Inv = preload("res://scripts/inventario.gd")
 const Mundo = preload("res://scripts/mundo.gd")
-const Apar = preload("res://scripts/apariencia.gd")
 const Guard = preload("res://scripts/guardado.gd")
 const J = preload("res://scripts/juego.gd")
-const Capas = preload("res://scripts/capas_sprite.gd")
 const Srv = preload("res://scripts/red_servidor.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const CV := "eq:vigia:casco::0"
@@ -19,7 +17,7 @@ func ok(cond: bool, nombre: String) -> void:
 	if not cond: fallos += 1
 
 func g(sem: int = 1):
-	var j = J.nueva(sem, "Test", [0, 0, 0], "viajero")
+	var j = J.nueva(sem, "Test", [0, 0, 0])
 	j.pies = Mundo.pies_de_celda(Vector2i(32, 40))
 	j.combate.enemigos.clear()
 	return j
@@ -42,8 +40,8 @@ func _init() -> void:
 	tmp = ProjectSettings.globalize_path("user://") + "pruebas_linde"
 	DirAccess.make_dir_recursive_absolute(tmp)
 	for f in DirAccess.get_files_at(tmp): DirAccess.remove_absolute(tmp + "/" + f)
-	t_catalogos(); t_mundo(); t_apariencia(); t_inventario(); t_recoleccion(); t_fabricacion(); t_construccion()
-	t_progresion(); t_flujo(); t_misiones(); t_tesoro(); t_combate(); t_habitantes(); t_persistencia(); t_regeneracion(); t_capas(); t_anim(); t_equipo(); t_equipo2(); t_migracion_v1(); t_multi(); t_red(); t_arte_equipo(); t_ataque_equipo(); t_imagen_util()
+	t_catalogos(); t_mundo(); t_inventario(); t_recoleccion(); t_fabricacion(); t_construccion()
+	t_progresion(); t_flujo(); t_misiones(); t_tesoro(); t_combate(); t_habitantes(); t_persistencia(); t_regeneracion(); t_anim(); t_equipo(); t_equipo2(); t_migracion_v1(); t_multi(); t_red(); t_arte_equipo(); t_ataque_equipo(); t_estados_e02(); t_mundo_arte(); t_actores_arte(); t_sin_arte_procedural(); t_imagen_util()
 	print("FALLOS: %d" % fallos)
 	quit(1 if fallos else 0)
 
@@ -90,20 +88,6 @@ func t_mundo() -> void:
 func objeto_de(m, tipo: String) -> String:
 	for id in m.objetos: if m.objetos[id].t == tipo: return id
 	return ""
-
-func t_apariencia() -> void:
-	var anclas := true
-	for dir in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
-		for f in 4:
-			var suelo := false
-			var pelo := false
-			for capa in Apar.capas(dir, f):
-				var r: Rect2i = capa[1]
-				if not Rect2i(0, 0, 16, 24).encloses(r): anclas = false
-				if capa[0] == "piernas" and r.end.y == 24: suelo = true
-				if capa[0] == "pelo": pelo = true
-			if not (suelo and pelo): anclas = false
-	ok(anclas, "apariencia: capas en 16x24, pies en y=24, pelo presente (4 dir x 4 cuadros)")
 
 func t_inventario() -> void:
 	var inv := {"madera": 1000}
@@ -169,7 +153,9 @@ func t_fabricacion() -> void:
 	ok(j.fabricar("lingote").ok and j.jug().inv == {"lingote": 1}, "junto al horno: fabrica")
 	j.jug().inv = {"lingote": 2, "madera": 1}
 	j.mundo.poner(Vector2i(31, 40), "mesa", true)
-	ok(j.fabricar("espada_hierro").ok and j.stats().dmg == C.DMG_BASE + 6, "espada: daño derivado del inventario")
+	ok(j.fabricar("espada_hierro").ok and j.stats().dmg == C.DMG_BASE, "espada: tenerla en el inventario no da daño")
+	ok(j.equipar("espada_hierro").ok and j.stats().dmg == C.DMG_BASE + 6 and j.jug().equipo.arma == "espada_hierro", "espada: el daño sale del arma equipada en la ranura arma")
+	ok(j.desequipar("arma").ok and j.stats().dmg == C.DMG_BASE and j.jug().inv.get("espada_hierro", 0) == 1, "espada: desequipar el arma devuelve la espada al inventario y quita el daño")
 
 func t_construccion() -> void:
 	var j = g()
@@ -222,7 +208,7 @@ func t_progresion() -> void:
 func t_misiones() -> void:
 	var j = g()
 	var r: Dictionary = j.hablar("maren")
-	ok(r.tipo == "mision" and j.estado_mision("cap1_piedras") == "activa" and r.texto.begins_with(C.DIALOGOS.origen.viajero), "diálogo abre misión con línea de origen")
+	ok(r.tipo == "mision" and j.estado_mision("cap1_piedras") == "activa" and r.texto == C.DIALOGOS.cap1_piedras.oferta, "diálogo abre misión con línea de origen")
 	j.jug().inv = {"piedra": 5}
 	j.evaluar_misiones()
 	ok(j.estado_mision("cap1_piedras") == "activa", "5/6 piedras: sigue activa")
@@ -517,45 +503,6 @@ func t_flujo() -> void:
 	ok(j.nivel() >= 2, "flujo: el progreso da niveles (xp %d)" % j.jug().xp)
 	ok(j.hablar("maren").texto == C.DIALOGOS.final, "flujo: diálogo final")
 
-# Escribe hojas sinteticas de color solido en tmp/arte_<celda>; devuelve la carpeta.
-func hojas(celda: int, capas: Array, mal: String = "", manifiesto: bool = true) -> String:
-	var d := tmp + "/arte_%d%s" % [celda, mal]
-	DirAccess.make_dir_recursive_absolute(d)
-	if manifiesto:
-		var f := FileAccess.open(d + "/personaje.json", FileAccess.WRITE)
-		f.store_string(JSON.stringify({"celda": celda, "capas": capas}))
-		f.close()
-	for i in capas.size():
-		var n := celda * 4 + (1 if capas[i] == mal else 0)
-		var img := Image.create(n, celda * 4, false, Image.FORMAT_RGBA8)
-		img.fill(Color.from_hsv(i / 9.0, 1, 1))
-		img.save_png("%s/personaje_%s.png" % [d, capas[i]])
-	return d
-
-func t_capas() -> void:
-	var todas: Array = ["cuerpo", "pelo", "tunica", "pantalon", "cinturon", "casco", "coraza", "escudo", "espada"]
-	for celda in [16, 32]:
-		var c = Capas.new(hojas(celda, todas))
-		var pies := Vector2(100, 50)
-		var cmd: Array = c.comandos(pies, Vector2i.DOWN, 2, [])
-		var dst: Rect2 = cmd[0][1]
-		var src: Rect2 = cmd[0][2]
-		ok(c.disponible() and dst.position == Vector2(100 - celda / 2.0, 50 - celda) and dst.end == Vector2(100 + celda / 2.0, 50)
-			and src.position == Vector2(2 * celda, 0), "capas: ancla de pies celda %d (centro inferior en 'pies')" % celda)
-		var img: Image = c.texturas["cuerpo"].get_image()
-		ok(img.get_pixel(int(src.position.x) + celda / 2, int(src.position.y) + celda - 1) == Color.from_hsv(0, 1, 1), "capas: pixel de ancla legible celda %d" % celda)
-	var c2 = Capas.new(hojas(16, todas))
-	var eq: Array = ["escudo", "espada", "casco"]
-	var nom := func(d: Vector2i) -> Array: return c2.comandos(Vector2.ZERO, d, 0, eq).map(func(x): return x[0])
-	var der: Array = nom.call(Vector2i.RIGHT)
-	var izq: Array = nom.call(Vector2i.LEFT)
-	ok(der.find("escudo") < der.find("tunica") and der.find("espada") > der.find("tunica"), "capas: derecha, escudo detras y espada delante")
-	ok(izq.find("escudo") > izq.find("tunica") and izq.find("espada") < izq.find("tunica"), "capas: izquierda, escudo delante y espada detras")
-	ok(not "coraza" in der and c2.comandos(Vector2.ZERO, Vector2i.DOWN, 0, []).size() == 5, "capas: equipo solo si se tiene")
-	ok(not Capas.new(hojas(16, todas, "", false).replace("arte_16", "arte_vacio")).disponible(), "capas: sin manifiesto, disponible() es false")
-	var c3 = Capas.new(hojas(16, todas, "escudo"))
-	ok(not c3.disponible() and c3.errores.size() == 1 and "escudo" in c3.errores[0], "capas: hoja de tamano incorrecto rechazada con mensaje")
-
 func t_anim() -> void:
 	var A = preload("res://scripts/anim_pj.gd")
 	var base := {"mov": false, "t_mov": 0.0, "herr_t": 0.0, "ataque_est": "libre", "ataque_t": 0.0, "inv_t": 0.0}
@@ -571,7 +518,7 @@ func t_anim() -> void:
 	var cs: Array = [0.0, 0.12, 0.24, 0.36, 0.48].map(func(t): return ev.call({"mov": true, "t_mov": t}).cuadro)
 	ok(cs == [0, 1, 2, 3, 0], "anim: cuadro de caminar avanza con t_mov")
 	var ca: Array = [["aviso", 0.10], ["aviso", 0.04], ["activo", 0.1], ["rec", 0.25]].map(func(e): return ev.call({"ataque_est": e[0], "ataque_t": e[1]}).cuadro)
-	ok(ca == [0, 1, 2, 3] and C.ANIM_PJ.ataque.cuadros == 4, "anim: cuadros de ataque 0/1 (aviso), 2 (activo), 3 (rec)")
+	ok(ca == [0, 1, 2, 0] and C.ANIM_PJ.ataque.cuadros == 4, "anim: cuadros de ataque 0/1 (aviso), 2 (activo), 0 (rec: vuelve al preparado, ciclo 1-2-3-1)")
 	ok(ev.call({"herr_t": 0.29}).cuadro == 0 and ev.call({"herr_t": 0.01}).cuadro == 2, "anim: cuadro de herramienta por progreso")
 	var j = g(12)
 	var ad: Vector2i = Mundo.celda_de(j.pies)
@@ -586,29 +533,12 @@ func t_anim() -> void:
 	j.combate.inv_t = 0.5
 	j.combate.est = "activo"
 	ok(j.anim_pj(false, 0.0).estado == "dano" and j.combate.est == "activo", "anim: dano no oculta el ataque para la logica")
-	# capas por estado
-	var todas: Array = ["cuerpo", "pelo"]
-	var d := hojas(16, todas)
-	var fj := FileAccess.open(d + "/personaje.json", FileAccess.WRITE)
-	fj.store_string(JSON.stringify({"celda": 16, "capas": todas, "estados": {"herramienta": {"cuadros": 3}, "dano": {"cuadros": 2}}}))
-	fj.close()
-	Image.create(48, 64, false, Image.FORMAT_RGBA8).save_png(d + "/personaje_herramienta_cuerpo.png")
-	Image.create(30, 64, false, Image.FORMAT_RGBA8).save_png(d + "/personaje_dano_cuerpo.png")   # tamano malo
-	var c = Capas.new(d)
-	var h: Array = c.comandos(Vector2.ZERO, Vector2i.RIGHT, 1, [], "herramienta", 2)
-	var cuerpo: Array = h.filter(func(x): return x[0] == "cuerpo")[0]
-	var pelo: Array = h.filter(func(x): return x[0] == "pelo")[0]
-	ok(c.disponible() and cuerpo[3] == c.estados.herramienta.tex.cuerpo and cuerpo[2].position == Vector2(32, 16), "capas: usa la hoja del estado si existe")
-	ok(pelo[3] == c.texturas.pelo and pelo[2].position == Vector2(16, 16), "capas: capa sin hoja de estado cae a la base")
-	var b: Array = c.comandos(Vector2.ZERO, Vector2i.DOWN, 3, [], "dano", 1)
-	ok(b[0][3] == c.texturas.cuerpo and b[0][2].position == Vector2(48, 0) and c.errores_estado.size() == 1, "capas: estado con hoja invalida o ausente cae a la base e informa")
-	ok(c.comandos(Vector2.ZERO, Vector2i.DOWN, 3, []) .size() == 2 and c.comandos(Vector2.ZERO, Vector2i.DOWN, 3, [], "caminar", 1)[0][2].position == Vector2(48, 0), "capas: sin estado o estado no declarado = comportamiento actual")
 
 # Equipo base (antes casco_hierro/coraza_hierro de 3 ranuras): mismas comprobaciones con piezas de Vigía y 6 ranuras.
 func t_equipo() -> void:
 	var j = g(11)
 	ok(C.validar() == [], "equipo: validar() vacío")
-	ok(j.jug().equipo == J.EQUIPO_VACIO and j.jug().equipo.size() == 6 and j.stats().def == 0, "equipo: estado inicial (6 ranuras vacías)")
+	ok(j.jug().equipo == J.EQUIPO_VACIO and j.jug().equipo.size() == 7 and j.stats().def == 0, "equipo: estado inicial (7 ranuras vacías: set, escudo y arma)")
 	# fabricar recetas nuevas
 	j.jug().hab = ["recolector", "artesano"]
 	j.jug().inv = {"madera": 5, "piedra": 2}
@@ -826,8 +756,8 @@ func t_equipo2() -> void:
 	ok(Guard.guardar(r2, base2), "eq8: se escribe un guardado de formato 2")
 	var j8 = J.cargar(r2)
 	var q: Dictionary = j8.jug()
-	ok(j8.d.formato == 3 and total_obj(q) == tot2 and q.equipo == {"casco": CV, "torso": TV, "guantes": "", "botas": "", "pantalones": "", "escudo": "escudo_madera"}
-		and q.inv == {CV: 2, TV: 1, "escudo_madera": 1, "madera": 3}, "eq8: 2 -> 3: mismo total, coraza -> torso, 3 ranuras nuevas vacías")
+	ok(j8.d.formato == 3 and total_obj(q) == tot2 and q.equipo == {"casco": CV, "torso": TV, "guantes": "", "botas": "", "pantalones": "", "escudo": "escudo_madera", "arma": ""}
+		and q.inv == {CV: 2, TV: 1, "escudo_madera": 1, "madera": 3}, "eq8: 2 -> 3: mismo total, coraza -> torso, ranuras nuevas vacías (incluida el arma)")
 	ok(j8.guardar(r2) and FileAccess.file_exists(r2 + ".bak") and int(JSON.parse_string(FileAccess.get_file_as_string(r2 + ".bak")).formato) == 2, "eq8: el .bak conserva la partida previa a migrar (formato 2)")
 	var v1 := {"formato": 1, "semilla": 3, "min": 600, "pj": {"nombre": "Vieja", "look": [0, 0, 0], "origen": "viajero", "pos": [p.x, p.y], "hp": 20, "cama": [], "inicio": [p.x, p.y]},
 		"inv": {"casco_hierro": 1, "coraza_hierro": 2}, "equipo": {"casco": "casco_hierro", "coraza": "coraza_hierro", "escudo": "escudo_madera"},
@@ -971,7 +901,7 @@ func t_migracion_v1() -> void:
 
 func t_multi() -> void:
 	var j = g(21)
-	ok(j.unir("b", "Bea", [1, 1, 1], "viajero").ok and not j.unir("b", "Otra", [0, 0, 0]).ok and j.jug("b").nombre == "Bea", "multi: unir un segundo jugador (id único)")
+	ok(j.unir("b", "Bea", [1, 1, 1]).ok and not j.unir("b", "Otra", [0, 0, 0]).ok and j.jug("b").nombre == "Bea", "multi: unir un segundo jugador (id único)")
 	j.rt.b.pies = Mundo.pies_de_celda(Vector2i(32, 38))
 	j.jug().inv = {"madera": 3}
 	j.jug("b").inv = {"piedra": 4}
@@ -997,7 +927,7 @@ func t_multi() -> void:
 	j.jug("b").inv = {"lingote": 2, "madera": 1}
 	ok(j.fabricar("espada_hierro").ok and j.jug().inv == {"espada_hierro": 1}, "multi: fabricar con la mesa de otro jugador")
 	ok(not j.fabricar("espada_hierro", "b").ok and j.jug("b").inv == {"lingote": 2, "madera": 1}, "multi: la habilidad de uno no habilita al otro")
-	ok(j.stats().dmg == C.DMG_BASE + 6 and j.stats("b").dmg == C.DMG_BASE, "multi: estadísticas por jugador")
+	ok(j.equipar("espada_hierro").ok and j.stats().dmg == C.DMG_BASE + 6 and j.stats("b").dmg == C.DMG_BASE, "multi: estadísticas por jugador (el arma equipada de uno no afecta al otro)")
 	j.jug("b").xp = 100
 	ok(j.aprender("golpe_fuerte", "b").ok and not j.aprender("golpe_fuerte").ok and j.puntos_libres("b") == 1 and not j.jug().hab.has("golpe_fuerte"), "multi: habilidades y puntos independientes")
 	# misiones y relación
@@ -1066,7 +996,7 @@ func t_red() -> void:
 	var V: int = Srv.VERSION
 	var look := [1, 2, 0]
 	s.registrar_peer(2)
-	var r: Dictionary = s.entrar(2, [V, "Bea", "clave-b", look, "viajero"])
+	var r: Dictionary = s.entrar(2, [V, "Bea", "clave-b", look])
 	var b := "@bea"
 	ok(r.ok and r.id == b and j.rt.has(b) and j.jug(b).nombre == "Bea" and j.jug(b).look == look and j.jug().nombre == "Test", "red: entrar crea un jugador propio sin tocar al local")
 	var cl: Dictionary = j.jug(b).clave
@@ -1075,14 +1005,14 @@ func t_red() -> void:
 	ok(not s.privado(b).has("clave") and not JSON.stringify(est).contains(cl.hash) and est.jugadores.size() == 1 and est.jugadores.local.nombre == "Bea", "red: el estado enviado no lleva el hash ni datos privados de otros")
 	ok(Srv.nombre_valido("  Ana ") == "Ana" and Srv.nombre_valido("a") == "" and Srv.nombre_valido("Ana;drop") == "" and Srv.nombre_valido(7) == "", "red: validación de nombres")
 	s.registrar_peer(3)
-	var malos := [null, "hola", [], [V + 1, "Cai", "clave", look, "viajero"], [V, "x", "clave", look, "viajero"], [V, 42, "clave", look, "viajero"],
-		[V, "Cai", "abc", look, "viajero"], [V, "Cai", "clave", [9, 0, 0], "viajero"], [V, "Cai", "clave", [0, 0], "viajero"], [V, "Cai", "clave", look, "rey"],
-		[V, "Cai", "clave", ["0", 0, 0], "viajero"], [str(V), "Cai", "clave", look, "viajero"]]
+	var malos := [null, "hola", [], [V + 1, "Cai", "clave", look], [V, "x", "clave", look], [V, 42, "clave", look],
+		[V, "Cai", "abc", look], [V, "Cai", "clave", [9, 0, 0]], [V, "Cai", "clave", [0, 0]], [V, "Cai", "clave", look, "extra"],
+		[V, "Cai", "clave", ["0", 0, 0]], [str(V), "Cai", "clave", look]]
 	var todos := true
 	for m in malos: if s.entrar(3, m).ok: todos = false
-	ok(todos and j.d.jugadores.size() == 2, "red: entrar rechaza versión, nombre, clave, apariencia y origen inválidos")
-	ok(s.entrar(3, [V, "Bea", "clave-b", look, "viajero"]).motivo == "Ese jugador ya está conectado", "red: no se entra dos veces con el mismo jugador")
-	var loc: Dictionary = s.entrar(3, [V, "local", "clave", look, "viajero"])
+	ok(todos and j.d.jugadores.size() == 2, "red: entrar rechaza versión, nombre, clave, apariencia y campos de más")
+	ok(s.entrar(3, [V, "Bea", "clave-b", look]).motivo == "Ese jugador ya está conectado", "red: no se entra dos veces con el mismo jugador")
+	var loc: Dictionary = s.entrar(3, [V, "local", "clave", look])
 	ok(loc.ok and loc.id == "@local" and j.jug().nombre == "Test", "red: un nombre remoto nunca suplanta al jugador local")
 	s.retirar_peer(3)
 	# desconexión y reconexión
@@ -1092,8 +1022,8 @@ func t_red() -> void:
 	s.retirar_peer(2)
 	ok(not j.rt.has(b) and j.d.jugadores.has(b) and not s.ids.has(b) and j.jug(b).pos == [donde.x, donde.y], "red: al desconectarse sale del mundo y conserva su estado")
 	s.registrar_peer(4)
-	ok(s.entrar(4, [V, "bea", "otra", look, "viajero"]).motivo == "Clave incorrecta" and not j.rt.has(b), "red: clave incorrecta se rechaza")
-	ok(s.entrar(4, [V, "Bea", "clave-b", look, "viajero"]).ok and j.jug(b).inv == {"madera": 7} and s.ids[b] == 4 and j.pies_de(b) == donde, "red: reconectar con nombre y clave recupera al mismo jugador (inventario y posición)")
+	ok(s.entrar(4, [V, "bea", "otra", look]).motivo == "Clave incorrecta" and not j.rt.has(b), "red: clave incorrecta se rechaza")
+	ok(s.entrar(4, [V, "Bea", "clave-b", look]).ok and j.jug(b).inv == {"madera": 7} and s.ids[b] == 4 and j.pies_de(b) == donde, "red: reconectar con nombre y clave recupera al mismo jugador (inventario y posición)")
 	# intenciones inválidas: tipos, rangos, desconocidas, fuera de alcance, repetidas
 	j.rt[b].pies = Mundo.pies_de_celda(Vector2i(32, 40))
 	var p0: Vector2 = j.pies_de(b)
@@ -1126,8 +1056,8 @@ func t_red() -> void:
 	for i in 50: if s.recibir(4, ["mov", 100 + i, Vector2i.ZERO]): n += 1
 	ok(n == Srv.MAX_PEDIDOS_S, "red: límite de pedidos por segundo y conexión")
 	s.registrar_peer(5)
-	ok(not s.recibir(5, ["accion", 1, Vector2i.UP]) and not s.recibir(5, ["hola", V, "Bea", "mala", look, "viajero"]) and s.peers[5].fuera
-		and not s.recibir(5, ["hola", V, "Bea", "clave-b", look, "viajero"]), "red: sin identificarse no se actúa; tras un rechazo la conexión queda fuera")
+	ok(not s.recibir(5, ["accion", 1, Vector2i.UP]) and not s.recibir(5, ["hola", V, "Bea", "mala", look]) and s.peers[5].fuera
+		and not s.recibir(5, ["hola", V, "Bea", "clave-b", look]), "red: sin identificarse no se actúa; tras un rechazo la conexión queda fuera")
 	# equipo por red: claves `eq:` en pedidos y en el estado privado
 	j.jug(b).inv = {CV: 1, "chispa": 1, "piedra_alma": 1}
 	var r0 := int(s.registro.rechazos.get(b, 0))
@@ -1143,7 +1073,7 @@ func t_red() -> void:
 	var ped = bytes_to_var(var_to_bytes(["equipar", 1, "eq:zarzal:pantalones:brillante:5"]))
 	ok(vuelta == pr and vuelta.equipo.casco == "eq:vigia:casco:divino:1" and ped[2] == "eq:zarzal:pantalones:brillante:5" and Srv._sig([ped[2]], [TYPE_STRING]), "red: estado privado y pedidos con claves eq: viajan intactos (serialización del RPC)")
 	s.registrar_peer(6)
-	ok(s.entrar(6, [V, "Cai", "clave-c", look, "viajero"]).ok, "red: segundo jugador remoto para intercambiar")
+	ok(s.entrar(6, [V, "Cai", "clave-c", look]).ok, "red: segundo jugador remoto para intercambiar")
 	j.jug("@cai").inv = {"chispa": 2}
 	j.jug(b).inv = {"eq:albor:botas::0": 1}
 	ok(s.ejecutar(b, ["ofrecer", 1010, "@cai", {"eq:albor:botas::0": 1}, {"chispa": 2}]) and j.jug(b).inv == {"eq:albor:botas::0": 1}
@@ -1386,7 +1316,7 @@ func t_ataque_equipo() -> void:
 		var an: Dictionary = j.anim_pj(false, 0.0)
 		if an.estado == "ataque" and (seq.is_empty() or seq[-1][1] != an.cuadro): seq.append([j.combate.est, an.cuadro])
 		j.combate.paso(1.0 / 30.0)
-	ok(seq == [["aviso", 0], ["aviso", 1], ["activo", 2], ["rec", 3]], "ataque equipo: las fases dan los cuadros 0,1 (aviso) 2 (activo) 3 (rec) en orden %s" % str(seq))
+	ok(seq == [["aviso", 0], ["aviso", 1], ["activo", 2], ["rec", 0]], "ataque equipo: las fases dan los cuadros 0,1 (aviso) 2 (activo) y vuelven a 0 (rec): ciclo 1-2-3-1 %s" % str(seq))
 	# render: celda 48 en ataque; pieza pendiente cae a su cuadro 0 de caminata (celda 32); sin conjunto, caminata
 	var vis: Array = Eq.visible(set_de("zarzal"))
 	vis.append({"ranura": "espada", "item": "espada_hierro", "paleta": Eq.datos().paletas[C.ITEMS.espada_hierro.paleta]})
@@ -1395,8 +1325,15 @@ func t_ataque_equipo() -> void:
 	for c in cm: por[c[0]] = c
 	ok((por.b_cuerpo[3] as Rect2) == Rect2(76, 2, 48, 48) and (por.b_cuerpo[2] as Rect2) == Rect2(96, 0, 48, 48) and (por.casco[2] as Rect2).size == Vector2(48, 48),
 		"ataque equipo: en ataque la base y las piezas usan celda 48, pivote en los pies y el cuadro = pose")
-	ok(a.atq.pendientes["ligera/torso"].has(Vector2i(0, 2)) and not por.has("torso") and por.has("b_tunica") and por.has("casco"),
-		"ataque equipo: torso PENDIENTE en frente/impacto -> esa pieza no se dibuja y se ve la túnica base de la pose (el resto sí)")
+	ok(a.atq.pendientes["ligera/torso"].is_empty() and por.has("torso") and not por.has("b_tunica") and por.has("casco"),
+		"ataque equipo (E01): torso completo en frente/impacto -> sin celdas pendientes y la pieza se dibuja")
+	ok(a.atq.get("estela") != null, "ataque equipo (E01): la estela de la espada se carga como capa propia")
+	a.atq.pendientes["ligera/torso"][Vector2i(0, 2)] = true   # mecanismo: una celda marcada pendiente ni se dibuja ni oculta la base
+	var por_pend := {}
+	for c in a.comandos(Vector2(100, 50), Vector2i.DOWN, 2, vis, [0, 0, 0], false, "ataque"): por_pend[c[0]] = c
+	ok(not por_pend.has("torso") and por_pend.has("b_tunica") and por_pend.has("casco"),
+		"ataque equipo: una celda PENDIENTE no se dibuja y deja ver la túnica base de la pose (el resto sí)")
+	a.atq.pendientes["ligera/torso"].erase(Vector2i(0, 2))
 	var der: Array = a.comandos(Vector2.ZERO, Vector2i.RIGHT, 1, vis, [0, 0, 0], false, "ataque").map(func(x): return x[0])
 	ok(der.find("escudo") < der.find("torso") and der.find("espada") > der.find("torso"), "ataque equipo: orden de capas por orientación del contrato también en ataque")
 	var iz_d: Array = a.comandos(Vector2.ZERO, Vector2i.LEFT, 3, vis, [0, 0, 0], false, "ataque").map(func(x): return x[0])
@@ -1418,3 +1355,107 @@ func t_imagen_util() -> void:
 	var t: Image = ImagenUtil.imagen(f)
 	ok(t != null and t.get_width() == 8 and t.get_height() == 4 and ImagenUtil.existe(f), "imagen_util: PNG temporal en user:// sigue funcionando")
 	ok(ImagenUtil.imagen("res://arte/no_existe.png") == null and not ImagenUtil.existe("res://arte/no_existe.png"), "imagen_util: ruta inexistente devuelve null")
+
+
+# ---------- E02: herramienta, daño, caída y dormir ----------
+func t_estados_e02() -> void:
+	var AE = preload("res://scripts/arte_equipo.gd")
+	var a = AE.new()
+	var esperado := {"herramienta": [3, 4], "dano": [2, 2], "caida": [2, 2], "dormir": [1, 1]}
+	var cargados := true
+	for n in esperado:
+		var st: Dictionary = a.estados.get(n, {})
+		if not (a.estado_disponible(n) and st.celda == 48 and st.pivote == Vector2(24, 48) and st.mapa.size() == esperado[n][0] and st.base.size() == 7 and st.hojas.size() == 23): cargados = false
+	ok(cargados, "estados E02: herramienta, daño, caída y dormir cargan (celda 48, pivote 24/48, 7 capas base y 23 hojas)")
+	var vis: Array = Eq.visible(set_de("zarzal"))
+	vis.append({"ranura": "espada", "item": "espada_hierro", "paleta": Eq.datos().paletas[C.ITEMS.espada_hierro.paleta]})
+	vis.append({"ranura": "escudo", "item": "escudo_madera", "paleta": Eq.datos().paletas[C.ITEMS.escudo_madera.paleta]})
+	var nombres := func(estado: String, dir: Vector2i, cuadro: int, hacha: bool) -> Array:
+		return a.comandos(Vector2(100, 50), dir, cuadro, vis, [0, 0, 0], false, estado, hacha).map(func(x): return x[0])
+	var h: Array = nombres.call("herramienta", Vector2i.DOWN, 0, true)
+	ok(h.has("guantes_lejana") and h.has("guantes_cercana") and not h.has("guantes"), "estados E02: los guantes se dibujan desdoblados y nunca con el atlas combinado")
+	ok(h[-1] == "hacha" and not nombres.call("herramienta", Vector2i.DOWN, 0, false).has("hacha"), "estados E02: el hacha va encima solo cuando se pide (talar con hacha)")
+	ok(h.has("escudo") and not h.has("espada") and not nombres.call("dano", Vector2i.DOWN, 0, true).has("hacha"), "estados E02: herramienta muestra escudo sin espada; el hacha no aparece fuera de herramienta")
+	var d: Array = nombres.call("dano", Vector2i.DOWN, 0, false)
+	ok(d.has("espada") and d.has("escudo"), "estados E02: daño muestra espada y escudo")
+	ok(not nombres.call("caida", Vector2i.DOWN, 0, false).has("escudo") and not nombres.call("dormir", Vector2i.DOWN, 0, false).has("espada"), "estados E02: caída y dormir no muestran armas")
+	var cm: Array = a.comandos(Vector2(100, 50), Vector2i.RIGHT, 2, vis, [0, 0, 0], false, "herramienta", false)
+	var col2: float = (cm[0][2] as Rect2).position.x / 48.0
+	var fila_d: float = (cm[0][2] as Rect2).position.y / 48.0
+	ok(col2 == 3.0 and fila_d == 1.0 and (cm[0][3] as Rect2) == Rect2(76, 2, 48, 48), "estados E02: cuadro lógico 2 de herramienta usa la columna 3 y la fila de la derecha; pies en el pivote")
+	var cm_d: Array = a.comandos(Vector2.ZERO, Vector2i.DOWN, 5, vis, [0, 0, 0], false, "dano", false)
+	ok((cm_d[0][2] as Rect2).position.x / 48.0 == 1.0, "estados E02: el cuadro de daño se reduce a sus 2 columnas (cuadro 5 -> columna 1)")
+	var der: Array = nombres.call("herramienta", Vector2i.RIGHT, 0, false)
+	var fre: Array = nombres.call("herramienta", Vector2i.DOWN, 0, false)
+	ok(der.find("escudo") >= 0 and der.find("escudo") < der.find("torso") and fre.find("escudo") > fre.find("torso"), "estados E02: escudo detrás del torso en perfil derecho y delante en frente")
+	var sin_estado: Array = nombres.call("estado_inexistente", Vector2i.DOWN, 0, false)
+	ok(sin_estado.size() > 0 and not sin_estado.has("guantes_lejana"), "estados E02: un estado sin hoja cae al render de caminata sin error")
+
+# ---------- E04/E05: terreno, naturaleza, casa y objetos ----------
+func t_mundo_arte() -> void:
+	var MA = preload("res://scripts/mundo_arte.gd")
+	var ma = MA.new()
+	ok(ma.cargar() and ma.mapeo.has("path") and ma.mapeo.has("water") and ma.mapeo.has("ruins") and ma.mapeo.has("wall"), "mundo arte: catálogos E04/E05 cargan y definen camino, agua, ruinas y muro")
+	var m := Mundo.new()
+	var sin_mapeo := 0
+	for y in Mundo.ALTO:
+		for x in Mundo.ANCHO:
+			var c := Vector2i(x, y)
+			var t: int = m.tipo(c)
+			var clase := "path" if t == Mundo.T.CAMINO else "water" if t == Mundo.T.AGUA else "ruins" if t == Mundo.T.RUINA else "wall" if t == Mundo.T.PARED or t == Mundo.T.MURO_RUINA else ""
+			if clase != "" and not ma.mapeo[clase].has(str(ma.mascara(m, c, t))): sin_mapeo += 1
+	ok(sin_mapeo == 0, "mundo arte: toda celda de camino, agua, ruina y muro del mapa tiene su conexión de 47 (%d sin mapeo)" % sin_mapeo)
+	ok(MA._normalizar(0xFF) == 255 and MA._normalizar(16) == 0 and MA._normalizar(1 | 2 | 16) == 19, "mundo arte: la diagonal solo cuenta si sus dos vecinos cardinales coinciden")
+	var texturas_ok := true
+	for k in ["E04_grass_periodica.png", "E04_path_47.png", "E04_water_47_anim.png", "E04_wall_47.png", "E04_ruins_47.png", "E05_casa_tejado_160.png", "E05_casa_fachada_160.png", "E05_valla_mask_15.png", "E05_cofre_cerrado_alineado.png", "E05_barrel.png"]:
+		if ma.tex(k) == null: texturas_ok = false
+	ok(texturas_ok and ma.faltantes.is_empty(), "mundo arte: las texturas de terreno, casa, valla, cofre y barril cargan sin faltantes")
+	var rutas_ok := true
+	var man = JSON.parse_string(FileAccess.get_file_as_string("res://arte/mundo/manifiesto.json"))
+	for f in man.archivos: if FileAccess.get_sha256("res://arte/mundo/" + f) != str(man.archivos[f]): rutas_ok = false
+	ok(rutas_ok, "mundo arte: los %d archivos copiados de E04/E05 conservan el sha256 del manifiesto" % man.archivos.size())
+	ok(ma.tex("no_existe.png") == null and ma.faltantes.has(MA.RAIZ + "no_existe.png"), "mundo arte: un recurso inexistente se registra como faltante, sin dibujar arte anterior")
+
+# ---------- E03: enemigos y efectos ----------
+func t_actores_arte() -> void:
+	var AA = preload("res://scripts/actores_arte.gd")
+	var aa = AA.new()
+	var m := Mundo.new()
+	var e := {"tipo": "slime", "pos": Vector2(100, 100), "home": Vector2(100, 100), "hp": 12, "est": "idle", "dir": Vector2.DOWN, "tam": 12}
+	aa.actualizar(0.016, [e], 40, Vector2(0, 0), m, false)
+	e.hp = 6
+	e.pos = Vector2(101, 100)
+	aa.actualizar(0.016, [e], 40, Vector2(0, 0), m, false)
+	ok(aa.efectos.any(func(f): return f.tipo == "impacto") and aa.seguidos[AA.clave(e)].dano_t > 0.0 and aa.seguidos[AA.clave(e)].mov, "actores arte: un golpe confirmado crea el efecto de impacto, la reacción de daño y la marcha")
+	aa.actualizar(0.016, [], 40, Vector2(0, 0), m, false)
+	ok(aa.residuos.size() == 1 and aa.seguidos.is_empty(), "actores arte: al morir el enemigo queda un residuo gráfico sin colisión")
+	aa.actualizar(0.5, [], 40, Vector2(0, 0), m, false)
+	ok(aa.residuos.is_empty() and aa.efectos.is_empty(), "actores arte: residuo y efectos terminan por duración y no se acumulan")
+	aa.actualizar(0.016, [], 30, Vector2(5, 5), m, false)
+	ok(aa.efectos.any(func(f): return f.tipo == "dano"), "actores arte: perder vida el jugador local crea el efecto de daño")
+	var otro = AA.new()
+	otro.actualizar(0.016, [e], 40, Vector2.ZERO, m, true)
+	e.hp = 1
+	otro.actualizar(0.016, [e], 40, Vector2.ZERO, m, true)
+	ok(otro.seguidos.is_empty() and not otro.efectos.any(func(f): return f.tipo == "impacto"), "actores arte: un cliente de red no deduce eventos por enemigo (sin identidad estable)")
+	ok(AA.cardinal(Vector2(5, 1)) == Vector2i.RIGHT and AA.cardinal(Vector2(-1, -5)) == Vector2i.UP and AA.fila(Vector2i.LEFT) == 3, "actores arte: la dirección se reduce a las 4 filas sur/este/norte/oeste")
+
+# ---------- Regla maestra: el arte procedural anterior no vuelve ----------
+## Recorre scripts/ y falla si aparece dibujo por código fuera de la lista blanca aprobada. Cada entrada es un máximo exacto:
+## marcadores magenta de «arte faltante» (ui_arte 8, mundo_arte 2, actores_arte 2, escena 2), selección de panel (hud 2),
+## zonas de aviso técnicas de enemigos (escena 2), cajas de depuración F1 (escena 2), barra de vida de enemigo (escena 2) e
+## indicador de golpes (escena 1). Un dibujo nuevo con draw_rect/draw_circle/polígonos obliga a revisar esta lista.
+func t_sin_arte_procedural() -> void:
+	var lista := {"ui_arte.gd": 8, "mundo_arte.gd": 2, "actores_arte.gd": 2, "hud.gd": 2, "escena.gd": 9}
+	var re := RegEx.new()
+	re.compile("draw_(rect|circle|colored_polygon|polygon|line|arc|polyline)\\(")
+	var fuera := []
+	for f in DirAccess.get_files_at("res://scripts"):
+		if not f.ends_with(".gd"): continue
+		var n := re.search_all(FileAccess.get_file_as_string("res://scripts/" + f)).size()
+		if n != int(lista.get(f, 0)): fuera.append("%s=%d (permitido %d)" % [f, n, int(lista.get(f, 0))])
+	ok(fuera.is_empty(), "sin arte procedural: ningún script dibuja con primitivas fuera de la lista blanca %s" % str(fuera))
+	ok(not FileAccess.file_exists("res://scripts/arte.gd") and not FileAccess.file_exists("res://scripts/apariencia.gd") and not FileAccess.file_exists("res://scripts/capas_sprite.gd") and not FileAccess.file_exists("res://arte/personaje_cuerpo.png"),
+		"sin arte procedural: los módulos y hojas del arte anterior ya no existen")
+	var esc_src := FileAccess.get_file_as_string("res://scripts/escena.gd")
+	ok(not esc_src.contains("usar_arte") and not esc_src.contains("Arte.suelo") and not esc_src.contains("Apar."), "sin arte procedural: la escena no tiene interruptor ni llamadas al dibujo anterior")

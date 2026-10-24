@@ -1,0 +1,12 @@
+{
+ "_nota": "Copia sin cambios de E03_v001 (enemigos/nativos y efectos/png). Candidato, aceptaci\u00f3n art\u00edstica pendiente.",
+ "origen": "E03_v001",
+ "archivos": {
+  "E03_fx_dano.png": "933542f93e6987a5681f1b0ac73fc46fb5835ef3d52e2a070bc4ede065059e3e",
+  "E03_fx_impacto.png": "f34b5c7610d04982d50a6521248d87e08ae86ffd50decf670a1a72272d2c8bd6",
+  "E03_fx_recoleccion.png": "b2512b296387b8f3baffa568f5d693240635f932335244c8a0592185ec7f9643",
+  "ciervo.png": "c48740790ffa47ef558d7e23c957fd62e08c4f2f8d448df238608a87bdc09dec",
+  "guardian.png": "9245dd5364633fcf95b5a9afae218072815852cf4ccb5d515c36bdf7d9b1e177",
+  "slime.png": "6c34e041eedc40077f8178cdf5adc67dd8cf5089118dbfe31a5708e6ab61002c"
+ }
+}

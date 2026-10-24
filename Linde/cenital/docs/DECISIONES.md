@@ -193,3 +193,20 @@ Código: `scripts/red_servidor.gd`, `scripts/red_cliente.gd` (con la réplica `R
 
 ## Arte nuevo por defecto (2026-10-24)
 **Instrucción del usuario:** la línea de arte anterior (dibujo procedural) no debe salir más. `usar_arte` arranca en `true` en `escena.gd` y se quitó la tecla F2 que alternaba al dibujo procedural. Hoy solo el personaje y su equipo usan sprites; mundo, enemigos, habitante, efectos e interfaz siguen procedurales hasta ejecutar `Linde/documentos/PLAN_ESTETICA_2_SESIONES.md`, que los reemplaza y retira `arte.gd` y las rutas procedurales. Los argumentos `--arte` y `--equipo=` siguen disponibles solo con `--nueva=`.
+
+
+## Integración estética completa (2026-10-24)
+Se integraron los seis entregables de arte (E01–E06, candidatos sin aceptación artística) y se retiró el dibujo por código anterior.
+- **Mundo (E04+E05):** `scripts/mundo_arte.gd`, datos en `arte/mundo/` (manifiesto con sha256). Terreno por 47 conexiones, agua animada de 4 cuadros, árboles de 64 px con copa translúcida, estados agotados (tocón, roca, veta, arbusto), vallas conectadas, cofres, barril, casa modular (interior, fachada, puerta, tejado que se oculta al entrar) y construcciones (el fantasma de construir es la misma textura tintada).
+- **Actores (E03):** `scripts/actores_arte.gd`, `arte/actores/`. Slime, Guardián y Ciervo (9 columnas × 4 direcciones), residuo de derrota, efectos de impacto, daño y recolección. Los eventos se deducen de cambios confirmados; un cliente de red no deduce reacciones por enemigo (el snapshot no trae identidad estable). Maren usa la base compartida del personaje con `look` [1,0,2].
+- **Personaje (E01+E02):** ataque con las 9 celdas completas y la estela como capa propia; estados herramienta, daño, caída y dormir cargados desde `arte/equipo/estados/`. Herramienta y daño están conectados; **caída y dormir están cargados pero sin disparador** (E02: no inventar eventos). El hacha solo se ve en el jugador local al talar con hacha; los remotos no la muestran (el protocolo no transmite la herramienta).
+- **Interfaz (E06):** `scripts/ui_arte.gd` y `hud.gd` reescrito con paneles de 9 parches, botones, barras (la de XP usa `xp_fill.svg`), iconos por ítem y por ranura, tipografía Pixelify Sans (OFL), tinte nocturno por shader solo en el mundo, sombra de pies e indicador de interacción.
+- **Retirado:** `arte.gd`, `apariencia.gd`, `capas_sprite.gd`, `arte/personaje*`, las capturas del arte anterior, la bandera `usar_arte`, F2 y `--arte`. Si falta un recurso, se registra `push_error` y se dibuja un marcador magenta.
+- **Lista blanca de dibujo por código** (`t_sin_arte_procedural`): marcadores de arte faltante, selección de panel, zonas de aviso de enemigos, cajas de depuración F1, barra de vida de enemigo e indicador de golpes. Cualquier otro `draw_rect`/`draw_circle`/polígono falla la prueba.
+- **Pendiente:** aceptación artística de todos los lotes; panel de habilidades con los iconos `skill_*` y `categoria_*`; `quest_marker`; barra de vida de enemigo con arte; daño de enemigo remoto; disparadores de caída y dormir (requieren autorización); revisión con dos clientes en red real.
+
+
+## Origen retirado, semilla fuera del creador y ranura de arma (2026-10-24, decisión del usuario)
+- **Origen:** eliminado por completo (catálogo, creador, partida, diálogo y protocolo de red; `Srv.VERSION` pasa a 2: el paquete «hola» ya no lo lleva). Los guardados antiguos con la clave `origen` se cargan igual: se ignora.
+- **Semilla:** el mapa es único; la semilla solo elige dónde apareces y el botín. Ya no aparece en el creador: cada partida nueva usa una aleatoria. `--nueva=SEMILLA` sigue como argumento de depuración.
+- **Ranura de arma:** `C.RANURAS` incluye `arma` (7 ranuras). La espada de hierro se equipa (Enter en la mochila), el daño sale del arma equipada (tenerla en el inventario ya no da daño) y se dibuja solo si está equipada, también en los jugadores remotos. Los guardados antiguos reciben la ranura vacía.

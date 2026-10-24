@@ -1,0 +1,89 @@
+{
+  "id": "E05_CASA_MODULAR_v002",
+  "canvas": [
+    160,
+    160
+  ],
+  "origen_casa_en_canvas": [
+    16,
+    32
+  ],
+  "pivote_comun": [
+    16,
+    32
+  ],
+  "casa_logica": {
+    "rect_celdas": [
+      24,
+      16,
+      8,
+      7
+    ],
+    "dimensiones_px": [
+      128,
+      112
+    ],
+    "puerta_celda": [
+      27,
+      22
+    ],
+    "puerta_local_rect": [
+      48,
+      96,
+      16,
+      16
+    ],
+    "pies_celda_puerta_local": [
+      56,
+      108
+    ]
+  },
+  "fachada_local_rect": [
+    0,
+    80,
+    128,
+    32
+  ],
+  "tejado_local_rect": [
+    -8,
+    -12,
+    144,
+    92
+  ],
+  "portal_visual_local_rect": [
+    46,
+    88,
+    20,
+    24
+  ],
+  "partes": {
+    "casa_tejado_160": "E05_casa_tejado_160.png",
+    "casa_fachada_160": "E05_casa_fachada_160.png",
+    "casa_puerta_cerrada_160": "E05_casa_puerta_cerrada_160.png",
+    "casa_puerta_abierta_160": "E05_casa_puerta_abierta_160.png",
+    "casa_interior_160": "E05_casa_interior_160.png",
+    "casa_paredes_interior_160": "E05_casa_paredes_interior_160.png"
+  },
+  "orden_exterior": [
+    "interior",
+    "paredes_interiores",
+    "objetos_por_pies",
+    "fachada",
+    "puerta",
+    "tejado"
+  ],
+  "orden_interior": "Ocultar tejado; fachada/puerta pueden atenuarse como en el render actual. Cama de Maren conserva celda [30,18].",
+  "colision": "Sin cambios; no se deduce del PNG. El portal sigue la celda lógica original, no crea cerradura.",
+  "fuentes": {
+    "cerrada": {
+      "archivo": "cottage_closed.png",
+      "sha256": "436407cde8a5f0b72ec5d289059c98087c6d2097e888315a0697573f8f5b9474"
+    },
+    "abierta": {
+      "archivo": "cottage_open.png",
+      "sha256": "ee60e83dc1402f848dcdf2c28ad8f198fba7d2e01568c50ca9856cf5dba42a1a"
+    }
+  },
+  "metodo": "Módulos de píxeles existentes, repetición de materiales sin redimensionar el edificio completo. Cerrada/abierta difieren únicamente en el portal.",
+  "estado": "validado estructural; aspecto y repetición del tejado pendientes de recepción artística"
+}

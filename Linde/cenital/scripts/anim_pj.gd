@@ -3,9 +3,9 @@ extends RefCounted
 # ctx: {mov: bool, t_mov: float, herr_t: float, ataque_est: "libre"|"aviso"|"activo"|"rec", ataque_t: float, inv_t: float}
 const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
-## Ataque: 4 cuadros = las 4 poses de ataque.png (preparado, anticipación, impacto, recuperación). Fase -> cuadro:
-## aviso = preparado (primera mitad) y anticipación (segunda mitad); activo = impacto; rec = recuperación.
-const FASE := {"aviso": 0, "activo": 2, "rec": 3}
+## Ataque sencillo 1-2-3-1: aviso = preparado (cuadro 0, primera mitad) y anticipación (cuadro 1, segunda mitad); activo = impacto
+## (cuadro 2); recuperación = vuelve al preparado (cuadro 0), igual que el primero. Sin cuadros intermedios de más.
+const FASE := {"aviso": 0, "activo": 2, "rec": 0}
 
 # Prioridad: dano > ataque > herramienta > caminar > reposo. Solo afecta a la animación, no a la lógica.
 static func estado_y_cuadro(ctx: Dictionary) -> Dictionary:

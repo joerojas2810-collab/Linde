@@ -1,0 +1,367 @@
+{
+  "id": "E05_VALLAS_16_v002",
+  "paso_mundo_px": 16,
+  "bits": {
+    "n": 1,
+    "e": 2,
+    "s": 4,
+    "w": 8
+  },
+  "nodos": [
+    {
+      "mascara": 0,
+      "archivo": "E05_valla_mask_00.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {}
+    },
+    {
+      "mascara": 1,
+      "archivo": "E05_valla_mask_01.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "n": [
+          24,
+          32
+        ]
+      }
+    },
+    {
+      "mascara": 2,
+      "archivo": "E05_valla_mask_02.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "e": [
+          32,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 3,
+      "archivo": "E05_valla_mask_03.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "n": [
+          24,
+          32
+        ],
+        "e": [
+          32,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 4,
+      "archivo": "E05_valla_mask_04.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "s": [
+          24,
+          48
+        ]
+      }
+    },
+    {
+      "mascara": 5,
+      "archivo": "E05_valla_mask_05.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "n": [
+          24,
+          32
+        ],
+        "s": [
+          24,
+          48
+        ]
+      }
+    },
+    {
+      "mascara": 6,
+      "archivo": "E05_valla_mask_06.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "e": [
+          32,
+          40
+        ],
+        "s": [
+          24,
+          48
+        ]
+      }
+    },
+    {
+      "mascara": 7,
+      "archivo": "E05_valla_mask_07.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "n": [
+          24,
+          32
+        ],
+        "e": [
+          32,
+          40
+        ],
+        "s": [
+          24,
+          48
+        ]
+      }
+    },
+    {
+      "mascara": 8,
+      "archivo": "E05_valla_mask_08.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "w": [
+          16,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 9,
+      "archivo": "E05_valla_mask_09.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "n": [
+          24,
+          32
+        ],
+        "w": [
+          16,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 10,
+      "archivo": "E05_valla_mask_10.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "e": [
+          32,
+          40
+        ],
+        "w": [
+          16,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 11,
+      "archivo": "E05_valla_mask_11.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "n": [
+          24,
+          32
+        ],
+        "e": [
+          32,
+          40
+        ],
+        "w": [
+          16,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 12,
+      "archivo": "E05_valla_mask_12.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "s": [
+          24,
+          48
+        ],
+        "w": [
+          16,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 13,
+      "archivo": "E05_valla_mask_13.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "n": [
+          24,
+          32
+        ],
+        "s": [
+          24,
+          48
+        ],
+        "w": [
+          16,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 14,
+      "archivo": "E05_valla_mask_14.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "e": [
+          32,
+          40
+        ],
+        "s": [
+          24,
+          48
+        ],
+        "w": [
+          16,
+          40
+        ]
+      }
+    },
+    {
+      "mascara": 15,
+      "archivo": "E05_valla_mask_15.png",
+      "canvas": [
+        48,
+        64
+      ],
+      "pivote": [
+        24,
+        40
+      ],
+      "puertos_activos": {
+        "n": [
+          24,
+          32
+        ],
+        "e": [
+          32,
+          40
+        ],
+        "s": [
+          24,
+          48
+        ],
+        "w": [
+          16,
+          40
+        ]
+      }
+    }
+  ],
+  "fuente": "fence_horizontal.png",
+  "sha256_fuente": "ca46412a6838c0e381d8136bbfcc2bc9b9a6abd7263dfa750a823fa7631667d1",
+  "metodo": "Postes y listones extraídos del original; todos los nodos comparten dimensiones y alturas. Los puertos son anclas de suelo, no píxeles de la parte alta del listón.",
+  "nota": "La valla horizontal original y las muestras v001 permanecen disponibles; estos nodos reemplazan su escala inconsistente al construir redes."
+}

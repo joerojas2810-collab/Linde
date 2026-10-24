@@ -35,6 +35,10 @@ var recoloreados := 0            # nº de texturas generadas (para comprobar la 
 ## celda 48, pivote 24/48 (mismo suelo que la caminata), 4 cuadros = poses; base sin espada por capas; hojas por
 ## arquetipo/ranura con celdas PENDIENTES (vacías). Si falta o es inválido, el ataque usa el cuadro 0 de caminata.
 var atq := {"celda": 0, "pivote": Vector2.ZERO, "base": {}, "hojas": {}, "pendientes": {}, "delante": {}, "errores": []}
+var estados: Dictionary = {}     # herramienta | dano | caida | dormir -> {celda, pivote, mapa, base, hojas, hacha, errores}
+## Estados de E02 y las armas que muestra cada uno (contrato: herramienta = hacha+escudo; daño = espada+escudo; caída/dormir = ninguna).
+const ESTADOS_E02 := ["herramienta", "dano", "caida", "dormir"]
+const ARMAS_ESTADO := {"herramienta": ["escudo"], "dano": ["espada", "escudo"], "caida": [], "dormir": []}
 
 func _init(dir: String = "res://arte/equipo") -> void:
 	var ruta := dir + "/manifiesto.json"
@@ -58,7 +62,48 @@ func _init(dir: String = "res://arte/equipo") -> void:
 			var archivo: String = str(h.get("archivo", "")) if h is Dictionary else ""
 			_cargar(dir + "/" + archivo, func(img: Image) -> void: hojas["%s/%s" % [arq, r]] = img)
 	for e in errores: push_warning("arte_equipo: " + e)
-	if errores.is_empty(): _cargar_ataque(dir + "/ataque")
+	if errores.is_empty():
+		_cargar_ataque(dir + "/ataque")
+		_cargar_estados(dir + "/estados")
+
+## Estados de E02 (herramienta, daño, caída, dormir): cada uno con su atlas (columnas × 4 filas de celda 48, pivote 24/48),
+## su base por capas y sus hojas de equipo; guantes desdoblados en cercana/lejana. <dir>/<estado>/E02_estado.json.
+func _cargar_estados(dir: String) -> void:
+	for nombre in ESTADOS_E02:
+		var ruta := "%s/%s/E02_estado.json" % [dir, nombre]
+		if not FileAccess.file_exists(ruta): continue
+		var man = JSON.parse_string(FileAccess.get_file_as_string(ruta))
+		var st := {"celda": 0, "pivote": Vector2.ZERO, "mapa": [], "base": {}, "hojas": {}, "hacha": null, "errores": []}
+		if not (man is Dictionary and man.get("celda") is Array and man.get("pivote") is Array and man.get("columnas") is float
+				and man.get("base") is Dictionary and man.get("equipo") is Dictionary and man.get("cuadros_runtime_a_fuente") is Array):
+			st.errores.append("manifiesto de estado inválido: " + ruta)
+		else:
+			var cel := int(man.celda[0])
+			var cols := int(man.columnas)
+			var base_dir := "%s/%s/" % [dir, nombre]
+			var capas = man.base.get("capas", {})
+			if not capas is Dictionary or capas.is_empty(): st.errores.append("%s: base sin capas" % nombre)
+			else:
+				for c in capas: _cargar_estado_img(base_dir + str(capas[c]), cel, cols, st.errores, func(img: Image) -> void: st.base[str(c)] = img)
+			for k in man.equipo:
+				_cargar_estado_img(base_dir + str(man.equipo[k]), cel, cols, st.errores, func(img: Image) -> void: st.hojas[str(k)] = img)
+			if man.get("herramienta") is String:
+				_cargar_estado_img(base_dir + str(man.herramienta), cel, cols, st.errores, func(img: Image) -> void: st.hacha = ImageTexture.create_from_image(img))
+			st.celda = cel
+			st.pivote = Vector2(float(man.pivote[0]), float(man.pivote[1]))
+			st.mapa = man.cuadros_runtime_a_fuente
+		for e in st.errores: push_warning("arte_equipo (%s): %s" % [nombre, e])
+		estados[nombre] = st
+
+func _cargar_estado_img(f: String, cel: int, cols: int, errs: Array, guardar: Callable) -> void:
+	var img: Image = ImagenUtil.imagen(f)
+	if img == null: errs.append("falta " + f); return
+	if img.get_width() != cols * cel or img.get_height() != 4 * cel: errs.append("%s no mide %dx%d" % [f, cols * cel, 4 * cel]); return
+	img.convert(Image.FORMAT_RGBA8)
+	guardar.call(img)
+
+func estado_disponible(nombre: String) -> bool:
+	return disponible() and estados.has(nombre) and estados[nombre].errores.is_empty() and not estados[nombre].base.is_empty()
 
 func _cargar_ataque(dir: String) -> void:
 	var ruta := dir + "/manifiesto.json"
@@ -83,6 +128,9 @@ func _cargar_ataque(dir: String) -> void:
 				for p in h.get("pendientes", []): if p is Array and p.size() == 2: pend[Vector2i(int(p[0]), int(p[1]))] = true
 				atq.pendientes[clave] = pend
 		for k in man.get("espada_delante", []): atq.delante[str(k)] = true
+		var est = man.get("estela")
+		if est is Dictionary:   # capa de efecto de la espada (E01): mismo atlas y celda que las poses; solo presentación
+			_cargar_en(dir + "/" + str(est.get("archivo", "")), cel, atq.errores, func(img: Image) -> void: atq.estela = ImageTexture.create_from_image(img))
 		atq.celda = cel
 		atq.pivote = Vector2(float(man.pivote[0]), float(man.pivote[1]))
 	for e in atq.errores: push_warning("arte_equipo (ataque): " + e)
@@ -144,7 +192,8 @@ static func recolorear(img: Image, mapa: Dictionary) -> Image:
 func textura_pieza(e: Dictionary, conjunto: String = "") -> Texture2D:
 	var ranura := str(e.get("ranura", ""))
 	var arq := "compartido" if ranura in RANURAS_COMPARTIDAS else str(e.get("arquetipo", ""))
-	var img: Image = (atq.hojas if conjunto == "ataque" else hojas).get("%s/%s" % [arq, ranura])
+	var fuente_hojas: Dictionary = atq.hojas if conjunto == "ataque" else (estados[conjunto].hojas if estados.has(conjunto) else hojas)
+	var img: Image = fuente_hojas.get("%s/%s" % [arq, ranura])
 	var pal: Dictionary = e.get("paleta") if e.get("paleta") is Dictionary else {}
 	if img == null or pal.is_empty(): return null
 	var variante := str(e.get("variante", ""))
@@ -187,9 +236,9 @@ func capas_base(look: Array, conjunto: String = "") -> Dictionary:
 	if cache_base.has(k): return cache_base[k]
 	var tinte := {"piel": _de(P.PIEL, look, 0), "pelo": _de(P.PELO, look, 1), "tunica": _de(P.ROPA, look, 2), "pantalon": P.PANTALON}
 	var out := {}
-	var fuente: Dictionary = atq.base if conjunto == "ataque" else base
+	var fuente: Dictionary = atq.base if conjunto == "ataque" else (estados[conjunto].base if estados.has(conjunto) else base)
 	for c in fuente:
-		var media := valor_medio(base[c]) if conjunto == "ataque" and base.has(c) else -1.0
+		var media := valor_medio(base[c]) if conjunto != "" and base.has(c) else -1.0
 		out["b_" + c] = ImageTexture.create_from_image(tenir(fuente[c], tinte[c], media) if tinte.has(c) else fuente[c])
 	cache_base[k] = out
 	return out
@@ -198,6 +247,50 @@ static func _de(lista: Array, look: Array, i: int) -> Color:
 	var n: int = int(look[i]) if i < look.size() and (look[i] is int or look[i] is float) else 0
 	return lista[n] if n >= 0 and n < lista.size() else lista[0]
 
+# ---------- estados de E02 ----------
+## [[capa, textura, origen, destino], ...] para herramienta, daño, caída o dormir. Orden del contrato (abajo a arriba):
+## cuerpo, piel, ropa base no oculta, guantes lejanos, escudo (perfil derecho: detrás), cinturón, botas, pantalones, torso,
+## guantes cercanos, escudo (resto), espada (solo daño; perfil izquierdo: detrás), pelo, casco y hacha (solo herramienta y
+## solo si `hacha`). Los guantes se dibujan desdoblados, nunca con el atlas combinado.
+func _comandos_estado(pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Array, estado: String, hacha: bool) -> Array:
+	var st: Dictionary = estados[estado]
+	var cel: int = st.celda
+	var col := int(st.mapa[posmod(cuadro, st.mapa.size())])
+	var dst := Rect2((pies - st.pivote).round(), Vector2(cel, cel))
+	var src := Rect2(Vector2(col, FILA.get(dir, 0)) * cel, Vector2(cel, cel))
+	var armas: Array = ARMAS_ESTADO.get(estado, [])
+	var piezas := {}
+	for e in equipo:
+		if not e is Dictionary: continue
+		var r := str(e.ranura)
+		if r in RANURAS_COMPARTIDAS and not r in armas: continue
+		if r == "guantes":
+			for lado in ["lejana", "cercana"]:
+				var e2: Dictionary = e.duplicate()
+				e2.ranura = "guantes_" + lado
+				var tg := textura_pieza(e2, estado)
+				if tg != null: piezas["guantes_" + lado] = tg
+			continue
+		var t := textura_pieza(e, estado)
+		if t != null: piezas[r] = t
+	var ocultas: Array = []
+	for r in piezas: if OCULTA.has(r): ocultas.append(OCULTA[r])
+	var b := capas_base(look, estado)
+	var orden: Array = ["b_cuerpo", "b_piel", "b_botas", "b_pantalon", "guantes_lejana"]
+	if dir == Vector2i.RIGHT: orden.append("escudo")
+	if dir == Vector2i.LEFT: orden.append("espada")
+	orden += ["b_tunica", "b_cinturon", "botas", "pantalones", "torso", "guantes_cercana"]
+	if dir != Vector2i.RIGHT: orden.append("escudo")
+	if dir != Vector2i.LEFT: orden.append("espada")
+	orden += ["b_pelo", "casco"]
+	var out: Array = []
+	for capa in orden:
+		if capa in ocultas: continue
+		if b.has(capa): out.append([capa, b[capa], src, dst])
+		elif piezas.has(capa): out.append([capa, piezas[capa], src, dst])
+	if hacha and estado == "herramienta" and st.hacha != null: out.append(["hacha", st.hacha, src, dst])
+	return out
+
 # ---------- dibujo ----------
 ## [[capa, textura, origen, destino], ...] de abajo a arriba. cuadro = cuadro de caminata (reposo = 0).
 ## equipo: entradas de Equipo.visible() (+ espada). Las piezas sin hoja o paleta se omiten y no ocultan nada.
@@ -205,9 +298,10 @@ static func _de(lista: Array, look: Array, i: int) -> Color:
 ## pieza con esa celda PENDIENTE no se dibuja ni oculta su capa base (se ve la pose de ataque.png); una pieza sin hoja
 ## de ataque usa su cuadro 0 de caminata. En las poses donde ataque.png pinta la espada sobre el cuerpo
 ## (manifiesto "espada_delante") la espada pasa delante del torso aunque el perfil la ponga detrás.
-func comandos(pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Array, invertir: bool = INVERTIR_PERFILES, estado: String = "") -> Array:
+func comandos(pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Array, invertir: bool = INVERTIR_PERFILES, estado: String = "", hacha: bool = false) -> Array:
 	var out: Array = []
 	if not disponible(): return out
+	if estado_disponible(estado): return _comandos_estado(pies, dir, cuadro, equipo, look, estado, hacha)
 	var fila: int = FILA.get(dir, 0)
 	var dst := Rect2((pies - pivote).round(), Vector2(celda, celda))
 	var src := Rect2(Vector2(posmod(cuadro, 4), fila) * celda, Vector2(celda, celda))
@@ -245,6 +339,9 @@ func comandos(pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Ar
 		elif piezas.has(capa): out.append([capa, piezas[capa][0], piezas[capa][1], piezas[capa][2]])
 	return out
 
-func dibujar(ci: CanvasItem, pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Array, estado: String = "") -> void:
+func dibujar(ci: CanvasItem, pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Array, estado: String = "", hacha: bool = false) -> void:
 	ci.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	for c in comandos(pies, dir, cuadro, equipo, look, INVERTIR_PERFILES, estado): ci.draw_texture_rect_region(c[1], c[3], c[2])
+	for c in comandos(pies, dir, cuadro, equipo, look, INVERTIR_PERFILES, estado, hacha): ci.draw_texture_rect_region(c[1], c[3], c[2])
+	if estado == "ataque" and ataque_disponible() and atq.get("estela") != null:
+		var tam := Vector2(atq.celda, atq.celda)
+		ci.draw_texture_rect_region(atq.estela, Rect2((pies - atq.pivote).round(), tam), Rect2(Vector2(posmod(cuadro, 4), FILA.get(dir, 0)) * atq.celda, tam))

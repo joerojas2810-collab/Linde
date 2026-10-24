@@ -16,7 +16,7 @@ const LOCAL := P.LOCAL
 const CAP_COFRE := 30
 const ALCANCE_ESTACION := 2     # celdas (Chebyshev)
 const ALCANCE_NPC := 32.0       # px
-const EQUIPO_VACIO := {"casco": "", "torso": "", "guantes": "", "botas": "", "pantalones": "", "escudo": ""}   # = C.RANURAS
+const EQUIPO_VACIO := {"casco": "", "torso": "", "guantes": "", "botas": "", "pantalones": "", "escudo": "", "arma": ""}   # = C.RANURAS
 
 var d := {}
 var mundo := Mundo.new()
@@ -42,13 +42,13 @@ var herr_t: float:       # s restantes de la animación de herramienta (solo ani
 var msgs: Array:
 	get: return rt[LOCAL].msgs
 
-static func nuevo_jugador(nombre: String, look: Array, origen: String, p: Vector2) -> Dictionary:
+static func nuevo_jugador(nombre: String, look: Array, p: Vector2) -> Dictionary:
 	return {"nombre": nombre.strip_edges().substr(0, 16) if nombre.strip_edges() != "" else "Viajero", "look": look.duplicate(),
-		"origen": origen, "pos": [p.x, p.y], "hp": C.HP_BASE, "cama": [], "inicio": [p.x, p.y],
+		"pos": [p.x, p.y], "hp": C.HP_BASE, "cama": [], "inicio": [p.x, p.y],
 		"inv": {}, "equipo": EQUIPO_VACIO.duplicate(), "hab": [], "xp": 0, "misiones": {}, "eventos": {}, "recompensas": [],
 		"pendientes": {}, "relacion": {}}
 
-static func nueva(semilla: int, nombre: String, look: Array, origen: String = "viajero"):
+static func nueva(semilla: int, nombre: String, look: Array):
 	var j = new()
 	j.d = {"semilla": semilla}
 	var p := Mundo.pies_de_celda(j.mundo.punto_inicio(semilla))
@@ -58,7 +58,7 @@ static func nueva(semilla: int, nombre: String, look: Array, origen: String = "v
 	if rt_.randf() < 0.5: cont["mena"] = 3
 	j.d = {"formato": Guard.FORMATO, "contenido": 1, "gen": 1, "semilla": semilla, "min": 6 * 60,
 		"cofres": {"tesoro_cantera": {"inv": cont, "abierto": false}}, "mundo": j.mundo.estado, "jefes": {}, "npcs": {},
-		"jugadores": {LOCAL: nuevo_jugador(nombre, look, origen, p)}}
+		"jugadores": {LOCAL: nuevo_jugador(nombre, look, p)}}
 	j._arrancar()
 	return j
 
@@ -116,10 +116,10 @@ func _sesion(id: String) -> void:
 	rt[id] = {"pies": Vector2(pos[0], pos[1]), "mira": Vector2i.DOWN, "cd_obj": 0.0, "herr_t": 0.0, "msgs": []}
 
 # Añade un jugador al mundo (servidor/pruebas). Empieza en el inicio de la semilla, con estado propio vacío.
-func unir(id: String, nombre: String, look: Array, origen: String = "viajero") -> Dictionary:
+func unir(id: String, nombre: String, look: Array) -> Dictionary:
 	if d.jugadores.has(id): return _no("Ese jugador ya está en el mundo", id)
 	var p := Mundo.pies_de_celda(mundo.punto_inicio(int(d.semilla)))
-	d.jugadores[id] = nuevo_jugador(nombre, look, origen, p)
+	d.jugadores[id] = nuevo_jugador(nombre, look, p)
 	_sesion(id)
 	evaluar_misiones(id)
 	return _ok("Entras al mundo.", id)
@@ -214,9 +214,8 @@ func stats(id: String = LOCAL) -> Dictionary:
 	var s := {"hp": C.HP_BASE, "dmg": C.DMG_BASE, "vel": 1.0, "slots": C.MAX_SLOTS_BASE, "golpes_menos": 0, "def": 0}
 	for h in pj.hab:
 		for k in C.HAB[h].efe: s[k] += C.HAB[h].efe[k]
-	var mejor := 0
-	for it in pj.inv: mejor = maxi(mejor, int(Eq.info(it).get("dmg", 0)))
-	s.dmg += mejor
+	var arma: String = str(pj.equipo.get("arma", ""))   # el daño de arma sale solo del arma equipada, no del inventario
+	if arma != "": s.dmg += int(Eq.info(arma).get("dmg", 0))
 	var f: Dictionary = Eq.finales(pj.equipo, int(s.hp) - C.HP_BASE, float(s.vel) - 1.0, C.HP_BASE)   # 3.2: redondeo único
 	s.def = f.def
 	s.hp = f.hp
@@ -644,8 +643,7 @@ func hablar(npc: String, id: String = LOCAL) -> Dictionary:
 		if e == "" and mision_disponible(mid, id):
 			aceptar(mid, id)
 			evaluar_misiones(id)
-			var extra: String = C.DIALOGOS.origen[pj.origen] + " " if veces == 1 else ""
-			return {"texto": extra + dl.oferta, "tipo": "mision"}
+			return {"texto": dl.oferta, "tipo": "mision"}
 		if e == "activa": return {"texto": dl.recordar + "  " + progreso_txt(mid, id), "tipo": "expresivo"}
 		if e == "cumplida":
 			var r := entregar(mid, id)

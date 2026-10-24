@@ -1,0 +1,150 @@
+extends RefCounted
+## Arte del mundo (E04 terreno/naturaleza + E05 casa/objetos). Sustituye al dibujo procedural: no hay vuelta atrás.
+## Datos y hojas en res://arte/mundo (manifiesto.json con sha256). Si falta un recurso se registra en `faltantes`,
+## se avisa con push_error una sola vez y se dibuja un marcador magenta visible; nunca el arte anterior.
+const RAIZ := "res://arte/mundo/"
+const Mundo = preload("res://scripts/mundo.gd")
+const CELDA := 16
+const ARBOLES := ["broadleaf", "pine", "fruit"]
+const VECINOS := [[Vector2i.UP, 1], [Vector2i.RIGHT, 2], [Vector2i.DOWN, 4], [Vector2i.LEFT, 8], [Vector2i(1, -1), 16], [Vector2i(1, 1), 32], [Vector2i(-1, 1), 64], [Vector2i(-1, -1), 128]]
+const CARDINALES := [[Vector2i.UP, 1], [Vector2i.RIGHT, 2], [Vector2i.DOWN, 4], [Vector2i.LEFT, 8]]
+const MARCADOR := Color(1, 0, 1, 0.85)
+
+var mapeo: Dictionary = {}
+var objetos: Dictionary = {}
+var casa: Dictionary = {}
+var texturas: Dictionary = {}
+var faltantes: Dictionary = {}
+var cargado := false
+
+func cargar() -> bool:
+	if cargado: return true
+	var cat = _json("E04_catalogo.json")
+	var o4 = _json("E04_objetos.json")
+	var o5 = _json("E05_objetos.json")
+	var cs = _json("E05_casa_modular.json")
+	if cat == null or o4 == null or o5 == null or cs == null: return false
+	mapeo = cat.mapping
+	objetos = o4.duplicate()
+	objetos.merge(o5)
+	casa = cs
+	cargado = true
+	return true
+
+func _json(f: String):
+	var txt := FileAccess.get_file_as_string(RAIZ + f)
+	var d = JSON.parse_string(txt) if txt != "" else null
+	if d == null: _falta(RAIZ + f)
+	return d
+
+func _falta(ruta: String) -> void:
+	if faltantes.has(ruta): return
+	faltantes[ruta] = true
+	push_error("Arte faltante: " + ruta)
+
+func tex(f: String) -> Texture2D:
+	if texturas.has(f): return texturas[f]
+	var t: Texture2D = null
+	if ResourceLoader.exists(RAIZ + f): t = load(RAIZ + f) as Texture2D
+	if t == null: _falta(RAIZ + f)
+	texturas[f] = t
+	return t
+
+func _tex_rect(ci: CanvasItem, f: String, r: Rect2, tinte: Color = Color.WHITE) -> void:
+	var t := tex(f)
+	if t == null: ci.draw_rect(r, MARCADOR)
+	else: ci.draw_texture_rect(t, r, false, tinte)
+
+# ---------- terreno (47 conexiones por material) ----------
+static func _normalizar(m: int) -> int:
+	for q in [[1, 2, 16], [2, 4, 32], [4, 8, 64], [8, 1, 128]]:
+		if not ((m & int(q[0])) != 0 and (m & int(q[1])) != 0): m = m & ~int(q[2])
+	return m
+
+func mascara(m, c: Vector2i, t: int) -> int:
+	var v := 0
+	for n in VECINOS:
+		if m.tipo(c + n[0]) == t: v |= int(n[1])
+	return _normalizar(v)
+
+func suelo(ci: CanvasItem, m, c: Vector2i, tiempo: float) -> void:
+	var t: int = m.tipo(c)
+	var clase := "path" if t == Mundo.T.CAMINO else "water" if t == Mundo.T.AGUA else "ruins" if t == Mundo.T.RUINA else "wall" if t == Mundo.T.PARED or t == Mundo.T.MURO_RUINA else ""
+	var dst := Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA))
+	if clase == "":
+		_tex_rect(ci, "E04_grass_periodica.png", dst)
+		return
+	var p: Array = mapeo[clase][str(mascara(m, c, t))]
+	var cuadro := int(tiempo / 0.15) % 4 if clase == "water" else 0
+	var f := "E04_water_47_anim.png" if clase == "water" else "E04_" + clase + "_47.png"
+	var tx := tex(f)
+	if tx == null: ci.draw_rect(dst, MARCADOR)
+	else: ci.draw_texture_rect_region(tx, dst, Rect2(int(p[0]) * CELDA + cuadro * 128, int(p[1]) * CELDA, CELDA, CELDA))
+
+# ---------- naturaleza (árbol, roca, veta, arbusto) ----------
+func natural(ci: CanvasItem, tipo: String, c: Vector2i, agotado: bool, jugador: Vector2) -> void:
+	var clave := ""
+	if tipo == "arbol":
+		var n: String = ARBOLES[posmod(c.x * 7 + c.y * 3, 3)]
+		clave = "E04_stump_" + n if agotado else "E04_tree_" + n + "_64"
+	elif tipo == "roca": clave = "E04_rock_depleted" if agotado else "E04_rock"
+	elif tipo == "veta": clave = "E04_ore_depleted" if agotado else "E04_ore_copper"
+	elif tipo == "arbusto": clave = "E04_bush_without_berries" if agotado else "E04_bush_berries"
+	else: return
+	var pies := Vector2(c) * CELDA + Vector2(8, 16)
+	var partes := [clave + "_tronco", clave + "_copa"] if tipo == "arbol" and not agotado else [clave]
+	for k in partes:
+		var alfa := 1.0
+		var d: Dictionary = objetos.get(k, {})
+		if d.is_empty(): _falta(RAIZ + k); continue
+		var r := Rect2((pies - Vector2(d.pivote[0], d.pivote[1])).round(), Vector2(d.canvas[0], d.canvas[1]))
+		if str(k).ends_with("_copa") and (c.y + 1) * CELDA >= jugador.y and r.has_point(jugador - Vector2(0, 14)): alfa = 0.4
+		_tex_rect(ci, d.archivo, r, Color(1, 1, 1, alfa))
+
+# ---------- objetos fijos y construcciones (E05) ----------
+func prop(ci: CanvasItem, nombre: String, pies: Vector2, tinte: Color = Color.WHITE) -> void:
+	var d: Dictionary = objetos.get(nombre, {})
+	if d.is_empty(): _falta(RAIZ + nombre); return
+	_tex_rect(ci, d.archivo, Rect2(pies - Vector2(d.pivote[0], d.pivote[1]), Vector2(d.canvas[0], d.canvas[1])), tinte)
+
+func valla(ci: CanvasItem, m, c: Vector2i) -> void:
+	var v := 0
+	for d in CARDINALES:
+		var id: String = m.por_celda.get(c + d[0], "")
+		if id != "" and m.objetos[id].t == "valla": v |= int(d[1])
+	_tex_rect(ci, "E05_valla_mask_%02d.png" % v, Rect2(Vector2(c) * CELDA + Vector2(8, 16) - Vector2(24, 40), Vector2(48, 64)))
+
+func cofre(ci: CanvasItem, c: Vector2i, abierto: bool, tinte: Color = Color.WHITE) -> void:
+	var f := "E05_cofre_abierto_alineado.png" if abierto else "E05_cofre_cerrado_alineado.png"
+	_tex_rect(ci, f, Rect2(Vector2(c) * CELDA + Vector2(8, 16) - Vector2(24, 44), Vector2(48, 48)), tinte)
+
+func constr_suelo(ci: CanvasItem, c: Vector2i, tinte: Color = Color.WHITE) -> void:
+	_tex_rect(ci, "E05_floor_wood.png", Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA)), tinte)
+
+func constr(ci: CanvasItem, t: String, c: Vector2i, abierto: bool = false, tinte: Color = Color.WHITE) -> void:
+	var pies := Vector2(c) * CELDA + Vector2(8, 16)
+	match t:
+		"muro": prop(ci, "palisade", pies, tinte)
+		"mesa": prop(ci, "workbench", pies, tinte)
+		"horno": prop(ci, "furnace", pies, tinte)
+		"cama": prop(ci, "bed", pies, tinte)
+		"cofre": cofre(ci, c, abierto, tinte)
+		"suelo": constr_suelo(ci, c, tinte)
+
+# ---------- casa modular (canvas 160×160; origen de la casa lógica en [16,32]) ----------
+func _base_casa() -> Vector2:
+	return Vector2(Mundo.CASA.position) * CELDA - Vector2(16, 32)
+
+func _capa_casa(ci: CanvasItem, parte: String, alfa: float = 1.0) -> void:
+	_tex_rect(ci, str(casa.partes.get(parte, "")), Rect2(_base_casa(), Vector2(160, 160)), Color(1, 1, 1, alfa))
+
+func casa_interior(ci: CanvasItem) -> void:
+	_capa_casa(ci, "casa_interior_160")
+	_capa_casa(ci, "casa_paredes_interior_160")
+
+func casa_fachada(ci: CanvasItem, alfa: float, puerta_abierta: bool) -> void:
+	_capa_casa(ci, "casa_fachada_160", alfa)
+	_capa_casa(ci, "casa_puerta_abierta_160" if puerta_abierta else "casa_puerta_cerrada_160", alfa)
+
+func casa_tejado(ci: CanvasItem, alfa: float) -> void:
+	if alfa > 0.0: _capa_casa(ci, "casa_tejado_160", alfa)

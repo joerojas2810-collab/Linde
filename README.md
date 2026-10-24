@@ -6,10 +6,10 @@ Juego cenital (vista superior) en Godot 4.7.1. Estado, controles y decisiones: `
 
 ```bash
 ./Iniciar-Cenital.command                                   # menú normal
-./Iniciar-Cenital.command --nueva=1 --arte --equipo=zarzal:oscuro   # partida nueva con el arte de equipo nuevo
+./Iniciar-Cenital.command --nueva=1 --equipo=zarzal:oscuro   # partida nueva con el equipo puesto
 ```
 
-`--arte`, `--equipo=` y `--mira=` solo aplican junto a `--nueva=`. En juego, F2 alterna el arte nuevo.
+`--equipo=` y `--mira=` solo aplican junto a `--nueva=`. El arte anterior (dibujo por código) ya no existe.
 
 ## Estructura
 
@@ -37,6 +37,6 @@ No hace falta instalar nada: el lanzador descarga Godot 4.7.1 oficial la primera
 
 Si ya tienes Godot 4.7.1, define la variable `GODOT` con la ruta al ejecutable y el lanzador lo usa en lugar de descargar.
 
-Con el arte nuevo del equipo completo: `Iniciar-Cenital.command --nueva=1 --arte --equipo=zarzal:oscuro` (en Windows, el mismo comando con `.bat`).
+Con el equipo completo puesto: `Iniciar-Cenital.command --nueva=1 --equipo=zarzal:oscuro` (en Windows, el mismo comando con `.bat`).
 
 Para colaboradores de arte: este repositorio no incluye el motor, las fuentes de terceros (`archivos-originales/`), los builds (`Linde/distribucion/`) ni la caché `.godot/`; todo eso se descarga o se regenera.

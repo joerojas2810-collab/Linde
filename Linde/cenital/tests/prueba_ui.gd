@@ -25,7 +25,7 @@ func _init() -> void:
 	for ch in "Ana": tecla(esc, KEY_A, ch.unicode_at(0))
 	tecla(esc, KEY_DOWN)
 	tecla(esc, KEY_RIGHT)
-	for i in 5: tecla(esc, KEY_DOWN)
+	for i in 3: tecla(esc, KEY_DOWN)   # pelo, ropa, comenzar
 	tecla(esc, KEY_ENTER)
 	ok(esc.modo == "juego" and esc.j.jug().nombre == "Ana" and esc.j.jug().look[0] == 1, "crea el personaje con nombre y apariencia elegidos")
 	for i in 10: await process_frame

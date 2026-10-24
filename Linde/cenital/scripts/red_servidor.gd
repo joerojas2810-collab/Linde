@@ -9,7 +9,7 @@ const Mundo = preload("res://scripts/mundo.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const PUERTO := 7777
 const MAX_CLIENTES := 15
-const VERSION := 1              # versión del protocolo; el cliente la manda en «hola»
+const VERSION := 2              # versión del protocolo; el cliente la manda en «hola»
 const TICK := 0.05              # 20 Hz
 const ALCANCE := 2              # celdas (Chebyshev) para construir, retirar y usar cofres
 const MAX_PEDIDOS_S := 40       # pedidos por segundo y conexión; el resto se descarta
@@ -105,10 +105,10 @@ static func id_de(nombre: String) -> String:
 static func hash_clave(sal: String, clave: String) -> String:
 	return (sal + ":" + clave).sha256_text()
 
-# datos = [version, nombre, clave, look, origen]. Devuelve {ok, id} o {ok: false, motivo}.
+# datos = [version, nombre, clave, look]. Devuelve {ok, id} o {ok: false, motivo}.
 func entrar(pid: int, datos) -> Dictionary:
 	if not peers.has(pid) or peers[pid].id != "": return {"ok": false, "motivo": "Conexión no válida"}
-	if typeof(datos) != TYPE_ARRAY or datos.size() != 5: return {"ok": false, "motivo": "Datos de entrada no válidos"}
+	if typeof(datos) != TYPE_ARRAY or datos.size() != 4: return {"ok": false, "motivo": "Datos de entrada no válidos"}
 	if typeof(datos[0]) != TYPE_INT or datos[0] != VERSION: return {"ok": false, "motivo": "Versión distinta del servidor"}
 	var nombre := nombre_valido(datos[1])
 	if nombre == "": return {"ok": false, "motivo": "Nombre no válido (2-16 letras, cifras, espacio, _ o -)"}
@@ -116,7 +116,6 @@ func entrar(pid: int, datos) -> Dictionary:
 	var clave: String = datos[2]
 	var look := _look(datos[3])
 	if look.is_empty(): return {"ok": false, "motivo": "Apariencia no válida"}
-	if typeof(datos[4]) != TYPE_STRING or not C.ORIGENES.has(datos[4]): return {"ok": false, "motivo": "Origen no válido"}
 	var id := id_de(nombre)
 	if j.d.jugadores.has(id):
 		if ids.has(id): return {"ok": false, "motivo": "Ese jugador ya está conectado"}
@@ -125,7 +124,7 @@ func entrar(pid: int, datos) -> Dictionary:
 		j.entrar(id)
 		j.aviso("Vuelves al mundo.", id)
 	else:
-		j.unir(id, nombre, look, datos[4])
+		j.unir(id, nombre, look)
 		var sal := Crypto.new().generate_random_bytes(16).hex_encode()
 		j.jug(id)["clave"] = {"sal": sal, "hash": hash_clave(sal, clave)}
 	peers[pid].id = id
@@ -168,7 +167,7 @@ func recibir(pid: int, datos) -> bool:
 	p.n += 1
 	if p.n > MAX_PEDIDOS_S: return _rechazo(p.id, "ritmo")
 	if p.id == "":
-		if typeof(datos) != TYPE_ARRAY or datos.size() != 6 or typeof(datos[0]) != TYPE_STRING or datos[0] != "hola":
+		if typeof(datos) != TYPE_ARRAY or datos.size() != 5 or typeof(datos[0]) != TYPE_STRING or datos[0] != "hola":
 			return _rechazo("", "sin identificar")
 		var r := entrar(pid, datos.slice(1))
 		if r.ok: _enviar(pid, ["bienvenida", estado_para(r.id)])
@@ -391,7 +390,7 @@ func instantanea_actual() -> Array:
 # Nombre, aspecto y equipo visible de los presentes (fiable, solo cuando cambia).
 func perfiles() -> Dictionary:
 	var r := {}
-	for id in j.rt: r[id] = {"nombre": j.jug(id).nombre, "look": j.jug(id).look, "equipo": j.jug(id).equipo, "espada": j.jug(id).inv.has("espada_hierro")}
+	for id in j.rt: r[id] = {"nombre": j.jug(id).nombre, "look": j.jug(id).look, "equipo": j.jug(id).equipo}
 	return r
 
 # Estado privado: solo al dueño. Nunca incluye el hash de la clave.
@@ -417,7 +416,7 @@ func otros_jugadores() -> Array:
 		if id == local: continue
 		var an: Dictionary = anim.get(id, {}).get("an", {"estado": "reposo", "cuadro": 0})
 		l.append({"nombre": j.jug(id).nombre, "look": j.jug(id).look, "pies": j.rt[id].pies, "mira": j.rt[id].mira,
-			"estado": an.estado, "cuadro": an.cuadro, "equipo": j.jug(id).equipo, "espada": j.jug(id).inv.has("espada_hierro")})
+			"estado": an.estado, "cuadro": an.cuadro, "equipo": j.jug(id).equipo})
 	return l
 
 func estado_txt() -> String:

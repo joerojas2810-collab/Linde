@@ -18,7 +18,6 @@ var puerto := Srv.PUERTO
 var nombre := ""
 var clave := ""
 var look: Array = [0, 0, 0]
-var origen := "viajero"
 var j = null                     # Replica
 var yo := ""                     # id del jugador en el servidor
 var otros := {}                  # id -> {pies (mostrada), objetivo, mira, estado, cuadro, hp}
@@ -60,7 +59,7 @@ func _fallar(motivo: String) -> void:
 
 func _conectado() -> void:
 	t_conexion_ms = Time.get_ticks_msec() - _t0
-	pedir.rpc_id(1, ["hola", Srv.VERSION, nombre, clave, look, origen])
+	pedir.rpc_id(1, ["hola", Srv.VERSION, nombre, clave, look])
 
 # Envía una intención: [tipo, ...argumentos] -> [tipo, seq, ...argumentos].
 func enviar(a: Array) -> void:
@@ -181,7 +180,7 @@ func otros_jugadores() -> Array:
 		var pf: Dictionary = perfiles.get(id, {"nombre": "?", "look": [0, 0, 0]})
 		l.append({"nombre": pf.nombre, "look": pf.look, "pies": o.pies, "mira": o.get("mira", Vector2i.DOWN),
 			"estado": o.get("estado", "reposo"), "cuadro": o.get("cuadro", 0),
-			"equipo": pf.get("equipo") if pf.get("equipo") is Dictionary else {}, "espada": pf.get("espada", false) == true})
+			"equipo": pf.get("equipo") if pf.get("equipo") is Dictionary else {}})
 	return l
 
 func estado_txt() -> String:

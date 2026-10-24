@@ -278,7 +278,7 @@ static func visible(equipo: Dictionary) -> Array:
 		if k == "": continue
 		var p := leer(k)
 		if p.is_empty():
-			l.append({"ranura": r, "item": k, "paleta": dd.paletas.get(str(info(k).get("paleta", "")), {})})
+			l.append({"ranura": "espada" if r == "arma" else r, "item": k, "paleta": dd.paletas.get(str(info(k).get("paleta", "")), {})})
 			continue
 		var fam: Dictionary = dd.familias[p.familia]
 		var a: Dictionary = dd.arquetipos[fam.arquetipo]

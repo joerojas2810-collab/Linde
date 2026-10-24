@@ -1,7 +1,7 @@
 extends Node2D
 # Presentación y entrada. Toda regla vive en Juego; aquí solo se pide y se muestra.
 # Args tras "--": --guardado=ruta · --nueva=SEMILLA (salta menús) · --panel=inv|forja|craft|hab|mis · --ir=x,y (celda, depuración)
-# Depuración del arte (con --nueva): --arte (activa usar_arte) · --equipo=<familia>:<variante|sin_piedra> (set completo
+# Depuración: --pantalla=creador|unirse abre esa pantalla. Del arte (con --nueva): --equipo=<familia>:<variante|sin_piedra> (set completo
 # + escudo + espada) · --mira=frente|derecha|espalda|izquierda · --auto-ataque (el jugador local ataca cada
 # AUTO_ATAQUE_S s, con el ciclo real de combate; muestra fase/pose sobre el PJ e imprime una línea por cuadro dibujado)
 # Servidor sin ventana: --servidor [--puerto=7777] [--guardado=ruta] [--semilla=N] [--duracion=s] [--registro=ruta.json]
@@ -9,19 +9,18 @@ const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Inv = preload("res://scripts/inventario.gd")
 const Mundo = preload("res://scripts/mundo.gd")
-const Apar = preload("res://scripts/apariencia.gd")
 const J = preload("res://scripts/juego.gd")
 const Hud = preload("res://scripts/hud.gd")
 const Hab = preload("res://scripts/habitantes.gd")
-const Arte = preload("res://scripts/arte.gd")
-const Capas = preload("res://scripts/capas_sprite.gd")
+const MundoArte = preload("res://scripts/mundo_arte.gd")
+const ActoresArte = preload("res://scripts/actores_arte.gd")
 const Srv = preload("res://scripts/red_servidor.gd")
 const Cli = preload("res://scripts/red_cliente.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const ArteEq = preload("res://scripts/arte_equipo.gd")
-var capas_pj = Capas.new()   # personaje por capas si hay hojas en res://arte (arte anterior, reserva)
+var actores = ActoresArte.new()   # E03: enemigos, residuos y efectos de combate
+var arte_mundo = MundoArte.new()   # E04+E05: terreno, objetos, casa (res://arte/mundo)
 var arte_eq = ArteEq.new()   # base + equipo por índices (res://arte/equipo); preferido si está completo
-var usar_arte := true        # arte nuevo siempre activo; la línea procedural anterior ya no se muestra (se retira por completo en el plan de estética)
 const MIRA := {"frente": Vector2i.DOWN, "derecha": Vector2i.RIGHT, "espalda": Vector2i.UP, "izquierda": Vector2i.LEFT}
 const COLORES := {Mundo.T.PASTO: Color("5a9b4a"), Mundo.T.CAMINO: Color("c9b27a"), Mundo.T.AGUA: Color("3f7fbf"),
 	Mundo.T.PARED: Color("a8794f"), Mundo.T.SUELO: Color("8a6a4a"), Mundo.T.PUERTA: Color("5b3a22"),
@@ -37,6 +36,7 @@ var modo := "menu"
 var panel := ""
 var lineas: Array = []
 var acc: Array = []
+var iconos: Array = []   # ruta de icono (res://arte/interfaz) por línea de panel; "" = sin icono
 var sel := 0
 var dialogo_txt := ""
 var cofre_id := ""
@@ -54,7 +54,7 @@ var auto_t := 0.0
 var menu_items: Array = []
 var menu_sel := 0
 var menu_msg := ""
-var cr := {"nombre": "Viajero", "piel": 0, "pelo": 1, "ropa": 0, "origen": 1, "semilla": 1, "campo": 0}
+var cr := {"nombre": "Viajero", "piel": 0, "pelo": 1, "ropa": 0, "campo": 0}
 var red: Node = null          # red_servidor (alojando) o red_cliente (unido); null = un jugador sin red
 var un := {"dir": "127.0.0.1:7777", "nombre": "", "clave": "", "campo": 0}   # formulario «Unirse»
 const RED_CFG := "user://red.cfg"
@@ -63,6 +63,7 @@ func _ready() -> void:
 	var nueva := -1
 	var panel_ini := ""
 	var ir := ""
+	var pantalla_ini := ""
 	var srv := {}
 	var dbg := {}
 	for a in OS.get_cmdline_user_args():
@@ -70,7 +71,7 @@ func _ready() -> void:
 		elif a.begins_with("--nueva="): nueva = int(a.substr(8))
 		elif a.begins_with("--panel="): panel_ini = a.substr(8)
 		elif a.begins_with("--ir="): ir = a.substr(5)
-		elif a == "--arte": dbg["arte"] = true
+		elif a.begins_with("--pantalla="): pantalla_ini = a.substr(11)
 		elif a.begins_with("--equipo="): dbg["equipo"] = a.substr(9)
 		elif a.begins_with("--mira="): dbg["mira"] = a.substr(7)
 		elif a == "--auto-ataque": dbg["auto_ataque"] = true
@@ -80,6 +81,13 @@ func _ready() -> void:
 		elif a.begins_with("--duracion="): srv["duracion"] = float(a.substr(11))
 		elif a.begins_with("--registro="): srv["registro"] = a.substr(11)
 	if srv.has("si"): return _servidor_sin_ventana(srv)
+	arte_mundo.cargar()
+	var luz := load("res://arte/interfaz/nuevos/luz_ambiente.gdshader") as Shader   # E06: tinte nocturno solo del mundo; el HUD va en su CanvasLayer
+	if luz == null: push_error("Arte faltante: res://arte/interfaz/nuevos/luz_ambiente.gdshader")
+	else:
+		var mat := ShaderMaterial.new()
+		mat.shader = luz
+		material = mat
 	cam.zoom = Vector2(P.ZOOM, P.ZOOM)
 	cam.limit_right = Mundo.ANCHO * P.CELDA
 	cam.limit_bottom = Mundo.ALTO * P.CELDA
@@ -92,8 +100,10 @@ func _ready() -> void:
 	add_child(capa)
 	get_tree().auto_accept_quit = false
 	_menu_inicial()
+	if pantalla_ini == "creador": modo = "creador"       # depuración/capturas: abre la pantalla sin teclear
+	elif pantalla_ini == "unirse": _abrir_unirse()
 	if nueva >= 0:
-		j = J.nueva(nueva, cr.nombre, [cr.piel, cr.pelo, cr.ropa], "viajero")
+		j = J.nueva(nueva, cr.nombre, [cr.piel, cr.pelo, cr.ropa])
 		modo = "juego"
 		if ir != "":
 			var p := ir.split(",")
@@ -103,7 +113,6 @@ func _ready() -> void:
 
 # Solo depuración/capturas: activa el arte, pone un set completo de una familia (+ escudo y espada) y la orientación.
 func _depurar_arte(dbg: Dictionary) -> void:
-	if dbg.has("arte"): usar_arte = _hay_arte()
 	if dbg.has("equipo"):
 		var p: PackedStringArray = str(dbg.equipo).split(":")
 		var fam: String = p[0]
@@ -112,12 +121,9 @@ func _depurar_arte(dbg: Dictionary) -> void:
 			var k := Eq.construir(fam, str(r), v, 0)
 			if not Eq.leer(k).is_empty(): j.jug().equipo[r] = k
 		j.jug().equipo["escudo"] = "escudo_madera"
-		j.jug().inv["espada_hierro"] = 1
+		j.jug().equipo["arma"] = "espada_hierro"
 	if MIRA.has(dbg.get("mira", "")): j.mira = MIRA[dbg.mira]
 	if dbg.has("auto_ataque"): auto_ataque = 0.0
-
-func _hay_arte() -> bool:
-	return arte_eq.disponible() or capas_pj.disponible()
 
 func _menu_inicial() -> void:
 	_cerrar_red()
@@ -173,7 +179,6 @@ func _tecla_menu(e: InputEvent) -> void:
 						j = g
 						modo = "juego"
 				1:
-					cr.semilla = randi() % 100000
 					cr.campo = 0
 					modo = "creador"
 				2: _alojar()
@@ -181,20 +186,19 @@ func _tecla_menu(e: InputEvent) -> void:
 				4: get_tree().quit()
 
 func _tecla_creador(e: InputEvent) -> void:
-	var lim := [0, 3, 4, 3, C.ORIGENES.size(), 0]
+	var lim := [0, 3, 4, 3, 0]
 	match e.keycode:
 		KEY_ESCAPE: return _menu_inicial()
-		KEY_UP: cr.campo = (cr.campo + 6) % 7
-		KEY_DOWN: cr.campo = (cr.campo + 1) % 7
+		KEY_UP: cr.campo = (cr.campo + 4) % 5
+		KEY_DOWN: cr.campo = (cr.campo + 1) % 5
 		KEY_LEFT, KEY_RIGHT:
 			var s: int = 1 if e.keycode == KEY_RIGHT else -1
-			var k: String = ["", "piel", "pelo", "ropa", "origen", "semilla"][cr.campo] if cr.campo > 0 and cr.campo < 6 else ""
-			if k == "semilla": cr.semilla = maxi(0, cr.semilla + s)
-			elif k != "": cr[k] = (cr[k] + s + lim[cr.campo]) % lim[cr.campo]
+			var k: String = ["", "piel", "pelo", "ropa"][cr.campo] if cr.campo > 0 and cr.campo < 4 else ""
+			if k != "": cr[k] = (cr[k] + s + lim[cr.campo]) % lim[cr.campo]
 		KEY_BACKSPACE: if cr.campo == 0: cr.nombre = cr.nombre.substr(0, cr.nombre.length() - 1)
 		KEY_ENTER, KEY_KP_ENTER:
-			if cr.campo == 6:
-				j = J.nueva(cr.semilla, cr.nombre, [cr.piel, cr.pelo, cr.ropa], C.ORIGENES.keys()[cr.origen])
+			if cr.campo == 4:
+				j = J.nueva(randi() % 100000, cr.nombre, [cr.piel, cr.pelo, cr.ropa])   # el mapa es único; la semilla solo elige dónde apareces
 				j.guardar(ruta)
 				modo = "juego"
 		_:
@@ -210,7 +214,7 @@ func _servidor_sin_ventana(o: Dictionary) -> void:
 	modo = "servidor"
 	if ruta == "user://partida.json": ruta = ProjectSettings.globalize_path("user://mundo_servidor.json")   # sin --guardado
 	var g = J.cargar(ruta)
-	if g == null: g = J.nueva(o.get("semilla", 1), "Anfitrión", [0, 0, 0], "viajero")
+	if g == null: g = J.nueva(o.get("semilla", 1), "Anfitrión", [0, 0, 0])
 	var s = Srv.new()
 	s.name = "Red"
 	s.j = g
@@ -225,7 +229,7 @@ func _servidor_sin_ventana(o: Dictionary) -> void:
 func _alojar() -> void:
 	var g = J.cargar(ruta)
 	if g == null:
-		g = J.nueva(randi() % 100000, cr.nombre, [cr.piel, cr.pelo, cr.ropa], "viajero")
+		g = J.nueva(randi() % 100000, cr.nombre, [cr.piel, cr.pelo, cr.ropa])
 		g.guardar(ruta)
 	var s = Srv.new()
 	s.name = "Red"
@@ -334,13 +338,20 @@ func _sel_valida(paso: int) -> void:
 		sel = (sel + paso + lineas.size()) % lineas.size()
 		n += 1
 
-func _l(t: String, f = null) -> void:
+func _l(t: String, f = null, ic: String = "") -> void:
 	lineas.append(t)
 	acc.append(f)
+	iconos.append(ic)
+
+## Icono de un ítem del inventario (piezas de set por su ranura; desconocido = sin icono, sin sustituto).
+func _ic(k: String) -> String:
+	var l: Dictionary = Eq.leer(k)
+	return hud.ui.ruta_icono(k, str(l.get("ranura", "")) if not l.is_empty() else "")
 
 func _armar() -> void:
 	lineas = []
 	acc = []
+	iconos = []
 	var st: Dictionary = j.stats()
 	match panel:
 		"inv":
@@ -349,7 +360,7 @@ func _armar() -> void:
 			_l("— Equipado  (F: forja para mejorar o cambiar piedra) —")
 			for r in C.RANURAS:
 				var q: String = j.jug().equipo.get(r, "")
-				_l("%s: %s" % [_n_ranura(r), (Eq.info(q).n + "  (Enter: quitar)") if q != "" else "—"], func(): j.desequipar(r))
+				_l("%s: %s" % [_n_ranura(r), (Eq.info(q).n + "  (Enter: quitar)") if q != "" else "—"], func(): j.desequipar(r), hud.ui.ruta_icono(q, r))
 			_l("— Mochila —")
 			var ks: Array = j.jug().inv.keys()
 			ks.sort()
@@ -359,7 +370,7 @@ func _armar() -> void:
 				var eq: bool = it.has("equipo")
 				_l("%s  x%d%s" % [it.n, j.jug().inv[k], "   (usar)" if cura else ("   (equipar: %s)" % _n_ranura(it.equipo) if eq else "")], func():
 					if cura: j.usar(k)
-					elif eq: j.equipar(k))
+					elif eq: j.equipar(k), _ic(k))
 			if ks.is_empty(): _l("(vacío)")
 			if not j.jug().pendientes.is_empty(): _l("Pendiente de recibir: " + Hud.J_txt(j.jug().pendientes))
 		"forja":
@@ -376,7 +387,7 @@ func _armar() -> void:
 			if piezas.is_empty(): _l("(no tienes piezas de set)")
 			for pz in piezas:
 				var k: String = pz[0]
-				_l("%s  (%s)" % [Eq.info(k).n, pz[1]])
+				_l("%s  (%s)" % [Eq.info(k).n, pz[1]], null, _ic(k))
 				var m: Dictionary = Eq.mejorar(k)
 				if m.ok: _l("    Mejorar a +%d  (cuesta %s)" % [Eq.leer(m.nueva).nivel, Hud.J_txt(m.coste)], func(): j.mejorar(k))
 				for v in Eq.datos().variantes:
@@ -394,7 +405,7 @@ func _armar() -> void:
 				var nota := ""
 				if r.hab != "" and not j.jug().hab.has(r.hab): nota += " [req. %s]" % C.HAB[r.hab].n
 				if r.est != "": nota += " [%s]" % r.est
-				_l("%s %s  <-  %s%s" % ["[ok]" if listo else "[--]", r.n, Hud.J_txt(r.ent), nota], func(): j.fabricar(id))
+				_l("%s %s  <-  %s%s" % ["[ok]" if listo else "[--]", r.n, Hud.J_txt(r.ent), nota], func(): j.fabricar(id), _ic(str(r.sal.keys()[0]) if not r.sal.is_empty() else ""))
 		"hab":
 			_l("HABILIDADES  ·  puntos libres: %d  ·  nivel %d" % [j.puntos_libres(), j.nivel()])
 			for id in C.HAB:
@@ -418,10 +429,10 @@ func _armar() -> void:
 		"cofre":
 			_l("COFRE  ·  Enter mueve la pila completa al otro lado")
 			_l("— Tu inventario —")
-			for k in j.jug().inv: _l("%s x%d  → cofre" % [Eq.info(k).n, j.jug().inv[k]], func(): j.mover_cofre(cofre_id, k, true))
+			for k in j.jug().inv: _l("%s x%d  → cofre" % [Eq.info(k).n, j.jug().inv[k]], func(): j.mover_cofre(cofre_id, k, true), _ic(k))
 			_l("— Cofre —")
 			var cf: Dictionary = j.d.cofres.get(cofre_id, {"inv": {}})
-			for k in cf.inv: _l("%s x%d  → inventario" % [Eq.info(k).n, cf.inv[k]], func(): j.mover_cofre(cofre_id, k, false))
+			for k in cf.inv: _l("%s x%d  → inventario" % [Eq.info(k).n, cf.inv[k]], func(): j.mover_cofre(cofre_id, k, false), _ic(k))
 		"pausa":
 			_l("PAUSA")
 			_l("Continuar", func(): _cerrar())
@@ -471,6 +482,8 @@ func _process(delta: float) -> void:
 	queue_redraw()
 	if modo != "juego" or j == null: return
 	cam.position = j.pies - Vector2(0, 12)
+	if material is ShaderMaterial: (material as ShaderMaterial).set_shader_parameter("noche", oscuridad(j.hora_dia()) / 0.5)
+	actores.actualizar(delta, j.combate.enemigos, int(j.jug().hp), j.combate.centro_pj(), j.mundo, red is Cli)
 	if panel != "":
 		if panel != "dialogo": _armar()
 		return
@@ -507,8 +520,10 @@ func _pista() -> String:
 		if cs.get("t", "") == "cama": return "E: dormir" if cs.get("dueno", "") == J.LOCAL else ("Cama de otro jugador" if cs.propia else "Cama de Maren")
 	return ""
 
-func _frame() -> int:
-	return 0 if activa == Vector2i.ZERO else int(t_anim / P.PASO_S) % 4
+## Marcador visible cuando falta el arte del personaje: nunca se dibuja el arte anterior.
+func _arte_faltante(origen: Vector2) -> void:
+	push_error("Arte faltante: personaje (res://arte/equipo)")
+	draw_rect(Rect2(origen, Vector2(P.SPRITE)), Color(1, 0, 1, 0.85))
 
 # ---------- dibujo del mundo ----------
 func _draw() -> void:
@@ -524,10 +539,12 @@ func _draw() -> void:
 	for y in range(y0, y1 + 1):
 		for x in range(x0, x1 + 1):
 			var c := Vector2i(x, y)
-			Arte.suelo(self, m, c)
+			arte_mundo.suelo(self, m, c, Time.get_ticks_msec() / 1000.0)
 			var cs: Dictionary = m.constr_en(c)
-			if cs.get("t", "") == "suelo": Arte.constr(self, "suelo", Vector2(c) * s, Color(C.CONSTR.suelo.c))
+			if cs.get("t", "") == "suelo": arte_mundo.constr_suelo(self, c)
+	arte_mundo.casa_interior(self)
 	for e in j.combate.enemigos: if e.est == "aviso": _telegrafo(e)
+	var dentro := Mundo.CASA.has_point(Mundo.celda_de(j.pies))
 	var lista: Array = [[j.pies.y, "pj", null], [Mundo.CASA.end.y * 16.0 - 8.0, "fachada", null]]
 	for id in Hab.NPCS: lista.append([j.habitantes.pos(id).y, "npc", id])
 	if red != null:
@@ -536,7 +553,7 @@ func _draw() -> void:
 	for id in m.objetos:
 		var o: Dictionary = m.objetos[id]
 		if not vista.has_point(Vector2(o.c) * s): continue
-		if m.estado.rotos.has(id): continue
+		if m.estado.rotos.has(id) and not (o.t in ["arbol", "roca", "veta", "arbusto"]): continue
 		lista.append([(o.c.y + 1.0) * s, "obj", id])
 	for k in m.estado.constr:
 		var p: PackedStringArray = k.split(",")
@@ -551,17 +568,18 @@ func _draw() -> void:
 			"enemigo": _dibujar_enemigo(e[2])
 			"obj": _dibujar_obj(e[2])
 			"constr": _dibujar_constr(e[2])
-			"fachada": Arte.fachada(self, Mundo.CASA, Mundo.PUERTA_C, 0.25 if Mundo.CASA.has_point(Mundo.celda_de(j.pies)) else 1.0)
-	var dentro := Mundo.CASA.has_point(Mundo.celda_de(j.pies))
-	Arte.tejado(self, Mundo.CASA, 0.25 if Mundo.CASA.has_point(Mundo.celda_de(j.pies)) else 1.0)
+			"fachada": arte_mundo.casa_fachada(self, 0.25 if dentro else 1.0, dentro or _cerca_puerta())
+	actores.residuo(self)
+	actores.efectos_dibujar(self)
+	if pista != "":   # E06: indicador de interacción sobre el jugador cuando hay algo con lo que interactuar
+		var ind: Texture2D = hud.ui.tex("reutilizados/interact_indicator.png")
+		if ind != null: draw_texture_rect(ind, Rect2((j.pies - Vector2(12, 46 + 2.0 * sin(Time.get_ticks_msec() / 200.0))).round(), Vector2(24, 32)), false)
+	arte_mundo.casa_tejado(self, 0.0 if dentro else 1.0)
 	if build:
 		var c: Vector2i = Mundo.celda_de(j.pies) + j.mira
 		var id: String = C.ORDEN_CONSTR[pieza_i]
 		var bien: bool = m.puede_poner(c) == "" and not j.ocupada(c) and Inv.tiene(j.jug().inv, C.CONSTR[id].coste)
-		draw_rect(Rect2(Vector2(c) * s, Vector2(s, s)), Color(0.2, 1, 0.3, 0.45) if bien else Color(1, 0.2, 0.2, 0.45))
-		draw_rect(Rect2(Vector2(c) * s, Vector2(s, s)), Color(C.CONSTR[id].c, 0.6), false, 1)
-	if j.combate.est == "activo":
-		draw_rect(j.combate.zona_golpe(), Color(1, 1, 1, 0.35))
+		arte_mundo.constr(self, id, c, false, Color(0.5, 1, 0.55, 0.65) if bien else Color(1, 0.4, 0.4, 0.65))
 	if debug:
 		draw_rect(Rect2(j.pies - Vector2(P.PIES.x / 2, P.PIES.y), P.PIES), Color(1, 0, 0, 0.5))
 		for y in range(y0, y1 + 1):
@@ -585,62 +603,69 @@ func _dibujar_pj() -> void:
 	_anim = j.anim_pj(activa != Vector2i.ZERO, t_anim)
 	if j.combate.inv_t > 0.0 and int(j.combate.inv_t * 20.0) % 2 == 0: return
 	var origen: Vector2 = (j.pies - Vector2(P.SPRITE.x / 2.0, P.SPRITE.y)).round()
-	draw_rect(Rect2(origen + Vector2(3, 22), Vector2(10, 3)), Color(0, 0, 0, 0.3))
-	var vis := _equipo_visible(j.jug().equipo, j.jug().inv.has("espada_hierro"))
-	if usar_arte and arte_eq.disponible(): arte_eq.dibujar(self, j.pies, j.mira, _cuadro_arte(_anim), vis, j.jug().look, _anim.estado)
-	elif usar_arte and capas_pj.disponible(): capas_pj.dibujar(self, j.pies, j.mira, _frame(), vis, _anim.estado, _anim.cuadro)
-	else: Apar.dibujar(self, origen, j.mira, _frame(), j.jug().look)
+	_sombra(j.pies)
+	var vis := _equipo_visible(j.jug().equipo)
+	if arte_eq.disponible(): arte_eq.dibujar(self, j.pies, j.mira, _cuadro_arte(_anim), vis, j.jug().look, _anim.estado, _hacha_local())
+	else: _arte_faltante(origen)
 	if auto_ataque >= 0.0:
 		var fase: String = j.combate.est
 		var txt := fase if _anim.estado != "ataque" else "%s %d %s" % [fase, _anim.cuadro, POSES_ATAQUE[posmod(int(_anim.cuadro), 4)]]
 		draw_string(ThemeDB.fallback_font, origen + Vector2(-18, -26), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
 		print("AUTOATQ cuadro_proceso=%d fase=%s estado=%s cuadro=%d" % [Engine.get_process_frames(), fase, _anim.estado, _anim.cuadro])
 
-## Cuadro para el arte por capas: caminata y ataque animan; el resto usa el cuadro 0.
-static func _cuadro_arte(an: Dictionary) -> int:
-	return int(an.cuadro) if an.estado in ["caminar", "ataque"] else 0
+## Sombra de pies E06 (máscara 16×8 a opacidad .25, escala entera; solo presentación, sin tocar la colisión).
+func _sombra(pies: Vector2, escala: float = 1.0) -> void:
+	var t: Texture2D = hud.ui.tex("nuevos/sombra_pies.svg")
+	var tam := Vector2(16, 8) * (1.0 if escala <= 1.0 else float(roundi(escala)))
+	var r := Rect2((pies - Vector2(tam.x / 2.0, tam.y * 0.6)).round(), tam)
+	if t == null: draw_rect(r, hud.ui.MARCADOR)
+	else: draw_texture_rect(t, r, false, Color(1, 1, 1, 0.25))
 
-# Equipo.visible (ranura, arquetipo, familia, variante, paleta, delta) + la espada si se lleva en el inventario.
-static func _equipo_visible(equipo: Dictionary, espada: bool) -> Array:
-	var v: Array = Eq.visible(equipo)
-	if espada: v.append({"ranura": "espada", "item": "espada_hierro", "paleta": Eq.datos().paletas.get(str(C.ITEMS.espada_hierro.get("paleta", "")), {})})
-	return v
+## Hacha visible solo al talar un árbol con hacha en el inventario (dato de presentación del jugador local; el
+## protocolo no transmite la herramienta de los remotos, así que ellos no la muestran).
+func _hacha_local() -> bool:
+	if _anim.estado != "herramienta": return false
+	var oid: String = j.mundo.por_celda.get(Mundo.celda_de(j.pies) + j.mira, "")
+	if oid == "" or j.mundo.objetos[oid].t != "arbol": return false
+	for it in j.jug().inv: if Eq.info(it).get("tag", "") == "talar": return true
+	return false
+
+## Cuadro para el arte por capas: caminata, ataque, herramienta y daño animan; el resto usa el cuadro 0.
+static func _cuadro_arte(an: Dictionary) -> int:
+	return int(an.cuadro) if an.estado in ["caminar", "ataque", "herramienta", "dano"] else 0
+
+# Equipo.visible (ranura, arquetipo, familia, variante, paleta, delta); el arma equipada sale como «espada».
+static func _equipo_visible(equipo: Dictionary) -> Array:
+	return Eq.visible(equipo)
 
 # Otro jugador (red): su apariencia y su equipo real (arte por capas si está activo; si no, procedural) y su nombre.
 func _dibujar_otro(o: Dictionary) -> void:
 	var origen: Vector2 = (o.pies - Vector2(P.SPRITE.x / 2.0, P.SPRITE.y)).round()
-	draw_rect(Rect2(origen + Vector2(3, 22), Vector2(10, 3)), Color(0, 0, 0, 0.3))
+	_sombra(o.pies)
 	var cuadro: int = _cuadro_arte(o)
-	if usar_arte and arte_eq.disponible():
+	if arte_eq.disponible():
 		var eq: Dictionary = o.get("equipo") if o.get("equipo") is Dictionary else {}
-		arte_eq.dibujar(self, o.pies, o.mira, cuadro, _equipo_visible(eq, o.get("espada", false) == true), o.look, str(o.estado))
-	else: Apar.dibujar(self, origen, o.mira, int(o.cuadro) if o.estado == "caminar" else 0, o.look)
+		arte_eq.dibujar(self, o.pies, o.mira, cuadro, _equipo_visible(eq), o.look, str(o.estado))
+	else: _arte_faltante(origen)
 	draw_string(ThemeDB.fallback_font, origen + Vector2(-6, -4), o.nombre, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color("f1c40f"))
 
 func _dibujar_npc(id: String) -> void:
 	var p: Vector2 = j.habitantes.pos(id)
 	var origen: Vector2 = (p - Vector2(P.SPRITE.x / 2.0, P.SPRITE.y)).round()
-	draw_rect(Rect2(origen + Vector2(3, 22), Vector2(10, 3)), Color(0, 0, 0, 0.3))
-	var dir := Vector2i.DOWN
+	_sombra(p)
 	var act: String = j.d.npcs[id].act
-	Apar.dibujar(self, origen, dir, int(Time.get_ticks_msec() / 150.0) % 4 if act == "camina" else 0, MAREN_LOOK)
+	var st: Dictionary = actores.npc_estado(id, p)
+	var cuadro := int(Time.get_ticks_msec() / 120.0) % 4 if st.mueve else 0
+	arte_eq.dibujar(self, p, st.dir, cuadro, [], MAREN_LOOK, "caminar" if st.mueve else "reposo")
 	var f := ThemeDB.fallback_font
 	draw_string(f, origen + Vector2(-6, -4), Hab.NPCS[id].n + (" (zzz)" if act == "dormir" else ""), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
 
 func _dibujar_enemigo(e: Dictionary) -> void:
 	var t: float = e.tam
 	var def: Dictionary = C.ENEMIGOS[e.tipo]
-	var col: Color = {"slime": Color("5fd0a0"), "guardian": Color("7d6b9a"), "ciervo": Color("a0784a")}[e.tipo]
-	if e.est == "aviso": col = col.lightened(0.35)
 	var o: Vector2 = e.pos - Vector2(t / 2.0, t)
-	draw_rect(Rect2(e.pos - Vector2(t / 2.0, 3), Vector2(t, 4)), Color(0, 0, 0, 0.3))
-	draw_rect(Rect2(o + Vector2(0, t * 0.3), Vector2(t, t * 0.7)), col)
-	draw_rect(Rect2(o + Vector2(t * 0.1, 0), Vector2(t * 0.8, t * 0.4)), col)
-	draw_rect(Rect2(o + Vector2(t * 0.25, t * 0.35), Vector2(2, 3)), Color.BLACK)
-	draw_rect(Rect2(o + Vector2(t * 0.65, t * 0.35), Vector2(2, 3)), Color.BLACK)
-	if e.tipo == "ciervo":
-		draw_rect(Rect2(o + Vector2(-2, -6), Vector2(3, 8)), Color("e8dcc0"))
-		draw_rect(Rect2(o + Vector2(t - 1, -6), Vector2(3, 8)), Color("e8dcc0"))
+	_sombra(e.pos, 0.6 + t / 28.0 * 0.6)
+	actores.enemigo(self, e, Time.get_ticks_msec() / 1000.0)
 	if e.hp < def.hp:
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t, 3)), Color(0, 0, 0, 0.6))
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t * float(e.hp) / def.hp, 3)), Color("e74c3c"))
@@ -648,17 +673,20 @@ func _dibujar_enemigo(e: Dictionary) -> void:
 func _dibujar_obj(id: String) -> void:
 	var o: Dictionary = j.mundo.objetos[id]
 	var p := Vector2(o.c) * P.CELDA
+	var roto: bool = j.mundo.estado.rotos.has(id)
 	match o.t:
-		"arbol": Arte.arbol(self, p, Mundo.h(o.c.x, o.c.y, 5))
-		"roca": Arte.roca(self, p, false)
-		"veta": Arte.roca(self, p, true)
-		"arbusto": Arte.arbusto(self, p)
-		"barril": Arte.barril(self, p)
-		"valla": Arte.valla(self, p)
-		"cofre_fijo": Arte.cofre(self, p, Color("93602d"), j.d.cofres.tesoro_cantera.get("abierto", false))
+		"arbol", "roca", "veta", "arbusto": arte_mundo.natural(self, o.t, o.c, roto, j.pies)
+		"barril": arte_mundo.prop(self, "barrel", Vector2(o.c) * P.CELDA + Vector2(8, 16))
+		"valla": arte_mundo.valla(self, j.mundo, o.c)
+		"cofre_fijo": arte_mundo.cofre(self, o.c, j.d.cofres.tesoro_cantera.get("abierto", false))
 	var g: int = j.mundo.estado.golpes.get(id, 0)
-	if g > 0: draw_rect(Rect2(p + Vector2(2, -2), Vector2(12, 2)), Color(1, 1, 1, 0.8))
+	if g > 0 and not roto: draw_rect(Rect2(p + Vector2(2, -2), Vector2(12, 2)), Color(1, 1, 1, 0.8))
 
 func _dibujar_constr(c: Vector2i) -> void:
 	var cs: Dictionary = j.mundo.constr_en(c)
-	Arte.constr(self, cs.t, Vector2(c) * P.CELDA, Color(C.CONSTR[cs.t].c))
+	arte_mundo.constr(self, cs.t, c)
+
+## La puerta se ve abierta con el jugador a una celda o menos (solo presentación; la colisión no cambia).
+func _cerca_puerta() -> bool:
+	var d: Vector2i = (Mundo.celda_de(j.pies) - Mundo.PUERTA_C).abs()
+	return maxi(d.x, d.y) <= 1

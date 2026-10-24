@@ -20,12 +20,12 @@ const ITEMS := {
 	"gema": {"n": "Gema", "pila": 20, "c": "#6ad0f0"},
 	"hacha_piedra": {"n": "Hacha de piedra", "pila": 1, "c": "#a0784a", "tag": "talar"},
 	"pico_piedra": {"n": "Pico de piedra", "pila": 1, "c": "#9a9aa6", "tag": "picar"},
-	"espada_hierro": {"n": "Espada de hierro", "pila": 1, "c": "#e0e4ea", "dmg": 6, "paleta": "pal_espada_hierro"},
+	"espada_hierro": {"n": "Espada de hierro", "pila": 1, "c": "#e0e4ea", "equipo": "arma", "def": 0, "dmg": 6, "paleta": "pal_espada_hierro"},
 	# Escudo (PROVISIONAL): "equipo" = ranura, "def" plana. Las piezas de set (casco..pantalones) no están aquí: son
 	# claves `eq:...` derivadas de datos/equipo/*.json y se resuelven con Equipo.info (scripts/equipo.gd).
 	"escudo_madera": {"n": "Escudo de madera", "pila": 1, "c": "#9b6b3a", "equipo": "escudo", "def": 3, "paleta": "pal_escudo_madera"},
 }
-const RANURAS := ["casco", "torso", "guantes", "botas", "pantalones", "escudo"]   # 5 de set + escudo (coraza -> torso)
+const RANURAS := ["casco", "torso", "guantes", "botas", "pantalones", "escudo", "arma"]   # 5 de set + escudo + arma (coraza -> torso)
 
 # golpes por etiqueta de herramienta ("" = a mano; ausente = imposible). prob: botín probabilístico con flujo propio.
 const OBJETOS := {
@@ -210,9 +210,6 @@ static func nivel_de(xp: int) -> int:
 	while n < NIVEL_MAX and xp >= umbral_xp(n + 1): n += 1
 	return n
 
-# Orígenes: solo contexto de diálogo, sin ventajas numéricas (propuesta).
-const ORIGENES := {"aprendiz": "Aprendiz de taller", "viajero": "Viajero sin rumbo", "cazador": "Cazador de la región"}
-
 # Texto de PRUEBA para ejercitar sistemas; no es canon (A02 pendiente).
 const DIALOGOS := {
 	"cap1_piedras": {"oferta": "Soy Maren. El taller se quedó sin piedra para cimientos. ¿Me traes seis? Una pica o un pico de piedra ayudan.",
@@ -222,6 +219,5 @@ const DIALOGOS := {
 	"cap1_ruinas": {"oferta": "La cantera saca mena rara desde que algo despertó en las ruinas del sureste. Ve a mirar y detén lo que haya allí.",
 		"recordar": "Las ruinas están al sureste, tras el camino del estanque.", "gracias": "Lo lograste. El taller y la cantera vuelven a respirar."},
 	"base": ["Buen día. El taller siempre tiene algo por hacer.", "Si construyes, cuida de no cerrar los caminos.", "Descansa en tu propia cama; la mía es la mía."],
-	"origen": {"aprendiz": "Se nota que conoces un taller.", "viajero": "Pareces venir de lejos.", "cazador": "Con ese paso debes ser cazador."},
 	"final": "Gracias por todo. Quizá haya más que descubrir en el bosque."
 }
