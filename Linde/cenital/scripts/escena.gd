@@ -48,6 +48,9 @@ var t_anim := 0.0
 var debug := false
 var _anim := {"estado": "reposo", "cuadro": 0}
 var pista := ""
+var ayuda_visible := false
+var rotulos: Array = []
+var cuerpos_rotulo: Array = []
 var cam := Camera2D.new()
 var hud := Hud.new()
 var ruta := "user://partida.json"
@@ -159,6 +162,7 @@ func _unhandled_key_input(e: InputEvent) -> void:
 		KEY_K: _abrir("hab")
 		KEY_J: _abrir("mis")
 		KEY_B: build = not build
+		KEY_H: ayuda_visible = not ayuda_visible
 		KEY_F1: debug = not debug
 		KEY_F5:
 			j.aviso("Guardado." if j.guardar(ruta) else "No se pudo guardar.")
@@ -564,6 +568,13 @@ func _armar() -> void:
 					_l("  Aportar materiales al grupo (requiere cercanía)", func(): j.aportar_grupo(gid))
 					for item in sociedad.cfg.grupos[gid].reservas:
 						_l("  %s: %d / %d" % [C.ITEMS[item].n, int(g.inv.get(item, 0)), int(sociedad.cfg.grupos[gid].reservas[item])])
+				_l("— VIVIENDAS Y PUESTOS —")
+				for k in sociedad.habitat.datos().obras:
+					var obra: Dictionary=sociedad.habitat.datos().obras[k]
+					_l("Casa "+k+": "+obra.estado+(" · "+obra.motivo if obra.motivo!="" else ""))
+				for puesto in j.autonomia.asentamientos.datos().puestos.values():
+					_l("%s · %d residentes · %s"%[puesto.nombre,puesto.residentes.size(),puesto.estado])
+					_l("  Coordenadas %s · %s"%[str(puesto.celda),Hud.J_txt(j.autonomia.asentamientos.inventario(puesto))])
 				_l("— ECONOMÍA Y PROTECCIÓN —")
 				_l("Valor de la fibra: %.2f · baja cuando abunda" % sociedad.valor("fibra"))
 				_parrafo("Los habitantes dejan fibra sobrante al recoger bayas y usan fibra para renovar ropa y lechos. Fabrica candados en una mesa y colócalos en tus cofres.")
@@ -730,8 +741,20 @@ func _arte_faltante(origen: Vector2) -> void:
 	draw_rect(Rect2(origen, Vector2(P.SPRITE)), Color(1, 0, 1, 0.85))
 
 # ---------- dibujo del mundo ----------
+## Profundidad por los pies; los empates mantienen el mismo orden aunque se mueva el PJ
+## o cambie la lista visible. Godot no garantiza estabilidad si solo se compara Y.
+static func entrada_dibujo(pies: Vector2, tipo: String, dato, clave: String) -> Array:
+	return [pies.y, tipo, dato, pies.x, tipo + ":" + clave]
+
+static func ordenar_dibujo(a: Array, b: Array) -> bool:
+	if a[0] != b[0]: return a[0] < b[0]
+	if a[3] != b[3]: return a[3] < b[3]
+	return a[4] < b[4]
+
 func _draw() -> void:
 	if modo != "juego" or j == null: return
+	rotulos.clear()
+	cuerpos_rotulo.clear()
 	var s := P.CELDA
 	var vp := get_viewport_rect().size / float(P.ZOOM)
 	var vista := Rect2(cam.position - vp / 2.0, vp).grow(40)
@@ -749,27 +772,41 @@ func _draw() -> void:
 	arte_mundo.casa_interior(self)
 	for e in j.combate.enemigos: if e.est == "aviso": _telegrafo(e)
 	var dentro := Mundo.CASA.has_point(Mundo.celda_de(j.pies))
-	var lista: Array = [[j.pies.y, "pj", null], [Mundo.CASA.end.y * 16.0 - 8.0, "fachada", null]]
-	for id in j.habitantes.ids: lista.append([j.habitantes.pos(id).y, "npc", id])
+	var lista: Array = [entrada_dibujo(j.pies, "pj", null, "local"), entrada_dibujo(Vector2(Mundo.CASA.position.x * s, Mundo.CASA.end.y * s - 8.0), "fachada", null, "casa")]
+	for id in j.habitantes.ids: lista.append(entrada_dibujo(j.habitantes.pos(id), "npc", id, id))
 	if red != null:
-		for o in red.otros_jugadores(): lista.append([o.pies.y, "otro", o])
-	for e in j.combate.enemigos: lista.append([e.pos.y, "enemigo", e])
+		for o in red.otros_jugadores(): lista.append(entrada_dibujo(o.pies, "otro", o, str(o.nombre)))
+	for e in j.combate.enemigos: lista.append(entrada_dibujo(e.pos, "enemigo", e, str(e.tipo) + ActoresArte.clave(e)))
+	for r in j.autonomia.asentamientos.visibles(): lista.append(entrada_dibujo(r.pos,"regional",r,r.id))
 	for id in m.objetos:
 		var o: Dictionary = m.objetos[id]
 		if not vista.has_point(Vector2(o.c) * s): continue
 		if m.estado.rotos.has(id) and not (o.t in ["arbol", "roca", "veta", "veta_cobre", "veta_estano", "arcilla", "arbusto"]): continue
-		lista.append([(o.c.y + 1.0) * s, "obj", id])
+		lista.append(entrada_dibujo(Vector2(o.c) * s + Vector2(s / 2.0, s), "obj", id, id))
 	for k in m.estado.constr:
 		var p: PackedStringArray = k.split(",")
 		var c := Vector2i(int(p[0]), int(p[1]))
-		if m.estado.constr[k].t != "suelo" and vista.has_point(Vector2(c) * s): lista.append([(c.y + 1.0) * s, "constr", c])
-	lista.sort_custom(func(a, b): return a[0] < b[0])
+		if m.estado.constr[k].t != "suelo" and vista.has_point(Vector2(c) * s): lista.append(entrada_dibujo(Vector2(c) * s + Vector2(s / 2.0, s), "constr", c, k))
+	for item in lista:
+		var pies_rotulo: Vector2
+		match item[1]:
+			"pj": pies_rotulo = j.pies
+			"npc": pies_rotulo = j.habitantes.pos(item[2])
+			"otro": pies_rotulo = item[2].pies
+			"enemigo", "regional": pies_rotulo = item[2].pos
+			_: continue
+		cuerpos_rotulo.append(Rect2(pies_rotulo - Vector2(11, 46 if item[1] == "enemigo" else 29), Vector2(22, 46 if item[1] == "enemigo" else 29)))
+	lista.sort_custom(ordenar_dibujo)
 	for e in lista:
 		match e[1]:
 			"pj": _dibujar_pj()
 			"npc": _dibujar_npc(e[2])
 			"otro": _dibujar_otro(e[2])
 			"enemigo": _dibujar_enemigo(e[2])
+			"regional":
+				var r: Dictionary=e[2]
+				arte_eq.dibujar(self,r.pos,Vector2i.DOWN,int(Time.get_ticks_msec()/150)%4 if r.mueve else 0,[],r.look,"caminar" if r.mueve else "reposo")
+				_nombre_mundo(r.nombre,r.pos)
 			"obj": _dibujar_obj(e[2])
 			"constr": _dibujar_constr(e[2])
 			"fachada": arte_mundo.casa_fachada(self, 0.25 if dentro else 1.0, dentro or _cerca_puerta())
@@ -793,6 +830,7 @@ func _draw() -> void:
 		var libre: bool = m.puede_techar(c) == "" if id == "techo" else m.puede_poner(c) == "" and not j.ocupada(c)
 		var bien: bool = libre and Inv.tiene(j.jug().inv, C.CONSTR[id].coste)
 		arte_mundo.constr(self, id, c, false, Color(0.5, 1, 0.55, 0.65) if bien else Color(1, 0.4, 0.4, 0.65))
+	_dibujar_rotulos()
 	if debug:
 		draw_rect(Rect2(j.pies - Vector2(P.PIES.x / 2, P.PIES.y), P.PIES), Color(1, 0, 0, 0.5))
 		for y in range(y0, y1 + 1):
@@ -887,12 +925,28 @@ func _dibujar_npc(id: String) -> void:
 
 ## Uses the current Nunito font; keep the new UI and Lora dialogue typography.
 func _nombre_mundo(texto: String, pies: Vector2, color: Color = Color("f7e2aa")) -> void:
+	rotulos.append({"texto": texto, "pies": pies, "color": color})
+
+func _dibujar_rotulos() -> void:
 	var fuente: Font = hud.ui.fuente
 	if fuente == null: return
-	var ancho: float = fuente.get_string_size(texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
-	var pos := (pies - Vector2(ancho / 2.0, 32)).round()
-	draw_string_outline(fuente, pos, texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, 1, Color("2b241c"))
-	draw_string(fuente, pos, texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, color)
+	var usados: Array = cuerpos_rotulo.duplicate()
+	for etiqueta in rotulos:
+		var ancho: float = fuente.get_string_size(etiqueta.texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
+		var r := Rect2((etiqueta.pies - Vector2(ancho / 2.0 + 2, 41)).round(), Vector2(ancho + 4, 11))
+		var libre := false
+		for intento in 20:
+			libre = true
+			for ocupado in usados:
+				if r.grow(1).intersects(ocupado):
+					libre = false
+					break
+			if libre: break
+			r.position.y -= 12
+		if not libre: continue
+		usados.append(r)
+		draw_rect(r, Color(0.09, 0.12, 0.10, 0.82))
+		draw_string(fuente, r.position + Vector2(2, 8), etiqueta.texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, etiqueta.color)
 
 func _dibujar_enemigo(e: Dictionary) -> void:
 	var t: float = e.tam
@@ -901,7 +955,7 @@ func _dibujar_enemigo(e: Dictionary) -> void:
 	_sombra(e.pos, 0.6 + t / 28.0 * 0.6)
 	actores.enemigo(self, e, Time.get_ticks_msec() / 1000.0)
 	if def.has("conducta") and e.pos.distance_to(j.pies) < 96.0:
-		draw_string(hud.ui.fuente, e.pos + Vector2(-22, -36), def.n, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, Color("eee4cf"))
+		_nombre_mundo(def.n, e.pos - Vector2(0, 18), Color("eee4cf"))
 	if e.hp < def.hp:
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t, 3)), Color(0, 0, 0, 0.6))
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t * float(e.hp) / def.hp, 3)), Color("cf5a43"))
@@ -933,15 +987,30 @@ func _dibujar_techos(vista: Rect2, s: float) -> void:
 		abiertos[c] = true
 		for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
 			if techos.has(Mundo.clave(c + d)) and not abiertos.has(c + d): cola.append(c + d)
+	var visitados := {}
 	for k in techos:
-		var p: PackedStringArray = k.split(",")
-		var c := Vector2i(int(p[0]), int(p[1]))
-		if vista.has_point(Vector2(c) * s): arte_mundo.techo(self, c, 0.18 if abiertos.has(c) else 0.95)
+		var partes: PackedStringArray=k.split(",")
+		var semilla:=Vector2i(int(partes[0]),int(partes[1]))
+		if visitados.has(semilla):continue
+		var grupo: Array=[semilla]
+		var minimo:=semilla
+		var maximo:=semilla
+		var transparente:=false
+		while not grupo.is_empty():
+			var c: Vector2i=grupo.pop_back()
+			if visitados.has(c):continue
+			visitados[c]=true
+			minimo=minimo.min(c);maximo=maximo.max(c)
+			if abiertos.has(c):transparente=true
+			for d in [Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]:
+				if techos.has(Mundo.clave(c+d)) and not visitados.has(c+d):grupo.append(c+d)
+		var r:=Rect2(Vector2(minimo)*s-Vector2(8,32),Vector2(maximo-minimo+Vector2i.ONE)*s+Vector2(16,32))
+		if r.intersects(vista):arte_mundo.tejado_rect(self,r,0.12 if transparente else 1.0)
 
 func _dibujar_constr(c: Vector2i) -> void:
 	var cs: Dictionary = j.mundo.constr_en(c)
 	var abierta: bool = cs.t == "puerta" and maxi(absi(Mundo.celda_de(j.pies).x - c.x), absi(Mundo.celda_de(j.pies).y - c.y)) <= 1
-	arte_mundo.constr(self, cs.t, c, false, Color(1, 1, 1, 0.35) if abierta else Color.WHITE, j.campo_listo(c))
+	arte_mundo.constr(self, cs.t, c, abierta, Color.WHITE, j.campo_listo(c))
 
 ## La puerta se ve abierta con el jugador a una celda o menos (solo presentación; la colisión no cambia).
 func _cerca_puerta() -> bool:

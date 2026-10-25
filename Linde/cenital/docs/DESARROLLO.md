@@ -102,4 +102,8 @@ Cada paso de un jugador o habitante sobre hierba libre cuenta (`Mundo.pisar`). A
 
 Piezas nuevas: **Puerta** (3 madera; no bloquea, se ve abierta con alguien a una celda) y **Techo** (1 madera + 1 fibra). El techo va aparte de las piezas (`mundo.techos`): una celda puede tener cama, mesa o muro y además techo. Los techos se guardan, se replican y se dibujan sobre la casa; los conectados al jugador (por dentro o junto a la puerta) se vuelven casi transparentes.
 
-El plano de la casa está en `datos/autonomia/reglas.json` (`vivienda.casa`), relativo a la cama de huésped: los tres muros del refugio, tres muros más para una sala de 2×1, la puerta al sur, una mesa y techo sobre cama y sala. Tras el refugio, un albañil la completa pieza a pieza; lo que no cabe se omite. Quien duerme en una casa completa recupera la energía un 25 % más rápido (`bono_descanso`). En la partida simulada de 5 días las camas quedaron apretadas y no se completó ninguna: el plano pide unos 5×5 libres.
+El plano de la casa está en `datos/autonomia/reglas.json` (`vivienda.casa`), relativo a la cama de huésped: los tres muros del refugio, tres muros más para una sala de 2×1, la puerta al sur, una mesa y techo sobre cama y sala. Tras el refugio, un albañil la completa pieza a pieza; las piezas bloqueadas quedan pendientes y se reintentan. Quien duerme en una casa completa recupera la energía un 25 % más rápido (`bono_descanso`). En la partida simulada de 5 días las camas quedaron apretadas y no se completó ninguna: el plano pide unos 5×5 libres.
+
+## Revisión de crecimiento (25/10)
+
+Se reservan solares completos y accesos antes de ampliar vivienda. La práctica de preparar una cama permite aprender ladrillo; se consultan recetas aprendidas además del oficio inicial. Los cultivos escalan con el grupo y cosechar tiene prioridad con hambre. Ver [CRECIMIENTO_Y_ASENTAMIENTOS.md](CRECIMIENTO_Y_ASENTAMIENTOS.md) para persistencia, arte, puestos exteriores y límites medidos.

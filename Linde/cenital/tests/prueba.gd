@@ -1447,9 +1447,10 @@ func t_actores_arte() -> void:
 ## Recorre scripts/ y falla si aparece dibujo por código fuera de la lista blanca aprobada. Cada entrada es un máximo exacto:
 ## marcadores magenta de «arte faltante» (ui_arte 8, mundo_arte 2, actores_arte 2, escena 2), selección de panel (hud 2),
 ## zonas de aviso técnicas de enemigos (escena 2), cajas de depuración F1 (escena 2), barra de vida de enemigo (escena 2) e
-## indicador de golpes (escena 1). Un dibujo nuevo con draw_rect/draw_circle/polígonos obliga a revisar esta lista.
+## indicador de golpes (escena 1), fondo de etiquetas (escena 1), foco/bordes de inventario (hud 3) y
+## superposición de mineral (mundo_arte 1). Un dibujo nuevo obliga a revisar esta lista.
 func t_sin_arte_procedural() -> void:
-	var lista := {"ui_arte.gd": 8, "mundo_arte.gd": 2, "actores_arte.gd": 2, "hud.gd": 2, "escena.gd": 9}
+	var lista := {"ui_arte.gd": 8, "mundo_arte.gd": 3, "actores_arte.gd": 2, "hud.gd": 5, "escena.gd": 10}
 	var re := RegEx.new()
 	re.compile("draw_(rect|circle|colored_polygon|polygon|line|arc|polyline)\\(")
 	var fuera := []

@@ -1,0 +1,36 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS la roca extraída en v1 no reaparece como estaño al cargar
+PASS v1 conserva tipo e impactos parciales de roca
+PASS partidas nuevas usan el generador v2 con estaño
+PASS se conserva también el estaño extraído en la versión intermedia sin número nuevo
+PASS no acepta un generador futuro desconocido
+PASS encuentra y reserva un solar real en el valle sin preparar el mapa
+PASS otro solar no puede invadir la reserva
+PASS el acceso reservado no admite talleres ni campos
+PASS las piezas planificadas sí caben en su posición
+PASS una obra bloqueada pierde la marca antigua de terminada
+PASS al retirar el obstáculo se reanuda y completa la casa pagando la puerta
+PASS reserva y obra sobreviven a guardar y cargar
+PASS hay solares regionales libres en el terreno generado
+PASS fundar consume el coste completo sin regalar materiales
+PASS el puesto materializa camas, campos, techos y cofre
+PASS con cama y comida llega un residente regional
+PASS el puesto crece hasta sus dos camas reales
+PASS lejos del jugador hay producción con extracción real del mapa
+PASS la simulación distante no mantiene cargado el asentamiento
+PASS cargar no duplica llegada, producción ni consumo
+PASS sin comida se detiene la producción
+PASS al volver aparecen los dos residentes persistentes
+PASS no permite duplicar materiales desmontando solo el marcador del puesto
+PASS la réplica presenta la población regional desde el estado del servidor
+PASS una instantánea atrasada de otro canal no hace retroceder la partida
+PASS el cliente nunca extrae recursos ni produce por su cuenta
+PASS la caché permanece acotada con las expediciones de NPC activas
+CRECIMIENTO: 27 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 180 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

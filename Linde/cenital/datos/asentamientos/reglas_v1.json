@@ -1,0 +1,11 @@
+{
+ "version": 1,
+ "max_puestos": 3,
+ "capacidad": 2,
+ "llegada_min": 360,
+ "produccion_min": 60,
+ "comida_min": 360,
+ "radio_recursos": 12,
+ "tope_stock": 60,
+ "nombres": ["Alba", "Darío", "Vera", "Nicolás", "Emma", "Gael"]
+}

@@ -19,6 +19,8 @@ func _suelo_bioma(ci: CanvasItem, c: Vector2i, bioma: String, dst: Rect2, alfa: 
 		return
 	var origen := Vector2(posmod(c.x, 2), posmod(c.y, 2)) * CELDA
 	ci.draw_texture_rect_region(t, dst, Rect2(origen, Vector2(CELDA, CELDA)), Color(1, 1, 1, alfa))
+	# Velo mineral uniforme: conserva el mosaico y sus transiciones con menos contraste.
+	if bioma == "sierra": ci.draw_rect(dst, Color(0.36, 0.39, 0.37, alfa * 0.48))
 
 var mapeo: Dictionary = {}
 var objetos: Dictionary = {}
@@ -122,6 +124,15 @@ func natural(ci: CanvasItem, tipo: String, c: Vector2i, agotado: bool, jugador: 
 	elif tipo == "arbusto": clave = "E04_bush_without_berries" if agotado else "E04_bush_berries"
 	else: return
 	var pies := Vector2(c) * CELDA + Vector2(8, 16)
+	if clave=="E04_tree_fruit_64":
+		var d: Dictionary=objetos[clave]
+		var origen: Vector2=pies-Vector2(d.pivote[0],d.pivote[1])
+		var tx:=tex(d.archivo)
+		if tx==null: return
+		var alfa:=0.4 if (c.y+1)*CELDA>=jugador.y and Rect2(origen,Vector2(64,45)).has_point(jugador-Vector2(0,14)) else 1.0
+		ci.draw_texture_rect_region(tx,Rect2(origen+Vector2(0,45),Vector2(64,19)),Rect2(0,45,64,19))
+		ci.draw_texture_rect_region(tx,Rect2(origen,Vector2(64,45)),Rect2(0,0,64,45),Color(1,1,1,alfa))
+		return
 	var partes := [clave + "_tronco", clave + "_copa"] if tipo == "arbol" and not agotado else [clave]
 	for k in partes:
 		var alfa := 1.0
@@ -152,24 +163,30 @@ func constr_suelo(ci: CanvasItem, c: Vector2i, tinte: Color = Color.WHITE) -> vo
 	_tex_rect(ci, "E05_floor_wood.png", Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA)), tinte)
 
 func techo(ci: CanvasItem, c: Vector2i, alfa: float) -> void:
-	_tex_rect(ci, "E05_floor_wood.png", Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA)), Color(1.0, 0.55, 0.45, alfa))
+	_tex_rect(ci, "poblados/techo.png", Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA)), Color(1,1,1,alfa))
+
+func tejado_rect(ci: CanvasItem, r: Rect2, alfa: float) -> void:
+	var t:=tex("poblados/techo.png")
+	if t==null: _tex_rect(ci,"poblados/techo.png",r);return
+	ci.draw_texture_rect(t,r,true,Color(1,1,1,alfa))
 
 func constr(ci: CanvasItem, t: String, c: Vector2i, abierto: bool = false, tinte: Color = Color.WHITE, listo: bool = true) -> void:
 	var pies := Vector2(c) * CELDA + Vector2(8, 16)
 	match t:
 		"muro": prop(ci, "palisade", pies, tinte)
-		"muro_ladrillo": prop(ci, "palisade", pies, tinte * Color(1.3, 0.7, 0.6))
+		"muro_ladrillo": _tex_rect(ci,"poblados/muro_ladrillo.png",Rect2(pies-Vector2(12,16),Vector2(24,16)),tinte)
 		"mesa": prop(ci, "workbench", pies, tinte)
 		"horno": prop(ci, "furnace", pies, tinte)
 		"cama": prop(ci, "bed", pies, tinte)
 		"cama_huesped": prop(ci, "bed", pies, tinte * Color(0.6, 0.85, 1.3))
 		"cofre": cofre(ci, c, abierto, tinte)
 		"suelo": constr_suelo(ci, c, tinte)
-		"puerta": prop(ci, "palisade", pies, tinte * Color(0.62, 0.42, 0.28))
+		"puerta": _tex_rect(ci,"poblados/puerta_abierta.png" if abierto else "poblados/puerta_cerrada.png",Rect2(pies-Vector2(10,28) if abierto else pies-Vector2(8,24),Vector2(20,28) if abierto else Vector2(16,24)),tinte)
+		"puesto":
+			prop(ci,"workbench",pies,tinte)
+			_tex_rect(ci,"poblados/techo.png",Rect2(pies-Vector2(16,32),Vector2(32,16)),tinte)
 		"techo": techo(ci, c, 0.7 * tinte.a)
-		"campo":   # tierra labrada; el arbusto sin bayas es el cultivo creciendo, con bayas está maduro
-			_tex_rect(ci, "E05_floor_wood.png", Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA)), tinte * Color(0.75, 0.55, 0.4))
-			natural(ci, "arbusto", c, not listo, Vector2(-99999, -99999))
+		"campo": _tex_rect(ci,"poblados/campo_maduro.png" if listo else "poblados/campo_creciendo.png",Rect2(Vector2(c)*CELDA,Vector2(CELDA,CELDA)),tinte)
 
 # ---------- casa modular (canvas 160×160; origen de la casa lógica en [16,32]) ----------
 func _base_casa() -> Vector2:

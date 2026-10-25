@@ -5,9 +5,11 @@ extends RefCounted
 const C = preload("res://scripts/catalogos.gd")
 const Mundo = preload("res://scripts/mundo.gd")
 const Inv = preload("res://scripts/inventario.gd")
+const Asentamientos = preload("res://scripts/asentamientos.gd")
 const Sociedad = preload("res://scripts/sociedad.gd")
 const Desarrollo = preload("res://scripts/desarrollo.gd")
 var desarrollo
+var asentamientos
 var sociedad
 var j
 var reglas: Dictionary
@@ -16,6 +18,7 @@ func _init(juego) -> void:
 	j = juego
 	reglas = JSON.parse_string(FileAccess.get_file_as_string("res://datos/autonomia/reglas.json"))
 	sociedad = Sociedad.new(self)
+	asentamientos = Asentamientos.new(self)
 	desarrollo = Desarrollo.new(self)
 	if j.es_autoridad() and not "--campana" in OS.get_cmdline_user_args(): activar()   # modo principal; --campana vuelve al director de tarjetas
 	else:
@@ -86,6 +89,7 @@ func paso() -> void:
 	if ahora <= int(a.ultimo_min): return
 	var transcurrido: int = ahora - int(a.ultimo_min)
 	a.ultimo_min = ahora
+	asentamientos.actualizar()
 	if sociedad.activa(): sociedad.actualizar()
 	for nid in j.habitantes.ids:
 		if perfil(nid).is_empty(): continue

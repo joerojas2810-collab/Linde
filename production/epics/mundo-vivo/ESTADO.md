@@ -1,10 +1,20 @@
 # Mundo vivo — estado del epic
 
-> **Actualizado**: 2026-10-24 · **Rama**: `main` · **Epic**: 5 de 5 historias Complete · **Revisión independiente**: ninguna (modo solo)
+> **Actualizado**: 2026-10-25 · **Rama**: `main` · **Epic original**: 5 de 5 historias Complete (histórico) · **Revisión independiente**: ninguna (modo solo)
 
 Documento único de estado. Para el plan original y las decisiones de diseño ver [README.md](README.md); para las reglas, [design/gdd/mundo-vivo.md](../../../design/gdd/mundo-vivo.md).
 
 > **Prueba posterior de autonomía (24/10):** se añadió un modo optativo separado de este epic. Ver §10–12 y `Linde/cenital/docs/AUTONOMIA.md`. El cierre 5/5 de arriba corresponde al director de tarjetas, no a la visión completa del juego.
+
+## Revisión actual — 25/10
+
+Se implementaron compatibilidad de terreno v1/v2, solares completos con acceso reservado, reintento de casas bloqueadas, arte propio de construcciones/cultivos, orden estable de objetos y primeros puestos regionales persistentes. El protocolo 5 evita instantáneas grandes por el canal no fiable y descarta actualizaciones atrasadas. Se integraron los cambios remotos de presentación.
+
+Contrato y límites: [Crecimiento y asentamientos](../../../Linde/cenital/docs/CRECIMIENTO_Y_ASENTAMIENTOS.md). Evidencia: [pruebas y capturas](../../qa/evidence/crecimiento/README.md).
+
+**Pendientes comprobados:** en cinco días de economía autónoma todavía no se completan casas de forma consistente; las obras preparadas sí se completan y reanudan. La prueba de 12 habitantes mantiene la caché acotada, pero muestra pausas de planificación de varios segundos. Los puestos son población resumida fundada por jugadores; no son ciudades autónomas con rutinas completas. La certificación en Internet con latencia real sigue pendiente.
+
+Lo siguiente es equilibrar abastecimiento de comida y ladrillos, distribuir la planificación entre fotogramas y ampliar las rutinas de la población regional. Las secciones siguientes conservan la historia del epic y sus verificaciones originales; sus cifras y deudas no sustituyen esta revisión.
 
 ## 1. Qué hace hoy el sistema
 
@@ -218,3 +228,15 @@ Se añaden cinco criaturas exteriores: espectro de bosque, gólem defensivo de s
 Aparición determinista por región, sin modificar el generador v1, franja de seguridad, validación de colisión y distancia, techo global de 24 regionales activos. Ataques con aviso, visión limitada por obstáculos, daño y botín reales; persecución acotada. Guardado aditivo de heridas y bajas; reaparición tras 720 minutos del juego. Réplica autoritativa mediante la instantánea existente. Sin simulación lejana ni ecosistema de reproducción/depredación. Balance provisional y tiras con una sola orientación.
 
 Contrato: `Linde/cenital/docs/FAUNA_Y_PELIGROS.md`. Verificación: 31 comprobaciones nuevas sin fallos; campaña histórica 327 PASS; interfaz 13 PASS; integración existente con servidor y dos clientes localhost sin fallos. Capturas reales de las cinco especies inspeccionadas en `production/qa/evidence/fauna/`. La regresión de terreno tiene 4 fallos de caché sobre 49, reproducidos también en una copia sin fauna: el contorno mantenido para los NPC se añadió antes de esta tarea. No se modificó ese cambio. Persisten los avisos previos al cerrar; faltan playtest prolongado y fauna en Internet.
+
+
+## Superposición estable al caminar (2026-10-25)
+
+Corregido el intercambio de orden entre árboles cercanos: el ordenamiento por Y no resolvía los empates y podía cambiar cuando se movía el personaje. La escena desempata ahora por X e identidad fija, conservando las alturas de dibujo previas y el paso del jugador delante/detrás. No requiere arte nuevo. Verificación: 6 comprobaciones específicas sin fallos (2 intercambios con el comparador anterior, 0 con el nuevo), interfaz 13 PASS y tres capturas de movimiento inspeccionadas en `production/qa/evidence/orden-dibujo/`. La separación de copa/tronco del frutal sigue siendo una mejora artística aparte.
+
+
+## Inspección consolidada (2026-10-25)
+
+HEAD local `720f6e9` añade minerales, recetas aprendidas, expediciones al contorno, caminos por uso, cultivos y casas de plano fijo. La referencia local `origin/main` está en `4697591`; la corrección del orden de dibujo sigue sin commit. Los apartados anteriores son históricos: sus frases sobre autonomía optativa, ausencia de fauna y ausencia total de expediciones ya no describen el código actual.
+
+Se repitieron 10 suites: 301 PASS, 0 fallos. La suite de terreno desactiva expediciones; queda verificar caché y red con el modo normal completo. Se reprodujeron dos casos fuera de las suites: una roca extraída puede reaparecer como estaño porque se cambió el generador v1 sin migración, y una casa bloqueada se marca como procesada y no vuelve a intentarse tras liberar el espacio. Prioridad: compatibilidad de partidas y reintento de casas; después reservar parcelas antes de colocar camas, arte propio de piezas nuevas y verificación de expediciones/cultivos/casas en multijugador. Informe y logs en `production/qa/evidence/inspeccion-2026-10-25/INFORME.md`. No se corrigió la lógica durante esta inspección.

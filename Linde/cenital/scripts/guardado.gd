@@ -30,7 +30,7 @@ static func migrar(d: Dictionary) -> Dictionary:
 	var generacion = d.get("mundo",{}).get("generacion",null)
 	if generacion!=null:
 		if not generacion is Dictionary:return {}
-		if int(generacion.get("version",-1))!=1 or int(generacion.get("region",-1))!=16:return {}
+		if int(generacion.get("version",-1)) not in [1,2] or int(generacion.get("region",-1))!=16:return {}
 		if not typeof(generacion.get("semilla")) in [TYPE_INT,TYPE_FLOAT]:return {}
 	if f < 1:
 		d["hab"] = d.get("hab", [])

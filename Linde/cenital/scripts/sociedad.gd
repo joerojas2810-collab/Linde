@@ -7,11 +7,14 @@ const Inv = preload("res://scripts/inventario.gd")
 var a
 var j
 var cfg: Dictionary
+var habitat
+const Habitat = preload("res://scripts/habitat.gd")
 
 func _init(autonomia) -> void:
 	a = autonomia
 	j = a.j
 	cfg = a.reglas.sociedad
+	habitat = Habitat.new(self)
 
 func activa() -> bool:
 	return a.activa() and bool(cfg.activa) and j.d.mundo_vivo.autonomia.get("modo", "sociedad") == "sociedad"
@@ -652,17 +655,19 @@ func _posponer(nid: String, item: String, motivo: String) -> void:
 func decidir(nid: String) -> void:
 	var n: Dictionary = a.estado(nid)
 	n.peticion = {}
+	if n.hambre >= float(a.reglas.umbral_comer) and _cosechar(nid): return
 	if _plan_acuerdo(nid): return
 	for herramienta in a.perfil(nid).get("herramientas_necesarias",[]):
 		if int(n.durabilidad.get(herramienta,cfg.durabilidad_herramienta)) <= int(cfg.umbral_reparar) and reparar_herramienta(nid,herramienta): return
 	var urgente: bool = n.hambre >= float(a.reglas.umbral_comer)
 	if not urgente and _mantener(nid): return
-	if not urgente and a.desarrollo.decidir(nid): return
 	if not urgente and _cosechar(nid): return
+	# Terminar una vivienda pendiente antes de ampliar talleres o abrir más obras.
+	if not urgente and _casa(nid): return
+	if not urgente and _refugio(nid): return
 	if not urgente and _sembrar(nid): return
 	if not urgente and _vivienda(nid): return
-	if not urgente and _refugio(nid): return
-	if not urgente and _casa(nid): return
+	if not urgente and a.desarrollo.decidir(nid): return
 	if not urgente and _proteger(nid): return
 	if not urgente and _acumular(nid): return
 	for meta in objetivos(nid):
@@ -702,7 +707,11 @@ func _cosechar(nid: String) -> bool:
 ## Con semilla y fibra de sobra, el grupo labra un campo junto a su depósito.
 func _sembrar(nid: String) -> bool:
 	var gid := grupo_de(nid)
-	if _campos(gid).size() >= int(cfg.economia.campos_por_grupo): return false
+	var miembros:=0
+	for otro in j.habitantes.ids:
+		if grupo_de(otro)==gid:miembros+=1
+	var objetivo_campos:=maxi(int(cfg.economia.campos_por_grupo),ceili(float(miembros)/2.0))
+	if _campos(gid).size() >= objetivo_campos: return false
 	var n: Dictionary = a.estado(nid)
 	if float(n.hambre) >= float(a.reglas.umbral_comer) * 0.5: return false
 	for item in C.CONSTR.campo.coste:   # la semilla sale de su reserva de comida: es una inversión, la repondrá después
@@ -843,7 +852,7 @@ func _construir_cerca(nid: String, pieza: String, cadena: Array, centro_p: Vecto
 		for y in range(centro.y-radio,centro.y+radio+1):
 			for x in range(centro.x-radio,centro.x+radio+1):
 				var c:=Vector2i(x,y)
-				if M.ESENCIALES.has(c) or c == centro or j.mundo.puede_poner(c)!="" or j.ocupada(c):continue
+				if M.ESENCIALES.has(c) or c == centro or j.mundo.puede_poner(c)!="" or j.ocupada(c) or not habitat.permite_pieza(c,pieza):continue
 				if j.mundo.camino(M.celda_de(j.habitantes.pos(nid)),func(z):return j.mundo.es_adyacente(z,c)).is_empty():continue
 				if not _ir(nid,c,"construir","construir " + C.CONSTR[pieza].n):return true
 				if construir_pieza(nid,pieza,c,dueno):return true
@@ -856,7 +865,7 @@ func construir_estacion(nid: String, pieza: String, c: Vector2i) -> bool:
 
 ## También permite suelo de ampliación, con las mismas validaciones y materiales.
 func construir_pieza(nid: String, pieza: String, c: Vector2i, dueno: String = "") -> bool:
-	if not C.CONSTR.has(pieza) or not _cerca(nid,c):return false
+	if not C.CONSTR.has(pieza) or not _cerca(nid,c) or not habitat.permite_pieza(c,pieza):return false
 	var n: Dictionary=a.estado(nid)
 	if pieza == "techo":   # el techo va aparte de las piezas: no bloquea ni cambia las rutas
 		if not Inv.tiene(n.inv,C.CONSTR.techo.coste) or j.mundo.puede_techar(c)!="":return false
@@ -974,19 +983,33 @@ func _vivienda(nid: String) -> bool:
 	for item in v.requiere_excedente:
 		if excedente(nid, item) < int(v.requiere_excedente[item]): return false
 	a.estado(nid).objetivo = "dar vivienda a quien llegue"
-	var hecho: bool = _construir_cerca(nid, "cama_huesped", [])
+	var parcela: Dictionary = habitat.reservar(nid)
+	if parcela.is_empty(): return false
+	var c := Vector2i(int(parcela.cama[0]),int(parcela.cama[1]))
+	var coste: Dictionary = C.CONSTR.cama_huesped.coste
+	comprometer(nid,coste)
+	for item in coste:
+		if int(a.estado(nid).inv.get(item,0))<int(coste[item]): return _obtener(nid,item,int(coste[item])-int(a.estado(nid).inv.get(item,0)),[],"dar vivienda a quien llegue")
+	if not _ir(nid,c,"construir","preparar una vivienda"): return true
+	var hecho: bool = construir_pieza(nid,"cama_huesped",c)
+	if hecho:
+		habitat.estado(c,"pendiente")
+		# La experiencia de levantar la vivienda abre su siguiente técnica, sin regalar insumos.
+		if not "ladrillo" in a.recetas_de(nid):
+			a.estado(nid).recetas_nuevas.append("ladrillo")
+			a._recordar(nid,"descubrio","Aprendí a fabricar ladrillos para completar viviendas")
 	if not j.vivo.camas_libres_lista().is_empty(): datos().vivienda_min = int(j.d.min)
 	return hecho
 
 ## Asentamiento: un albañil cierra con ladrillo tres lados (norte, oeste, este) de cada cama de huésped; el sur queda como entrada.
 ## Construir exige ladrillos reales (los fabrica o los compra) y las mismas validaciones de ruta que el resto.
 func _refugio(nid: String) -> bool:
-	if not "ladrillo" in a.perfil(nid).get("recetas", []): return false
+	if not "ladrillo" in a.recetas_de(nid): return false
 	var hechos: Dictionary = datos().get("refugios", {})
 	var claves: Array = j.d.mundo.constr.keys()
 	claves.sort()
 	for k in claves:
-		if j.d.mundo.constr[k].t != "cama_huesped" or hechos.has(k): continue
+		if j.d.mundo.constr[k].t != "cama_huesped": continue
 		var cama := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
 		for d in [Vector2i(0, -1), Vector2i(-1, 0), Vector2i(1, 0)]:
 			var w: Vector2i = cama + d
@@ -1030,18 +1053,25 @@ func casa_completa(cama: Vector2i) -> bool:
 
 ## Tras el refugio, el albañil completa la casa pieza a pieza (plano en reglas.vivienda.casa). Lo que no cabe se omite.
 func _casa(nid: String) -> bool:
-	if not "ladrillo" in a.perfil(nid).get("recetas", []): return false
+	if not "ladrillo" in a.recetas_de(nid): return false
 	var hechas: Dictionary = datos().get("casas", {})
 	var claves: Array = j.d.mundo.constr.keys()
 	claves.sort()
 	for k in claves:
-		if j.d.mundo.constr[k].t != "cama_huesped" or hechas.has(k) or not datos().get("refugios", {}).has(k): continue
+		if j.d.mundo.constr[k].t != "cama_huesped" or not datos().get("refugios", {}).has(k): continue
 		var cama := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
+		if casa_completa(cama):
+			habitat.estado(cama,"completa")
+			continue
+		hechas.erase(k) # migra marcas antiguas de obras procesadas pero incompletas
+		habitat.estado(cama,"pendiente")
 		for paso in _celdas_casa(cama):
 			var pieza: String = paso[0]
 			var c: Vector2i = paso[1]
 			if _pieza_puesta(pieza, c) or M.ESENCIALES.has(c) or (pieza != "techo" and j.ocupada(c)): continue   # el techo no estorba a quien está debajo
-			if (j.mundo.puede_techar(c) if pieza == "techo" else j.mundo.puede_poner(c)) != "": continue
+			if (j.mundo.puede_techar(c) if pieza == "techo" else j.mundo.puede_poner(c)) != "":
+				habitat.estado(cama,"bloqueada","Hay un obstáculo en "+M.clave(c))
+				continue
 			a.estado(nid).objetivo = "completar una casa"
 			var coste: Dictionary = C.CONSTR[pieza].coste
 			comprometer(nid, coste)
@@ -1052,7 +1082,10 @@ func _casa(nid: String) -> bool:
 			if not construir_pieza(nid, pieza, c): break   # la validación de rutas lo rechazó: dejar esta casa como está
 			return true
 		if not datos().has("casas"): datos().casas = {}
-		datos().casas[k] = true
+		if casa_completa(cama):
+			datos().casas[k] = true
+			habitat.estado(cama,"completa")
+		else: habitat.estado(cama,"bloqueada","Faltan piezas o acceso; se reintentará")
 	return false
 
 ## Riqueza del valle: valor de lo que guardan habitantes y depósitos. Mide si hay con qué sostener a un recién llegado.
@@ -1123,6 +1156,10 @@ func _inmigrar() -> void:
 	var oficios: Array = ci.oficios.keys()
 	oficios.sort()
 	var oficio: String = oficios[rng.randi() % oficios.size()]
+	var albanil := false
+	for nid in j.habitantes.ids:
+		if "ladrillo" in a.perfil(nid).get("recetas",[]): albanil=true
+	if not albanil and not habitat.datos().parcelas.is_empty() and ci.oficios.has("albanil"): oficio="albanil"
 	var of: Dictionary = ci.oficios[oficio]
 	var usados: Array = []
 	for c in raiz.colonos.values(): usados.append(c.npc.name)

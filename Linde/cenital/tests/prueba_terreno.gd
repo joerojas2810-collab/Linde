@@ -38,7 +38,7 @@ func _init() -> void:
  for oid in original.objetos:
   if j.mundo.objetos.get(oid,{})!=original.objetos[oid]:core=false
  ok(core,"se conservan recursos y puntos de interés originales")
- ok(j.d.mundo.generacion.semilla==123 and j.d.mundo.generacion.version==1,"semilla y versión del generador se guardan en el mundo")
+ ok(j.d.mundo.generacion.semilla==123 and j.d.mundo.generacion.version==2,"semilla y versión del generador se guardan en el mundo")
  ok(M.celda_de(Vector2(-0.1,12))==Vector2i(-1,0),"coordenadas negativas usan suelo matemático, no truncamiento")
  ok(T.region(Vector2i(-1,-17))==Vector2i(-1,-2),"regiones negativas no se solapan con el origen")
  var uno=T.new(123);var dos=T.new(123);var distinto=T.new(124)

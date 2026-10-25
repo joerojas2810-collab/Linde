@@ -55,8 +55,14 @@ func _draw() -> void:
 		var alto := 20.0 + msgs.size() * 22.0
 		ui.panel(self, Rect2(16, 660 - alto - 8, 520, alto))
 		for i in msgs.size(): _t(str(msgs[i]), Vector2(32, 660 - alto + 4 + i * 22.0), 16)
-	ui.panel(self, Rect2(16, 668, 1248, 40))
-	_t("I mochila · C fabricar · F forja · G materiales/planos · K habilidades · J valle · B construir · E hablar · Espacio acción · Esc menú", Vector2(32, 676), 16)
+	ui.panel(self, Rect2(vs.x / 2 - 310, 668, 620, 40))
+	_t("I  Mochila     E  Interactuar     Espacio  Acción     H  Ayuda", Vector2(vs.x / 2 - 288, 678), 17)
+	if esc.ayuda_visible:
+		ui.panel(self, Rect2(vs.x / 2 - 310, 518, 620, 142))
+		_t("CONTROLES", Vector2(vs.x / 2 - 288, 536), 20)
+		_t("WASD / Flechas  Moverse     Esc  Menú", Vector2(vs.x / 2 - 288, 570), 17)
+		_t("C  Fabricar     F  Forja     G  Materiales y planos", Vector2(vs.x / 2 - 288, 598), 17)
+		_t("K  Habilidades     J  Valle     B  Construir     F5  Guardar", Vector2(vs.x / 2 - 288, 626), 17)
 	if esc.debug: _t("anim: %s #%d" % [esc._anim.estado, esc._anim.cuadro], Vector2(vs.x - 200, 700), 16, UiArte.FOCO)
 	if esc.pista != "":
 		var w: float = ui.ancho_texto(esc.pista, 16) + 32.0
@@ -115,6 +121,9 @@ func _panel(vs: Vector2) -> void:
 			draw_multiline_string(ui.fuente_dialogo, d.position + Vector2(112, 100), esc.dialogo_txt, HORIZONTAL_ALIGNMENT_LEFT, 912, 24, -1, UiArte.TINTA)
 		_t("[E / Enter] cerrar", d.position + Vector2(112, d.size.y-44), 16)
 		return
+	if esc.panel == "inv":
+		_inventario(vs)
+		return
 	var r := Rect2(vs.x / 2 - 448, 40, 896, 600)
 	ui.panel(self, r)
 	var fila := 34.0
@@ -138,6 +147,48 @@ func _panel(vs: Vector2) -> void:
 		y += fila
 		if y > r.end.y - 56: break
 	_t("[↑↓] mover · [Enter] elegir · [Esc] cerrar", Vector2(r.position.x + 24, r.end.y - 36), 16)
+
+# Conserva los índices y acciones de escena: solo cambia su presentación.
+func _inventario(vs: Vector2) -> void:
+	var r := Rect2(vs.x / 2 - 530, 32, 1060, 612)
+	ui.panel(self, r)
+	var st: Dictionary = esc.j.stats()
+	_t("MOCHILA Y EQUIPO", r.position + Vector2(28, 22), 28)
+	_t("Nivel %d   ·   Daño %d   ·   Defensa %d   ·   Vida %d   ·   Velocidad ×%.2f" % [esc.j.nivel(), st.dmg, st.def, st.hp, st.vel], r.position + Vector2(28, 64), 17)
+	var izq := r.position + Vector2(28, 108)
+	var der := r.position + Vector2(540, 108)
+	draw_line(r.position + Vector2(516, 108), r.position + Vector2(516, 536), Color(UiArte.TINTA, 0.22), 2)
+	_t("EQUIPADO", izq, 21)
+	_t("MOCHILA   %d / %d espacios" % [preload("res://scripts/inventario.gd").slots(esc.j.jug().inv), st.slots], der, 21)
+	var mochila := 3 + C.RANURAS.size()
+	for i in range(3, mochila):
+		_fila_inventario(i, izq + Vector2(0, 36 + (i - 3) * 48), 466)
+	var primero := mochila + 1
+	var inicio := maxi(primero, esc.sel - 6)
+	var fin := mini(esc.lineas.size(), inicio + 7)
+	for i in range(inicio, fin):
+		_fila_inventario(i, der + Vector2(0, 36 + (i - inicio) * 48), 480)
+	if inicio > primero or fin < esc.lineas.size():
+		_t("↑↓ Más objetos · %d–%d" % [inicio - primero + 1, fin - primero], der + Vector2(0, 390), 15)
+	_t("Bono: " + esc._txt_bono(esc.j.bono_set()), r.position + Vector2(28, 510), 16)
+	var detalle := "Selecciona una pieza u objeto con ↑↓."
+	if esc.sel >= 0 and esc.sel < esc.lineas.size() and esc.acc[esc.sel] != null:
+		detalle = esc.lineas[esc.sel]
+	_t(detalle, r.position + Vector2(28, 544), 15)
+	_t("↑↓ Seleccionar    Enter Usar / Equipar / Quitar    Esc Cerrar", r.position + Vector2(28, 578), 16)
+
+func _fila_inventario(i: int, pos: Vector2, ancho: float) -> void:
+	var activa: bool = esc.acc[i] != null
+	if i == esc.sel and activa:
+		draw_rect(Rect2(pos, Vector2(ancho, 44)), Color(UiArte.FOCO, 0.30))
+		draw_rect(Rect2(pos, Vector2(ancho, 44)), UiArte.FOCO, false, 2)
+	var icono: String = esc.iconos[i] if i < esc.iconos.size() else ""
+	if icono == "" and i == 3 + C.RANURAS.find("arma"): icono = "reutilizados/espada_hierro.png"
+	ui.ranura(self, Rect2(pos + Vector2(2, 2), Vector2(40, 40)), i == esc.sel and activa)
+	ui.icono(self, icono, Rect2(pos + Vector2(6, 6), Vector2(32, 32)))
+	var texto: String = esc.lineas[i].replace("  (Enter: quitar)", "")
+	if ui.fuente != null:
+		draw_string(ui.fuente, pos + Vector2(52, 27), texto, HORIZONTAL_ALIGNMENT_LEFT, ancho - 60, 16, UiArte.TINTA)
 
 func _menu(vs: Vector2) -> void:
 	var p := Rect2(vs.x / 2 - 240, 40, 480, 620)

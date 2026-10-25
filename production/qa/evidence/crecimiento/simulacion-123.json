@@ -1,0 +1,151 @@
+{
+  "camas": 5,
+  "casas_completas": 0,
+  "dias": 5,
+  "estadisticas": {
+    "acuerdo": 39,
+    "ahorro": 3,
+    "alternativa": 28,
+    "aporte": 9,
+    "construccion": 26,
+    "descubrimiento": 4,
+    "desgaste": 2,
+    "entrega": 37,
+    "fabricacion": 17,
+    "incumplimiento": 2,
+    "liderazgo": 2,
+    "llegada": 4,
+    "mantenimiento": 10,
+    "objetivo": 4,
+    "retiro": 4
+  },
+  "habitantes": 6,
+  "inventarios_negativos": false,
+  "obras": {
+    "13,8": {
+      "estado": "pendiente",
+      "motivo": ""
+    },
+    "21,13": {
+      "estado": "pendiente",
+      "motivo": ""
+    },
+    "22,26": {
+      "estado": "pendiente",
+      "motivo": ""
+    },
+    "28,26": {
+      "estado": "pendiente",
+      "motivo": ""
+    },
+    "33,14": {
+      "estado": "pendiente",
+      "motivo": ""
+    }
+  },
+  "regiones": 44,
+  "semilla": 123,
+  "solares": 5,
+  "trabajadores": [
+    {
+      "id": "maren",
+      "inv": {
+        "arcilla": 3,
+        "art1:casco:fibra:ligera:1": 1,
+        "art1:torso:fibra:ligera:1": 1,
+        "fibra": 17,
+        "hacha_piedra": 1,
+        "madera": 2,
+        "pico_piedra": 2,
+        "piedra": 8
+      },
+      "objetivo": "alimentarme",
+      "oficio": "",
+      "plan": {
+        "act": "recolectar",
+        "celda": [
+          41,
+          8
+        ],
+        "motivo": "alimentarme"
+      }
+    },
+    {
+      "id": "ordal",
+      "inv": {
+        "fibra": 18,
+        "gema": 1,
+        "madera": 2,
+        "mena": 4,
+        "pico_piedra": 1
+      },
+      "objetivo": "alimentarme",
+      "oficio": "",
+      "plan": {
+        "act": "recolectar",
+        "celda": [
+          14,
+          31
+        ],
+        "motivo": "alimentarme"
+      }
+    },
+    {
+      "id": "colono_1",
+      "inv": {
+        "fibra": 18,
+        "madera": 1,
+        "pico_piedra": 1,
+        "piedra": 8
+      },
+      "objetivo": "probar un recurso nuevo",
+      "oficio": "albanil",
+      "plan": {}
+    },
+    {
+      "id": "colono_2",
+      "inv": {
+        "art1:casco:fibra:ligera:1": 1,
+        "art1:torso:fibra:ligera:1": 1,
+        "baya": 1,
+        "fibra": 11,
+        "hacha_piedra": 2,
+        "piedra": 8
+      },
+      "objetivo": "alimentarme",
+      "oficio": "recolector",
+      "plan": {
+        "act": "recolectar",
+        "celda": [
+          9,
+          -5
+        ],
+        "motivo": "alimentarme"
+      }
+    },
+    {
+      "id": "colono_3",
+      "inv": {
+        "baya": 2,
+        "fibra": 16,
+        "hacha_piedra": 2,
+        "madera": 4,
+        "piedra": 1
+      },
+      "objetivo": "dar vivienda a quien llegue",
+      "oficio": "recolector",
+      "plan": {}
+    },
+    {
+      "id": "colono_4",
+      "inv": {
+        "fibra": 12,
+        "hacha_piedra": 1,
+        "piedra": 2
+      },
+      "objetivo": "mantener mi oficio",
+      "oficio": "artesano",
+      "plan": {}
+    }
+  ]
+}

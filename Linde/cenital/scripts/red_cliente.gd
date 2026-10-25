@@ -25,6 +25,7 @@ var perfiles := {}               # id -> {nombre, look}
 var pos_servidor := Vector2.ZERO # posición propia según la última instantánea
 var anim_propia := {"estado": "reposo", "cuadro": 0}
 var instantaneas := 0
+var ultima_instantanea := -1
 var t_conexion_ms := -1.0
 var _seq := 0
 var _t0 := 0
@@ -84,9 +85,16 @@ func evento(datos: Array) -> void:
 		"privado":
 			if j != null: _privado(datos[1])
 
+@rpc("authority", "call_remote", "reliable")
+func instantanea_fiable(datos: Array) -> void:
+	instantanea(datos)
+
 @rpc("authority", "call_remote", "unreliable_ordered")
 func instantanea(datos: Array) -> void:
 	if j == null: return
+	if datos.size()>4:
+		if int(datos[4]) <= ultima_instantanea: return
+		ultima_instantanea=int(datos[4])
 	instantaneas += 1
 	j.d.min = datos[0]
 	var jug: Dictionary = datos[1]

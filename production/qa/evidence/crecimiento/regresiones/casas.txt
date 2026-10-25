@@ -1,0 +1,22 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS hay sitio para una casa
+PASS la puerta se construye y no bloquea
+PASS la cama
+PASS el techo cubre una celda que ya tiene una pieza
+PASS no se techa dos veces
+PASS retirar la cama deja el techo
+PASS retirar de nuevo quita el techo
+PASS una cama sola no es una casa
+PASS con muros, sala, puerta, mesa y techo está completa
+PASS sin techo deja de estar completa
+PASS la casa completa sobrevive a guardar y cargar
+PASS el albañil completa la casa (muros, sala, puerta, mesa y techo)
+PASS con tres techos y la puerta al sur
+CASAS: 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 73 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 12 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

@@ -1,0 +1,5 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+MIGRACION celda=(56, -299) antes=roca ahora=veta_estano version_guardada=1 roto_anterior=true objeto_presente_tras_carga=veta_estano@56,-299
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)

@@ -1,0 +1,16 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS hay una celda de hierba libre
+PASS pocos pasos no forman camino
+PASS al llegar al umbral se forma el camino
+PASS solo la hierba se gasta
+PASS el tick cuenta pasos sin romper nada
+PASS guardado
+PASS el camino sobrevive a guardar y cargar
+CAMINOS: 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 37 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 10 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

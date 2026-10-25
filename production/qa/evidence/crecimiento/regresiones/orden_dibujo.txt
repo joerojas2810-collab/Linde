@@ -1,0 +1,11 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS reproduce el intercambio de árboles empatados al mover al personaje
+PASS los mismos árboles conservan su orden en todos los pasos
+PASS recargar regiones en otro orden no cambia la superposición
+PASS entrar y salir elementos del encuadre no altera el orden de los restantes
+PASS el personaje sigue pasando detrás o delante según la profundidad
+PASS objetos de distinta clase con la misma posición tienen desempate fijo
+ORDEN_DIBUJO: 6 comprobaciones, 0 fallos; cambios antiguos=2, nuevos=0
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)

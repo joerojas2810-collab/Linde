@@ -53,6 +53,7 @@ const OBJETOS := {
 
 # bloquea: ocupa la celda. est: estación de fabricación. propia: la pone/retira el jugador.
 const CONSTR := {
+	"puesto": {"n":"Puesto regional", "coste":{"madera":20,"piedra":8,"fibra":12,"baya":8,"hacha_piedra":1,"pico_piedra":1}, "bloquea":false,"c":"#bd8b51"},
 	"muro": {"n": "Muro", "coste": {"madera": 2}, "bloquea": true, "c": "#a8794f"},
 	"muro_ladrillo": {"n": "Muro de ladrillo", "coste": {"ladrillo": 2}, "bloquea": true, "c": "#b5533c"},
 	"suelo": {"n": "Suelo de madera", "coste": {"madera": 1}, "bloquea": false, "c": "#9b7a52"},
@@ -65,7 +66,7 @@ const CONSTR := {
 	"campo": {"n": "Campo de cultivo", "coste": {"fibra": 2, "baya": 2}, "bloquea": false, "campo": true, "c": "#7a5a2e"},   # la baya hace de semilla
 	"cama_huesped": {"n": "Cama de huésped", "coste": {"madera": 4, "fibra": 3}, "bloquea": true, "c": "#4a8fb8"},   # sin "cama": no sirve para dormir; la asigna Mundo vivo
 }
-const ORDEN_CONSTR := ["muro", "muro_ladrillo", "suelo", "mesa", "horno", "cofre", "cama", "cama_huesped", "campo", "puerta", "techo"]
+const ORDEN_CONSTR := ["muro", "muro_ladrillo", "suelo", "mesa", "horno", "cofre", "cama", "cama_huesped", "campo", "puerta", "techo", "puesto"]
 
 # est: estación cercana (≤2 celdas); herr: ítem requerido sin consumir; hab: habilidad requerida.
 const RECETAS := {

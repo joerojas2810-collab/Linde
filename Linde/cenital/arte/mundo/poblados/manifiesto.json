@@ -1,0 +1,74 @@
+{
+  "origen": "image_gen, generación y edición de fondo transparente, 2026-10-25",
+  "fuente": "fuente.png",
+  "prompt": "prompt.txt",
+  "procesado": "Recorte y reducción nearest-neighbor con Godot; alfa conservado.",
+  "recortes_fuente": {
+    "muro_ladrillo": [
+      54,
+      200,
+      420,
+      212
+    ],
+    "puerta_cerrada": [
+      603,
+      40,
+      320,
+      382
+    ],
+    "puerta_abierta": [
+      1110,
+      38,
+      320,
+      428
+    ],
+    "techo": [
+      52,
+      525,
+      420,
+      420
+    ],
+    "campo_creciendo": [
+      556,
+      532,
+      420,
+      420
+    ],
+    "campo_maduro": [
+      1066,
+      530,
+      420,
+      420
+    ]
+  },
+  "archivos": [
+    {
+      "archivo": "campo_creciendo.png",
+      "sha256": "4138c9fd098288f95efbeaf6cb057c68833f54cd53b15c04a248433105d98f54"
+    },
+    {
+      "archivo": "campo_maduro.png",
+      "sha256": "905a7216c2ef351c1b0c1a0c2cea1c7afdd8a1b61388eead3a90a04e198e09c8"
+    },
+    {
+      "archivo": "fuente.png",
+      "sha256": "166705eeeee8237691893a53e5105c37f22eb0a359a324376ca8bbfdd4313e47"
+    },
+    {
+      "archivo": "muro_ladrillo.png",
+      "sha256": "7628477e2b7edbd1760d64e991f1bb8d323caccb2d5f87c6e67b93a3a59fbf1d"
+    },
+    {
+      "archivo": "puerta_abierta.png",
+      "sha256": "36852e6bdead19cd2cd142889b65f8c78a35529880b5ec13e8f62b695d428fc8"
+    },
+    {
+      "archivo": "puerta_cerrada.png",
+      "sha256": "563219d62cdf302a2cde9de8a5dba6b7b30917ae5b3326abe9f08045ba81f81e"
+    },
+    {
+      "archivo": "techo.png",
+      "sha256": "0b659c0ceb92f8ac72b63d26deb372855ffaa3760f9e886c29b60ca90228fd23"
+    }
+  ]
+}

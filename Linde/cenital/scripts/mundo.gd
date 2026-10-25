@@ -4,6 +4,7 @@ extends RefCounted
 const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Terreno = preload("res://scripts/terreno_v1.gd")
+const Terreno2 = preload("res://scripts/terreno_v2.gd")
 enum T { PASTO, CAMINO, AGUA, PARED, SUELO, PUERTA, RUINA, MURO_RUINA }
 const ANCHO := 64
 const ALTO := 48
@@ -79,7 +80,7 @@ func configurar(semilla: int) -> void:
 	for campo in ["caminos", "pisadas", "techos"]:
 		if not estado.has(campo): estado[campo] = {}   # guardados anteriores
 	if not estado.has("generacion"): estado.generacion={"version":1,"semilla":semilla,"region":Terreno.TAM}
-	generador=Terreno.new(int(estado.generacion.semilla))
+	generador=Terreno2.new(int(estado.generacion.semilla)) if int(estado.generacion.version)==2 else Terreno.new(int(estado.generacion.semilla))
 	_firma_regiones=""
 
 static func es_valle(c: Vector2i) -> bool:
@@ -126,8 +127,12 @@ func actualizar_regiones(centros: Array) -> void:
 		var ids: Array=[]
 		for recurso in datos.recursos:
 			if es_valle(recurso.c):continue
-			var id: String=str(recurso.t)+"@"+clave(recurso.c)
-			_agregar(str(recurso.t),recurso.c,id)
+			var tipo_recurso: String = str(recurso.t)
+			# Conserva diferencias de estaño de la versión intermedia que aún se guardaba como v1.
+			var id_estano: String = "veta_estano@" + clave(recurso.c)
+			if int(estado.generacion.version)==1 and (estado.rotos.has(id_estano) or estado.golpes.has(id_estano)): tipo_recurso="veta_estano"
+			var id: String=tipo_recurso+"@"+clave(recurso.c)
+			_agregar(tipo_recurso,recurso.c,id)
 			ids.append(id)
 		datos.ids=ids
 		regiones[k]=datos
@@ -151,6 +156,7 @@ func datos_objeto(id: String) -> Dictionary:
 	var c:=Vector2i(int(partes[0]),int(partes[1]))
 	if es_valle(c) or not generador.valida(c):return {}
 	var d: Dictionary=generador.datos(c)
+	if int(estado.generacion.version)==1 and id=="veta_estano@"+clave(c) and (estado.rotos.has(id) or estado.golpes.has(id)): d.objeto="veta_estano"
 	return {"t":str(d.objeto),"c":c} if str(d.objeto)!="" and id==str(d.objeto)+"@"+clave(c) else {}
 
 func _poner(x: int, y: int, t: int) -> void:

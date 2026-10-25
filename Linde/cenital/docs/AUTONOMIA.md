@@ -61,3 +61,7 @@ Desde la raíz, usar el ejecutable local de Godot con `--headless --path Linde/c
 - `res://tests/prueba.gd`, `prueba_ui.gd`, `prueba_red.gd`: regresión general, interfaz y red local.
 
 Las pruebas nuevas guardan sus partidas en `/tmp/`. `tests/captura_sociedad.gd` se ejecuta con render (sin `--headless`), simula tres días sin intervención y conserva capturas de habitantes, grupos, diario, diálogo y depósito en `production/qa/evidence/sociedad/`. La prueba visual no equivale a un playtest de diversión ni a una sesión multijugador real en Internet.
+
+## Crecimiento y exterior (25/10)
+
+Las obras conservan solares y accesos, reintentan piezas bloqueadas y reconocen recetas aprendidas. Los puestos regionales son una simulación resumida separada de las rutinas completas del valle. Detalles, costes y límites en [CRECIMIENTO_Y_ASENTAMIENTOS.md](CRECIMIENTO_Y_ASENTAMIENTOS.md).

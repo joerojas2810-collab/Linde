@@ -64,6 +64,7 @@ static func nueva(semilla: int, nombre: String, look: Array):
 	j.d = {"formato": Guard.FORMATO, "contenido": 1, "gen": 1, "semilla": semilla, "min": 6 * 60,
 		"cofres": {"tesoro_cantera": {"inv": cont, "abierto": false}}, "mundo": j.mundo.estado, "jefes": {}, "npcs": {},
 		"jugadores": {LOCAL: nuevo_jugador(nombre, look, p)}}
+	j.d.mundo.generacion = {"version": 2, "semilla": semilla, "region": 16}
 	j._arrancar()
 	return j
 
@@ -500,6 +501,8 @@ func actores() -> Array:
 	var l: Array = []
 	for id in rt: l.append([rt[id].pies, P.PIES])
 	for nid in habitantes.ids: l.append([habitantes.pos(nid), P.PIES])
+	if autonomia!=null:
+		for r in autonomia.asentamientos.visibles():l.append([r.pos,P.PIES])
 	for e in combate.enemigos:
 		if e.est != "muerto": l.append([e.pos, Vector2(e.tam, e.tam * 0.6)])
 	return l
@@ -514,6 +517,10 @@ func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
 	var pj := jug(id)
 	if not C.CONSTR.has(pieza): return _no("Pieza desconocida", id)
 	var def: Dictionary = C.CONSTR[pieza]
+	if autonomia.activa() and not autonomia.sociedad.habitat.permite_pieza(c,pieza): return _no("Solar reservado para una vivienda",id)
+	if pieza=="puesto":
+		var problema: String=autonomia.asentamientos.validar(c)
+		if problema!="": return _no(problema,id)
 	if def.get("techo", false):
 		var m_techo := mundo.puede_techar(c)
 		if m_techo != "": return _no("No se puede: " + m_techo, id)
@@ -537,6 +544,7 @@ func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
 			mundo.quitar(c)
 			return _no("Eso cerraría un camino esencial", id)
 	Inv.quitar(pj.inv, def.coste)
+	if pieza=="puesto": autonomia.asentamientos.crear(c,id)
 	if def.get("cofre", false): d.cofres["c@" + Mundo.clave(c)] = {"inv": {}}
 	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",def.coste)
 	return _ok("Construyes %s" % def.n, id)
@@ -568,6 +576,7 @@ func retirar(c: Vector2i, id: String = LOCAL) -> Dictionary:
 		return _ok("Recuperas " + _txt_items(C.CONSTR.techo.coste), id)
 	if cs.is_empty(): return _no("No hay construcción", id)
 	if cs.get("dueno", "") != id: return _no("Esa construcción no es tuya", id)
+	if cs.t=="puesto": return _no("El puesto regional es permanente; sus reservas y casas se gestionan por separado",id)
 	var def: Dictionary = C.CONSTR[cs.t]
 	var cid := "c@" + k
 	if d.cofres.get(cid, {}).get("candado", false): return _no("Retira primero el candado", id)

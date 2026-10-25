@@ -10,7 +10,7 @@ const Mundo = preload("res://scripts/mundo.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const PUERTO := 7777
 const MAX_CLIENTES := 15
-const VERSION := 4              # versión del protocolo; el cliente la manda en «hola»
+const VERSION := 5              # versión del protocolo; el cliente la manda en «hola»
 const TICK := 0.05              # 20 Hz
 const ALCANCE := 2              # celdas (Chebyshev) para construir, retirar y usar cofres
 const MAX_PEDIDOS_S := 40       # pedidos por segundo y conexión; el resto se descarta
@@ -21,6 +21,7 @@ const SECCIONES := ["rotos", "golpes", "constr", "caminos", "techos", "cofres", 
 const MAX_TEXTO := 48           # longitud máxima de un texto de pedido (las claves `eq:` más largas rondan 32)
 const MAX_LOTE := 12            # entradas por lado de una oferta de intercambio
 
+var secuencia_instantanea := 0
 var j                           # Juego del mundo (único)
 var puerto := PUERTO
 var local := ""                 # id del jugador que juega en este proceso (anfitrión con ventana); "" sin ventana
@@ -152,6 +153,10 @@ func evento(_datos) -> void:
 ## Servidor -> clientes (instantánea a 20 Hz, puede perderse).
 @rpc("authority", "call_remote", "unreliable_ordered")
 func instantanea(_datos) -> void:
+	pass
+
+@rpc("authority", "call_remote", "reliable")
+func instantanea_fiable(_datos: Array) -> void:
 	pass
 
 # Devuelve true si el pedido pasó la validación (no si la acción de juego tuvo éxito).
@@ -356,7 +361,11 @@ func _difundir() -> void:
 	for pid in peers: if peers[pid].id != "": dentro.append(pid)
 	if dentro.is_empty(): return
 	var inst := instantanea_actual()
-	for pid in dentro: instantanea.rpc_id(pid, inst)
+	# ENet no debe fragmentar instantáneas grandes en el canal sin fiabilidad.
+	var grande := var_to_bytes(inst).size() > 1200
+	for pid in dentro:
+		if grande: instantanea_fiable.rpc_id(pid,inst)
+		else: instantanea.rpc_id(pid, inst)
 	var cambios := {}
 	for k in SECCIONES:
 		var v = _seccion(k)
@@ -400,7 +409,8 @@ func instantanea_actual() -> Array:
 		ene.append([e.tipo, e.pos.x, e.pos.y, e.est, e.hp, e.atq, e.t, e.dir.x, e.dir.y])
 	var npcs := {}
 	for nid in j.d.npcs: npcs[nid] = [j.d.npcs[nid].pos[0], j.d.npcs[nid].pos[1], j.d.npcs[nid].act]
-	return [j.d.min, jug, ene, npcs]
+	secuencia_instantanea += 1
+	return [j.d.min, jug, ene, npcs, secuencia_instantanea]
 
 # Nombre, aspecto y equipo visible de los presentes (fiable, solo cuando cambia).
 func perfiles() -> Dictionary:

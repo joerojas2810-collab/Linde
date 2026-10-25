@@ -48,6 +48,12 @@
    "origen": "Nuevo Juego/public/art/enemies-px, reutilización indicada por el usuario",
    "contenido": "20 tiras: espectro tierra, gólem tierra, diablillo fuego, arpía viento y slime agua; reposo, ataque, golpe y derrota",
    "manifiesto": "arte/actores/fauna/manifiesto.json"
+  },
+  {
+   "carpeta": "Linde/cenital/arte/mundo/poblados",
+   "origen": "Generación propia image_gen, 2026-10-25",
+   "contenido": "Ladrillo, puerta cerrada/abierta, teja y dos fases de cultivo; fuente y prompt conservados.",
+   "manifiesto": "arte/mundo/poblados/manifiesto.json"
   }
  ],
  "informes": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_0X/salida/lotes/*/INFORME.md"

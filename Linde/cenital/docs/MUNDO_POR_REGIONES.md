@@ -1,4 +1,4 @@
-# Mundo por regiones · generación v1
+# Mundo por regiones · generaciones v1 y v2
 
 ## Uso
 
@@ -16,7 +16,7 @@ Se adaptaron la generación por coordenadas globales, el cálculo de regiones y 
 
 ## Contrato persistente
 
-- `d.mundo.generacion`: versión 1, semilla de terreno y tamaño de región 16.
+- `d.mundo.generacion`: versión 1 para partidas anteriores, versión 2 para partidas nuevas (estaño), semilla y tamaño de región 16. v1 permanece congelada. Las diferencias guardadas de estaño de la versión intermedia se conservan.
 - El valle sigue usando su geometría de autor y su semilla histórica. La semilla de partida determina el exterior.
 - Cada región contiene 16 × 16 celdas. Se calcula con coordenadas globales: el orden de exploración no cambia el resultado ni crea cortes entre regiones.
 - `rotos`, `golpes` y `constr` conservan extracciones, daño parcial y construcciones por coordenadas globales. Los cofres conservan contenido, dueño, permisos y candado.
@@ -31,15 +31,15 @@ Se mantiene en memoria la unión de los entornos de los jugadores conectados: ha
 
 La carga es síncrona y por regiones pequeñas. No se declara generación en segundo plano. Una medición local de carga de 25 regiones, incluida la creación del valle, dio unos 28 ms; no representa un límite garantizado ni una prueba de rendimiento en todas las máquinas.
 
-La navegación de los habitantes continúa dentro del valle. La validación de construcciones usa recorridos acotados para no intentar recorrer un mundo sin límite: conserva las rutas esenciales del valle y comprueba conexiones locales en el exterior. Esta comprobación puede ser conservadora cuando un desvío queda fuera del área local.
+Las rutinas completas se mantienen en el valle; las expediciones usan rutas regionales acotadas y caché limitada. La validación de construcciones usa recorridos acotados para no intentar recorrer un mundo sin límite: conserva las rutas esenciales del valle y comprueba conexiones locales en el exterior. Esta comprobación puede ser conservadora cuando un desvío queda fuera del área local.
 
-El servidor sigue siendo la autoridad sobre movimientos y cambios. Los clientes reciben la semilla/configuración y las diferencias, y reconstruyen el terreno con el mismo generador. El protocolo pasa a versión 4 para evitar mezclar clientes anteriores con otra geometría. Los pedidos lejanos no provocan generación de regiones a voluntad del cliente.
+El servidor sigue siendo la autoridad sobre movimientos y cambios. Los clientes reciben la semilla/configuración y las diferencias, y reconstruyen el terreno con el mismo generador. El protocolo pasa a versión 5 para evitar mezclar clientes anteriores con otra geometría. Los pedidos lejanos no provocan generación de regiones a voluntad del cliente.
 
 ## Alcance de esta entrega
 
-Los habitantes no exploran ni colonizan el exterior todavía. Las camas de huésped de afuera no se asignan a colonos que aún tienen rutinas del valle. Tampoco se les ordenan hurtos a cofres exteriores sin rutas regionales. Sí puedes usar tus propias camas y cofres fuera del valle.
+Los habitantes pueden hacer expediciones. Los puestos fundados por el jugador incorporan hasta dos residentes regionales resumidos; ver [CRECIMIENTO_Y_ASENTAMIENTOS.md](CRECIMIENTO_Y_ASENTAMIENTOS.md). Las camas de huésped de afuera no se asignan a colonos que aún tienen rutinas del valle. Tampoco se les ordenan hurtos a cofres exteriores sin rutas regionales. Sí puedes usar tus propias camas y cofres fuera del valle.
 
-Los enemigos, jefes, ruinas y lugares de la campaña conservan sus posiciones del valle. El exterior añade terreno y recursos, sin nuevos tipos de criaturas, pueblos o mazmorras. Los caminos son una red ortogonal provisional; no hay todavía un modelo de ríos, erosión, puentes o rutas comerciales. La colonización, las rutas largas de NPC y la actividad resumida de asentamientos lejanos requieren otra capa de simulación.
+Los enemigos, jefes, ruinas y lugares de la campaña conservan sus posiciones del valle. El exterior añade terreno, recursos, cinco especies de fauna por bioma y puestos regionales; no añade mazmorras. Los caminos son una red ortogonal provisional; no hay todavía un modelo de ríos, erosión, puentes o rutas comerciales. Las ciudades autónomas, el comercio entre pueblos y las rutinas completas para toda la población exterior siguen pendientes.
 
 ## Verificación
 
