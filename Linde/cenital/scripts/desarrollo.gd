@@ -304,12 +304,14 @@ func _ampliar(nid: String) -> bool:
 	var existencias: Dictionary = a.estado(nid).inv
 	if int(existencias.get("madera",0))<1: return a.sociedad._obtener(nid,"madera",1,[],"ampliar el taller")
 	var origen := centro(actor)
+	var alcanzables: Dictionary = {}   # una sola exploración desde donde está, reutilizada para todas las candidatas
 	for radio in range(1,int(cfg.radio_taller)+1):
 		for y in range(origen.y-radio,origen.y+radio+1):
 			for x in range(origen.x-radio,origen.x+radio+1):
 				var c := Vector2i(x,y)
 				if M.ESENCIALES.has(c) or c==origen or j.mundo.puede_poner(c)!="" or j.ocupada(c): continue
-				if j.mundo.camino(M.celda_de(j.habitantes.pos(nid)),func(z):return j.mundo.es_adyacente(z,c)).is_empty(): continue
+				if alcanzables.is_empty(): alcanzables = j.mundo.alcanzables(M.celda_de(j.habitantes.pos(nid)))
+				if not a.sociedad._llega_junto_a(alcanzables,c): continue
 				if not a.sociedad._ir(nid,c,"construir","ampliar el taller"): return true
 				if a.sociedad.construir_pieza(nid,"suelo",c): return true
 	return false

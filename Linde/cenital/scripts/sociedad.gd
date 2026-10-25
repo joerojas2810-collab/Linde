@@ -967,14 +967,22 @@ func _construir_cerca(nid: String, pieza: String, cadena: Array, centro_p: Vecto
 		var falta: int=int(C.CONSTR[pieza].coste[item])-int(n.inv.get(item,0))
 		if falta>0:return _obtener(nid,item,falta,cadena,"construir " + C.CONSTR[pieza].n)
 	var centro: Vector2i=_ancla(grupo_de(nid)) if centro_p==Vector2i(-1,-1) else centro_p
+	var alcanzables: Dictionary = {}   # una sola exploración desde donde está, reutilizada para todas las candidatas
 	for radio in range(1,int(cfg.radio_construccion)+1):
 		for y in range(centro.y-radio,centro.y+radio+1):
 			for x in range(centro.x-radio,centro.x+radio+1):
 				var c:=Vector2i(x,y)
 				if M.ESENCIALES.has(c) or c == centro or j.mundo.puede_poner(c)!="" or j.ocupada(c) or not habitat.permite_pieza(c,pieza):continue
-				if j.mundo.camino(M.celda_de(j.habitantes.pos(nid)),func(z):return j.mundo.es_adyacente(z,c)).is_empty():continue
+				if alcanzables.is_empty(): alcanzables = j.mundo.alcanzables(M.celda_de(j.habitantes.pos(nid)))
+				if not _llega_junto_a(alcanzables,c):continue
 				if not _ir(nid,c,"construir","construir " + C.CONSTR[pieza].n):return true
 				if construir_pieza(nid,pieza,c,dueno):return true
+	return false
+
+## ¿Alguna celda alcanzable (tabla de Mundo.alcanzables) es adyacente a la celda `c`? Equivale a que camino(pos, es_adyacente(z, c)) no sea vacío.
+func _llega_junto_a(alcanzables: Dictionary, c: Vector2i) -> bool:
+	for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+		if alcanzables.has(c + d): return true
 	return false
 
 ## Construir valida huella, coste, ocupación y rutas de todos antes de consumir materiales.
