@@ -4,6 +4,8 @@
 # Variables: GODOT (ruta al ejecutable), SALIDA (carpeta de logs; por defecto una temporal).
 # Código de salida: 0 si todas pasan; 1 si alguna falla; 2 si falta el ejecutable de Godot.
 # Una suite pasa si Godot sale con 0, imprime al menos una línea PASS/OK, ninguna FAIL y ningún SCRIPT ERROR.
+# prueba_red se lee de tests/resultados_red.txt. Las suites *_red reescriben los .json de production/qa/evidence/{terreno,crecimiento};
+# revisa `git status` tras ejecutar y restaura lo que no quieras conservar.
 # Los avisos de recursos al cerrar son conocidos (ESTADO.md §3) y no cuentan.
 set -u
 R="$(cd "$(dirname "$0")/../../.." && pwd)"
@@ -30,6 +32,9 @@ for s in "${SUITES[@]}"; do
   "$G" --headless --path "$P" --log-file "$SALIDA/$s.log" --script "res://tests/$s.gd" >"$out" 2>&1
   rc=$?
   pass=$(grep -cE '^(PASS|OK)' "$out"); fail=$(grep -cE '^FAIL' "$out"); err=$(grep -c 'SCRIPT ERROR' "$out")
+  if [ "$s" = prueba_red ]; then   # esta suite no imprime por consola: escribe tests/resultados_red.txt
+    pass=$(grep -c '^\[OK\]' "$P/tests/resultados_red.txt" 2>/dev/null); fail=$(grep -c '^\[FALLO\]' "$P/tests/resultados_red.txt" 2>/dev/null)
+  fi
   if [ $rc -eq 0 ] && [ "$pass" -gt 0 ] && [ "$fail" -eq 0 ] && [ "$err" -eq 0 ]; then res=OK; else res=FALLA; fallidas=$((fallidas+1)); fi
   printf "%-26s %5s %6s %6s  %s\n" "$s" "$rc" "$pass" "$fail" "$res"
 done
