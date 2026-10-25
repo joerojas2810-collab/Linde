@@ -62,6 +62,8 @@ WASD/flechas mover · Espacio golpear/atacar · E interactuar · I inventario ·
 | `habitantes.gd` | Maren: necesidades→actividad→ruta→ejecución |
 | `escena.gd`, `hud.gd`, `arte.gd`, `apariencia.gd` | Presentación, interfaz, arte procedural, PJ en capas |
 
+> **Nota (2026-10-25)**: el título de esta sección es del 23/10. Las decisiones del usuario posteriores (secciones B y C del índice) prevalecen sobre esta tabla; `arte.gd`, `apariencia.gd` y `capas_sprite.gd` se retiraron (ver «Retirado» más abajo). Se conserva el texto original.
+
 ## Decisiones (todas Propuesta, reversibles; ninguna es decisión del usuario)
 | ID | Decisión | Dónde |
 |---|---|---|
@@ -95,6 +97,8 @@ Alternativa recomendada y usada: tiempo real, cuerpo a cuerpo hacia donde mira e
 - Sin sonido. Sin animaciones de ataque ni de herramienta específicas; la caminata sí tiene 4 cuadros.
 - Enemigos no persisten posición; los slimes reaparecen al cargar (simulación local).
 - La carga de la partida no valida reglas de negocio más allá del checksum y el formato.
+
+> **Histórico**: `capas_sprite.gd` ya no existe; el arte por capas lo sustituyó el sistema de equipo (`arte_equipo.gd`). Se conserva como registro.
 
 ## Personaje por capas desde hojas PNG (`scripts/capas_sprite.gd`)
 - Qué es: cargador opcional. Lee `res://arte/personaje.json` (`{"celda": 32, "capas": [...]}`) y una hoja `res://arte/personaje_<capa>.png` por capa. Si falta el manifiesto o alguna hoja, o una hoja no mide 4·celda × 4·celda, `disponible()` es false (con `errores` y aviso) y `escena.gd` sigue con el dibujo procedural (`Apariencia`).

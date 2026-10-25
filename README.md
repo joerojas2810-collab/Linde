@@ -26,7 +26,7 @@ Abrir `Iniciar-Prueba-Autonomia.command` para una partida separada donde los hab
 | `design/`, `docs/`, `production/`, `.claude/` | Flujo del estudio (game brief, ADRs, épicas) |
 | `herramientas/` | Motor Godot local y scripts de arte |
 | `licencias/`, `archivos-originales/` | Términos y respaldos de las fuentes de terceros |
-| `_archivo/` | Material obsoleto (beta lateral, fuentes extraídas, logs, prototipos); se puede borrar |
+| `docs/archivo/` | Material histórico (paquetes `INSTRUCCIONES_2_IA`, estados anteriores); no es lectura de trabajo y no se borra sin aprobación |
 
 Pruebas: `herramientas/runtime/Godot.app/Contents/MacOS/Godot --headless --path Linde/cenital --script res://tests/prueba.gd`
 
