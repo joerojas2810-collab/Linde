@@ -391,6 +391,7 @@ func _l(t: String, f = null, ic: String = "") -> void:
 ## Icono de un ítem del inventario (piezas de set por su ranura; desconocido = sin icono, sin sustituto).
 func _ic(k: String) -> String:
 	var artesanal: Dictionary = Eq.Artesania.leer(k)
+	if artesanal.is_empty(): artesanal = Eq.Artesania.leer2(k)
 	if not artesanal.is_empty(): return hud.ui.ruta_icono("espada_hierro" if artesanal.forma=="espada" else "", str(Eq.info(k).equipo))
 	var l: Dictionary = Eq.leer(k)
 	return hud.ui.ruta_icono(k, str(l.get("ranura", "")) if not l.is_empty() else "")

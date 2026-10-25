@@ -1279,6 +1279,8 @@ func _valor_lote(lote: Dictionary) -> float:
 		elif not a.desarrollo.A.leer(item).is_empty():
 			# Una pieza generada vale los componentes que se pagaron por ella.
 			total += _valor_lote(a.desarrollo.A.receta(item).ent)*int(lote[item])
+		elif not a.desarrollo.A.leer2(item).is_empty():
+			total += _valor_lote(a.desarrollo.A.receta2(item).ent)*int(lote[item])
 	return total
 
 func _riqueza() -> int:

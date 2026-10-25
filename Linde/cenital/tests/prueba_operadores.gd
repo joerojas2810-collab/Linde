@@ -4,6 +4,10 @@ extends SceneTree
 ## Uso:  Godot --headless --path Linde/cenital --script res://tests/prueba_operadores.gd [-- --informe]
 const A = preload("res://scripts/artesania.gd")
 const Srv = preload("res://scripts/red_servidor.gd")
+const Cli = preload("res://scripts/red_cliente.gd")
+const Eq = preload("res://scripts/equipo.gd")
+const J = preload("res://scripts/juego.gd")
+const TMP := "user://prueba_operadores.json"
 const E := 0.000000001
 ## REGISTROS medidos con los coeficientes iniciales de I1a (2026-10-25); no son objetivos. Si cambian, o es un cambio deliberado
 ## de coeficientes (actualizar y documentar en ESTADO.md) o una regresión.
@@ -12,6 +16,8 @@ const E := 0.000000001
 const DOMINANCIAS_ENTERAS := 1646
 ## Variantes con ventaja nominal de potencia y ninguna estadística entera (dmg/def/hp) por encima de la pieza sin operadores.
 const VENTAJAS_PERDIDAS := 631
+## Clasificación de las variantes frente a la pieza sin operadores (ver _clasificacion).
+const CLASES := {"mejora_entera": 497, "equivalente": 0, "dominada": 675, "contrapartida": 520}
 var total := 0
 var fallos := 0
 
@@ -30,6 +36,8 @@ func _init() -> void:
 	_dominancia(informe)
 	_perdidas(informe)
 	_recetas()
+	_clasificacion(informe)
+	_integracion()
 	_rendimiento()
 	print("OPERADORES: %d comprobaciones, %d fallos" % [total, fallos])
 	quit(1 if fallos else 0)
@@ -298,3 +306,112 @@ func _rendimiento() -> void:
 	var receta_us := float(Time.get_ticks_usec() - t0) / n
 	print("MEDIDA tiempo_info2_us = %.1f; tiempo_receta2_us = %.1f" % [info_us, receta_us])
 	ok(info_us < 300.0 and receta_us < 600.0, "rendimiento: info2 y receta2 por llamada dentro del umbral (300 y 600 µs)")
+
+## Diagnóstico del redondeo (E3). Cada variante frente a la pieza sin operadores (la art1: equivalente), con estadísticas
+## finales enteras, velocidad e insumos reales. No se oculta ni se elimina nada; esto solo distingue:
+##  mejora_entera: algún dmg/def/hp entero supera al de la pieza sin operadores.
+##  equivalente: mismas estadísticas enteras, misma velocidad y mismos insumos (alias mecánico efectivo).
+##  dominada: sin mejora entera y otra pieza del grupo es ≥ en todo y consume ≤ insumo por insumo.
+##  contrapartida: sin mejora entera de potencia, no dominada: difiere en velocidad o insumos (puede tener valor por ello).
+func _clasificacion(informe: bool) -> void:
+	var cuenta := {"mejora_entera": 0, "equivalente": 0, "dominada": 0, "contrapartida": 0}
+	var por_forma := {}
+	var cuenta_dominadas_con_mejora := 0
+	for g in _grupos(true).values():
+		var base: Dictionary = g[0]
+		for i in range(1, g.size()):
+			var v: Dictionary = g[i]
+			var domin := false
+			for w in g: if w.clave != v.clave and _domina(w, v): domin = true
+			var sube := false
+			var igual_pot := true
+			for st in v.est:
+				if st == "vel": continue
+				if v.est[st] > base.est[st] + E: sube = true
+				if absf(v.est[st] - base.est[st]) > E: igual_pot = false
+			var cat := "mejora_entera"
+			if not sube:
+				if igual_pot and absf(v.est.vel - base.est.vel) < E and v.ent == base.ent: cat = "equivalente"
+				elif domin: cat = "dominada"
+				else: cat = "contrapartida"
+			elif domin: cuenta_dominadas_con_mejora += 1
+			cuenta[cat] += 1
+			var forma: String = v.clave.get_slice(":", 1)
+			por_forma[forma + " " + cat] = int(por_forma.get(forma + " " + cat, 0)) + 1
+	print("MEDIDA clasificacion = ", JSON.stringify(cuenta, "", true), "; con_mejora_entera_pero_dominadas = ", cuenta_dominadas_con_mejora)
+	if informe: print("MEDIDA clasificacion_por_forma = ", JSON.stringify(por_forma, "", true))
+	var suma := 0
+	for c in cuenta: suma += int(cuenta[c])
+	ok(suma == A.enumerar2().size(), "clasificación: cada variante cae en una categoría (%d)" % suma)
+	ok(cuenta == CLASES, "clasificación registrada: %s (si cambia: coeficientes o registro)" % JSON.stringify(cuenta))
+
+func _integracion() -> void:
+	var k := "art2:espada:hierro:simple:0:piedra:grueso"
+	var t := "art2:torso:hierro:simple:0:fibra:grueso"
+	# Equipo: art2 pasa por los mismos contratos y art1 queda idéntico.
+	var distinto1: Array = []
+	for k1 in _claves1():
+		if Eq.info(k1) != A.info(k1) or not Eq.existe(k1) or Eq.visible({"arma": k1}) != [A.visible(k1)]: distinto1.append(k1)
+	ok(distinto1.is_empty(), "equipo: las %d piezas art1: siguen dando el mismo existe/info/visible " % _claves1().size() + str(distinto1.slice(0, 3)))
+	ok(Eq.existe(k) and Eq.info(k) == A.info2(k) and Eq.visible({"arma": k}) == [A.visible2(k)], "equipo: existe/info/visible reconocen art2")
+	ok(not Eq.existe("art2:espada:hierro:simple:03:piedra:grueso") and Eq.info("art2:espada:hierro:simple:03:piedra:grueso").get("desconocida", false), "equipo: una art2 no canónica es «Pieza desconocida»")
+	ok(Eq.info("madera") == Eq.C.ITEMS["madera"], "equipo: los ítems comunes no cambian")
+	# Juego: equipar, estadísticas, guardado y carga.
+	var j = J.nueva(5, "Prueba", [0, 0, 0])
+	var pj: Dictionary = j.jug()
+	var sin_equipo: Dictionary = j.stats()
+	pj.inv[k] = 1
+	pj.inv[t] = 1
+	ok(j.equipar(k).ok and pj.equipo.arma == k and not pj.inv.has(k), "juego: se equipa una espada art2")
+	ok(j.stats().dmg == sin_equipo.dmg + int(A.info2(k).dmg), "juego: el daño de la espada art2 es el calculado por el evaluador (+%d)" % int(A.info2(k).dmg))
+	ok(j.equipar(t).ok and pj.equipo.torso == t, "juego: se equipa un torso art2")
+	var st: Dictionary = j.stats()
+	ok(st.hp > sin_equipo.hp and st.def > sin_equipo.def, "juego: el torso art2 aporta defensa y vida (hp %d→%d, def %d→%d)" % [sin_equipo.hp, st.hp, sin_equipo.def, st.def])
+	var j_antes: Dictionary = {"dmg": st.dmg, "hp": st.hp, "def": st.def, "vel": st.vel}
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(TMP))
+	ok(j.guardar(TMP), "persistencia: se guarda un mundo con piezas art2 equipadas")
+	var c = J.cargar(TMP)
+	ok(c != null and c.jug().equipo.arma == k and c.jug().equipo.torso == t and c.jug().pendientes.is_empty(), "persistencia: tras cargar siguen equipadas y no pasan a pendientes")
+	ok(c != null and {"dmg": c.stats().dmg, "hp": c.stats().hp, "def": c.stats().def, "vel": c.stats().vel} == j_antes, "persistencia: las estadísticas tras cargar son idénticas")
+	var texto := FileAccess.get_file_as_string(TMP)
+	ok(k in texto and not "refuerzo de piedra" in texto, "persistencia: el guardado conserva solo la clave, no el nombre ni las estadísticas")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(TMP))
+	# Fabricar y comprar siguen cerrados hasta que existan los saberes op: (E4): la clave art2 no se concede por la vía actual.
+	var d = j.autonomia.desarrollo
+	var inv_antes: Dictionary = pj.inv.duplicate()
+	var f: Dictionary = d.fabricar("art2:espada:hierro:simple:0:piedra:grueso", J.LOCAL)
+	ok(not f.ok and "Aún no conoces" in str(f.get("msg", f)) and not d.conoce(j.actor_desarrollo(), k) and pj.inv == inv_antes, "E4 pendiente: desarrollo.fabricar rechaza art2 sin tocar el inventario " + str(f))
+	# Servidor: validación de claves y pedidos.
+	var srv = Srv.new()
+	srv.j = j
+	ok(Srv._clave_valida("equipar", k) and Srv._lote({k: 1}) and not Srv._lote({"art2:espada:hierro:simple:03:piedra:grueso": 1}), "red: el servidor acepta claves art2 canónicas en equipar y en lotes, y rechaza las demás")
+	var larga := k + ":" + "x".repeat(60)
+	ok(not Srv._lote({larga: 1}) and not Srv._clave_valida("equipar", larga), "red: una clave art2 más larga que el límite no pasa")
+	pj.inv[k] = 1
+	ok(srv.ejecutar(J.LOCAL, ["equipar", 1, "art2:espada:hierro:simple:03:piedra:grueso"]) == false, "red: equipar con una clave no canónica se rechaza")
+	ok(srv.ejecutar(J.LOCAL, ["equipar", 2, k]) == true and pj.equipo.arma == k, "red: equipar una art2 canónica por pedido")
+	ok(srv.ejecutar(J.LOCAL, ["equipar", 3, "art2:espada:hierro:simple:0:piedra:grueso:dmg=99"]) == false, "red: un cliente no puede añadir parámetros a la clave")
+	# Recepción: serialización por la red (var_to_bytes) y réplica del cliente.
+	var e = bytes_to_var(var_to_bytes(srv.estado_para(J.LOCAL)))
+	var cli = Cli.new()
+	cli._bienvenida(e)
+	var r = cli.j
+	ok(r != null and r.jug().equipo.arma == k and Eq.info(r.jug().equipo.arma) == A.info2(k), "recepción: la réplica del cliente recibe la pieza y calcula la misma info")
+	ok(r != null and r.stats().dmg == j.stats().dmg and r.stats().hp == j.stats().hp and r.stats().def == j.stats().def, "recepción: la réplica calcula las mismas estadísticas que el servidor")
+	cli.free()
+	srv.free()
+	# Sociedad: una pieza art2 vale los insumos pagados por ella.
+	var soc = j.autonomia.sociedad
+	var valor: float = soc._valor_lote({k: 1})
+	ok(valor > 0.0 and is_equal_approx(valor, soc._valor_lote(A.receta2(k).ent)), "sociedad: el valor de una pieza art2 es el de sus insumos (%.1f)" % valor)
+
+func _claves1() -> Array:
+	var lista: Array = []
+	var r := A.reglas()
+	for f in r.formas:
+		for m in r.materiales.keys() + A.combinaciones():
+			for tc in r.tecnicas:
+				for q in int(r.calidad_max) + 1:
+					var k := A.clave(f, m, tc, q)
+					if not A.leer(k).is_empty(): lista.append(k)
+	return lista

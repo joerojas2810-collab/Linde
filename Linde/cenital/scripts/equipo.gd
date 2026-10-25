@@ -88,15 +88,20 @@ static func nombre(p: Dictionary) -> String:
 	if int(p.nivel) > 0: t += " +%d" % int(p.nivel)
 	return t
 
+## Info de una pieza artesanal: `art1:` (gramática de materiales) o `art2:` (con operadores, I1a). {} si no es ninguna.
+static func artesanal(clave: String) -> Dictionary:
+	var i := Artesania.info(clave)
+	return i if not i.is_empty() else Artesania.info2(clave)
+
 static func existe(clave: String) -> bool:
 	var dd := datos()
-	return not Artesania.info(clave).is_empty() or C.ITEMS.has(clave) or dd.piedras.has(clave) or dd.joyas.has(clave) or not leer(clave).is_empty()
+	return not artesanal(clave).is_empty() or C.ITEMS.has(clave) or dd.piedras.has(clave) or dd.joyas.has(clave) or not leer(clave).is_empty()
 
 ## Lo mismo que una entrada de C.ITEMS (n, pila, c, y equipo/def/hp/vel en piezas) para cualquier clave.
 ## Clave desconocida o `eq:` inválida: «Pieza desconocida», pila 1, no equipable (nunca falla ni se pierde).
 static func info(clave: String) -> Dictionary:
-	var artesanal := Artesania.info(clave)
-	if not artesanal.is_empty(): return artesanal
+	var pieza_artesanal := artesanal(clave)
+	if not pieza_artesanal.is_empty(): return pieza_artesanal
 	if C.ITEMS.has(clave): return C.ITEMS[clave]
 	if _info.has(clave): return _info[clave]
 	var dd := datos()
@@ -177,7 +182,7 @@ static func stats_de(equipo: Dictionary) -> Dictionary:
 			s.vel_eq += ps.vel
 		elif str(info(k).get("equipo", "")) == r:
 			s.def_eq += float(info(k).get("def", 0))
-			if not Artesania.leer(k).is_empty():
+			if not artesanal(k).is_empty():
 				s.hp_eq += float(info(k).get("hp", 0))
 				s.vel_eq += float(info(k).get("vel", 0))
 	var b := bono_set(equipo)
@@ -282,9 +287,10 @@ static func visible(equipo: Dictionary) -> Array:
 	for r in equipo:
 		var k := str(equipo[r])
 		if k == "": continue
-		var artesanal := Artesania.visible(k)
-		if not artesanal.is_empty():
-			l.append(artesanal)
+		var pieza_artesanal := Artesania.visible(k)
+		if pieza_artesanal.is_empty(): pieza_artesanal = Artesania.visible2(k)
+		if not pieza_artesanal.is_empty():
+			l.append(pieza_artesanal)
 			continue
 		var p := leer(k)
 		if p.is_empty():
