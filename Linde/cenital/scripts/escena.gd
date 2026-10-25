@@ -48,6 +48,9 @@ var t_anim := 0.0
 var debug := false
 var _anim := {"estado": "reposo", "cuadro": 0}
 var pista := ""
+var ayuda_visible := false
+var rotulos: Array = []
+var cuerpos_rotulo: Array = []
 var cam := Camera2D.new()
 var hud := Hud.new()
 var ruta := "user://partida.json"
@@ -159,6 +162,7 @@ func _unhandled_key_input(e: InputEvent) -> void:
 		KEY_K: _abrir("hab")
 		KEY_J: _abrir("mis")
 		KEY_B: build = not build
+		KEY_H: ayuda_visible = not ayuda_visible
 		KEY_F1: debug = not debug
 		KEY_F5:
 			j.aviso("Guardado." if j.guardar(ruta) else "No se pudo guardar.")
@@ -732,6 +736,8 @@ func _arte_faltante(origen: Vector2) -> void:
 # ---------- dibujo del mundo ----------
 func _draw() -> void:
 	if modo != "juego" or j == null: return
+	rotulos.clear()
+	cuerpos_rotulo.clear()
 	var s := P.CELDA
 	var vp := get_viewport_rect().size / float(P.ZOOM)
 	var vista := Rect2(cam.position - vp / 2.0, vp).grow(40)
@@ -763,6 +769,15 @@ func _draw() -> void:
 		var p: PackedStringArray = k.split(",")
 		var c := Vector2i(int(p[0]), int(p[1]))
 		if m.estado.constr[k].t != "suelo" and vista.has_point(Vector2(c) * s): lista.append([(c.y + 1.0) * s, "constr", c])
+	for item in lista:
+		var pies_rotulo: Vector2
+		match item[1]:
+			"pj": pies_rotulo = j.pies
+			"npc": pies_rotulo = j.habitantes.pos(item[2])
+			"otro": pies_rotulo = item[2].pies
+			"enemigo": pies_rotulo = item[2].pos
+			_: continue
+		cuerpos_rotulo.append(Rect2(pies_rotulo - Vector2(11, 46 if item[1] == "enemigo" else 29), Vector2(22, 46 if item[1] == "enemigo" else 29)))
 	lista.sort_custom(func(a, b): return a[0] < b[0])
 	for e in lista:
 		match e[1]:
@@ -791,6 +806,7 @@ func _draw() -> void:
 		var id: String = C.ORDEN_CONSTR[pieza_i]
 		var bien: bool = m.puede_poner(c) == "" and not j.ocupada(c) and Inv.tiene(j.jug().inv, C.CONSTR[id].coste)
 		arte_mundo.constr(self, id, c, false, Color(0.5, 1, 0.55, 0.65) if bien else Color(1, 0.4, 0.4, 0.65))
+	_dibujar_rotulos()
 	if debug:
 		draw_rect(Rect2(j.pies - Vector2(P.PIES.x / 2, P.PIES.y), P.PIES), Color(1, 0, 0, 0.5))
 		for y in range(y0, y1 + 1):
@@ -885,12 +901,28 @@ func _dibujar_npc(id: String) -> void:
 
 ## Uses the current Nunito font; keep the new UI and Lora dialogue typography.
 func _nombre_mundo(texto: String, pies: Vector2, color: Color = Color("f7e2aa")) -> void:
+	rotulos.append({"texto": texto, "pies": pies, "color": color})
+
+func _dibujar_rotulos() -> void:
 	var fuente: Font = hud.ui.fuente
 	if fuente == null: return
-	var ancho: float = fuente.get_string_size(texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
-	var pos := (pies - Vector2(ancho / 2.0, 32)).round()
-	draw_string_outline(fuente, pos, texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, 1, Color("2b241c"))
-	draw_string(fuente, pos, texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, color)
+	var usados: Array = cuerpos_rotulo.duplicate()
+	for etiqueta in rotulos:
+		var ancho: float = fuente.get_string_size(etiqueta.texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
+		var r := Rect2((etiqueta.pies - Vector2(ancho / 2.0 + 2, 41)).round(), Vector2(ancho + 4, 11))
+		var libre := false
+		for intento in 20:
+			libre = true
+			for ocupado in usados:
+				if r.grow(1).intersects(ocupado):
+					libre = false
+					break
+			if libre: break
+			r.position.y -= 12
+		if not libre: continue
+		usados.append(r)
+		draw_rect(r, Color(0.09, 0.12, 0.10, 0.82))
+		draw_string(fuente, r.position + Vector2(2, 8), etiqueta.texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, etiqueta.color)
 
 func _dibujar_enemigo(e: Dictionary) -> void:
 	var t: float = e.tam
@@ -899,7 +931,7 @@ func _dibujar_enemigo(e: Dictionary) -> void:
 	_sombra(e.pos, 0.6 + t / 28.0 * 0.6)
 	actores.enemigo(self, e, Time.get_ticks_msec() / 1000.0)
 	if def.has("conducta") and e.pos.distance_to(j.pies) < 96.0:
-		draw_string(hud.ui.fuente, e.pos + Vector2(-22, -36), def.n, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, Color("eee4cf"))
+		_nombre_mundo(def.n, e.pos - Vector2(0, 18), Color("eee4cf"))
 	if e.hp < def.hp:
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t, 3)), Color(0, 0, 0, 0.6))
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t * float(e.hp) / def.hp, 3)), Color("cf5a43"))

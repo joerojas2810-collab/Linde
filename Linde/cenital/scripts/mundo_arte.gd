@@ -19,6 +19,8 @@ func _suelo_bioma(ci: CanvasItem, c: Vector2i, bioma: String, dst: Rect2, alfa: 
 		return
 	var origen := Vector2(posmod(c.x, 2), posmod(c.y, 2)) * CELDA
 	ci.draw_texture_rect_region(t, dst, Rect2(origen, Vector2(CELDA, CELDA)), Color(1, 1, 1, alfa))
+	# Velo mineral uniforme: conserva el mosaico y sus transiciones con menos contraste.
+	if bioma == "sierra": ci.draw_rect(dst, Color(0.36, 0.39, 0.37, alfa * 0.48))
 
 var mapeo: Dictionary = {}
 var objetos: Dictionary = {}
