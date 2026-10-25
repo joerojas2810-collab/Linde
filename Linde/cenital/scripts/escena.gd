@@ -539,10 +539,14 @@ func _armar() -> void:
 					var n: Dictionary = j.autonomia.estado(nid)
 					var falta: Dictionary = j.autonomia.necesidad(nid)
 					_l("%s · hambre %d/100 · %s" % [j.habitantes.fichas[nid].n, int(n.hambre), str(n.plan.get("act", "rutina"))])
+					if j.autonomia.sociedad.activa(): _l("  " + j.autonomia.sociedad.texto_trabajo(nid))
 					if j.autonomia.sociedad.activa():
 						_l("  Grupo: " + j.autonomia.sociedad.nombre_grupo(j.autonomia.sociedad.grupo_de(nid)) + " · " + str(n.get("objetivo", "buscar oportunidades")))
 					var identidad: Dictionary = j.autonomia.perfil(nid).get("identidad",{})
 					if not identidad.is_empty(): _parrafo("Quiere " + str(identidad.objetivo))
+					if j.autonomia.sociedad.activa():
+						var vida: String = j.autonomia.sociedad.arraigo.resumen(nid)
+						if vida != "": _parrafo(vida)
 					if j.autonomia.sociedad.activa():
 						for otro in j.habitantes.ids:
 							if otro==nid: continue

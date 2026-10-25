@@ -29,6 +29,17 @@ Las 5 criaturas regionales reutilizan 20 tiras de `Nuevo Juego/public/art/enemie
 
 Espadas, escudos y armaduras generados recolorean geometría existente: faltan siluetas nuevas.
 
+## Arraigo, oficios y vivienda (nuevo)
+
+Las mecánicas de `docs/ARRAIGO.md` funcionan sin arte nuevo, pero se ven pobres. Falta:
+
+- **Dormir al raso:** quien no tiene cama queda en estado `sin_cama` sin pose ni objeto (ni petate, ni fogata, ni marcador de campamento).
+- **Oficios nuevos:** agricultor, explorador, mercader y guardia usan el aspecto generado por id; faltan señales de oficio (sombrero y azada, mochila de explorador, bolsa de mercader, equipo de guardia).
+- **Ocupaciones:** vigilar, explorar y comerciar no tienen animación ni icono sobre el habitante.
+- **Estados de permanencia:** visitante, aspirante, residente y ausente solo existen como texto en el panel J; no hay icono ni marca visual.
+- **Biografía:** origen, antecedente y aspiración se leen en una línea del panel J; no hay ficha de personaje ni retrato.
+- **Casa comunitaria:** reutiliza cama, muro, puerta y techo; tres camas en fila se ven repetidas. Falta una variante de cama (litera o jergón) y un letrero que distinga la casa común.
+
 ## Cómo añadirlo
 
 Generar el PNG, copiarlo a `arte/mundo/`, registrarlo en `E04_objetos.json` (archivo, canvas, pivote) y cambiar la clave en `mundo_arte.gd` (`natural()`); `TINTE_MENA` puede borrarse cuando cada mena tenga arte propio.

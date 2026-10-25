@@ -9,12 +9,15 @@ var j
 var cfg: Dictionary
 var habitat
 const Habitat = preload("res://scripts/habitat.gd")
+const Arraigo = preload("res://scripts/arraigo.gd")
+var arraigo
 
 func _init(autonomia) -> void:
 	a = autonomia
 	j = a.j
 	cfg = a.reglas.sociedad
 	habitat = Habitat.new(self)
+	arraigo = Arraigo.new(self)
 
 func activa() -> bool:
 	return a.activa() and bool(cfg.activa) and j.d.mundo_vivo.autonomia.get("modo", "sociedad") == "sociedad"
@@ -28,6 +31,7 @@ func restaurar() -> void:
 	var colonos: Dictionary = j.d.mundo_vivo.autonomia.get("colonos",{})
 	for nid in colonos:
 		var colono: Dictionary = colonos[nid]
+		if not colono.perfil.has("biografia"): colono.perfil.biografia = arraigo.biografia(j._rng("biografia", nid), colono.perfil.get("caracter", {}), [])   # partidas anteriores
 		if colono.perfil.has("identidad"): continue
 		_personalizar_colono(colono.npc,colono.perfil,j._rng("identidad",nid))
 		colono.perfil.oficio = colono.perfil.get("oficio","habitante")
@@ -508,6 +512,7 @@ func _hurtar(nid: String, item: String, cantidad: int) -> bool:
 	for gid in cfg.grupos:
 		if gid == propio or int(grupo(gid).inv.get(item, 0)) <= 0: continue
 		var ancla := _ancla(gid)
+		if _guardia_cerca(ancla): continue   # con un guardia de servicio no se intenta
 		if not _ir(nid, ancla, "hurtar", "conseguir " + str(C.ITEMS.get(item, {}).get("n", item)) + " sin pedirlo"): return true
 		var n: int = mini(mini(cantidad, int(cfg.caracter.hurto_max)), int(grupo(gid).inv[item]))
 		a._quitar(grupo(gid).inv, item, n)
@@ -534,7 +539,7 @@ func _hurtar(nid: String, item: String, cantidad: int) -> bool:
 		var dueno: String = str(j.d.mundo.constr.get(str(cid).trim_prefix("c@"), {}).get("dueno", ""))
 		if dueno == "" or dueno == "npc:" + nid or dueno == "grupo:" + propio: continue
 		var celda := _celda_cofre(str(cid))
-		if not M.es_valle(celda):continue # No ordenar hurtos sin planificación regional.
+		if not M.es_valle(celda) or _guardia_cerca(celda): continue # No ordenar hurtos sin planificación regional; un guardia de servicio disuade.
 		var guardian := dueno.trim_prefix("npc:")
 		if dueno.begins_with("npc:") and j.habitantes.ids.has(guardian) and _cerca(guardian, celda): continue
 		var vigilado := false
@@ -583,6 +588,10 @@ func actualizar() -> void:
 		if d.acuerdos[cid].estado != "activo": cerrados.append(cid)
 	cerrados.sort_custom(func(x,y): return int(d.acuerdos[x].vence) < int(d.acuerdos[y].vence))
 	while cerrados.size() > int(cfg.tope_acuerdos_cerrados): d.acuerdos.erase(cerrados.pop_front())
+	if dia > int(d.get("dia_camas", dia)) and not _sin_cama().is_empty(): j.habitantes.asignar_camas()   # quien duerme al raso toma una cama que quede libre
+	d.dia_camas = dia
+	if dia > int(d.get("dia_arraigo", dia)): arraigo.evaluar_dia()
+	d.dia_arraigo = dia
 	if int(j.d.min) - int(d.get("inmigracion_min", -99999)) >= int(cfg.inmigracion.intervalo_min):
 		d.inmigracion_min = int(j.d.min)
 		_inmigrar()
@@ -654,6 +663,29 @@ func _posponer(nid: String, item: String, motivo: String) -> void:
 	a._recordar(nid, "pospuso", C.ITEMS.get(item,{}).get("n",item) + ": " + motivo)
 	suceso("alternativa", "Pospuso " + item + ": " + motivo, nid)
 
+## Ocupaciones que un habitante puede asumir cuando no hay urgencia, en el orden por defecto. La profesión (perfil.prioridad) solo las reordena.
+const ORDEN := ["mantener", "cosechar", "casa", "refugio", "sembrar", "vivienda", "desarrollo", "proteger", "acumular"]
+
+## Intenta una ocupación; si actúa, queda anotada como lo que hace ahora (distinto de su profesión).
+func _ocupar(nid: String, oc: String) -> bool:
+	var hecho := false
+	match oc:
+		"mantener": hecho = _mantener(nid)
+		"cosechar": hecho = _cosechar(nid)
+		"casa": hecho = _casa(nid)
+		"refugio": hecho = _refugio(nid)
+		"sembrar": hecho = _sembrar(nid)
+		"vivienda": hecho = _vivienda(nid)
+		"desarrollo": hecho = a.desarrollo.decidir(nid)
+		"proteger": hecho = _proteger(nid)
+		"acumular": hecho = _acumular(nid)
+		"prospectar": hecho = _prospectar(nid)
+		"explorar": hecho = _explorar_lejos(nid)
+		"comerciar": hecho = _comerciar(nid)
+		"vigilar": hecho = _vigilar(nid)
+	if hecho: a.estado(nid).ocupacion = oc
+	return hecho
+
 func decidir(nid: String) -> void:
 	var n: Dictionary = a.estado(nid)
 	n.peticion = {}
@@ -662,26 +694,26 @@ func decidir(nid: String) -> void:
 	for herramienta in a.perfil(nid).get("herramientas_necesarias",[]):
 		if int(n.durabilidad.get(herramienta,cfg.durabilidad_herramienta)) <= int(cfg.umbral_reparar) and reparar_herramienta(nid,herramienta): return
 	var urgente: bool = n.hambre >= float(a.reglas.umbral_comer)
-	if not urgente and _mantener(nid): return
-	if not urgente and _cosechar(nid): return
-	# Terminar una vivienda pendiente antes de ampliar talleres o abrir más obras.
-	if not urgente and _casa(nid): return
-	if not urgente and _refugio(nid): return
-	if not urgente and _sembrar(nid): return
-	if not urgente and _vivienda(nid): return
-	if not urgente and a.desarrollo.decidir(nid): return
-	if not urgente and _proteger(nid): return
-	if not urgente and _acumular(nid): return
+	# Terminar una vivienda pendiente va antes de ampliar talleres o abrir más obras; la profesión adelanta sus ocupaciones preferidas.
+	if not urgente:
+		var preferidas: Array = a.perfil(nid).get("prioridad", [])
+		var orden: Array = preferidas + ORDEN.filter(func(o): return not o in preferidas)
+		for oc in orden:
+			if _ocupar(nid, oc): return
 	for meta in objetivos(nid):
 		if not urgente and str(meta.motivo).begins_with("abastecer ") and _depositar(nid): return
 		var item: String = meta.item
 		if int(n.bloqueos.get(item,-1)) > int(j.d.min): continue
 		n.objetivo = meta.motivo
-		if _obtener(nid,item,int(meta.cantidad),[],meta.motivo): return
+		if _obtener(nid,item,int(meta.cantidad),[],meta.motivo):
+			n.ocupacion = "proveerse"
+			return
 		_posponer(nid,item,"sin ruta, existencias o acuerdo viable")
 		if urgente and item == str(a.reglas.comida): break
-	if not urgente and _prospectar(nid): return
-	if not urgente and _depositar(nid): return
+	if not urgente and _ocupar(nid, "prospectar"): return
+	if not urgente and _depositar(nid):
+		n.ocupacion = "depositar"
+		return
 	n.plan = a._pedir(nid,"buscar otra solución")
 
 ## Campos de cultivo del grupo (celdas), en orden estable.
@@ -699,6 +731,8 @@ func _cosechar(nid: String) -> bool:
 		if not j.campo_listo(c) or j.mundo.camino(M.celda_de(j.habitantes.pos(nid)), func(z): return z == c or j.mundo.es_adyacente(z, c)).is_empty(): continue
 		if _ir(nid, c, "recolectar", "cosechar el campo"):
 			var cosecha: Dictionary = j.cosechar(c)
+			var bonus: int = a.desarrollo.rango("npc:" + nid, "recoleccion") / 2   # la práctica desperdicia menos: +1 de comida desde el rango 2
+			if bonus > 0 and cosecha.has(a.reglas.comida): cosecha[a.reglas.comida] = int(cosecha[a.reglas.comida]) + bonus
 			if not cosecha.is_empty():
 				_anadir(a.estado(nid).inv, cosecha)
 				a.desarrollo.registrar("npc:" + nid, "recoleccion", cosecha)
@@ -712,7 +746,10 @@ func _sembrar(nid: String) -> bool:
 	var miembros:=0
 	for otro in j.habitantes.ids:
 		if grupo_de(otro)==gid:miembros+=1
-	var objetivo_campos:=maxi(int(cfg.economia.campos_por_grupo),ceili(float(miembros)/2.0))
+	var agricultores := 0
+	for otro in j.habitantes.ids:
+		if grupo_de(otro) == gid and "sembrar" in a.perfil(otro).get("prioridad", []): agricultores += 1
+	var objetivo_campos:=maxi(int(cfg.economia.campos_por_grupo),ceili(float(miembros)/2.0)) + agricultores * int(cfg.economia.campo_extra_por_agricultor)
 	if _campos(gid).size() >= objetivo_campos: return false
 	var n: Dictionary = a.estado(nid)
 	if float(n.hambre) >= float(a.reglas.umbral_comer) * 0.5: return false
@@ -720,6 +757,86 @@ func _sembrar(nid: String) -> bool:
 		var libre: int = int(n.inv.get(item, 0)) if item == str(a.reglas.comida) else excedente(nid, item)
 		if libre < int(C.CONSTR.campo.coste[item]): return false
 	return _construir_cerca(nid, "campo", [], Vector2i(-1, -1), "grupo:" + gid)
+
+## Intermediario: vende lo que tiene a quien lo necesita o compra a quien le sobra cuando ambos no se tratan directamente. Todo pasa por acordar():
+## mismos depósitos en garantía, confianza y riesgo de estafa; no crea mercancías.
+func _comerciar(nid: String) -> bool:
+	if _ocupado(nid) != "": return false
+	var todos: Array = j.habitantes.ids.duplicate()
+	todos.sort()
+	var minima := int(cfg.confianza_minima)
+	for otro in todos:
+		if otro == nid or a.perfil(otro).is_empty(): continue
+		var falta: Dictionary = necesidad(otro)
+		if not falta.has("item") or not C.ITEMS.has(str(falta.item)) or int(falta.cantidad) <= 0: continue
+		var item := str(falta.item)
+		var cant := int(falta.cantidad)
+		var vende := mini(cant, excedente(nid, item))
+		if vende > 0:
+			if acordar(otro, nid, item, vende) != "": return _comercio(nid)
+			continue
+		for prov in todos:
+			if prov == nid or prov == otro or a.perfil(prov).is_empty() or excedente(prov, item) < cant: continue
+			if confianza(prov, otro) >= minima and confianza(otro, prov) >= minima: continue   # ya pueden tratar directamente
+			if acordar(nid, prov, item, cant) != "": return _comercio(nid)
+	return false
+
+func _comercio(nid: String) -> bool:
+	a.desarrollo.registrar("npc:" + nid, "comercio")
+	return true
+
+## Turnos de vigilancia junto al depósito de su grupo: la presencia disuade el hurto y ensancha el radio de testigos.
+func _vigilar(nid: String) -> bool:
+	var v: Dictionary = cfg.vigilancia
+	if int(j.d.min) % int(v.periodo_min) >= int(v.turno_min): return false
+	var ancla := _ancla(grupo_de(nid))
+	var llego: bool = _ir(nid, ancla, "vigilar", "vigilar el depósito")
+	var n: Dictionary = a.estado(nid)
+	var turno: int = floori(float(j.d.min) / float(v.periodo_min))
+	if llego and int(n.get("turno_vigilado", -1)) != turno:
+		n.turno_vigilado = turno
+		a.desarrollo.registrar("npc:" + nid, "proteccion")
+	return true
+
+## ¿Hay un guardia de servicio cerca de esa celda?
+func _guardia_cerca(celda: Vector2i) -> bool:
+	for g in j.habitantes.ids:
+		if str(a.estado(g).get("ocupacion", "")) != "vigilar" or not "vigilar" in a.perfil(g).get("prioridad", []): continue
+		if int(j.d.min) % int(cfg.vigilancia.periodo_min) >= int(cfg.vigilancia.turno_min): continue
+		if Vector2(M.celda_de(j.habitantes.pos(g))).distance_to(Vector2(celda)) <= float(cfg.vigilancia.radio): return true
+	return false
+
+## Salir hacia un bloque desconocido: quien explora amplía lo que sabe (y lo que cuenta al cruzarse con otros) y gana práctica.
+func _explorar_lejos(nid: String) -> bool:
+	var n: Dictionary = a.estado(nid)
+	var ce: Dictionary = cfg.exploracion
+	var e: Dictionary = n.get("explora", {})
+	if not e.is_empty():
+		var c := Vector2i(int(e.c[0]), int(e.c[1]))
+		if _cerca(nid, c):
+			a.desarrollo.registrar("npc:" + nid, "exploracion")
+			a._recordar(nid, "exploro", "un lugar nuevo")
+			n.erase("explora")
+			return false
+		if int(j.d.min) - int(e.desde) > int(ce.paciencia_min):
+			if not n.has("explora_fallos"): n.explora_fallos = {}
+			n.explora_fallos[a._bloque(c)] = true   # no llegó: no insistir con ese bloque
+			n.erase("explora")
+			return false
+		_ir(nid, c, "explorar", "explorar lo desconocido")
+		return true
+	var pos: Vector2i = M.celda_de(j.habitantes.pos(nid))
+	var dirs: Array = [Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1), Vector2i(-1, 1), Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1)]
+	var giro: int = floori(float(j.d.min) / 1440.0) % dirs.size()   # cada día empieza por una dirección distinta
+	if not n.has("bloques"): a._explorar(nid)
+	for k in dirs.size():
+		var c: Vector2i = pos + dirs[(k + giro) % dirs.size()] * int(ce.radio)
+		var libre: bool = M.AREA_EXPEDICION.has_point(c) if a.expediciones() else M.es_valle(c)
+		if not libre or n.bloques.has(a._bloque(c)) or n.get("explora_fallos", {}).has(a._bloque(c)) or j.mundo.bloquea(c): continue
+		n.explora = {"c": [c.x, c.y], "desde": int(j.d.min)}
+		_ir(nid, c, "explorar", "explorar lo desconocido")
+		return true
+	return false
 
 ## Sin metas pendientes, prueba un recurso que nunca ha tenido (así aparecen recetas nuevas).
 func _prospectar(nid: String) -> bool:
@@ -980,13 +1097,15 @@ func observar_hurto_cofre(actor: String, cid: String, item: String, n: int) -> v
 func _vivienda(nid: String) -> bool:
 	var v: Dictionary = cfg.vivienda
 	if not bool(v.activa) or not bool(cfg.inmigracion.activa) or j.habitantes.ids.size() >= int(cfg.inmigracion.max_habitantes): return false
-	if not j.vivo.camas_libres_lista().is_empty(): return false
+	if _sin_cama().is_empty() or not j.vivo.camas_libres_lista().is_empty(): return false   # solo se construye para quien duerme al raso
 	if int(j.d.min) - int(datos().get("vivienda_min", -99999)) < int(v.espera_min): return false
 	for item in v.requiere_excedente:
 		if excedente(nid, item) < int(v.requiere_excedente[item]): return false
 	a.estado(nid).objetivo = "dar vivienda a quien llegue"
-	var parcela: Dictionary = habitat.reservar(nid)
+	var sin: Array = _sin_cama()
+	var parcela: Dictionary = habitat.reservar(nid, "comunitaria" if sin.size() >= int(v.comunitaria_desde) else "casa")
 	if parcela.is_empty(): return false
+	if not parcela.has("para") or j.habitantes.cama(str(parcela.para)) != Vector2i(-1, -1) or not j.habitantes.ids.has(str(parcela.para)): parcela["para"] = sin[0]   # la vivienda se planifica para alguien concreto, no alrededor de una cama
 	var c := Vector2i(int(parcela.cama[0]),int(parcela.cama[1]))
 	var coste: Dictionary = C.CONSTR.cama_huesped.coste
 	comprometer(nid,coste)
@@ -996,6 +1115,7 @@ func _vivienda(nid: String) -> bool:
 	var hecho: bool = construir_pieza(nid,"cama_huesped",c)
 	if hecho:
 		habitat.estado(c,"pendiente")
+		reclamar_cama(parcela)
 		# La experiencia de levantar la vivienda abre su siguiente técnica, sin regalar insumos.
 		if not "ladrillo" in a.recetas_de(nid):
 			a.estado(nid).recetas_nuevas.append("ladrillo")
@@ -1003,27 +1123,69 @@ func _vivienda(nid: String) -> bool:
 	if not j.vivo.camas_libres_lista().is_empty(): datos().vivienda_min = int(j.d.min)
 	return hecho
 
+## Habilidades que ya dan frutos por la práctica (disciplina -> rango), solo las mayores que cero. Reutiliza la progresión de Desarrollo.
+const DISCIPLINAS := ["recoleccion", "construccion", "artesania", "combate", "comercio", "exploracion", "proteccion"]
+func habilidades(nid: String) -> Dictionary:
+	var h := {}
+	if not a.desarrollo.activa(): return h
+	for d in DISCIPLINAS:
+		var r: int = a.desarrollo.rango("npc:" + nid, d)
+		if r > 0: h[d] = r
+	return h
+
+## Profesión (quién es), ocupación (qué hace ahora) y habilidades (qué ha aprendido): tres cosas distintas.
+func texto_trabajo(nid: String) -> String:
+	var t: String = str(a.perfil(nid).get("oficio", "habitante")).capitalize()
+	var oc: String = str(a.estado(nid).get("ocupacion", ""))
+	if oc != "": t += " · ahora " + str(cfg.ocupaciones.get(oc, oc))
+	var h := habilidades(nid)
+	if not h.is_empty():
+		var l: Array = []
+		for d in h: l.append("%s %d" % [d, h[d]])
+		t += " · " + ", ".join(l)
+	return t
+
+## Quién levanta una obra: el albañil; sin albañil cualquiera improvisa con madera; y si la obra lleva `relevo_min` esperando, cualquiera ayuda
+## (que el especialista no avance no debe bloquear el asentamiento).
+func _constructor(nid: String, cama: Vector2i = Vector2i(-1, -1)) -> bool:
+	if "ladrillo" in a.recetas_de(nid): return true
+	for otro in j.habitantes.ids:
+		if "ladrillo" in a.recetas_de(otro):
+			var desde: int = int(habitat.datos().obras.get(M.clave(cama), {}).get("desde", j.d.min))
+			return cama != Vector2i(-1, -1) and int(j.d.min) - desde >= int(cfg.vivienda.relevo_min)
+	return true
+
+## La cama de una parcela planificada para alguien pasa a ser suya en cuanto existe.
+func reclamar_cama(parcela: Dictionary) -> void:
+	var para := str(parcela.get("para", ""))
+	var cama := Vector2i(int(parcela.cama[0]), int(parcela.cama[1]))
+	if para == "" or not j.habitantes.ids.has(para) or j.habitantes.cama(para) != Vector2i(-1, -1): return
+	if j.mundo.constr_en(cama).get("t", "") != "cama_huesped" or j.vivo.camas_libres_lista().find(M.clave(cama)) < 0: return
+	j.vivo.restaurar().camas_asignadas[M.clave(cama)] = para
+	suceso("vivienda", "tiene dónde dormir", para)
+
 ## Asentamiento: un albañil cierra con ladrillo tres lados (norte, oeste, este) de cada cama de huésped; el sur queda como entrada.
 ## Construir exige ladrillos reales (los fabrica o los compra) y las mismas validaciones de ruta que el resto.
 func _refugio(nid: String) -> bool:
-	if not "ladrillo" in a.recetas_de(nid): return false
+	var muro: String = "muro_ladrillo" if "ladrillo" in a.recetas_de(nid) and Inv.tiene(a.estado(nid).inv, C.CONSTR.muro_ladrillo.coste) else "muro"   # sin ladrillos a mano, madera
 	var hechos: Dictionary = datos().get("refugios", {})
 	var claves: Array = j.d.mundo.constr.keys()
 	claves.sort()
 	for k in claves:
 		if j.d.mundo.constr[k].t != "cama_huesped": continue
 		var cama := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
-		for d in [Vector2i(0, -1), Vector2i(-1, 0), Vector2i(1, 0)]:
-			var w: Vector2i = cama + d
+		if habitat.es_pieza_ajena(cama) or not _constructor(nid, cama): continue
+		for dd in plano(cama).base:
+			var w: Vector2i = cama + Vector2i(int(dd[0]), int(dd[1]))
 			if M.ESENCIALES.has(w) or j.mundo.puede_poner(w) != "" or j.ocupada(w): continue
-			a.estado(nid).objetivo = "levantar un refugio de ladrillo"
-			var coste: Dictionary = C.CONSTR.muro_ladrillo.coste
+			a.estado(nid).objetivo = "levantar un refugio"
+			var coste: Dictionary = C.CONSTR[muro].coste
 			comprometer(nid, coste)
 			for item in coste:
 				var falta: int = int(coste[item]) - int(a.estado(nid).inv.get(item, 0))
-				if falta > 0: return _obtener(nid, item, falta, [], "construir " + C.CONSTR.muro_ladrillo.n)
-			if not _ir(nid, w, "construir", "levantar un refugio de ladrillo"): return true
-			if not construir_pieza(nid, "muro_ladrillo", w):   # la validación de rutas lo rechazó: no insistir en esta cama
+				if falta > 0: return _obtener(nid, item, falta, [], "construir " + C.CONSTR[muro].n)
+			if not _ir(nid, w, "construir", "levantar un refugio"): return true
+			if not construir_pieza(nid, muro, w):   # la validación de rutas lo rechazó: no insistir en esta cama
 				if not datos().has("refugios"): datos().refugios = {}
 				datos().refugios[k] = true
 			return true
@@ -1035,8 +1197,12 @@ func _pieza_puesta(pieza: String, c: Vector2i) -> bool:
 	if pieza == "techo": return j.mundo.estado.techos.has(M.clave(c))
 	return j.mundo.constr_en(c).get("t", "") == pieza
 
-func _celdas_casa(cama: Vector2i) -> Array:
-	var plano: Dictionary = cfg.vivienda.casa
+## Plano de la vivienda cuya cama ancla es `cama` (casa por defecto; comunitaria si la parcela se planificó así).
+func plano(cama: Vector2i) -> Dictionary:
+	return cfg.vivienda[str(habitat.datos().parcelas.get(M.clave(cama), {}).get("plano", "casa"))]
+
+func _celdas_casa(cama: Vector2i, nombre: String = "") -> Array:
+	var plano: Dictionary = cfg.vivienda[nombre] if nombre != "" else plano(cama)
 	var pasos: Array = []
 	for e in plano.piezas: pasos.append([str(e.p), cama + Vector2i(int(e.d[0]), int(e.d[1]))])
 	for d in plano.techos: pasos.append(["techo", cama + Vector2i(int(d[0]), int(d[1]))])
@@ -1045,7 +1211,7 @@ func _celdas_casa(cama: Vector2i) -> Array:
 ## Casa completa: tres muros de la cama, sala, puerta, mesa y techo sobre cama y sala.
 func casa_completa(cama: Vector2i) -> bool:
 	if j.mundo.constr_en(cama).get("t", "") not in ["cama", "cama_huesped"]: return false
-	for d in cfg.vivienda.casa.base:
+	for d in plano(cama).base:
 		if j.mundo.constr_en(cama + Vector2i(int(d[0]), int(d[1]))).get("t", "") not in ["muro", "muro_ladrillo"]: return false
 	for paso in _celdas_casa(cama):
 		var ok := _pieza_puesta(paso[0], paso[1])
@@ -1055,13 +1221,13 @@ func casa_completa(cama: Vector2i) -> bool:
 
 ## Tras el refugio, el albañil completa la casa pieza a pieza (plano en reglas.vivienda.casa). Lo que no cabe se omite.
 func _casa(nid: String) -> bool:
-	if not "ladrillo" in a.recetas_de(nid): return false
 	var hechas: Dictionary = datos().get("casas", {})
 	var claves: Array = j.d.mundo.constr.keys()
 	claves.sort()
 	for k in claves:
 		if j.d.mundo.constr[k].t != "cama_huesped" or not datos().get("refugios", {}).has(k): continue
 		var cama := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
+		if habitat.es_pieza_ajena(cama) or not _constructor(nid, cama): continue
 		if casa_completa(cama):
 			habitat.estado(cama,"completa")
 			continue
@@ -1071,7 +1237,7 @@ func _casa(nid: String) -> bool:
 			var pieza: String = paso[0]
 			var c: Vector2i = paso[1]
 			# Sin ladrillos a mano el muro se levanta de madera: casa_completa() acepta ambos y la casa no se queda a medias.
-			if pieza == "muro_ladrillo" and not Inv.tiene(a.estado(nid).inv, C.CONSTR[pieza].coste): pieza = "muro"
+			if pieza == "muro_ladrillo" and (not "ladrillo" in a.recetas_de(nid) or not Inv.tiene(a.estado(nid).inv, C.CONSTR[pieza].coste)): pieza = "muro"
 			if _pieza_puesta(pieza, c) or _pieza_puesta(paso[0], c) or M.ESENCIALES.has(c) or (pieza != "techo" and j.ocupada(c)): continue   # el techo no estorba a quien está debajo
 			if (j.mundo.puede_techar(c) if pieza == "techo" else j.mundo.puede_poner(c)) != "":
 				habitat.estado(cama,"bloqueada","Hay un obstáculo en "+M.clave(c))
@@ -1147,19 +1313,63 @@ func _personalizar_colono(npc: Dictionary, perfil: Dictionary, rng: RandomNumber
 	perfil["identidad"] = identidad
 	perfil.reserva_producto = int(perfil.reserva_producto)+int(identidad.reserva_extra)
 
-## Población abierta: con cama libre, riqueza y espacio llega alguien con oficio y carácter sorteados. No hay un número objetivo.
+## Presión de llegada: cuánto sustento hay para acoger a alguien (riqueza frente al mínimo), reducido por robos recientes.
+## 1.0 equivale al umbral antiguo de riqueza. Las camas no intervienen: son descanso, no capacidad.
+func presion() -> float:
+	var ci: Dictionary = cfg.inmigracion
+	var ausentes := 0
+	var presentes := oficios_presentes()
+	for o in ci.oficios: if not presentes.has(o): ausentes += 1
+	var oportunidad: float = float(ci.bonus_oficio_ausente) * mini(int(ci.bonus_oficio_tope), ausentes)   # un oficio que falta es una oportunidad de trabajo
+	return clampf(float(_riqueza()) / float(ci.riqueza_minima), 0.0, 1.5) * seguridad() + oportunidad
+
+## Cuántos habitantes presentes ejercen cada profesión.
+func oficios_presentes() -> Dictionary:
+	var r := {}
+	for nid in j.habitantes.ids:
+		var o: String = str(a.perfil(nid).get("oficio", ""))
+		if o != "": r[o] = int(r.get(o, 0)) + 1
+	return r
+
+## Peso de sortear un oficio al llegar: más cuanto más falta, más guardias si hay robos, ningún intermediario sin con quién tratar.
+func _peso_oficio(oficio: String, presentes: Dictionary) -> float:
+	var ci: Dictionary = cfg.inmigracion
+	var n: int = int(presentes.get(oficio, 0))
+	var w: float = 1.0 / float(1 + n) * (float(ci.escasez_oficio) if n == 0 else 1.0)
+	if oficio == "guardia": w *= 1.0 + float(ci.peso_guardia_por_inseguridad) * (1.0 - seguridad())
+	if oficio == "mercader" and j.habitantes.ids.size() < 3: w *= 0.5
+	return w
+
+## Factor 1.0 (sin incidentes) .. seguridad_minima según los robos de los últimos días.
+func seguridad() -> float:
+	var ci: Dictionary = cfg.inmigracion
+	var incidentes := 0
+	for e in datos().sucesos:
+		if e.tipo == "hurto" and int(j.d.min) - int(e.min) < int(ci.ventana_incidentes_min): incidentes += 1
+	return maxf(float(ci.seguridad_minima), 1.0 - float(ci.seguridad_por_incidente) * incidentes)
+
+## Habitantes con perfil autónomo que no tienen cama propia (duermen al raso).
+func _sin_cama() -> Array:
+	var l: Array = []
+	for nid in j.habitantes.ids:
+		if j.habitantes.cama(nid) == Vector2i(-1, -1): l.append(nid)
+	return l
+
+## Población abierta: llega alguien con oficio y carácter sorteados cuando la presión lo permite. No hay un número objetivo ni cama previa.
 func _inmigrar() -> void:
 	var ci: Dictionary = cfg.inmigracion
 	var d: Dictionary = datos()
 	if not bool(ci.activa) or j.habitantes.ids.size() >= int(ci.max_habitantes): return
 	if int(j.d.min) - int(d.get("llegada_min", -99999)) < int(ci.espera_min): return
-	if j.vivo.camas_libres_lista().is_empty() or _riqueza() < int(ci.riqueza_minima): return
+	if presion() < float(ci.presion_minima): return
 	var raiz: Dictionary = j.d.mundo_vivo.autonomia
 	if not raiz.has("colonos"): raiz.colonos = {}
 	var rng = j._rng("inmigracion", "%d:%d" % [int(j.d.min), raiz.colonos.size()])
 	var oficios: Array = ci.oficios.keys()
 	oficios.sort()
-	var oficio: String = oficios[rng.randi() % oficios.size()]
+	var presentes := oficios_presentes()
+	var pesos: Array = oficios.map(func(o): return _peso_oficio(o, presentes))
+	var oficio: String = arraigo._sortear(rng, oficios, pesos)
 	var albanil := false
 	for nid in j.habitantes.ids:
 		if "ladrillo" in a.perfil(nid).get("recetas",[]): albanil=true
@@ -1180,10 +1390,12 @@ func _inmigrar() -> void:
 	perfil["caracter"] = carac
 	perfil["oficio"] = oficio
 	_personalizar_colono(npc,perfil,rng)
+	perfil["biografia"] = arraigo.biografia(rng, carac, arraigo.candidatos())
 	if j.habitantes.registrar_colono(id, npc) != "": return
-	raiz.colonos[id] = {"npc": npc, "perfil": perfil}
+	raiz.colonos[id] = {"npc": npc, "perfil": perfil, "permanencia": arraigo.nueva()}
 	j.vivo.restaurar().vars[id + "_presente"] = true
 	j.habitantes.reconciliar()
+	arraigo.vincular(id)
 	d.llegada_min = int(j.d.min)
 	a._recordar(id, "llego", "al valle")
 	suceso("llegada", "%s, de oficio %s, llega al valle" % [nombre, oficio], id)
@@ -1191,7 +1403,7 @@ func _inmigrar() -> void:
 
 ## Diario legible: muestra actor, acción y resultado en lugar de identificadores internos.
 func texto_suceso(e: Dictionary) -> String:
-	var acciones := {"acuerdo":"acordó", "entrega":"entregó", "fabricacion":"fabricó", "construccion":"construyó", "reparacion":"reparó", "desgaste":"agotó", "aporte":"aportó", "retiro":"retiró", "alternativa":"buscó otra solución", "incumplimiento":"no concretó el acuerdo", "llegada":"llegó", "estafa":"engañó en un acuerdo", "hurto":"robó", "ahorro":"ahorró", "conflicto":"tuvo un conflicto", "ayuda":"recibió ayuda", "descubrimiento":"creó", "venta":"intercambió", "material":"elaboró", "mantenimiento":"cuidó su ropa y lecho", "proteccion":"protegió sus ahorros"}
+	var acciones := {"acuerdo":"acordó", "entrega":"entregó", "fabricacion":"fabricó", "construccion":"construyó", "reparacion":"reparó", "desgaste":"agotó", "aporte":"aportó", "retiro":"retiró", "alternativa":"buscó otra solución", "incumplimiento":"no concretó el acuerdo", "llegada":"llegó", "estafa":"engañó en un acuerdo", "hurto":"robó", "ahorro":"ahorró", "conflicto":"tuvo un conflicto", "ayuda":"recibió ayuda", "descubrimiento":"creó", "venta":"intercambió", "material":"elaboró", "mantenimiento":"cuidó su ropa y lecho", "proteccion":"protegió sus ahorros", "aspiracion":"aspira a quedarse", "establecimiento":"se estableció", "partida":"se marchó", "regreso":"regresó", "logro":"consiguió", "deuda":"saldó una deuda", "vivienda":"consiguió su cama"}
 	var nombre: String = j.habitantes.fichas.get(e.quien, {}).get("n", "Alguien")
 	if j.d.jugadores.has(e.quien): nombre = j.d.jugadores[e.quien].nombre
 	var detalle: String = e.detalle

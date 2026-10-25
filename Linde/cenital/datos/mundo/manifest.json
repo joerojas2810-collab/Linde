@@ -18,6 +18,7 @@
     "entities/lugar/bosque.json",
     "entities/variable_mundo/ordal_presente.json",
     "entities/variable_mundo/camas_libres.json",
+    "entities/variable_mundo/presion_llegada.json",
     "entities/evento/llegada_ordal.json",
     "entities/evento/llegada_nerea.json",
     "entities/variable_mundo/nerea_presente.json",

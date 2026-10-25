@@ -96,6 +96,12 @@ func aspecto(id: String) -> Array:
 func reconciliar() -> void:
 	var mv: Dictionary = j.vivo.restaurar()
 	_cargar_colonos()
+	for id in ids.duplicate():   # quien se marchó deja de estar presente, pero su ficha, inventario y recuerdos se conservan
+		if id.begins_with("colono_") and mv.vars.get(id + "_presente", true) == false:
+			ids.erase(id)
+			j.d.npcs.erase(id)
+			rutas.erase(id)
+			for k in mv.camas_asignadas.keys(): if mv.camas_asignadas[k] == id: mv.camas_asignadas.erase(k)
 	for id in fichas:
 		if not mv.vars.get(id + "_presente", id in ids): continue
 		if not id in ids: ids.append(id)
@@ -103,14 +109,30 @@ func reconciliar() -> void:
 		if j.d.npcs.has(id): continue
 		if cama(id) == Vector2i(-1, -1):
 			var libres: Array = j.vivo.camas_libres_lista()
-			if libres.is_empty(): continue    # la precondición del director lo impide; sin cama no se crea
-			mv.camas_asignadas[libres[0]] = id
+			if not libres.is_empty(): mv.camas_asignadas[libres[0]] = id   # sin cama libre llega igual y duerme al raso
 		var n: Dictionary = nuevo(id)
 		var p: Vector2 = Mundo.pies_de_celda(Mundo.ENTRADA)
 		n.pos = [p.x, p.y]
 		j.d.npcs[id] = n
 		rutas[id] = {"act": "", "ruta": [], "v": -1, "i": 0, "fallo": false}
 		if not id in mv.llegados and not id in _inicial: mv.llegados.append(id)
+
+## Reparte las camas libres entre quienes duermen al raso (orden estable). Devuelve cuántas asignó.
+func asignar_camas() -> int:
+	var mv: Dictionary = j.vivo.restaurar()
+	var hechas := 0
+	if j.autonomia != null and j.autonomia.sociedad.activa():   # primero las viviendas planificadas para alguien concreto
+		for p in j.autonomia.sociedad.habitat.datos().parcelas.values():
+			var antes: int = mv.camas_asignadas.size()
+			j.autonomia.sociedad.reclamar_cama(p)
+			hechas += mv.camas_asignadas.size() - antes
+	for id in ids:
+		if cama(id) != Vector2i(-1, -1): continue
+		var libres: Array = j.vivo.camas_libres_lista()
+		if libres.is_empty(): break
+		mv.camas_asignadas[libres[0]] = id
+		hechas += 1
+	return hechas
 
 ## Recrea las fichas de los colonos llegados en esta partida (se guardan enteras en mundo_vivo.autonomia.colonos; el cliente también las recibe).
 func _cargar_colonos() -> void:
@@ -158,6 +180,8 @@ func _meta(id: String, d: Dictionary) -> Callable:
 	var t: Vector2i = fichas[id].lugares[d.lugar]
 	return func(c): return c == t
 
+const DESCANSO_AL_RASO := 0.5   # ponytail: fijo; a datos si se afina el balance
+
 func paso(dt: float) -> void:
 	var horas: float = dt * C.MIN_POR_SEG / 60.0
 	for id in ids:
@@ -169,10 +193,10 @@ func paso(dt: float) -> void:
 		var act: String = d.act
 		var gasto: float = nec.cambio_por_hora_activo * horas
 		var recupera: float = nec.cambio_por_hora_descanso * horas
-		if act == "dormir" and j.autonomia != null and j.autonomia.activa() and j.autonomia.sociedad.casa_completa(cama(id)): recupera *= float(j.autonomia.sociedad.cfg.vivienda.casa.bono_descanso)
+		if act == "dormir" and j.autonomia != null and j.autonomia.activa() and j.autonomia.sociedad.casa_completa(cama(id)): recupera *= float(j.autonomia.sociedad.plano(cama(id)).bono_descanso)
 		if act == "dormir" and not cama_existe(id):
-			n.act = "sin_cama"
-			n.energia = clampf(n.energia + gasto, nec.minimo, nec.maximo)
+			n.act = "sin_cama"   # duerme al raso donde está: recupera menos que en una cama
+			n.energia = clampf(n.energia + recupera * DESCANSO_AL_RASO, nec.minimo, nec.maximo)
 			continue
 		if act == "descansar":    # sin destino: descansa donde está
 			n.act = act

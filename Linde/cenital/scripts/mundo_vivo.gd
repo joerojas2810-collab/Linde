@@ -21,7 +21,7 @@ func _init(juego, paq: Dictionary = {}, admitir: bool = false) -> void:
 	j = juego
 	_paq = paq if not paq.is_empty() else MundoDatos.paquete()
 	admitir_propuestas = admitir or _paq.get("manifiesto", {}).get("fixture", false) == true or "--admitir-propuestas" in OS.get_cmdline_user_args()
-	_derivadas = {"dia": _v_dia, "camas_libres": _v_camas_libres, "habitantes_presentes": _v_habitantes,
+	_derivadas = {"dia": _v_dia, "camas_libres": _v_camas_libres, "presion_llegada": _v_presion, "habitantes_presentes": _v_habitantes,
 		"mesa_construida": _v_mesa, "guardian_derrotado": _v_guardian}
 
 ## Estado compartido (d.mundo_vivo). Rellena los defectos que falten; las variables persistidas nuevas toman su `inicial`.
@@ -103,13 +103,13 @@ func camas_libres_lista() -> Array:
 	l.sort()
 	return l
 
-# "" si cada llegada (`<id>_presente` false -> true sin habitante) tiene cama libre propia y ruta desde la entrada hasta su lado.
+# "" si cada llegada (`<id>_presente` false -> true sin habitante) puede entrar: con cama libre exige ruta hasta su lado; sin cama llega igual y duerme al raso.
 func _llegadas_posibles(nuevas: Dictionary, antes: Dictionary) -> String:
 	var libres: Array = camas_libres_lista()
 	for id in _paq.entidades.npc:
 		var v: String = id + "_presente"
 		if not nuevas.get(v, false) or antes.get(v, false) or j.d.npcs.has(id): continue
-		if libres.is_empty(): return "%s: sin cama libre" % id
+		if libres.is_empty(): continue
 		var parts: PackedStringArray = libres.pop_front().split(",")
 		var cama := Vector2i(int(parts[0]), int(parts[1]))
 		if j.mundo.camino(Mundo.ENTRADA, func(c): return j.mundo.es_adyacente(c, cama)).is_empty(): return "%s: sin ruta desde la entrada" % id
@@ -247,6 +247,16 @@ func _v_dia() -> int:
 
 func _v_camas_libres() -> int:
 	return camas_libres_lista().size()
+
+## Presión de llegada en porcentaje (100 = alcanza para acoger a alguien): lo mayor entre el sustento y la seguridad del valle
+## (autonomía) y la actividad construida por cualquiera (piezas útiles que no son camas). Las camas solas no atraen a nadie.
+func _v_presion() -> int:
+	var util := 0
+	for k in j.d.mundo.constr:
+		if not j.d.mundo.constr[k].t in ["cama", "cama_huesped", "muro", "muro_ladrillo", "suelo", "puerta", "techo"]: util += 1
+	var p: int = mini(150, util * 25)
+	if j.autonomia != null and j.autonomia.sociedad.activa(): p = maxi(p, floori(j.autonomia.sociedad.presion() * 100.0))
+	return p
 
 func _v_habitantes() -> int:
 	var n: int = 0

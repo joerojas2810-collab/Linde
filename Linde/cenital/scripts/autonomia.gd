@@ -341,6 +341,7 @@ func dialogo(nid: String, jugador: String) -> String:
 		var perfil_actual := perfil(nid)
 		var identidad: Dictionary = perfil_actual.get("identidad",{})
 		if not identidad.is_empty(): texto = "Soy %s y quiero %s. " % [perfil_actual.get("oficio","habitante"),identidad.objetivo] + texto
+		texto = sociedad.arraigo.resumen(nid) + " " + texto
 		var recientes: Array = n.recuerdos.slice(-12)
 		recientes.reverse()
 		for recuerdo in recientes:

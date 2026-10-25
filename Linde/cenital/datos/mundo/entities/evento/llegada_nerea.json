@@ -3,7 +3,7 @@
   "id": "llegada_nerea",
   "type": "evento",
   "name": "Llegada de Nerea",
-  "summary": "Propuesta. Solicita presencia; materialización pendiente de entrada_sur con celda y proveedor camas_libres.",
+  "summary": "Propuesta. Solicita presencia; llega por entrada_sur cuando hay presión de llegada, sin exigir cama.",
   "tags": [
     "ejemplo"
   ],
@@ -40,9 +40,9 @@
           "valor": false
         },
         {
-          "variable": "camas_libres",
+          "variable": "presion_llegada",
           "operador": "gte",
-          "valor": 1
+          "valor": 100
         }
       ]
     },

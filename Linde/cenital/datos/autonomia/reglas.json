@@ -36,7 +36,8 @@
       ],
       "herramientas_necesarias": [
         "hacha_piedra"
-      ]
+      ],
+      "oficio": "artesano"
     },
     "ordal": {
       "caracter": {
@@ -56,7 +57,8 @@
       ],
       "herramientas_necesarias": [
         "pico_piedra"
-      ]
+      ],
+      "oficio": "cantero"
     },
     "nerea": {
       "caracter": {
@@ -74,7 +76,8 @@
       ],
       "herramientas_necesarias": [
         "hacha_piedra"
-      ]
+      ],
+      "oficio": "recolector"
     }
   },
   "sociedad": {
@@ -265,16 +268,137 @@
             1
           ]
         ],
+        "bono_descanso": 1.25,
+        "area": [
+          -2,
+          -2,
+          6,
+          7
+        ]
+      },
+      "comunitaria_desde": 2,
+      "comunitaria": {
+        "nota": "Casa comunitaria: tres camas en fila bajo un mismo techo y una sala común; la capacidad son sus camas. (0,0) es la cama ancla. Provisional.",
+        "area": [
+          -2,
+          -2,
+          9,
+          7
+        ],
+        "base": [
+          [
+            0,
+            -1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            2,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        "piezas": [
+          {
+            "p": "cama_huesped",
+            "d": [
+              1,
+              0
+            ]
+          },
+          {
+            "p": "cama_huesped",
+            "d": [
+              2,
+              0
+            ]
+          },
+          {
+            "p": "muro_ladrillo",
+            "d": [
+              -1,
+              1
+            ]
+          },
+          {
+            "p": "muro_ladrillo",
+            "d": [
+              3,
+              1
+            ]
+          },
+          {
+            "p": "muro_ladrillo",
+            "d": [
+              0,
+              2
+            ]
+          },
+          {
+            "p": "muro_ladrillo",
+            "d": [
+              2,
+              2
+            ]
+          },
+          {
+            "p": "puerta",
+            "d": [
+              1,
+              2
+            ]
+          }
+        ],
+        "techos": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
         "bono_descanso": 1.25
-      }
+      },
+      "relevo_min": 1440
     },
     "inmigracion": {
-      "nota": "Sin número objetivo de habitantes: max_habitantes es solo un techo técnico provisional por rendimiento y red. Llega alguien cuando hay cama libre y riqueza.",
+      "nota": "Sin número objetivo de habitantes: max_habitantes es solo un techo técnico provisional por rendimiento y red. Llega alguien cuando la presión (sustento y seguridad) lo permite; la cama no cuenta.",
       "activa": true,
       "intervalo_min": 120,
       "espera_min": 1440,
       "max_habitantes": 12,
       "riqueza_minima": 120,
+      "presion_minima": 1.0,
+      "ventana_incidentes_min": 2880,
+      "seguridad_por_incidente": 0.15,
+      "seguridad_minima": 0.4,
       "nombres": [
         "Iria",
         "Tomás",
@@ -363,6 +487,77 @@
           "herramientas_necesarias": [
             "hacha_piedra"
           ]
+        },
+        "agricultor": {
+          "molde": "nerea",
+          "grupo": "talleres",
+          "receta": "hacha_piedra",
+          "reserva_producto": 1,
+          "herramientas": [],
+          "recetas": [
+            "hacha_piedra",
+            "pico_piedra"
+          ],
+          "herramientas_necesarias": [
+            "hacha_piedra"
+          ],
+          "prioridad": [
+            "cosechar",
+            "sembrar"
+          ]
+        },
+        "explorador": {
+          "molde": "nerea",
+          "grupo": "talleres",
+          "receta": "hacha_piedra",
+          "reserva_producto": 1,
+          "herramientas": [],
+          "recetas": [
+            "hacha_piedra",
+            "pico_piedra"
+          ],
+          "herramientas_necesarias": [
+            "hacha_piedra"
+          ],
+          "prioridad": [
+            "explorar"
+          ]
+        },
+        "mercader": {
+          "molde": "maren",
+          "grupo": "talleres",
+          "receta": "pico_piedra",
+          "reserva_producto": 1,
+          "herramientas": [],
+          "recetas": [
+            "pico_piedra",
+            "hacha_piedra"
+          ],
+          "herramientas_necesarias": [
+            "hacha_piedra"
+          ],
+          "prioridad": [
+            "comerciar"
+          ]
+        },
+        "guardia": {
+          "molde": "ordal",
+          "grupo": "canteros",
+          "receta": "pico_piedra",
+          "reserva_producto": 1,
+          "herramientas": [
+            "picar"
+          ],
+          "recetas": [
+            "pico_piedra",
+            "lingote"
+          ],
+          "herramientas_necesarias": [
+            "pico_piedra"
+          ],
+          "prioridad": [
+            "vigilar"
+          ]
         }
       },
       "identidades": [
@@ -381,7 +576,11 @@
           "preferencia": "seguridad",
           "reserva_extra": 3
         }
-      ]
+      ],
+      "escasez_oficio": 2.0,
+      "bonus_oficio_ausente": 0.05,
+      "bonus_oficio_tope": 3,
+      "peso_guardia_por_inseguridad": 4.0
     },
     "economia": {
       "fibra_objetivo_persona": 24,
@@ -389,7 +588,8 @@
       "fibra_mantenimiento": 8,
       "intervalo_mantenimiento": 1440,
       "valor_minimo": 0.25,
-      "campos_por_grupo": 1
+      "campos_por_grupo": 1,
+      "campo_extra_por_agricultor": 1
     },
     "proteccion": {
       "coste": {
@@ -397,6 +597,227 @@
         "fibra": 2
       },
       "espera_hurto_min": 360
+    },
+    "arraigo": {
+      "nota": "Arraigo de colonos: orienta si se quedan, no lo obliga. Provisional; se afina jugando.",
+      "pesos": {
+        "sustento": 1.0,
+        "seguridad": 1.0,
+        "relaciones": 1.0,
+        "oportunidades": 1.0,
+        "condiciones": 1.0,
+        "historia": 0.5
+      },
+      "dias_visita": 1,
+      "dias_max_visita": 4,
+      "dias_paciencia": 3,
+      "dias_ausencia_min": 3,
+      "dias_historia": 5,
+      "umbral_aspirar": 0.5,
+      "umbral_residir": 0.6,
+      "umbral_partir": 0.35,
+      "prob_regreso": 0.5
+    },
+    "biografia": {
+      "nota": "Biografía mínima sorteada al llegar. Los antecedentes con persona solo salen si hay alguien más en el valle; nunca nombran lugares ni gente que no exista. Provisional.",
+      "origenes": {
+        "cercano": "Vivía en una región cercana",
+        "viajero": "Es viajero habitual",
+        "desplazado": "Salió de otro asentamiento sin hogar",
+        "itinerante": "Comerciaba de lugar en lugar",
+        "exiliado": "Tuvo que dejar su tierra",
+        "aventurero": "Fue aventurero y se cansó del camino"
+      },
+      "antecedentes": {
+        "negocio": {
+          "texto": "Perdió un negocio"
+        },
+        "comunidad": {
+          "texto": "Abandonó una comunidad"
+        },
+        "maestro": {
+          "texto": "Aprendió el oficio de otra persona"
+        },
+        "peligro": {
+          "texto": "Sobrevivió a un peligro"
+        },
+        "herencia": {
+          "texto": "Heredó sus herramientas"
+        },
+        "grupo": {
+          "texto": "Se separó de un grupo de viajeros"
+        },
+        "deuda": {
+          "texto": "Tiene una deuda pendiente con %s",
+          "persona": true,
+          "relacion": "deuda"
+        },
+        "conocido": {
+          "texto": "Busca a %s, un antiguo conocido",
+          "persona": true,
+          "relacion": "amistad"
+        },
+        "rival": {
+          "texto": "Tuvo un roce con %s",
+          "persona": true,
+          "relacion": "rivalidad"
+        }
+      },
+      "motivaciones": {
+        "prosperidad": {
+          "texto": "Busca prosperar",
+          "carac": "codicia",
+          "factor": 0.8,
+          "pesos": {
+            "sustento": 1.5,
+            "oportunidades": 1.5
+          },
+          "aspiraciones": [
+            "taller",
+            "herramientas"
+          ]
+        },
+        "seguridad": {
+          "texto": "Busca un lugar seguro",
+          "carac": "rencor",
+          "factor": 0.8,
+          "pesos": {
+            "seguridad": 2.0,
+            "condiciones": 1.3
+          },
+          "aspiraciones": [
+            "hogar",
+            "lugar_seguro"
+          ]
+        },
+        "pertenencia": {
+          "texto": "Busca pertenecer",
+          "carac": "honestidad",
+          "factor": 0.8,
+          "pesos": {
+            "relaciones": 2.0,
+            "historia": 1.5
+          },
+          "aspiraciones": [
+            "amistad",
+            "hogar"
+          ]
+        },
+        "ambicion": {
+          "texto": "Quiere llegar lejos",
+          "carac": "codicia",
+          "factor": 1.0,
+          "pesos": {
+            "oportunidades": 2.0,
+            "sustento": 1.2,
+            "condiciones": 0.7
+          },
+          "aspiraciones": [
+            "taller",
+            "herramientas"
+          ]
+        },
+        "libertad": {
+          "texto": "Quiere moverse sin ataduras",
+          "carac": "honestidad",
+          "factor": -0.5,
+          "pesos": {
+            "relaciones": 0.7,
+            "condiciones": 0.6,
+            "historia": 0.5,
+            "oportunidades": 1.2
+          },
+          "aspiraciones": [
+            "herramientas",
+            "lugar_seguro"
+          ]
+        },
+        "necesidad": {
+          "texto": "Necesita salir de un apuro",
+          "base": 0.4,
+          "pesos": {
+            "sustento": 2.0,
+            "condiciones": 1.5
+          },
+          "aspiraciones": [
+            "hogar",
+            "herramientas"
+          ]
+        }
+      },
+      "aspiraciones": {
+        "hogar": {
+          "texto": "conseguir un hogar",
+          "cumple": "cama"
+        },
+        "casa": {
+          "texto": "tener una casa completa",
+          "cumple": "casa"
+        },
+        "taller": {
+          "texto": "abrir un taller",
+          "cumple": ""
+        },
+        "herramientas": {
+          "texto": "reunir sus herramientas",
+          "cumple": "herramientas"
+        },
+        "amistad": {
+          "texto": "ganarse a sus vecinos",
+          "cumple": "confianza"
+        },
+        "lugar_seguro": {
+          "texto": "encontrar un lugar seguro",
+          "cumple": "seguridad"
+        }
+      },
+      "umbral_confianza": 4,
+      "relaciones": {
+        "deuda": {
+          "yo": -2,
+          "el": -1,
+          "item": "fibra",
+          "cantidad": 3,
+          "saldada": [
+            4,
+            3
+          ]
+        },
+        "amistad": {
+          "yo": 4,
+          "el": 3
+        },
+        "rivalidad": {
+          "yo": -4,
+          "el": -3
+        }
+      }
+    },
+    "ocupaciones": {
+      "mantener": "cuida su ropa y lecho",
+      "cosechar": "cosecha",
+      "casa": "levanta una casa",
+      "refugio": "levanta un refugio",
+      "sembrar": "siembra",
+      "vivienda": "prepara una vivienda",
+      "desarrollo": "perfecciona su técnica",
+      "proteger": "protege sus ahorros",
+      "acumular": "ahorra",
+      "prospectar": "prueba recursos nuevos",
+      "depositar": "abastece al grupo",
+      "proveerse": "consigue lo que le falta",
+      "explorar": "explora lo desconocido",
+      "comerciar": "hace de intermediario",
+      "vigilar": "vigila el depósito"
+    },
+    "exploracion": {
+      "radio": 16,
+      "paciencia_min": 240
+    },
+    "vigilancia": {
+      "periodo_min": 240,
+      "turno_min": 120,
+      "radio": 8
     }
   }
 }

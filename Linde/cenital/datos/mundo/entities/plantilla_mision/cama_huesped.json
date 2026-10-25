@@ -39,7 +39,7 @@
     },
     "efectos_completar": [],
     "repetible": false,
-    "texto": "Construye una cama de huésped para que alguien pueda quedarse en el valle.",
+    "texto": "Construye una cama de huésped para que quien llegue tenga dónde dormir.",
     "notas": "Plantilla de prueba de la copia del paquete (historia 004).",
     "recompensa": {
       "destinatario": "completador",

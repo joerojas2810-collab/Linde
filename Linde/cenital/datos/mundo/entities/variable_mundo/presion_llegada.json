@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "id": "presion_llegada",
+  "type": "variable_mundo",
+  "name": "Presión de llegada",
+  "summary": "Solo lectura. 100 o más: el valle puede acoger a alguien. No depende de las camas.",
+  "tags": [
+    "ejemplo"
+  ],
+  "revision": 1,
+  "design_status": "proposed",
+  "implementation_status": "absent",
+  "sources": [
+    "atlas_ejemplos"
+  ],
+  "relations": [],
+  "data": {
+    "origen": "derivada",
+    "tipo_valor": "integer",
+    "minimo": 0,
+    "persistir": false,
+    "descripcion": "Porcentaje de presión de llegada: sustento y seguridad del valle (autonomía) o actividad construida (sin ella)."
+  }
+}

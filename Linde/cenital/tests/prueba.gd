@@ -388,7 +388,7 @@ func t_habitantes() -> void:
 	n.mundo.quitar(Mundo.CAMA_MAREN)
 	var e1: float = n.d.npcs.maren.energia
 	for i in 200: n.habitantes.paso(0.05)
-	ok(n.d.npcs.maren.act == "sin_cama" and n.d.npcs.maren.energia < e1, "asignar dormir sin cama no equivale a dormir")
+	ok(n.d.npcs.maren.act == "sin_cama" and n.d.npcs.maren.energia > e1 and n.d.npcs.maren.energia - e1 < s.d.npcs.maren.energia - e0, "sin cama duerme al raso: recupera, pero menos que en una cama")
 
 func t_persistencia() -> void:
 	var j = g(9)

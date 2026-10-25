@@ -79,7 +79,7 @@ Los datos vienen del Atlas (contrato `atlas-contrato.md`, versión del 2026-10-2
 - **Si un efecto rompe un mínimo o máximo, o apunta a una derivada:** no se aplica ninguno y el enfriamiento no cambia.
 - **Si el servidor se reinicia en la misma hora de juego:** la última hora evaluada se persiste para no evaluar dos veces el mismo minuto; el enfriamiento persistido impide repetir el evento.
 - **Si `<id>_presente` ya es `true` y el habitante existe:** la reconciliación no hace nada.
-- **Si una llegada no tiene cama libre o ruta desde la entrada:** el evento no se aplica y reintenta en la siguiente evaluación.
+- **Si una llegada no tiene cama libre:** llega igual y duerme al raso hasta que haya una cama (la cama es descanso, no capacidad). Si hay cama libre pero sin ruta desde la entrada, el evento no se aplica y reintenta en la siguiente evaluación.
 - **Si el jugador bloquea el camino de entrada:** ya está impedido, porque la entrada es un lugar esencial para las reglas de construcción.
 - **Si la cama de un habitante presente se retira:** vale el comportamiento actual (`sin_cama`).
 - **Si el paquete cambia entre reinicios:** las variables guardadas desconocidas se conservan y se avisan; las tarjetas retiradas se ignoran; las variables nuevas toman su inicial.
@@ -109,7 +109,7 @@ Ninguna de las dependencias tiene GDD, solo código y `DECISIONES.md`; los contr
 - **GIVEN** una tarjeta cuyo segundo efecto viola un límite, **WHEN** se aplica, **THEN** no cambia ninguna variable y `ultimo[id]` no cambia.
 - **GIVEN** un efecto que escribe una variable derivada, **WHEN** se aplica, **THEN** se rechaza y queda registrado.
 - **GIVEN** un evento de llegada con cama libre y ruta válida, **WHEN** se aplica, **THEN** el habitante aparece en la celda (32,46) y su variable `<id>_presente` es `true`.
-- **GIVEN** el mismo evento sin cama libre, **WHEN** se evalúa, **THEN** no se aplica y el enfriamiento no cambia.
+- **GIVEN** el mismo evento sin cama libre, **WHEN** se aplica, **THEN** el habitante aparece igual y no tiene cama asignada.
 - **GIVEN** `ordal_presente = true`, **WHEN** el motor reconcilia por segunda vez, **THEN** hay exactamente un Ordal.
 - **GIVEN** una plantilla de misión con recompensa, **WHEN** el jugador la completa, **THEN** recibe XP e ítems una sola vez; si el inventario está lleno, lo que no cabe queda en `pendientes`.
 - **GIVEN** un cliente que envía un pedido de evento, **WHEN** el servidor lo recibe, **THEN** lo rechaza y no cambia nada.
