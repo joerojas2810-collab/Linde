@@ -1,0 +1,1018 @@
+{
+	"_nota": "Instantánea del comportamiento de artesania.gd. Regenerar solo tras un cambio deliberado: subir EVALUADOR_VERSION o la version de reglas_v1.json según corresponda y explicarlo en el commit.",
+	"evaluador": 1,
+	"hash": "92a60cf8b39e9ed5a3c64dc4f1a293101b3f2d43cd8d95eb7bad41ff41822e89",
+	"muestra": [
+		{
+			"clave": "art1:botas:bronce:ligera:0",
+			"info": {
+				"artesania": {
+					"calidad": 0,
+					"forma": "botas",
+					"material": "bronce",
+					"tecnica": "ligera"
+				},
+				"c": "#b88a3c",
+				"def": 1,
+				"dmg": 0,
+				"equipo": "botas",
+				"hp": 2,
+				"n": "Botas de bronce ligeras (comunes)",
+				"pila": 1,
+				"vel": 0.01
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"lingote_bronce": 2
+				},
+				"est": "mesa",
+				"n": "Botas de bronce ligeras (comunes)",
+				"sal": {
+					"art1:botas:bronce:ligera:0": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:botas:cobre:ligera:1",
+			"info": {
+				"artesania": {
+					"calidad": 1,
+					"forma": "botas",
+					"material": "cobre",
+					"tecnica": "ligera"
+				},
+				"c": "#c8742f",
+				"def": 1,
+				"dmg": 0,
+				"equipo": "botas",
+				"hp": 2,
+				"n": "Botas de cobre ligeras (cuidadas)",
+				"pila": 1,
+				"vel": 0.02
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"lingote_cobre": 2
+				},
+				"est": "mesa",
+				"n": "Botas de cobre ligeras (cuidadas)",
+				"sal": {
+					"art1:botas:cobre:ligera:1": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:botas:fibra:ligera:2",
+			"info": {
+				"artesania": {
+					"calidad": 2,
+					"forma": "botas",
+					"material": "fibra",
+					"tecnica": "ligera"
+				},
+				"c": "#7b9855",
+				"def": 1,
+				"dmg": 0,
+				"equipo": "botas",
+				"hp": 1,
+				"n": "Botas de tejido ligeras (expertas)",
+				"pila": 1,
+				"vel": 0.04
+			},
+			"receta": {
+				"ent": {
+					"fibra": 5
+				},
+				"est": "mesa",
+				"n": "Botas de tejido ligeras (expertas)",
+				"sal": {
+					"art1:botas:fibra:ligera:2": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:botas:hierro_fibra:ligera:3",
+			"info": {
+				"artesania": {
+					"calidad": 3,
+					"forma": "botas",
+					"material": "hierro_fibra",
+					"tecnica": "ligera"
+				},
+				"c": "9cb0a8ff",
+				"def": 1,
+				"dmg": 0,
+				"equipo": "botas",
+				"hp": 2,
+				"n": "Botas de laminado de hierro y tejido ligeras (maestras)",
+				"pila": 1,
+				"vel": 0.025
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"mat1:hierro_fibra": 1
+				},
+				"est": "mesa",
+				"n": "Botas de laminado de hierro y tejido ligeras (maestras)",
+				"sal": {
+					"art1:botas:hierro_fibra:ligera:3": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:casco:bronce_fibra:reforzada:0",
+			"info": {
+				"artesania": {
+					"calidad": 0,
+					"forma": "casco",
+					"material": "bronce_fibra",
+					"tecnica": "reforzada"
+				},
+				"c": "a98e42ff",
+				"def": 3,
+				"dmg": 0,
+				"equipo": "casco",
+				"hp": 3,
+				"n": "Casco de laminado de bronce y tejido reforzado (común)",
+				"pila": 1,
+				"vel": -0.015
+			},
+			"receta": {
+				"ent": {
+					"mat1:bronce_fibra": 1,
+					"piedra": 1
+				},
+				"est": "mesa",
+				"n": "Casco de laminado de bronce y tejido reforzado (común)",
+				"sal": {
+					"art1:casco:bronce_fibra:reforzada:0": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:casco:cobre_fibra:reforzada:1",
+			"info": {
+				"artesania": {
+					"calidad": 1,
+					"forma": "casco",
+					"material": "cobre_fibra",
+					"tecnica": "reforzada"
+				},
+				"c": "b57d39ff",
+				"def": 2,
+				"dmg": 0,
+				"equipo": "casco",
+				"hp": 2,
+				"n": "Casco de laminado de cobre y tejido reforzado (cuidado)",
+				"pila": 1,
+				"vel": -0.01
+			},
+			"receta": {
+				"ent": {
+					"mat1:cobre_fibra": 1,
+					"piedra": 1
+				},
+				"est": "mesa",
+				"n": "Casco de laminado de cobre y tejido reforzado (cuidado)",
+				"sal": {
+					"art1:casco:cobre_fibra:reforzada:1": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:casco:hierro:reforzada:2",
+			"info": {
+				"artesania": {
+					"calidad": 2,
+					"forma": "casco",
+					"material": "hierro",
+					"tecnica": "reforzada"
+				},
+				"c": "#a7b8c4",
+				"def": 3,
+				"dmg": 0,
+				"equipo": "casco",
+				"hp": 3,
+				"n": "Casco de hierro reforzado (experto)",
+				"pila": 1,
+				"vel": -0.03
+			},
+			"receta": {
+				"ent": {
+					"lingote": 2,
+					"piedra": 1
+				},
+				"est": "mesa",
+				"n": "Casco de hierro reforzado (experto)",
+				"sal": {
+					"art1:casco:hierro:reforzada:2": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:escudo:bronce:reforzada:3",
+			"info": {
+				"artesania": {
+					"calidad": 3,
+					"forma": "escudo",
+					"material": "bronce",
+					"tecnica": "reforzada"
+				},
+				"c": "#b88a3c",
+				"def": 6,
+				"dmg": 0,
+				"equipo": "escudo",
+				"hp": 0,
+				"n": "Escudo de bronce reforzado (maestro)",
+				"pila": 1,
+				"vel": -0.03
+			},
+			"receta": {
+				"ent": {
+					"lingote_bronce": 2,
+					"piedra": 1
+				},
+				"est": "mesa",
+				"n": "Escudo de bronce reforzado (maestro)",
+				"sal": {
+					"art1:escudo:bronce:reforzada:3": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:escudo:bronce_piedra:simple:0",
+			"info": {
+				"artesania": {
+					"calidad": 0,
+					"forma": "escudo",
+					"material": "bronce_piedra",
+					"tecnica": "simple"
+				},
+				"c": "ac8c53ff",
+				"def": 4,
+				"dmg": 0,
+				"equipo": "escudo",
+				"hp": 0,
+				"n": "Escudo de laminado de bronce y piedra sencillo (común)",
+				"pila": 1,
+				"vel": -0.015
+			},
+			"receta": {
+				"ent": {
+					"mat1:bronce_piedra": 1
+				},
+				"est": "mesa",
+				"n": "Escudo de laminado de bronce y piedra sencillo (común)",
+				"sal": {
+					"art1:escudo:bronce_piedra:simple:0": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:escudo:cobre_madera:simple:1",
+			"info": {
+				"artesania": {
+					"calidad": 1,
+					"forma": "escudo",
+					"material": "cobre_madera",
+					"tecnica": "simple"
+				},
+				"c": "c07537ff",
+				"def": 3,
+				"dmg": 0,
+				"equipo": "escudo",
+				"hp": 0,
+				"n": "Escudo de laminado de cobre y madera sencillo (cuidado)",
+				"pila": 1,
+				"vel": 0.005
+			},
+			"receta": {
+				"ent": {
+					"mat1:cobre_madera": 1
+				},
+				"est": "mesa",
+				"n": "Escudo de laminado de cobre y madera sencillo (cuidado)",
+				"sal": {
+					"art1:escudo:cobre_madera:simple:1": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:escudo:hierro:simple:2",
+			"info": {
+				"artesania": {
+					"calidad": 2,
+					"forma": "escudo",
+					"material": "hierro",
+					"tecnica": "simple"
+				},
+				"c": "#a7b8c4",
+				"def": 4,
+				"dmg": 0,
+				"equipo": "escudo",
+				"hp": 0,
+				"n": "Escudo de hierro sencillo (experto)",
+				"pila": 1,
+				"vel": -0.01
+			},
+			"receta": {
+				"ent": {
+					"lingote": 2
+				},
+				"est": "mesa",
+				"n": "Escudo de hierro sencillo (experto)",
+				"sal": {
+					"art1:escudo:hierro:simple:2": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:escudo:hierro_piedra:simple:3",
+			"info": {
+				"artesania": {
+					"calidad": 3,
+					"forma": "escudo",
+					"material": "hierro_piedra",
+					"tecnica": "simple"
+				},
+				"c": "a0aeb9ff",
+				"def": 4,
+				"dmg": 0,
+				"equipo": "escudo",
+				"hp": 0,
+				"n": "Escudo de laminado de hierro y piedra sencillo (maestro)",
+				"pila": 1,
+				"vel": -0.015
+			},
+			"receta": {
+				"ent": {
+					"mat1:hierro_piedra": 1
+				},
+				"est": "mesa",
+				"n": "Escudo de laminado de hierro y piedra sencillo (maestro)",
+				"sal": {
+					"art1:escudo:hierro_piedra:simple:3": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:espada:bronce:ligera:0",
+			"info": {
+				"artesania": {
+					"calidad": 0,
+					"forma": "espada",
+					"material": "bronce",
+					"tecnica": "ligera"
+				},
+				"c": "#b88a3c",
+				"def": 0,
+				"dmg": 6,
+				"equipo": "arma",
+				"hp": 0,
+				"n": "Espada de bronce ligera (común)",
+				"pila": 1,
+				"vel": 0.01
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"lingote_bronce": 2
+				},
+				"est": "mesa",
+				"n": "Espada de bronce ligera (común)",
+				"sal": {
+					"art1:espada:bronce:ligera:0": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:espada:bronce_piedra:ligera:1",
+			"info": {
+				"artesania": {
+					"calidad": 1,
+					"forma": "espada",
+					"material": "bronce_piedra",
+					"tecnica": "ligera"
+				},
+				"c": "ac8c53ff",
+				"def": 0,
+				"dmg": 6,
+				"equipo": "arma",
+				"hp": 0,
+				"n": "Espada de laminado de bronce y piedra ligera (cuidada)",
+				"pila": 1,
+				"vel": 0.005
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"mat1:bronce_piedra": 1
+				},
+				"est": "mesa",
+				"n": "Espada de laminado de bronce y piedra ligera (cuidada)",
+				"sal": {
+					"art1:espada:bronce_piedra:ligera:1": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:espada:cobre_madera:ligera:2",
+			"info": {
+				"artesania": {
+					"calidad": 2,
+					"forma": "espada",
+					"material": "cobre_madera",
+					"tecnica": "ligera"
+				},
+				"c": "c07537ff",
+				"def": 0,
+				"dmg": 5,
+				"equipo": "arma",
+				"hp": 0,
+				"n": "Espada de laminado de cobre y madera ligera (experta)",
+				"pila": 1,
+				"vel": 0.025
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"mat1:cobre_madera": 1
+				},
+				"est": "mesa",
+				"n": "Espada de laminado de cobre y madera ligera (experta)",
+				"sal": {
+					"art1:espada:cobre_madera:ligera:2": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:espada:hierro:ligera:3",
+			"info": {
+				"artesania": {
+					"calidad": 3,
+					"forma": "espada",
+					"material": "hierro",
+					"tecnica": "ligera"
+				},
+				"c": "#a7b8c4",
+				"def": 0,
+				"dmg": 7,
+				"equipo": "arma",
+				"hp": 0,
+				"n": "Espada de hierro ligera (maestra)",
+				"pila": 1,
+				"vel": 0.01
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"lingote": 2
+				},
+				"est": "mesa",
+				"n": "Espada de hierro ligera (maestra)",
+				"sal": {
+					"art1:espada:hierro:ligera:3": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:espada:hierro_piedra:reforzada:0",
+			"info": {
+				"artesania": {
+					"calidad": 0,
+					"forma": "espada",
+					"material": "hierro_piedra",
+					"tecnica": "reforzada"
+				},
+				"c": "a0aeb9ff",
+				"def": 0,
+				"dmg": 6,
+				"equipo": "arma",
+				"hp": 0,
+				"n": "Espada de laminado de hierro y piedra reforzada (común)",
+				"pila": 1,
+				"vel": -0.035
+			},
+			"receta": {
+				"ent": {
+					"mat1:hierro_piedra": 1,
+					"piedra": 1
+				},
+				"est": "mesa",
+				"n": "Espada de laminado de hierro y piedra reforzada (común)",
+				"sal": {
+					"art1:espada:hierro_piedra:reforzada:0": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:espada:piedra:reforzada:1",
+			"info": {
+				"artesania": {
+					"calidad": 1,
+					"forma": "espada",
+					"material": "piedra",
+					"tecnica": "reforzada"
+				},
+				"c": "#899197",
+				"def": 0,
+				"dmg": 5,
+				"equipo": "arma",
+				"hp": 0,
+				"n": "Espada de piedra reforzada (cuidada)",
+				"pila": 1,
+				"vel": -0.04
+			},
+			"receta": {
+				"ent": {
+					"piedra": 4
+				},
+				"est": "mesa",
+				"n": "Espada de piedra reforzada (cuidada)",
+				"sal": {
+					"art1:espada:piedra:reforzada:1": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:guantes:bronce_fibra:reforzada:2",
+			"info": {
+				"artesania": {
+					"calidad": 2,
+					"forma": "guantes",
+					"material": "bronce_fibra",
+					"tecnica": "reforzada"
+				},
+				"c": "a98e42ff",
+				"def": 2,
+				"dmg": 0,
+				"equipo": "guantes",
+				"hp": 2,
+				"n": "Guantes de laminado de bronce y tejido reforzados (expertos)",
+				"pila": 1,
+				"vel": -0.015
+			},
+			"receta": {
+				"ent": {
+					"mat1:bronce_fibra": 1,
+					"piedra": 1
+				},
+				"est": "mesa",
+				"n": "Guantes de laminado de bronce y tejido reforzados (expertos)",
+				"sal": {
+					"art1:guantes:bronce_fibra:reforzada:2": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:guantes:cobre_fibra:reforzada:3",
+			"info": {
+				"artesania": {
+					"calidad": 3,
+					"forma": "guantes",
+					"material": "cobre_fibra",
+					"tecnica": "reforzada"
+				},
+				"c": "b57d39ff",
+				"def": 1,
+				"dmg": 0,
+				"equipo": "guantes",
+				"hp": 1,
+				"n": "Guantes de laminado de cobre y tejido reforzados (maestros)",
+				"pila": 1,
+				"vel": -0.01
+			},
+			"receta": {
+				"ent": {
+					"mat1:cobre_fibra": 1,
+					"piedra": 1
+				},
+				"est": "mesa",
+				"n": "Guantes de laminado de cobre y tejido reforzados (maestros)",
+				"sal": {
+					"art1:guantes:cobre_fibra:reforzada:3": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:guantes:hierro:simple:0",
+			"info": {
+				"artesania": {
+					"calidad": 0,
+					"forma": "guantes",
+					"material": "hierro",
+					"tecnica": "simple"
+				},
+				"c": "#a7b8c4",
+				"def": 1,
+				"dmg": 0,
+				"equipo": "guantes",
+				"hp": 1,
+				"n": "Guantes de hierro sencillos (comunes)",
+				"pila": 1,
+				"vel": -0.01
+			},
+			"receta": {
+				"ent": {
+					"lingote": 2
+				},
+				"est": "mesa",
+				"n": "Guantes de hierro sencillos (comunes)",
+				"sal": {
+					"art1:guantes:hierro:simple:0": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:pantalones:bronce:simple:1",
+			"info": {
+				"artesania": {
+					"calidad": 1,
+					"forma": "pantalones",
+					"material": "bronce",
+					"tecnica": "simple"
+				},
+				"c": "#b88a3c",
+				"def": 3,
+				"dmg": 0,
+				"equipo": "pantalones",
+				"hp": 3,
+				"n": "Pantalones de bronce sencillos (cuidados)",
+				"pila": 1,
+				"vel": -0.01
+			},
+			"receta": {
+				"ent": {
+					"lingote_bronce": 2
+				},
+				"est": "mesa",
+				"n": "Pantalones de bronce sencillos (cuidados)",
+				"sal": {
+					"art1:pantalones:bronce:simple:1": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:pantalones:cobre:simple:2",
+			"info": {
+				"artesania": {
+					"calidad": 2,
+					"forma": "pantalones",
+					"material": "cobre",
+					"tecnica": "simple"
+				},
+				"c": "#c8742f",
+				"def": 2,
+				"dmg": 0,
+				"equipo": "pantalones",
+				"hp": 2,
+				"n": "Pantalones de cobre sencillos (expertos)",
+				"pila": 1,
+				"vel": 0.0
+			},
+			"receta": {
+				"ent": {
+					"lingote_cobre": 2
+				},
+				"est": "mesa",
+				"n": "Pantalones de cobre sencillos (expertos)",
+				"sal": {
+					"art1:pantalones:cobre:simple:2": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:pantalones:fibra:simple:3",
+			"info": {
+				"artesania": {
+					"calidad": 3,
+					"forma": "pantalones",
+					"material": "fibra",
+					"tecnica": "simple"
+				},
+				"c": "#7b9855",
+				"def": 2,
+				"dmg": 0,
+				"equipo": "pantalones",
+				"hp": 2,
+				"n": "Pantalones de tejido sencillos (maestros)",
+				"pila": 1,
+				"vel": 0.02
+			},
+			"receta": {
+				"ent": {
+					"fibra": 4
+				},
+				"est": "mesa",
+				"n": "Pantalones de tejido sencillos (maestros)",
+				"sal": {
+					"art1:pantalones:fibra:simple:3": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:torso:bronce:ligera:0",
+			"info": {
+				"artesania": {
+					"calidad": 0,
+					"forma": "torso",
+					"material": "bronce",
+					"tecnica": "ligera"
+				},
+				"c": "#b88a3c",
+				"def": 5,
+				"dmg": 0,
+				"equipo": "torso",
+				"hp": 5,
+				"n": "Armadura de bronce ligera (común)",
+				"pila": 1,
+				"vel": 0.01
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"lingote_bronce": 4
+				},
+				"est": "mesa",
+				"n": "Armadura de bronce ligera (común)",
+				"sal": {
+					"art1:torso:bronce:ligera:0": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:torso:cobre:ligera:1",
+			"info": {
+				"artesania": {
+					"calidad": 1,
+					"forma": "torso",
+					"material": "cobre",
+					"tecnica": "ligera"
+				},
+				"c": "#c8742f",
+				"def": 4,
+				"dmg": 0,
+				"equipo": "torso",
+				"hp": 4,
+				"n": "Armadura de cobre ligera (cuidada)",
+				"pila": 1,
+				"vel": 0.02
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"lingote_cobre": 4
+				},
+				"est": "mesa",
+				"n": "Armadura de cobre ligera (cuidada)",
+				"sal": {
+					"art1:torso:cobre:ligera:1": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:torso:fibra:ligera:2",
+			"info": {
+				"artesania": {
+					"calidad": 2,
+					"forma": "torso",
+					"material": "fibra",
+					"tecnica": "ligera"
+				},
+				"c": "#7b9855",
+				"def": 3,
+				"dmg": 0,
+				"equipo": "torso",
+				"hp": 3,
+				"n": "Armadura de tejido ligera (experta)",
+				"pila": 1,
+				"vel": 0.04
+			},
+			"receta": {
+				"ent": {
+					"fibra": 9
+				},
+				"est": "mesa",
+				"n": "Armadura de tejido ligera (experta)",
+				"sal": {
+					"art1:torso:fibra:ligera:2": 1
+				}
+			}
+		},
+		{
+			"clave": "art1:torso:hierro_fibra:ligera:3",
+			"info": {
+				"artesania": {
+					"calidad": 3,
+					"forma": "torso",
+					"material": "hierro_fibra",
+					"tecnica": "ligera"
+				},
+				"c": "9cb0a8ff",
+				"def": 5,
+				"dmg": 0,
+				"equipo": "torso",
+				"hp": 5,
+				"n": "Armadura de laminado de hierro y tejido ligera (maestra)",
+				"pila": 1,
+				"vel": 0.025
+			},
+			"receta": {
+				"ent": {
+					"fibra": 1,
+					"mat1:hierro_fibra": 2
+				},
+				"est": "mesa",
+				"n": "Armadura de laminado de hierro y tejido ligera (maestra)",
+				"sal": {
+					"art1:torso:hierro_fibra:ligera:3": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:hierro_madera",
+			"info": {
+				"c": "a7a8a7ff",
+				"material": "hierro_madera",
+				"n": "Laminado De Hierro Y Madera",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"lingote": 2,
+					"madera": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Hierro Y Madera",
+				"sal": {
+					"mat1:hierro_madera": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:hierro_piedra",
+			"info": {
+				"c": "a0aeb9ff",
+				"material": "hierro_piedra",
+				"n": "Laminado De Hierro Y Piedra",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"lingote": 2,
+					"piedra": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Hierro Y Piedra",
+				"sal": {
+					"mat1:hierro_piedra": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:hierro_fibra",
+			"info": {
+				"c": "9cb0a8ff",
+				"material": "hierro_fibra",
+				"n": "Laminado De Hierro Y Tejido",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"fibra": 2,
+					"lingote": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Hierro Y Tejido",
+				"sal": {
+					"mat1:hierro_fibra": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:cobre_madera",
+			"info": {
+				"c": "c07537ff",
+				"material": "cobre_madera",
+				"n": "Laminado De Cobre Y Madera",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"lingote_cobre": 2,
+					"madera": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Cobre Y Madera",
+				"sal": {
+					"mat1:cobre_madera": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:cobre_piedra",
+			"info": {
+				"c": "b87b49ff",
+				"material": "cobre_piedra",
+				"n": "Laminado De Cobre Y Piedra",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"lingote_cobre": 2,
+					"piedra": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Cobre Y Piedra",
+				"sal": {
+					"mat1:cobre_piedra": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:cobre_fibra",
+			"info": {
+				"c": "b57d39ff",
+				"material": "cobre_fibra",
+				"n": "Laminado De Cobre Y Tejido",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"fibra": 2,
+					"lingote_cobre": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Cobre Y Tejido",
+				"sal": {
+					"mat1:cobre_fibra": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:bronce_madera",
+			"info": {
+				"c": "b48641ff",
+				"material": "bronce_madera",
+				"n": "Laminado De Bronce Y Madera",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"lingote_bronce": 2,
+					"madera": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Bronce Y Madera",
+				"sal": {
+					"mat1:bronce_madera": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:bronce_piedra",
+			"info": {
+				"c": "ac8c53ff",
+				"material": "bronce_piedra",
+				"n": "Laminado De Bronce Y Piedra",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"lingote_bronce": 2,
+					"piedra": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Bronce Y Piedra",
+				"sal": {
+					"mat1:bronce_piedra": 1
+				}
+			}
+		},
+		{
+			"clave": "mat1:bronce_fibra",
+			"info": {
+				"c": "a98e42ff",
+				"material": "bronce_fibra",
+				"n": "Laminado De Bronce Y Tejido",
+				"pila": 10
+			},
+			"receta": {
+				"ent": {
+					"fibra": 2,
+					"lingote_bronce": 2
+				},
+				"est": "horno",
+				"n": "Laminado De Bronce Y Tejido",
+				"sal": {
+					"mat1:bronce_fibra": 1
+				}
+			}
+		}
+	],
+	"reglas_desarrollo": 1.0,
+	"total": 693
+}

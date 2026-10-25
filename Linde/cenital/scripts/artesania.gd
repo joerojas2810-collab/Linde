@@ -2,6 +2,9 @@ extends RefCounted
 ## Gramática de piezas; no registra un catálogo de cada combinación. Claves versionadas y canónicas.
 const C = preload("res://scripts/catalogos.gd")
 const PREFIJO := "art1:"
+## Interpretación de las reglas (fórmulas, redondeos, orden de operaciones, canonicalización). Subirla SIEMPRE que cambie
+## cómo se calcula una pieza aunque los JSON no cambien; forma parte de la huella de reglas (huella.gd) y del test dorado.
+const EVALUADOR_VERSION := 1
 static var _reglas: Dictionary = {}
 
 static func reglas() -> Dictionary:

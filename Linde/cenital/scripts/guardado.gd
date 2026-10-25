@@ -10,18 +10,37 @@ const LOCAL := "local"
 # Claves de la raíz del formato 1 que pasan a ser de cada jugador (pj se aplana dentro del jugador).
 const DEL_JUGADOR := ["inv", "equipo", "hab", "xp", "misiones", "eventos", "recompensas", "pendientes"]
 
+const Huella = preload("res://scripts/huella.gd")
+
+# El cuerpo lleva `reglas` (sello de huella.gd). Un mundo nuevo se sella con las reglas actuales al guardarse (el sello
+# queda en `d`, así el mundo vivo y el recargado coinciden); uno ya sellado (cargado) conserva el suyo, de modo que
+# cambiar las reglas nunca "lava" un mundo.
 static func empaquetar(d: Dictionary) -> String:
+	if not d.get("reglas") is Dictionary: d["reglas"] = Huella.sello()
 	var cuerpo := JSON.stringify(d, "", true)
 	return JSON.stringify({"formato": d.get("formato", FORMATO), "checksum": cuerpo.sha256_text(), "cuerpo": cuerpo})
 
-# Devuelve {} si el texto no es válido (checksum, JSON, formato futuro o migración imposible).
-static func desempaquetar(txt: String) -> Dictionary:
+# {estado, d, ...}. estado: "ok" | "ok_con_excepcion" (reglas distintas aceptadas en modo de desarrollo; d.reglas queda
+# marcado como contaminado) | "reglas_distintas" (d vacío; detalle = Huella.comparar) | "ilegible" (JSON o checksum
+# erróneos) | "invalido" (formato futuro o migración imposible). Nunca escribe nada.
+static func inspeccionar(txt: String) -> Dictionary:
 	var o = JSON.parse_string(txt)
-	if typeof(o) != TYPE_DICTIONARY or not o.has("cuerpo") or not o.has("checksum"): return {}
-	if str(o.cuerpo).sha256_text() != o.checksum: return {}
+	if typeof(o) != TYPE_DICTIONARY or not o.has("cuerpo") or not o.has("checksum"): return {"estado": "ilegible", "d": {}}
+	if str(o.cuerpo).sha256_text() != o.checksum: return {"estado": "ilegible", "d": {}}
 	var d = JSON.parse_string(o.cuerpo)
-	if typeof(d) != TYPE_DICTIONARY: return {}
-	return migrar(d)
+	if typeof(d) != TYPE_DICTIONARY: return {"estado": "ilegible", "d": {}}
+	d = migrar(d)
+	if d.is_empty(): return {"estado": "invalido", "d": {}}
+	var c := Huella.comparar(d.get("reglas"))
+	if c.compatible: return {"estado": "ok", "d": d}
+	if Huella.excepcion_dev():
+		d["reglas"] = Huella.sello_contaminado(d.get("reglas"))
+		return {"estado": "ok_con_excepcion", "d": d, "detalle": c}
+	return {"estado": "reglas_distintas", "d": {}, "detalle": c}
+
+# Devuelve {} si el texto no es utilizable (checksum, JSON, formato futuro, migración imposible o reglas distintas).
+static func desempaquetar(txt: String) -> Dictionary:
+	return inspeccionar(txt).d
 
 # Migraciones: v0 es un formato sintético de prueba del mecanismo (sin habilidades/eventos).
 static func migrar(d: Dictionary) -> Dictionary:
@@ -88,18 +107,30 @@ static func guardar(ruta: String, d: Dictionary) -> bool:
 	if f == null: return false
 	f.store_string(txt)
 	f.close()
-	if desempaquetar(_leer(tmp)).is_empty(): return false      # verificación de lectura
+	if inspeccionar(_leer(tmp)).estado in ["ilegible", "invalido"]: return false      # verificación de lectura
 	if FileAccess.file_exists(ruta):
-		if desempaquetar(_leer(ruta)).is_empty():
-			DirAccess.rename_absolute(ruta, ruta + ".corrupta")   # se conserva, no se borra
-		else:
-			DirAccess.copy_absolute(ruta, ruta + ".bak")
+		match inspeccionar(_leer(ruta)).estado:
+			"ilegible", "invalido": DirAccess.rename_absolute(ruta, ruta + ".corrupta")   # se conserva, no se borra
+			"reglas_distintas": DirAccess.copy_absolute(ruta, ruta + ".incompatible")   # íntegro, fuera de la rotación de .bak
+			_: DirAccess.copy_absolute(ruta, ruta + ".bak")
 	return DirAccess.rename_absolute(tmp, ruta) == OK
 
-# {d, origen} con origen "principal" | "respaldo"; d vacío si no hay nada utilizable.
+# {d, origen} con origen "principal" | "respaldo"; d vacío si no hay nada utilizable. Si el archivo es válido pero sus reglas
+# no coinciden con las actuales: d vacío, `error` = "reglas_distintas", `detalle`, `motivo` y `archivo`; no se prueba el
+# respaldo (sería volver atrás en silencio) ni se modifica nada. Una carga aceptada por la excepción de desarrollo
+# añade `aviso`.
 static func cargar(ruta: String) -> Dictionary:
 	for par in [[ruta, "principal"], [ruta + ".bak", "respaldo"]]:
 		if FileAccess.file_exists(par[0]):
-			var d := desempaquetar(_leer(par[0]))
-			if not d.is_empty(): return {"d": d, "origen": par[1]}
+			var r := inspeccionar(_leer(par[0]))
+			if r.estado == "reglas_distintas":
+				var motivo: String = r.detalle.motivo
+				push_warning("Guardado: %s rechazado, %s" % [par[0], motivo])
+				return {"d": {}, "origen": "", "error": "reglas_distintas", "detalle": r.detalle, "motivo": motivo, "archivo": par[0]}
+			if not r.d.is_empty():
+				var res := {"d": r.d, "origen": par[1]}
+				if r.d.get("reglas", {}).get("contaminado", false):
+					res["aviso"] = "Mundo cargado con reglas distintas a las de su creación"
+					push_warning("Guardado: " + res.aviso)
+				return res
 	return {"d": {}, "origen": ""}
