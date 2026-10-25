@@ -1,0 +1,38 @@
+#!/bin/bash
+# Ejecuta las 22 suites vigentes de Linde, una tras otra, y escribe un resumen único.
+# Uso:  Linde/cenital/tests/ejecutar_suites.sh [suite ...]     (sin argumentos: las 22)
+# Variables: GODOT (ruta al ejecutable), SALIDA (carpeta de logs; por defecto una temporal).
+# Código de salida: 0 si todas pasan; 1 si alguna falla; 2 si falta el ejecutable de Godot.
+# Una suite pasa si Godot sale con 0, imprime al menos una línea PASS/OK, ninguna FAIL y ningún SCRIPT ERROR.
+# Los avisos de recursos al cerrar son conocidos (ESTADO.md §3) y no cuentan.
+set -u
+R="$(cd "$(dirname "$0")/../../.." && pwd)"
+P="$R/Linde/cenital"
+G="${GODOT:-$R/herramientas/runtime/Godot.app/Contents/MacOS/Godot}"
+[ -x "$G" ] || { echo "No se encuentra Godot en $G (define GODOT o ejecuta Iniciar-Cenital.command una vez)." >&2; exit 2; }
+SALIDA="${SALIDA:-$(mktemp -d "${TMPDIR:-/tmp}/linde-suites.XXXXXX")}"
+mkdir -p "$SALIDA"
+
+SUITES=(prueba prueba_reglas prueba_saberes prueba_desarrollo prueba_sociedad prueba_autonomia
+        prueba_arraigo prueba_casas_arraigo prueba_aspecto prueba_ui prueba_proteccion prueba_terreno
+        prueba_fauna prueba_orden_dibujo prueba_caminos prueba_campos_cultivo prueba_casas
+        prueba_crecimiento prueba_carga_crecimiento prueba_red prueba_terreno_red prueba_crecimiento_red)
+[ $# -gt 0 ] && SUITES=("$@")
+
+# La red usa clientes reales y deja user://pruebas_linde/; se importa una vez para que res:// esté al día.
+[ -d "$P/.godot" ] || "$G" --headless --path "$P" --import --log-file "$SALIDA/import.log" >/dev/null 2>&1
+
+fallidas=0; total=0
+printf "%-26s %5s %6s %6s  %s\n" SUITE SALIDA PASS FAIL RESULTADO
+for s in "${SUITES[@]}"; do
+  total=$((total+1))
+  out="$SALIDA/$s.out"
+  "$G" --headless --path "$P" --log-file "$SALIDA/$s.log" --script "res://tests/$s.gd" >"$out" 2>&1
+  rc=$?
+  pass=$(grep -cE '^(PASS|OK)' "$out"); fail=$(grep -cE '^FAIL' "$out"); err=$(grep -c 'SCRIPT ERROR' "$out")
+  if [ $rc -eq 0 ] && [ "$pass" -gt 0 ] && [ "$fail" -eq 0 ] && [ "$err" -eq 0 ]; then res=OK; else res=FALLA; fallidas=$((fallidas+1)); fi
+  printf "%-26s %5s %6s %6s  %s\n" "$s" "$rc" "$pass" "$fail" "$res"
+done
+echo "---"
+echo "$((total-fallidas)) de $total suites sin fallos. Salidas completas en: $SALIDA"
+[ $fallidas -eq 0 ]
