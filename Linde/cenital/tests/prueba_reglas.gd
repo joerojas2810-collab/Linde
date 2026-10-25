@@ -7,6 +7,7 @@ const H = preload("res://scripts/huella.gd")
 const G = preload("res://scripts/guardado.gd")
 const J = preload("res://scripts/juego.gd")
 const RUTA_DORADO := "res://tests/dorados/artesania_v1.json"
+const Srv = preload("res://scripts/red_servidor.gd")
 const TMP := "user://prueba_reglas.json"
 ## Lo que M0 NO debe cambiar (capturado con el código de H0 antes de tocar nada): recetas y todo `info()` salvo dmg/def/hp.
 const INVARIANTES_PRE_M0 := {"claves": 693, "recetas": "4df6b2a359c474565bcda98553d5d218421f960faccc946289f9f1643831cd46",
@@ -443,6 +444,22 @@ func _mundo_vivo() -> void:
 	d2["reglas"] = distinto
 	_escribir(TMP, G.empaquetar(d2))
 	ok(J.cargar(TMP) == null, "mundo vivo: Juego.cargar devuelve null ante reglas distintas")
+	# P2: el motivo llega a la interfaz y no se confunde con un archivo ilegible ni con el rechazo de conexión.
+	var msg_guardado: String = J.mensaje_carga(J.ultimo_error)
+	ok(J.ultimo_error.get("error", "") == "reglas_distintas" and "catalogos" in msg_guardado and "otras reglas" in msg_guardado, "P2: carga rechazada por reglas muestra el motivo y los componentes " + msg_guardado)
+	_escribir(TMP, "no es un guardado")
+	var msg_ilegible: String = ""
+	ok(J.cargar(TMP) == null, "P2: archivo ilegible también devuelve null")
+	msg_ilegible = J.mensaje_carga(J.ultimo_error)
+	ok(msg_ilegible.begins_with("No hay partida legible") and msg_ilegible != msg_guardado, "P2: archivo ilegible mantiene su mensaje propio " + msg_ilegible)
+	_limpiar()
+	ok(J.cargar(TMP) == null and J.ultimo_error.is_empty(), "P2: sin archivo no hay error de reglas (se podrá crear mundo nuevo)")
+	var hola := ["hola", Srv.VERSION, "n", "clave", [0, 0, 0], "0".repeat(64)]
+	var msg_red: String = Srv._verificar_hola(hola).get("motivo", "")
+	var msg_version: String = Srv._verificar_hola(["hola", Srv.VERSION + 1, "n", "clave", [0, 0, 0], H.huella()]).get("motivo", "")
+	ok("servidor" in msg_red and "huella" in msg_red and "mundo" not in msg_red, "P2: la conexión con reglas distintas dice «servidor», no «mundo» " + msg_red)
+	ok("servidor" not in msg_guardado and "huella" not in msg_guardado, "P2: el guardado con reglas distintas no habla de servidor ni de conexión")
+	ok(msg_version != msg_red and "Versión" in msg_version, "P2: versión de protocolo distinta es un tercer caso diferenciado " + msg_version)
 
 func _limpiar() -> void:
 	for s in ["", ".tmp", ".bak", ".corrupta", ".incompatible"]:

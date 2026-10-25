@@ -182,7 +182,7 @@ func _tecla_menu(e: InputEvent) -> void:
 			match menu_sel:
 				0:
 					var g = J.cargar(ruta)
-					if g == null: menu_msg = "No hay partida legible (el archivo no se borra). Crea una nueva."
+					if g == null: menu_msg = J.mensaje_carga(J.ultimo_error)
 					else:
 						for id in g.rt.keys(): if id != J.LOCAL: g.salir(id)   # mundo alojado: los demás no están
 						j = g
@@ -238,6 +238,10 @@ func _servidor_sin_ventana(o: Dictionary) -> void:
 	modo = "servidor"
 	if ruta == "user://partida.json": ruta = ProjectSettings.globalize_path("user://mundo_servidor.json")   # sin --guardado
 	var g = J.cargar(ruta)
+	if g == null and not J.ultimo_error.is_empty():     # nunca sustituir en silencio un mundo con otras reglas
+		printerr("Linde: " + J.mensaje_carga(J.ultimo_error))
+		get_tree().quit(1)
+		return
 	if g == null: g = J.nueva(o.get("semilla", 1), "Anfitrión", [0, 0, 0])
 	var s = Srv.new()
 	s.name = "Red"
@@ -252,6 +256,9 @@ func _servidor_sin_ventana(o: Dictionary) -> void:
 
 func _alojar() -> void:
 	var g = J.cargar(ruta)
+	if g == null and not J.ultimo_error.is_empty():
+		menu_msg = J.mensaje_carga(J.ultimo_error)
+		return
 	if g == null:
 		g = J.nueva(randi() % 100000, cr.nombre, Aspecto.de_creador(cr))
 		g.guardar(ruta)

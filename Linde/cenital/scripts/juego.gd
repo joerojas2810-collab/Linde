@@ -68,8 +68,12 @@ static func nueva(semilla: int, nombre: String, look: Array):
 	j._arrancar()
 	return j
 
+## Resultado de la última `cargar` fallida ({} si no falló o no hubo archivo): `error`, `motivo`, `detalle`, `archivo` de Guardado.cargar.
+static var ultimo_error: Dictionary = {}
+
 static func cargar(ruta: String):
 	var r := Guard.cargar(ruta)
+	ultimo_error = r if r.has("error") else {}
 	if r.d.is_empty(): return null
 	var j = new()
 	j.d = _enteros(r.d)
@@ -78,6 +82,14 @@ static func cargar(ruta: String):
 	j._arrancar()
 	j.aviso("Partida cargada (%s)." % r.origen)
 	return j
+
+## Texto para el jugador de una carga fallida (`ultimo_error`). Distingue «reglas distintas» (mundo de otra versión del juego, el
+## archivo no se toca) de un archivo ilegible; la unión a un servidor con reglas distintas tiene su propio mensaje en red_servidor.gd.
+static func mensaje_carga(e: Dictionary) -> String:
+	if str(e.get("error", "")) == "reglas_distintas":
+		var d: Array = e.get("detalle", {}).get("distintos", [])
+		return "Este mundo se creó con otras reglas de juego (%s). El archivo no se modifica." % ", ".join(PackedStringArray(d))
+	return "No hay partida legible (el archivo no se borra). Crea una nueva."
 
 # Equipo al cargar: ranuras que falten = ""; lo que no sea equipable en su ranura (clave desconocida, ranura vieja)
 # pasa a pendientes (nunca se borra ni se duplica) y se avisa. Las claves desconocidas del inventario se quedan
