@@ -1,0 +1,25 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+
+WARNING: 23 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 9 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+WARNING: 23 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 9 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+WARNING: 22 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 9 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+PASS RED_EXTERIOR {"A":{"cerrado":true,"cruzo":true,"error":"","huella":"976782d3a56905cc043c5ce8e8d6cf69f84dea57f0c4b34a2d946d6f9180c060","permiso":true,"regiones":17.0,"transferencia":true},"B":{"cerrado":true,"cruzo":true,"error":"","huella":"976782d3a56905cc043c5ce8e8d6cf69f84dea57f0c4b34a2d946d6f9180c060","permiso":true,"regiones":17.0,"transferencia":true},"ok":true,"puerto":31172,"registros":"/tmp/linde-terreno-red-13172"}
+WARNING: 22 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 9 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

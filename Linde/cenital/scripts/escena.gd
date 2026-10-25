@@ -91,8 +91,10 @@ func _ready() -> void:
 		mat.shader = luz
 		material = mat
 	cam.zoom = Vector2(P.ZOOM, P.ZOOM)
-	cam.limit_right = Mundo.ANCHO * P.CELDA
-	cam.limit_bottom = Mundo.ALTO * P.CELDA
+	cam.limit_left = -Mundo.Terreno.LIMITE * P.CELDA
+	cam.limit_top = -Mundo.Terreno.LIMITE * P.CELDA
+	cam.limit_right = Mundo.Terreno.LIMITE * P.CELDA
+	cam.limit_bottom = Mundo.Terreno.LIMITE * P.CELDA
 	add_child(cam)
 	var capa := CanvasLayer.new()
 	hud.esc = self
@@ -358,7 +360,7 @@ func _tecla_panel(e: InputEvent) -> void:
 
 func _sel_valida(paso: int) -> void:
 	if lineas.is_empty(): return
-	if panel in ["materiales","practica"]:
+	if panel in ["materiales","practica","mis"]:
 		sel=clampi(sel,1,maxi(1,lineas.size()-1))
 		return
 	sel = clampi(sel, 0, lineas.size() - 1)
@@ -532,7 +534,14 @@ func _armar() -> void:
 					_l("%s · hambre %d/100 · %s" % [j.habitantes.fichas[nid].n, int(n.hambre), str(n.plan.get("act", "rutina"))])
 					if j.autonomia.sociedad.activa():
 						_l("  Grupo: " + j.autonomia.sociedad.nombre_grupo(j.autonomia.sociedad.grupo_de(nid)) + " · " + str(n.get("objetivo", "buscar oportunidades")))
-					_l("  Reservas: " + (Hud.J_txt(n.inv) if not n.inv.is_empty() else "vacías"))
+					var identidad: Dictionary = j.autonomia.perfil(nid).get("identidad",{})
+					if not identidad.is_empty(): _parrafo("Quiere " + str(identidad.objetivo))
+					if j.autonomia.sociedad.activa():
+						for otro in j.habitantes.ids:
+							if otro==nid: continue
+							var confianza: int = j.autonomia.sociedad.confianza(nid,otro)
+							if confianza<0: _parrafo("Desconfía de %s (%d). Los incumplimientos y robos pueden cerrar intercambios." % [j.habitantes.fichas[otro].n,confianza])
+					_parrafo("Reservas: " + (Hud.J_txt(n.inv) if not n.inv.is_empty() else "vacías"))
 					if j.autonomia.sociedad.activa() and not n.durabilidad.is_empty():
 						var herramientas: Array = []
 						for item in n.durabilidad: herramientas.append("%s %d/%d" % [C.ITEMS[item].n, n.durabilidad[item], j.autonomia.sociedad.cfg.durabilidad_herramienta])
@@ -544,7 +553,7 @@ func _armar() -> void:
 						_l("  Trabajo pendiente: %s (estación %s)" % [falta.motivo, falta.estacion])
 					if not n.recuerdos.is_empty():
 						var recuerdo: Dictionary = n.recuerdos.back()
-						_l("  " + j.autonomia.texto_recuerdo(recuerdo))
+						_parrafo(j.autonomia.texto_recuerdo(recuerdo))
 			if j.autonomia.sociedad.activa():
 				var sociedad = j.autonomia.sociedad
 				var observador: String = red.yo if red is Cli else J.LOCAL
@@ -555,14 +564,18 @@ func _armar() -> void:
 					_l("  Aportar materiales al grupo (requiere cercanía)", func(): j.aportar_grupo(gid))
 					for item in sociedad.cfg.grupos[gid].reservas:
 						_l("  %s: %d / %d" % [C.ITEMS[item].n, int(g.inv.get(item, 0)), int(sociedad.cfg.grupos[gid].reservas[item])])
+				_l("— ECONOMÍA Y PROTECCIÓN —")
+				_l("Valor de la fibra: %.2f · baja cuando abunda" % sociedad.valor("fibra"))
+				_parrafo("Los habitantes dejan fibra sobrante al recoger bayas y usan fibra para renovar ropa y lechos. Fabrica candados en una mesa y colócalos en tus cofres.")
 				_l("— ACUERDOS EN CURSO —")
 				for cid in sociedad.datos().acuerdos:
 					var acuerdo: Dictionary = sociedad.datos().acuerdos[cid]
 					if acuerdo.estado != "activo": continue
 					_l("%s y %s: %s" % [j.habitantes.fichas[acuerdo.solicitante].n, j.habitantes.fichas[acuerdo.proveedor].n, Hud.J_txt(acuerdo.bien)])
+					_l("  Riesgo estimado de engaño: %.0f%% · pago %s" % [100.0*sociedad.riesgo_estafa(acuerdo.solicitante,acuerdo.proveedor) if not acuerdo.pago.is_empty() else 0.0,Hud.J_txt(acuerdo.pago)])
 				_l("— LO QUE PASÓ EN EL VALLE —")
 				for hecho in sociedad.datos().sucesos.slice(-6):
-					_l("  %02d:%02d · %s" % [int(hecho.min / 60) % 24, int(hecho.min) % 60, sociedad.texto_suceso(hecho)])
+					_parrafo("%02d:%02d · %s" % [int(hecho.min / 60) % 24, int(hecho.min) % 60, sociedad.texto_suceso(hecho)])
 				_l("Volver a los habitantes", func(): _abrir("mis"))
 			for id in C.MISIONES:
 				if j.autonomia.activa(): break
@@ -585,12 +598,33 @@ func _armar() -> void:
 						elif ok: j.entregar_mision_plantilla(iid, J.LOCAL))
 					if act: _l("      " + str(mi.texto))
 		"cofre":
-			_l("COFRE  ·  Enter mueve la pila completa al otro lado")
-			_l("— Tu inventario —")
-			for k in j.jug().inv: _l("%s x%d  → cofre" % [Eq.info(k).n, j.jug().inv[k]], func(): j.mover_cofre(cofre_id, k, true), _ic(k))
-			_l("— Cofre —")
-			var cf: Dictionary = j.d.cofres.get(cofre_id, {"inv": {}})
-			for k in cf.inv: _l("%s x%d  → inventario" % [Eq.info(k).n, cf.inv[k]], func(): j.mover_cofre(cofre_id, k, false), _ic(k))
+			var info: Dictionary = j.info_cofre(cofre_id)
+			_l("COFRE · " + ("cerrado con candado" if info.cerrado else "abierto"))
+			_l("Dueño: " + ("tú" if info.propio else str(red.perfiles.get(info.dueno,{}).get("nombre",info.nombre)) if red is Cli else str(info.nombre)))
+			if info.propio:
+				for incidente in j.d.cofres.get(cofre_id,{}).get("incidentes",[]).slice(-3):
+					_parrafo("Día %d: %s se llevó %s." % [int(incidente.min)/1440+1,incidente.autor,incidente.detalle])
+				if not info.candado:
+					_l("Instalar candado (fabrícalo con 2 lingotes y 2 fibras)", func(): j.gestionar_cofre(cofre_id,"instalar"))
+				else:
+					_l("Abrir para todos" if info.cerrado else "Cerrar con candado", func(): j.gestionar_cofre(cofre_id,"abrir" if info.cerrado else "cerrar"))
+					_l("Retirar candado", func(): j.gestionar_cofre(cofre_id,"retirar"))
+				var personas: Dictionary = (red.perfiles if red is Cli else j.d.jugadores).duplicate(true)
+				for pid in info.permitidos:
+					if not personas.has(pid): personas[pid]={"nombre":j.d.cofres[cofre_id].get("nombres_permitidos",{}).get(pid,"Jugador autorizado (ausente)")}
+				for pid in personas:
+					if pid == j.actor_desarrollo().trim_prefix("pj:"): continue
+					var permitido: bool = info.permitidos.has(pid)
+					_l(("Revocar acceso: " if permitido else "Permitir acceso: ") + str(personas[pid].get("nombre",pid)), func(): j.gestionar_cofre(cofre_id,"revocar" if permitido else "permitir",pid))
+			if not info.acceso:
+				_l("Necesitas permiso del dueño para acceder.")
+			else:
+				_l("— Tu inventario · Enter mueve la pila —")
+				for k in j.jug().inv: _l("%s x%d → cofre" % [Eq.info(k).n, j.jug().inv[k]], func(): j.mover_cofre(cofre_id,k,true),_ic(k))
+				_l("— Cofre —")
+				var cf: Dictionary = j.d.cofres.get(cofre_id,{"inv":{}})
+				for k in cf.inv: _l("%s x%d → inventario" % [Eq.info(k).n,cf.inv[k]],func():j.mover_cofre(cofre_id,k,false),_ic(k))
+			_l("Cerrar panel",func():_cerrar())
 		"pausa":
 			_l("PAUSA")
 			_l("Continuar", func(): _cerrar())
@@ -702,10 +736,10 @@ func _draw() -> void:
 	var vp := get_viewport_rect().size / float(P.ZOOM)
 	var vista := Rect2(cam.position - vp / 2.0, vp).grow(40)
 	var m = j.mundo
-	var x0 := maxi(0, int(vista.position.x / s))
-	var x1 := mini(Mundo.ANCHO - 1, int(vista.end.x / s))
-	var y0 := maxi(0, int(vista.position.y / s))
-	var y1 := mini(Mundo.ALTO - 1, int(vista.end.y / s))
+	var x0 := floori(vista.position.x / s)
+	var x1 := floori(vista.end.x / s)
+	var y0 := floori(vista.position.y / s)
+	var y1 := floori(vista.end.y / s)
 	for y in range(y0, y1 + 1):
 		for x in range(x0, x1 + 1):
 			var c := Vector2i(x, y)
@@ -723,7 +757,7 @@ func _draw() -> void:
 	for id in m.objetos:
 		var o: Dictionary = m.objetos[id]
 		if not vista.has_point(Vector2(o.c) * s): continue
-		if m.estado.rotos.has(id) and not (o.t in ["arbol", "roca", "veta", "arbusto"]): continue
+		if m.estado.rotos.has(id) and not (o.t in ["arbol", "roca", "veta", "veta_cobre", "arcilla", "arbusto"]): continue
 		lista.append([(o.c.y + 1.0) * s, "obj", id])
 	for k in m.estado.constr:
 		var p: PackedStringArray = k.split(",")
@@ -851,7 +885,7 @@ func _dibujar_obj(id: String) -> void:
 	var p := Vector2(o.c) * P.CELDA
 	var roto: bool = j.mundo.estado.rotos.has(id)
 	match o.t:
-		"arbol", "roca", "veta", "arbusto": arte_mundo.natural(self, o.t, o.c, roto, j.pies)
+		"arbol", "roca", "veta", "veta_cobre", "arcilla", "arbusto": arte_mundo.natural(self, o.t, o.c, roto, j.pies)
 		"barril": arte_mundo.prop(self, "barrel", Vector2(o.c) * P.CELDA + Vector2(8, 16))
 		"valla": arte_mundo.valla(self, j.mundo, o.c)
 		"cofre_fijo": arte_mundo.cofre(self, o.c, j.d.cofres.tesoro_cantera.get("abierto", false))

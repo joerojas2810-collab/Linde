@@ -115,8 +115,10 @@ func es_autoridad() -> bool:
 
 func _arrancar() -> void:
 	mundo.estado = d.mundo
+	mundo.configurar(int(d.semilla))
 	mundo.cambiar()
 	for id in d.jugadores: _sesion(id)
+	actualizar_regiones()
 	vivo = Vivo.new(self)
 	vivo.restaurar()
 	habitantes = Hab.new(self)
@@ -193,7 +195,14 @@ func hora_dia() -> float:
 func dia() -> int:
 	return floori(d.min / 1440.0) + 1
 
+## No se guarda la caché de terreno: solo semilla, versión y alteraciones.
+func actualizar_regiones() -> void:
+	var centros: Array=[]
+	for id in rt:centros.append(Mundo.celda_de(rt[id].pies))
+	mundo.actualizar_regiones(centros)
+
 func tick(dt: float) -> void:
+	actualizar_regiones()
 	_acum += dt * C.MIN_POR_SEG
 	while _acum >= 1.0:
 		_acum -= 1.0
@@ -286,6 +295,7 @@ func _derrota(id: String) -> void:
 	var pj := jug(id)
 	var c: Array = pj.cama if not pj.cama.is_empty() else pj.inicio
 	rt[id].pies = Vector2(c[0], c[1])
+	actualizar_regiones()
 	pj.hp = int(stats(id).hp / 2.0)
 	if rt.size() == 1: combate.reiniciar()
 	else: combate.olvidar(id)
@@ -294,6 +304,7 @@ func _derrota(id: String) -> void:
 
 # ---------- acciones ----------
 func mover_pj(dir: Vector2i, dt: float, id: String = LOCAL) -> void:
+	actualizar_regiones()
 	var e: String = combate.ataque(id).est
 	if dir == Vector2i.ZERO or e == "aviso" or e == "activo": return
 	rt[id].mira = dir
@@ -490,12 +501,10 @@ func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
 	if not Inv.tiene(pj.inv, def.coste): return _no("Faltan materiales: " + _txt_items(def.coste), id)
 	mundo.poner(c, pieza, true, id)
 	if def.bloquea:    # no se permiten bloqueos irreversibles de lugares esenciales ni de ningún jugador
-		var alc := mundo.alcanzables()
-		var ok := true
-		for k in rt:
-			var ck := Mundo.celda_de(rt[k].pies)
-			if not (alc.has(ck) or mundo.bloquea(ck)): ok = false
-		for e in Mundo.ESENCIALES: if not alc.has(e): ok = false
+		var posiciones: Array=[]
+		for k in rt: posiciones.append(Mundo.celda_de(rt[k].pies))
+		for nid in habitantes.ids: posiciones.append(Mundo.celda_de(habitantes.pos(nid)))
+		var ok := mundo.construccion_segura(c,posiciones)
 		if not ok:
 			mundo.quitar(c)
 			return _no("Eso cerraría un camino esencial", id)
@@ -512,6 +521,7 @@ func retirar(c: Vector2i, id: String = LOCAL) -> Dictionary:
 	if cs.get("dueno", "") != id: return _no("Esa construcción no es tuya", id)
 	var def: Dictionary = C.CONSTR[cs.t]
 	var cid := "c@" + k
+	if d.cofres.get(cid, {}).get("candado", false): return _no("Retira primero el candado", id)
 	if d.cofres.has(cid) and not d.cofres[cid].inv.is_empty(): return _no("El cofre no está vacío", id)
 	if not Inv.anadir(pj.inv, def.coste, stats(id).slots): return _no("Inventario lleno", id)
 	mundo.quitar(c)
@@ -531,7 +541,66 @@ func abrir_tesoro(cid: String, id: String = LOCAL) -> Dictionary:
 	pj.eventos["abrio_" + cid] = true
 	return _ok("Abres el cofre: " + txt, id)
 
+## La autorización se comprueba en la acción, incluso si el panel ya estaba abierto.
+func cofre_cerca(cid: String, id: String = LOCAL) -> bool:
+	if not cid.begins_with("c@") or not d.cofres.has(cid) or not rt.has(id): return false
+	var partes := cid.trim_prefix("c@").split(",")
+	if partes.size() != 2 or not partes[0].is_valid_int() or not partes[1].is_valid_int(): return false
+	var c := Vector2i(int(partes[0]), int(partes[1]))
+	if mundo.constr_en(c).get("t", "") != "cofre": return false
+	var actual := Mundo.celda_de(pies_de(id))
+	return actual == c or mundo.es_adyacente(actual, c)
+
+func info_cofre(cid: String, id: String = LOCAL) -> Dictionary:
+	var dueno: String = str(d.mundo.constr.get(cid.trim_prefix("c@"), {}).get("dueno", ""))
+	var cf: Dictionary = d.cofres.get(cid, {})
+	var real := actor_desarrollo(id).trim_prefix("pj:")
+	var propio := dueno == id or dueno == real
+	var permisos: Array = cf.get("permitidos", [])
+	var autorizado := propio or permisos.has(real)
+	var nombre: String = str(d.jugadores.get(dueno,{}).get("nombre","Otro jugador"))
+	if dueno.begins_with("npc:"): nombre = str(habitantes.fichas.get(dueno.trim_prefix("npc:"),{}).get("n","Habitante"))
+	elif dueno.begins_with("grupo:"): nombre = autonomia.sociedad.nombre_grupo(dueno.trim_prefix("grupo:"))
+	elif dueno=="anfitrion:local": nombre="Anfitrión"
+	elif dueno=="": nombre="Compartido"
+	return {"dueno": dueno, "nombre":nombre, "propio": propio, "candado": bool(cf.get("candado", false)), "cerrado": bool(cf.get("cerrado", false)), "permitidos": permisos, "acceso": not bool(cf.get("cerrado", false)) or autorizado}
+
+func gestionar_cofre(cid: String, accion: String, destino: String = "", id: String = LOCAL) -> Dictionary:
+	if not cofre_cerca(cid, id): return _no("Acércate al cofre", id)
+	var info := info_cofre(cid, id)
+	if not info.propio: return _no("Solo el dueño puede cambiar la protección", id)
+	var cf: Dictionary = d.cofres[cid]
+	match accion:
+		"instalar":
+			if info.candado: return _no("Ya tiene candado", id)
+			if not Inv.tiene(jug(id).inv, {"candado":1}): return _no("Fabrica un candado en una mesa: 2 lingotes y 2 fibras", id)
+			Inv.quitar(jug(id).inv, {"candado":1})
+			cf.candado = true
+			cf.cerrado = true
+		"abrir", "cerrar":
+			if not info.candado: return _no("No tiene candado", id)
+			cf.cerrado = accion == "cerrar"
+		"retirar":
+			if not info.candado: return _no("No tiene candado", id)
+			if not Inv.anadir(jug(id).inv, {"candado":1}, stats(id).slots): return _no("Inventario lleno", id)
+			cf.candado = false
+			cf.cerrado = false
+		"permitir", "revocar":
+			if not d.jugadores.has(destino) or destino == id: return _no("Jugador desconocido", id)
+			var permisos: Array = cf.get("permitidos", []).duplicate()
+			if accion == "permitir" and not permisos.has(destino): permisos.append(destino)
+			if accion == "revocar": permisos.erase(destino)
+			cf.permitidos = permisos
+			var nombres: Dictionary = cf.get("nombres_permitidos",{})
+			if accion=="permitir": nombres[destino]=str(jug(destino).nombre)
+			else: nombres.erase(destino)
+			cf.nombres_permitidos=nombres
+		_: return _no("Acción desconocida", id)
+	return _ok("Protección del cofre actualizada", id)
+
 func mover_cofre(cid: String, item: String, hacia_cofre: bool, id: String = LOCAL) -> Dictionary:
+	if not cofre_cerca(cid, id): return _no("Acércate al cofre", id)
+	if not info_cofre(cid, id).acceso: return _no("Cofre cerrado con candado", id)
 	var pj := jug(id)
 	var cf: Dictionary = d.cofres.get(cid, {})
 	if cf.is_empty(): return _no("Cofre inexistente", id)

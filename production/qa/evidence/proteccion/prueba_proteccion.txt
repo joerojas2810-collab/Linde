@@ -1,0 +1,60 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS construye cofre propio
+PASS cofre antiguo abierto conserva acceso
+PASS coloca candado y lo cierra
+PASS instalar consume un candado real
+PASS no duplica candados al repetir
+PASS bloquea retirada ajena aunque panel estuviera abierto
+PASS bloquea también depósito ajeno
+PASS ajeno no abre ni cambia permisos
+PASS dueño autoriza a otro jugador
+PASS autorizado accede cerrado
+PASS acceso autorizado no se registra como robo
+PASS dueño revoca acceso
+PASS revocación se aplica a la siguiente acción
+PASS rechaza transferencia remota
+PASS rechaza permisos para identidad inexistente
+PASS candado instalado impide desmontar el cofre
+PASS dueño puede dejarlo abierto para todos
+PASS abierto permite compartir
+PASS guarda protección
+PASS candado y permisos sobreviven al guardado
+PASS réplica usa la identidad real para permisos sin confundir al anfitrión
+PASS retirar recupera exactamente el candado y abre
+PASS NPC no roba de cofre cerrado
+PASS NPC evita robar junto al dueño jugador
+PASS cofre abierto sin dueño cerca sí permite hurto físico
+PASS robo deja un historial persistente en el cofre
+PASS hurto tiene espera y no vacía pilas en cada decisión
+PASS abundancia baja valor de fibra
+PASS mantenimiento consume materiales y mejora descanso
+PASS no cobra dos veces el mantenimiento del mismo periodo
+PASS ayuda gratuita entre miembros no se etiqueta como estafa
+PASS NPC instala su candado sin crearlo gratis
+PASS NPC fabrica e instala pagando lingotes y fibra
+PASS fabricación desgasta mesa una vez y no cobra de nuevo
+PASS horario desplazado sigue siendo ejecutable
+PASS horario generado cubre un día completo
+PASS preferencia alimentaria cambia necesidad real
+PASS diálogo refleja objetivo propio
+PASS preferencias sobreviven al guardado
+PASS colono anterior recibe identidad una sola vez
+PASS intercambio pagado conserva posibilidad de engaño
+PASS relación de confianza reduce riesgo de estafa
+PASS insumos del proyecto no aparecen como excedente negociable
+PASS compromiso abandonado vence y libera recursos
+PASS buscar bayas con suficiente fibra no suma ni elimina fibra acumulada
+PASS intercambio pagado puede terminar en estafa
+PASS estafa conserva los bienes y no se ejecuta dos veces
+PASS intención de red instala candado en autoridad
+PASS secuencia repetida no revierte el candado
+PASS servidor impide que otro jugador abra el candado
+PASS servidor rechaza manipulación remota del candado
+PROTECCION: 51 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 97 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 8 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

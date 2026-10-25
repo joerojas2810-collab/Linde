@@ -1,0 +1,30 @@
+{
+  "fecha": "2026-10-24",
+  "pruebas": {
+    "proteccion": 51,
+    "sociedad": 48,
+    "autonomia": 33,
+    "desarrollo": 55,
+    "general": 326,
+    "interfaz": 13
+  },
+  "fallos": 0,
+  "simulacion_final": "simulacion-123.json",
+  "otras_semillas": "54 y 321 ensayadas durante los ajustes; no se presentan como evidencia del código final.",
+  "limites": [
+    "Sin playtest de diversión ni balance definitivo.",
+    "Red existente con 2 clientes localhost; acciones de protección comprobadas directamente en servidor y réplica.",
+    "Avisos de recursos al salir de Godot."
+  ],
+  "sha256": {
+    "scripts/sociedad.gd": "a93c2afdb458326f24eaeb44b10b15169d397db83fa893af739001f8426019f7",
+    "scripts/autonomia.gd": "2628a925672d07aeda1bdddc5fb587f51013d90bcba0167bac1e73b62fb3e049",
+    "scripts/juego.gd": "2c9b73df2321f860fbfc81d58b1393b1d9bbb0117c610d4a204e748b054345e6",
+    "scripts/escena.gd": "ede2a3c689fc345707a63b40bfd65cb09969c7e498b2777c473ce4c3863268f1",
+    "scripts/hud.gd": "a66b9cb209288f9b16b07201e43a101d7cb856999ad897c259643e731dfb7093",
+    "scripts/red_servidor.gd": "75dfa04c14df9be080cd8d3578508a6a1177a68c86bd5a2206448802b13adcad",
+    "scripts/red_cliente.gd": "69963df4b42094b5da8fb602fdd17b163174be2491ef63fb64cec2cf0905dd98",
+    "scripts/catalogos.gd": "7af7823eb03fdf8767caef05abd4a40e30af7531e99b7601db3056dfc21bd3d2",
+    "datos/autonomia/reglas.json": "cb0a89fba3d238fc7760f2febf0494d8c5b6f73794f534ad88e5e98e0f576497"
+  }
+}

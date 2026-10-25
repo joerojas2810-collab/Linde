@@ -44,3 +44,7 @@ Si ya tienes Godot 4.7.1, define la variable `GODOT` con la ruta al ejecutable y
 Con el equipo completo puesto: `Iniciar-Cenital.command --nueva=1 --equipo=zarzal:oscuro` (en Windows, el mismo comando con `.bat`).
 
 Para colaboradores de arte: este repositorio no incluye el motor, las fuentes de terceros (`archivos-originales/`), los builds (`Linde/distribucion/`) ni la caché `.godot/`; todo eso se descarga o se regenera.
+
+Protección y economía: puedes fabricar un candado con **2 lingotes y 2 fibras** junto a una mesa (C), instalarlo en un cofre propio (E) y gestionar permisos. En la prueba de autonomía, J explica necesidades, confianza y economía. [Guía de cofres, economía e identidad](Linde/cenital/docs/PROTECCION_Y_ECONOMIA.md).
+
+**El mapa ahora se amplía al explorar:** el valle inicial se conserva y puedes seguir el camino al sur para encontrar territorio generado por la semilla. Construcciones, cofres y camas exteriores se guardan; el indicador superior muestra bioma y coordenadas. [Guía del mundo por regiones](Linde/cenital/docs/MUNDO_POR_REGIONES.md).

@@ -14,7 +14,7 @@ const NECESIDAD := ["id", "minimo", "maximo", "inicial", "cambio_por_hora_activo
 const MAX_EFECTOS := 64
 const MAX_PROFUNDIDAD := 16
 const MAX_NODOS := 256
-const ANCHO := 64    # = Mundo.ANCHO/ALTO (el contrato fija la cuadrícula 64x48); no se precarga mundo.gd para evitar dependencias circulares
+const ANCHO := 64    # = Mundo.ANCHO/ALTO (el contrato de entidades fija el valle inicial 64x48, no el exterior generado); no se precarga mundo.gd para evitar dependencias circulares
 const ALTO := 48
 
 static var _actual := {}

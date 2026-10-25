@@ -17,7 +17,7 @@ func _init(juego) -> void:
 	reglas = JSON.parse_string(FileAccess.get_file_as_string("res://datos/autonomia/reglas.json"))
 	sociedad = Sociedad.new(self)
 	desarrollo = Desarrollo.new(self)
-	if j.es_autoridad() and "--autonomia" in OS.get_cmdline_user_args(): activar()
+	if j.es_autoridad() and not "--campana" in OS.get_cmdline_user_args(): activar()   # modo principal; --campana vuelve al director de tarjetas
 	else:
 		sociedad.restaurar()
 		desarrollo.restaurar()
@@ -67,6 +67,7 @@ func paso() -> void:
 	for nid in j.habitantes.ids:
 		if perfil(nid).is_empty(): continue
 		var n: Dictionary = estado(nid)
+		_explorar(nid)
 		n.hambre = minf(100.0, float(n.hambre) + float(reglas.hambre_por_hora) * transcurrido / 60.0)
 		if n.hambre >= float(reglas.umbral_comer) and int(n.inv.get(reglas.comida, 0)) > 0:
 			_quitar(n.inv, str(reglas.comida), 1)
@@ -179,14 +180,51 @@ func _golpes(nid: String, def: Dictionary) -> int:
 		if tag == "" or tag in perfil(nid).herramientas: necesarios = mini(necesarios, int(def.golpes[tag]))
 	return necesarios
 
+## Conocimiento limitado: cada habitante sabe qué bloques del mapa ha visto (se guarda como claves "bx,by").
+## Parte de su entorno inicial, descubre lo que ve al moverse y se entera de lo que sabe quien se cruza con él.
+func _bloque(c: Vector2i) -> String:
+	var b: int = int(reglas.conocimiento.bloque)
+	return "%d,%d" % [floori(float(c.x) / b), floori(float(c.y) / b)]
+
+func conoce(nid: String, c: Vector2i) -> bool:
+	if not estado(nid).has("bloques"): _explorar(nid) # También antes del primer minuto o al cargar un guardado anterior.
+	return estado(nid).bloques.has(_bloque(c))
+
+func _ver(n: Dictionary, centro: Vector2i, radio: int) -> void:
+	for dx in range(-radio, radio + 1, int(reglas.conocimiento.bloque)):
+		for dy in range(-radio, radio + 1, int(reglas.conocimiento.bloque)):
+			n.bloques[_bloque(centro + Vector2i(dx, dy))] = true
+
+func _explorar(nid: String) -> void:
+	var n: Dictionary = estado(nid)
+	var pos := Mundo.celda_de(j.habitantes.pos(nid))
+	if not n.has("bloques"):
+		n.bloques = {}
+		_ver(n, pos, int(reglas.conocimiento.radio_inicial))
+	_ver(n, pos, int(reglas.conocimiento.radio_vision))
+	for otro in j.habitantes.ids:   # rumor: al cruzarse comparten lo que conocen
+		if otro == nid or perfil(otro).is_empty() or not estado(otro).has("bloques"): continue
+		if Vector2(Mundo.celda_de(j.habitantes.pos(otro))).distance_to(Vector2(pos)) <= float(reglas.conocimiento.radio_rumor):
+			n.bloques.merge(estado(otro).bloques)
+
+## Línea de visión aproximada: ningún muro u objeto sólido entre ambas celdas.
+func ve(desde: Vector2i, hasta: Vector2i) -> bool:
+	var pasos: int = maxi(absi(hasta.x - desde.x), absi(hasta.y - desde.y))
+	for i in range(1, pasos):
+		var c := Vector2i(desde + (hasta - desde) * i / pasos)
+		if j.mundo.bloquea(c): return false
+	return true
+
 # Orden por distancia y después ID: repetible y no dependiente del orden de un Dictionary.
 func _recurso(nid: String, item: String) -> String:
 	var origen := Mundo.celda_de(j.habitantes.pos(nid))
 	var candidatos: Array = []
 	for oid in j.mundo.objetos:
 		var o: Dictionary = j.mundo.objetos[oid]
+		if not Mundo.es_valle(o.c):continue # La colonización exterior requiere planificación regional, aún no activada.
 		if j.mundo.objeto_presente(o.c) != oid or not C.OBJETOS.has(o.t): continue
 		if sociedad.activa() and not sociedad.permite_recurso(nid, oid): continue
+		if not conoce(nid, o.c): continue
 		var def: Dictionary = C.OBJETOS[o.t]
 		var aporta: bool = def.drops.has(item)
 		for prob in def.prob: if prob.item == item and float(prob.p) > 0.0: aporta = true
@@ -238,8 +276,12 @@ func ayudar(nid: String, jugador: String, rechazar: bool = false) -> Dictionary:
 	n.inv[item] = int(n.inv.get(item, 0)) + cantidad
 	vinculo["ayudas"] = int(vinculo.get("ayudas", 0)) + 1
 	n.vinculos[jugador] = vinculo
-	if sociedad.activa(): sociedad.reconoce_ayuda(nid, jugador)
+	var pago := {}
+	if sociedad.activa():
+		sociedad.reconoce_ayuda(nid, jugador)
+		pago = sociedad.recompensa(nid, jugador, item, cantidad)
 	_recordar(nid, "ayuda", "%d %s" % [cantidad, item], jugador)
+	if not pago.is_empty(): return j._ok("Entregas %d %s y recibes %s a cambio." % [cantidad, C.ITEMS[item].n, j._txt_items(pago)], jugador)
 	return j._ok("Entregas %d %s; recordará tu ayuda." % [cantidad, C.ITEMS[item].n], jugador)
 
 ## Texto derivado del estado y de la relación recordada; nunca concede objetos.
@@ -249,6 +291,15 @@ func dialogo(nid: String, jugador: String) -> String:
 	var texto := "Recuerdo tu ayuda. " if int(vinculo.get("ayudas", 0)) > 0 else ""
 	if texto == "" and vinculo.has("rechazo_min"): texto = "La última vez no pudiste ayudarme. "
 	if sociedad.activa():
+		var perfil_actual := perfil(nid)
+		var identidad: Dictionary = perfil_actual.get("identidad",{})
+		if not identidad.is_empty(): texto = "Soy %s y quiero %s. " % [perfil_actual.get("oficio","habitante"),identidad.objetivo] + texto
+		var recientes: Array = n.recuerdos.slice(-12)
+		recientes.reverse()
+		for recuerdo in recientes:
+			if recuerdo.hecho in ["estafado","robado","descubrio","mantenimiento"]:
+				texto += texto_recuerdo(recuerdo).left(110) + ". "
+				break
 		var cid: String = sociedad._ocupado(nid)
 		if cid != "":
 			var acuerdo: Dictionary = sociedad.datos().acuerdos[cid]
@@ -262,5 +313,5 @@ func dialogo(nid: String, jugador: String) -> String:
 
 ## Expresión legible de un recuerdo para la interfaz.
 func texto_recuerdo(r: Dictionary) -> String:
-	var nombres := {"sin_recurso": "No encontré el recurso", "sin_estacion": "Me faltó una estación", "recolecto": "Recolecté", "fabrico": "Fabriqué", "comio": "Comí", "ayuda": "Recibí ayuda", "rechazo": "No pudieron ayudarme", "herramienta_rota": "Se rompió mi herramienta", "reparo": "Reparé", "extraccion_vista": "Vi extraer", "aporte": "Aporté al grupo", "promesa": "Acordé entregar", "cumplio": "Cumplimos el acuerdo", "incumplio": "No cumplió el plazo", "plazo_vencido": "Venció el acuerdo", "pospuso": "Busqué otra solución", "construyo": "Construí", "descubrio": "Creé un nuevo plano", "estafado": "Me engañaron", "estafo": "Engañé", "hurto": "Robé", "hurto_visto": "Vi un robo", "llego": "Llegué", "robado": "Me robaron"}
+	var nombres := {"sin_recurso": "No encontré el recurso", "sin_estacion": "Me faltó una estación", "recolecto": "Recolecté", "fabrico": "Fabriqué", "comio": "Comí", "ayuda": "Recibí ayuda", "rechazo": "No pudieron ayudarme", "herramienta_rota": "Se rompió mi herramienta", "reparo": "Reparé", "extraccion_vista": "Vi extraer", "aporte": "Aporté al grupo", "promesa": "Acordé entregar", "cumplio": "Cumplimos el acuerdo", "incumplio": "No cumplió el plazo", "plazo_vencido": "Venció el acuerdo", "pospuso": "Busqué otra solución", "construyo": "Construí", "descubrio": "Creé un nuevo plano", "estafado": "Me engañaron", "estafo": "Engañé", "hurto": "Robé", "hurto_visto": "Vi un robo", "llego": "Llegué", "robado": "Me robaron", "mantenimiento":"Cuidé mi ropa y lecho"}
 	return str(nombres.get(r.hecho, r.hecho)) + ": " + str(r.detalle)

@@ -169,6 +169,7 @@ func _traducir(constr: Dictionary) -> Dictionary:
 func _process(delta: float) -> void:
 	if j == null: return
 	j.rt[P.LOCAL].pies = _suave(j.pies, pos_servidor, delta)
+	j.actualizar_regiones()
 	for id in otros: otros[id].pies = _suave(otros[id].pies, otros[id].get("objetivo", otros[id].pies), delta)
 	if j._dir_env != Vector2i.ZERO and Engine.get_process_frames() - j._frame_mov > 1:
 		j.mover_pj(Vector2i.ZERO, 0.0)      # la escena dejó de pedir movimiento (panel abierto, construir...)
@@ -209,6 +210,7 @@ class Replica extends "res://scripts/juego.gd":
 		return true                            # el mundo lo guarda el servidor
 
 	func mover_pj(dir: Vector2i, _dt: float, _id: String = LOCAL) -> void:
+		actualizar_regiones()
 		_frame_mov = Engine.get_process_frames()
 		if dir != Vector2i.ZERO: rt[LOCAL].mira = dir
 		if dir != _dir_env:
@@ -255,6 +257,9 @@ class Replica extends "res://scripts/juego.gd":
 	func engarzar(clave: String, variante: String, _id: String = LOCAL) -> Dictionary: return _env(["engarzar", clave, variante])
 	func aceptar(mid: String, _id: String = LOCAL) -> Dictionary: return _env(["aceptar", mid])
 	func entregar(mid: String, _id: String = LOCAL) -> Dictionary: return _env(["entregar", mid])
+	func gestionar_cofre(cid: String, accion: String, destino: String = "", _id: String = LOCAL) -> Dictionary:
+		return _env(["gestionar_cofre", cid, accion, destino])
+
 	func mover_cofre(cid: String, item: String, hacia_cofre: bool, _id: String = LOCAL) -> Dictionary:
 		return _env(["mover_cofre", cid, item, hacia_cofre])
 

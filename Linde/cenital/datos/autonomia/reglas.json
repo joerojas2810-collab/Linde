@@ -6,11 +6,21 @@
   "reserva_comida": 2,
   "comida": "baya",
   "intervalo_accion_min": 5,
+  "conocimiento": {
+    "bloque": 8,
+    "radio_inicial": 16,
+    "radio_vision": 8,
+    "radio_rumor": 4
+  },
   "intervalo_recuerdo_min": 60,
   "tope_recuerdos": 32,
   "perfiles": {
     "maren": {
-      "caracter": {"honestidad": 90, "codicia": 20, "rencor": 40},
+      "caracter": {
+        "honestidad": 90,
+        "codicia": 20,
+        "rencor": 40
+      },
       "receta": "pico_piedra",
       "reserva_producto": 2,
       "herramientas": [],
@@ -25,7 +35,11 @@
       ]
     },
     "ordal": {
-      "caracter": {"honestidad": 40, "codicia": 70, "rencor": 60},
+      "caracter": {
+        "honestidad": 40,
+        "codicia": 70,
+        "rencor": 60
+      },
       "receta": "lingote",
       "reserva_producto": 3,
       "herramientas": [
@@ -41,7 +55,11 @@
       ]
     },
     "nerea": {
-      "caracter": {"honestidad": 75, "codicia": 35, "rencor": 25},
+      "caracter": {
+        "honestidad": 75,
+        "codicia": 35,
+        "rencor": 25
+      },
       "receta": "hacha_piedra",
       "reserva_producto": 2,
       "herramientas": [],
@@ -66,6 +84,7 @@
     "tope_sucesos": 80,
     "tope_acuerdos_cerrados": 24,
     "confianza_minima": -2,
+    "alianza_umbral": 6,
     "confianza_inicial": 0,
     "ganancia_confianza": 1,
     "perdida_incumplimiento": 2,
@@ -81,6 +100,10 @@
       "baya": 2,
       "mena": 2,
       "lingote": 5,
+      "ladrillo": 3,
+      "cobre": 2,
+      "lingote_cobre": 5,
+      "arcilla": 1,
       "pico_piedra": 6,
       "hacha_piedra": 5,
       "unguento": 4
@@ -137,14 +160,19 @@
     "coste_reparacion": 1,
     "caracter": {
       "nota": "Disposiciones 0-100 por habitante (perfiles.*.caracter). Provisional: gente buena y mala, no todos cumplen.",
-      "defecto": {"honestidad": 70, "codicia": 30, "rencor": 30},
-      "prob_estafa_max": 0.5,
+      "defecto": {
+        "honestidad": 70,
+        "codicia": 30,
+        "rencor": 30
+      },
+      "prob_estafa_max": 0.2,
       "sobreprecio_max": 0.6,
       "acaparar_max": 2,
       "perdida_estafa": 4,
       "castigo_grupo_estafa": 3,
       "umbral_hurto": 50,
       "hurto_max": 2,
+      "recompensa_min": 0.2,
       "castigo_hurto": 3,
       "rencor_dias_por_punto": 40
     },
@@ -158,7 +186,9 @@
     "vivienda": {
       "nota": "Quien tiene excedente y no hay camas libres construye una cama de huésped cerca del depósito de su grupo. Provisional.",
       "activa": true,
-      "requiere_excedente": {"fibra": 10},
+      "requiere_excedente": {
+        "fibra": 10
+      },
       "espera_min": 720
     },
     "inmigracion": {
@@ -168,13 +198,127 @@
       "espera_min": 1440,
       "max_habitantes": 12,
       "riqueza_minima": 120,
-      "nombres": ["Iria", "Tomás", "Bruno", "Lía", "Aldo", "Sira", "Mateo", "Nuria", "Hugo", "Elena", "Raúl", "Clara"],
-      "caracter_rango": {"honestidad": [15, 95], "codicia": [10, 90], "rencor": [10, 80]},
+      "nombres": [
+        "Iria",
+        "Tomás",
+        "Bruno",
+        "Lía",
+        "Aldo",
+        "Sira",
+        "Mateo",
+        "Nuria",
+        "Hugo",
+        "Elena",
+        "Raúl",
+        "Clara"
+      ],
+      "caracter_rango": {
+        "honestidad": [
+          15,
+          95
+        ],
+        "codicia": [
+          10,
+          90
+        ],
+        "rencor": [
+          10,
+          80
+        ]
+      },
       "oficios": {
-        "cantero": {"molde": "ordal", "grupo": "canteros", "receta": "lingote", "reserva_producto": 3, "herramientas": ["picar"], "recetas": ["lingote", "pico_piedra"], "herramientas_necesarias": ["pico_piedra"]},
-        "artesano": {"molde": "maren", "grupo": "talleres", "receta": "pico_piedra", "reserva_producto": 2, "herramientas": [], "recetas": ["pico_piedra", "hacha_piedra"], "herramientas_necesarias": ["hacha_piedra"]},
-        "recolector": {"molde": "nerea", "grupo": "talleres", "receta": "hacha_piedra", "reserva_producto": 2, "herramientas": [], "recetas": ["hacha_piedra", "pico_piedra"], "herramientas_necesarias": ["hacha_piedra"]}
-      }
+        "cantero": {
+          "molde": "ordal",
+          "grupo": "canteros",
+          "receta": "lingote",
+          "reserva_producto": 3,
+          "herramientas": [
+            "picar"
+          ],
+          "recetas": [
+            "lingote",
+            "pico_piedra"
+          ],
+          "herramientas_necesarias": [
+            "pico_piedra"
+          ]
+        },
+        "artesano": {
+          "molde": "maren",
+          "grupo": "talleres",
+          "receta": "pico_piedra",
+          "reserva_producto": 2,
+          "herramientas": [],
+          "recetas": [
+            "pico_piedra",
+            "hacha_piedra"
+          ],
+          "herramientas_necesarias": [
+            "hacha_piedra"
+          ]
+        },
+        "albanil": {
+          "molde": "ordal",
+          "grupo": "canteros",
+          "receta": "ladrillo",
+          "reserva_producto": 4,
+          "herramientas": [
+            "picar"
+          ],
+          "recetas": [
+            "ladrillo",
+            "pico_piedra"
+          ],
+          "herramientas_necesarias": [
+            "pico_piedra"
+          ]
+        },
+        "recolector": {
+          "molde": "nerea",
+          "grupo": "talleres",
+          "receta": "hacha_piedra",
+          "reserva_producto": 2,
+          "herramientas": [],
+          "recetas": [
+            "hacha_piedra",
+            "pico_piedra"
+          ],
+          "herramientas_necesarias": [
+            "hacha_piedra"
+          ]
+        }
+      },
+      "identidades": [
+        {
+          "objetivo": "vivir de mi taller",
+          "preferencia": "artesania",
+          "reserva_extra": 2
+        },
+        {
+          "objetivo": "que no falte comida en el valle",
+          "preferencia": "alimentos",
+          "reserva_extra": 1
+        },
+        {
+          "objetivo": "construir un hogar seguro",
+          "preferencia": "seguridad",
+          "reserva_extra": 3
+        }
+      ]
+    },
+    "economia": {
+      "fibra_objetivo_persona": 24,
+      "fibra_reserva": 8,
+      "fibra_mantenimiento": 8,
+      "intervalo_mantenimiento": 1440,
+      "valor_minimo": 0.25
+    },
+    "proteccion": {
+      "coste": {
+        "lingote": 2,
+        "fibra": 2
+      },
+      "espera_hurto_min": 360
     }
   }
 }

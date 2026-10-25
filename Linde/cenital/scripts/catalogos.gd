@@ -9,11 +9,16 @@ const HP_BASE := 40
 const DMG_BASE := 5
 
 const ITEMS := {
+	"candado": {"n": "Candado", "pila": 10, "c": "#cfd3da"},
 	"madera": {"n": "Madera", "pila": 50, "c": "#8a5a2b"},
 	"piedra": {"n": "Piedra", "pila": 50, "c": "#8e8e96"},
 	"fibra": {"n": "Fibra", "pila": 50, "c": "#7bb04a"},
 	"mena": {"n": "Mena de hierro", "pila": 50, "c": "#b5651d"},
 	"lingote": {"n": "Lingote", "pila": 50, "c": "#cfd3da"},
+	"ladrillo": {"n": "Ladrillo", "pila": 50, "c": "#b5533c"},
+	"cobre": {"n": "Mena de cobre", "pila": 50, "c": "#c8742f"},
+	"lingote_cobre": {"n": "Lingote de cobre", "pila": 50, "c": "#d98a4a"},
+	"arcilla": {"n": "Arcilla", "pila": 50, "c": "#a8664a"},
 	"baya": {"n": "Baya", "pila": 20, "c": "#c0305a", "cura": 8},
 	"gelatina": {"n": "Gelatina", "pila": 20, "c": "#5fd0a0"},
 	"unguento": {"n": "Ungüento", "pila": 10, "c": "#e0e07a", "cura": 30},
@@ -33,11 +38,15 @@ const OBJETOS := {
 	"roca": {"n": "Roca", "golpes": {"": 10, "picar": 4}, "drops": {"piedra": 2}, "prob": [], "regen_h": 0, "bloquea": true, "xp": 2},
 	"veta": {"n": "Veta de mena", "golpes": {"picar": 6}, "drops": {"mena": 2}, "prob": [{"item": "gema", "q": 1, "p": 0.25}], "regen_h": 0, "bloquea": true, "xp": 4},
 	"arbusto": {"n": "Arbusto", "golpes": {"": 1}, "drops": {"fibra": 2}, "prob": [{"item": "baya", "q": 1, "p": 0.5}], "regen_h": 24, "bloquea": false, "xp": 0},
+	# Solo aparecen fuera del valle (terreno_v1): dan motivo para explorar.
+	"veta_cobre": {"n": "Veta de cobre", "golpes": {"picar": 5}, "drops": {"cobre": 2}, "prob": [{"item": "gema", "q": 1, "p": 0.15}], "regen_h": 0, "bloquea": true, "xp": 3},
+	"arcilla": {"n": "Pozo de arcilla", "golpes": {"": 8, "picar": 3}, "drops": {"arcilla": 3}, "prob": [], "regen_h": 0, "bloquea": true, "xp": 2},
 }
 
 # bloquea: ocupa la celda. est: estación de fabricación. propia: la pone/retira el jugador.
 const CONSTR := {
 	"muro": {"n": "Muro", "coste": {"madera": 2}, "bloquea": true, "c": "#a8794f"},
+	"muro_ladrillo": {"n": "Muro de ladrillo", "coste": {"ladrillo": 2}, "bloquea": true, "c": "#b5533c"},
 	"suelo": {"n": "Suelo de madera", "coste": {"madera": 1}, "bloquea": false, "c": "#9b7a52"},
 	"mesa": {"n": "Mesa de trabajo", "coste": {"madera": 5, "piedra": 2}, "bloquea": true, "est": "mesa", "c": "#7a5530"},
 	"horno": {"n": "Horno", "coste": {"piedra": 8}, "bloquea": true, "est": "horno", "c": "#6c6c74"},
@@ -45,14 +54,18 @@ const CONSTR := {
 	"cama": {"n": "Cama", "coste": {"madera": 4, "fibra": 4}, "bloquea": true, "cama": true, "c": "#b84a5a"},
 	"cama_huesped": {"n": "Cama de huésped", "coste": {"madera": 4, "fibra": 3}, "bloquea": true, "c": "#4a8fb8"},   # sin "cama": no sirve para dormir; la asigna Mundo vivo
 }
-const ORDEN_CONSTR := ["muro", "suelo", "mesa", "horno", "cofre", "cama", "cama_huesped"]
+const ORDEN_CONSTR := ["muro", "muro_ladrillo", "suelo", "mesa", "horno", "cofre", "cama", "cama_huesped"]
 
 # est: estación cercana (≤2 celdas); herr: ítem requerido sin consumir; hab: habilidad requerida.
 const RECETAS := {
+	"candado": {"n": "Candado", "ent": {"lingote": 2, "fibra": 2}, "sal": {"candado": 1}, "est": "mesa", "herr": "", "hab": ""},
 	"hacha_piedra": {"n": "Hacha de piedra", "ent": {"piedra": 2, "madera": 2, "fibra": 1}, "sal": {"hacha_piedra": 1}, "est": "", "herr": "", "hab": ""},
 	"pico_piedra": {"n": "Pico de piedra", "ent": {"piedra": 3, "madera": 2, "fibra": 1}, "sal": {"pico_piedra": 1}, "est": "", "herr": "", "hab": ""},
 	"unguento": {"n": "Ungüento", "ent": {"gelatina": 2, "fibra": 1}, "sal": {"unguento": 1}, "est": "mesa", "herr": "", "hab": ""},
 	"lingote": {"n": "Lingote", "ent": {"mena": 2, "madera": 1}, "sal": {"lingote": 1}, "est": "horno", "herr": "", "hab": "artesano"},
+	"ladrillo": {"n": "Ladrillo", "ent": {"piedra": 2, "fibra": 1}, "sal": {"ladrillo": 2}, "est": "horno", "herr": "", "hab": ""},
+	"lingote_cobre": {"n": "Lingote de cobre", "ent": {"cobre": 2, "madera": 1}, "sal": {"lingote_cobre": 1}, "est": "horno", "herr": "", "hab": "artesano"},
+	"ladrillo_arcilla": {"n": "Ladrillo de arcilla", "ent": {"arcilla": 2}, "sal": {"ladrillo": 3}, "est": "horno", "herr": "", "hab": ""},
 	"espada_hierro": {"n": "Espada de hierro", "ent": {"lingote": 2, "madera": 1}, "sal": {"espada_hierro": 1}, "est": "mesa", "herr": "", "hab": "artesano"},
 	# Escudo (PROVISIONAL). Las recetas de piezas de Vigía y de la Chispa se generan desde datos (Equipo.recetas()).
 	"escudo_madera": {"n": "Escudo de madera", "ent": {"madera": 6, "fibra": 2}, "sal": {"escudo_madera": 1}, "est": "mesa", "herr": "", "hab": ""},

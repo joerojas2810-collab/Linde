@@ -88,6 +88,9 @@ func _tracker(vs: Vector2, j, h: float) -> void:
 			lineas.append([str(mi.nombre) + (" (¡cumplida!)" if mi.cumplida else ""), 16])
 			lineas.append([str(mi.texto), 16])
 	var extra := 1 if esc.red != null else 0
+	var celda: Vector2i=esc.j.mundo.celda_de(esc.j.pies)
+	var bioma: String=esc.j.mundo.bioma(celda)
+	lineas.append(["%s · %d, %d" % [bioma.capitalize(),celda.x,celda.y],16])
 	var alto := 52.0 + (extra + lineas.size()) * 22.0 + (8.0 if not lineas.is_empty() else 0.0)
 	var r := Rect2(vs.x - 16 - 328, 16, 328, alto)
 	ui.panel(self, r)
@@ -102,13 +105,15 @@ func _tracker(vs: Vector2, j, h: float) -> void:
 
 func _panel(vs: Vector2) -> void:
 	if esc.panel == "dialogo":
-		var d := Rect2(112, 392, 1056, 256)
+		var alto_texto: float = ui.fuente_dialogo.get_multiline_string_size(esc.dialogo_txt,HORIZONTAL_ALIGNMENT_LEFT,912,24).y if ui.fuente_dialogo != null else 100.0
+		var alto: float = clampf(alto_texto+144.0,256.0,600.0)
+		var d := Rect2(112,648-alto,1056,alto)
 		ui.panel(self, d)
 		ui.icono(self, "reutilizados/categoria_comunidad.png", Rect2(d.position + Vector2(24, 24), Vector2(64, 64)))
 		_t(esc.dialogo_nombre, d.position + Vector2(112, 24), 32)
 		if ui.fuente_dialogo != null:
 			draw_multiline_string(ui.fuente_dialogo, d.position + Vector2(112, 100), esc.dialogo_txt, HORIZONTAL_ALIGNMENT_LEFT, 912, 24, -1, UiArte.TINTA)
-		_t("[E / Enter] cerrar", d.position + Vector2(112, 212), 16)
+		_t("[E / Enter] cerrar", d.position + Vector2(112, d.size.y-44), 16)
 		return
 	var r := Rect2(vs.x / 2 - 448, 40, 896, 600)
 	ui.panel(self, r)

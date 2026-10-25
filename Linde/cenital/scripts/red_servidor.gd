@@ -10,7 +10,7 @@ const Mundo = preload("res://scripts/mundo.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const PUERTO := 7777
 const MAX_CLIENTES := 15
-const VERSION := 3              # versión del protocolo; el cliente la manda en «hola»
+const VERSION := 4              # versión del protocolo; el cliente la manda en «hola»
 const TICK := 0.05              # 20 Hz
 const ALCANCE := 2              # celdas (Chebyshev) para construir, retirar y usar cofres
 const MAX_PEDIDOS_S := 40       # pedidos por segundo y conexión; el resto se descarta
@@ -250,6 +250,9 @@ func ejecutar(id: String, datos) -> bool:
 				"aprender": j.aprender(a[0], id)
 				"aceptar": j.aceptar(a[0], id)
 				"entregar": j.entregar(a[0], id)
+		"gestionar_cofre":
+			if not _sig(a, [TYPE_STRING, TYPE_STRING, TYPE_STRING]) or not _cofre_cerca(id, a[0]): return _rechazo(id, tipo)
+			j.gestionar_cofre(a[0], a[1], a[2], id)
 		"mover_cofre":
 			if not _sig(a, [TYPE_STRING, TYPE_STRING, TYPE_BOOL]) or not Eq.existe(a[1]) or not _cofre_cerca(id, a[0]):
 				return _rechazo(id, tipo)
@@ -288,7 +291,7 @@ func _mirar(id: String, d: Vector2i) -> void:
 
 func _cerca(id: String, c: Vector2i) -> bool:
 	var b := Mundo.celda_de(j.pies_de(id))
-	return Rect2i(0, 0, Mundo.ANCHO, Mundo.ALTO).has_point(c) and maxi(absi(c.x - b.x), absi(c.y - b.y)) <= ALCANCE
+	return j.mundo.valida(c) and j.mundo.region_cargada(c) and maxi(absi(c.x - b.x), absi(c.y - b.y)) <= ALCANCE
 
 # Solo cofres construidos ("c@x,y"); el tesoro del mundo se abre con «interactuar».
 func _cofre_cerca(id: String, cid: String) -> bool:

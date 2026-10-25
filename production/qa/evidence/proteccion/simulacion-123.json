@@ -1,0 +1,25 @@
+{
+  "cofres": 5,
+  "dias": 10,
+  "fibra_total": 201,
+  "habitantes": 9,
+  "hechos": {
+    "acuerdo": 263,
+    "ahorro": 6,
+    "alternativa": 1193,
+    "aporte": 11,
+    "construccion": 27,
+    "descubrimiento": 3,
+    "desgaste": 8,
+    "entrega": 258,
+    "fabricacion": 22,
+    "incumplimiento": 5,
+    "llegada": 7,
+    "mantenimiento": 23,
+    "proteccion": 1,
+    "reparacion": 1,
+    "retiro": 8
+  },
+  "semilla": 123,
+  "inventarios_negativos": false
+}

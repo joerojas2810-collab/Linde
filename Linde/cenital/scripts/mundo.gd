@@ -1,8 +1,9 @@
 extends RefCounted
 # Geometría y estado modificable del mundo. Celdas = Vector2i; posiciones en px = "pies" (centro-abajo).
-# Mapa de autor FIJO (semilla MAPA); la semilla de partida solo elige el punto de inicio.
+# Valle de autor conservado; el exterior se genera por regiones con la semilla persistente de la partida.
 const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
+const Terreno = preload("res://scripts/terreno_v1.gd")
 enum T { PASTO, CAMINO, AGUA, PARED, SUELO, PUERTA, RUINA, MURO_RUINA }
 const ANCHO := 64
 const ALTO := 48
@@ -31,6 +32,9 @@ var objetos := {}            # id -> {t, c}   (estático, derivado del MAPA)
 var por_celda := {}          # Vector2i -> id
 var spawns_slime: Array = []
 var estado := {"rotos": {}, "golpes": {}, "constr": {}}   # lo único que se guarda
+var generador
+var regiones: Dictionary = {} # Caché descartable: nunca se guarda terreno sin modificar.
+var _firma_regiones := ""
 var version := 0
 var _bloq := PackedByteArray()
 var _bloq_v := -1
@@ -68,6 +72,83 @@ func _init() -> void:
 	for t in DECORADO: for c in DECORADO[t]: _agregar(t, c)
 	for id in CAMAS: estado.constr[clave(CAMAS[id])] = {"t": "cama", "propia": false}
 	_generar_slimes()
+
+## Migración aditiva: el valle y todas sus diferencias se mantienen.
+func configurar(semilla: int) -> void:
+	if not estado.has("generacion"): estado.generacion={"version":1,"semilla":semilla,"region":Terreno.TAM}
+	generador=Terreno.new(int(estado.generacion.semilla))
+	_firma_regiones=""
+
+static func es_valle(c: Vector2i) -> bool:
+	return Rect2i(0,0,ANCHO,ALTO).has_point(c)
+
+func valida(c: Vector2i) -> bool:
+	return es_valle(c) or (generador!=null and generador.valida(c))
+
+func region_cargada(c: Vector2i) -> bool:
+	return es_valle(c) or regiones.has(clave(Terreno.region(c)))
+
+## Unión de los alrededores de todos los jugadores, con descarga de regiones distantes.
+## El valle permanece residente para sostener los habitantes actuales.
+func actualizar_regiones(centros: Array) -> void:
+	if generador==null:return
+	var centros_region: Array=[]
+	for c in centros:
+		var r:=Terreno.region(c)
+		var k:=clave(r)
+		if not centros_region.has(k):centros_region.append(k)
+	centros_region.sort()
+	var firma: String=";".join(centros_region)
+	if firma==_firma_regiones:return
+	_firma_regiones=firma
+	var deseadas: Dictionary={}
+	for k in centros_region:
+		var r:=Vector2i(int(k.get_slice(",",0)),int(k.get_slice(",",1)))
+		for y in range(r.y-2,r.y+3):
+			for x in range(r.x-2,r.x+3):
+				var pos:=Vector2i(x,y)
+				var esquina:=pos*Terreno.TAM
+				if not generador.valida(esquina):continue
+				if Rect2i(0,0,ANCHO,ALTO).encloses(Rect2i(esquina,Vector2i(Terreno.TAM,Terreno.TAM))):continue
+				deseadas[clave(pos)]=pos
+	for k in regiones.keys():
+		if deseadas.has(k):continue
+		for id in regiones[k].ids:
+			por_celda.erase(objetos[id].c)
+			objetos.erase(id)
+		regiones.erase(k)
+	for k in deseadas:
+		if regiones.has(k):continue
+		var datos: Dictionary=generador.generar_region(deseadas[k])
+		var ids: Array=[]
+		for recurso in datos.recursos:
+			if es_valle(recurso.c):continue
+			var id: String=str(recurso.t)+"@"+clave(recurso.c)
+			_agregar(str(recurso.t),recurso.c,id)
+			ids.append(id)
+		datos.ids=ids
+		regiones[k]=datos
+	cambiar()
+
+func _indice_exterior(c: Vector2i) -> int:
+	return posmod(c.y,Terreno.TAM)*Terreno.TAM+posmod(c.x,Terreno.TAM)
+
+func bioma(c: Vector2i) -> String:
+	if es_valle(c):return "valle"
+	if generador==null:return "limite"
+	var region: Dictionary=regiones.get(clave(Terreno.region(c)),{})
+	return str(region.biomas[_indice_exterior(c)]) if not region.is_empty() else str(generador.datos(c).bioma)
+
+## Datos de recursos descargados: reconstrucción pura, sin volver a cargar la región.
+func datos_objeto(id: String) -> Dictionary:
+	if objetos.has(id):return objetos[id]
+	if generador==null or not id.contains("@"):return {}
+	var partes:=id.get_slice("@",1).split(",")
+	if partes.size()!=2 or not partes[0].is_valid_int() or not partes[1].is_valid_int():return {}
+	var c:=Vector2i(int(partes[0]),int(partes[1]))
+	if es_valle(c) or not generador.valida(c):return {}
+	var d: Dictionary=generador.datos(c)
+	return {"t":str(d.objeto),"c":c} if str(d.objeto)!="" and id==str(d.objeto)+"@"+clave(c) else {}
 
 func _poner(x: int, y: int, t: int) -> void:
 	celdas[y * ANCHO + x] = t
@@ -120,7 +201,10 @@ static func clave(c: Vector2i) -> String:
 	return "%d,%d" % [c.x, c.y]
 
 func tipo(c: Vector2i) -> int:
-	return T.AGUA if not Rect2i(0, 0, ANCHO, ALTO).has_point(c) else celdas[c.y * ANCHO + c.x]
+	if es_valle(c):return celdas[c.y*ANCHO+c.x]
+	if generador==null or not generador.valida(c):return T.AGUA
+	var region: Dictionary=regiones.get(clave(Terreno.region(c)),{})
+	return int(region.terreno[_indice_exterior(c)]) if not region.is_empty() else int(generador.datos(c).tipo)
 
 func objeto_presente(c: Vector2i) -> String:
 	var id: String = por_celda.get(c, "")
@@ -144,11 +228,16 @@ func _reconstruir() -> void:
 			_bloq[y * ANCHO + x] = 1 if b else 0
 	for k in estado.constr:
 		var p: PackedStringArray = k.split(",")
-		if C.CONSTR[estado.constr[k].t].bloquea: _bloq[int(p[1]) * ANCHO + int(p[0])] = 1
+		if es_valle(Vector2i(int(p[0]),int(p[1]))) and C.CONSTR[estado.constr[k].t].bloquea: _bloq[int(p[1]) * ANCHO + int(p[0])] = 1
 	_bloq_v = version
 
 func bloquea(c: Vector2i) -> bool:
-	if not Rect2i(0, 0, ANCHO, ALTO).has_point(c): return true
+	if not valida(c) or not region_cargada(c):return true
+	if not es_valle(c):
+		if tipo(c)==T.AGUA:return true
+		if C.CONSTR.get(constr_en(c).get("t",""),{}).get("bloquea",false):return true
+		var id:=objeto_presente(c)
+		return id!="" and bool(C.OBJETOS.get(objetos[id].t,{}).get("bloquea",true))
 	if _bloq_v != version: _reconstruir()
 	return _bloq[c.y * ANCHO + c.x] == 1
 
@@ -164,9 +253,11 @@ func romper(id: String, hora: int) -> void:
 func regenerar(hora: int, ocupada: Callable) -> int:
 	var n := 0
 	for id in estado.rotos.keys():
-		var r: int = C.OBJETOS[objetos[id].t].regen_h
+		var objeto:=datos_objeto(id)
+		if objeto.is_empty() or not C.OBJETOS.has(objeto.t):continue
+		var r: int = C.OBJETOS[objeto.t].regen_h
 		if r > 0 and hora - estado.rotos[id] >= r * 60:
-			var c: Vector2i = objetos[id].c
+			var c: Vector2i = objeto.c
 			if constr_en(c).is_empty() and not ocupada.call(c):
 				estado.rotos.erase(id)
 				n += 1
@@ -175,7 +266,7 @@ func regenerar(hora: int, ocupada: Callable) -> int:
 
 # Reglas estáticas de colocación (no incluye actores ni alcanzabilidad: las evalúa Juego).
 func puede_poner(c: Vector2i) -> String:
-	if not Rect2i(0, 0, ANCHO, ALTO).has_point(c): return "fuera del mapa"
+	if not valida(c) or not region_cargada(c): return "fuera de las regiones cargadas"
 	var t := tipo(c)
 	if t != T.PASTO and t != T.CAMINO and t != T.SUELO: return "terreno no construible"
 	if objeto_presente(c) != "": return "ocupado por un objeto"
@@ -197,7 +288,7 @@ static func pies_de_celda(c: Vector2i) -> Vector2:
 	return Vector2(c.x * P.CELDA + P.CELDA / 2.0, c.y * P.CELDA + 12)
 
 static func celda_de(pies: Vector2) -> Vector2i:
-	return Vector2i((pies - Vector2(0, 1)) / P.CELDA)   # -1 px: el borde inferior pertenece a la celda de arriba
+	return Vector2i(((pies - Vector2(0, 1)) / P.CELDA).floor())   # -1 px: el borde inferior pertenece a la celda de arriba
 
 func caja_libre(pies: Vector2, medio: Vector2 = P.PIES) -> bool:
 	var a := Vector2i(((pies - Vector2(medio.x / 2, medio.y)) / P.CELDA).floor())
@@ -214,20 +305,22 @@ func mover(pies: Vector2, d: Vector2, medio: Vector2 = P.PIES) -> Vector2:
 	if d.y != 0.0 and caja_libre(p + Vector2(0, d.y), medio): p.y += d.y
 	return p
 
-func alcanzables(desde: Vector2i = ENTRADA) -> Dictionary:
+func alcanzables(desde: Vector2i = ENTRADA, area: Rect2i = Rect2i()) -> Dictionary:
+	if area.size==Vector2i.ZERO:area=_area_ruta(desde)
 	var vistas := {desde: true}
 	var cola := [desde]
 	while not cola.is_empty():
 		var c: Vector2i = cola.pop_back()
 		for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
 			var n: Vector2i = c + d
-			if not vistas.has(n) and not bloquea(n):
+			if area.has_point(n) and not vistas.has(n) and not bloquea(n):
 				vistas[n] = true
 				cola.append(n)
 	return vistas
 
 # BFS 4-vecinos. Termina al llegar a una celda que cumple meta. [] si no hay ruta; [desde] si ya cumple.
-func camino(desde: Vector2i, meta: Callable) -> Array:
+func camino(desde: Vector2i, meta: Callable, area: Rect2i = Rect2i()) -> Array:
+	if area.size==Vector2i.ZERO:area=_area_ruta(desde)
 	if meta.call(desde): return [desde]
 	var prev := {desde: desde}
 	var cola := [desde]
@@ -237,7 +330,7 @@ func camino(desde: Vector2i, meta: Callable) -> Array:
 		i += 1
 		for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
 			var n: Vector2i = c + d
-			if prev.has(n) or bloquea(n): continue
+			if not area.has_point(n) or prev.has(n) or bloquea(n): continue
 			prev[n] = c
 			if meta.call(n):
 				var ruta := [n]
@@ -245,6 +338,27 @@ func camino(desde: Vector2i, meta: Callable) -> Array:
 				return ruta
 			cola.append(n)
 	return []
+
+func _area_ruta(desde: Vector2i) -> Rect2i:
+	if es_valle(desde):return Rect2i(0,0,ANCHO,ALTO)
+	return Rect2i(Terreno.region(desde)*Terreno.TAM-Vector2i(Terreno.TAM,Terreno.TAM),Vector2i(Terreno.TAM*3,Terreno.TAM*3))
+
+## Validación finita: nunca recorre un mundo ilimitado para colocar una pared.
+func construccion_segura(c: Vector2i, actores: Array) -> bool:
+	if es_valle(c):
+		var alc:=alcanzables()
+		for e in ESENCIALES:if not alc.has(e):return false
+		for actor in actores:
+			if es_valle(actor) and not (alc.has(actor) or bloquea(actor)):return false
+		return true
+	var vecinos: Array=[]
+	for d in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
+		if not bloquea(c+d):vecinos.append(c+d)
+	if vecinos.size()<2:return true
+	var area:=_area_ruta(c)
+	var alc:=alcanzables(vecinos[0],area)
+	for vecino in vecinos:if not alc.has(vecino):return false
+	return true
 
 func es_adyacente(c: Vector2i, objetivo: Vector2i) -> bool:
 	return absi(c.x - objetivo.x) + absi(c.y - objetivo.y) == 1

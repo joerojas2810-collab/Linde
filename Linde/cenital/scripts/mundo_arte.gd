@@ -72,7 +72,10 @@ func suelo(ci: CanvasItem, m, c: Vector2i, tiempo: float) -> void:
 	var clase := "path" if t == Mundo.T.CAMINO else "water" if t == Mundo.T.AGUA else "ruins" if t == Mundo.T.RUINA else "wall" if t == Mundo.T.PARED or t == Mundo.T.MURO_RUINA else ""
 	var dst := Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA))
 	if clase == "":
-		_tex_rect(ci, "E04_grass_periodica.png", dst)
+		var bioma: String=m.bioma(c)
+		var tinte: Color={"bosque":Color("c1d7b9"),"sierra":Color("d6d1c4"),"secano":Color("e5d3a2")}.get(bioma,Color.WHITE)
+		tinte=Color.WHITE.lerp(tinte,clampf(float(Mundo.Terreno.distancia_valle(c))/12.0,0.0,1.0))
+		_tex_rect(ci, "E04_grass_periodica.png", dst,tinte)
 		return
 	var p: Array = mapeo[clase][str(mascara(m, c, t))]
 	var cuadro := int(tiempo / 0.15) % 4 if clase == "water" else 0
@@ -81,6 +84,8 @@ func suelo(ci: CanvasItem, m, c: Vector2i, tiempo: float) -> void:
 	if tx == null: ci.draw_rect(dst, MARCADOR)
 	else: ci.draw_texture_rect_region(tx, dst, Rect2(int(p[0]) * CELDA + cuadro * 128, int(p[1]) * CELDA, CELDA, CELDA))
 
+# Un solo arte de mena (cobre): el hierro se distingue con tinte frío y la arcilla es roca rojiza. Sustituir cuando haya arte propio.
+const TINTE_MENA := {"veta": Color(0.72, 0.78, 1.0), "arcilla": Color(1.25, 0.7, 0.55)}
 # ---------- naturaleza (árbol, roca, veta, arbusto) ----------
 func natural(ci: CanvasItem, tipo: String, c: Vector2i, agotado: bool, jugador: Vector2) -> void:
 	var clave := ""
@@ -88,7 +93,8 @@ func natural(ci: CanvasItem, tipo: String, c: Vector2i, agotado: bool, jugador: 
 		var n: String = ARBOLES[posmod(c.x * 7 + c.y * 3, 3)]
 		clave = "E04_stump_" + n if agotado else "E04_tree_" + n + "_64"
 	elif tipo == "roca": clave = "E04_rock_depleted" if agotado else "E04_rock"
-	elif tipo == "veta": clave = "E04_ore_depleted" if agotado else "E04_ore_copper"
+	elif tipo == "veta" or tipo == "veta_cobre": clave = "E04_ore_depleted" if agotado else "E04_ore_copper"
+	elif tipo == "arcilla": clave = "E04_rock_depleted" if agotado else "E04_rock"
 	elif tipo == "arbusto": clave = "E04_bush_without_berries" if agotado else "E04_bush_berries"
 	else: return
 	var pies := Vector2(c) * CELDA + Vector2(8, 16)
@@ -99,7 +105,7 @@ func natural(ci: CanvasItem, tipo: String, c: Vector2i, agotado: bool, jugador: 
 		if d.is_empty(): _falta(RAIZ + k); continue
 		var r := Rect2((pies - Vector2(d.pivote[0], d.pivote[1])).round(), Vector2(d.canvas[0], d.canvas[1]))
 		if str(k).ends_with("_copa") and (c.y + 1) * CELDA >= jugador.y and r.has_point(jugador - Vector2(0, 14)): alfa = 0.4
-		_tex_rect(ci, d.archivo, r, Color(1, 1, 1, alfa))
+		_tex_rect(ci, d.archivo, r, Color(1, 1, 1, alfa) * TINTE_MENA.get(tipo, Color.WHITE))
 
 # ---------- objetos fijos y construcciones (E05) ----------
 func prop(ci: CanvasItem, nombre: String, pies: Vector2, tinte: Color = Color.WHITE) -> void:
@@ -125,6 +131,7 @@ func constr(ci: CanvasItem, t: String, c: Vector2i, abierto: bool = false, tinte
 	var pies := Vector2(c) * CELDA + Vector2(8, 16)
 	match t:
 		"muro": prop(ci, "palisade", pies, tinte)
+		"muro_ladrillo": prop(ci, "palisade", pies, tinte * Color(1.3, 0.7, 0.6))
 		"mesa": prop(ci, "workbench", pies, tinte)
 		"horno": prop(ci, "furnace", pies, tinte)
 		"cama": prop(ci, "bed", pies, tinte)

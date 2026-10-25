@@ -1,0 +1,58 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS el valle de autor conserva exactamente sus celdas
+PASS se conservan recursos y puntos de interés originales
+PASS semilla y versión del generador se guardan en el mundo
+PASS coordenadas negativas usan suelo matemático, no truncamiento
+PASS regiones negativas no se solapan con el origen
+PASS misma semilla y coordenadas producen terreno y recursos idénticos
+PASS huella v1 impide cambiar silenciosamente el terreno de partidas existentes
+PASS otra semilla produce una región diferente
+PASS bordes de regiones consultan las mismas coordenadas globales
+PASS el exterior contiene varios biomas reales
+PASS los caminos atraviesan regiones sin cortes ni objetos bloqueantes
+PASS el jugador cruza andando el borde antiguo del valle
+PASS colisión sigue siendo válida fuera del valle
+PASS encuentra una parcela exterior construible
+PASS construye un cofre fuera del mapa original
+PASS candado e inventario funcionan en el exterior
+PASS descarga la región lejana
+PASS descargar no borra objetos guardados ni protección
+PASS guarda estando lejos del valle
+PASS carga restaura posición exterior y genera su entorno
+PASS volver conserva terreno, construcción, contenido y candado
+PASS el guardado no acumula copias del terreno generado
+PASS genera recursos cosechables fuera del valle
+PASS recolecta con la acción real y recibe materiales
+PASS descarga datos del recurso pero conserva su extracción
+PASS volver no duplica ni repone un recurso extraído
+PASS regeneración resuelve recursos descargados sin errores ni carga global
+PASS recurso renovable vuelve con el mismo identificador
+PASS primer golpe exterior queda como daño parcial
+PASS daño parcial persiste descargado y después de cargar partida
+PASS rematar después de cargar entrega el botín una sola vez
+PASS movimiento y colisión funcionan en coordenadas negativas
+PASS límite técnico no genera coordenadas inválidas
+PASS treinta desplazamientos no hacen crecer la caché sin límite
+PASS el valle permanece residente para sus habitantes
+PASS el orden de exploración no altera una región
+PASS dos jugadores distantes cargan la unión de sus entornos
+PASS desconectar libera el entorno del jugador ausente
+PASS partida anterior añade expansión sin reemplazar valle ni inventario
+PASS rechaza generador futuro para no regenerar terreno incompatible
+PASS réplica reconstruye exterior idéntico con metadatos del servidor
+PASS permiso exterior funciona con identidad traducida del cliente
+PASS servidor acepta transferencia legítima en cofre exterior
+PASS servidor acepta construcción exterior cercana
+PASS pedido remoto lejano no genera regiones ni modifica el mundo
+PASS construye y fija una cama real en el exterior
+PASS reaparecer vuelve a cargar la región de la cama exterior
+PASS el jugador reaparece con colisión válida en su campamento
+PASS camas exteriores no asignan colonos sin rutas regionales
+TERRENO: 49 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 83 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 9 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

@@ -18,6 +18,7 @@ func ok(cond: bool, nombre: String) -> void:
 
 func g(sem: int = 1):
 	var j = J.nueva(sem, "Test", [0, 0, 0])
+	if j.d.mundo_vivo.has("autonomia"): j.d.mundo_vivo.autonomia.activa = false   # esta suite prueba la campaña; la autonomía es el modo por defecto
 	j.pies = Mundo.pies_de_celda(Vector2i(32, 40))
 	j.combate.enemigos.clear()
 	return j
@@ -366,7 +367,9 @@ func t_habitantes() -> void:
 	var k = g()
 	k.d.min = 12 * 60
 	k.jug().inv = {"madera": 20}
-	for c in [Vector2i(27, 20), Vector2i(29, 20), Vector2i(28, 19), Vector2i(28, 21)]: k.construir("muro", c)
+	for c in [Vector2i(27, 20), Vector2i(29, 20), Vector2i(28, 19)]: k.construir("muro", c)
+	ok(not k.construir("muro",Vector2i(28,21)).ok,"construir rechaza encerrar a un habitante")
+	k.mundo.poner(Vector2i(28,21),"muro",true,J.LOCAL) # Estado malformado de QA para probar recuperación de navegación.
 	for i in 20: k.habitantes.paso(0.05)
 	ok(k.d.npcs.maren.act == "bloqueado", "habitante encerrado: estado bloqueado, no atraviesa")
 	k.retirar(Vector2i(28, 21))

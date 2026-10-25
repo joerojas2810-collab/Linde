@@ -96,7 +96,10 @@ func nombre(id: String) -> String:
 func camas_libres_lista() -> Array:
 	var asignadas: Dictionary = j.d.mundo_vivo.camas_asignadas
 	var l: Array = []
-	for k in j.d.mundo.constr: if j.d.mundo.constr[k].t == "cama_huesped" and not asignadas.has(k): l.append(k)
+	for k in j.d.mundo.constr:
+		var c:=Vector2i(int(k.get_slice(",",0)),int(k.get_slice(",",1)))
+		# Los habitantes conservan por ahora su planificación del valle; no asignar camas inalcanzables del exterior.
+		if Mundo.es_valle(c) and j.d.mundo.constr[k].t == "cama_huesped" and not asignadas.has(k): l.append(k)
 	l.sort()
 	return l
 

@@ -27,7 +27,7 @@ func recuerdo(j, nid: String, tipo: String) -> bool:
 	return false
 func _init() -> void:
 	var normal = J.nueva(7, "Normal", [0, 0, 0])
-	ok(not normal.autonomia.activa(), "partida normal conserva el comportamiento anterior")
+	ok(normal.autonomia.activa(), "partida normal arranca en autonomía (modo principal)")
 	var j = juego()
 	var antes: int = j.d.mundo.rotos.size()
 	sim(j, 180)

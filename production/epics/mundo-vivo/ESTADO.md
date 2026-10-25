@@ -174,3 +174,31 @@ Cambios hechos tras el aviso de «haz los cambios tuyos», sobre la sociedad de 
 - No verificado: que un **cliente de red** vea a los colonos y los cofres de los habitantes (el estado viaja en `mundo_vivo`, pero solo se probó guardar y cargar); el panel J con 10 habitantes; ni una partida jugada a mano.
 - Sigue sin activarse la autonomía por defecto en partidas nuevas ni retirarse la campaña del capítulo 1 (§11).
 - Ajustada una comprobación de `tests/prueba_sociedad.gd`: la reparación ya no se exige en la simulación libre, porque depende de la secuencia; su mecanismo sigue comprobado aparte.
+
+## 14. Protección de cofres, economía e identidad (2026-10-24)
+
+Se añadieron candados fabricables (2 lingotes + 2 fibras, mesa), permisos por jugador, revocación, recuperación del candado, historial de robos y validación de acceso/cercanía en la transferencia y en el servidor. Los habitantes fabrican protección pagando materiales y usando una mesa; no pueden robar de cofres cerrados y respetan la cercanía del dueño jugador. Los cofres anteriores mantienen acceso abierto hasta instalar protección.
+
+La recolección de fibra se limita según las reservas del habitante; ropa y lechos consumen fibra diariamente a cambio de recuperación de energía. La abundancia reduce su valor en el trueque. Se protegen materiales comprometidos en proyectos y recién recibidos; se corrigieron prioridades que provocaban retirar/depositar o prestar/devolver repetidamente los mismos insumos. La riqueza de acogida incluye infraestructura y piezas realmente fabricadas.
+
+Las ayudas gratuitas no producen estafas; los acuerdos pagados consideran honestidad y confianza. Los colonos reciben preferencias, objetivos, variaciones de horario y reservas con efectos en su conducta. Los guardados anteriores se migran de forma aditiva. El diálogo refleja identidad, necesidad y memoria. J permite consultar y recorrer explicaciones, reservas, confianza y riesgo.
+
+Detalle de uso, reglas y límites: `Linde/cenital/docs/PROTECCION_Y_ECONOMIA.md`. Evidencia: `production/qa/evidence/proteccion/`. Los pendientes de §13 sobre fibra, estafas e identidad tienen ahora estas medidas; el balance sigue siendo provisional. Continúan las tres familias de oficio y la autonomía opcional, sin retirar la campaña del capítulo 1. No se añadieron ganzúas ni rotura de candados.
+
+Verificación de §14: 51 comprobaciones nuevas sin fallos; regresiones de sociedad 48, autonomía 33, desarrollo 55, general 326 e interfaz 13, sin fallos; integración de red existente con dos clientes localhost sin fallos. Simulación final de diez días sin intervención, semilla 123: 9 habitantes, 201 fibras en inventarios/cofres/depósitos (antes de estos ajustes: 804), 263 acuerdos, 258 entregas, 27 construcciones, 23 mantenimientos y un cofre protegido por un NPC. Esta semilla no produjo estafas; no implica una tasa general. Continúan faltando playtest y balance de varias partidas completas.
+
+## 15. Exterior generado por regiones (2026-10-24)
+
+El valle de autor se conserva y ahora tiene un exterior explorable, generado con la semilla de partida. Se adaptó código MIT de `mearnest-dev/infinite-generation-demo` (revisión `63f7400d58f5bdc1bba5fdb33e01016389ff46e4`); fuente y licencia están en `Linde/cenital/terceros/infinite-generation-demo/`. La demo no implementaba descarga ni semilla persistente; esas partes y la integración son propias de Linde.
+
+- Regiones de 16 × 16, coordenadas globales positivas y negativas, biomas, caminos y recursos actuales. Cámara y colisión funcionan fuera del antiguo rectángulo.
+- Caché de hasta 25 regiones exteriores por jugador, con descarga; el valle sigue residente. No se serializa el terreno sin modificar.
+- Semilla y versión persistentes, diferencias de extracción/daño/construcción, cofres con candado y camas de jugador. Guardar lejos, regresar y reaparecer en una cama exterior conservan el estado. Partidas anteriores añaden los metadatos sin reemplazar el valle.
+- Servidor autoritativo y réplica con el mismo terreno; protocolo 4. Navegación y validación de rutas acotadas, sin inundar el mundo entero al colocar una pared.
+- Se conserva la activación de autonomía por defecto incorporada en paralelo. La campaña histórica se verifica usando `--campana`.
+
+**Límites:** rango técnico ±65.536 celdas por eje, carga síncrona en regiones pequeñas, caminos ortogonales provisionales y arte/materiales existentes. No hay generación de nuevos enemigos, pueblos o mazmorras fuera del valle. Los habitantes siguen planificando dentro del valle; sus camas de huésped y objetivos no se trasladan todavía al exterior. La colonización y simulación resumida de asentamientos lejanos quedan para otra etapa.
+
+Guía y contrato: `Linde/cenital/docs/MUNDO_POR_REGIONES.md`. Evidencia: `production/qa/evidence/terreno/`.
+
+Verificación de §15: 49 comprobaciones específicas de terreno; regresiones de protección 51, autonomía 33, sociedad 48, desarrollo 55, campaña histórica 327 (`--campana`) e interfaz 13, sin fallos ni errores de script. Dos clientes y un servidor reales cruzaron el antiguo borde, coincidieron en terreno/bioma/recursos y validaron construcción, candado, rechazo sin permiso, autorización, transferencia y guardado exterior. La integración de red anterior también pasó sus 11 comprobaciones. Capturas de la escena real inspeccionadas. Continúan pendientes Internet, grupos grandes, playtest de exploración y colonización regional de NPC; persisten los avisos previos de recursos al cerrar.
