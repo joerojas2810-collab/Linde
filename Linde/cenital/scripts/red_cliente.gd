@@ -60,7 +60,7 @@ func _fallar(motivo: String) -> void:
 
 func _conectado() -> void:
 	t_conexion_ms = Time.get_ticks_msec() - _t0
-	pedir.rpc_id(1, ["hola", Srv.VERSION, nombre, clave, look])
+	pedir.rpc_id(1, ["hola", Srv.VERSION, nombre, clave, look, Srv.Huella.huella()])
 
 # Envía una intención: [tipo, ...argumentos] -> [tipo, seq, ...argumentos].
 func enviar(a: Array) -> void:
@@ -247,6 +247,12 @@ class Replica extends "res://scripts/juego.gd":
 
 	func comprar_artefacto(npc: String, clave: String, _id: String = LOCAL) -> Dictionary:
 		return _env(["comprar_artefacto",npc,clave])
+
+	func ensenar_saber(npc: String, saber: String, _id: String = LOCAL) -> Dictionary:
+		return _env(["ensenar_saber",npc,saber])
+
+	func pedir_saber(npc: String, saber: String, _id: String = LOCAL) -> Dictionary:
+		return _env(["pedir_saber",npc,saber])
 
 	func aportar_grupo(grupo: String, _id: String = LOCAL) -> Dictionary:
 		return _env(["aportar_grupo", grupo])

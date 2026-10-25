@@ -1059,8 +1059,8 @@ func t_red() -> void:
 	for i in 50: if s.recibir(4, ["mov", 100 + i, Vector2i.ZERO]): n += 1
 	ok(n == Srv.MAX_PEDIDOS_S, "red: límite de pedidos por segundo y conexión")
 	s.registrar_peer(5)
-	ok(not s.recibir(5, ["accion", 1, Vector2i.UP]) and not s.recibir(5, ["hola", V, "Bea", "mala", look]) and s.peers[5].fuera
-		and not s.recibir(5, ["hola", V, "Bea", "clave-b", look]), "red: sin identificarse no se actúa; tras un rechazo la conexión queda fuera")
+	ok(not s.recibir(5, ["accion", 1, Vector2i.UP]) and not s.recibir(5, ["hola", V, "Bea", "mala", look, Srv.Huella.huella()]) and s.peers[5].fuera
+		and not s.recibir(5, ["hola", V, "Bea", "clave-b", look, Srv.Huella.huella()]), "red: sin identificarse no se actúa; tras un rechazo la conexión queda fuera")
 	# equipo por red: claves `eq:` en pedidos y en el estado privado
 	j.jug(b).inv = {CV: 1, "chispa": 1, "piedra_alma": 1}
 	var r0 := int(s.registro.rechazos.get(b, 0))

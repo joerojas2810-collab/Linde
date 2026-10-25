@@ -408,7 +408,7 @@ func _armar() -> void:
 	acc = []
 	iconos = []
 	var st: Dictionary = j.stats()
-	if panel in ["planos","practica","laminados"] and not j.autonomia.desarrollo.activa(): panel="desarrollo"
+	if panel in ["planos","practica","laminados","saberes"] and not j.autonomia.desarrollo.activa(): panel="desarrollo"
 	match panel:
 		"inv":
 			_l("INVENTARIO  %d/%d  ·  Nv %d  Daño %d  Def %d  Vida %d  Vel x%.2f" % [Inv.slots(j.jug().inv), st.slots, j.nivel(), st.dmg, st.def, st.hp, st.vel])
@@ -438,6 +438,7 @@ func _armar() -> void:
 				_l("Planos: crear equipo con lo que aprendiste", func(): _abrir("planos"))
 				_l("Materiales elaborados: experimentar con laminados",func():_abrir("laminados"))
 				_l("Práctica: ver técnicas y especializaciones", func(): _abrir("practica"))
+				_l("Saberes: pedir y enseñar técnicas", func(): _abrir("saberes"))
 				_l("— OBRAS QUE OFRECEN LOS HABITANTES —")
 				for nid in j.habitantes.ids:
 					for pieza in j.autonomia.estado(nid).inv:
@@ -457,13 +458,35 @@ func _armar() -> void:
 			_l("PLANOS  ·  el material, la técnica y la pericia definen la pieza")
 			_l("Cambiar forma: " + Eq.Artesania.reglas().formas[forma_plano].nombre,func():_cambiar_forma())
 			var planos: Array=j.autonomia.desarrollo.planos(j.actor_desarrollo(),forma_plano)
-			if planos.is_empty(): _parrafo("Obtén materiales del valle para descubrir sus primeros planos. Fabrica para aprender técnicas y amplía tu taller para poder aplicarlas.")
+			if planos.is_empty(): _parrafo("Obtén materiales del valle para descubrir sus primeros planos. Las técnicas especializadas se piden a quien las conoce (Saberes) y se aplican ampliando tu taller.")
 			for clave in planos:
 				var it: Dictionary=Eq.info(clave)
 				_l(it.n)
 				_l("  Daño %d · Defensa %d · Vida %d · Velocidad %+.2f" % [it.dmg,it.def,it.hp,it.vel])
 				_parrafo("Materiales: " + Hud.J_txt(Eq.Artesania.receta(clave).ent))
 				_l("  Fabricar junto a una mesa de trabajo",func():j.fabricar_artefacto(clave),_ic(clave))
+			_l("Volver al taller",func():_abrir("desarrollo"))
+		"saberes":
+			_l("SABERES  ·  técnicas y procesos que se aprenden de otros")
+			var dv=j.autonomia.desarrollo
+			var yo: String=j.actor_desarrollo()
+			var propios: Array=[]
+			for id in dv.catalogo(): if dv.tiene_saber(yo,id): propios.append(dv.catalogo()[id].nombre)
+			propios.sort()
+			_parrafo("Conoces: " + (", ".join(propios) if not propios.is_empty() else "solo fabricación simple"))
+			var hay_lecciones := false
+			for nid in j.habitantes.ids:
+				var otro: String="npc:"+nid
+				var quien: String=j.habitantes.fichas[nid].n
+				for id in dv.catalogo():
+					var saber: String=dv.catalogo()[id].nombre
+					if dv.tiene_saber(otro,id) and not dv.tiene_saber(yo,id):
+						hay_lecciones=true
+						_l("  Pedir a %s que te enseñe: %s (requiere cercanía)" % [quien,saber],func():j.pedir_saber(nid,id))
+					elif dv.tiene_saber(yo,id) and not dv.tiene_saber(otro,id):
+						hay_lecciones=true
+						_l("  Enseñar a %s: %s (requiere cercanía)" % [quien,saber],func():j.ensenar_saber(nid,id))
+			if not hay_lecciones: _parrafo("Nadie tiene algo que enseñarte ni necesita lo que sabes.")
 			_l("Volver al taller",func():_abrir("desarrollo"))
 		"laminados":
 			_l("MATERIALES ELABORADOS  ·  conocimiento y componentes reales")

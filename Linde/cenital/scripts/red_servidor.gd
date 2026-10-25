@@ -8,9 +8,10 @@ const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Mundo = preload("res://scripts/mundo.gd")
 const Eq = preload("res://scripts/equipo.gd")
+const Huella = preload("res://scripts/huella.gd")
 const PUERTO := 7777
 const MAX_CLIENTES := 15
-const VERSION := 5              # versión del protocolo; el cliente la manda en «hola»
+const VERSION := 7              # versión del protocolo; el cliente la manda en «hola» (6: saberes y enseñanza; 7: huella de reglas en el saludo)
 const TICK := 0.05              # 20 Hz
 const ALCANCE := 2              # celdas (Chebyshev) para construir, retirar y usar cofres
 const MAX_PEDIDOS_S := 40       # pedidos por segundo y conexión; el resto se descarta
@@ -169,15 +170,24 @@ func recibir(pid: int, datos) -> bool:
 	p.n += 1
 	if p.n > MAX_PEDIDOS_S: return _rechazo(p.id, "ritmo")
 	if p.id == "":
-		if typeof(datos) != TYPE_ARRAY or datos.size() != 5 or typeof(datos[0]) != TYPE_STRING or datos[0] != "hola":
+		if typeof(datos) != TYPE_ARRAY or not datos.size() in [5, 6] or typeof(datos[0]) != TYPE_STRING or datos[0] != "hola":
 			return _rechazo("", "sin identificar")
-		var r := entrar(pid, datos.slice(1))
+		var r := _verificar_hola(datos)
+		if r.is_empty(): r = entrar(pid, datos.slice(1, 5))
 		if r.ok: _enviar(pid, ["bienvenida", estado_para(r.id)])
 		else:
 			_enviar(pid, ["rechazo", r.motivo])
 			_expulsar(pid)
 		return r.ok
 	return ejecutar(p.id, datos)
+
+## «hola» = [tag, versión, nombre, clave, apariencia, huella de reglas]. Devuelve {} si versión y reglas coinciden con las del
+## servidor, o el rechazo. Evita que la réplica (que calcula planos y saberes con sus propios archivos) use reglas distintas.
+static func _verificar_hola(datos: Array) -> Dictionary:
+	if typeof(datos[1]) != TYPE_INT or datos[1] != VERSION: return {"ok": false, "motivo": "Versión distinta del servidor"}
+	if datos.size() != 6 or typeof(datos[5]) != TYPE_STRING or datos[5] != Huella.huella():
+		return {"ok": false, "motivo": "Reglas distintas a las del servidor (huella de reglas)"}
+	return {}
 
 func _rechazo(id: String, motivo: String) -> bool:
 	var k := id if id != "" else "?"
@@ -213,6 +223,10 @@ func ejecutar(id: String, datos) -> bool:
 		"comprar_artefacto":
 			if not _sig(a, [TYPE_STRING,TYPE_STRING]): return _rechazo(id,tipo)
 			j.comprar_artefacto(a[0],a[1],id)
+		"ensenar_saber", "pedir_saber":     # [habitante, saber]: el servidor decide si hay lección; el cliente no fija éxito ni autor
+			if not _sig(a, [TYPE_STRING,TYPE_STRING]) or not j.habitantes.ids.has(a[0]): return _rechazo(id,tipo)
+			if tipo == "ensenar_saber": j.ensenar_saber(a[0],a[1],id)
+			else: j.pedir_saber(a[0],a[1],id)
 		"aportar_grupo":
 			if not _sig(a, [TYPE_STRING]): return _rechazo(id, tipo)
 			j.aportar_grupo(a[0], id)

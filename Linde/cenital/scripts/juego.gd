@@ -828,6 +828,14 @@ func fabricar_artefacto(clave: String, id: String = LOCAL) -> Dictionary:
 func comprar_artefacto(npc: String, clave: String, id: String = LOCAL) -> Dictionary:
 	return autonomia.desarrollo.comprar(npc,clave,id)
 
+## El jugador enseña un saber suyo a un habitante cercano.
+func ensenar_saber(npc: String, saber: String, id: String = LOCAL) -> Dictionary:
+	return autonomia.desarrollo.leccion_jugador(npc,saber,id,false)
+
+## El jugador pide a un habitante cercano que le enseñe un saber que este conoce.
+func pedir_saber(npc: String, saber: String, id: String = LOCAL) -> Dictionary:
+	return autonomia.desarrollo.leccion_jugador(npc,saber,id,true)
+
 func aportar_grupo(grupo: String, id: String = LOCAL) -> Dictionary:
 	return autonomia.sociedad.aportar_grupo(grupo, id)
 

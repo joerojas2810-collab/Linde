@@ -60,7 +60,10 @@ func _init() -> void:
 	j.fabricar_artefacto(espada);j.fabricar_artefacto(espada)
 	ok(d.rango(actor,"artesania","madera")==1,"la práctica material desbloquea un rango especializado")
 	var ligera:=A.clave("espada","madera","ligera",1)
-	ok(not d.conoce(actor,ligera),"una técnica avanzada también necesita espacio de taller")
+	# Cambio esperado (saberes): el rango ya no desbloquea técnicas por sí solo; hay que aprenderlas.
+	ok(not d.sabe(actor,ligera) and not d.conoce(actor,ligera),"el rango no concede una técnica que nadie ha enseñado")
+	d.aprender(actor,"tec:ligera","prueba")
+	ok(d.sabe(actor,ligera) and not d.conoce(actor,ligera),"una técnica avanzada también necesita espacio de taller")
 	for suelo in [Vector2i(27,20),Vector2i(27,21)]:j.construir("suelo",suelo)
 	ok(d.conoce(actor,ligera),"ampliar un taller habilita una técnica aprendida")
 	ok(j.fabricar_artefacto(ligera).ok,"la variante avanzada tiene un coste y una fabricación reales")
@@ -92,6 +95,9 @@ func _init() -> void:
 	mezcla.pies=M.pies_de_celda(Vector2i(28,21))
 	mezcla.construir("mesa",Vector2i(29,20));mezcla.construir("horno",Vector2i(29,21))
 	for i in 3:mezcla.fabricar_artefacto(A.clave("espada","hierro","simple",0))
+	var antes_laminar: Dictionary=mezcla.jug().inv.duplicate(true)
+	ok(not mezcla.refinar_material("hierro_fibra").ok and mezcla.jug().inv==antes_laminar,"con práctica y componentes tampoco se elabora un laminado cuyo proceso no se conoce")
+	md.aprender(mezcla.actor_desarrollo(),"lam:hierro_fibra","prueba")
 	for i in 3:ok(mezcla.refinar_material("hierro_fibra").ok,"se transforma hierro y fibra en un laminado pagando componentes")
 	ok(mezcla.jug().inv.get("mat1:hierro_fibra",0)==3 and not mezcla.jug().inv.has("lingote"),"la mezcla conserva las cantidades y consume el metal")
 	var compuesta:=A.clave("torso","hierro_fibra","simple",0)
@@ -129,7 +135,12 @@ func _init() -> void:
 	ok(hierro.fuente.contains("horno") and not hierro.usos.is_empty(),"el atlas conecta origen, refinado y usos del hierro")
 	# Prueba integrada: sin equipamiento, experiencia ni suelo iniciales regalados.
 	var libre=nuevo()
-	sim(libre,4320)
+	# Se mide el desgaste máximo de la mesa DURANTE la simulación: una reparación posterior lo devuelve a 0 y el estado final no lo ve.
+	var mesa_max := 0
+	for hora in 72:
+		sim(libre,60)
+		for k in libre.autonomia.sociedad.datos().estaciones:
+			if libre.d.mundo.constr.has(k) and libre.d.mundo.constr[k].t=="mesa": mesa_max=maxi(mesa_max,int(libre.autonomia.sociedad.datos().estaciones[k]))
 	var ld=libre.autonomia.desarrollo
 	var construidos:=0
 	for pieza in libre.d.mundo.constr.values():
@@ -137,10 +148,7 @@ func _init() -> void:
 	print("DESARROLLO_LIBRE: ",JSON.stringify({"creaciones":ld.datos().creaciones.size(),"suelos":construidos,"sociedad":libre.autonomia.sociedad.datos().estadisticas}))
 	ok(construidos>0,"los habitantes amplían sus talleres según práctica y necesidades")
 	ok(not ld.datos().creaciones.is_empty(),"sin intervención llegan a crear piezas mediante la gramática")
-	var desgaste_mesa := false
-	for k in libre.autonomia.sociedad.datos().estaciones:
-		if libre.d.mundo.constr.has(k) and libre.d.mundo.constr[k].t=="mesa" and int(libre.autonomia.sociedad.datos().estaciones[k])>0: desgaste_mesa=true
-	ok(desgaste_mesa,"los prototipos también desgastan la mesa utilizada")
+	ok(mesa_max>0,"los prototipos también desgastan la mesa utilizada")
 	var f=FileAccess.open("/tmp/linde-desarrollo-tres-dias.json",FileAccess.WRITE)
 	f.store_string(JSON.stringify(libre.d.mundo_vivo.autonomia,"  "));f.close()
 	ok(libre.d.mundo_vivo.ultimo.is_empty() and libre.d.mundo_vivo.instancias.is_empty(),"los descubrimientos no dependen de tarjetas o misiones preparadas")

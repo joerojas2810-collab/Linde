@@ -8,30 +8,160 @@ const M = preload("res://scripts/mundo.gd")
 var a
 var j
 var cfg: Dictionary
+var sab: Dictionary          # saberes_v1.json: catálogo complementario de conocimiento
+var _cat: Dictionary = {}
 
 func _init(autonomia) -> void:
 	a = autonomia
 	j = a.j
 	cfg = A.reglas()
+	sab = JSON.parse_string(FileAccess.get_file_as_string("res://datos/desarrollo/saberes_v1.json"))
 
 func activa() -> bool:
 	return a.sociedad.activa() and bool(cfg.activa)
 
 func datos() -> Dictionary:
 	var d: Dictionary = j.d.mundo_vivo.autonomia
-	if not d.has("desarrollo"): d.desarrollo = {"version":1,"actores":{},"creaciones":[]}
-	return d.desarrollo
+	if not d.has("desarrollo"): d.desarrollo = {"version":2,"actores":{},"creaciones":[],"historia":{},"lecciones":{},"pausas":{}}
+	var s: Dictionary = d.desarrollo
+	if int(s.version)<2:   # 1 -> 2: saberes. La siembra de cada actor la hace sembrar(), solo en la autoridad.
+		for k in ["historia","lecciones","pausas"]: if not s.has(k): s[k]={}
+		s.version=2
+	return s
 
 func estado(actor: String) -> Dictionary:
 	var actores: Dictionary = datos().actores
-	if not actores.has(actor): actores[actor] = {"practica":{},"materiales":{},"proyecto":{}}
+	if not actores.has(actor): actores[actor] = {"practica":{},"materiales":{},"proyecto":{},"saber":{}}
+	if not actores[actor].has("saber"): actores[actor].saber = {}
 	return actores[actor]
 
 ## Añade campos y reconoce existencias de partidas anteriores, sin regalar experiencia.
 func restaurar() -> void:
 	if not activa(): return
-	for id in j.d.jugadores: observar(j.actor_desarrollo(id),j.d.jugadores[id].inv)
-	for nid in j.habitantes.ids: observar("npc:"+nid,a.estado(nid).inv)
+	for id in j.d.jugadores:
+		observar(j.actor_desarrollo(id),j.d.jugadores[id].inv)
+		sembrar(j.actor_desarrollo(id))
+	for nid in j.habitantes.ids:
+		observar("npc:"+nid,a.estado(nid).inv)
+		sembrar("npc:"+nid)
+
+# ---------- Saberes ----------
+# Un saber es conocimiento de un procedimiento: «tec:<técnica>» o «lam:<laminado>». Es independiente de
+# la práctica (rango), del material visto y del taller. Otros niveles (dom:, dis:, ope:, inv:) se añaden
+# como ids nuevos en el mismo almacén, sin cambiar el esquema (PLAN_IMPLEMENTACION §3 y §17).
+
+## Id → {tipo, exige, rango_min, afines, nombre}. Derivado de saberes_v1.json y de la gramática.
+func catalogo() -> Dictionary:
+	if _cat.is_empty():
+		for t in sab.tecnicas:
+			var def: Dictionary = sab.tecnicas[t]
+			_cat["tec:"+t] = {"tipo":"tec","exige":def.exige,"rango_min":int(def.rango_min),"afines":def.afines,"nombre":"técnica "+str(cfg.tecnicas[t].nombre)}
+		for id in A.combinaciones():
+			var def: Dictionary = sab.laminados
+			_cat["lam:"+id] = {"tipo":"lam","exige":def.exige,"rango_min":int(def.rango_min),"afines":def.afines,"nombre":str(A.material(id).nombre),"componentes":id.split("_")}
+	return _cat
+
+## Errores del catálogo y de la siembra inicial (vacío si es coherente).
+func validar_saberes() -> Array:
+	var errores: Array = []
+	for t in sab.tecnicas:
+		if not cfg.tecnicas.has(t) or t=="simple": errores.append("técnica inexistente o común: "+t)
+	for id in catalogo():
+		if not catalogo()[id].exige in ["tec","lam"]: errores.append("exigencia no soportada: "+id)
+	var listas: Array = sab.inicial.npc.values()+sab.inicial.oficio.values()+[sab.inicial.jugador]
+	for lista in listas:
+		for id in lista: if not catalogo().has(id): errores.append("saber inicial inexistente: "+str(id))
+	return errores
+
+## Ids de saber que exige fabricar la pieza `p` (descriptor de artesania.leer). La lógica de conocimiento
+## solo pregunta por aquí: una gramática con parámetros añadirá ids a esta lista, no condiciones al resto.
+func saberes_exigidos(p: Dictionary) -> Array:
+	var ids: Array = []
+	if catalogo().has("tec:"+str(p.tecnica)): ids.append("tec:"+str(p.tecnica))
+	if catalogo().has("lam:"+str(p.material)): ids.append("lam:"+str(p.material))
+	return ids
+
+## Lectura pura (también en la réplica): no crea entradas.
+func _saber_de(actor: String) -> Dictionary:
+	return datos().actores.get(actor,{}).get("saber",{})
+
+func tiene_saber(actor: String, id: String) -> bool:
+	return _saber_de(actor).has(id)
+
+## ¿Existe esta pieza dentro de las reglas? No depende de ningún actor.
+func valido(clave: String) -> bool:
+	return not A.leer(clave).is_empty()
+
+## ¿Conoce el procedimiento de esta pieza? Independiente del taller, los materiales y la pericia.
+func sabe(actor: String, clave: String) -> bool:
+	var p := A.leer(clave)
+	if p.is_empty(): return false
+	for id in saberes_exigidos(p): if not tiene_saber(actor,id): return false
+	return true
+
+## Preparación mínima para aprender un saber: rango general de artesanía y, en laminados, haber visto sus componentes.
+func prerrequisitos_ok(actor: String, id: String) -> bool:
+	if not catalogo().has(id): return false
+	var def: Dictionary = catalogo()[id]
+	if rango(actor,"artesania")<int(def.rango_min): return false
+	if def.tipo=="lam":
+		for c in def.componentes: if not datos().actores.get(actor,{}).get("materiales",{}).has(c): return false
+	return true
+
+## Saberes que el actor aún no tiene y para los que está preparado.
+func candidatos(actor: String) -> Array:
+	var lista: Array = []
+	for id in catalogo():
+		if not tiene_saber(actor,id) and prerrequisitos_ok(actor,id): lista.append(id)
+	lista.sort()
+	return lista
+
+func _nombre_saber(id: String) -> String:
+	return str(catalogo().get(id,{}).get("nombre",id))
+
+## Concede un saber (solo la autoridad). `fuente`: siembra, ensenanza, descubrimiento o prueba.
+## No comprueba prerrequisitos: los exige quien enseña. Registra la procedencia salvo en la siembra.
+func aprender(actor: String, id: String, fuente: String, maestro: String = "") -> bool:
+	if not j.es_autoridad() or not activa() or not catalogo().has(id): return false
+	var n := estado(actor)
+	if n.saber.has(id): return false
+	n.saber[id] = {"fuente":fuente,"min":int(j.d.min),"de":maestro}
+	if fuente=="siembra": return true
+	var h: Dictionary = datos().historia.get_or_add(id,{"primero":{},"aprendices":[],"total":0})
+	if fuente=="descubrimiento" and h.primero.is_empty(): h.primero={"actor":actor,"min":int(j.d.min)}
+	h.total=int(h.total)+1
+	h.aprendices.append({"actor":actor,"min":int(j.d.min),"de":maestro,"fuente":fuente})
+	while h.aprendices.size()>int(sab.ensenanza.tope_aprendices): h.aprendices.pop_front()
+	return true
+
+## Conocimiento inicial: lo que el oficio y la experiencia justifican. Solo la autoridad, una vez por actor.
+func sembrar(actor: String) -> void:
+	if not j.es_autoridad() or not activa(): return
+	var n := estado(actor)
+	if n.has("sembrado"): return
+	n.sembrado = true
+	var ids: Array = _heredados(actor)
+	if actor.begins_with("npc:"): ids+=_iniciales(actor.trim_prefix("npc:"))
+	else: ids+=sab.inicial.jugador
+	for id in ids: aprender(actor,str(id),"siembra")
+
+## Quien ya practicaba conserva lo que ya hacía: técnicas y laminados que su rango le permitía usar.
+func _heredados(actor: String) -> Array:
+	var n := estado(actor)
+	var ids: Array = []
+	if int(n.practica.get("artesania",0))<=0: return ids
+	var mejor := 0
+	for m in n.materiales: mejor = maxi(mejor,rango(actor,"artesania",str(m)))
+	for id in catalogo():
+		var def: Dictionary = catalogo()[id]
+		if def.tipo=="tec" and mejor>=int(cfg.tecnicas[id.trim_prefix("tec:")].rango): ids.append(id)
+		elif def.tipo=="lam" and _laminado_ok(actor,id.trim_prefix("lam:")): ids.append(id)
+	return ids
+
+func _iniciales(nid: String) -> Array:
+	var ids: Array = sab.inicial.npc.get(nid,[]).duplicate()
+	for id in sab.inicial.oficio.get(str(a.perfil(nid).get("oficio","")),[]): if not id in ids: ids.append(id)
+	return ids
 
 func _materiales(objetos: Dictionary) -> Array:
 	var encontrados: Array = []
@@ -81,12 +211,16 @@ func suelo(actor: String) -> int:
 		if maxi(absi(c.x-origen.x),absi(c.y-origen.y)) <= int(cfg.radio_taller): cantidad+=1
 	return cantidad
 
-## Valida conocimiento, pericia y entorno de trabajo de la pieza solicitada.
-func conoce(actor: String, clave: String) -> bool:
+## ¿Puede hacerla ahora? Material visto, pericia y espacio de taller. Los insumos y la estación se validan al actuar.
+func puede(actor: String, clave: String) -> bool:
 	var p := A.leer(clave)
 	if p.is_empty() or not estado(actor).materiales.has(p.material): return false
 	var nivel := rango(actor,"artesania",p.material)
 	return int(p.calidad)<=nivel and nivel>=int(cfg.tecnicas[p.tecnica].rango) and suelo(actor)>=suelo_requerido(actor,p.tecnica)
+
+## Fabricar exige conocer el procedimiento (sabe) y poder ejecutarlo ahora (puede).
+func conoce(actor: String, clave: String) -> bool:
+	return sabe(actor,clave) and puede(actor,clave)
 
 ## La práctica de construcción permite organizar el mismo taller con menos superficie.
 func suelo_requerido(actor: String, tecnica: String) -> int:
@@ -94,14 +228,18 @@ func suelo_requerido(actor: String, tecnica: String) -> int:
 	if base==0:return 0
 	return maxi(1,base-rango(actor,"construccion")*int(cfg.ahorro_suelo_constructor))
 
-func conoce_laminado(actor: String, id: String) -> bool:
+## Componentes vistos y pericia suficiente para elaborar el laminado (sin comprobar si conoce el proceso).
+func _laminado_ok(actor: String, id: String) -> bool:
 	if not id in A.combinaciones(): return false
 	var partes:=id.split("_")
 	return estado(actor).materiales.has(partes[0]) and estado(actor).materiales.has(partes[1]) and rango(actor,"artesania",partes[0])>=int(cfg.laminados.rango)
 
+func conoce_laminado(actor: String, id: String) -> bool:
+	return tiene_saber(actor,"lam:"+id) and _laminado_ok(actor,id)
+
 ## Refinar también es una transacción: descubrir no regala la materia fabricada.
 func refinar(id_material: String, id: String) -> Dictionary:
-	if not activa() or not conoce_laminado(j.actor_desarrollo(id),id_material): return j._no("Necesitas conocer sus componentes y practicar con el metal",id)
+	if not activa() or not conoce_laminado(j.actor_desarrollo(id),id_material): return j._no("Necesitas conocer el proceso y sus componentes, y practicar con el metal",id)
 	var r:=A.receta_material(id_material)
 	if not j.estacion_cerca(r.est,id): return j._no("Necesitas un horno cerca",id)
 	if not Inv.cambiar(j.jug(id).inv,r.ent,r.sal,j.stats(id).slots):return j._no("Faltan componentes o espacio",id)
@@ -176,11 +314,122 @@ func _ampliar(nid: String) -> bool:
 				if a.sociedad.construir_pieza(nid,"suelo",c): return true
 	return false
 
+# ---------- Enseñanza ----------
+
+## Motivo por el que `maestro` no puede enseñar `id` a `alumno` ("" si puede). No mira distancia ni voluntad.
+func _motivo_no_ensena(maestro: String, alumno: String, id: String) -> String:
+	if not catalogo().has(id): return "Ese saber no existe"
+	if not tiene_saber(maestro,id): return "No conoce ese saber"
+	if tiene_saber(alumno,id): return "Ya lo conoce"
+	if not prerrequisitos_ok(alumno,id): return "Aún no está preparado para aprenderlo"
+	return ""
+
+func _celdas(nid: String) -> Vector2i:
+	return M.celda_de(j.habitantes.pos(nid))
+
+func _descansa(nid: String) -> bool:
+	return j.habitantes.rutina(nid).act in ["dormir","descansar"]
+
+## Enseñanza entre habitantes, sin intervención del jugador: acude al alumno, comparte tiempo con él
+## y, al completar la lección, el alumno aprende. No hereda pericia ni recibe ninguna pieza.
+func _ensenar(nid: String) -> bool:
+	var maestro := "npc:"+nid
+	if _saber_de(maestro).is_empty(): return false
+	var ens: Dictionary = sab.ensenanza
+	var ahora := int(j.d.min)
+	var lecciones: Dictionary = datos().lecciones
+	var leccion: Dictionary = lecciones.get(maestro,{})
+	if not leccion.is_empty():
+		var otro_id: String = str(leccion.alumno).trim_prefix("npc:")
+		if ahora-int(leccion.ultimo)>int(ens.espera_max_min) or not j.habitantes.ids.has(otro_id) or _motivo_no_ensena(maestro,leccion.alumno,leccion.saber)!="":
+			_pausar(maestro,str(leccion.alumno),str(leccion.saber))
+			lecciones.erase(maestro)
+			leccion = {}
+	if leccion.is_empty():
+		leccion = _elegir_leccion(nid)
+		if leccion.is_empty(): return false
+		lecciones[maestro] = leccion
+	var otro: String = str(leccion.alumno).trim_prefix("npc:")
+	if _descansa(otro): return false
+	a.sociedad._ir(nid,_celdas(otro),"ensenar","compartir una técnica")
+	if Vector2(_celdas(nid)).distance_to(Vector2(_celdas(otro)))>float(ens.radio_leccion_celdas): return true
+	leccion.avance = int(leccion.avance)+mini(int(ens.paso_max_min),ahora-int(leccion.ultimo))
+	leccion.ultimo = ahora
+	if int(leccion.avance)<int(ens.minutos): return true
+	if aprender(leccion.alumno,leccion.saber,"ensenanza",maestro):
+		var nombre := _nombre_saber(leccion.saber)
+		a.sociedad._vinculo(nid,otro,int(ens.ganancia_confianza))
+		a.sociedad._vinculo(otro,nid,int(ens.ganancia_confianza))
+		a._recordar(nid,"enseno",nombre,leccion.alumno)
+		a._recordar(otro,"aprendio",nombre,maestro)
+		a.sociedad.suceso("ensenanza",nombre,nid,otro)
+	lecciones.erase(maestro)
+	return true
+
+## Primera lección posible con alguien cercano, despierto y de confianza; prefiere lo afín a su oficio.
+func _elegir_leccion(nid: String) -> Dictionary:
+	var ens: Dictionary = sab.ensenanza
+	var maestro := "npc:"+nid
+	var ahora := int(j.d.min)
+	var ids: Array = j.habitantes.ids.duplicate()
+	ids.sort()
+	var saberes: Array = _saber_de(maestro).keys()
+	saberes.sort()
+	var mejor: Dictionary = {}
+	var puntos := -1
+	for otro in ids:
+		if otro==nid or a.perfil(otro).is_empty() or _descansa(otro): continue
+		if Vector2(_celdas(nid)).distance_to(Vector2(_celdas(otro)))>float(ens.radio_busqueda_celdas): continue
+		if a.sociedad.confianza(nid,otro)<int(ens.confianza_min) or a.sociedad.confianza(otro,nid)<int(ens.confianza_min): continue
+		var alumno: String = "npc:"+str(otro)
+		sembrar(alumno)
+		for id in saberes:
+			if _motivo_no_ensena(maestro,alumno,id)!="": continue
+			if ahora-int(datos().pausas.get(_clave_pausa(maestro,alumno,id),-1000000))<int(ens.enfriamiento_min): continue
+			var p := 1+(2 if str(a.perfil(otro).get("oficio","")) in catalogo()[id].afines else 0)
+			if p>puntos:
+				puntos = p
+				mejor = {"alumno":alumno,"saber":id,"avance":0,"ultimo":ahora}
+	return mejor
+
+func _clave_pausa(maestro: String, alumno: String, id: String) -> String:
+	return maestro+">"+alumno+">"+id
+
+## Una lección interrumpida no se reintenta de inmediato; las pausas caducadas se descartan.
+func _pausar(maestro: String, alumno: String, id: String) -> void:
+	var pausas: Dictionary = datos().pausas
+	var limite := int(j.d.min)-int(sab.ensenanza.enfriamiento_min)
+	for k in pausas.keys(): if int(pausas[k])<=limite: pausas.erase(k)
+	pausas[_clave_pausa(maestro,alumno,id)] = int(j.d.min)
+
+## Enseñanza directa con un jugador, instantánea: el habitante enseña al jugador (`hacia_jugador`) o aprende de él.
+## Valida en el servidor cercanía, saber del maestro, preparación y voluntad del habitante.
+func leccion_jugador(nid: String, saber: String, id: String, hacia_jugador: bool) -> Dictionary:
+	if not activa() or not j.habitantes.ids.has(nid): return j._no("No hay nadie que pueda enseñar aquí",id)
+	if j.habitantes.pos(nid).distance_to(j.pies_de(id))>j.ALCANCE_NPC: return j._no("Acércate a quien quieres enseñar o escuchar",id)
+	if _descansa(nid): return j._no("Ahora descansa",id)
+	var yo: String = j.actor_desarrollo(id)
+	var npc := "npc:"+nid
+	sembrar(npc)
+	var gid: String = a.sociedad.grupo_de(nid)
+	if gid!="" and a.sociedad.reputacion(gid,id)<int(sab.ensenanza.reputacion_min): return j._no("No confía lo bastante en ti",id)
+	var maestro: String = npc if hacia_jugador else yo
+	var alumno: String = yo if hacia_jugador else npc
+	var motivo := _motivo_no_ensena(maestro,alumno,saber)
+	if motivo!="": return j._no(motivo,id)
+	if not aprender(alumno,saber,"ensenanza",maestro): return j._no("No se pudo completar la lección",id)
+	var nombre := _nombre_saber(saber)
+	a._recordar(nid,"enseno" if hacia_jugador else "aprendio",nombre,id)
+	a.sociedad.suceso("ensenanza",nombre,nid if hacia_jugador else id,id if hacia_jugador else nid)
+	return j._ok(("Aprendes %s" if hacia_jugador else "Enseñas %s") % nombre,id)
+
 ## Experimentación de NPC con excedentes, recetas descubiertas y mesa accesible.
 func decidir(nid: String) -> bool:
 	if not activa(): return false
 	var actor := "npc:"+nid
+	sembrar(actor)
 	if _ampliar(nid): return true
+	if _ensenar(nid): return true
 	if rango(actor,"artesania")<int(cfg.rango_prototipo): return false
 	var n: Dictionary = a.estado(nid)
 	var cantidad := 0
