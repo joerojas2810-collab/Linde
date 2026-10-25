@@ -65,6 +65,24 @@ See `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md` for full protocol and examples.
 > **First session?** If the project has no engine configured and no game concept,
 > run `/start` to begin the guided onboarding flow.
 
+## Documentación: qué leer y cómo mantenerla
+
+**Entrada rápida (toda sesión de Linde, en este orden, sin cargar más):**
+1. Qué es → [`design/game-brief.md`](design/game-brief.md).
+2. Qué existe y qué está verificado → [`production/epics/mundo-vivo/ESTADO.md`](production/epics/mundo-vivo/ESTADO.md) (fuente de verdad; cada cifra lleva fecha y alcance).
+3. Qué decisiones respetar → [`Linde/cenital/docs/DECISIONES.md`](Linde/cenital/docs/DECISIONES.md) (índice único, solo la tabla).
+4. Sesión anterior → `production/session-state/active.md`.
+
+**Lectura contextual (solo si la tarea toca el tema):** el contrato del sistema en `Linde/cenital/docs/` y su GDD en `design/gdd/` (el GDD dice qué se quiere; el contrato, cómo funciona hoy); el plan activo de la iniciativa; `docs/investigacion/` solo para conocimiento/invención de técnicas; arte pendiente en `Linde/cenital/docs/ARTE_PENDIENTE.md`. **Visión original** (para contrastar decisiones con los objetivos de Linde, no es lectura técnica diaria): [`Linde/documentos/LINDE_Punto_de_Inicio/`](Linde/documentos/LINDE_Punto_de_Inicio/00_LEEME.md).
+
+**Mantenimiento:**
+- Antes de crear un documento, buscar si corresponde actualizar uno existente. Cada iniciativa tiene **un solo plan activo**; las investigaciones son referencia y no duplican el plan.
+- Al implementar y probar una fase: actualizar su estado en el plan **y** registrar en `ESTADO.md` el resultado verificado (qué se ejecutó, cuándo, resultado). No convertir resultados históricos en actuales sin repetir la prueba.
+- Decisiones: una fila en el índice de `DECISIONES.md` (ID, fecha, estado, enlace); fundamentos y alternativas junto al sistema o la iniciativa.
+- Si una investigación o doc contradice el código verificado, prevalece el código: corregirlo o marcarlo obsoleto con fecha.
+- Al terminar una iniciativa: mover su plan a `docs/archivo/` y dejar enlazadas sus decisiones en el índice. Lo histórico no se borra sin aprobación expresa.
+- **No mover** `Linde/arte-entregado/`, `Linde/documentos/{contrato-equipo,sistema-de-equipo}.md` ni `Linde/documentos/FASE_07/`: los citan código, pruebas y manifiestos.
+
 ## Coding Standards
 
 @.claude/docs/coding-standards.md

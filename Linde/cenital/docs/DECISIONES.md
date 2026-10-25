@@ -1,11 +1,49 @@
-# Linde cenital — estado, decisiones y procedencia (23 oct 2026)
+# Linde — registro de decisiones y procedencia
 
-El prototipo lateral (`beta/lateral`) no se tocó. Todo lo de aquí es código y arte propios.
+> **Este es el índice único de decisiones del proyecto.** Cada fila apunta al lugar donde viven los fundamentos y las alternativas; no se duplican aquí. Estado vigente del juego: [ESTADO.md](../../../production/epics/mundo-vivo/ESTADO.md). Política de mantenimiento: [CLAUDE.md](../../../CLAUDE.md#documentación-qué-leer-y-cómo-mantenerla).
+>
+> **Al añadir una decisión**: una fila en el índice (ID, fecha, estado, enlace) y el fundamento junto a su sistema o en la iniciativa. Estados: *Propuesta* (reversible, sin aprobar), *Usuario* (decisión expresa del usuario), *Vigente*, *Reemplazada por X*.
+> **Visión original** (para contrastar): [LINDE_Punto_de_Inicio](../../documentos/LINDE_Punto_de_Inicio/01_VISION_Y_DECISIONES.md) y [game-brief](../../../design/game-brief.md).
+> La cabecera «23 oct 2026» del archivo anterior era el momento de su creación; las secciones de abajo son de fechas distintas, anotadas en cada una.
+
+## Índice
+
+### A. Decisiones técnicas del prototipo cenital (este archivo, 23–24/10)
+| ID | Tema | Estado | Dónde está el fundamento |
+|---|---|---|---|
+| P03–P06 y sin ID | Movimiento, celda, mapa de autor, sin avance con la app cerrada; reglas de inventario, botín, construcción, misiones, habilidades, jefes | Propuesta | Sección «Decisiones» más abajo |
+| A01 | Combate en tiempo real provisional | Propuesta, pendiente | «A01 — Combate» |
+| — | Estado por jugador y mundo compartido (formato 2) | Propuesta, vigente | «Estado por jugador y mundo compartido» |
+| — | Servidor autoritativo «mundo anfitrión» (A04) | Propuesta, vigente (protocolo hoy en versión 5) | «Red: servidor autoritativo»; [ADR-0001](../../../docs/architecture/adr-0001-multijugador-mundo-anfitrion.md) |
+| — | Equipo v1 (familias, piedras, Chispa, sets) | Propuesta, vigente | «Equipo v1» y [sistema-de-equipo.md](../../documentos/sistema-de-equipo.md) |
+| — | Arte de equipo por colores índice; ataque con celda 48 | Propuesta, vigente | Secciones «Arte de equipo…» y «Ataque con equipo» |
+| — | Arte nuevo por defecto; integración estética E01–E06; dibujo procedural retirado | Usuario (24/10) | «Arte nuevo por defecto» e «Integración estética completa» |
+| — | Origen retirado, semilla fuera del creador, ranura de arma | Usuario (24/10) | «Origen retirado…» |
+
+### B. Decisiones del epic mundo-vivo (24/10, del usuario)
+Servidor siempre encendido, sin congelar el mundo; crecimiento mixto (los hitos abren posibilidades y la construcción las concreta); Ordal presente desde el inicio; dormir no salta el reloj; llegada = variable `<id>_presente`; «cama de huésped» como pieza nueva; plantilla de prueba «Una cama de huésped» (15 XP + 2 fibra); clientes ven la llegada pero no el panel de misiones; agentes de implementación con Sonnet 5.5. Fundamentos: [README del epic](../../../production/epics/mundo-vivo/README.md) (§ Decisiones del usuario) y [ESTADO archivado §4](../../../docs/archivo/ESTADO-mundo-vivo-hasta-2026-10-25.md).
+
+### C. Decisiones del usuario sobre dirección (24/10)
+| Decisión | Estado | Dónde |
+|---|---|---|
+| La autonomía es el modo principal; el juego nace de las decisiones del jugador, no de una campaña; campaña del cap. 1 retirada de la partida principal | Usuario (vigente; la activación por defecto se hizo en paralelo, ver ESTADO) | [ESTADO archivado §11](../../../docs/archivo/ESTADO-mundo-vivo-hasta-2026-10-25.md), [AUTONOMIA](AUTONOMIA.md) |
+| La población no tiene número objetivo; `max_habitantes` es solo un techo técnico | Vigente | ESTADO archivado §13 |
+| Gente buena y mala: honestidad, codicia y rencor; propiedad y hurto también para el jugador | Usuario | ESTADO archivado §13, [PROTECCION_Y_ECONOMIA](PROTECCION_Y_ECONOMIA.md) |
+
+### D. Iniciativa «Innovación emergente» (25/10, investigación)
+- 9 decisiones tomadas por el usuario para el plan: [PLAN_IMPLEMENTACION §1](../../../docs/investigacion/innovacion-emergente/PLAN_IMPLEMENTACION.md).
+- D01–D12 (recomendaciones con evidencia y alternativa evaluada, todas *Propuesta*): [DECISIONES de la investigación](../../../docs/investigacion/innovacion-emergente/DECISIONES.md). Allí viven las alternativas; no se copian aquí.
+
+### E. Otros registros
+[ADR-0001 multijugador](../../../docs/architecture/adr-0001-multijugador-mundo-anfitrion.md) · [canon de trabajo](../../../design/narrative/canon-de-trabajo.md) · [registro de entidades](../../../design/registry/entities.yaml) · [deuda técnica](../../../docs/tech-debt-register.md).
+
+---
 
 ## Ejecutar
+> Los recuentos de este bloque son del 23/10 y están superados; los comandos y suites vigentes están en [ESTADO.md](../../../production/epics/mundo-vivo/ESTADO.md#4-cómo-verificarlo).
 - Jugar: `Iniciar-Cenital.command` (args tras `--`: `--guardado=ruta`, `--nueva=SEMILLA`, `--panel=inv|craft|hab|mis`, `--ir=x,y`).
-- Lógica: `Godot --headless --path Linde/cenital --script res://tests/prueba.gd` → 213 PASS, 0 FAIL.
-- UI real (menú→creador→partida→paneles→guardar→continuar): `--script res://tests/prueba_ui.gd` → 12 PASS.
+- Lógica: `Godot --headless --path Linde/cenital --script res://tests/prueba.gd` → 213 PASS, 0 FAIL (cifra del 23/10).
+- UI real (menú→creador→partida→paneles→guardar→continuar): `--script res://tests/prueba_ui.gd` → 12 PASS (cifra del 23/10).
 - `tests/capturas/`: fotogramas reales de la escena (casa, cantera, lago, ruinas, panel).
 - Los "ERROR: Parse JSON failed" que imprime la prueba de persistencia son esperados: se corrompen archivos a propósito.
 
