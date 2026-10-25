@@ -129,8 +129,8 @@ func _init() -> void:
 	persistente.autonomia.estado("maren").inv={"pico_piedra":2}
 	persistente.autonomia.estado("ordal").inv={"fibra":12}
 	var pid: String=ps.acordar("ordal","maren","pico_piedra",1)
-	ok(pid!="" and persistente.guardar("/tmp/linde-sociedad-prueba.json"), "guarda un acuerdo con materiales en tránsito")
-	var cargado=J.cargar("/tmp/linde-sociedad-prueba.json")
+	ok(pid!="" and persistente.guardar("/tmp/linde-sociedad-prueba-%d.json" % OS.get_process_id()), "guarda un acuerdo con materiales en tránsito")
+	var cargado=J.cargar("/tmp/linde-sociedad-prueba-%d.json" % OS.get_process_id())
 	ok(cargado!=null and JSON.stringify(cargado.d.mundo_vivo.autonomia)==JSON.stringify(J._enteros(JSON.parse_string(JSON.stringify(persistente.d.mundo_vivo.autonomia)))), "carga mantiene grupos, herramientas, acuerdos, garantías y memorias")
 	if cargado != null:
 		colocar(cargado,"ordal",Vector2i(28,21)); colocar(cargado,"maren",Vector2i(28,20))
@@ -148,8 +148,8 @@ func _init() -> void:
 	antiguo.autonomia.estado("maren").inv = {"fibra":7}
 	antiguo.d.mundo_vivo.autonomia.erase("sociedad")
 	antiguo.d.mundo_vivo.autonomia.erase("modo")
-	ok(antiguo.guardar("/tmp/linde-sociedad-antiguo.json"), "guarda una partida con el estado de autonomía anterior")
-	var migrado = J.cargar("/tmp/linde-sociedad-antiguo.json")
+	ok(antiguo.guardar("/tmp/linde-sociedad-antiguo-%d.json" % OS.get_process_id()), "guarda una partida con el estado de autonomía anterior")
+	var migrado = J.cargar("/tmp/linde-sociedad-antiguo-%d.json" % OS.get_process_id())
 	ok(migrado != null and migrado.autonomia.sociedad.activa() and migrado.autonomia.estado("maren").inv == {"fibra":7}, "la migración añade grupos conservando los recursos de la primera prueba")
 	var construir = nuevo()
 	construir.autonomia.estado("ordal").inv = {"piedra":8}
@@ -168,7 +168,7 @@ func _init() -> void:
 	# La reparación depende de la secuencia (carácter, estafas, población): su mecanismo se comprueba arriba, no su aparición en la simulación libre.
 	ok(tipos.has("desgaste"), "el uso desgasta las herramientas y renueva la demanda de productos fabricados")
 	ok(libre.d.mundo_vivo.ultimo.is_empty() and libre.d.mundo_vivo.instancias.is_empty(), "las cinco capacidades funcionan con las tarjetas desactivadas")
-	var f=FileAccess.open("/tmp/linde-sociedad-dia.json",FileAccess.WRITE)
+	var f=FileAccess.open("/tmp/linde-sociedad-dia-%d.json" % OS.get_process_id(),FileAccess.WRITE)
 	f.store_string(JSON.stringify(libre.d.mundo_vivo.autonomia,"  "));f.close()
 	print("SOCIEDAD: %d comprobaciones, %d fallos"%[total,fallos])
 	quit(1 if fallos else 0)

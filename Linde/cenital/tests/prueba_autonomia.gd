@@ -77,7 +77,7 @@ func _init() -> void:
 	ok(int(f.inv.get("lingote", 0)) == 1 and not f.inv.has("mena") and not f.inv.has("madera"), "fabricación consume exactamente entradas y crea su salida")
 	ok(recuerdo(fabrica, "ordal", "fabrico"), "recuerda producción habilitada por una construcción del jugador")
 	# Persistencia completa, incluida negativa y reloj: no repite acciones al restaurar.
-	var ruta := "/tmp/linde-autonomia-integracion.json"
+	var ruta := "/tmp/linde-autonomia-integracion-%d.json" % OS.get_process_id()
 	ok(sin.guardar(ruta), "guardado real de necesidades, inventarios, planes y memoria")
 	var cargado = J.cargar(ruta)
 	ok(cargado != null, "carga el guardado")

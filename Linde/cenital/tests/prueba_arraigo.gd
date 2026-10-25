@@ -108,11 +108,11 @@ func _init() -> void:
 	l.d.min += 1440 * 9
 	sl.arraigo.evaluar_dia()
 	ok(sl.arraigo.estado(lid) == "residente" and l.habitantes.ids.has(lid), "un colono de una partida anterior cuenta como residente y no se marcha")
-	var gp = l.guardar("/tmp/linde-arraigo.json")
-	var cg = J.cargar("/tmp/linde-arraigo.json")
+	var gp = l.guardar("/tmp/linde-arraigo-%d.json" % OS.get_process_id())
+	var cg = J.cargar("/tmp/linde-arraigo-%d.json" % OS.get_process_id())
 	ok(gp and cg != null and cg.habitantes.ids.has(lid), "el guardado conserva a los colonos presentes")
-	var wg = w.guardar("/tmp/linde-arraigo2.json")
-	var cw = J.cargar("/tmp/linde-arraigo2.json")
+	var wg = w.guardar("/tmp/linde-arraigo2-%d.json" % OS.get_process_id())
+	var cw = J.cargar("/tmp/linde-arraigo2-%d.json" % OS.get_process_id())
 	ok(wg and cw != null and cw.autonomia.sociedad.arraigo.estado(wid) == "visitante", "el estado de permanencia sobrevive al guardado")
 	# Etapa 3: biografía mínima.
 	var b: Dictionary = u.autonomia.perfil(uid).get("biografia", {})
@@ -329,8 +329,8 @@ func _init() -> void:
 	ok(sq.arraigo.estado(qid) == "ausente" and not q.habitantes.ids.has(qid), "el colono con deuda se marcha")
 	ok(sq.arraigo.relevante(qid), "quien se marcha con una deuda abierta es relevante para el aviso")
 	var antes_q := huella(q, qid)
-	ok(q.guardar("/tmp/linde-arraigo-q.json"), "guarda con un ausente")
-	var cq = J.cargar("/tmp/linde-arraigo-q.json")
+	ok(q.guardar("/tmp/linde-arraigo-q-%d.json" % OS.get_process_id()), "guarda con un ausente")
+	var cq = J.cargar("/tmp/linde-arraigo-q-%d.json" % OS.get_process_id())
 	ok(cq != null and cq.d.size() > 0, "carga la partida con el ausente")
 	if cq != null and cq.d.size() > 0:
 		ok(huella(cq, qid) == antes_q, "biografía, deuda, vínculos, inventario y recuerdos del ausente son idénticos tras cargar")
@@ -347,8 +347,8 @@ func _init() -> void:
 	sp._inmigrar()
 	var pid: String = pp.d.mundo_vivo.autonomia.colonos.keys()[0]
 	var antes_p := huella(pp, pid)
-	pp.guardar("/tmp/linde-arraigo-p.json")
-	var cp = J.cargar("/tmp/linde-arraigo-p.json")
+	pp.guardar("/tmp/linde-arraigo-p-%d.json" % OS.get_process_id())
+	var cp = J.cargar("/tmp/linde-arraigo-p-%d.json" % OS.get_process_id())
 	ok(cp != null and cp.d.size() > 0 and huella(cp, pid) == antes_p, "un colono presente conserva todo tras guardar y cargar")
 	print("ARRAIGO: %d comprobaciones, %d fallos" % [total, fallos])
 	quit(1 if fallos else 0)

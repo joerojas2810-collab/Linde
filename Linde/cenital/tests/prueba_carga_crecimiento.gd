@@ -28,7 +28,7 @@ func _init() -> void:
   tiempos.append(float(Time.get_ticks_usec()-inicio)/1000.0)
  tiempos.sort()
  var r:Dictionary={"habitantes":j.habitantes.ids.size(),"sesiones":j.rt.size(),"ticks":tiempos.size(),"p95_ms":tiempos[floori(tiempos.size()*0.95)],"max_ms":tiempos[-1],"regiones":j.mundo.regiones.size(),"bytes_instantanea":var_to_bytes(srv.instantanea_actual()).size()}
- FileAccess.open("/tmp/linde-carga-crecimiento.json",FileAccess.WRITE).store_string(JSON.stringify(r,"  "))
+ FileAccess.open("/tmp/linde-carga-crecimiento-%d.json" % OS.get_process_id(),FileAccess.WRITE).store_string(JSON.stringify(r,"  "))
  var bien:bool=r.habitantes==12 and r.sesiones==4 and r.regiones<=200
  print(("PASS " if bien else "FAIL ")+"CARGA_CRECIMIENTO "+JSON.stringify(r))
  srv.free()

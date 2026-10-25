@@ -7,9 +7,9 @@ const M = preload("res://scripts/mundo.gd")
 const Srv = preload("res://scripts/red_servidor.gd")
 const Cli = preload("res://scripts/red_cliente.gd")
 const G = preload("res://scripts/guardado.gd")
-const RUTA := "/tmp/linde-saberes-prueba.json"
-const RUTA_COMPAT := "/tmp/linde-saberes-compat.json"
-const RUTA_PREVIO := "/tmp/linde-saberes-previo.json"
+var RUTA := "/tmp/linde-saberes-prueba-%d.json" % OS.get_process_id()
+var RUTA_COMPAT := "/tmp/linde-saberes-compat-%d.json" % OS.get_process_id()
+var RUTA_PREVIO := "/tmp/linde-saberes-previo-%d.json" % OS.get_process_id()
 var fallos := 0
 var total := 0
 

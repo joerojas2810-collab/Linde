@@ -24,16 +24,16 @@ func _init() -> void:
  var viejo=J.nueva(123,"Anterior",[0,0,0])
  viejo.d.mundo.generacion.version=1
  viejo.d.mundo.rotos["roca@56,-299"]=viejo.d.min
- viejo.guardar("/tmp/linde-v1-roca.json")
- var carga=J.cargar("/tmp/linde-v1-roca.json");mover(carga,Vector2i(56,-299))
+ viejo.guardar("/tmp/linde-v1-roca-%d.json" % OS.get_process_id())
+ var carga=J.cargar("/tmp/linde-v1-roca-%d.json" % OS.get_process_id());mover(carga,Vector2i(56,-299))
  ok(carga.mundo.generador.datos(Vector2i(56,-299)).objeto=="roca" and carga.mundo.objeto_presente(Vector2i(56,-299))=="","la roca extraída en v1 no reaparece como estaño al cargar")
- viejo.d.mundo.rotos.erase("roca@56,-299");viejo.d.mundo.golpes["roca@56,-299"]=1;viejo.guardar("/tmp/linde-v1-parcial.json")
- carga=J.cargar("/tmp/linde-v1-parcial.json");mover(carga,Vector2i(56,-299))
+ viejo.d.mundo.rotos.erase("roca@56,-299");viejo.d.mundo.golpes["roca@56,-299"]=1;viejo.guardar("/tmp/linde-v1-parcial-%d.json" % OS.get_process_id())
+ carga=J.cargar("/tmp/linde-v1-parcial-%d.json" % OS.get_process_id());mover(carga,Vector2i(56,-299))
  ok(carga.mundo.objeto_presente(Vector2i(56,-299))=="roca@56,-299" and int(carga.d.mundo.golpes["roca@56,-299"])==1,"v1 conserva tipo e impactos parciales de roca")
  var nuevo=J.nueva(123,"Nueva",[0,0,0])
  ok(nuevo.d.mundo.generacion.version==2 and nuevo.mundo.generador.datos(Vector2i(56,-299)).objeto=="veta_estano","partidas nuevas usan el generador v2 con estaño")
- viejo.d.mundo.golpes.clear();viejo.d.mundo.rotos["veta_estano@56,-299"]=0;viejo.guardar("/tmp/linde-intermedio.json")
- carga=J.cargar("/tmp/linde-intermedio.json");mover(carga,Vector2i(56,-299))
+ viejo.d.mundo.golpes.clear();viejo.d.mundo.rotos["veta_estano@56,-299"]=0;viejo.guardar("/tmp/linde-intermedio-%d.json" % OS.get_process_id())
+ carga=J.cargar("/tmp/linde-intermedio-%d.json" % OS.get_process_id());mover(carga,Vector2i(56,-299))
  ok(carga.mundo.objeto_presente(Vector2i(56,-299))=="","se conserva también el estaño extraído en la versión intermedia sin número nuevo")
  var futuro: Dictionary=nuevo.d.duplicate(true);futuro.mundo.generacion.version=3
  ok(G.desempaquetar(G.empaquetar(futuro)).is_empty(),"no acepta un generador futuro desconocido")
@@ -63,7 +63,7 @@ func _init() -> void:
  var pos:=M.pies_de_celda(puerta+Vector2i.DOWN);h.d.npcs.maren.pos=[pos.x,pos.y]
  so._casa("maren")
  ok(so.casa_completa(cama),"al retirar el obstáculo se reanuda y completa la casa pagando la puerta")
- h.guardar("/tmp/linde-solares.json");var hc=J.cargar("/tmp/linde-solares.json")
+ h.guardar("/tmp/linde-solares-%d.json" % OS.get_process_id());var hc=J.cargar("/tmp/linde-solares-%d.json" % OS.get_process_id())
  ok(hc.autonomia.sociedad.habitat.datos().parcelas.has(M.clave(cama)),"reserva y obra sobreviven a guardar y cargar")
  # Primer asentamiento exterior: acciones normales del jugador y producción resumida.
  var r=J.nueva(123,"Colona",[0,0,0]);var regional=r.autonomia.asentamientos
@@ -86,7 +86,7 @@ func _init() -> void:
  r.d.min+=60;regional.actualizar()
  ok(int(puesto.producciones)>0 and r.d.mundo.rotos.size()>rotos,"lejos del jugador hay producción con extracción real del mapa")
  ok(r.mundo.regiones.size()==regiones and not r.mundo.region_cargada(c),"la simulación distante no mantiene cargado el asentamiento")
- r.guardar("/tmp/linde-puesto.json");var rc=J.cargar("/tmp/linde-puesto.json")
+ r.guardar("/tmp/linde-puesto-%d.json" % OS.get_process_id());var rc=J.cargar("/tmp/linde-puesto-%d.json" % OS.get_process_id())
  var antes_carga:String=JSON.stringify(rc.autonomia.asentamientos.datos())
  rc.autonomia.asentamientos.actualizar()
  ok(JSON.stringify(rc.autonomia.asentamientos.datos())==antes_carga,"cargar no duplica llegada, producción ni consumo")

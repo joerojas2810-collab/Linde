@@ -103,8 +103,8 @@ func _init() -> void:
 	var compuesta:=A.clave("torso","hierro_fibra","simple",0)
 	ok(mezcla.fabricar_artefacto(compuesta).ok and mezcla.jug().inv.get("mat1:hierro_fibra",0)==1,"el material elaborado abre planos nuevos y se consume al fabricar")
 	ok(mezcla.equipar(compuesta).ok and mezcla.stats().def>0,"el equipo de material elaborado tiene propiedades jugables")
-	ok(mezcla.guardar("/tmp/linde-materiales-prueba.json"),"se guardan materiales y piezas elaboradas")
-	var mezcla_carga=J.cargar("/tmp/linde-materiales-prueba.json")
+	ok(mezcla.guardar("/tmp/linde-materiales-prueba-%d.json" % OS.get_process_id()),"se guardan materiales y piezas elaboradas")
+	var mezcla_carga=J.cargar("/tmp/linde-materiales-prueba-%d.json" % OS.get_process_id())
 	ok(mezcla_carga!=null and mezcla_carga.jug().inv.get("mat1:hierro_fibra",0)==1 and mezcla_carga.jug().equipo.torso==compuesta,"cargar conserva el material elaborado y la pieza sin perderlos")
 	# Compra de una obra real, con proximidad, precio y existencias.
 	j.autonomia.estado("maren").inv[espada]=1
@@ -115,8 +115,8 @@ func _init() -> void:
 	ok(j.comprar_artefacto("maren",espada).ok and j.jug().inv.madera==7,"el trueque paga con materiales y entrega una obra existente")
 	ok(not j.comprar_artefacto("maren",espada).ok and j.jug().inv.madera==7,"repetir la compra de una pieza agotada no consume más")
 	# Persistencia y réplica de conocimientos y piezas.
-	ok(j.guardar("/tmp/linde-desarrollo-prueba.json"),"se guarda equipo y conocimiento generado")
-	var carga=J.cargar("/tmp/linde-desarrollo-prueba.json")
+	ok(j.guardar("/tmp/linde-desarrollo-prueba-%d.json" % OS.get_process_id()),"se guarda equipo y conocimiento generado")
+	var carga=J.cargar("/tmp/linde-desarrollo-prueba-%d.json" % OS.get_process_id())
 	ok(carga!=null and carga.jug().equipo.torso==armadura and carga.autonomia.desarrollo.rango(actor,"artesania","madera")==d.rango(actor,"artesania","madera"),"cargar conserva las piezas y los rangos sin acumular bonus")
 	ok(carga.stats()==j.stats(),"cargar no vuelve a sumar efectos de equipo o práctica")
 	var srv=Srv.new();srv.j=j
@@ -149,7 +149,7 @@ func _init() -> void:
 	ok(construidos>0,"los habitantes amplían sus talleres según práctica y necesidades")
 	ok(not ld.datos().creaciones.is_empty(),"sin intervención llegan a crear piezas mediante la gramática")
 	ok(mesa_max>0,"los prototipos también desgastan la mesa utilizada")
-	var f=FileAccess.open("/tmp/linde-desarrollo-tres-dias.json",FileAccess.WRITE)
+	var f=FileAccess.open("/tmp/linde-desarrollo-tres-dias-%d.json" % OS.get_process_id(),FileAccess.WRITE)
 	f.store_string(JSON.stringify(libre.d.mundo_vivo.autonomia,"  "));f.close()
 	ok(libre.d.mundo_vivo.ultimo.is_empty() and libre.d.mundo_vivo.instancias.is_empty(),"los descubrimientos no dependen de tarjetas o misiones preparadas")
 	print("DESARROLLO: %d comprobaciones, %d fallos"%[total,fallos])

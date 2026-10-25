@@ -27,7 +27,7 @@ func _init() -> void:
 	var antes: int = j.d.mundo.caminos.size()
 	for i in 4000: j.tick(0.1)
 	ok(j.d.mundo.caminos.size() >= antes, "el tick cuenta pasos sin romper nada")
-	var ruta := "/tmp/linde-caminos.json"
+	var ruta := "/tmp/linde-caminos-%d.json" % OS.get_process_id()
 	ok(j.guardar(ruta), "guardado")
 	var carga = J.cargar(ruta)
 	ok(carga != null and carga.mundo.tipo(c) == M.T.CAMINO, "el camino sobrevive a guardar y cargar")

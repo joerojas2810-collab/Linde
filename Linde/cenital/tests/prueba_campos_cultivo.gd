@@ -22,7 +22,7 @@ func _init() -> void:
 	var r = j.interactuar()
 	ok(r.ok and j.jug().inv.get("baya", 0) == 3 and j.jug().inv.get("fibra", 0) == 1, "la cosecha entrega bayas y fibra")
 	ok(not j.campo_listo(c), "tras cosechar vuelve a crecer")
-	var ruta := "/tmp/linde-campos.json"
+	var ruta := "/tmp/linde-campos-%d.json" % OS.get_process_id()
 	j.guardar(ruta)
 	var carga = J.cargar(ruta)
 	ok(carga != null and not carga.campo_listo(c), "el estado del cultivo se guarda")

@@ -43,7 +43,7 @@ func _init() -> void:
 	ok(so.casa_completa(b), "con muros, sala, puerta, mesa y techo está completa")
 	h.mundo.destechar(b)
 	ok(not so.casa_completa(b), "sin techo deja de estar completa")
-	var ruta := "/tmp/linde-casas.json"
+	var ruta := "/tmp/linde-casas-%d.json" % OS.get_process_id()
 	h.mundo.techar(b, "grupo:talleres")
 	h.guardar(ruta)
 	var carga = J.cargar(ruta)
