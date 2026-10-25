@@ -4,7 +4,7 @@ const C = preload("res://scripts/catalogos.gd")
 const PREFIJO := "art1:"
 ## Interpretación de las reglas (fórmulas, redondeos, orden de operaciones, canonicalización). Subirla SIEMPRE que cambie
 ## cómo se calcula una pieza aunque los JSON no cambien; forma parte de la huella de reglas (huella.gd) y del test dorado.
-const EVALUADOR_VERSION := 1
+const EVALUADOR_VERSION := 2   # 2 (M0): estadísticas por propiedades del material y pesos de la forma; 1: potencia única por material
 static var _reglas: Dictionary = {}
 
 static func reglas() -> Dictionary:
@@ -31,8 +31,10 @@ static func material(id: String) -> Dictionary:
 	for forma in uno.formas:
 		if forma in dos.formas: formas.append(forma)
 	var peso: float=r.laminados.peso_nucleo
+	var peso_densidad: float=r.laminados.peso_densidad
 	return {"nombre":"laminado de "+str(uno.nombre)+" y "+str(dos.nombre),"item":"mat1:"+id,"coste":1,
-		"potencia":float(uno.potencia)*peso+float(dos.potencia)*(1.0-peso),"vel":(float(uno.vel)+float(dos.vel))/2.0,
+		"dureza":float(uno.dureza)*peso+float(dos.dureza)*(1.0-peso),"tenacidad":float(uno.tenacidad)*peso+float(dos.tenacidad)*(1.0-peso),
+		"densidad":float(uno.densidad)*peso_densidad+float(dos.densidad)*(1.0-peso_densidad),
 		"arquetipo":uno.arquetipo,"color":Color(uno.color).lerp(Color(dos.color),float(r.laminados.mezcla_color)).to_html(),"formas":formas,
 		"fuente":"Fabricar en un horno con "+str(uno.nombre)+" y "+str(dos.nombre)}
 
@@ -49,6 +51,15 @@ static func receta_material(id: String) -> Dictionary:
 	ent[str(r.materiales[p[0]].item)]=int(r.laminados.coste_nucleo)
 	ent[str(r.materiales[p[1]].item)]=int(r.laminados.coste_refuerzo)
 	return {"n":material(id).nombre.capitalize(),"ent":ent,"sal":{"mat1:"+id:1},"est":r.laminados.estacion}
+
+## Eficacia de un material en una forma: media ponderada de dureza y tenacidad con los pesos de esa forma.
+static func eficacia(m: Dictionary, pesos: Dictionary) -> float:
+	return float(pesos.dureza)*float(m.dureza)+float(pesos.tenacidad)*float(m.tenacidad)
+
+## Velocidad que aporta el material: más denso que la referencia resta, más ligero suma.
+static func velocidad(m: Dictionary) -> float:
+	var pr: Dictionary=reglas().propiedades
+	return (float(pr.referencia_densidad)-float(m.densidad))*float(pr.vel_por_densidad)
 
 static func clave(forma: String, material: String, tecnica: String, calidad: int) -> String:
 	return "art1:%s:%s:%s:%d" % [forma, material, tecnica, calidad]
@@ -75,7 +86,7 @@ static func info(k: String) -> Dictionary:
 	var f: Dictionary = r.formas[p.forma]
 	var m: Dictionary = material(p.material)
 	var t: Dictionary = r.tecnicas[p.tecnica]
-	var potencia := float(m.potencia) * float(t.potencia) * (1.0 + int(p.calidad) * float(r.extra_calidad))
+	var potencia := eficacia(m, f.pesos) * float(t.potencia) * (1.0 + int(p.calidad) * float(r.extra_calidad))
 	var tecnica: String = t.nombre
 	var calidad: String = r.calidades[int(p.calidad)]
 	var masculino: bool = p.forma in ["casco","escudo","guantes","pantalones"]
@@ -88,7 +99,7 @@ static func info(k: String) -> Dictionary:
 		calidad="comunes" if calidad=="común" else calidad+"s"
 	return {"n":"%s de %s %s (%s)" % [f.nombre,m.nombre,tecnica,calidad],
 		"pila":1, "equipo":f.ranura, "dmg":roundi(float(f.dmg)*potencia), "def":roundi(float(f.def)*potencia),
-		"hp":roundi(float(f.hp)*potencia), "vel":float(m.vel)+float(t.vel), "c":m.color, "artesania":p}
+		"hp":roundi(float(f.hp)*potencia), "vel":velocidad(m)+float(t.vel), "c":m.color, "artesania":p}
 
 static func receta(k: String) -> Dictionary:
 	var p := leer(k)
@@ -116,8 +127,14 @@ static func validar() -> Array:
 	for id in r.materiales:
 		var m: Dictionary = r.materiales[id]
 		if not C.ITEMS.has(m.item) or int(m.coste)<=0: errores.append("material inválido: "+id)
+		for prop in ["dureza","tenacidad","densidad"]:
+			if not m.has(prop) or float(m[prop])<=0.0: errores.append("propiedad inválida: %s.%s" % [id, prop])
 		for f in m.formas:
 			if not r.formas.has(f): errores.append("forma inexistente: "+str(f))
+	for f in r.formas:
+		var pesos: Dictionary=r.formas[f].get("pesos",{})
+		if not pesos.has("dureza") or not pesos.has("tenacidad") or absf(float(pesos.get("dureza",0))+float(pesos.get("tenacidad",0))-1.0)>0.000001 or float(pesos.get("dureza",0))<0.0 or float(pesos.get("tenacidad",0))<0.0:
+			errores.append("pesos de forma inválidos: "+f)
 	for t in r.tecnicas:
 		for item in r.tecnicas[t].extra:
 			if not C.ITEMS.has(item) or int(r.tecnicas[t].extra[item])<=0: errores.append("coste inválido: "+str(item))

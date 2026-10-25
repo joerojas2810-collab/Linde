@@ -1,7 +1,7 @@
 {
 	"_nota": "Instantánea del comportamiento de artesania.gd. Regenerar solo tras un cambio deliberado: subir EVALUADOR_VERSION o la version de reglas_v1.json según corresponda y explicarlo en el commit.",
-	"evaluador": 1,
-	"hash": "92a60cf8b39e9ed5a3c64dc4f1a293101b3f2d43cd8d95eb7bad41ff41822e89",
+	"evaluador": 2,
+	"hash": "c4485701da43a1ab609fbec0301219ebd7a8d23fc2e528841084859dc70fbeb0",
 	"muestra": [
 		{
 			"clave": "art1:botas:bronce:ligera:0",
@@ -76,7 +76,7 @@
 				"def": 1,
 				"dmg": 0,
 				"equipo": "botas",
-				"hp": 1,
+				"hp": 2,
 				"n": "Botas de tejido ligeras (expertas)",
 				"pila": 1,
 				"vel": 0.04
@@ -105,7 +105,7 @@
 				"def": 1,
 				"dmg": 0,
 				"equipo": "botas",
-				"hp": 2,
+				"hp": 3,
 				"n": "Botas de laminado de hierro y tejido ligeras (maestras)",
 				"pila": 1,
 				"vel": 0.025
@@ -162,10 +162,10 @@
 					"tecnica": "reforzada"
 				},
 				"c": "b57d39ff",
-				"def": 2,
+				"def": 3,
 				"dmg": 0,
 				"equipo": "casco",
-				"hp": 2,
+				"hp": 3,
 				"n": "Casco de laminado de cobre y tejido reforzado (cuidado)",
 				"pila": 1,
 				"vel": -0.01
@@ -222,7 +222,7 @@
 					"tecnica": "reforzada"
 				},
 				"c": "#b88a3c",
-				"def": 6,
+				"def": 5,
 				"dmg": 0,
 				"equipo": "escudo",
 				"hp": 0,
@@ -252,7 +252,7 @@
 					"tecnica": "simple"
 				},
 				"c": "ac8c53ff",
-				"def": 4,
+				"def": 3,
 				"dmg": 0,
 				"equipo": "escudo",
 				"hp": 0,
@@ -281,7 +281,7 @@
 					"tecnica": "simple"
 				},
 				"c": "c07537ff",
-				"def": 3,
+				"def": 4,
 				"dmg": 0,
 				"equipo": "escudo",
 				"hp": 0,
@@ -665,10 +665,10 @@
 					"tecnica": "simple"
 				},
 				"c": "#c8742f",
-				"def": 2,
+				"def": 3,
 				"dmg": 0,
 				"equipo": "pantalones",
-				"hp": 2,
+				"hp": 3,
 				"n": "Pantalones de cobre sencillos (expertos)",
 				"pila": 1,
 				"vel": 0.0
@@ -723,10 +723,10 @@
 					"tecnica": "ligera"
 				},
 				"c": "#b88a3c",
-				"def": 5,
+				"def": 4,
 				"dmg": 0,
 				"equipo": "torso",
-				"hp": 5,
+				"hp": 4,
 				"n": "Armadura de bronce ligera (común)",
 				"pila": 1,
 				"vel": 0.01
@@ -783,10 +783,10 @@
 					"tecnica": "ligera"
 				},
 				"c": "#7b9855",
-				"def": 3,
+				"def": 4,
 				"dmg": 0,
 				"equipo": "torso",
-				"hp": 3,
+				"hp": 4,
 				"n": "Armadura de tejido ligera (experta)",
 				"pila": 1,
 				"vel": 0.04
@@ -1013,6 +1013,6 @@
 			}
 		}
 	],
-	"reglas_desarrollo": 1.0,
+	"reglas_desarrollo": 2.0,
 	"total": 693
 }

@@ -8,6 +8,29 @@ const G = preload("res://scripts/guardado.gd")
 const J = preload("res://scripts/juego.gd")
 const RUTA_DORADO := "res://tests/dorados/artesania_v1.json"
 const TMP := "user://prueba_reglas.json"
+## Lo que M0 NO debe cambiar (capturado con el código de H0 antes de tocar nada): recetas y todo `info()` salvo dmg/def/hp.
+const INVARIANTES_PRE_M0 := {"claves": 693, "recetas": "4df6b2a359c474565bcda98553d5d218421f960faccc946289f9f1643831cd46",
+	"info_sin_estadisticas": "189d2ebc3d5f8f271a6670f160df656f13639e445e80050820ba91c6cc1d26a5"}
+## Potencia y velocidad por material antes de M0 (el número exacto ES el objeto de la prueba).
+const PREVIO_M0 := {"madera": [0.65, 0.01], "piedra": [0.80, -0.02], "fibra": [0.65, 0.02], "hierro": [1.20, -0.01],
+	"cobre": [1.00, 0.0], "bronce": [1.35, -0.01]}
+## Dominancias entre materiales de la gramática, tal como las produce el modelo actual. Es un REGISTRO, no un objetivo:
+## si cambia, o es un cambio deliberado de reglas (actualizar esta lista y documentarlo) o una regresión.
+const DOMINANCIAS_CONOCIDAS: Array = [
+	"botas:bronce>hierro",
+	"casco:bronce>hierro",
+	"escudo:bronce>hierro",
+	"escudo:bronce>piedra",
+	"escudo:cobre>piedra",
+	"escudo:hierro>piedra",
+	"escudo:madera>piedra",
+	"espada:bronce>hierro",
+	"espada:bronce>piedra",
+	"espada:cobre>piedra",
+	"espada:hierro>piedra",
+	"guantes:bronce>hierro",
+	"pantalones:bronce>hierro",
+	"torso:bronce>hierro"]
 const EXCLUIDOS := ["res://datos/equipo/paletas.json"]   # solo color; datos/mundo es narrativa del director
 var fallos := 0
 var total := 0
@@ -22,9 +45,23 @@ func _init() -> void:
 		_generar_dorado()
 		quit(0)
 		return
+	if "--imprimir-dominancia" in OS.get_cmdline_user_args():
+		for linea in _informe_dominancia().detalle: print("DOMINANCIA ", linea)
+		print("DOMINANCIAS: ", JSON.stringify(_informe_dominancia().claves))
+		quit(0)
+		return
+	if "--imprimir-tabla" in OS.get_cmdline_user_args():
+		_tabla()
+		quit(0)
+		return
+	if "--imprimir-invariantes" in OS.get_cmdline_user_args():
+		print("INVARIANTES: ", JSON.stringify(_invariantes()))
+		quit(0)
+		return
 	_canonico()
 	_huella()
 	_dorado()
+	_m0()
 	_guardado()
 	_excepcion()
 	_mundo_vivo()
@@ -58,7 +95,7 @@ func _huella() -> void:
 	obtenidos.sort()
 	ok(obtenidos == esperados, "huella: componentes " + ", ".join(PackedStringArray(esperados)))
 	ok(H.constantes_faltantes().is_empty(), "huella: todas las constantes de catalogos.gd listadas existen " + str(H.constantes_faltantes()))
-	ok(H.versiones().evaluador == A.EVALUADOR_VERSION and int(H.versiones().get("reglas_v1", 0)) == int(A.reglas().version), "huella: versiones legibles (evaluador y reglas de desarrollo)")
+	ok(H.versiones().evaluador == A.EVALUADOR_VERSION and int(H.versiones().get("desarrollo/reglas_v1", 0)) == int(A.reglas().version) and H.versiones().has("fauna/reglas_v1") and H.versiones().has("asentamientos/reglas_v1"), "huella: versiones legibles (evaluador y reglas de desarrollo)")
 	for id in comp:
 		var alterado := comp.duplicate()
 		alterado[id] = "x"
@@ -68,7 +105,7 @@ func _huella() -> void:
 	ok(H.total(alterado) != h, "huella: subir EVALUADOR_VERSION cambia la huella aunque los JSON no cambien")
 	var reglas: Dictionary = A.reglas().duplicate(true)
 	ok(H.hash_de(reglas) == H.hash_de(A.reglas()), "huella: una copia profunda de las reglas conserva el hash")
-	reglas.materiales.hierro.potencia = float(reglas.materiales.hierro.potencia) + 0.01
+	reglas.materiales.hierro.dureza = float(reglas.materiales.hierro.dureza) + 0.01
 	ok(H.hash_de(reglas) != H.hash_de(A.reglas()), "huella: un cambio de balance en un material cambia el hash")
 	var items: Dictionary = H.constantes().duplicate(true)
 	items.RECETAS.lingote.ent.mena = 3
@@ -111,6 +148,32 @@ func _enumerar() -> Array:
 		lista.append({"clave": "mat1:" + m, "info": A.info("mat1:" + m), "receta": A.receta_material(m)})
 	return lista
 
+## Informe legible: estadísticas de cada forma con cada material (técnica sencilla, calidades 0 y 3).
+func _tabla() -> void:
+	var r := A.reglas()
+	var formas: Array = r.formas.keys()
+	for f in formas:
+		for q in [0, 3]:
+			var fila: PackedStringArray = []
+			for m in ["madera", "piedra", "fibra", "cobre", "hierro", "bronce"]:
+				var k := A.clave(f, m, "simple", q)
+				if A.leer(k).is_empty(): continue
+				var i := A.info(k)
+				fila.append("%s d%d/D%d/h%d/v%+.3f" % [m, i.dmg, i.def, i.hp, i.vel])
+			print("TABLA %s q%d: %s" % [f, q, " | ".join(fila)])
+
+## Lo que M0 no debe cambiar: recetas y todo lo de `info()` salvo dmg/def/hp (nombre, ranura, color, pila, velocidad...).
+func _invariantes() -> Dictionary:
+	var lista := _enumerar()
+	var recetas: Array = []
+	var resto: Array = []
+	for e in lista:
+		recetas.append({"clave": e.clave, "receta": e.receta})
+		var info: Dictionary = e.info.duplicate(true)
+		for k in ["dmg", "def", "hp"]: info.erase(k)
+		resto.append({"clave": e.clave, "info": info})
+	return {"claves": lista.size(), "recetas": H.hash_de(recetas), "info_sin_estadisticas": H.hash_de(resto)}
+
 func _generar_dorado() -> void:
 	var lista := _enumerar()
 	var muestra: Array = []
@@ -140,6 +203,104 @@ func _dorado() -> void:
 		var actual = por_clave.get(e.clave)
 		if actual == null or H.canonico(e.info) != H.canonico(actual.info) or H.canonico(e.receta) != H.canonico(actual.receta): diferentes.append(e.clave)
 	ok(diferentes.is_empty(), "dorado: muestra revisable por personas coincide " + str(diferentes.slice(0, 5)))
+
+# ---------- M0: propiedades físicas y pesos por forma ----------
+const MATERIALES_BASE := ["madera", "piedra", "fibra", "hierro", "cobre", "bronce"]
+const NEUTROS := {"dureza": 0.5, "tenacidad": 0.5}
+
+## Para cada forma y cada par de materiales que la admiten: ¿uno es al menos igual al otro en eficacia y velocidad y
+## mejor en alguna? Se compara con valores continuos (sin redondear) y la técnica sencilla.
+func _informe_dominancia() -> Dictionary:
+	var r := A.reglas()
+	var claves: Array = []
+	var detalle: Array = []
+	var formas: Array = r.formas.keys()
+	formas.sort()
+	for f in formas:
+		var pesos: Dictionary = r.formas[f].pesos
+		var ms: Array = MATERIALES_BASE.filter(func(m): return f in r.materiales[m].formas)
+		for a in ms:
+			for b in ms:
+				if a == b: continue
+				var ea := A.eficacia(r.materiales[a], pesos)
+				var eb := A.eficacia(r.materiales[b], pesos)
+				var va := A.velocidad(r.materiales[a])
+				var vb := A.velocidad(r.materiales[b])
+				var e := 0.000000001
+				if ea >= eb - e and va >= vb - e and (ea > eb + e or va > vb + e):
+					claves.append("%s:%s>%s" % [f, a, b])
+					detalle.append("%s: %s domina a %s (eficacia %.3f/%.3f, vel %+.3f/%+.3f, coste %d/%d)" % [f, a, b, ea, eb, va, vb, int(r.materiales[a].coste), int(r.materiales[b].coste)])
+	claves.sort()
+	return {"claves": claves, "detalle": detalle}
+
+func _m0() -> void:
+	var r := A.reglas()
+	ok(A.validar().is_empty(), "M0: reglas válidas (propiedades positivas, pesos por forma que suman 1) " + str(A.validar()))
+	ok(int(r.version) == 2 and A.EVALUADOR_VERSION == 2, "M0: version de reglas y EVALUADOR_VERSION subidas a 2")
+	# Continuidad: con pesos neutros las propiedades reproducen la potencia y la velocidad anteriores.
+	var continuidad := true
+	for m in MATERIALES_BASE:
+		var mat: Dictionary = r.materiales[m]
+		continuidad = continuidad and absf(A.eficacia(mat, NEUTROS) - float(PREVIO_M0[m][0])) < 0.000001 and absf(A.velocidad(mat) - float(PREVIO_M0[m][1])) < 0.000001
+	ok(continuidad, "M0: con pesos 0.5/0.5 cada material reproduce su potencia y velocidad de antes")
+	var laminados_ok := true
+	var peso: float = r.laminados.peso_nucleo
+	for id in A.combinaciones():
+		var p: PackedStringArray = str(id).split("_")
+		var lam: Dictionary = A.material(id)
+		var pot := float(PREVIO_M0[p[0]][0]) * peso + float(PREVIO_M0[p[1]][0]) * (1.0 - peso)
+		var vel := (float(PREVIO_M0[p[0]][1]) + float(PREVIO_M0[p[1]][1])) / 2.0
+		laminados_ok = laminados_ok and absf(A.eficacia(lam, NEUTROS) - pot) < 0.000001 and absf(A.velocidad(lam) - vel) < 0.000001
+	ok(laminados_ok and A.combinaciones().size() == 9, "M0: los 9 laminados se conservan y reproducen su potencia y velocidad de antes con pesos neutros")
+	# Lo único que puede cambiar es dmg/def/hp: recetas, nombres, ranuras, colores, pilas y velocidades quedan idénticos.
+	var inv := _invariantes()
+	ok(inv.claves == INVARIANTES_PRE_M0.claves and inv.recetas == INVARIANTES_PRE_M0.recetas, "M0: ninguna receta ni coste cambió (cambio deliberado frente a regresión)")
+	ok(inv.info_sin_estadisticas == INVARIANTES_PRE_M0.info_sin_estadisticas, "M0: nombres, ranuras, colores, pilas y velocidades no cambiaron; solo dmg/def/hp pueden cambiar")
+	# Estadísticas bien formadas.
+	var mal: Array = []
+	for e in _enumerar():
+		var i: Dictionary = e.info
+		if i.has("dmg") and (typeof(i.dmg) != TYPE_INT or typeof(i.def) != TYPE_INT or typeof(i.hp) != TYPE_INT or i.dmg < 0 or i.def < 0 or i.hp < 0): mal.append(e.clave)
+	ok(mal.is_empty(), "M0: dmg/def/hp son enteros no negativos en todas las claves " + str(mal.slice(0, 3)))
+	# Las propiedades afectan de verdad a la estadística y según la forma: la dureza empuja más a la espada que al escudo.
+	var base_e: int = A.info(A.clave("espada", "hierro", "simple", 0)).dmg
+	var base_s: int = A.info(A.clave("escudo", "hierro", "simple", 0)).def
+	var copia := r.duplicate(true)
+	copia.materiales.hierro.dureza = float(copia.materiales.hierro.dureza) * 3.0
+	A._reglas = copia
+	var dur_e: int = A.info(A.clave("espada", "hierro", "simple", 0)).dmg
+	var dur_s: int = A.info(A.clave("escudo", "hierro", "simple", 0)).def
+	var copia2 := r.duplicate(true)
+	copia2.materiales.hierro.tenacidad = float(copia2.materiales.hierro.tenacidad) * 3.0
+	A._reglas = copia2
+	var ten_e: int = A.info(A.clave("espada", "hierro", "simple", 0)).dmg
+	var ten_s: int = A.info(A.clave("escudo", "hierro", "simple", 0)).def
+	var copia3 := r.duplicate(true)
+	copia3.materiales.hierro.densidad = float(copia3.materiales.hierro.densidad) * 2.0
+	A._reglas = copia3
+	var vel_pesado: float = A.info(A.clave("espada", "hierro", "simple", 0)).vel
+	A._reglas = {}
+	ok(float(dur_e) / base_e > float(dur_s) / base_s, "M0: triplicar la dureza mejora más la espada (%d→%d) que el escudo (%d→%d)" % [base_e, dur_e, base_s, dur_s])
+	ok(float(ten_s) / base_s > float(ten_e) / base_e, "M0: triplicar la tenacidad mejora más el escudo (%d→%d) que la espada (%d→%d)" % [base_s, ten_s, base_e, ten_e])
+	ok(vel_pesado < float(A.info(A.clave("espada", "hierro", "simple", 0)).vel), "M0: un material más denso hace la pieza más lenta")
+	# Diferenciación funcional: el mejor material depende de la forma (el orden cambia entre formas).
+	var cambios: Array = []
+	for a in MATERIALES_BASE:
+		for b in MATERIALES_BASE:
+			if a >= b: continue
+			var antes := 0
+			var despues := 0
+			for f in r.formas:
+				if not (f in r.materiales[a].formas and f in r.materiales[b].formas): continue
+				var d := A.eficacia(r.materiales[a], r.formas[f].pesos) - A.eficacia(r.materiales[b], r.formas[f].pesos)
+				if d > 0.000001: antes |= 1
+				elif d < -0.000001: despues |= 1
+			if antes == 1 and despues == 1: cambios.append("%s/%s" % [a, b])
+	ok(not cambios.is_empty(), "M0: el orden entre materiales cambia según la forma en " + str(cambios))
+	# Registro de dominancias: se imprime siempre y se compara con la lista conocida.
+	var dom := _informe_dominancia()
+	for linea in dom.detalle: print("INFORME dominancia: ", linea)
+	ok(dom.claves == DOMINANCIAS_CONOCIDAS, "M0: el registro de dominancias coincide con el conocido (%d pares) " % dom.claves.size() + ("" if dom.claves == DOMINANCIAS_CONOCIDAS else str(dom.claves)))
 
 # ---------- guardado, carga e incompatibilidad ----------
 func _mundo_min() -> Dictionary:

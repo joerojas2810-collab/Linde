@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "nota": "Gramática propia provisional. Congelar esta versión para conservar las propiedades de las piezas guardadas.",
+  "version": 2,
+  "nota": "Gramática propia provisional (M0: propiedades dureza/tenacidad/densidad por material y pesos por forma). En desarrollo se edita en sitio; la versión y la huella de reglas (scripts/huella.gd) detectan cambios. Congelar solo al sellar las reglas (PLAN_MAESTRO §7.5).",
   "calidad_max": 3,
   "practica_por_rango": 3,
   "practica_max": 120,
@@ -15,8 +15,9 @@
       "nombre": "madera",
       "item": "madera",
       "coste": 3,
-      "potencia": 0.65,
-      "vel": 0.01,
+      "dureza": 0.45,
+      "tenacidad": 0.85,
+      "densidad": 0.75,
       "arquetipo": "ligera",
       "color": "#a8794f",
       "formas": [
@@ -29,8 +30,9 @@
       "nombre": "piedra",
       "item": "piedra",
       "coste": 3,
-      "potencia": 0.8,
-      "vel": -0.02,
+      "dureza": 0.95,
+      "tenacidad": 0.65,
+      "densidad": 1.5,
       "arquetipo": "pesada",
       "color": "#899197",
       "formas": [
@@ -43,8 +45,9 @@
       "nombre": "tejido",
       "item": "fibra",
       "coste": 4,
-      "potencia": 0.65,
-      "vel": 0.02,
+      "dureza": 0.3,
+      "tenacidad": 1.0,
+      "densidad": 0.5,
       "arquetipo": "ligera",
       "color": "#7b9855",
       "formas": [
@@ -60,8 +63,9 @@
       "nombre": "hierro",
       "item": "lingote",
       "coste": 2,
-      "potencia": 1.2,
-      "vel": -0.01,
+      "dureza": 1.25,
+      "tenacidad": 1.15,
+      "densidad": 1.25,
       "arquetipo": "media",
       "color": "#a7b8c4",
       "formas": [
@@ -79,8 +83,9 @@
       "nombre": "cobre",
       "item": "lingote_cobre",
       "coste": 2,
-      "potencia": 1.0,
-      "vel": 0.0,
+      "dureza": 0.75,
+      "tenacidad": 1.25,
+      "densidad": 1.0,
       "arquetipo": "media",
       "color": "#c8742f",
       "formas": [
@@ -98,8 +103,9 @@
       "nombre": "bronce",
       "item": "lingote_bronce",
       "coste": 2,
-      "potencia": 1.35,
-      "vel": -0.01,
+      "dureza": 1.6,
+      "tenacidad": 1.1,
+      "densidad": 1.25,
       "arquetipo": "media",
       "color": "#b88a3c",
       "formas": [
@@ -114,6 +120,11 @@
       "fuente": "Aleación de cobre y estaño fundida en un horno."
     }
   },
+  "propiedades": {
+    "nota": "Eficacia de una pieza = peso_dureza·dureza + peso_tenacidad·tenacidad del material, con los pesos de cada forma. La velocidad de la pieza = (referencia_densidad − densidad)·vel_por_densidad. Valores de material en unidades de juego, calibrados para que la media dureza/tenacidad y la velocidad coincidan con la potencia y la velocidad anteriores a M0; no son magnitudes físicas reales.",
+    "referencia_densidad": 1.0,
+    "vel_por_densidad": 0.04
+  },
   "formas": {
     "espada": {
       "nombre": "Espada",
@@ -121,7 +132,11 @@
       "dmg": 5,
       "def": 0,
       "hp": 0,
-      "coste": 1
+      "coste": 1,
+      "pesos": {
+        "dureza": 0.6,
+        "tenacidad": 0.4
+      }
     },
     "escudo": {
       "nombre": "Escudo",
@@ -129,7 +144,11 @@
       "dmg": 0,
       "def": 3,
       "hp": 0,
-      "coste": 1
+      "coste": 1,
+      "pesos": {
+        "dureza": 0.2,
+        "tenacidad": 0.8
+      }
     },
     "casco": {
       "nombre": "Casco",
@@ -137,7 +156,11 @@
       "dmg": 0,
       "def": 2,
       "hp": 2,
-      "coste": 1
+      "coste": 1,
+      "pesos": {
+        "dureza": 0.3,
+        "tenacidad": 0.7
+      }
     },
     "torso": {
       "nombre": "Armadura",
@@ -145,7 +168,11 @@
       "dmg": 0,
       "def": 4,
       "hp": 4,
-      "coste": 2
+      "coste": 2,
+      "pesos": {
+        "dureza": 0.2,
+        "tenacidad": 0.8
+      }
     },
     "guantes": {
       "nombre": "Guantes",
@@ -153,7 +180,11 @@
       "dmg": 0,
       "def": 1,
       "hp": 1,
-      "coste": 1
+      "coste": 1,
+      "pesos": {
+        "dureza": 0.3,
+        "tenacidad": 0.7
+      }
     },
     "botas": {
       "nombre": "Botas",
@@ -161,7 +192,11 @@
       "dmg": 0,
       "def": 1,
       "hp": 2,
-      "coste": 1
+      "coste": 1,
+      "pesos": {
+        "dureza": 0.3,
+        "tenacidad": 0.7
+      }
     },
     "pantalones": {
       "nombre": "Pantalones",
@@ -169,7 +204,11 @@
       "dmg": 0,
       "def": 2,
       "hp": 2,
-      "coste": 1
+      "coste": 1,
+      "pesos": {
+        "dureza": 0.2,
+        "tenacidad": 0.8
+      }
     }
   },
   "tecnicas": {
@@ -252,7 +291,8 @@
     "estacion": "horno",
     "peso_nucleo": 0.85,
     "mezcla_color": 0.25,
-    "pila": 10
+    "pila": 10,
+    "peso_densidad": 0.5
   },
   "ahorro_suelo_constructor": 1
 }

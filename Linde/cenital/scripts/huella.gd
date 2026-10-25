@@ -120,7 +120,7 @@ static func versiones() -> Dictionary:
 	for id in COMPONENTES:
 		for ruta in COMPONENTES[id]:
 			var o = _archivo(ruta)
-			if typeof(o) == TYPE_DICTIONARY and o.has("version"): r[ruta.get_file().get_basename()] = _entero(o.version)
+			if typeof(o) == TYPE_DICTIONARY and o.has("version"): r[ruta.trim_prefix("res://datos/").get_basename()] = _entero(o.version)
 	return r
 
 ## Sello que se guarda con el mundo.
