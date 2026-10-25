@@ -63,6 +63,11 @@ Comprobados el 25/10 por las sesiones indicadas; ninguno reverificado hoy.
 ### Deuda técnica
 Registrada en [docs/tech-debt-register.md](../../../docs/tech-debt-register.md) (TD-001 a TD-009: entrada tapable, tabla de aspecto en código, aviso de llegada pobre, instantánea sobre el MTU de ENet, `mundo_vivo` reenviado completo, etc.). Sin registrar: `CADENCIA_MIN` sin usar y constantes de ritmo en código; rastreador de misiones que desborda; ámbito jugador tratado como compartido.
 
+## 3b. I1a — progreso verificado (autorizada 2026-10-25)
+
+- **E0 (P2), commit `6e9656a`:** `Juego.cargar` conserva el error en `ultimo_error`; `Juego.mensaje_carga` muestra «reglas distintas» (con los componentes) y lo distingue de un archivo ilegible y del rechazo de conexión («Reglas distintas a las del servidor», «Versión distinta del servidor»). Alojar y el servidor sin ventana no sustituyen en silencio un mundo rechazado. `prueba_reglas` 79/79 (13 nuevas «P2»); `prueba`, `prueba_ui`, `prueba_saberes` sin fallos. **Sin captura de pantalla del mensaje** (solo texto en el menú existente).
+- **E1, línea base antes de `art2:` (2026-10-25, `tests/medir_i1a.gd`, mundo semilla 123 tras 3 h simuladas):** guardado 9.689 B; réplica de bienvenida 14.100 B; instantánea 1.836 B; 684 claves `art1:` válidas, la más larga 40 caracteres; `A.leer` 9,7 µs, `info` 17,9 µs, `receta` 31,9 µs, `visible` 14,9 µs. `planos` del jugador devolvió 0 (sin saberes ni materiales en ese mundo), así que su tiempo no es representativo y se medirá en E6 con un jugador equipado.
+
 ## 4. Cómo verificarlo
 
 Desde la raíz del repo, con `herramientas/runtime/Godot.app/Contents/MacOS/Godot`:
