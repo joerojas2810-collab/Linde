@@ -1,6 +1,6 @@
 # Compatibilidad con Linde
 
-> **Vigencia (consolidación documental, 2026-10-25)**: investigación verificada contra el árbol de trabajo en `HEAD 990d549` el 25/10/2026 (alcance: inspección estática; ver [README](README.md)). **No describe necesariamente el código posterior**: el árbol tenía cambios sin confirmar de otras sesiones (`habitantes.gd`, `sociedad.gd`, `autonomia.gd`, `escena.gd`, `mundo_vivo.gd`, `arraigo.gd`). Si el código verificado la contradice, prevalece el código y hay que corregir este texto. Estado del juego: [ESTADO.md](../../../production/epics/mundo-vivo/ESTADO.md). Registro de decisiones: [DECISIONES del proyecto](../../../Linde/cenital/docs/DECISIONES.md).
+> **Vigencia (consolidación documental, 2026-10-25)**: investigación verificada contra el árbol de trabajo en `HEAD 324f339` el 25/10/2026 (alcance: inspección estática; ver [README](README.md)). **No describe necesariamente el código posterior**: el árbol tenía cambios sin confirmar de otras sesiones (`habitantes.gd`, `sociedad.gd`, `autonomia.gd`, `escena.gd`, `mundo_vivo.gd`, `arraigo.gd`). Si el código verificado la contradice, prevalece el código y hay que corregir este texto. Estado del juego: [ESTADO.md](../../../production/epics/mundo-vivo/ESTADO.md). Registro de decisiones: [DECISIONES del proyecto](../../../Linde/cenital/docs/DECISIONES.md).
 
 **[C]** Raíz de juego inspeccionada: `Linde/cenital/`. Las copias de proyectos bajo entregables de arte no se toman como implementación vigente. Rutas de las tablas relativas a esa raíz; los enlaces apuntan al árbol real.
 

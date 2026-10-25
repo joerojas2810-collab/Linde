@@ -1,8 +1,8 @@
 # Plan maestro unificado: materiales, conocimiento, descubrimiento e invención en Linde
 
-**Estado:** plan con decisiones O1–O7 confirmadas (2026-10-25). **H0 aprobada el 2026-10-25 como núcleo implementado y verificado, sin commit (ver §10, «Estado de H0»), con dos integraciones pendientes antes del playtest multijugador externo.** **M0 aprobada el 2026-10-25 como implementada y verificada, sin commit** (ver §10, «Estado de M0»). I1a no se ha iniciado: antes hay que revisar el cierre de K1, comprobar la estabilidad del árbol compartido y coordinar ambos sistemas. K1 la desarrolla otra sesión.
+**Estado:** plan con decisiones O1–O7 confirmadas (2026-10-25). **H0 aprobada el 2026-10-25 como núcleo implementado y verificado, commit `70d7b5f` (ver §10, «Estado de H0»), con dos integraciones pendientes antes del playtest multijugador externo.** **M0 aprobada el 2026-10-25 como implementada y verificada, commit `e0dc0dd`** (ver §10, «Estado de M0»). I1a no se ha iniciado: antes hay que revisar el cierre de K1, comprobar la estabilidad del árbol compartido y coordinar ambos sistemas. K1 la desarrolla otra sesión.
 
-**Consolidación (2026-10-25):** H0 `a5414fb`, M0 `67d52ca`, K1 `07813c2` y corrección de rendimiento (`_construir_cerca`, `_ampliar`) `2ccb99a`, en commits separados y en ese orden. Las menciones «sin commit» de las secciones de estado son anteriores a esta consolidación. Pendiente explícito: **P2** (mostrar el motivo `reglas_distintas` en la interfaz). K2 e I1a no se han iniciado.
+**Consolidación (2026-10-25):** H0 `70d7b5f`, M0 `e0dc0dd`, K1 `4141ae9` y corrección de rendimiento (`_construir_cerca`, `_ampliar`) `c967ba9`, en commits separados y en ese orden. Las menciones «sin commit» de las secciones de estado son anteriores a esta consolidación. Pendiente explícito: **P2** (mostrar el motivo `reglas_distintas` en la interfaz). K2 e I1a no se han iniciado.
 **Revisión:** 2 (2026-10-25). La revisión 1 era la primera versión unificada; esta incorpora las decisiones, la huella de reglas, la versión del evaluador, la división de I1, la ampliación de K2 y la distinción entre variantes fabricables e invención autónoma.
 **Integra:** la propuesta «Materiales, Transformación y Descubrimiento» (texto del encargo), [PLAN_IMPLEMENTACION](PLAN_IMPLEMENTACION.md) (niveles A–D), [DECISIONES](DECISIONES.md), [COMPATIBILIDAD_LINDE](COMPATIBILIDAD_LINDE.md) y relectura del código actual.
 **Relación con los documentos previos:** este archivo **no borra ni reescribe** ninguno. Donde contradice a PLAN_IMPLEMENTACION lo dice expresamente (§1.2) y **prevalece este plan**.
@@ -537,7 +537,7 @@ Cerrada con las decisiones O1–O7 de esta revisión. Queda abierta **O8** (acce
 **Aceptación.** Los cuatro puntos anteriores pasan y el dorado inicial documenta el estado actual.
 **Fuera de alcance.** Cualquier cambio de reglas o de gramática.
 
-#### Estado de H0 (2026-10-25) — implementada, sin commit
+#### Estado de H0 (2026-10-25) — implementada; commit `70d7b5f`
 
 Solo se consignan resultados de ejecuciones reales de esta sesión (motor Godot 4.7.1 del proyecto, `--headless`).
 
@@ -617,7 +617,7 @@ Sin P1 y P2 no debe distribuirse una build para un playtest multijugador externo
 **Aceptación.** A1–A8 del PLAN_IMPLEMENTACION §7, sin cambios.
 **Fuera de alcance.** Descubrimiento autónomo, libros, olvido, secretos, comercio de conocimiento.
 
-#### Estado de K1 (2026-10-25) — implementada con salvedades, sin commit
+#### Estado de K1 (2026-10-25) — implementada con salvedades; commit `4141ae9`
 
 Solo se consignan resultados de ejecuciones reales. Detalle de criterios y archivos en [PLAN_IMPLEMENTACION §19](PLAN_IMPLEMENTACION.md).
 
@@ -673,7 +673,7 @@ Estado: **coordinación, sin implementar.** Revisar de nuevo `git status` justo 
 
 **Condiciones para empezar:** (a) la sesión que desarrolla K1 confirma que no tocará `artesania.gd` ni `reglas_v1.json`; (b) `git status` sin cambios nuevos en esos dos archivos; (c) indicación expresa del usuario.
 
-#### Estado de M0 (2026-10-25) — aprobada, sin commit
+#### Estado de M0 (2026-10-25) — aprobada; commit `e0dc0dd`
 
 Coordinación previa: la sesión de K1 confirmó por mensaje que no edita `artesania.gd`, `reglas_v1.json`, `prueba_reglas.gd`, `tests/dorados/` ni `huella.gd`; antes de editar se recomprobó `git status` (sin cambios ajenos en esos archivos). Solo se consignan resultados de ejecuciones reales de esta sesión.
 

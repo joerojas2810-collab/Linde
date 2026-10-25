@@ -11,7 +11,7 @@ Investigación realizada el **25 de octubre de 2026**. Alcance: inspección est�
 | [PLAN_MAESTRO](PLAN_MAESTRO.md) | **Plan activo** (único). Fases H0–S1, decisiones O1–O7, materiales, versionado, hoja de ruta | Revisión 2 (25/10); se actualiza al implementar |
 | [PLAN_IMPLEMENTACION](PLAN_IMPLEMENTACION.md) | Antecedente: niveles A–D del conocimiento y la invención. Vigente salvo donde PLAN_MAESTRO §1.2 lo sustituye | Conservado como evidencia |
 | [DECISIONES](DECISIONES.md) | D01–D12 con alternativas; verificación mínima | Decisiones: vigentes como *Propuesta*; verificación: 25/10 |
-| [COMPATIBILIDAD_LINDE](COMPATIBILIDAD_LINDE.md) | Inventario del código con hashes | **Instantánea** de `HEAD 990d549` + árbol local; caduca con cada cambio en `desarrollo.gd`, `artesania.gd`, `sociedad.gd` |
+| [COMPATIBILIDAD_LINDE](COMPATIBILIDAD_LINDE.md) | Inventario del código con hashes | **Instantánea** de `HEAD 324f339` + árbol local; caduca con cada cambio en `desarrollo.gd`, `artesania.gd`, `sociedad.gd` |
 | [BASES_TECNICAS](BASES_TECNICAS.md) | Modelo propuesto | Propuesta; no es descripción del código |
 | [PRECEDENTES](PRECEDENTES.md) | Fuentes externas por SHA | Consulta del 25/10 |
 
@@ -44,7 +44,7 @@ Cada afirmación o grupo de afirmaciones usa una de estas categorías:
 
 ## Línea base y reproducción
 
-**[C]** HEAD local observado: `990d5498330961349435abcc47ce42054a0e5a51`. El árbol ya tenía cambios sin confirmar en `datos/autonomia/reglas.json`, `scripts/habitantes.gd`, `scripts/sociedad.gd` y dos pruebas no rastreadas (`tests/_dbg.gd`, `tests/prueba_arraigo.gd`), todos bajo `Linde/cenital/`. La investigación lee el árbol de trabajo, no solo HEAD. Esos cambios no pertenecen a este encargo. El inventario de hashes de COMPATIBILIDAD permite detectar diferencias futuras.
+**[C]** HEAD local observado: `324f3398330961349435abcc47ce42054a0e5a51`. El árbol ya tenía cambios sin confirmar en `datos/autonomia/reglas.json`, `scripts/habitantes.gd`, `scripts/sociedad.gd` y dos pruebas no rastreadas (`tests/_dbg.gd`, `tests/prueba_arraigo.gd`), todos bajo `Linde/cenital/`. La investigación lee el árbol de trabajo, no solo HEAD. Esos cambios no pertenecen a este encargo. El inventario de hashes de COMPATIBILIDAD permite detectar diferencias futuras.
 
 **[C]** `project.godot` declara Godot 4.7; el motor local se identifica como 4.7.1 estable oficial, revisión `a13da4feb8d8aefc283c3763d33a2f170a18d541`.
 
