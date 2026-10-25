@@ -1,6 +1,1093 @@
 {
 	"_nota": "Instantánea del comportamiento de artesania.gd. Regenerar solo tras un cambio deliberado: subir EVALUADOR_VERSION o la version de reglas_v1.json según corresponda y explicarlo en el commit.",
-	"evaluador": 2,
+	"art2": {
+		"hash": "c5186f679c2b6b55e9326e56961fef0c1fb07d5000933fba64025bc7633291b9",
+		"muestra": [
+			{
+				"clave": "art2:botas:bronce:ligera:0:fibra:fino",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "botas",
+						"grosor": "fino",
+						"material": "bronce",
+						"refuerzo": "fibra",
+						"tecnica": "ligera"
+					},
+					"c": "#b88a3c",
+					"def": 1,
+					"dmg": 0,
+					"equipo": "botas",
+					"hp": 2,
+					"n": "Botas de bronce ligeras (comunes) · refuerzo de tejido · grosor fino",
+					"pila": 1,
+					"vel": 0.034
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_bronce": 2
+					},
+					"est": "mesa",
+					"n": "Botas de bronce ligeras (comunes) · refuerzo de tejido · grosor fino",
+					"sal": {
+						"art2:botas:bronce:ligera:0:fibra:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:botas:bronce:simple:2:fibra:fino",
+				"info": {
+					"artesania": {
+						"calidad": 2,
+						"forma": "botas",
+						"grosor": "fino",
+						"material": "bronce",
+						"refuerzo": "fibra",
+						"tecnica": "simple"
+					},
+					"c": "#b88a3c",
+					"def": 1,
+					"dmg": 0,
+					"equipo": "botas",
+					"hp": 3,
+					"n": "Botas de bronce sencillas (expertas) · refuerzo de tejido · grosor fino",
+					"pila": 1,
+					"vel": 0.014
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_bronce": 2
+					},
+					"est": "mesa",
+					"n": "Botas de bronce sencillas (expertas) · refuerzo de tejido · grosor fino",
+					"sal": {
+						"art2:botas:bronce:simple:2:fibra:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:botas:cobre:simple:0:fibra:fino",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "botas",
+						"grosor": "fino",
+						"material": "cobre",
+						"refuerzo": "fibra",
+						"tecnica": "simple"
+					},
+					"c": "#c8742f",
+					"def": 1,
+					"dmg": 0,
+					"equipo": "botas",
+					"hp": 2,
+					"n": "Botas de cobre sencillas (comunes) · refuerzo de tejido · grosor fino",
+					"pila": 1,
+					"vel": 0.024
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_cobre": 2
+					},
+					"est": "mesa",
+					"n": "Botas de cobre sencillas (comunes) · refuerzo de tejido · grosor fino",
+					"sal": {
+						"art2:botas:cobre:simple:0:fibra:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:botas:hierro:ligera:1:fibra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "botas",
+						"grosor": "grueso",
+						"material": "hierro",
+						"refuerzo": "fibra",
+						"tecnica": "ligera"
+					},
+					"c": "#a7b8c4",
+					"def": 1,
+					"dmg": 0,
+					"equipo": "botas",
+					"hp": 3,
+					"n": "Botas de hierro ligeras (cuidadas) · refuerzo de tejido · grosor grueso",
+					"pila": 1,
+					"vel": -0.026
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote": 3
+					},
+					"est": "mesa",
+					"n": "Botas de hierro ligeras (cuidadas) · refuerzo de tejido · grosor grueso",
+					"sal": {
+						"art2:botas:hierro:ligera:1:fibra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:botas:hierro:simple:3:fibra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 3,
+						"forma": "botas",
+						"grosor": "grueso",
+						"material": "hierro",
+						"refuerzo": "fibra",
+						"tecnica": "simple"
+					},
+					"c": "#a7b8c4",
+					"def": 2,
+					"dmg": 0,
+					"equipo": "botas",
+					"hp": 3,
+					"n": "Botas de hierro sencillas (maestras) · refuerzo de tejido · grosor grueso",
+					"pila": 1,
+					"vel": -0.046
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote": 3
+					},
+					"est": "mesa",
+					"n": "Botas de hierro sencillas (maestras) · refuerzo de tejido · grosor grueso",
+					"sal": {
+						"art2:botas:hierro:simple:3:fibra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:casco:bronce:simple:1:fibra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "casco",
+						"grosor": "grueso",
+						"material": "bronce",
+						"refuerzo": "fibra",
+						"tecnica": "simple"
+					},
+					"c": "#b88a3c",
+					"def": 3,
+					"dmg": 0,
+					"equipo": "casco",
+					"hp": 3,
+					"n": "Casco de bronce sencillo (cuidado) · refuerzo de tejido · grosor grueso",
+					"pila": 1,
+					"vel": -0.046
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_bronce": 3
+					},
+					"est": "mesa",
+					"n": "Casco de bronce sencillo (cuidado) · refuerzo de tejido · grosor grueso",
+					"sal": {
+						"art2:casco:bronce:simple:1:fibra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:casco:cobre:reforzada:3:fibra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 3,
+						"forma": "casco",
+						"grosor": "grueso",
+						"material": "cobre",
+						"refuerzo": "fibra",
+						"tecnica": "reforzada"
+					},
+					"c": "#c8742f",
+					"def": 4,
+					"dmg": 0,
+					"equipo": "casco",
+					"hp": 4,
+					"n": "Casco de cobre reforzado (maestro) · refuerzo de tejido · grosor grueso",
+					"pila": 1,
+					"vel": -0.056
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_cobre": 3
+					},
+					"est": "mesa",
+					"n": "Casco de cobre reforzado (maestro) · refuerzo de tejido · grosor grueso",
+					"sal": {
+						"art2:casco:cobre:reforzada:3:fibra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:casco:hierro:ligera:0:fibra:normal",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "casco",
+						"grosor": "normal",
+						"material": "hierro",
+						"refuerzo": "fibra",
+						"tecnica": "ligera"
+					},
+					"c": "#a7b8c4",
+					"def": 2,
+					"dmg": 0,
+					"equipo": "casco",
+					"hp": 2,
+					"n": "Casco de hierro ligero (común) · refuerzo de tejido",
+					"pila": 1,
+					"vel": 0.004
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote": 2
+					},
+					"est": "mesa",
+					"n": "Casco de hierro ligero (común) · refuerzo de tejido",
+					"sal": {
+						"art2:casco:hierro:ligera:0:fibra:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:casco:hierro:simple:2:fibra:normal",
+				"info": {
+					"artesania": {
+						"calidad": 2,
+						"forma": "casco",
+						"grosor": "normal",
+						"material": "hierro",
+						"refuerzo": "fibra",
+						"tecnica": "simple"
+					},
+					"c": "#a7b8c4",
+					"def": 3,
+					"dmg": 0,
+					"equipo": "casco",
+					"hp": 3,
+					"n": "Casco de hierro sencillo (experto) · refuerzo de tejido",
+					"pila": 1,
+					"vel": -0.016
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote": 2
+					},
+					"est": "mesa",
+					"n": "Casco de hierro sencillo (experto) · refuerzo de tejido",
+					"sal": {
+						"art2:casco:hierro:simple:2:fibra:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:escudo:bronce:reforzada:1:madera:normal",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "escudo",
+						"grosor": "normal",
+						"material": "bronce",
+						"refuerzo": "madera",
+						"tecnica": "reforzada"
+					},
+					"c": "#b88a3c",
+					"def": 5,
+					"dmg": 0,
+					"equipo": "escudo",
+					"hp": 0,
+					"n": "Escudo de bronce reforzado (cuidado) · refuerzo de madera",
+					"pila": 1,
+					"vel": -0.0375
+				},
+				"receta": {
+					"ent": {
+						"lingote_bronce": 2,
+						"madera": 2
+					},
+					"est": "mesa",
+					"n": "Escudo de bronce reforzado (cuidado) · refuerzo de madera",
+					"sal": {
+						"art2:escudo:bronce:reforzada:1:madera:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:escudo:bronce:simple:3:piedra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 3,
+						"forma": "escudo",
+						"grosor": "grueso",
+						"material": "bronce",
+						"refuerzo": "piedra",
+						"tecnica": "simple"
+					},
+					"c": "#b88a3c",
+					"def": 5,
+					"dmg": 0,
+					"equipo": "escudo",
+					"hp": 0,
+					"n": "Escudo de bronce sencillo (maestro) · refuerzo de piedra · grosor grueso",
+					"pila": 1,
+					"vel": -0.064
+				},
+				"receta": {
+					"ent": {
+						"lingote_bronce": 3,
+						"piedra": 2
+					},
+					"est": "mesa",
+					"n": "Escudo de bronce sencillo (maestro) · refuerzo de piedra · grosor grueso",
+					"sal": {
+						"art2:escudo:bronce:simple:3:piedra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:escudo:cobre:reforzada:1:sin:fino",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "escudo",
+						"grosor": "fino",
+						"material": "cobre",
+						"refuerzo": "sin",
+						"tecnica": "reforzada"
+					},
+					"c": "#c8742f",
+					"def": 4,
+					"dmg": 0,
+					"equipo": "escudo",
+					"hp": 0,
+					"n": "Escudo de cobre reforzado (cuidado) · grosor fino",
+					"pila": 1,
+					"vel": 0.01
+				},
+				"receta": {
+					"ent": {
+						"lingote_cobre": 2
+					},
+					"est": "mesa",
+					"n": "Escudo de cobre reforzado (cuidado) · grosor fino",
+					"sal": {
+						"art2:escudo:cobre:reforzada:1:sin:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:escudo:hierro:ligera:0:madera:fino",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "escudo",
+						"grosor": "fino",
+						"material": "hierro",
+						"refuerzo": "madera",
+						"tecnica": "ligera"
+					},
+					"c": "#a7b8c4",
+					"def": 3,
+					"dmg": 0,
+					"equipo": "escudo",
+					"hp": 0,
+					"n": "Escudo de hierro ligero (común) · refuerzo de madera · grosor fino",
+					"pila": 1,
+					"vel": 0.0325
+				},
+				"receta": {
+					"ent": {
+						"lingote": 2,
+						"madera": 2
+					},
+					"est": "mesa",
+					"n": "Escudo de hierro ligero (común) · refuerzo de madera · grosor fino",
+					"sal": {
+						"art2:escudo:hierro:ligera:0:madera:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:escudo:hierro:reforzada:2:madera:normal",
+				"info": {
+					"artesania": {
+						"calidad": 2,
+						"forma": "escudo",
+						"grosor": "normal",
+						"material": "hierro",
+						"refuerzo": "madera",
+						"tecnica": "reforzada"
+					},
+					"c": "#a7b8c4",
+					"def": 5,
+					"dmg": 0,
+					"equipo": "escudo",
+					"hp": 0,
+					"n": "Escudo de hierro reforzado (experto) · refuerzo de madera",
+					"pila": 1,
+					"vel": -0.0375
+				},
+				"receta": {
+					"ent": {
+						"lingote": 2,
+						"madera": 2
+					},
+					"est": "mesa",
+					"n": "Escudo de hierro reforzado (experto) · refuerzo de madera",
+					"sal": {
+						"art2:escudo:hierro:reforzada:2:madera:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:escudo:madera:ligera:2:sin:fino",
+				"info": {
+					"artesania": {
+						"calidad": 2,
+						"forma": "escudo",
+						"grosor": "fino",
+						"material": "madera",
+						"refuerzo": "sin",
+						"tecnica": "ligera"
+					},
+					"c": "#a8794f",
+					"def": 2,
+					"dmg": 0,
+					"equipo": "escudo",
+					"hp": 0,
+					"n": "Escudo de madera ligero (experto) · grosor fino",
+					"pila": 1,
+					"vel": 0.06
+				},
+				"receta": {
+					"ent": {
+						"madera": 3
+					},
+					"est": "mesa",
+					"n": "Escudo de madera ligero (experto) · grosor fino",
+					"sal": {
+						"art2:escudo:madera:ligera:2:sin:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:espada:bronce:ligera:0:sin:fino",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "espada",
+						"grosor": "fino",
+						"material": "bronce",
+						"refuerzo": "sin",
+						"tecnica": "ligera"
+					},
+					"c": "#b88a3c",
+					"def": 0,
+					"dmg": 6,
+					"equipo": "arma",
+					"hp": 0,
+					"n": "Espada de bronce ligera (común) · grosor fino",
+					"pila": 1,
+					"vel": 0.04
+				},
+				"receta": {
+					"ent": {
+						"lingote_bronce": 2
+					},
+					"est": "mesa",
+					"n": "Espada de bronce ligera (común) · grosor fino",
+					"sal": {
+						"art2:espada:bronce:ligera:0:sin:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:espada:bronce:reforzada:3:madera:fino",
+				"info": {
+					"artesania": {
+						"calidad": 3,
+						"forma": "espada",
+						"grosor": "fino",
+						"material": "bronce",
+						"refuerzo": "madera",
+						"tecnica": "reforzada"
+					},
+					"c": "#b88a3c",
+					"def": 0,
+					"dmg": 9,
+					"equipo": "arma",
+					"hp": 0,
+					"n": "Espada de bronce reforzada (maestra) · refuerzo de madera · grosor fino",
+					"pila": 1,
+					"vel": -0.00750000000000001
+				},
+				"receta": {
+					"ent": {
+						"lingote_bronce": 2,
+						"madera": 2
+					},
+					"est": "mesa",
+					"n": "Espada de bronce reforzada (maestra) · refuerzo de madera · grosor fino",
+					"sal": {
+						"art2:espada:bronce:reforzada:3:madera:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:espada:cobre:ligera:1:madera:normal",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "espada",
+						"grosor": "normal",
+						"material": "cobre",
+						"refuerzo": "madera",
+						"tecnica": "ligera"
+					},
+					"c": "#c8742f",
+					"def": 0,
+					"dmg": 5,
+					"equipo": "arma",
+					"hp": 0,
+					"n": "Espada de cobre ligera (cuidada) · refuerzo de madera",
+					"pila": 1,
+					"vel": 0.0125
+				},
+				"receta": {
+					"ent": {
+						"lingote_cobre": 2,
+						"madera": 2
+					},
+					"est": "mesa",
+					"n": "Espada de cobre ligera (cuidada) · refuerzo de madera",
+					"sal": {
+						"art2:espada:cobre:ligera:1:madera:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:espada:cobre:reforzada:3:piedra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 3,
+						"forma": "espada",
+						"grosor": "grueso",
+						"material": "cobre",
+						"refuerzo": "piedra",
+						"tecnica": "reforzada"
+					},
+					"c": "#c8742f",
+					"def": 0,
+					"dmg": 8,
+					"equipo": "arma",
+					"hp": 0,
+					"n": "Espada de cobre reforzada (maestra) · refuerzo de piedra · grosor grueso",
+					"pila": 1,
+					"vel": -0.074
+				},
+				"receta": {
+					"ent": {
+						"lingote_cobre": 3,
+						"piedra": 2
+					},
+					"est": "mesa",
+					"n": "Espada de cobre reforzada (maestra) · refuerzo de piedra · grosor grueso",
+					"sal": {
+						"art2:espada:cobre:reforzada:3:piedra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:espada:hierro:ligera:1:sin:fino",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "espada",
+						"grosor": "fino",
+						"material": "hierro",
+						"refuerzo": "sin",
+						"tecnica": "ligera"
+					},
+					"c": "#a7b8c4",
+					"def": 0,
+					"dmg": 5,
+					"equipo": "arma",
+					"hp": 0,
+					"n": "Espada de hierro ligera (cuidada) · grosor fino",
+					"pila": 1,
+					"vel": 0.04
+				},
+				"receta": {
+					"ent": {
+						"lingote": 2
+					},
+					"est": "mesa",
+					"n": "Espada de hierro ligera (cuidada) · grosor fino",
+					"sal": {
+						"art2:espada:hierro:ligera:1:sin:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:espada:hierro:simple:0:madera:fino",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "espada",
+						"grosor": "fino",
+						"material": "hierro",
+						"refuerzo": "madera",
+						"tecnica": "simple"
+					},
+					"c": "#a7b8c4",
+					"def": 0,
+					"dmg": 6,
+					"equipo": "arma",
+					"hp": 0,
+					"n": "Espada de hierro sencilla (común) · refuerzo de madera · grosor fino",
+					"pila": 1,
+					"vel": 0.0125
+				},
+				"receta": {
+					"ent": {
+						"lingote": 2,
+						"madera": 2
+					},
+					"est": "mesa",
+					"n": "Espada de hierro sencilla (común) · refuerzo de madera · grosor fino",
+					"sal": {
+						"art2:espada:hierro:simple:0:madera:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:espada:madera:simple:1:sin:fino",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "espada",
+						"grosor": "fino",
+						"material": "madera",
+						"refuerzo": "sin",
+						"tecnica": "simple"
+					},
+					"c": "#a8794f",
+					"def": 0,
+					"dmg": 3,
+					"equipo": "arma",
+					"hp": 0,
+					"n": "Espada de madera sencilla (cuidada) · grosor fino",
+					"pila": 1,
+					"vel": 0.04
+				},
+				"receta": {
+					"ent": {
+						"madera": 3
+					},
+					"est": "mesa",
+					"n": "Espada de madera sencilla (cuidada) · grosor fino",
+					"sal": {
+						"art2:espada:madera:simple:1:sin:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:guantes:bronce:reforzada:0:fibra:fino",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "guantes",
+						"grosor": "fino",
+						"material": "bronce",
+						"refuerzo": "fibra",
+						"tecnica": "reforzada"
+					},
+					"c": "#b88a3c",
+					"def": 1,
+					"dmg": 0,
+					"equipo": "guantes",
+					"hp": 1,
+					"n": "Guantes de bronce reforzados (comunes) · refuerzo de tejido · grosor fino",
+					"pila": 1,
+					"vel": -0.006
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_bronce": 2
+					},
+					"est": "mesa",
+					"n": "Guantes de bronce reforzados (comunes) · refuerzo de tejido · grosor fino",
+					"sal": {
+						"art2:guantes:bronce:reforzada:0:fibra:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:guantes:cobre:ligera:2:fibra:fino",
+				"info": {
+					"artesania": {
+						"calidad": 2,
+						"forma": "guantes",
+						"grosor": "fino",
+						"material": "cobre",
+						"refuerzo": "fibra",
+						"tecnica": "ligera"
+					},
+					"c": "#c8742f",
+					"def": 1,
+					"dmg": 0,
+					"equipo": "guantes",
+					"hp": 1,
+					"n": "Guantes de cobre ligeros (expertos) · refuerzo de tejido · grosor fino",
+					"pila": 1,
+					"vel": 0.044
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_cobre": 2
+					},
+					"est": "mesa",
+					"n": "Guantes de cobre ligeros (expertos) · refuerzo de tejido · grosor fino",
+					"sal": {
+						"art2:guantes:cobre:ligera:2:fibra:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:guantes:fibra:ligera:0:sin:fino",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "guantes",
+						"grosor": "fino",
+						"material": "fibra",
+						"refuerzo": "sin",
+						"tecnica": "ligera"
+					},
+					"c": "#7b9855",
+					"def": 1,
+					"dmg": 0,
+					"equipo": "guantes",
+					"hp": 1,
+					"n": "Guantes de tejido ligeros (comunes) · grosor fino",
+					"pila": 1,
+					"vel": 0.07
+				},
+				"receta": {
+					"ent": {
+						"fibra": 3
+					},
+					"est": "mesa",
+					"n": "Guantes de tejido ligeros (comunes) · grosor fino",
+					"sal": {
+						"art2:guantes:fibra:ligera:0:sin:fino": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:guantes:hierro:reforzada:1:fibra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "guantes",
+						"grosor": "grueso",
+						"material": "hierro",
+						"refuerzo": "fibra",
+						"tecnica": "reforzada"
+					},
+					"c": "#a7b8c4",
+					"def": 2,
+					"dmg": 0,
+					"equipo": "guantes",
+					"hp": 2,
+					"n": "Guantes de hierro reforzados (cuidados) · refuerzo de tejido · grosor grueso",
+					"pila": 1,
+					"vel": -0.066
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote": 3
+					},
+					"est": "mesa",
+					"n": "Guantes de hierro reforzados (cuidados) · refuerzo de tejido · grosor grueso",
+					"sal": {
+						"art2:guantes:hierro:reforzada:1:fibra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:pantalones:bronce:ligera:3:fibra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 3,
+						"forma": "pantalones",
+						"grosor": "grueso",
+						"material": "bronce",
+						"refuerzo": "fibra",
+						"tecnica": "ligera"
+					},
+					"c": "#b88a3c",
+					"def": 3,
+					"dmg": 0,
+					"equipo": "pantalones",
+					"hp": 3,
+					"n": "Pantalones de bronce ligeros (maestros) · refuerzo de tejido · grosor grueso",
+					"pila": 1,
+					"vel": -0.026
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_bronce": 3
+					},
+					"est": "mesa",
+					"n": "Pantalones de bronce ligeros (maestros) · refuerzo de tejido · grosor grueso",
+					"sal": {
+						"art2:pantalones:bronce:ligera:3:fibra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:pantalones:cobre:ligera:1:fibra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 1,
+						"forma": "pantalones",
+						"grosor": "grueso",
+						"material": "cobre",
+						"refuerzo": "fibra",
+						"tecnica": "ligera"
+					},
+					"c": "#c8742f",
+					"def": 3,
+					"dmg": 0,
+					"equipo": "pantalones",
+					"hp": 3,
+					"n": "Pantalones de cobre ligeros (cuidados) · refuerzo de tejido · grosor grueso",
+					"pila": 1,
+					"vel": -0.016
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_cobre": 3
+					},
+					"est": "mesa",
+					"n": "Pantalones de cobre ligeros (cuidados) · refuerzo de tejido · grosor grueso",
+					"sal": {
+						"art2:pantalones:cobre:ligera:1:fibra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:pantalones:cobre:simple:3:fibra:grueso",
+				"info": {
+					"artesania": {
+						"calidad": 3,
+						"forma": "pantalones",
+						"grosor": "grueso",
+						"material": "cobre",
+						"refuerzo": "fibra",
+						"tecnica": "simple"
+					},
+					"c": "#c8742f",
+					"def": 3,
+					"dmg": 0,
+					"equipo": "pantalones",
+					"hp": 3,
+					"n": "Pantalones de cobre sencillos (maestros) · refuerzo de tejido · grosor grueso",
+					"pila": 1,
+					"vel": -0.036
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote_cobre": 3
+					},
+					"est": "mesa",
+					"n": "Pantalones de cobre sencillos (maestros) · refuerzo de tejido · grosor grueso",
+					"sal": {
+						"art2:pantalones:cobre:simple:3:fibra:grueso": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:pantalones:hierro:reforzada:0:fibra:normal",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "pantalones",
+						"grosor": "normal",
+						"material": "hierro",
+						"refuerzo": "fibra",
+						"tecnica": "reforzada"
+					},
+					"c": "#a7b8c4",
+					"def": 3,
+					"dmg": 0,
+					"equipo": "pantalones",
+					"hp": 3,
+					"n": "Pantalones de hierro reforzados (comunes) · refuerzo de tejido",
+					"pila": 1,
+					"vel": -0.036
+				},
+				"receta": {
+					"ent": {
+						"fibra": 2,
+						"lingote": 2
+					},
+					"est": "mesa",
+					"n": "Pantalones de hierro reforzados (comunes) · refuerzo de tejido",
+					"sal": {
+						"art2:pantalones:hierro:reforzada:0:fibra:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:torso:bronce:ligera:2:fibra:normal",
+				"info": {
+					"artesania": {
+						"calidad": 2,
+						"forma": "torso",
+						"grosor": "normal",
+						"material": "bronce",
+						"refuerzo": "fibra",
+						"tecnica": "ligera"
+					},
+					"c": "#b88a3c",
+					"def": 5,
+					"dmg": 0,
+					"equipo": "torso",
+					"hp": 5,
+					"n": "Armadura de bronce ligera (experta) · refuerzo de tejido",
+					"pila": 1,
+					"vel": 0.004
+				},
+				"receta": {
+					"ent": {
+						"fibra": 4,
+						"lingote_bronce": 4
+					},
+					"est": "mesa",
+					"n": "Armadura de bronce ligera (experta) · refuerzo de tejido",
+					"sal": {
+						"art2:torso:bronce:ligera:2:fibra:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:torso:cobre:ligera:0:fibra:normal",
+				"info": {
+					"artesania": {
+						"calidad": 0,
+						"forma": "torso",
+						"grosor": "normal",
+						"material": "cobre",
+						"refuerzo": "fibra",
+						"tecnica": "ligera"
+					},
+					"c": "#c8742f",
+					"def": 5,
+					"dmg": 0,
+					"equipo": "torso",
+					"hp": 5,
+					"n": "Armadura de cobre ligera (común) · refuerzo de tejido",
+					"pila": 1,
+					"vel": 0.014
+				},
+				"receta": {
+					"ent": {
+						"fibra": 4,
+						"lingote_cobre": 4
+					},
+					"est": "mesa",
+					"n": "Armadura de cobre ligera (común) · refuerzo de tejido",
+					"sal": {
+						"art2:torso:cobre:ligera:0:fibra:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:torso:cobre:simple:2:fibra:normal",
+				"info": {
+					"artesania": {
+						"calidad": 2,
+						"forma": "torso",
+						"grosor": "normal",
+						"material": "cobre",
+						"refuerzo": "fibra",
+						"tecnica": "simple"
+					},
+					"c": "#c8742f",
+					"def": 6,
+					"dmg": 0,
+					"equipo": "torso",
+					"hp": 6,
+					"n": "Armadura de cobre sencilla (experta) · refuerzo de tejido",
+					"pila": 1,
+					"vel": -0.006
+				},
+				"receta": {
+					"ent": {
+						"fibra": 4,
+						"lingote_cobre": 4
+					},
+					"est": "mesa",
+					"n": "Armadura de cobre sencilla (experta) · refuerzo de tejido",
+					"sal": {
+						"art2:torso:cobre:simple:2:fibra:normal": 1
+					}
+				}
+			},
+			{
+				"clave": "art2:torso:hierro:ligera:3:sin:fino",
+				"info": {
+					"artesania": {
+						"calidad": 3,
+						"forma": "torso",
+						"grosor": "fino",
+						"material": "hierro",
+						"refuerzo": "sin",
+						"tecnica": "ligera"
+					},
+					"c": "#a7b8c4",
+					"def": 5,
+					"dmg": 0,
+					"equipo": "torso",
+					"hp": 5,
+					"n": "Armadura de hierro ligera (maestra) · grosor fino",
+					"pila": 1,
+					"vel": 0.04
+				},
+				"receta": {
+					"ent": {
+						"lingote": 3
+					},
+					"est": "mesa",
+					"n": "Armadura de hierro ligera (maestra) · grosor fino",
+					"sal": {
+						"art2:torso:hierro:ligera:3:sin:fino": 1
+					}
+				}
+			}
+		],
+		"total": 1692
+	},
+	"evaluador": 3,
 	"hash": "c4485701da43a1ab609fbec0301219ebd7a8d23fc2e528841084859dc70fbeb0",
 	"muestra": [
 		{
@@ -1013,6 +2100,6 @@
 			}
 		}
 	],
-	"reglas_desarrollo": 2.0,
+	"reglas_desarrollo": 3.0,
 	"total": 693
 }

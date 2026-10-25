@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "nota": "Gramática propia provisional (M0: propiedades dureza/tenacidad/densidad por material y pesos por forma). En desarrollo se edita en sitio; la versión y la huella de reglas (scripts/huella.gd) detectan cambios. Congelar solo al sellar las reglas (PLAN_MAESTRO §7.5).",
   "calidad_max": 3,
   "practica_por_rango": 3,
@@ -294,5 +294,56 @@
     "pila": 10,
     "peso_densidad": 0.5
   },
-  "ahorro_suelo_constructor": 1
+  "ahorro_suelo_constructor": 1,
+  "operadores": {
+    "nota": "I1a (valores iniciales sujetos a revisión). Una variante de segunda generación (clave art2) es una combinación de niveles; sus estadísticas se calculan, no se leen. refuerzo: propiedad' = propiedad + k·propiedad_del_refuerzo (dureza, tenacidad) y densidad' = densidad + k_densidad·k·densidad_del_refuerzo; cuesta coste_por_forma·coste_de_la_forma unidades del insumo del refuerzo. grosor: multiplica la potencia, suma velocidad y multiplica el coste del material base (redondeado hacia arriba). Las técnicas en las variantes no añaden insumos. Beneficio total acotado por potencia_max sobre la misma pieza sin operadores.",
+    "potencia_max": 1.3,
+    "refuerzo": {
+      "nombre": "Refuerzo",
+      "defecto": "sin",
+      "base": [
+        "hierro",
+        "cobre",
+        "bronce"
+      ],
+      "coste_por_forma": 2,
+      "k_densidad": 2.5,
+      "niveles": {
+        "sin": {},
+        "madera": {
+          "material": "madera",
+          "k": 0.1
+        },
+        "piedra": {
+          "material": "piedra",
+          "k": 0.16
+        },
+        "fibra": {
+          "material": "fibra",
+          "k": 0.12
+        }
+      }
+    },
+    "grosor": {
+      "nombre": "Grosor",
+      "defecto": "normal",
+      "niveles": {
+        "fino": {
+          "potencia": 0.92,
+          "vel": 0.03,
+          "coste": 0.75
+        },
+        "normal": {
+          "potencia": 1.0,
+          "vel": 0.0,
+          "coste": 1.0
+        },
+        "grueso": {
+          "potencia": 1.1,
+          "vel": -0.03,
+          "coste": 1.5
+        }
+      }
+    }
+  }
 }

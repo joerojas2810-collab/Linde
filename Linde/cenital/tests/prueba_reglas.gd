@@ -180,8 +180,13 @@ func _generar_dorado() -> void:
 	var muestra: Array = []
 	for i in lista.size():
 		if i % 25 == 0 or str(lista[i].clave).begins_with("mat1:"): muestra.append(lista[i])
+	var l2: Array = []
+	for k in A.enumerar2(): l2.append({"clave": k, "info": A.info2(k), "receta": A.receta2(k)})
+	var m2: Array = []
+	for i in l2.size(): if i % 50 == 0: m2.append(l2[i])
 	var dorado := {"_nota": "Instantánea del comportamiento de artesania.gd. Regenerar solo tras un cambio deliberado: subir EVALUADOR_VERSION o la version de reglas_v1.json según corresponda y explicarlo en el commit.",
-		"evaluador": A.EVALUADOR_VERSION, "reglas_desarrollo": A.reglas().version, "total": lista.size(), "hash": H.hash_de(lista), "muestra": muestra}
+		"evaluador": A.EVALUADOR_VERSION, "reglas_desarrollo": A.reglas().version, "total": lista.size(), "hash": H.hash_de(lista), "muestra": muestra,
+		"art2": {"total": l2.size(), "hash": H.hash_de(l2), "muestra": m2}}
 	var f := FileAccess.open(RUTA_DORADO, FileAccess.WRITE)
 	f.store_string(JSON.stringify(dorado, "\t", true))
 	f.close()
@@ -197,6 +202,18 @@ func _dorado() -> void:
 	ok(meta, "dorado: EVALUADOR_VERSION y version de reglas coinciden con el dorado (si no: regenerar con --generar-dorado y explicarlo)")
 	var mismo := int(dor.total) == lista.size() and str(dor.hash) == H.hash_de(lista)
 	ok(mismo, "dorado: las %d claves de fabricación dan los mismos resultados" % lista.size() + ("" if mismo or not meta else " ¡CAMBIÓ EL COMPORTAMIENTO SIN SUBIR EVALUADOR_VERSION NI version!"))
+	var l2: Array = []
+	for k in A.enumerar2(): l2.append({"clave": k, "info": A.info2(k), "receta": A.receta2(k)})
+	var a2: Dictionary = dor.get("art2", {})
+	var igual2 := int(a2.get("total", -1)) == l2.size() and str(a2.get("hash", "")) == H.hash_de(l2)
+	ok(igual2, "dorado art2: las %d variantes dan los mismos resultados" % l2.size() + ("" if igual2 or not meta else " ¡CAMBIÓ EL COMPORTAMIENTO SIN SUBIR EVALUADOR_VERSION NI version!"))
+	var por_clave2 := {}
+	for e in l2: por_clave2[e.clave] = e
+	var dif2: Array = []
+	for e in a2.get("muestra", []):
+		var act = por_clave2.get(e.clave)
+		if act == null or H.canonico(e.info) != H.canonico(act.info) or H.canonico(e.receta) != H.canonico(act.receta): dif2.append(e.clave)
+	ok(dif2.is_empty() and not a2.get("muestra", []).is_empty(), "dorado art2: muestra revisable por personas coincide " + str(dif2.slice(0, 5)))
 	var por_clave := {}
 	for e in lista: por_clave[e.clave] = e
 	var diferentes: Array = []
@@ -237,7 +254,7 @@ func _informe_dominancia() -> Dictionary:
 func _m0() -> void:
 	var r := A.reglas()
 	ok(A.validar().is_empty(), "M0: reglas válidas (propiedades positivas, pesos por forma que suman 1) " + str(A.validar()))
-	ok(int(r.version) == 2 and A.EVALUADOR_VERSION == 2, "M0: version de reglas y EVALUADOR_VERSION subidas a 2")
+	ok(int(r.version) >= 2 and A.EVALUADOR_VERSION >= 2, "M0: version de reglas y EVALUADOR_VERSION subidas al menos a 2 (I1a las subió a 3)")
 	# Continuidad: con pesos neutros las propiedades reproducen la potencia y la velocidad anteriores.
 	var continuidad := true
 	for m in MATERIALES_BASE:
