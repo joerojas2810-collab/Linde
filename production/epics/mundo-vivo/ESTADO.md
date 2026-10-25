@@ -202,3 +202,19 @@ El valle de autor se conserva y ahora tiene un exterior explorable, generado con
 Guía y contrato: `Linde/cenital/docs/MUNDO_POR_REGIONES.md`. Evidencia: `production/qa/evidence/terreno/`.
 
 Verificación de §15: 49 comprobaciones específicas de terreno; regresiones de protección 51, autonomía 33, sociedad 48, desarrollo 55, campaña histórica 327 (`--campana`) e interfaz 13, sin fallos ni errores de script. Dos clientes y un servidor reales cruzaron el antiguo borde, coincidieron en terreno/bioma/recursos y validaron construcción, candado, rechazo sin permiso, autorización, transferencia y guardado exterior. La integración de red anterior también pasó sus 11 comprobaciones. Capturas de la escena real inspeccionadas. Continúan pendientes Internet, grupos grandes, playtest de exploración y colonización regional de NPC; persisten los avisos previos de recursos al cerrar.
+
+
+## 16. Arte de superficies por bioma (2026-10-24)
+
+Se integraron texturas propias para suelo de bosque, sierra, secano y pradera y agua de ribera, generadas con image_gen para Linde. El valle conserva su arte; hay transición gradual hacia el exterior y mezcla entre suelos vecinos. Las orillas reutilizan las conexiones y animación existentes con tinte armonizado. No se modifica el generador ni las partidas. Árboles, arbustos, rocas y menas siguen con sprites anteriores; no se entrega todavía un paquete completo de vegetación ni orillas propias.
+
+Fuente, prompt y hashes en `Linde/cenital/arte/mundo/biomas/`; contrato en `Linde/cenital/docs/ARTE_BIOMAS.md`. Capturas reales de los cinco biomas, valle y salida en `production/qa/evidence/biomas/`, reproducibles con `tests/captura_biomas.gd`. Importación sin errores de script y regresión de terreno: 49 comprobaciones, 0 fallos. Persisten los avisos previos de recursos al cerrar.
+
+
+## 17. Fauna y peligros regionales (2026-10-24)
+
+Se añaden cinco criaturas exteriores: espectro de bosque, gólem defensivo de sierra, diablillo hostil de secano, arpía huidiza de pradera y slime territorial de ribera (en tierra junto al agua). Arte reutilizado por indicación del usuario de `Nuevo Juego/public/art/enemies-px`: 20 tiras con reposo, ataque, golpe y derrota. Slimes y dos jefes originales permanecen en el valle.
+
+Aparición determinista por región, sin modificar el generador v1, franja de seguridad, validación de colisión y distancia, techo global de 24 regionales activos. Ataques con aviso, visión limitada por obstáculos, daño y botín reales; persecución acotada. Guardado aditivo de heridas y bajas; reaparición tras 720 minutos del juego. Réplica autoritativa mediante la instantánea existente. Sin simulación lejana ni ecosistema de reproducción/depredación. Balance provisional y tiras con una sola orientación.
+
+Contrato: `Linde/cenital/docs/FAUNA_Y_PELIGROS.md`. Verificación: 31 comprobaciones nuevas sin fallos; campaña histórica 327 PASS; interfaz 13 PASS; integración existente con servidor y dos clientes localhost sin fallos. Capturas reales de las cinco especies inspeccionadas en `production/qa/evidence/fauna/`. La regresión de terreno tiene 4 fallos de caché sobre 49, reproducidos también en una copia sin fauna: el contorno mantenido para los NPC se añadió antes de esta tarea. No se modificó ese cambio. Persisten los avisos previos al cerrar; faltan playtest prolongado y fauna en Internet.

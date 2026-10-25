@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "intervalo_s": 1.0,
+  "max_activos": 24,
+  "radio_regiones": 2,
+  "distancia_valle": 8,
+  "distancia_jugador_px": 96,
+  "reaparicion_min": 720,
+  "biomas": {
+    "bosque": "espectro_bosque",
+    "sierra": "golem_sierra",
+    "secano": "diablillo_secano",
+    "pradera": "arpia_pradera",
+    "ribera": "slime_ribera"
+  }
+}

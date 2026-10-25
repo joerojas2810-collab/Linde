@@ -676,7 +676,7 @@ func _process(delta: float) -> void:
 	if modo != "juego" or j == null: return
 	cam.position = j.pies - Vector2(0, 12)
 	if material is ShaderMaterial: (material as ShaderMaterial).set_shader_parameter("noche", oscuridad(j.hora_dia()) / 0.5)
-	actores.actualizar(delta, j.combate.enemigos, int(j.jug().hp), j.combate.centro_pj(), j.mundo, red is Cli)
+	actores.actualizar(delta, j.combate.enemigos, int(j.jug().hp), j.combate.centro_pj(), j.mundo, red is Cli, j.d.get("fauna", {}).get("bajas", {}))
 	if panel != "":
 		# En la prueba, mirar las necesidades no detiene la vida del valle. Esc sí pausa.
 		if red == null and j.autonomia.activa() and panel != "pausa":
@@ -876,6 +876,8 @@ func _dibujar_enemigo(e: Dictionary) -> void:
 	var o: Vector2 = e.pos - Vector2(t / 2.0, t)
 	_sombra(e.pos, 0.6 + t / 28.0 * 0.6)
 	actores.enemigo(self, e, Time.get_ticks_msec() / 1000.0)
+	if def.has("conducta") and e.pos.distance_to(j.pies) < 96.0:
+		draw_string(hud.ui.fuente, e.pos + Vector2(-22, -36), def.n, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, Color("eee4cf"))
 	if e.hp < def.hp:
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t, 3)), Color(0, 0, 0, 0.6))
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t * float(e.hp) / def.hp, 3)), Color("e74c3c"))

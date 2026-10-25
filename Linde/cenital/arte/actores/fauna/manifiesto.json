@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "origen": "/Users/josephrojas/Desktop/Nuevo Juego/public/art/enemies-px",
+  "nota": "Reutilización de las tiras pixel art existentes del proyecto Nuevo Juego por indicación del usuario. Sin generación ni recoloreado. Orientación frontal única; no se inventan vistas laterales.",
+  "tipos": {
+    "espectro_bosque": "enemy_specter_normal_earth",
+    "golem_sierra": "enemy_golem_normal_earth",
+    "diablillo_secano": "enemy_imp_normal_fire",
+    "arpia_pradera": "enemy_harpy_normal_wind",
+    "slime_ribera": "enemy_slime_normal_water"
+  },
+  "cuadros": {
+    "idle": 4,
+    "attack": 4,
+    "hit": 2,
+    "defeat": 4
+  },
+  "archivos": {
+    "enemy_specter_normal_earth_idle.png": "6be8675b0330f45f81fa37207c69a1b9ad50a0da2e8cdbec7b4199ab91a413c4",
+    "enemy_specter_normal_earth_attack.png": "101b801ff740451135328329aa53c473a1653bea1e745e7a81e27abef47d707b",
+    "enemy_specter_normal_earth_hit.png": "f94074945828691f102a23a8d2e926dca6297ed7c9c699b891293d6d2b2d30a7",
+    "enemy_specter_normal_earth_defeat.png": "2719c8da4a9b7028c14b3b8f5b9acfb4b23a7bea4d8069450496b1f5b2a187b2",
+    "enemy_golem_normal_earth_idle.png": "4d98e74b2dc1c9db90a17616804c0e94a8dce166bc273932748d2527049b6739",
+    "enemy_golem_normal_earth_attack.png": "5ab7c6ea1ae9b36e42a0873b46882c3257aba81274355d7edbb37a1656fed062",
+    "enemy_golem_normal_earth_hit.png": "10083f68a5de0f5b63f63343811b338f8c2008b856726f8320402171569a54c2",
+    "enemy_golem_normal_earth_defeat.png": "1f3a4872a86d43f44fc09ada940cad3c07bf9e3e97562f8fc79c8b86797fff53",
+    "enemy_imp_normal_fire_idle.png": "276a69e0bc5cdefed10999728dddcfe1538d740baae037902bd41c91429231bd",
+    "enemy_imp_normal_fire_attack.png": "876595ce18d357604dd6009026cc683f10390714e1f16fe73ee4edaca9b70cd3",
+    "enemy_imp_normal_fire_hit.png": "797bce7b2761b907b55c47c2331dcbe41850b04c4a04bc47860bcf9555c11114",
+    "enemy_imp_normal_fire_defeat.png": "921448d486decc17e27e2c1c9b8e380732ebaee1b84495f9ad4a6346339073e3",
+    "enemy_harpy_normal_wind_idle.png": "b063f7a8c2fec9cab0df29ebcd830e5fed6453c2d3e495c23404803483219556",
+    "enemy_harpy_normal_wind_attack.png": "ae8079152bd7da3a52c0b1b899bbd8409ab54d3a3ee30d59d5caae08ee156856",
+    "enemy_harpy_normal_wind_hit.png": "d0e0d88fd2d6160d4473c50f284d693953f824e065f4fcbbfa3fe3504e4ece1a",
+    "enemy_harpy_normal_wind_defeat.png": "4d540bec08172a4dbf61c40ec831ac4bf77f2ad645c07a53631645bc219dfa0d",
+    "enemy_slime_normal_water_idle.png": "66ac7ff33e1875623744fd6a4866b094ba64911194e117caac0b856e153140d1",
+    "enemy_slime_normal_water_attack.png": "b455ae249ca4b56f4f0cfecde370eb2d802e921f977e6c7b0a27493e68640df5",
+    "enemy_slime_normal_water_hit.png": "7c7c0555b5ceb25eb32ab32992666bae08d4929a252175422745cc679fd66d2f",
+    "enemy_slime_normal_water_defeat.png": "c267ec695386fa015dda79213f1498bc49c6bcd0a1b838eee815ba4b5cb08206"
+  }
+}

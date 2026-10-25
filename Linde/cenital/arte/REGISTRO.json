@@ -36,6 +36,18 @@
    "origen": "equipo_indice_01 (arte-entregado)",
    "contenido": "base y 17 hojas de caminata",
    "manifiesto": "arte/equipo/manifiesto.json"
+  },
+  {
+   "carpeta": "Linde/cenital/arte/mundo/biomas",
+   "origen": "Generación propia image_gen, 2026-10-24",
+   "contenido": "Suelos de bosque, sierra, secano y pradera; agua de ribera. Fuente y prompt conservados.",
+   "manifiesto": "arte/mundo/biomas/manifiesto.json"
+  },
+  {
+   "carpeta": "Linde/cenital/arte/actores/fauna",
+   "origen": "Nuevo Juego/public/art/enemies-px, reutilización indicada por el usuario",
+   "contenido": "20 tiras: espectro tierra, gólem tierra, diablillo fuego, arpía viento y slime agua; reposo, ataque, golpe y derrota",
+   "manifiesto": "arte/actores/fauna/manifiesto.json"
   }
  ],
  "informes": "Linde/documentos/INSTRUCCIONES_ARTE_ENTREGABLES/entregable_0X/salida/lotes/*/INFORME.md"

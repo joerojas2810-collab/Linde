@@ -1,0 +1,37 @@
+{
+  "fecha": "2026-10-24",
+  "engine": "Godot 4.7.1",
+  "sha256": {
+    "Linde/cenital/scripts/fauna.gd": "1ed8446096e48aa586d05859880e1538d154cefbed7252f00c50fef3af22a325",
+    "Linde/cenital/scripts/combate.gd": "07cfce61ac0b81536eb7a3d9b15425113f00ab9654533c3e3f9f86b2f69170d4",
+    "Linde/cenital/scripts/catalogos.gd": "d30a31f5fa23c6b1c35c9dd4be3f26a69bc49066cd6c560a2d20bfe108769baf",
+    "Linde/cenital/scripts/actores_arte.gd": "32e4811ac11f720e1451618208ec1bd6cb2a49f767b833335fa0328c447beb22",
+    "Linde/cenital/scripts/escena.gd": "96302bceb1c5c76e94cc129733d4448deeda38fdda445677b41ebb705e6ebd11",
+    "Linde/cenital/scripts/juego.gd": "d827885cf0c49a35ba9f6214d74e05fc057e9d3dff85ea11737b7a8763adbb28",
+    "Linde/cenital/datos/fauna/reglas_v1.json": "ace7d51ff1ae906deb5dea4ad7f6c55db9a735ad7cfade7f403a8f2822abb9ba",
+    "Linde/cenital/tests/prueba_fauna.gd": "03035b7b59f1597e40b96acff5878b49ddeada3164dc6a856102472bf1505f71",
+    "Linde/cenital/tests/captura_fauna.gd": "1444db97e801bdc457ea9e84c84fb5fb56e079a4d47e025d5858333447974dbe"
+  },
+  "resultados": {
+    "fauna": {
+      "comprobaciones": 31,
+      "fallos": 0
+    },
+    "campana": {
+      "comprobaciones": 327,
+      "fallos": 0
+    },
+    "interfaz": {
+      "comprobaciones": 13,
+      "fallos": 0
+    },
+    "red_localhost": {
+      "fallos": 0
+    },
+    "terreno": {
+      "comprobaciones": 49,
+      "fallos": 4,
+      "mismos_fallos_sin_fauna": true
+    }
+  }
+}

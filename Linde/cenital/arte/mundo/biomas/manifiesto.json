@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "fecha": "2026-10-24",
+  "origen": "Generación propia para Linde mediante image_gen integrado; recorte central y reducción nearest en Godot.",
+  "fuente_dimensiones": [
+    2172,
+    724
+  ],
+  "textura_dimensiones": [
+    32,
+    32
+  ],
+  "celda": 16,
+  "archivos": {
+    "bosque.png": "62429f8343c140c79870affbd6df460f8058a56ba31c9d7e63a946e7c3c6e3a9",
+    "fuente.png": "2eee5025098c5f758dbba828fd2598b2eaba52296b9afc3ed585f1ce1344f51e",
+    "pradera.png": "11855ed6a6b551bc4c7eb11c4ac9e04d12b5968952e3143cf875fdf7f964f70f",
+    "ribera.png": "d97c23ef89ca8f2245890b778673592834cc5ffaf786b80388b9340543402c3a",
+    "secano.png": "d7e72f608aa7661f6adb4e5cd614aebc2ff8af74da2287bc4406c4ef54f00ee5",
+    "sierra.png": "738f14dcfbf82c90abefce24e6824883643f5547bce002a913b04a7f776754a5"
+  }
+}

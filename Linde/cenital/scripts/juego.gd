@@ -2,7 +2,8 @@ extends RefCounted
 # Autoridad única del estado: inventario, mundo, misiones, progresión. La UI (o un servidor) pide acciones y muestra resultados.
 # Estado persistente = d (JSON): lo COMPARTIDO (semilla, min, mundo, cofres, jefes, npcs) en la raíz y lo de cada
 # jugador en d.jugadores[id]. Todas las acciones reciben el id del jugador que las ejecuta (por defecto P.LOCAL).
-# Todo lo demás (enemigos, rutas, posición viva y temporizadores de cada jugador) es sesión y se reconstruye al cargar.
+# Rutas y temporizadores son de sesión. La fauna regional conserva heridas y bajas en d.fauna;
+# los encuentros del valle se reconstruyen al cargar, respetando el estado durable de los jefes.
 const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Inv = preload("res://scripts/inventario.gd")
@@ -161,6 +162,7 @@ func pies_de(id: String = LOCAL) -> Vector2:
 	return rt[id].pies
 
 func guardar(ruta: String) -> bool:
+	combate.fauna.guardar()
 	for id in rt:
 		var p: Vector2 = rt[id].pies
 		d.jugadores[id].pos = [p.x, p.y]

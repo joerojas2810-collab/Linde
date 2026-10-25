@@ -1,0 +1,13 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+CAPTURA espectro_bosque fauna_v1@-16,-16 (-3972.415, -3890.476)
+CAPTURA golem_sierra fauna_v1@-13,-16 (-3224.0, -4004.0)
+CAPTURA diablillo_secano fauna_v1@-7,-16 (-1619.951, -4082.38)
+CAPTURA arpia_pradera fauna_v1@-14,-16 (-3501.615, -3926.246)
+CAPTURA slime_ribera fauna_v1@-8,-16 (-1800.0, -4084.0)
+CAPTURAS_FAUNA_OK
+WARNING: 24 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 10 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

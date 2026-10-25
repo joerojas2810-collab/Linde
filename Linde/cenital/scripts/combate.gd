@@ -9,8 +9,10 @@ const Mundo = preload("res://scripts/mundo.gd")
 const JEFES := ["guardian", "ciervo"]
 const INVULN_S := 0.6
 const KNOCKBACK_PX := 8.0
+const Fauna = preload("res://scripts/fauna.gd")
 
 var j
+var fauna
 var enemigos: Array = []
 var pjs := {}           # id -> {est: libre|aviso|activo|rec, t, inv_t, dir}: sesión, no se guarda
 
@@ -30,6 +32,7 @@ var dir: Vector2i:
 
 func _init(juego) -> void:
 	j = juego
+	fauna = Fauna.new(self)
 
 func ataque(id: String) -> Dictionary:
 	if not pjs.has(id): pjs[id] = {"est": "libre", "t": 0.0, "inv_t": 0.0, "dir": Vector2i.DOWN}
@@ -42,6 +45,7 @@ static func centro(e: Dictionary) -> Vector2:
 	return e.pos - Vector2(0, e.tam / 2.0)
 
 func reiniciar() -> void:
+	fauna.guardar()
 	enemigos.clear()
 	for s in j.mundo.spawns_slime: enemigos.append(_nuevo("slime", Mundo.pies_de_celda(s)))
 	for id in JEFES: _aparecer_si_toca(id)
@@ -90,6 +94,7 @@ func atacar(d: Vector2i, id: String = P.LOCAL) -> bool:
 	return true
 
 func paso(dt: float) -> void:
+	fauna.paso(dt)
 	for id in j.rt:
 		var a := ataque(id)
 		a.inv_t = maxf(0.0, a.inv_t - dt)
@@ -128,13 +133,16 @@ func _golpe_pj(id: String) -> void:
 func _danar(e: Dictionary, dmg: int, id: String = P.LOCAL) -> void:
 	if e.est == "muerto": return
 	e.hp -= dmg
+	e.alertado = true
 	j.autonomia.desarrollo.registrar(j.actor_desarrollo(id),"combate",{str(j.jug(id).equipo.get("arma","")):1})
 	if not C.ENEMIGOS[e.tipo].has("fases"):
 		e.pos = _mover(e, Vector2(ataque(id).dir) * KNOCKBACK_PX)
 	if e.hp <= 0: _morir(e, id)
+	else: fauna.recordar(e)
 
 func _morir(e: Dictionary, id: String) -> void:
 	e.est = "muerto"
+	fauna.baja(e)
 	var def: Dictionary = C.ENEMIGOS[e.tipo]
 	j.ganar_xp(def.xp, id)
 	if def.has("drops"): j.dar_o_pendiente(def.drops, id)
@@ -167,11 +175,35 @@ func _mas_cercano(e: Dictionary) -> Array:
 		if dist < mejor[1]: mejor = [id, dist]
 	return mejor
 
+func _visible(e: Dictionary, id: String) -> bool:
+	if not e.has("fauna_id"): return true # conservar los encuentros históricos
+	var hasta: Vector2 = j.pies_de(id)
+	var pasos := maxi(1, ceili(e.pos.distance_to(hasta) / 4.0))
+	for i in range(1, pasos):
+		if j.mundo.bloquea(Mundo.celda_de(e.pos.lerp(hasta, float(i) / pasos))): return false
+	return true
+
 func _paso_enemigo(e: Dictionary, dt: float) -> void:
+	if e.est == "muerto": return
 	var def: Dictionary = C.ENEMIGOS[e.tipo]
 	var jefe: bool = def.has("fases")
 	var cerca: Array = _mas_cercano(e)
 	var dist: float = cerca[1]
+	var conducta: String = def.get("conducta", "hostil")
+	# La fauna no abandona su región para perseguir indefinidamente a un jugador.
+	if e.has("fauna_id") and (e.pos.distance_to(e.home) > 144.0 or e.est == "regresa"):
+		e.est = "regresa"
+		e.obj = ""
+		e.alertado = false
+		e.pos = _mover(e, (e.home - e.pos).normalized() * def.vel * dt)
+		if e.pos.distance_to(e.home) < 8.0: e.est = "idle"
+		return
+	if conducta == "huidizo" and not e.get("alertado", false) and dist < def.vision:
+		e.est = "huye"
+		e.dir = (centro(e) - centro_pj(cerca[0])).normalized()
+		e.pos = _mover(e, e.dir * def.vel * dt)
+		return
+	if e.est == "huye": e.est = "idle"
 	if jefe:
 		var f: float = float(e.hp) / def.hp
 		var idx := 0
@@ -181,13 +213,13 @@ func _paso_enemigo(e: Dictionary, dt: float) -> void:
 			j.aviso_todos("¡%s cambia de postura!" % def.n)
 	match e.est:
 		"idle":
-			if dist <= def.vision:
+			if dist <= def.vision and (conducta != "defensivo" or e.get("alertado", false)) and _visible(e, cerca[0]):
 				e.est = "persigue"
 				e.obj = cerca[0]
 			elif e.pos.distance_to(e.home) > 2.0: e.pos = _mover(e, (e.home - e.pos).normalized() * def.vel * dt)
 			if jefe and e.hp < def.hp and dist > def.vision * 2.0: e.hp = def.hp   # reinicio de encuentro
 		"persigue":
-			if dist > def.vision * 2.0:
+			if dist > def.vision * 2.0 or not _visible(e, cerca[0]):
 				e.est = "idle"
 				e.obj = ""
 				return
@@ -202,6 +234,7 @@ func _paso_enemigo(e: Dictionary, dt: float) -> void:
 				e.dir = (cp - centro(e)).normalized()
 				e.n_atq += 1
 			else:
+				e.dir = (cp - centro(e)).normalized()
 				e.pos = _mover(e, (cp - centro(e)).normalized() * def.vel * dt)
 		"aviso":
 			e.t -= dt
@@ -219,6 +252,7 @@ func _paso_enemigo(e: Dictionary, dt: float) -> void:
 func _resolver(e: Dictionary, info: Dictionary) -> void:
 	var obj: String = e.obj
 	var hay: bool = j.rt.has(obj)
+	if hay and not _visible(e, obj): return
 	var cp := centro_pj(obj) if hay else Vector2(INF, INF)
 	var golpea := false
 	if info.forma == "circulo":

@@ -85,6 +85,11 @@ const HAB := {
 # Combate (A01 PENDIENTE: modelo provisional en tiempo real, ver docs/DECISIONES.md).
 # aviso = segundos de señal previa antes del impacto; rec = recuperación tras atacar.
 const ENEMIGOS := {
+	"espectro_bosque": {"n": "Espectro del bosque", "hp": 20, "vel": 24.0, "vision": 96.0, "aviso": 0.9, "rec": 1.2, "dmg": 5, "radio": 18.0, "xp": 12, "drops": {"fibra": 2}, "tam": 14, "conducta": "hostil"},
+	"golem_sierra": {"n": "Gólem de la sierra", "hp": 38, "vel": 15.0, "vision": 80.0, "aviso": 1.2, "rec": 1.5, "dmg": 8, "radio": 22.0, "xp": 18, "drops": {"piedra": 3}, "tam": 18, "conducta": "defensivo"},
+	"diablillo_secano": {"n": "Diablillo del secano", "hp": 16, "vel": 32.0, "vision": 104.0, "aviso": 0.65, "rec": 0.9, "dmg": 5, "radio": 16.0, "xp": 12, "drops": {"arcilla": 2}, "tam": 12, "conducta": "hostil"},
+	"arpia_pradera": {"n": "Arpía de pradera", "hp": 18, "vel": 38.0, "vision": 88.0, "aviso": 0.8, "rec": 1.0, "dmg": 4, "radio": 17.0, "xp": 10, "drops": {"fibra": 2}, "tam": 12, "conducta": "huidizo"},
+	"slime_ribera": {"n": "Slime de ribera", "hp": 16, "vel": 22.0, "vision": 40.0, "aviso": 0.8, "rec": 1.0, "dmg": 4, "radio": 16.0, "xp": 9, "drops": {"gelatina": 2}, "tam": 12, "conducta": "territorial"},
 	"slime": {"n": "Slime", "hp": 12, "vel": 28.0, "vision": 80.0, "aviso": 0.5, "rec": 0.8, "dmg": 4, "radio": 14.0,
 		"xp": 8, "drops": {"gelatina": 1}, "tam": 12},
 	"guardian": {"n": "Guardián de las Ruinas", "hp": 80, "vel": 22.0, "vision": 140.0, "tipo": "capitulo", "xp": 100,

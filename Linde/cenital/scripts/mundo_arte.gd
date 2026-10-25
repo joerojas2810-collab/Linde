@@ -9,6 +9,16 @@ const ARBOLES := ["broadleaf", "pine", "fruit"]
 const VECINOS := [[Vector2i.UP, 1], [Vector2i.RIGHT, 2], [Vector2i.DOWN, 4], [Vector2i.LEFT, 8], [Vector2i(1, -1), 16], [Vector2i(1, 1), 32], [Vector2i(-1, 1), 64], [Vector2i(-1, -1), 128]]
 const CARDINALES := [[Vector2i.UP, 1], [Vector2i.RIGHT, 2], [Vector2i.DOWN, 4], [Vector2i.LEFT, 8]]
 const MARCADOR := Color(1, 0, 1, 0.85)
+const SUELOS_BIOMA := {"bosque": "bosque", "sierra": "sierra", "secano": "secano", "pradera": "pradera"}
+
+# Las variantes forman un mosaico de 32 px; coordenadas globales, también negativas.
+func _suelo_bioma(ci: CanvasItem, c: Vector2i, bioma: String, dst: Rect2, alfa: float = 1.0) -> void:
+	var t := tex("biomas/" + bioma + ".png")
+	if t == null:
+		_tex_rect(ci, "biomas/" + bioma + ".png", dst)
+		return
+	var origen := Vector2(posmod(c.x, 2), posmod(c.y, 2)) * CELDA
+	ci.draw_texture_rect_region(t, dst, Rect2(origen, Vector2(CELDA, CELDA)), Color(1, 1, 1, alfa))
 
 var mapeo: Dictionary = {}
 var objetos: Dictionary = {}
@@ -73,16 +83,30 @@ func suelo(ci: CanvasItem, m, c: Vector2i, tiempo: float) -> void:
 	var dst := Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA))
 	if clase == "":
 		var bioma: String=m.bioma(c)
-		var tinte: Color={"bosque":Color("c1d7b9"),"sierra":Color("d6d1c4"),"secano":Color("e5d3a2")}.get(bioma,Color.WHITE)
-		tinte=Color.WHITE.lerp(tinte,clampf(float(Mundo.Terreno.distancia_valle(c))/12.0,0.0,1.0))
-		_tex_rect(ci, "E04_grass_periodica.png", dst,tinte)
+		_tex_rect(ci, "E04_grass_periodica.png", dst)
+		if SUELOS_BIOMA.has(bioma):
+			var mezcla := clampf(float(Mundo.Terreno.distancia_valle(c)) / 12.0, 0.0, 1.0)
+			_suelo_bioma(ci, c, bioma, dst, mezcla)
+			# Una franja de transición de una celda suaviza los cambios entre materiales.
+			for vecino in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+				var otro: String = m.bioma(c + vecino)
+				if otro != bioma and SUELOS_BIOMA.has(otro) and m.tipo(c + vecino) == Mundo.T.PASTO:
+					_suelo_bioma(ci, c, otro, dst, mezcla * 0.12)
 		return
 	var p: Array = mapeo[clase][str(mascara(m, c, t))]
 	var cuadro := int(tiempo / 0.15) % 4 if clase == "water" else 0
 	var f := "E04_water_47_anim.png" if clase == "water" else "E04_" + clase + "_47.png"
 	var tx := tex(f)
 	if tx == null: ci.draw_rect(dst, MARCADOR)
-	else: ci.draw_texture_rect_region(tx, dst, Rect2(int(p[0]) * CELDA + cuadro * 128, int(p[1]) * CELDA, CELDA, CELDA))
+	else:
+		var tinte := Color(0.62, 0.72, 0.60) if clase == "water" and not Mundo.es_valle(c) else Color.WHITE
+		ci.draw_texture_rect_region(tx, dst, Rect2(int(p[0]) * CELDA + cuadro * 128, int(p[1]) * CELDA, CELDA, CELDA), tinte)
+	# Se conserva la orilla de 47 conexiones; el agua propia ocupa solo el interior.
+	if clase == "water" and not Mundo.es_valle(c) and mascara(m, c, t) == 255:
+		var agua := tex("biomas/ribera.png")
+		if agua != null:
+			var origen := Vector2(posmod(c.x + cuadro, 2), posmod(c.y, 2)) * CELDA
+			ci.draw_texture_rect_region(agua, dst, Rect2(origen, Vector2(CELDA, CELDA)), Color(1, 1, 1, 0.55))
 
 # Un solo arte de mena (cobre): el hierro se distingue con tinte frío y la arcilla es roca rojiza. Sustituir cuando haya arte propio.
 const TINTE_MENA := {"veta": Color(0.72, 0.78, 1.0), "arcilla": Color(1.25, 0.7, 0.55)}
