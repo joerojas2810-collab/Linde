@@ -16,3 +16,6 @@ Ejecutar tests/revision_visual_integrada.gd con render gráfico y opcional -- --
 
 ## Actualización de base
 Se incorporó 86ae9e2 antes de publicar. Se conservan solares, casas, campos, puestos, minerales y orden estable de dibujo. La presentación hereda los nuevos tejados, puertas y cultivos de mundo_arte.gd. Prueba de orden de dibujo: 6 comprobaciones aprobadas.
+
+## Estado de aprobación (25/10)
+El usuario aprobó **provisionalmente** el estilo visual mostrado en las cinco capturas (escenario, vegetación, HUD, mochila, equipo, marcos, botones y barras). Los dibujos por código de `arte_entornos.gd`, `hud_vivo.gd` y `ui_viva.gd` (49 llamadas) son excepciones específicas registradas en [DECISIONES](DECISIONES.md#excepciones-de-dibujo-por-código-usuario-2510-provisional) y controladas por función en `tests/prueba.gd`. «Se dibujan en Godot» describe lo existente, no un método para arte nuevo: el arte nuevo usa sprites y recursos gráficos.

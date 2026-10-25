@@ -43,3 +43,6 @@ Las mecánicas de `docs/ARRAIGO.md` funcionan sin arte nuevo, pero se ven pobres
 ## Cómo añadirlo
 
 Generar el PNG, copiarlo a `arte/mundo/`, registrarlo en `E04_objetos.json` (archivo, canvas, pivote) y cambiar la clave en `mundo_arte.gd` (`natural()`); `TINTE_MENA` puede borrarse cuando cada mena tenga arte propio.
+
+## Dibujo por código aceptado (provisional, 25/10)
+Lo siguiente se dibuja hoy con primitivas por excepción aprobada ([DECISIONES](DECISIONES.md#excepciones-de-dibujo-por-código-usuario-2510-provisional)) y puede sustituirse por recursos sin cambiar el aspecto: motas de pradera, hierbas, piedrecillas de secano, juncos de ribera, flor y musgo de ruinas (`arte_entornos.gd`); marcos, casillas y barras de la interfaz (`ui_viva.gd`, como 9-patch con este mismo aspecto). Al sustituirlos, bajar el máximo correspondiente en `DIBUJOS_APROBADOS`.

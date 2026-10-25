@@ -26,6 +26,7 @@ Servidor siempre encendido, sin congelar el mundo; crecimiento mixto (los hitos 
 ### C. Decisiones del usuario sobre dirección (24/10)
 | Decisión | Estado | Dónde |
 |---|---|---|
+| Estilo visual de «arte vivo» aprobado **provisionalmente** (25/10, cinco capturas); 49 llamadas de dibujo por código aceptadas como excepciones específicas; la regla de usar sprites para el arte nuevo sigue vigente | Usuario (25/10, provisional) | [Excepciones de dibujo por código](#excepciones-de-dibujo-por-código-usuario-2510-provisional) |
 | La autonomía es el modo principal; el juego nace de las decisiones del jugador, no de una campaña; campaña del cap. 1 retirada de la partida principal | Usuario (vigente; la activación por defecto se hizo en paralelo, ver ESTADO) | [ESTADO archivado §11](../../../docs/archivo/ESTADO-mundo-vivo-hasta-2026-10-25.md), [AUTONOMIA](AUTONOMIA.md) |
 | La población no tiene número objetivo; `max_habitantes` es solo un techo técnico | Vigente | ESTADO archivado §13 |
 | Gente buena y mala: honestidad, codicia y rencor; propiedad y hurto también para el jugador | Usuario | ESTADO archivado §13, [PROTECCION_Y_ECONOMIA](PROTECCION_Y_ECONOMIA.md) |
@@ -252,3 +253,25 @@ Se integraron los seis entregables de arte (E01–E06, candidatos sin aceptació
 - **Origen:** eliminado por completo (catálogo, creador, partida, diálogo y protocolo de red; `Srv.VERSION` pasa a 2: el paquete «hola» ya no lo lleva). Los guardados antiguos con la clave `origen` se cargan igual: se ignora.
 - **Semilla:** el mapa es único; la semilla solo elige dónde apareces y el botín. Ya no aparece en el creador: cada partida nueva usa una aleatoria. `--nueva=SEMILLA` sigue como argumento de depuración.
 - **Ranura de arma:** `C.RANURAS` incluye `arma` (7 ranuras). La espada de hierro se equipa (Enter en la mochila), el daño sale del arma equipada (tenerla en el inventario ya no da daño) y se dibuja solo si está equipada, también en los jugadores remotos. Los guardados antiguos reciben la ranura vacía.
+
+## Excepciones de dibujo por código (usuario, 25/10, provisional)
+**Decisión.** El usuario revisó cinco capturas reales (valle, mochila y equipo; evidencia en `production/qa/evidence/arte-vivo/` y la revisión del 25/10) y **aprueba provisionalmente el estilo visual actual**: escenario, vegetación, HUD, mochila, equipo, marcos, botones y barras se conservan tal cual. Origen del dibujo: commit `88571a6` («arte vivo e interfaz pulida»), que añadió código de dibujo sin actualizar `t_sin_arte_procedural`.
+
+**Qué se acepta.** Solo estas 49 llamadas, como excepciones **específicas** (máximo exacto por script y función, en `tests/prueba.gd` → `DIBUJOS_APROBADOS`):
+
+| Script · función | Llamadas | Qué dibujan | Por qué se acepta |
+|---|---|---|---|
+| `arte_entornos.gd` · `suelo` | 15 | Velos de bioma, cantera y ruinas; sombra de la casa; motas, hierbas, piedrecillas, juncos, musgo y destello del agua | Aspecto aprobado; los velos modulan arte real. Motas, hierbas, juncos y musgo son arte que falta (ver ARTE_PENDIENTE) |
+| `arte_entornos.gd` · `_flor` | 4 | Flor de pradera | Aspecto aprobado; sprite pendiente |
+| `arte_entornos.gd` · `_sombra_suelo` | 2 | Sombras de contacto de objetos | Aspecto aprobado; es sombreado sobre arte real |
+| `hud_vivo.gd` · `_celda` | 1 | Cuadro de color con iniciales si un ítem no tiene icono | Marcador provisional equivalente al de «arte faltante» |
+| `hud_vivo.gd` · `_inventario` | 4 | Botón de cerrar y dos círculos de fondo de la ficha | Aspecto aprobado |
+| `ui_viva.gd` · `marco` | 13 | Marco de madera y oro de paneles, tooltip y botones | Aspecto aprobado (sustituye a los 9-patch de `ui_arte`) |
+| `ui_viva.gd` · `ranura` | 5 | Casilla de inventario | Aspecto aprobado |
+| `ui_viva.gd` · `medidor` | 5 | Barras de vida y XP | Aspecto aprobado |
+
+**Qué NO autoriza.**
+- La regla general sigue siendo: **el arte nuevo se hace con sprites y recursos gráficos**.
+- No autoriza generar personajes, edificios, árboles ni otros recursos con primitivas (`draw_rect`, `draw_circle`, polígonos, líneas) sin revisión.
+- Una llamada nueva, una función nueva con dibujo o un script nuevo hace fallar `t_sin_arte_procedural`; añadir una excepción exige nueva aprobación del usuario y una fila aquí.
+- Es **provisional**: la aceptación artística de los lotes sigue pendiente (ver [ARTE_PENDIENTE](ARTE_PENDIENTE.md)) y estas excepciones pueden retirarse sustituyéndolas por recursos.

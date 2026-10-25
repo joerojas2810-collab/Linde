@@ -1449,6 +1449,31 @@ func t_actores_arte() -> void:
 ## zonas de aviso técnicas de enemigos (escena 2), cajas de depuración F1 (escena 2), barra de vida de enemigo (escena 2) e
 ## indicador de golpes (escena 1), fondo de etiquetas (escena 1), foco/bordes de inventario (hud 3) y
 ## superposición de mineral (mundo_arte 1). Un dibujo nuevo obliga a revisar esta lista.
+## EXCEPCIONES APROBADAS (usuario, 25/10, «arte vivo» 88571a6; ver DECISIONES.md «Excepciones de dibujo por código»):
+## solo estos tres scripts y solo estas funciones, con máximo exacto por función (49 llamadas). No es una excepción general:
+## una llamada nueva, un script nuevo o una función nueva con dibujo hace fallar la prueba.
+##  arte_entornos.gd  suelo 15 (velos de bioma/cantera/ruinas, sombra de la casa, motas, hierbas, piedrecillas, juncos, musgo, destello del agua),
+##                    _flor 4, _sombra_suelo 2 (sombras de contacto)
+##  hud_vivo.gd       _celda 1 (cuadro de color cuando un ítem no tiene icono), _inventario 4 (botón cerrar y dos círculos de fondo)
+##  ui_viva.gd        marco 13 (marcos de panel, tooltip y botón), ranura 5 (casilla de inventario), medidor 5 (barras de vida y XP)
+const DIBUJOS_APROBADOS := {
+	"arte_entornos.gd": {"suelo": 15, "_flor": 4, "_sombra_suelo": 2},
+	"hud_vivo.gd": {"_celda": 1, "_inventario": 4},
+	"ui_viva.gd": {"marco": 13, "ranura": 5, "medidor": 5},
+}
+## Cuenta las llamadas de dibujo por función del código fuente `src`.
+func _dibujos_por_funcion(src: String, re: RegEx) -> Dictionary:
+	var re_func := RegEx.new()
+	re_func.compile("^(?:static\\s+)?func\\s+(\\w+)")
+	var cuentas := {}
+	var actual := ""
+	for linea in src.split("\n"):
+		var m := re_func.search(linea)
+		if m: actual = m.get_string(1)
+		var n := re.search_all(linea).size()
+		if n > 0: cuentas[actual] = int(cuentas.get(actual, 0)) + n
+	return cuentas
+
 func t_sin_arte_procedural() -> void:
 	var lista := {"ui_arte.gd": 8, "mundo_arte.gd": 3, "actores_arte.gd": 2, "hud.gd": 5, "escena.gd": 10}
 	var re := RegEx.new()
@@ -1456,9 +1481,21 @@ func t_sin_arte_procedural() -> void:
 	var fuera := []
 	for f in DirAccess.get_files_at("res://scripts"):
 		if not f.ends_with(".gd"): continue
-		var n := re.search_all(FileAccess.get_file_as_string("res://scripts/" + f)).size()
+		var fuente := FileAccess.get_file_as_string("res://scripts/" + f)
+		if DIBUJOS_APROBADOS.has(f):
+			var por_funcion := _dibujos_por_funcion(fuente, re)
+			if JSON.stringify(por_funcion, "", true) != JSON.stringify(DIBUJOS_APROBADOS[f], "", true):
+				fuera.append("%s=%s (aprobado %s)" % [f, str(por_funcion), str(DIBUJOS_APROBADOS[f])])
+			continue
+		var n := re.search_all(fuente).size()
 		if n != int(lista.get(f, 0)): fuera.append("%s=%d (permitido %d)" % [f, n, int(lista.get(f, 0))])
 	ok(fuera.is_empty(), "sin arte procedural: ningún script dibuja con primitivas fuera de la lista blanca %s" % str(fuera))
+	# La comprobación por función detecta un dibujo nuevo aunque el script ya tenga excepciones.
+	var base := "func suelo(ci):\n\tci.draw_rect(a)\nfunc _flor(ci):\n\tci.draw_line(a)\n"
+	var aprobado := {"suelo": 1, "_flor": 1}
+	ok(JSON.stringify(_dibujos_por_funcion(base, re), "", true) == JSON.stringify(aprobado, "", true), "sin arte procedural: el recuento por función coincide con lo aprobado")
+	ok(JSON.stringify(_dibujos_por_funcion(base + "func nueva(ci):\n\tci.draw_circle(a)\n", re), "", true) != JSON.stringify(aprobado, "", true), "sin arte procedural: una función nueva con dibujo se detecta")
+	ok(JSON.stringify(_dibujos_por_funcion(base.replace("draw_rect(a)", "draw_rect(a)\n\tci.draw_rect(b)"), re), "", true) != JSON.stringify(aprobado, "", true), "sin arte procedural: una llamada extra en una función aprobada se detecta")
 	ok(not FileAccess.file_exists("res://scripts/arte.gd") and not FileAccess.file_exists("res://scripts/apariencia.gd") and not FileAccess.file_exists("res://scripts/capas_sprite.gd") and not FileAccess.file_exists("res://arte/personaje_cuerpo.png"),
 		"sin arte procedural: los módulos y hojas del arte anterior ya no existen")
 	var esc_src := FileAccess.get_file_as_string("res://scripts/escena.gd")
