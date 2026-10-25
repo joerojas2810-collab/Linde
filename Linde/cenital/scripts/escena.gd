@@ -11,8 +11,8 @@ const C = preload("res://scripts/catalogos.gd")
 const Inv = preload("res://scripts/inventario.gd")
 const Mundo = preload("res://scripts/mundo.gd")
 const J = preload("res://scripts/juego.gd")
-const Hud = preload("res://scripts/hud.gd")
-const MundoArte = preload("res://scripts/mundo_arte.gd")
+const Hud = preload("res://scripts/hud_vivo.gd")
+const MundoArte = preload("res://scripts/arte_entornos.gd")
 const ActoresArte = preload("res://scripts/actores_arte.gd")
 const Srv = preload("res://scripts/red_servidor.gd")
 const Cli = preload("res://scripts/red_cliente.gd")
@@ -335,6 +335,9 @@ func _cerrar() -> void:
 	cofre_id = ""
 
 func _tecla_panel(e: InputEvent) -> void:
+	if panel=="inv" and e.keycode in [KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT]:
+		_navegar_inventario(e)
+		return
 	if panel == "dialogo":
 		if e.keycode in [KEY_E, KEY_ENTER, KEY_ESCAPE, KEY_SPACE]: _cerrar()
 		return
@@ -1016,3 +1019,21 @@ func _dibujar_constr(c: Vector2i) -> void:
 func _cerca_puerta() -> bool:
 	var d: Vector2i = (Mundo.celda_de(j.pies) - Mundo.PUERTA_C).abs()
 	return maxi(d.x, d.y) <= 1
+
+func _navegar_inventario(e:InputEvent)->void:
+	var primero:=4+C.RANURAS.size()
+	var ultimo:int=primero+j.jug().inv.size()-1
+	if sel<primero:
+		if e.keycode==KEY_UP:sel=3+posmod(sel-4,C.RANURAS.size())
+		elif e.keycode==KEY_DOWN:sel=3+posmod(sel-2,C.RANURAS.size())
+		elif e.keycode==KEY_RIGHT:
+			if sel<7:sel=mini(sel+4,9)
+			elif ultimo>=primero:sel=primero
+		elif e.keycode==KEY_LEFT and sel>=7:sel-=4
+	else:
+		var columna:=posmod(sel-primero,5)
+		if e.keycode==KEY_LEFT:
+			sel=9 if columna==0 else sel-1
+		elif e.keycode==KEY_RIGHT:sel=mini(ultimo,sel+1)
+		elif e.keycode==KEY_UP:sel=maxi(primero,sel-5)
+		elif e.keycode==KEY_DOWN:sel=mini(ultimo,sel+5)
