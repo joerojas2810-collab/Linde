@@ -233,7 +233,9 @@ func _pisadas() -> void:
 	for id in rt: quienes["pj:" + id] = Mundo.celda_de(pies_de(id))
 	for id in habitantes.ids: quienes["npc:" + id] = Mundo.celda_de(habitantes.pos(id))
 	for k in quienes:
-		if _ult_celda.get(k, quienes[k]) != quienes[k]: mundo.pisar(quienes[k])
+		if _ult_celda.get(k, quienes[k]) != quienes[k]:
+			mundo.pisar(quienes[k])
+			if k.begins_with("pj:"): practicar("pasos", 1, k.substr(3))
 		_ult_celda[k] = quienes[k]
 
 func _hora_en_punto() -> void:
@@ -260,6 +262,11 @@ func stats(id: String = LOCAL) -> Dictionary:
 	var s := {"hp": C.HP_BASE, "dmg": C.DMG_BASE, "vel": 1.0, "slots": C.MAX_SLOTS_BASE, "golpes_menos": 0, "def": 0}
 	for h in pj.hab:
 		for k in C.HAB[h].efe: s[k] += C.HAB[h].efe[k]
+	var uso: Dictionary = pj.get("uso", {})
+	for pid in C.PASIVAS:
+		var pa: Dictionary = C.PASIVAS[pid]
+		if int(uso.get(pa.uso, 0)) >= int(pa.umbral):
+			for k in pa.efe: s[k] += pa.efe[k]
 	if autonomia != null and autonomia.desarrollo.activa():
 		var actor := actor_desarrollo(id)
 		s.golpes_menos += mini(int(autonomia.desarrollo.cfg.bonus_recoleccion_max), autonomia.desarrollo.rango(actor,"recoleccion"))
@@ -284,6 +291,16 @@ func puntos_libres(id: String = LOCAL) -> int:
 	for h in jug(id).hab: g += C.HAB[h].coste
 	return nivel(id) - 1 - g
 
+## Suma práctica; al cruzar el umbral de una pasiva avisa. Las pasivas no se guardan: salen del contador.
+func practicar(clave: String, n: int = 1, id: String = LOCAL) -> void:
+	var uso: Dictionary = jug(id).get_or_add("uso", {})
+	var antes := int(uso.get(clave, 0))
+	uso[clave] = antes + n
+	for pid in C.PASIVAS:
+		var pa: Dictionary = C.PASIVAS[pid]
+		if pa.uso == clave and antes < int(pa.umbral) and antes + n >= int(pa.umbral):
+			aviso("Por la práctica dominas «%s»." % pa.n, id)
+
 func ganar_xp(n: int, id: String = LOCAL) -> void:
 	var antes := nivel(id)
 	jug(id).xp += n
@@ -302,6 +319,7 @@ func aprender(hid: String, id: String = LOCAL) -> Dictionary:
 
 func danar_pj(n: int, id: String = LOCAL) -> void:
 	var pj := jug(id)
+	practicar("dano", n, id)
 	pj.hp -= Eq.dano(n, int(stats(id).def))   # 3.7 PROVISIONAL: max(1, round(n * 20 / (20 + DEF)))
 	if pj.hp <= 0: _derrota(id)
 
@@ -376,6 +394,7 @@ func golpear_objeto(c: Vector2i, id: String = LOCAL) -> Dictionary:
 	mundo.romper(oid, d.min)
 	if autonomia.sociedad.activa(): autonomia.sociedad.observar_extraccion(id, oid)
 	autonomia.desarrollo.registrar(actor_desarrollo(id),"recoleccion",drops)
+	practicar("recolectado", 1, id)
 	ganar_xp(def.xp, id)
 	return _ok("Obtienes " + _txt_items(drops), id)
 

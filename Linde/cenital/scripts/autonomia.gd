@@ -91,6 +91,7 @@ func paso() -> void:
 	a.ultimo_min = ahora
 	asentamientos.actualizar()
 	if sociedad.activa(): sociedad.actualizar()
+	var decididos := 0   # reparte la planificación: pocos habitantes por minuto de juego, el resto queda pendiente
 	for nid in j.habitantes.ids:
 		if perfil(nid).is_empty(): continue
 		var n: Dictionary = estado(nid)
@@ -106,6 +107,8 @@ func paso() -> void:
 			n.plan = {}
 			continue
 		if ahora - int(n.accion_min) < int(reglas.intervalo_accion_min): continue
+		if decididos >= int(reglas.max_decisiones_por_paso): continue
+		decididos += 1
 		n.accion_min = ahora
 		_decidir(nid)
 
@@ -130,6 +133,19 @@ func _pedir(nid: String, motivo: String) -> Dictionary:
 			p["celda"] = [c.x, c.y]
 			p["destinatario"] = elegido
 	return p
+
+## Cuánto de `item` aún cabe en la mochila del habitante (reglas.mochila_habitante pilas).
+func hueco(nid: String, item: String) -> int:
+	var inv: Dictionary = estado(nid).inv
+	var pila: int = int(Inv.Eq.info(item).pila)
+	var resto: int = (pila - int(inv.get(item, 0)) % pila) % pila
+	return maxi(0, int(reglas.mochila_habitante) - Inv.slots(inv)) * pila + resto
+
+## Añade hasta donde quepa y devuelve lo realmente añadido.
+func dar(nid: String, item: String, cantidad: int) -> int:
+	var k: int = mini(cantidad, hueco(nid, item))
+	if k > 0: estado(nid).inv[item] = int(estado(nid).inv.get(item, 0)) + k
+	return k
 
 func _quitar(inv: Dictionary, item: String, cantidad: int) -> void:
 	inv[item] = int(inv.get(item, 0)) - cantidad
@@ -179,7 +195,7 @@ func _decidir(nid: String) -> void:
 		var rng = j._rng("autonomia", "%s:%s:%d" % [nid, objetivo, j.d.min])
 		for prob in def.prob:
 			if rng.randf() < prob.p: drops[prob.item] = int(drops.get(prob.item, 0)) + int(prob.q)
-		for item in drops: n.inv[item] = int(n.inv.get(item, 0)) + int(drops[item])
+		for item in drops: dar(nid, item, int(drops[item]))
 		j.mundo.romper(objetivo, j.d.min)
 		_recordar(nid, "recolecto", j._txt_items(drops))
 		n.plan = {}
@@ -195,7 +211,7 @@ func _decidir(nid: String) -> void:
 	var receta: Dictionary = C.RECETAS[perfil(nid).receta]
 	if not Inv.tiene(n.inv, receta.ent): return
 	for item in receta.ent: _quitar(n.inv, item, int(receta.ent[item]))
-	for item in receta.sal: n.inv[item] = int(n.inv.get(item, 0)) + int(receta.sal[item])
+	for item in receta.sal: dar(nid, item, int(receta.sal[item]))
 	_recordar(nid, "fabrico", j._txt_items(receta.sal))
 	j.aviso_todos("%s fabricó %s" % [j.habitantes.fichas[nid].n, j._txt_items(receta.sal)])
 	n.plan = {}
@@ -301,8 +317,10 @@ func ayudar(nid: String, jugador: String, rechazar: bool = false) -> Dictionary:
 	var item: String = falta.item
 	var cantidad: int = mini(int(falta.cantidad), int(j.jug(jugador).inv.get(item, 0)))
 	if cantidad <= 0: return j._no("No llevas " + C.ITEMS[item].n, jugador)
+	cantidad = mini(cantidad, hueco(nid, item))
+	if cantidad <= 0: return j._no("Su mochila está llena", jugador)
 	_quitar(j.jug(jugador).inv, item, cantidad)
-	n.inv[item] = int(n.inv.get(item, 0)) + cantidad
+	dar(nid, item, cantidad)
 	vinculo["ayudas"] = int(vinculo.get("ayudas", 0)) + 1
 	n.vinculos[jugador] = vinculo
 	var pago := {}

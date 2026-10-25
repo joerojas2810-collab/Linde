@@ -97,6 +97,14 @@ const HAB := {
 	"dominio": {"n": "Dominio del combate", "rama": "combate", "req": ["golpe_fuerte", "vitalidad"], "coste": 2, "niv": 4, "efe": {"dmg": 3, "hp": 20}},
 }
 
+# Habilidades pasivas: se ganan por práctica (contador `uso` del jugador) y se aplican en Juego.stats() sin gastar puntos.
+const PASIVAS := {
+	"manos_curtidas": {"n": "Manos curtidas", "uso": "recolectado", "umbral": 150, "efe": {"golpes_menos": 1}},
+	"paso_firme": {"n": "Paso firme", "uso": "pasos", "umbral": 4000, "efe": {"vel": 0.05}},
+	"piel_curtida": {"n": "Piel curtida", "uso": "dano", "umbral": 150, "efe": {"hp": 10}},
+	"pulso_firme": {"n": "Pulso firme", "uso": "derrotas", "umbral": 20, "efe": {"dmg": 1}},
+}
+
 # Combate (A01 PENDIENTE: modelo provisional en tiempo real, ver docs/DECISIONES.md).
 # aviso = segundos de señal previa antes del impacto; rec = recuperación tras atacar.
 const ENEMIGOS := {

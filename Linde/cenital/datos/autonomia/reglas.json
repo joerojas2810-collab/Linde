@@ -2,6 +2,8 @@
   "nota": "Prototipo propio, balance provisional. Son reglas y oficios, no eventos ni misiones.",
   "hambre_por_hora": 8.0,
   "umbral_comer": 24.0,
+  "mochila_habitante": 16,
+  "max_decisiones_por_paso": 2,
   "saciedad": 32.0,
   "reserva_comida": 2,
   "comida": "baya",

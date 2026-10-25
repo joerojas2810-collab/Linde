@@ -392,8 +392,10 @@ func retirar_deposito(nid: String, item: String, cantidad: int) -> bool:
 	var gid := grupo_de(nid)
 	if gid == "" or cantidad <= 0 or not _cerca(nid, _ancla(gid)): return false
 	if int(grupo(gid).inv.get(item, 0)) < cantidad: return false
+	cantidad = mini(cantidad, a.hueco(nid, item))
+	if cantidad <= 0: return false
 	a._quitar(grupo(gid).inv, item, cantidad)
-	a.estado(nid).inv[item] = int(a.estado(nid).inv.get(item, 0)) + cantidad
+	a.dar(nid, item, cantidad)
 	suceso("retiro", "%d %s" % [cantidad, item], nid, gid)
 	return true
 
@@ -1068,7 +1070,9 @@ func _casa(nid: String) -> bool:
 		for paso in _celdas_casa(cama):
 			var pieza: String = paso[0]
 			var c: Vector2i = paso[1]
-			if _pieza_puesta(pieza, c) or M.ESENCIALES.has(c) or (pieza != "techo" and j.ocupada(c)): continue   # el techo no estorba a quien está debajo
+			# Sin ladrillos a mano el muro se levanta de madera: casa_completa() acepta ambos y la casa no se queda a medias.
+			if pieza == "muro_ladrillo" and not Inv.tiene(a.estado(nid).inv, C.CONSTR[pieza].coste): pieza = "muro"
+			if _pieza_puesta(pieza, c) or _pieza_puesta(paso[0], c) or M.ESENCIALES.has(c) or (pieza != "techo" and j.ocupada(c)): continue   # el techo no estorba a quien está debajo
 			if (j.mundo.puede_techar(c) if pieza == "techo" else j.mundo.puede_poner(c)) != "":
 				habitat.estado(cama,"bloqueada","Hay un obstáculo en "+M.clave(c))
 				continue

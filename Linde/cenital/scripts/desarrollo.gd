@@ -202,7 +202,7 @@ func decidir(nid: String) -> bool:
 		if not Inv.tiene(n.inv,receta.ent):return false
 		Inv.quitar(n.inv,receta.ent)
 		a.sociedad.datos().estaciones[horno]=int(a.sociedad.datos().estaciones.get(horno,0))+1
-		for item in receta.sal:n.inv[item]=int(n.inv.get(item,0))+int(receta.sal[item])
+		for item in receta.sal:a.dar(nid,item,int(receta.sal[item]))
 		registrar(actor,"artesania",receta.ent)
 		observar(actor,receta.sal)
 		a.sociedad.suceso("material",receta.n,nid)
@@ -237,7 +237,7 @@ func decidir(nid: String) -> bool:
 		if not Inv.tiene(n.inv,r.ent): return false
 		Inv.quitar(n.inv,r.ent)
 		a.sociedad.datos().estaciones[estacion]=int(a.sociedad.datos().estaciones.get(estacion,0))+1
-		n.inv[clave]=int(n.inv.get(clave,0))+1
+		a.dar(nid,clave,1)
 		_creacion(actor,clave,r.ent)
 		registrar(actor,"artesania",r.ent)
 		a._recordar(nid,"descubrio",A.info(clave).n)

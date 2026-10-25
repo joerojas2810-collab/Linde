@@ -144,6 +144,7 @@ func _morir(e: Dictionary, id: String) -> void:
 	e.est = "muerto"
 	fauna.baja(e)
 	var def: Dictionary = C.ENEMIGOS[e.tipo]
+	j.practicar("derrotas", 1, id)
 	j.ganar_xp(def.xp, id)
 	if def.has("drops"): j.dar_o_pendiente(def.drops, id)
 	j.caida_equipo(e.tipo, id)          # piezas de familias de zona (tirada propia de quien remata)
