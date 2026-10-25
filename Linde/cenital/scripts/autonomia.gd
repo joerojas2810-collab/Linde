@@ -33,6 +33,10 @@ func activar() -> void:
 func activa() -> bool:
 	return j.d.get("mundo_vivo", {}).get("autonomia", {}).get("activa", false)
 
+## Los habitantes salen a recoger al contorno del valle (reglas.expediciones).
+func expediciones() -> bool:
+	return activa() and bool(reglas.get("expediciones", true))
+
 func estado(nid: String) -> Dictionary:
 	var todos: Dictionary = j.d.mundo_vivo.autonomia.npcs
 	if not todos.has(nid):
@@ -40,12 +44,31 @@ func estado(nid: String) -> Dictionary:
 	var n: Dictionary = todos[nid]
 	for campo in ["durabilidad", "bloqueos", "peticion"]:
 		if not n.has(campo): n[campo] = {}
+	if not n.has("vistos"):   # lo que todos conocen desde el inicio no enseña recetas
+		n.vistos = {"madera": true, "piedra": true, "fibra": true, "baya": true, "gelatina": true}
+		n.recetas_nuevas = []
 	return n
 
 ## Perfil del habitante: los de reglas.json o el de un colono llegado después (guardado en la partida).
 func perfil(nid: String) -> Dictionary:
 	if reglas.perfiles.has(nid): return reglas.perfiles[nid]
 	return j.d.get("mundo_vivo", {}).get("autonomia", {}).get("colonos", {}).get(nid, {}).get("perfil", {})
+
+## Recetas del perfil más las que descubrió al tener en las manos un ítem que no conocía.
+func recetas_de(nid: String) -> Array:
+	return perfil(nid).get("recetas", []) + estado(nid).get("recetas_nuevas", [])
+
+## Cada ítem que lleva y no conocía le enseña las recetas que lo usan.
+func descubrir_recetas(nid: String) -> void:
+	var n := estado(nid)
+	for item in n.inv:
+		if n.vistos.has(item): continue
+		n.vistos[item] = true
+		for rid in C.RECETAS:
+			if not C.RECETAS[rid].ent.has(item) or rid in recetas_de(nid): continue
+			n.recetas_nuevas.append(rid)
+			_recordar(nid, "descubrio", "receta de " + C.RECETAS[rid].n)
+			if C.ITEMS.get(C.RECETAS[rid].sal.keys()[0], {}).has("tag"): sociedad.suceso("descubrimiento", "Receta de " + C.RECETAS[rid].n, nid)
 
 func _recordar(nid: String, hecho: String, detalle: String, actor: String = "") -> void:
 	var recuerdos: Array = estado(nid).recuerdos
@@ -188,7 +211,7 @@ func _bloque(c: Vector2i) -> String:
 
 func conoce(nid: String, c: Vector2i) -> bool:
 	if not estado(nid).has("bloques"): _explorar(nid) # También antes del primer minuto o al cargar un guardado anterior.
-	return estado(nid).bloques.has(_bloque(c))
+	return estado(nid).bloques.has(_bloque(c)) or (not Mundo.es_valle(c) and Mundo.Terreno.distancia_valle(c) <= int(reglas.conocimiento.horizonte))   # el contorno se ve desde el borde
 
 func _ver(n: Dictionary, centro: Vector2i, radio: int) -> void:
 	for dx in range(-radio, radio + 1, int(reglas.conocimiento.bloque)):
@@ -221,7 +244,7 @@ func _recurso(nid: String, item: String) -> String:
 	var candidatos: Array = []
 	for oid in j.mundo.objetos:
 		var o: Dictionary = j.mundo.objetos[oid]
-		if not Mundo.es_valle(o.c):continue # La colonización exterior requiere planificación regional, aún no activada.
+		if not expediciones() and not Mundo.es_valle(o.c): continue
 		if j.mundo.objeto_presente(o.c) != oid or not C.OBJETOS.has(o.t): continue
 		if sociedad.activa() and not sociedad.permite_recurso(nid, oid): continue
 		if not conoce(nid, o.c): continue
@@ -233,9 +256,11 @@ func _recurso(nid: String, item: String) -> String:
 		var da: int = absi(origen.x - j.mundo.objetos[a].c.x) + absi(origen.y - j.mundo.objetos[a].c.y)
 		var db: int = absi(origen.x - j.mundo.objetos[b].c.x) + absi(origen.y - j.mundo.objetos[b].c.y)
 		return a < b if da == db else da < db)
+	var alcance: Dictionary = j.mundo.alcanzables(origen, Mundo.AREA_EXPEDICION if expediciones() else Rect2i())   # una sola búsqueda, valle y contorno
 	for oid in candidatos:
 		var c: Vector2i = j.mundo.objetos[oid].c
-		if not j.mundo.camino(origen, func(x): return j.mundo.es_adyacente(x, c)).is_empty(): return oid
+		for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+			if alcance.has(c + d) and j.mundo.es_adyacente(c + d, c): return oid
 	return ""
 
 func _estacion(nid: String, tipo: String) -> String:
@@ -313,5 +338,5 @@ func dialogo(nid: String, jugador: String) -> String:
 
 ## Expresión legible de un recuerdo para la interfaz.
 func texto_recuerdo(r: Dictionary) -> String:
-	var nombres := {"sin_recurso": "No encontré el recurso", "sin_estacion": "Me faltó una estación", "recolecto": "Recolecté", "fabrico": "Fabriqué", "comio": "Comí", "ayuda": "Recibí ayuda", "rechazo": "No pudieron ayudarme", "herramienta_rota": "Se rompió mi herramienta", "reparo": "Reparé", "extraccion_vista": "Vi extraer", "aporte": "Aporté al grupo", "promesa": "Acordé entregar", "cumplio": "Cumplimos el acuerdo", "incumplio": "No cumplió el plazo", "plazo_vencido": "Venció el acuerdo", "pospuso": "Busqué otra solución", "construyo": "Construí", "descubrio": "Creé un nuevo plano", "estafado": "Me engañaron", "estafo": "Engañé", "hurto": "Robé", "hurto_visto": "Vi un robo", "llego": "Llegué", "robado": "Me robaron", "mantenimiento":"Cuidé mi ropa y lecho"}
+	var nombres := {"sin_recurso": "No encontré el recurso", "sin_estacion": "Me faltó una estación", "recolecto": "Recolecté", "fabrico": "Fabriqué", "comio": "Comí", "ayuda": "Recibí ayuda", "rechazo": "No pudieron ayudarme", "herramienta_rota": "Se rompió mi herramienta", "reparo": "Reparé", "extraccion_vista": "Vi extraer", "aporte": "Aporté al grupo", "promesa": "Acordé entregar", "cumplio": "Cumplimos el acuerdo", "incumplio": "No cumplió el plazo", "plazo_vencido": "Venció el acuerdo", "pospuso": "Busqué otra solución", "construyo": "Construí", "cosecho": "Coseché", "descubrio": "Creé un nuevo plano", "estafado": "Me engañaron", "estafo": "Engañé", "hurto": "Robé", "hurto_visto": "Vi un robo", "llego": "Llegué", "robado": "Me robaron", "mantenimiento":"Cuidé mi ropa y lecho"}
 	return str(nombres.get(r.hecho, r.hecho)) + ": " + str(r.detalle)

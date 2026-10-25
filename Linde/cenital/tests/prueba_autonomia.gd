@@ -40,6 +40,7 @@ func _init() -> void:
 	ok(JSON.stringify(j.d.mundo_vivo.autonomia) == JSON.stringify(identico.d.mundo_vivo.autonomia), "misma semilla e intervención reproducen decisiones y recuerdos")
 	# Mundo sin fuentes alimenticias: la carencia debe generar una petición en vez de inventar comida.
 	var sin = juego()
+	sin.autonomia.reglas.expediciones = false   # sin arbustos en el valle ni fuera
 	for oid in sin.mundo.objetos:
 		if sin.mundo.objetos[oid].t == "arbusto": sin.mundo.romper(oid, sin.d.min)
 	sim(sin, 6)

@@ -109,7 +109,7 @@ func suelo(ci: CanvasItem, m, c: Vector2i, tiempo: float) -> void:
 			ci.draw_texture_rect_region(agua, dst, Rect2(origen, Vector2(CELDA, CELDA)), Color(1, 1, 1, 0.55))
 
 # Un solo arte de mena (cobre): el hierro se distingue con tinte frío y la arcilla es roca rojiza. Sustituir cuando haya arte propio.
-const TINTE_MENA := {"veta": Color(0.72, 0.78, 1.0), "arcilla": Color(1.25, 0.7, 0.55)}
+const TINTE_MENA := {"veta": Color(0.72, 0.78, 1.0), "veta_estano": Color(0.8, 1.0, 1.05), "arcilla": Color(1.25, 0.7, 0.55)}
 # ---------- naturaleza (árbol, roca, veta, arbusto) ----------
 func natural(ci: CanvasItem, tipo: String, c: Vector2i, agotado: bool, jugador: Vector2) -> void:
 	var clave := ""
@@ -117,7 +117,7 @@ func natural(ci: CanvasItem, tipo: String, c: Vector2i, agotado: bool, jugador: 
 		var n: String = ARBOLES[posmod(c.x * 7 + c.y * 3, 3)]
 		clave = "E04_stump_" + n if agotado else "E04_tree_" + n + "_64"
 	elif tipo == "roca": clave = "E04_rock_depleted" if agotado else "E04_rock"
-	elif tipo == "veta" or tipo == "veta_cobre": clave = "E04_ore_depleted" if agotado else "E04_ore_copper"
+	elif tipo in ["veta", "veta_cobre", "veta_estano"]: clave = "E04_ore_depleted" if agotado else "E04_ore_copper"
 	elif tipo == "arcilla": clave = "E04_rock_depleted" if agotado else "E04_rock"
 	elif tipo == "arbusto": clave = "E04_bush_without_berries" if agotado else "E04_bush_berries"
 	else: return
@@ -151,7 +151,10 @@ func cofre(ci: CanvasItem, c: Vector2i, abierto: bool, tinte: Color = Color.WHIT
 func constr_suelo(ci: CanvasItem, c: Vector2i, tinte: Color = Color.WHITE) -> void:
 	_tex_rect(ci, "E05_floor_wood.png", Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA)), tinte)
 
-func constr(ci: CanvasItem, t: String, c: Vector2i, abierto: bool = false, tinte: Color = Color.WHITE) -> void:
+func techo(ci: CanvasItem, c: Vector2i, alfa: float) -> void:
+	_tex_rect(ci, "E05_floor_wood.png", Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA)), Color(1.0, 0.55, 0.45, alfa))
+
+func constr(ci: CanvasItem, t: String, c: Vector2i, abierto: bool = false, tinte: Color = Color.WHITE, listo: bool = true) -> void:
 	var pies := Vector2(c) * CELDA + Vector2(8, 16)
 	match t:
 		"muro": prop(ci, "palisade", pies, tinte)
@@ -162,6 +165,11 @@ func constr(ci: CanvasItem, t: String, c: Vector2i, abierto: bool = false, tinte
 		"cama_huesped": prop(ci, "bed", pies, tinte * Color(0.6, 0.85, 1.3))
 		"cofre": cofre(ci, c, abierto, tinte)
 		"suelo": constr_suelo(ci, c, tinte)
+		"puerta": prop(ci, "palisade", pies, tinte * Color(0.62, 0.42, 0.28))
+		"techo": techo(ci, c, 0.7 * tinte.a)
+		"campo":   # tierra labrada; el arbusto sin bayas es el cultivo creciendo, con bayas está maduro
+			_tex_rect(ci, "E05_floor_wood.png", Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA)), tinte * Color(0.75, 0.55, 0.4))
+			natural(ci, "arbusto", c, not listo, Vector2(-99999, -99999))
 
 # ---------- casa modular (canvas 160×160; origen de la casa lógica en [16,32]) ----------
 func _base_casa() -> Vector2:

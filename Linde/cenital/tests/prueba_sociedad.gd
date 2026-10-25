@@ -110,6 +110,7 @@ func _init() -> void:
 	srv.free()
 	# La escasez no congela toda la IA: pospone un objetivo imposible y prueba otro.
 	var alterno = nuevo()
+	alterno.autonomia.reglas.expediciones = false   # sin arbustos en el valle ni fuera
 	for oid in alterno.mundo.objetos:
 		if alterno.mundo.objetos[oid].t=="arbusto": alterno.mundo.romper(oid,alterno.d.min)
 	sim(alterno,6)

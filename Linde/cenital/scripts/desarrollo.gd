@@ -49,6 +49,7 @@ func observar(actor: String, objetos: Dictionary) -> void:
 	if not activa(): return
 	var n := estado(actor)
 	for mat in _materiales(objetos): n.materiales[mat] = true
+	if actor.begins_with("npc:"): a.descubrir_recetas(actor.trim_prefix("npc:"))
 
 ## Una acción exitosa cuenta una vez; los materiales determinan especializaciones.
 func registrar(actor: String, disciplina: String, objetos: Dictionary = {}) -> void:
@@ -247,7 +248,7 @@ func decidir(nid: String) -> bool:
 ## Atlas de materiales del juego actual: fuentes y usos consultados en los catálogos existentes.
 func materiales() -> Array:
 	var lista: Array = []
-	var ids := ["madera","piedra","fibra","mena","lingote","baya","gelatina","unguento","gema"]
+	var ids := ["madera","piedra","fibra","mena","lingote","cobre","lingote_cobre","estano","lingote_bronce","arcilla","baya","gelatina","unguento","gema"]
 	for item in ids:
 		var fuentes: Array = []
 		var usos: Array = []

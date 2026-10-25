@@ -122,7 +122,7 @@ func _init() -> void:
 	ok(cli.j.actor_desarrollo()==actor and cli.j.autonomia.desarrollo.rango(cli.j.actor_desarrollo(),"artesania","madera")==d.rango(actor,"artesania","madera"),"la réplica consulta la identidad correcta de conocimientos del jugador")
 	cli.free();srv.free()
 	var materiales: Array=d.materiales()
-	ok(materiales.size()==9,"el atlas explica los nueve recursos y consumibles actuales")
+	ok(materiales.size()==14,"el atlas explica los catorce recursos y consumibles actuales")
 	var hierro: Dictionary={}
 	for mat in materiales:
 		if mat.id=="lingote":hierro=mat

@@ -201,6 +201,7 @@ func dia() -> int:
 func actualizar_regiones() -> void:
 	var centros: Array=[]
 	for id in rt:centros.append(Mundo.celda_de(rt[id].pies))
+	if autonomia != null and autonomia.expediciones(): centros.append_array([Vector2i(8, 8), Vector2i(56, 8), Vector2i(8, 40), Vector2i(56, 40)])   # el contorno del valle, para que los habitantes salgan
 	mundo.actualizar_regiones(centros)
 
 func tick(dt: float) -> void:
@@ -216,11 +217,23 @@ func tick(dt: float) -> void:
 		s.cd_obj = maxf(0.0, s.cd_obj - dt)
 		s.herr_t = maxf(0.0, s.herr_t - dt)
 	habitantes.paso(dt)
+	if es_autoridad(): _pisadas()
 	combate.paso(dt)
 	_seg += dt
 	if _seg >= 0.5:
 		_seg = 0.0
 		_chequeos()
+
+var _ult_celda: Dictionary = {}   # última celda de cada jugador y habitante; no se guarda
+
+## Jugadores y habitantes desgastan la hierba al cambiar de celda.
+func _pisadas() -> void:
+	var quienes := {}
+	for id in rt: quienes["pj:" + id] = Mundo.celda_de(pies_de(id))
+	for id in habitantes.ids: quienes["npc:" + id] = Mundo.celda_de(habitantes.pos(id))
+	for k in quienes:
+		if _ult_celda.get(k, quienes[k]) != quienes[k]: mundo.pisar(quienes[k])
+		_ult_celda[k] = quienes[k]
 
 func _hora_en_punto() -> void:
 	mundo.regenerar(d.min, ocupada)
@@ -340,11 +353,15 @@ func golpear_objeto(c: Vector2i, id: String = LOCAL) -> Dictionary:
 	if ot in Mundo.DECO: return _no("No se puede romper", id)
 	var def: Dictionary = C.OBJETOS[ot]
 	var tags := {}
-	for it in pj.inv: if Eq.info(it).has("tag"): tags[Eq.info(it).tag] = true
+	var menos := 0   # la mejor herramienta de la etiqueta recorta golpes
+	for it in pj.inv:
+		if Eq.info(it).has("tag"):
+			tags[Eq.info(it).tag] = true
+			if Eq.info(it).tag in def.golpes: menos = maxi(menos, int(Eq.info(it).get("menos", 0)))
 	var necesarios := 9999
 	for tag in def.golpes: if tag == "" or tags.has(tag): necesarios = mini(necesarios, def.golpes[tag])
 	if necesarios == 9999: return _no("%s: necesitas una herramienta (%s)" % [def.n, ", ".join(def.golpes.keys())], id)
-	necesarios = maxi(1, necesarios - stats(id).golpes_menos)
+	necesarios = maxi(1, necesarios - stats(id).golpes_menos - menos)
 	var g: int = d.mundo.golpes.get(oid, 0) + 1      # golpes acumulados: compartidos (cualquiera puede rematar)
 	if g < necesarios:
 		d.mundo.golpes[oid] = g
@@ -497,11 +514,20 @@ func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
 	var pj := jug(id)
 	if not C.CONSTR.has(pieza): return _no("Pieza desconocida", id)
 	var def: Dictionary = C.CONSTR[pieza]
+	if def.get("techo", false):
+		var m_techo := mundo.puede_techar(c)
+		if m_techo != "": return _no("No se puede: " + m_techo, id)
+		if not Inv.tiene(pj.inv, def.coste): return _no("Faltan materiales: " + _txt_items(def.coste), id)
+		mundo.techar(c, id)
+		Inv.quitar(pj.inv, def.coste)
+		autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",def.coste)
+		return _ok("Techas la celda", id)
 	var motivo := mundo.puede_poner(c)
 	if motivo != "": return _no("No se puede: " + motivo, id)
 	if ocupada(c): return _no("Hay alguien en esa celda", id)
 	if not Inv.tiene(pj.inv, def.coste): return _no("Faltan materiales: " + _txt_items(def.coste), id)
 	mundo.poner(c, pieza, true, id)
+	sembrar(c)
 	if def.bloquea:    # no se permiten bloqueos irreversibles de lugares esenciales ni de ningún jugador
 		var posiciones: Array=[]
 		for k in rt: posiciones.append(Mundo.celda_de(rt[k].pies))
@@ -515,10 +541,31 @@ func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
 	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",def.coste)
 	return _ok("Construyes %s" % def.n, id)
 
+## Un campo recién puesto empieza a crecer; solo se anota el minuto en que estará listo.
+func sembrar(c: Vector2i) -> void:
+	var cs: Dictionary = mundo.constr_en(c)
+	if C.CONSTR.get(cs.get("t", ""), {}).get("campo", false): cs["listo"] = int(d.min) + C.CAMPO_CRECE_MIN
+
+func campo_listo(c: Vector2i) -> bool:
+	var cs: Dictionary = mundo.constr_en(c)
+	return cs.get("t", "") == "campo" and int(d.min) >= int(cs.get("listo", 0))
+
+## Recoge un campo maduro (jugador o habitante) y lo deja sembrado otra vez. {} si aún no está listo.
+func cosechar(c: Vector2i) -> Dictionary:
+	if not campo_listo(c): return {}
+	sembrar(c)
+	mundo.cambiar()
+	return C.CAMPO_COSECHA.duplicate()
+
 func retirar(c: Vector2i, id: String = LOCAL) -> Dictionary:
 	var pj := jug(id)
 	var k := Mundo.clave(c)
 	var cs: Dictionary = mundo.constr_en(c)
+	if cs.is_empty() and mundo.estado.techos.has(k):   # solo techo
+		if mundo.estado.techos[k] != id: return _no("Ese techo no es tuyo", id)
+		if not Inv.anadir(pj.inv, C.CONSTR.techo.coste, stats(id).slots): return _no("Inventario lleno", id)
+		mundo.destechar(c)
+		return _ok("Recuperas " + _txt_items(C.CONSTR.techo.coste), id)
 	if cs.is_empty(): return _no("No hay construcción", id)
 	if cs.get("dueno", "") != id: return _no("Esa construcción no es tuya", id)
 	var def: Dictionary = C.CONSTR[cs.t]
@@ -635,6 +682,13 @@ func interactuar(id: String = LOCAL) -> Dictionary:
 		var cs := mundo.constr_en(c)
 		if cs.is_empty(): continue
 		if cs.t == "cofre": return {"ok": true, "panel": "cofre", "id": "c@" + Mundo.clave(c)}
+		if cs.t == "campo":
+			var falta := int(cs.get("listo", 0)) - int(d.min)
+			if falta > 0: return {"ok": false, "r": _no("El cultivo crece: faltan %d h" % ceili(falta / 60.0), id)}
+			var cosecha := C.CAMPO_COSECHA
+			if not Inv.anadir(jug(id).inv, cosecha, stats(id).slots): return {"ok": false, "r": _no("Inventario lleno", id)}
+			cosechar(c)
+			return {"ok": true, "r": _ok("Cosechas " + _txt_items(cosecha), id)}
 		if cs.t == "cama":
 			if not cs.propia: return {"ok": false, "r": _no("Es la cama de un habitante", id)}
 			if cs.get("dueno", "") != id: return {"ok": false, "r": _no("Es la cama de otro jugador", id)}

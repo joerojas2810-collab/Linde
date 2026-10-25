@@ -169,6 +169,7 @@ func paso(dt: float) -> void:
 		var act: String = d.act
 		var gasto: float = nec.cambio_por_hora_activo * horas
 		var recupera: float = nec.cambio_por_hora_descanso * horas
+		if act == "dormir" and j.autonomia != null and j.autonomia.activa() and j.autonomia.sociedad.casa_completa(cama(id)): recupera *= float(j.autonomia.sociedad.cfg.vivienda.casa.bono_descanso)
 		if act == "dormir" and not cama_existe(id):
 			n.act = "sin_cama"
 			n.energia = clampf(n.energia + gasto, nec.minimo, nec.maximo)
@@ -190,7 +191,7 @@ func paso(dt: float) -> void:
 		n.energia = clampf(n.energia + gasto, nec.minimo, nec.maximo)
 		var clave: String = act + ":" + d.lugar + str(d.get("celda", []))
 		if r.act != clave or r.v != j.mundo.version:
-			r.ruta = j.mundo.camino(c, meta)
+			r.ruta = j.mundo.camino(c, meta, Mundo.AREA_EXPEDICION if j.autonomia != null and j.autonomia.expediciones() else Rect2i())
 			r.act = clave
 			r.v = j.mundo.version
 			r.i = 1

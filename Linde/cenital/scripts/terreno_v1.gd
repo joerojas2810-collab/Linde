@@ -45,8 +45,8 @@ func datos(c: Vector2i) -> Dictionary:
  var objeto:=""
  if tipo==0:
   if bioma=="bosque": objeto="arbol" if azar<0.19 else "arbusto" if azar<0.29 else ""
-  elif bioma=="sierra": objeto="veta" if azar<0.045 else "veta_cobre" if azar<0.07 else "roca" if azar<0.24 else "arbusto" if azar<0.27 else ""
-  elif bioma=="secano": objeto="arbusto" if azar<0.05 else "arcilla" if azar<0.10 else "veta_cobre" if azar<0.12 else "roca" if azar<0.15 else ""
+  elif bioma=="sierra": objeto="veta" if azar<0.045 else "veta_cobre" if azar<0.07 else "veta_estano" if azar<0.085 else "roca" if azar<0.24 else "arbusto" if azar<0.27 else ""
+  elif bioma=="secano": objeto="arbusto" if azar<0.05 else "arcilla" if azar<0.10 else "veta_cobre" if azar<0.12 else "veta_estano" if azar<0.13 else "roca" if azar<0.15 else ""
   else: objeto="arbusto" if azar<0.08 else "arbol" if azar<0.12 else "roca" if azar<0.15 else "veta" if azar<0.16 else "arcilla" if azar<0.175 else ""
  return {"tipo":tipo,"bioma":bioma,"objeto":objeto}
 func generar_region(pos: Vector2i) -> Dictionary:

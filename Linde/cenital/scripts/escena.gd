@@ -757,7 +757,7 @@ func _draw() -> void:
 	for id in m.objetos:
 		var o: Dictionary = m.objetos[id]
 		if not vista.has_point(Vector2(o.c) * s): continue
-		if m.estado.rotos.has(id) and not (o.t in ["arbol", "roca", "veta", "veta_cobre", "arcilla", "arbusto"]): continue
+		if m.estado.rotos.has(id) and not (o.t in ["arbol", "roca", "veta", "veta_cobre", "veta_estano", "arcilla", "arbusto"]): continue
 		lista.append([(o.c.y + 1.0) * s, "obj", id])
 	for k in m.estado.constr:
 		var p: PackedStringArray = k.split(",")
@@ -779,6 +779,7 @@ func _draw() -> void:
 		var ind: Texture2D = hud.ui.tex("reutilizados/interact_indicator.png")
 		if ind != null: draw_texture_rect(ind, Rect2((j.pies - Vector2(6, 46 + 0.5 * sin(Time.get_ticks_msec() / 300.0))).round(), Vector2(12, 16)), false)
 	arte_mundo.casa_tejado(self, 0.0 if dentro else 1.0)
+	_dibujar_techos(vista, s)
 	if j.autonomia.sociedad.activa():
 		var marcador: Texture2D = hud.ui.tex("reutilizados/quest_marker.png")
 		for gid in j.autonomia.sociedad.cfg.grupos:
@@ -789,7 +790,8 @@ func _draw() -> void:
 	if build:
 		var c: Vector2i = Mundo.celda_de(j.pies) + j.mira
 		var id: String = C.ORDEN_CONSTR[pieza_i]
-		var bien: bool = m.puede_poner(c) == "" and not j.ocupada(c) and Inv.tiene(j.jug().inv, C.CONSTR[id].coste)
+		var libre: bool = m.puede_techar(c) == "" if id == "techo" else m.puede_poner(c) == "" and not j.ocupada(c)
+		var bien: bool = libre and Inv.tiene(j.jug().inv, C.CONSTR[id].coste)
 		arte_mundo.constr(self, id, c, false, Color(0.5, 1, 0.55, 0.65) if bien else Color(1, 0.4, 0.4, 0.65))
 	if debug:
 		draw_rect(Rect2(j.pies - Vector2(P.PIES.x / 2, P.PIES.y), P.PIES), Color(1, 0, 0, 0.5))
@@ -909,16 +911,37 @@ func _dibujar_obj(id: String) -> void:
 	var p := Vector2(o.c) * P.CELDA
 	var roto: bool = j.mundo.estado.rotos.has(id)
 	match o.t:
-		"arbol", "roca", "veta", "veta_cobre", "arcilla", "arbusto": arte_mundo.natural(self, o.t, o.c, roto, j.pies)
+		"arbol", "roca", "veta", "veta_cobre", "veta_estano", "arcilla", "arbusto": arte_mundo.natural(self, o.t, o.c, roto, j.pies)
 		"barril": arte_mundo.prop(self, "barrel", Vector2(o.c) * P.CELDA + Vector2(8, 16))
 		"valla": arte_mundo.valla(self, j.mundo, o.c)
 		"cofre_fijo": arte_mundo.cofre(self, o.c, j.d.cofres.tesoro_cantera.get("abierto", false))
 	var g: int = j.mundo.estado.golpes.get(id, 0)
 	if g > 0 and not roto: draw_rect(Rect2(p + Vector2(2, -2), Vector2(12, 2)), Color(1, 1, 1, 0.8))
 
+## Los techos tapan la casa; los que están conectados al jugador (por dentro o junto a la puerta) se vuelven transparentes.
+func _dibujar_techos(vista: Rect2, s: float) -> void:
+	var techos: Dictionary = j.mundo.estado.techos
+	if techos.is_empty(): return
+	var pj := Mundo.celda_de(j.pies)
+	var abiertos := {}
+	var cola: Array = []
+	for d in [Vector2i.ZERO, Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+		if techos.has(Mundo.clave(pj + d)) and (d == Vector2i.ZERO or j.mundo.constr_en(pj + d).get("t", "") == "puerta"): cola.append(pj + d)
+	while not cola.is_empty():
+		var c: Vector2i = cola.pop_back()
+		if abiertos.has(c): continue
+		abiertos[c] = true
+		for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+			if techos.has(Mundo.clave(c + d)) and not abiertos.has(c + d): cola.append(c + d)
+	for k in techos:
+		var p: PackedStringArray = k.split(",")
+		var c := Vector2i(int(p[0]), int(p[1]))
+		if vista.has_point(Vector2(c) * s): arte_mundo.techo(self, c, 0.18 if abiertos.has(c) else 0.95)
+
 func _dibujar_constr(c: Vector2i) -> void:
 	var cs: Dictionary = j.mundo.constr_en(c)
-	arte_mundo.constr(self, cs.t, c)
+	var abierta: bool = cs.t == "puerta" and maxi(absi(Mundo.celda_de(j.pies).x - c.x), absi(Mundo.celda_de(j.pies).y - c.y)) <= 1
+	arte_mundo.constr(self, cs.t, c, false, Color(1, 1, 1, 0.35) if abierta else Color.WHITE, j.campo_listo(c))
 
 ## La puerta se ve abierta con el jugador a una celda o menos (solo presentación; la colisión no cambia).
 func _cerca_puerta() -> bool:

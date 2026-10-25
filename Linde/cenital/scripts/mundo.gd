@@ -7,6 +7,7 @@ const Terreno = preload("res://scripts/terreno_v1.gd")
 enum T { PASTO, CAMINO, AGUA, PARED, SUELO, PUERTA, RUINA, MURO_RUINA }
 const ANCHO := 64
 const ALTO := 48
+const AREA_EXPEDICION := Rect2i(-32, -32, ANCHO + 64, ALTO + 64)   # el valle más dos regiones de contorno (las que juego.gd mantiene cargadas)
 const MAPA := 20261023
 const CASA := Rect2i(24, 16, 8, 7)           # x 24..31, y 16..22
 const PUERTA_C := Vector2i(27, 22)
@@ -31,7 +32,7 @@ var celdas := PackedInt32Array()
 var objetos := {}            # id -> {t, c}   (estático, derivado del MAPA)
 var por_celda := {}          # Vector2i -> id
 var spawns_slime: Array = []
-var estado := {"rotos": {}, "golpes": {}, "constr": {}}   # lo único que se guarda
+var estado := {"rotos": {}, "golpes": {}, "constr": {}, "caminos": {}, "pisadas": {}, "techos": {}}   # lo único que se guarda
 var generador
 var regiones: Dictionary = {} # Caché descartable: nunca se guarda terreno sin modificar.
 var _firma_regiones := ""
@@ -75,6 +76,8 @@ func _init() -> void:
 
 ## Migración aditiva: el valle y todas sus diferencias se mantienen.
 func configurar(semilla: int) -> void:
+	for campo in ["caminos", "pisadas", "techos"]:
+		if not estado.has(campo): estado[campo] = {}   # guardados anteriores
 	if not estado.has("generacion"): estado.generacion={"version":1,"semilla":semilla,"region":Terreno.TAM}
 	generador=Terreno.new(int(estado.generacion.semilla))
 	_firma_regiones=""
@@ -201,10 +204,24 @@ static func clave(c: Vector2i) -> String:
 	return "%d,%d" % [c.x, c.y]
 
 func tipo(c: Vector2i) -> int:
+	var t := _base(c)
+	return T.CAMINO if t == T.PASTO and estado.get("caminos", {}).has(clave(c)) else t
+
+func _base(c: Vector2i) -> int:
 	if es_valle(c):return celdas[c.y*ANCHO+c.x]
 	if generador==null or not generador.valida(c):return T.AGUA
 	var region: Dictionary=regiones.get(clave(Terreno.region(c)),{})
 	return int(region.terreno[_indice_exterior(c)]) if not region.is_empty() else int(generador.datos(c).tipo)
+
+## Cada paso sobre hierba libre la gasta; al llegar al umbral queda un camino (se guarda y se replica).
+func pisar(c: Vector2i) -> void:
+	if _base(c) != T.PASTO or estado.caminos.has(clave(c)) or not constr_en(c).is_empty() or objeto_presente(c) != "": return
+	var k := clave(c)
+	estado.pisadas[k] = int(estado.pisadas.get(k, 0)) + 1
+	if int(estado.pisadas[k]) >= C.PISADAS_CAMINO:
+		estado.pisadas.erase(k)
+		estado.caminos[k] = true
+		cambiar()
 
 func objeto_presente(c: Vector2i) -> String:
 	var id: String = por_celda.get(c, "")
@@ -278,6 +295,23 @@ func poner(c: Vector2i, pieza: String, propia: bool, dueno: String = "") -> void
 	var cs := {"t": pieza, "propia": propia}
 	if dueno != "": cs["dueno"] = dueno
 	estado.constr[clave(c)] = cs
+	cambiar()
+
+## Los techos van aparte de las piezas: una celda puede tener cama, mesa o muro y además techo. El valor es el dueño.
+func puede_techar(c: Vector2i) -> String:
+	if not valida(c) or not region_cargada(c): return "fuera de las regiones cargadas"
+	var t := tipo(c)
+	if t != T.PASTO and t != T.CAMINO and t != T.SUELO: return "terreno no construible"
+	if objeto_presente(c) != "": return "ocupado por un objeto"
+	if estado.techos.has(clave(c)): return "ya tiene techo"
+	return ""
+
+func techar(c: Vector2i, dueno: String) -> void:
+	estado.techos[clave(c)] = dueno
+	cambiar()
+
+func destechar(c: Vector2i) -> void:
+	estado.techos.erase(clave(c))
 	cambiar()
 
 func quitar(c: Vector2i) -> void:

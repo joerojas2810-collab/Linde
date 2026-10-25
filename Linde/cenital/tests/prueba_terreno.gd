@@ -14,6 +14,7 @@ func ok(c: bool, texto: String) -> void:
 func nuevo(s: int=123):
  var j=J.nueva(s,"Exploradora",[0,0,0])
  j.combate.enemigos.clear()
+ j.autonomia.reglas.expediciones=false   # estas pruebas miden el entorno del jugador, sin el contorno del valle
  return j
 func viajar(j,c: Vector2i) -> void:
  j.pies=M.pies_de_celda(c)
@@ -82,6 +83,7 @@ func _init() -> void:
  ok(j.d.cofres[cid].inv.fibra==17 and j.d.cofres[cid].cerrado,"descargar no borra objetos guardados ni protección")
  ok(j.guardar("/tmp/linde-terreno-prueba.json"),"guarda estando lejos del valle")
  var carga=J.cargar("/tmp/linde-terreno-prueba.json")
+ carga.autonomia.reglas.expediciones=false
  ok(carga!=null and M.celda_de(carga.pies)==Vector2i(4096,23),"carga restaura posición exterior y genera su entorno")
  viajar(carga,c+Vector2i.LEFT)
  ok(carga.mundo.tipo(c)==tipo and carga.d.cofres[cid].inv.fibra==17 and carga.d.cofres[cid].cerrado,"volver conserva terreno, construcción, contenido y candado")
@@ -115,6 +117,7 @@ func _init() -> void:
  ok(int(carga.d.mundo.golpes.get(arbol,0))==1,"primer golpe exterior queda como daño parcial")
  viajar(carga,Vector2i(-4096,23));carga.guardar("/tmp/linde-terreno-parcial.json")
  var parcial=J.cargar("/tmp/linde-terreno-parcial.json")
+ parcial.autonomia.reglas.expediciones=false
  viajar(parcial,arbol_c+Vector2i.LEFT)
  ok(int(parcial.d.mundo.golpes.get(arbol,0))==1,"daño parcial persiste descargado y después de cargar partida")
  parcial.golpear_objeto(arbol_c);parcial.golpear_objeto(arbol_c)
@@ -142,6 +145,7 @@ func _init() -> void:
  var viejo=nuevo();viejo.d.mundo.erase("generacion")
  viejo.jug().inv={"gema":3};viejo.guardar("/tmp/linde-terreno-anterior.json")
  var migrado=J.cargar("/tmp/linde-terreno-anterior.json")
+ migrado.autonomia.reglas.expediciones=false
  ok(migrado!=null and migrado.jug().inv.gema==3 and migrado.mundo.celdas==original.celdas and migrado.d.mundo.has("generacion"),"partida anterior añade expansión sin reemplazar valle ni inventario")
  var futuro: Dictionary=j.d.duplicate(true);futuro.mundo.generacion.version=99
  ok(G.desempaquetar(G.empaquetar(futuro)).is_empty(),"rechaza generador futuro para no regenerar terreno incompatible")

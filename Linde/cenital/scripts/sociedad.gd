@@ -241,6 +241,10 @@ func _herramienta_para(nid: String, def: Dictionary) -> String:
 func golpes(nid: String, def: Dictionary) -> int:
 	var tag := _herramienta_para(nid, def)
 	var necesarios := int(def.golpes.get(tag, 9999))
+	if tag != "":
+		var menos := 0
+		for item in a.estado(nid).inv: if C.ITEMS.get(item, {}).get("tag", "") == tag: menos = maxi(menos, int(C.ITEMS[item].get("menos", 0)))
+		necesarios = maxi(1, necesarios - menos)
 	if necesarios < 9999 and a.desarrollo != null and a.desarrollo.activa():
 		necesarios = maxi(1, necesarios - mini(int(a.desarrollo.cfg.bonus_recoleccion_max), a.desarrollo.rango("npc:"+nid,"recoleccion")))
 	return necesarios
@@ -602,6 +606,18 @@ func objetivos(nid: String) -> Array:
 		elif int(n.durabilidad.get(herramienta,cfg.durabilidad_herramienta)) <= int(cfg.umbral_reparar):
 			var falta: int = int(cfg.coste_reparacion) - int(n.inv.get(cfg.material_reparacion, 0))
 			if falta > 0: metas.append({"item":cfg.material_reparacion,"cantidad":falta,"motivo":"reparar " + C.ITEMS[herramienta].n,"reparar":herramienta})
+	for rid in n.get("recetas_nuevas", []):   # una herramienta mejor que ya puede fabricar con lo que lleva
+		var mejora: String = C.RECETAS[rid].sal.keys()[0]
+		var tag: String = C.ITEMS.get(mejora, {}).get("tag", "")
+		var tiene_tag := false
+		for h in a.perfil(nid).get("herramientas_necesarias",[]): tiene_tag = tiene_tag or C.ITEMS[h].get("tag","") == tag
+		var conocidos := true
+		for insumo in C.RECETAS[rid].ent: conocidos = conocidos and n.vistos.has(insumo)
+		if tag != "" and tiene_tag and conocidos and not n.inv.has(mejora): metas.append({"item":mejora,"cantidad":1,"motivo":"mejorar mi herramienta"})
+	for rid in n.get("recetas_nuevas", []):   # fundir o transformar lo que ya trajo
+		var r: Dictionary = C.RECETAS[rid]
+		var prod: String = r.sal.keys()[0]
+		if not C.ITEMS.get(prod, {}).has("tag") and int(n.inv.get(prod, 0)) < 2 and Inv.tiene(n.inv, r.ent): metas.append({"item":prod,"cantidad":1,"motivo":"aprovechar lo que traje"})
 	var receta: Dictionary = C.RECETAS[a.perfil(nid).receta]
 	var producto: String = receta.sal.keys()[0]
 	if int(n.inv.get(producto,0)) < int(a.perfil(nid).reserva_producto): metas.append({"item":producto,"cantidad":int(a.perfil(nid).reserva_producto)-int(n.inv.get(producto,0)),"motivo":"mantener mi oficio"})
@@ -642,8 +658,11 @@ func decidir(nid: String) -> void:
 	var urgente: bool = n.hambre >= float(a.reglas.umbral_comer)
 	if not urgente and _mantener(nid): return
 	if not urgente and a.desarrollo.decidir(nid): return
+	if not urgente and _cosechar(nid): return
+	if not urgente and _sembrar(nid): return
 	if not urgente and _vivienda(nid): return
 	if not urgente and _refugio(nid): return
+	if not urgente and _casa(nid): return
 	if not urgente and _proteger(nid): return
 	if not urgente and _acumular(nid): return
 	for meta in objetivos(nid):
@@ -654,8 +673,57 @@ func decidir(nid: String) -> void:
 		if _obtener(nid,item,int(meta.cantidad),[],meta.motivo): return
 		_posponer(nid,item,"sin ruta, existencias o acuerdo viable")
 		if urgente and item == str(a.reglas.comida): break
+	if not urgente and _prospectar(nid): return
 	if not urgente and _depositar(nid): return
 	n.plan = a._pedir(nid,"buscar otra solución")
+
+## Campos de cultivo del grupo (celdas), en orden estable.
+func _campos(gid: String) -> Array:
+	var l: Array = []
+	for k in j.d.mundo.constr:
+		var cs: Dictionary = j.d.mundo.constr[k]
+		if cs.t == "campo" and cs.get("dueno", "") == "grupo:" + gid: l.append(Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1))))
+	l.sort()
+	return l
+
+## Va al campo maduro de su grupo y lo cosecha. true si ya está en ello.
+func _cosechar(nid: String) -> bool:
+	for c in _campos(grupo_de(nid)):
+		if not j.campo_listo(c) or j.mundo.camino(M.celda_de(j.habitantes.pos(nid)), func(z): return z == c or j.mundo.es_adyacente(z, c)).is_empty(): continue
+		if _ir(nid, c, "recolectar", "cosechar el campo"):
+			var cosecha: Dictionary = j.cosechar(c)
+			if not cosecha.is_empty():
+				_anadir(a.estado(nid).inv, cosecha)
+				a.desarrollo.registrar("npc:" + nid, "recoleccion", cosecha)
+				a._recordar(nid, "cosecho", j._txt_items(cosecha))
+		return true
+	return false
+
+## Con semilla y fibra de sobra, el grupo labra un campo junto a su depósito.
+func _sembrar(nid: String) -> bool:
+	var gid := grupo_de(nid)
+	if _campos(gid).size() >= int(cfg.economia.campos_por_grupo): return false
+	var n: Dictionary = a.estado(nid)
+	if float(n.hambre) >= float(a.reglas.umbral_comer) * 0.5: return false
+	for item in C.CONSTR.campo.coste:   # la semilla sale de su reserva de comida: es una inversión, la repondrá después
+		var libre: int = int(n.inv.get(item, 0)) if item == str(a.reglas.comida) else excedente(nid, item)
+		if libre < int(C.CONSTR.campo.coste[item]): return false
+	return _construir_cerca(nid, "campo", [], Vector2i(-1, -1), "grupo:" + gid)
+
+## Sin metas pendientes, prueba un recurso que nunca ha tenido (así aparecen recetas nuevas).
+func _prospectar(nid: String) -> bool:
+	var n: Dictionary = a.estado(nid)
+	var tipos: Array = C.OBJETOS.keys()
+	tipos.sort()
+	for tipo in tipos:
+		for item in C.OBJETOS[tipo].drops:
+			if n.vistos.has(item) or int(n.bloqueos.get(item, -1)) > int(j.d.min): continue
+			var oid: String = a._recurso(nid, item)
+			if oid != "":
+				n.objetivo = "probar un recurso nuevo"
+				return _recolectar(nid, oid, "probar un recurso nuevo")
+			n.bloqueos[item] = int(j.d.min) + int(cfg.reintento_min)
+	return false
 
 func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: String) -> bool:
 	if cadena.size()>8: return false
@@ -680,7 +748,7 @@ func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: S
 			if cid!="": _plan_acuerdo(nid);return true
 	# Oficios con recetas explícitas: fabricar requiere insumos y estación reales.
 	var receta_id := ""
-	for rid in a.perfil(nid).get("recetas",[]):
+	for rid in a.recetas_de(nid):
 		if C.RECETAS[rid].sal.has(item): receta_id=rid;break
 	if receta_id!="" and not cadena.has(item):
 		var r: Dictionary=C.RECETAS[receta_id]
@@ -712,6 +780,7 @@ func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: S
 		a._recordar(nid,"fabrico",j._txt_items(r.sal))
 		suceso("fabricacion",j._txt_items(r.sal),nid)
 		return true
+	if item == str(a.reglas.comida) and _cosechar(nid): return true
 	var oid: String=a._recurso(nid,item)
 	if oid!="": return _recolectar(nid,oid,motivo)
 	# Si necesita comprar, intenta reunir un bien de trueque en lugar de esperar indefinidamente.
@@ -789,8 +858,18 @@ func construir_estacion(nid: String, pieza: String, c: Vector2i) -> bool:
 func construir_pieza(nid: String, pieza: String, c: Vector2i, dueno: String = "") -> bool:
 	if not C.CONSTR.has(pieza) or not _cerca(nid,c):return false
 	var n: Dictionary=a.estado(nid)
+	if pieza == "techo":   # el techo va aparte de las piezas: no bloquea ni cambia las rutas
+		if not Inv.tiene(n.inv,C.CONSTR.techo.coste) or j.mundo.puede_techar(c)!="":return false
+		j.mundo.techar(c,dueno if dueno!="" else "grupo:"+grupo_de(nid))
+		Inv.quitar(n.inv,C.CONSTR.techo.coste)
+		n.comprometido={}
+		a.desarrollo.registrar("npc:"+nid,"construccion",C.CONSTR.techo.coste)
+		a._recordar(nid,"construyo",C.CONSTR.techo.n)
+		suceso("construccion",C.CONSTR.techo.n,nid,grupo_de(nid))
+		return true
 	if not Inv.tiene(n.inv,C.CONSTR[pieza].coste) or M.ESENCIALES.has(c) or j.mundo.puede_poner(c)!="" or j.ocupada(c):return false
 	j.mundo.poner(c,pieza,false,dueno if dueno!="" else "grupo:"+grupo_de(nid))
+	j.sembrar(c)
 	var alc: Dictionary=j.mundo.alcanzables()
 	var valido:=true
 	for e in M.ESENCIALES:
@@ -925,6 +1004,55 @@ func _refugio(nid: String) -> bool:
 			return true
 		if not datos().has("refugios"): datos().refugios = {}
 		datos().refugios[k] = true   # nada más que cerrar (o ya no se puede): no se vuelve a evaluar
+	return false
+
+func _pieza_puesta(pieza: String, c: Vector2i) -> bool:
+	if pieza == "techo": return j.mundo.estado.techos.has(M.clave(c))
+	return j.mundo.constr_en(c).get("t", "") == pieza
+
+func _celdas_casa(cama: Vector2i) -> Array:
+	var plano: Dictionary = cfg.vivienda.casa
+	var pasos: Array = []
+	for e in plano.piezas: pasos.append([str(e.p), cama + Vector2i(int(e.d[0]), int(e.d[1]))])
+	for d in plano.techos: pasos.append(["techo", cama + Vector2i(int(d[0]), int(d[1]))])
+	return pasos
+
+## Casa completa: tres muros de la cama, sala, puerta, mesa y techo sobre cama y sala.
+func casa_completa(cama: Vector2i) -> bool:
+	if j.mundo.constr_en(cama).get("t", "") not in ["cama", "cama_huesped"]: return false
+	for d in cfg.vivienda.casa.base:
+		if j.mundo.constr_en(cama + Vector2i(int(d[0]), int(d[1]))).get("t", "") not in ["muro", "muro_ladrillo"]: return false
+	for paso in _celdas_casa(cama):
+		var ok := _pieza_puesta(paso[0], paso[1])
+		if paso[0] == "muro_ladrillo": ok = j.mundo.constr_en(paso[1]).get("t", "") in ["muro", "muro_ladrillo"]
+		if not ok: return false
+	return true
+
+## Tras el refugio, el albañil completa la casa pieza a pieza (plano en reglas.vivienda.casa). Lo que no cabe se omite.
+func _casa(nid: String) -> bool:
+	if not "ladrillo" in a.perfil(nid).get("recetas", []): return false
+	var hechas: Dictionary = datos().get("casas", {})
+	var claves: Array = j.d.mundo.constr.keys()
+	claves.sort()
+	for k in claves:
+		if j.d.mundo.constr[k].t != "cama_huesped" or hechas.has(k) or not datos().get("refugios", {}).has(k): continue
+		var cama := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
+		for paso in _celdas_casa(cama):
+			var pieza: String = paso[0]
+			var c: Vector2i = paso[1]
+			if _pieza_puesta(pieza, c) or M.ESENCIALES.has(c) or (pieza != "techo" and j.ocupada(c)): continue   # el techo no estorba a quien está debajo
+			if (j.mundo.puede_techar(c) if pieza == "techo" else j.mundo.puede_poner(c)) != "": continue
+			a.estado(nid).objetivo = "completar una casa"
+			var coste: Dictionary = C.CONSTR[pieza].coste
+			comprometer(nid, coste)
+			for item in coste:
+				var falta: int = int(coste[item]) - int(a.estado(nid).inv.get(item, 0))
+				if falta > 0: return _obtener(nid, item, falta, [], "construir " + C.CONSTR[pieza].n)
+			if not _ir(nid, c, "construir", "completar una casa"): return true
+			if not construir_pieza(nid, pieza, c): break   # la validación de rutas lo rechazó: dejar esta casa como está
+			return true
+		if not datos().has("casas"): datos().casas = {}
+		datos().casas[k] = true
 	return false
 
 ## Riqueza del valle: valor de lo que guardan habitantes y depósitos. Mide si hay con qué sostener a un recién llegado.

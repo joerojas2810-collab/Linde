@@ -28,7 +28,17 @@ F sigue mostrando mejoras del equipo anterior y ofrece acceso a G. K conserva el
 | Ungüento | Gelatina + fibra, en mesa | Curación |
 | Gema | Puede salir de vetas; también tesoros y jefes | Recetas y mejoras de equipo existentes |
 
-El atlas del juego consulta los catálogos actuales para mostrar usos concretos. No se añadieron minerales nuevos al mapa.
+El atlas del juego consulta los catálogos actuales para mostrar usos concretos.
+
+Fuera del valle (sierra, secano, pradera) hay tres recursos más. Un habitante puede llegar a ellos: el contorno del valle se mantiene cargado y todos lo ven desde el borde.
+
+| Recurso | Fuente | Uso |
+|---|---|---|
+| Mena de cobre | Veta de cobre (pico) | 2 menas + 1 madera en horno → lingote de cobre |
+| Mena de estaño | Veta de estaño (pico) | 2 lingotes de cobre + 1 estaño en horno → 2 lingotes de bronce |
+| Arcilla | Pozo de arcilla (mano o pico) | 2 arcillas en horno → 3 ladrillos |
+
+Cobre y bronce son materiales de la gramática (`reglas_v1.json`): permiten espadas, escudos y armaduras, y forman laminados como el hierro. El hacha y el pico de cobre recortan 1 golpe más que los de piedra, también para los habitantes.
 
 ## Cómo aparecen piezas nuevas
 
@@ -60,6 +70,10 @@ Las técnicas ligera y reforzada requieren inicialmente 2 y 4 suelos de taller, 
 
 **Las piezas ya fabricadas conservan sus propiedades al aprender.** La fórmula y el contenido de la versión 1 deben conservarse para leer las claves de esa versión; cambios incompatibles necesitan una versión nueva, no editar silenciosamente `reglas_v1.json`.
 
+## Recetas que aparecen según lo que ocurre
+
+Cada habitante parte con las recetas de su perfil. Al tener en las manos un ítem que nunca había tenido, aprende las recetas que lo usan (queda en su memoria; las herramientas, también en el diario). Con eso aparecen metas nuevas: aprovechar lo que trajo (fundir cobre) y mejorar su herramienta (pico de cobre) cuando ya conoce todos los insumos. Sin metas pendientes, prueba un recurso que nunca ha tenido, y por eso sale a las vetas y pozos del contorno. Las recetas aprendidas se guardan en `recetas_nuevas` de cada habitante.
+
 ## Habitantes y ampliaciones
 
 Los habitantes aprenden de sus propias acciones. Después de practicar pueden ampliar la superficie del taller según su rango y la ocupación de su inventario, hasta 8 suelos por zona. Caminan, reúnen madera, pagan cada pieza y conservan las validaciones de ocupación y rutas. Esta superficie permite aplicar técnicas nuevas; no es solo decoración.
@@ -75,3 +89,17 @@ El conocimiento, práctica, proyectos y registro de creaciones viven en `mundo_v
 Solo el servidor fabrica, refina y vende. Valida conocimiento, calidad, estación, proximidad, stock y capacidad; los costes son atómicos. La réplica consulta la identidad real del jugador del servidor. No puede entrenar ni crear un artefacto por modificar la previsualización local.
 
 Prueba principal: `tests/prueba_desarrollo.gd`. La regresión conserva `prueba_autonomia.gd`, `prueba_sociedad.gd`, `prueba.gd`, `prueba_ui.gd` y `prueba_red.gd`. Las pruebas nuevas guardan solo en `/tmp/`. Evidencia visual y de simulación en `production/qa/evidence/desarrollo/`; `captura_desarrollo.gd` usa la escena real y acciones de recolección/fabricación para preparar sus pantallas, con posicionamiento de QA. La simulación independiente de tres días no recibe intervenciones del jugador.
+
+## Caminos que se forman por uso
+
+Cada paso de un jugador o habitante sobre hierba libre cuenta (`Mundo.pisar`). A las 20 pisadas (`PISADAS_CAMINO`, provisional) la celda pasa a ser camino: se guarda en `mundo.caminos`, se replica a los clientes y se dibuja con el arte de camino existente. Agua, construcciones y objetos no se gastan. Los caminos no vuelven a hierba. 
+
+## Campos de cultivo
+
+«Campo de cultivo» es una pieza (2 fibras y 2 bayas; la baya hace de semilla). Madura a las 12 horas de juego (`CAMPO_CRECE_MIN`) y con E se cosechan 3 bayas y 1 fibra (`CAMPO_COSECHA`); queda sembrado otra vez. El arbusto dibujado sin bayas es el cultivo creciendo. Cada grupo labra un campo junto a su depósito (`campos_por_grupo`) cuando algún miembro puede pagar la semilla sin hambre, y sus miembros lo cosechan, también cuando necesitan comida. En 4 días simulados (semilla 123) los dos grupos hicieron un campo cada uno y los cosecharon.
+
+## Casas completas
+
+Piezas nuevas: **Puerta** (3 madera; no bloquea, se ve abierta con alguien a una celda) y **Techo** (1 madera + 1 fibra). El techo va aparte de las piezas (`mundo.techos`): una celda puede tener cama, mesa o muro y además techo. Los techos se guardan, se replican y se dibujan sobre la casa; los conectados al jugador (por dentro o junto a la puerta) se vuelven casi transparentes.
+
+El plano de la casa está en `datos/autonomia/reglas.json` (`vivienda.casa`), relativo a la cama de huésped: los tres muros del refugio, tres muros más para una sala de 2×1, la puerta al sur, una mesa y techo sobre cama y sala. Tras el refugio, un albañil la completa pieza a pieza; lo que no cabe se omite. Quien duerme en una casa completa recupera la energía un 25 % más rápido (`bono_descanso`). En la partida simulada de 5 días las camas quedaron apretadas y no se completó ninguna: el plano pide unos 5×5 libres.

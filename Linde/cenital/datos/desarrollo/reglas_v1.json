@@ -74,6 +74,44 @@
         "pantalones"
       ],
       "fuente": "Mena de las vetas, refinada con madera en un horno."
+    },
+    "cobre": {
+      "nombre": "cobre",
+      "item": "lingote_cobre",
+      "coste": 2,
+      "potencia": 1.0,
+      "vel": 0.0,
+      "arquetipo": "media",
+      "color": "#c8742f",
+      "formas": [
+        "espada",
+        "escudo",
+        "casco",
+        "torso",
+        "guantes",
+        "botas",
+        "pantalones"
+      ],
+      "fuente": "Veta de cobre fuera del valle, fundida en un horno."
+    },
+    "bronce": {
+      "nombre": "bronce",
+      "item": "lingote_bronce",
+      "coste": 2,
+      "potencia": 1.35,
+      "vel": -0.01,
+      "arquetipo": "media",
+      "color": "#b88a3c",
+      "formas": [
+        "espada",
+        "escudo",
+        "casco",
+        "torso",
+        "guantes",
+        "botas",
+        "pantalones"
+      ],
+      "fuente": "Aleación de cobre y estaño fundida en un horno."
     }
   },
   "formas": {
@@ -187,14 +225,21 @@
     "baya": "Puede salir de arbustos; alimento para habitantes y curación para el jugador.",
     "gelatina": "Botín de slimes; sirve para fabricar ungüentos.",
     "unguento": "Fabricar con gelatina y fibra en una mesa; restaura vida.",
-    "gema": "Puede salir de vetas y tesoros; se usa en fabricación y mejoras de equipo."
+    "gema": "Puede salir de vetas y tesoros; se usa en fabricación y mejoras de equipo.",
+    "cobre": "Vetas de cobre fuera del valle; requiere pico.",
+    "lingote_cobre": "Fundir 2 menas de cobre con 1 madera en un horno.",
+    "estano": "Vetas de estaño en sierra y secano; requiere pico.",
+    "lingote_bronce": "Fundir 2 lingotes de cobre con 1 estaño en un horno; salen 2.",
+    "arcilla": "Pozos de arcilla fuera del valle; da ladrillos en el horno."
   },
   "activa": true,
   "bonus_combate_max": 2,
   "tope_creaciones": 64,
   "laminados": {
     "nucleos": [
-      "hierro"
+      "hierro",
+      "cobre",
+      "bronce"
     ],
     "refuerzos": [
       "madera",

@@ -10,8 +10,10 @@
     "bloque": 8,
     "radio_inicial": 16,
     "radio_vision": 8,
-    "radio_rumor": 4
+    "radio_rumor": 4,
+    "horizonte": 28
   },
+  "expediciones": true,
   "intervalo_recuerdo_min": 60,
   "tope_recuerdos": 32,
   "perfiles": {
@@ -106,7 +108,11 @@
       "arcilla": 1,
       "pico_piedra": 6,
       "hacha_piedra": 5,
-      "unguento": 4
+      "unguento": 4,
+      "estano": 2,
+      "lingote_bronce": 7,
+      "hacha_cobre": 8,
+      "pico_cobre": 9
     },
     "grupos": {
       "talleres": {
@@ -189,7 +195,76 @@
       "requiere_excedente": {
         "fibra": 10
       },
-      "espera_min": 720
+      "espera_min": 720,
+      "casa": {
+        "nota": "Plano de la casa completa respecto de la cama de huésped; (0,0) es la cama. Los tres muros de la cama los pone el refugio. Provisional.",
+        "base": [
+          [
+            0,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "piezas": [
+          {
+            "p": "muro_ladrillo",
+            "d": [
+              -1,
+              1
+            ]
+          },
+          {
+            "p": "muro_ladrillo",
+            "d": [
+              2,
+              1
+            ]
+          },
+          {
+            "p": "muro_ladrillo",
+            "d": [
+              1,
+              2
+            ]
+          },
+          {
+            "p": "puerta",
+            "d": [
+              0,
+              2
+            ]
+          },
+          {
+            "p": "mesa",
+            "d": [
+              1,
+              1
+            ]
+          }
+        ],
+        "techos": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "bono_descanso": 1.25
+      }
     },
     "inmigracion": {
       "nota": "Sin número objetivo de habitantes: max_habitantes es solo un techo técnico provisional por rendimiento y red. Llega alguien cuando hay cama libre y riqueza.",
@@ -311,7 +386,8 @@
       "fibra_reserva": 8,
       "fibra_mantenimiento": 8,
       "intervalo_mantenimiento": 1440,
-      "valor_minimo": 0.25
+      "valor_minimo": 0.25,
+      "campos_por_grupo": 1
     },
     "proteccion": {
       "coste": {

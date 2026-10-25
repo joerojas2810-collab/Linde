@@ -141,7 +141,7 @@ func _bienvenida(e: Dictionary) -> void:
 func _mundo(cambios: Dictionary) -> void:
 	for k in cambios:
 		match k:
-			"rotos", "golpes": j.d.mundo[k] = cambios[k]
+			"rotos", "golpes", "caminos", "techos": j.d.mundo[k] = cambios[k]
 			"constr": j.d.mundo.constr = _traducir(cambios[k])
 			"cofres", "jefes": j.d[k] = cambios[k]
 			"mundo_vivo":
