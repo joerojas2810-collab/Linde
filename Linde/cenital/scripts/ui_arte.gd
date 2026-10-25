@@ -5,7 +5,7 @@ extends RefCounted
 const RAIZ := "res://arte/interfaz/"
 const TINTA := Color("#30271f")
 const PAPEL := Color("#f7e2aa")
-const FOCO := Color("#92edee")
+const FOCO := Color("#f1c75b")
 const MARCADOR := Color(1, 0, 1, 0.85)
 ## Márgenes de los 9 parches (propuesta E06 PROPUESTAS.md): panel 8/16/8/16, botón 20/10/20/8.
 const M_PANEL := [8, 16, 8, 16]

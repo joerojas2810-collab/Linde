@@ -777,14 +777,15 @@ func _draw() -> void:
 	actores.efectos_dibujar(self)
 	if pista != "":   # E06: indicador de interacción sobre el jugador cuando hay algo con lo que interactuar
 		var ind: Texture2D = hud.ui.tex("reutilizados/interact_indicator.png")
-		if ind != null: draw_texture_rect(ind, Rect2((j.pies - Vector2(12, 46 + 2.0 * sin(Time.get_ticks_msec() / 200.0))).round(), Vector2(24, 32)), false)
+		if ind != null: draw_texture_rect(ind, Rect2((j.pies - Vector2(6, 46 + 0.5 * sin(Time.get_ticks_msec() / 300.0))).round(), Vector2(12, 16)), false)
 	arte_mundo.casa_tejado(self, 0.0 if dentro else 1.0)
 	if j.autonomia.sociedad.activa():
 		var marcador: Texture2D = hud.ui.tex("reutilizados/quest_marker.png")
 		for gid in j.autonomia.sociedad.cfg.grupos:
 			var pos := Mundo.pies_de_celda(j.autonomia.sociedad._ancla(gid))
-			if marcador != null: draw_texture_rect(marcador, Rect2(pos - Vector2(8, 28), Vector2(16, 16)), false)
-			draw_string(hud.ui.fuente, pos + Vector2(-18, -30), j.autonomia.sociedad.nombre_grupo(gid), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
+			# Deposits share anchors with workshops: keep their marker above NPC heads and names.
+			if marcador != null: draw_texture_rect(marcador, Rect2(pos - Vector2(6, 58), Vector2(12, 12)), false)
+			_nombre_mundo(j.autonomia.sociedad.nombre_grupo(gid), pos - Vector2(0, 30), Color("f1d692"))
 	if build:
 		var c: Vector2i = Mundo.celda_de(j.pies) + j.mira
 		var id: String = C.ORDEN_CONSTR[pieza_i]
@@ -815,7 +816,7 @@ func _dibujar_pj() -> void:
 	var origen: Vector2 = (j.pies - Vector2(P.SPRITE.x / 2.0, P.SPRITE.y)).round()
 	_sombra(j.pies)
 	var vis := _equipo_visible(j.jug().equipo)
-	if arte_eq.disponible(): arte_eq.dibujar(self, j.pies, j.mira, _cuadro_arte(_anim), vis, j.jug().look, _anim.estado, _hacha_local())
+	if arte_eq.disponible(): arte_eq.dibujar(self, j.pies, j.mira, _cuadro_arte(_anim), vis, j.jug().look, _anim.estado, _hacha_local(), _herramienta_local())
 	else: _arte_faltante(origen)
 	if auto_ataque >= 0.0:
 		var fase: String = j.combate.est
@@ -833,6 +834,18 @@ func _sombra(pies: Vector2, escala: float = 1.0) -> void:
 
 ## Hacha visible solo al talar un árbol con hacha en el inventario (dato de presentación del jugador local; el
 ## protocolo no transmite la herramienta de los remotos, así que ellos no la muestran).
+## Presentation only: choose the actual tool for the target, including the new regional resources.
+func _herramienta_local() -> String:
+	if _anim.estado != "herramienta": return ""
+	var oid: String = j.mundo.por_celda.get(Mundo.celda_de(j.pies) + j.mira, "")
+	if oid == "": return ""
+	var tipo: String = j.mundo.objetos[oid].t
+	var tag := "talar" if tipo == "arbol" else ("picar" if tipo in ["roca", "veta", "veta_cobre", "arcilla"] else "")
+	if tag == "": return ""
+	for it in j.jug().inv:
+		if Eq.info(it).get("tag", "") == tag: return "hacha" if tag == "talar" else "pico"
+	return ""
+
 func _hacha_local() -> bool:
 	if _anim.estado != "herramienta": return false
 	var oid: String = j.mundo.por_celda.get(Mundo.celda_de(j.pies) + j.mira, "")
@@ -857,7 +870,7 @@ func _dibujar_otro(o: Dictionary) -> void:
 		var eq: Dictionary = o.get("equipo") if o.get("equipo") is Dictionary else {}
 		arte_eq.dibujar(self, o.pies, o.mira, cuadro, _equipo_visible(eq), o.look, str(o.estado))
 	else: _arte_faltante(origen)
-	draw_string(hud.ui.fuente, origen + Vector2(-6, -4), o.nombre, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color("f1c40f"))
+	_nombre_mundo(o.nombre, o.pies, Color("f1d692"))
 
 func _dibujar_npc(id: String) -> void:
 	var p: Vector2 = j.habitantes.pos(id)
@@ -867,8 +880,17 @@ func _dibujar_npc(id: String) -> void:
 	var st: Dictionary = actores.npc_estado(id, p)
 	var cuadro := int(Time.get_ticks_msec() / 120.0) % 4 if st.mueve else 0
 	arte_eq.dibujar(self, p, st.dir, cuadro, [], j.habitantes.aspecto(id), "caminar" if st.mueve else "reposo")
-	var f: Font = hud.ui.fuente
-	draw_string(f, origen + Vector2(-6, -4), j.habitantes.fichas[id].n + (" (zzz)" if act == "dormir" else ""), HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.WHITE)
+	if p.distance_to(j.pies) <= 128.0:
+		_nombre_mundo(j.habitantes.fichas[id].n + (" · zzz" if act == "dormir" else ""), p)
+
+## Uses the current Nunito font; keep the new UI and Lora dialogue typography.
+func _nombre_mundo(texto: String, pies: Vector2, color: Color = Color("f7e2aa")) -> void:
+	var fuente: Font = hud.ui.fuente
+	if fuente == null: return
+	var ancho: float = fuente.get_string_size(texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
+	var pos := (pies - Vector2(ancho / 2.0, 32)).round()
+	draw_string_outline(fuente, pos, texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, 1, Color("2b241c"))
+	draw_string(fuente, pos, texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, color)
 
 func _dibujar_enemigo(e: Dictionary) -> void:
 	var t: float = e.tam
@@ -880,7 +902,7 @@ func _dibujar_enemigo(e: Dictionary) -> void:
 		draw_string(hud.ui.fuente, e.pos + Vector2(-22, -36), def.n, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, Color("eee4cf"))
 	if e.hp < def.hp:
 		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t, 3)), Color(0, 0, 0, 0.6))
-		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t * float(e.hp) / def.hp, 3)), Color("e74c3c"))
+		draw_rect(Rect2(o + Vector2(0, -6), Vector2(t * float(e.hp) / def.hp, 3)), Color("cf5a43"))
 
 func _dibujar_obj(id: String) -> void:
 	var o: Dictionary = j.mundo.objetos[id]

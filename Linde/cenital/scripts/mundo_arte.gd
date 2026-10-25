@@ -83,7 +83,7 @@ func suelo(ci: CanvasItem, m, c: Vector2i, tiempo: float) -> void:
 	var dst := Rect2(Vector2(c) * CELDA, Vector2(CELDA, CELDA))
 	if clase == "":
 		var bioma: String=m.bioma(c)
-		_tex_rect(ci, "E04_grass_periodica.png", dst)
+		_tex_rect(ci, "E04_grass_periodica.png", dst, Color(0.96, 0.92, 0.98))
 		if SUELOS_BIOMA.has(bioma):
 			var mezcla := clampf(float(Mundo.Terreno.distancia_valle(c)) / 12.0, 0.0, 1.0)
 			_suelo_bioma(ci, c, bioma, dst, mezcla)

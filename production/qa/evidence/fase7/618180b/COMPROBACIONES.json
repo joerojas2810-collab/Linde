@@ -1,0 +1,28 @@
+{
+  "alcance": "Integración visual y guardado local; no sustituye pruebas completas de sociedad ni una sesión multijugador.",
+  "base": "618180b",
+  "comprobaciones": [
+    {
+      "comprobacion": "arranque con viajero/NPC detallados, cámara 3× y colisión conservada",
+      "ok": true
+    },
+    {
+      "comprobacion": "Nunito y Lora de la versión actual conservadas",
+      "ok": true
+    },
+    {
+      "comprobacion": "equipo combinatorio y colores distintos para espada de madera/hierro",
+      "ok": true
+    },
+    {
+      "comprobacion": "autonomía por defecto, regiones/biomas y fauna real conservados; sin recursos faltantes",
+      "ok": true
+    },
+    {
+      "comprobacion": "guardado/carga conserva aspecto, equipo artesanal, autonomía y fauna",
+      "ok": true
+    }
+  ],
+  "fallos": 0,
+  "total": 5
+}

@@ -1,0 +1,15 @@
+{
+  "sha256": {
+    "ARRANQUE_REPO.txt": "145a79e5d5c60cfcf10291b5c21866fc2a4a579b5ced422da124ec8d586ee5cf",
+    "capturas/01_valle_integrado.png": "16be1419e10a2828bed9ee635bce6d5054c063949cfb091555f476eaf104d277",
+    "capturas/02_inventario_nunito.png": "3afb55a41b4e50d35639facd8ba3199d11d620b5ca10426593a46a42fe7fbef6",
+    "capturas/03_dialogo_lora.png": "604f954ac01d64973ddc4f17778626c9b83ffebba1690e57e928a7fae52c5f20",
+    "capturas/04_bioma_y_fauna.png": "2595c715298dc26c095c4c640939ca68f8d345cd9a0750cefbe08081ef0d0331",
+    "COMPROBACIONES.json": "007a667361995d16fcfc962a883362293af43263c3698267d9b2b56430ff3fd9",
+    "IMPORTACION.txt": "024751b603b404bd250d84238b2c15703b8b009b0a3182c4162d960bba26fe0d",
+    "IMPORTACION_REPO.txt": "7c909abd5b4f9724f157c7d842c65b08a462408911abcc0d8970920bffd3c5ed",
+    "INFORME.md": "07723439292f567dad12eb46360f4f4a8c59daad4a72c57e26be18b976417cdb",
+    "INTEGRACION.json": "a02ce3f585bbba4862b41913830fa80fce5b65b8c12e39ba417844f07a705995",
+    "REGISTRO.txt": "65d96fabeefc15d96cdd7c73e5af358fd92b585da7ecf999bef0d2417555ba5b"
+  }
+}

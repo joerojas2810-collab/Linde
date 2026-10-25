@@ -5,6 +5,8 @@ extends RefCounted
 # Las texturas se cachean por (arquetipo, ranura, familia, variante); la base, por apariencia (look).
 # Si falta el manifiesto, la base o cualquier hoja, disponible() es false y la escena usa el dibujo procedural.
 const Aspecto = preload("res://scripts/aspecto.gd")
+const Viajero071 = preload("res://scripts/viajero071.gd")
+var viajero071 = Viajero071.new()
 const P = preload("res://scripts/params.gd")
 
 ## Lateralidad de los perfiles (decisión abierta 2 del contrato). false = como propone el contrato: mirando a la
@@ -495,7 +497,14 @@ func comandos(pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Ar
 		elif piezas.has(capa): out.append([capa, piezas[capa][0], piezas[capa][1], piezas[capa][2]])
 	return out
 
-func dibujar(ci: CanvasItem, pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Array, estado: String = "", hacha: bool = false) -> void:
+func dibujar(ci: CanvasItem, pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Array, estado: String = "", hacha: bool = false, herramienta: String = "") -> void:
+	ci.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var tool := herramienta if herramienta != "" else ("hacha" if hacha else "")
+	var textura := viajero071.texture(look, dir, estado, cuadro, equipo, tool)
+	ci.draw_texture_rect(textura, Rect2((pies - Vector2(24,48)).round(), Vector2(48,48)), false)
+
+## Retained for existing layer contracts and compatibility checks.
+func dibujar_heredado(ci: CanvasItem, pies: Vector2, dir: Vector2i, cuadro: int, equipo: Array, look: Array, estado: String = "", hacha: bool = false) -> void:
 	ci.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	for c in comandos(pies, dir, cuadro, equipo, look, INVERTIR_PERFILES, estado, hacha): ci.draw_texture_rect_region(c[1], c[3], c[2])
 	if estado == "ataque" and ataque_disponible() and atq.get("estela") != null:

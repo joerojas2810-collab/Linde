@@ -1,0 +1,13 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 3.3.0 Core Profile Context 23.19.12.03.240603 - Compatibility - Using Device: ATI Technologies Inc. - AMD Radeon(TM) Graphics
+
+PASS arranque con viajero/NPC detallados, cámara 3× y colisión conservada
+PASS Nunito y Lora de la versión actual conservadas
+PASS equipo combinatorio y colores distintos para espada de madera/hierro
+PASS autonomía por defecto, regiones/biomas y fauna real conservados; sin recursos faltantes
+PASS guardado/carga conserva aspecto, equipo artesanal, autonomía y fauna
+FASE7_INTEGRACION: 5 comprobaciones, 0 fallos
+WARNING: 37 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 10 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
