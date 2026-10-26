@@ -15,6 +15,7 @@ const Vivo = preload("res://scripts/mundo_vivo.gd")
 const Comb = preload("res://scripts/combate.gd")
 const Anim = preload("res://scripts/anim_pj.gd")
 const Eq = preload("res://scripts/equipo.gd")
+const Lugares = preload("res://scripts/lugares.gd")
 const Pistas = preload("res://scripts/pistas.gd")
 const Exploracion = preload("res://scripts/exploracion.gd")
 const LOCAL := P.LOCAL
@@ -306,6 +307,7 @@ func dia() -> int:
 func actualizar_regiones() -> void:
 	var centros: Array=[]
 	for id in rt:centros.append(Mundo.celda_de(rt[id].pies))
+	Lugares.preparar(self, centros)
 	if autonomia != null and autonomia.expediciones(): centros.append_array([Vector2i(8, 8), Vector2i(56, 8), Vector2i(8, 40), Vector2i(56, 40)])   # el contorno del valle, para que los habitantes salgan
 	mundo.actualizar_regiones(centros)
 

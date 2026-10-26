@@ -150,6 +150,9 @@ func _mundo(cambios: Dictionary) -> void:
 	for k in cambios:
 		match k:
 			"rotos", "golpes", "caminos", "techos": j.d.mundo[k] = cambios[k]
+			"registro":
+				if not cambios[k].is_empty(): j.d.mundo.registro = cambios[k]
+				j.mundo.aplicar_registro()
 			"constr": j.d.mundo.constr = _traducir(cambios[k])
 			"cofres", "jefes": j.d[k] = cambios[k]
 			"mundo_vivo":

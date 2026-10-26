@@ -11,14 +11,14 @@ const Eq = preload("res://scripts/equipo.gd")
 const Huella = preload("res://scripts/huella.gd")
 const PUERTO := 7777
 const MAX_CLIENTES := 15
-const VERSION := 7              # versión del protocolo; el cliente la manda en «hola» (6: saberes y enseñanza; 7: huella de reglas en el saludo)
+const VERSION := 8              # versión del protocolo; el cliente la manda en «hola» (6: saberes y enseñanza; 7: huella de reglas en el saludo)
 const TICK := 0.05              # 20 Hz
 const ALCANCE := 2              # celdas (Chebyshev) para construir, retirar y usar cofres
 const MAX_PEDIDOS_S := 40       # pedidos por segundo y conexión; el resto se descarta
 const ESPERA_HOLA_S := 10.0     # una conexión que no se identifica en este tiempo se corta
 const GUARDADO_S := 30.0
 const DIRS := [Vector2i.ZERO, Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
-const SECCIONES := ["rotos", "golpes", "constr", "caminos", "techos", "cofres", "jefes", "mundo_vivo"]
+const SECCIONES := ["registro", "rotos", "golpes", "constr", "caminos", "techos", "cofres", "jefes", "mundo_vivo"]
 const MAX_TEXTO := 48           # longitud máxima de un texto de pedido (las claves `eq:` más largas rondan 32)
 const MAX_LOTE := 12            # entradas por lado de una oferta de intercambio
 
@@ -414,7 +414,8 @@ func _enviar(pid: int, datos: Array) -> void:
 	if pid != 0 and is_inside_tree() and multiplayer.multiplayer_peer is ENetMultiplayerPeer: evento.rpc_id(pid, datos)
 
 func _seccion(k: String):
-	return j.d.mundo[k] if k in ["rotos", "golpes", "constr", "caminos", "techos"] else j.d[k]
+	if k == "registro": return j.d.mundo.get("registro", {})
+	return j.d.mundo[k] if k in ["rotos", "golpes", "constr", "caminos", "techos", "registro"] else j.d[k]
 
 # ---------- lo que ve cada cliente ----------
 # [min, {id: [x, y, mira_x, mira_y, anim, cuadro, hp, ataque_est, inv_t]}, [[tipo, x, y, est, hp, atq, t, dx, dy]], {npc: [x, y, act]}]

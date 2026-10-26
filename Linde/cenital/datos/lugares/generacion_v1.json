@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "macro_celdas": 96,
+  "margen_preparacion": 16,
+  "margen_sitio": 5,
+  "paso_candidato": 2,
+  "inicio_y_min": 56,
+  "radio_sitio": 3,
+  "distancia_inicial_max": 128,
+  "coste_sendero": 1,
+  "coste_tierra": 3,
+  "coste_recurso": 2,
+  "tipos": [
+    {"id":"ruinas", "nombre":"Ruinas del Vado", "x_min":6, "x_max":26, "biomas":["pradera","bosque","secano","sierra"], "descripcion":"Quedan muros de piedra y un patio abierto. El antiguo sendero conecta este lugar con el camino principal; puedes recorrerlo y regresar por la misma ruta."},
+    {"id":"campamento", "nombre":"Campamento de la Loma", "x_min":40, "x_max":60, "biomas":["pradera","bosque","secano"], "descripcion":"Un campamento desocupado junto al camino. La mesa permite trabajar con tus propios materiales y el cofre compartido puede guardar provisiones. No hay residentes ni suministros garantizados."},
+    {"id":"cueva", "nombre":"Boca de Piedra", "x_min":70, "x_max":88, "biomas":["sierra","secano","bosque","pradera"], "descripcion":"Una boca oscura entre paredes de roca. Por ahora puedes reconocer la entrada y su acceso; el interior de la cueva todavía no es transitable."}
+  ]
+}

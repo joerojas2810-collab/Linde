@@ -152,7 +152,7 @@ func hito_en(c: Vector2i) -> String:
 	for h in poblado(ID_INICIAL).get("hitos", []):
 		var a: Array = h.area
 		if Rect2i(int(a[0]), int(a[1]), int(a[2]), int(a[3])).has_point(c): return str(h.nombre)
-	return ""
+	return str(lugar_en(c).get("nombre", ""))
 
 ## Primera celda libre de hierba a distancia Chebyshev rmin..rmax de `centro` (anillos crecientes, y luego y, x), fuera de las celdas esenciales.
 func _celda_libre_cerca(centro: Vector2i, rmin: int, rmax: int) -> Vector2i:
@@ -264,7 +264,7 @@ func actualizar_regiones(centros: Array) -> void:
 		var datos: Dictionary=generador.generar_region(deseadas[k])
 		var ids: Array=[]
 		for recurso in datos.recursos:
-			if es_valle(recurso.c):continue
+			if es_valle(recurso.c) or estado.get("registro", {}).get("despejes", {}).has(clave(recurso.c)):continue
 			var tipo_recurso: String = str(recurso.t)
 			# Conserva diferencias de estaño de la versión intermedia que aún se guardaba como v1.
 			var id_estano: String = "veta_estano@" + clave(recurso.c)
@@ -292,7 +292,7 @@ func datos_objeto(id: String) -> Dictionary:
 	var partes:=id.get_slice("@",1).split(",")
 	if partes.size()!=2 or not partes[0].is_valid_int() or not partes[1].is_valid_int():return {}
 	var c:=Vector2i(int(partes[0]),int(partes[1]))
-	if es_valle(c) or not generador.valida(c):return {}
+	if es_valle(c) or not generador.valida(c) or estado.get("registro", {}).get("despejes", {}).has(clave(c)):return {}
 	var d: Dictionary=generador.datos(c)
 	if int(estado.generacion.version)==1 and id=="veta_estano@"+clave(c) and (estado.rotos.has(id) or estado.golpes.has(id)): d.objeto="veta_estano"
 	return {"t":str(d.objeto),"c":c} if str(d.objeto)!="" and id==str(d.objeto)+"@"+clave(c) else {}
@@ -367,6 +367,8 @@ func tipo(c: Vector2i) -> int:
 	return T.CAMINO if t == T.PASTO and estado.get("caminos", {}).has(clave(c)) else t
 
 func _base(c: Vector2i) -> int:
+	var cambios: Dictionary = estado.get("registro", {}).get("suelos", {})
+	if cambios.has(clave(c)): return int(cambios[clave(c)])
 	if es_valle(c):return celdas[c.y*ANCHO+c.x]
 	if generador==null or not generador.valida(c):return T.AGUA
 	var region: Dictionary=regiones.get(clave(Terreno.region(c)),{})
@@ -410,7 +412,7 @@ func _reconstruir() -> void:
 func bloquea(c: Vector2i) -> bool:
 	if not valida(c) or not region_cargada(c):return true
 	if not es_valle(c):
-		if tipo(c)==T.AGUA:return true
+		if tipo(c) in [T.AGUA, T.PARED, T.MURO_RUINA]:return true
 		if C.CONSTR.get(constr_en(c).get("t",""),{}).get("bloquea",false):return true
 		var id:=objeto_presente(c)
 		return id!="" and bool(C.OBJETOS.get(objetos[id].t,{}).get("bloquea",true))
@@ -583,3 +585,24 @@ func punto_inicio(semilla: int) -> Vector2i:
 static func dir_cardinal(sostenidas: Array, previa: Vector2i) -> Vector2i:
 	if sostenidas.is_empty(): return Vector2i.ZERO
 	return previa if previa in sostenidas else sostenidas[0]
+
+## Aplica la geometría registrada y descarga los recursos desplazados por la génesis de lugares/rutas.
+## Las regiones siguen siendo caché; estas decisiones están en el guardado y vienen del servidor.
+func aplicar_registro() -> void:
+	var despejes: Dictionary = estado.get("registro", {}).get("despejes", {})
+	for k in regiones:
+		var presentes: Array = []
+		for id in regiones[k].ids:
+			if despejes.has(clave(objetos[id].c)):
+				por_celda.erase(objetos[id].c)
+				objetos.erase(id)
+			else: presentes.append(id)
+		regiones[k].ids = presentes
+	cambiar()
+
+## Lugar persistente que contiene la celda, sin crear ninguno al consultar.
+func lugar_en(c: Vector2i) -> Dictionary:
+	for lugar in estado.get("registro", {}).get("lugares", {}).values():
+		var a: Array = lugar.area
+		if Rect2i(a[0], a[1], a[2], a[3]).has_point(c): return lugar
+	return {}

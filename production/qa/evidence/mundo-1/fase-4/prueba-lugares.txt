@@ -1,0 +1,22 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS registro compartido con los tres tipos de destino
+PASS cargar regiones no vuelve a generar lugares
+PASS mismo registro ampliando macrorregiones en orden inverso
+PASS planes puros independientes de diferencias y caché
+PASS expansión negativa persistida
+PASS guardar/cargar conserva el resultado completo
+PASS legado no genera registro
+PASS acceso real desde el camino con colisiones y recursos cargados
+PASS volver no repone la mesa ni el contenido del cofre
+PASS los recursos naturales no reaparecen bloqueando los senderos
+PASS un registro futuro se rechaza explícitamente
+PASS 100 semillas: destinos cercanos y rutas continuas sin agua
+PASS 100 semillas: todas las rutas permiten pasar al jugador con colisión real
+GENERACION_MACRO_US p50=25244 p95=27426 max=29386
+REGISTRO_BYTES 34024
+LUGARES_100_SEMILLAS validas=100 tres_tipos=91
+WARNING: 78 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

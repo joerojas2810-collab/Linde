@@ -46,6 +46,8 @@ static func desempaquetar(txt: String) -> Dictionary:
 static func migrar(d: Dictionary) -> Dictionary:
 	var f := int(d.get("formato", 0))
 	if f > FORMATO: return {}
+	var registro = d.get("mundo", {}).get("registro", null)
+	if registro != null and (not registro is Dictionary or int(registro.get("version", -1)) != 1): return {}
 	var generacion = d.get("mundo",{}).get("generacion",null)
 	if generacion!=null:
 		if not generacion is Dictionary:return {}

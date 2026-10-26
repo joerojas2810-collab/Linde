@@ -17,7 +17,8 @@ func _celda_dato(lugar: String) -> Vector2i:
 func _piezas(j, tipo: String) -> Array:
 	var l: Array = []
 	for k in j.d.mundo.constr:
-		if j.d.mundo.constr[k].t == tipo: l.append(Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1))))
+		var c := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
+		if M.es_valle(c) and j.d.mundo.constr[k].t == tipo: l.append(c)
 	return l
 
 func _init() -> void:
