@@ -53,7 +53,9 @@ static func nuevo_jugador(nombre: String, look: Array, p: Vector2) -> Dictionary
 		"inv": {}, "equipo": EQUIPO_VACIO.duplicate(), "hab": [], "xp": 0, "misiones": {}, "eventos": {}, "recompensas": [],
 		"pendientes": {}, "relacion": {}}
 
-static func nueva(semilla: int, nombre: String, look: Array):
+## `modo_inicio`: ver `Mundo.MODO_LEGADO` / `MODO_POBLADO`. Los mundos que se juegan (escena) usan `MODO_JUEGO`; las pruebas y herramientas, `legado` salvo que lo pidan.
+const MODO_JUEGO := Mundo.MODO_LEGADO   # pasa a MODO_POBLADO cuando se validan las mediciones de seguridad (1c)
+static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String = Mundo.MODO_LEGADO):
 	var j = new()
 	j.d = {"semilla": semilla}
 	var p := Mundo.pies_de_celda(j.mundo.punto_inicio(semilla))
@@ -65,6 +67,7 @@ static func nueva(semilla: int, nombre: String, look: Array):
 		"cofres": {"tesoro_cantera": {"inv": cont, "abierto": false}}, "mundo": j.mundo.estado, "jefes": {}, "npcs": {},
 		"jugadores": {LOCAL: nuevo_jugador(nombre, look, p)}}
 	j.d.mundo.generacion = {"version": 2, "semilla": semilla, "region": 16}
+	j.d.mundo.inicio = {"modo": modo_inicio}
 	j._arrancar()
 	return j
 

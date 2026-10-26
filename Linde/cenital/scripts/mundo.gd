@@ -88,9 +88,17 @@ static func poblado_inicial() -> Dictionary:
 	return {"id": ID_INICIAL, "nombre": "Valle", "estado": "activo", "centro": [CENTRO_INICIAL.x, CENTRO_INICIAL.y],
 		"area": [0, 0, ANCHO, ALTO], "entrada": [ENTRADA.x, ENTRADA.y], "esenciales": esenciales, "camas": camas}
 
+## Modos de aparición de los jugadores (`estado.inicio.modo`). `legado`: `punto_inicio` como siempre (celda aleatoria válida del Valle).
+## `poblado`: alrededor del centro del poblado inicial, validada con el estado actual (Mundo 1, paso 1c).
+const MODO_LEGADO := "legado"
+const MODO_POBLADO := "poblado"
 const SIN_CELDA := Vector2i(-1, -1)   # `entrada()` de un poblado que no existe
 
 ## Datos del poblado `poblado_id` ({} si no existe en el registro de este mundo).
+## Modo de aparición vigente en este mundo.
+func modo_inicio() -> String:
+	return str(estado.get("inicio", {}).get("modo", MODO_LEGADO))
+
 func poblado(poblado_id: String) -> Dictionary:
 	return estado.get("poblados", {}).get(poblado_id, {})
 
@@ -126,6 +134,7 @@ func configurar(semilla: int) -> void:
 	for campo in ["caminos", "pisadas", "techos"]:
 		if not estado.has(campo): estado[campo] = {}   # guardados anteriores
 	if not estado.has("poblados"): estado.poblados = {ID_INICIAL: poblado_inicial()}
+	if not estado.has("inicio"): estado.inicio = {"modo": MODO_LEGADO}   # cómo aparecen los jugadores (Mundo 1, paso 1c); guardados sin la clave: legado
 	if not estado.has("generacion"): estado.generacion={"version":1,"semilla":semilla,"region":Terreno.TAM}
 	generador=Terreno2.new(int(estado.generacion.semilla)) if int(estado.generacion.version)==2 else Terreno.new(int(estado.generacion.semilla))
 	_firma_regiones=""
