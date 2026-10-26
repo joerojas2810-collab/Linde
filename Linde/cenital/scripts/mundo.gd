@@ -75,10 +75,49 @@ func _init() -> void:
 	for id in CAMAS: estado.constr[clave(CAMAS[id])] = {"t": "cama", "propia": false}
 	_generar_slimes()
 
+## Registro de poblados (Mundo 1, paso 1a): el Valle actual descrito como datos. Hoy solo documenta y expone las mismas
+## constantes de arriba; ningún consumidor lo lee todavía (paso 1b). Un poblado nuevo sería otra entrada con su propio id.
+const ID_INICIAL := "inicial"
+const CENTRO_INICIAL := Vector2i(32, 23)     # cruce del camino sur con el camino este-oeste
+
+static func poblado_inicial() -> Dictionary:
+	var esenciales: Array = []
+	for e in ESENCIALES: esenciales.append([e.x, e.y])
+	var camas := {}
+	for id in CAMAS: camas[id] = [CAMAS[id].x, CAMAS[id].y]
+	return {"id": ID_INICIAL, "nombre": "Valle", "estado": "activo", "centro": [CENTRO_INICIAL.x, CENTRO_INICIAL.y],
+		"area": [0, 0, ANCHO, ALTO], "entrada": [ENTRADA.x, ENTRADA.y], "esenciales": esenciales, "camas": camas}
+
+## Datos del poblado `id` ({} si no existe o el guardado no trae registro).
+func poblado(id: String = ID_INICIAL) -> Dictionary:
+	return estado.get("poblados", {}).get(id, {})
+
+## Entrada del poblado inicial; sin registro, la constante `ENTRADA`.
+func entrada() -> Vector2i:
+	var p: Dictionary = poblado()
+	return Vector2i(int(p.entrada[0]), int(p.entrada[1])) if p.has("entrada") else ENTRADA
+
+## Celdas que la construcción no puede cerrar; sin registro, la constante `ESENCIALES`.
+func esenciales() -> Array:
+	var p: Dictionary = poblado()
+	if not p.has("esenciales"): return ESENCIALES
+	var l: Array = []
+	for e in p.esenciales: l.append(Vector2i(int(e[0]), int(e[1])))
+	return l
+
+## Cama fija de cada habitante inicial (id -> celda); sin registro, la constante `CAMAS`.
+func camas() -> Dictionary:
+	var p: Dictionary = poblado()
+	if not p.has("camas"): return CAMAS
+	var d := {}
+	for id in p.camas: d[id] = Vector2i(int(p.camas[id][0]), int(p.camas[id][1]))
+	return d
+
 ## Migración aditiva: el valle y todas sus diferencias se mantienen.
 func configurar(semilla: int) -> void:
 	for campo in ["caminos", "pisadas", "techos"]:
 		if not estado.has(campo): estado[campo] = {}   # guardados anteriores
+	if not estado.has("poblados"): estado.poblados = {ID_INICIAL: poblado_inicial()}
 	if not estado.has("generacion"): estado.generacion={"version":1,"semilla":semilla,"region":Terreno.TAM}
 	generador=Terreno2.new(int(estado.generacion.semilla)) if int(estado.generacion.version)==2 else Terreno.new(int(estado.generacion.semilla))
 	_firma_regiones=""
