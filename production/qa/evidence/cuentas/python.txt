@@ -1,0 +1,9 @@
+test_certificate_reused (test_servicio.AccountsTest.test_certificate_reused) ... ok
+test_expiration_limits_and_backup (test_servicio.AccountsTest.test_expiration_limits_and_backup) ... ok
+test_private_server_separate_password (test_servicio.AccountsTest.test_private_server_separate_password) ... ok
+test_registration_login_and_unique_identity (test_servicio.AccountsTest.test_registration_login_and_unique_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.799s
+
+OK

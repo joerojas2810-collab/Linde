@@ -255,3 +255,26 @@ Acabado local reaplicado a la última base remota, conservando art2 y correccion
 El usuario solicitó commit y push de esta integración sobre 5b87517. La evidencia vigente se conserva en `production/qa/evidence/arte-pendiente-integrado/`; los estados de borrador y sin publicar anteriores son históricos. Se mantienen los límites artísticos y de pruebas documentados; la publicación se identifica en el historial de Git.
 
 **Nota de cierre de validación:** Una repetición adicional de red pasó vivienda 33/33 y taller 35/36: el cliente B no alcanzó a observar el daño antes de que A reparara. La corrida completa anterior pasó 36/36; queda pendiente sincronizar esa observación en el escenario de prueba. No se modificó el juego después de la batería completa.
+## IA 2 — cuentas y persistencia, rama independiente (26/10/2026)
+
+**Base:** Fase 4 `6bb89f5`; **rama:** `feature/cuentas`, sin merge con main. Se corrige la confusión entre la clave de identidad antigua y la contraseña del servidor: el menú permite iniciar un servidor separado, configurar UDP/TCP y contraseña opcional, registrar/iniciar sesión por cuenta y detener guardando. Cuentas SQLite con Argon2id y UUID; HTTPS con certificado verificado, tickets efímeros de un uso, DTLS/ENet, límites de intentos y bloqueo de sesiones duplicadas. La autoridad y el personaje completo siguen en Juego/Guardado, con mapa personal y progreso; SQLite no replica personajes. Incluye autoguardado, desconexión, cierre y respaldo de cuentas.
+
+**Ejecutado en esta rama el 26/10:** cuatro casos unitarios Python sin fallos; 35 comprobaciones de integración con procesos reales sin fallos; cinco de recuperación/autoguardado sin fallos; inicio/cierre de interfaz en puertos predeterminados y capturas inspeccionadas; **36/37 suites de regresión sin fallos**. Único fallo restante: SHA de los 96 archivos E04/E05 ya registrado. Rutas temporales Unix adaptadas solo en copias de ejecución y bytes canónicos del mapa de iconos para Windows: detalle y resultados por suite en [informe](../../qa/evidence/cuentas/INFORME.md).
+
+**Conectividad:** localhost y `192.168.100.190` desde esta misma PC. No se probó una segunda computadora, firewall entrante de otra máquina ni Internet/NAT real. No declarar LAN externa o Internet superados. Se necesitan UDP 7777 y TCP 7778 por defecto. El modo legado `--servidor` permanece sin cifrado para compatibilidad y sus pruebas; los formularios nuevos usan el servidor seguro.
+
+**Límites:** instalación Python/dependencias en el anfitrión, certificado público compartido manualmente; sin recuperación de contraseña ni exportación empaquetada; pérdida posible hasta el intervalo de autoguardado ante caída. Partida individual y skin de El Rayo no modificadas. Núcleo de mundo/reglas/datos idéntico a la base; ver [guía](../../../Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md) y [ADR-0002](../../../docs/architecture/adr-0002-cuentas-locales-seguras.md). No se intervino el checkout de IA 1; coordinar antes de integrar escena/HUD/red y estas notas con Fase 5.
+
+### Cierre del fallo de hashes E04/E05 (26/10/2026)
+
+Revisado por solicitud del usuario: 84 PNG intactos; doce JSON afectados por CRLF en Windows, y `E04_objetos.json` además tenía el hash anterior a las 32 entradas aprobadas en `44f6f09`. Se fijó LF por atributos de Git y se actualizó solo ese hash, conservando la procedencia original. Auditoría 96/96; general **330 PASS/0 FAIL** y visual A1–A3 **60 PASS/0 FAIL**. No se repitió toda la batería; el resultado anterior 36/37 es histórico y el único fallo allí identificado quedó resuelto en esta revisión. Detalle: [informe de hashes](../../qa/evidence/arte-hashes/INFORME.md). Sin cambios gráficos ni de reglas.
+
+## Integración de cuentas y hashes con Fase 5a/vivienda (26/10/2026)
+
+Aprobada expresamente por el usuario la publicación y fusión con main. Versión combinada con `origin/main` `42bef50`: sin conflictos de Git; conserva Fase 5a y primera vivienda. **10/10 suites seleccionadas** sin fallos (general, reglas, UI, comunidades núcleo/UI/red, vivienda núcleo/UI/red y visual); **35/35 comprobaciones de cuentas** con clientes y servidor reales; capturas y arranque/cierre de formulario en 7777/7778. Detalle en [cuentas-main](../../qa/evidence/cuentas-main/README.md). No se repitió la batería completa de 43 suites. No se probó otra computadora ni Internet público. Se mantiene la skin fuera del alcance, en pausa.
+
+## Integración de taller con login y servidor (26/10/2026)
+
+Merge autorizado de `9c0d1c4` (taller/casas comunales) y `d223398` (cuentas, servidor y hashes). Se conservan ambos trabajos; conflictos limitados a notas añadidas en documentación, resueltos manteniendo ambas. El fallo de arte mencionado en el cierre histórico del taller ya está corregido por el trabajo integrado de IA 2. No se agregan funcionalidades ni se repiten baterías extensas.
+
+Verificación mínima del merge: `prueba_taller_ui` **7 PASS/0 FAIL** (escena combinada, plano/precio, construcción y acceso a mesa, horno y cofre). Módulos de cuentas y red idénticos a `origin/main`; núcleo de edificios y asentamientos idéntico al cierre del taller.

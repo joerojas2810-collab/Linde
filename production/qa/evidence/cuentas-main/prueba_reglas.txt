@@ -1,0 +1,161 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS canónico: orden de claves y 1 frente a 1.0 no importan
+PASS canónico: el orden de un arreglo sí importa
+PASS canónico: el ruido de coma flotante no cambia el texto
+PASS canónico: distingue texto de número y valores distintos
+PASS canónico: un tipo no previsto queda visible en vez de ignorarse
+PASS canónico: dos diccionarios con distinto orden de inserción dan el mismo hash
+PASS huella: SHA-256 hexadecimal
+PASS huella: determinista tras recalcular desde los archivos
+PASS huella: componentes asentamientos, autonomia, catalogos, desarrollo, edificios, equipo, evaluador, fauna
+PASS huella: todas las constantes de catalogos.gd listadas existen []
+PASS huella: versiones legibles (evaluador y reglas de desarrollo)
+PASS huella: cambia si cambia el componente edificios
+PASS huella: cambia si cambia el componente desarrollo
+PASS huella: cambia si cambia el componente autonomia
+PASS huella: cambia si cambia el componente asentamientos
+PASS huella: cambia si cambia el componente fauna
+PASS huella: cambia si cambia el componente equipo
+PASS huella: cambia si cambia el componente catalogos
+PASS huella: cambia si cambia el componente evaluador
+PASS huella: subir EVALUADOR_VERSION cambia la huella aunque los JSON no cambien
+PASS huella: una copia profunda de las reglas conserva el hash
+PASS huella: un cambio de balance en un material cambia el hash
+PASS huella: un cambio de receta en catalogos.gd cambia el hash
+PASS huella: ningún JSON de reglas queda sin clasificar []
+PASS huella: los archivos listados existen []
+PASS dorado: la enumeración es reproducible dentro de la misma ejecución
+PASS dorado: archivo legible
+PASS dorado: EVALUADOR_VERSION y version de reglas coinciden con el dorado (si no: regenerar con --generar-dorado y explicarlo)
+PASS dorado: las 693 claves de fabricación dan los mismos resultados
+PASS dorado art2: las 1692 variantes dan los mismos resultados
+PASS dorado art2: muestra revisable por personas coincide []
+PASS dorado: muestra revisable por personas coincide []
+PASS M0: reglas válidas (propiedades positivas, pesos por forma que suman 1) []
+PASS M0: version de reglas y EVALUADOR_VERSION subidas al menos a 2 (I1a las subió a 3)
+PASS M0: con pesos 0.5/0.5 cada material reproduce su potencia y velocidad de antes
+PASS M0: los 9 laminados se conservan y reproducen su potencia y velocidad de antes con pesos neutros
+PASS M0: ninguna receta ni coste cambió (cambio deliberado frente a regresión)
+PASS M0: nombres, ranuras, colores, pilas y velocidades no cambiaron; solo dmg/def/hp pueden cambiar
+PASS M0: dmg/def/hp son enteros no negativos en todas las claves []
+PASS M0: triplicar la dureza mejora más la espada (6→14) que el escudo (4→5)
+PASS M0: triplicar la tenacidad mejora más el escudo (4→9) que la espada (6→11)
+PASS M0: un material más denso hace la pieza más lenta
+PASS M0: el orden entre materiales cambia según la forma en ["madera/piedra"]
+INFORME dominancia: botas: bronce domina a hierro (eficacia 1.250/1.180, vel -0.010/-0.010, coste 2/2)
+INFORME dominancia: casco: bronce domina a hierro (eficacia 1.250/1.180, vel -0.010/-0.010, coste 2/2)
+INFORME dominancia: escudo: madera domina a piedra (eficacia 0.770/0.710, vel +0.010/-0.020, coste 3/3)
+INFORME dominancia: escudo: hierro domina a piedra (eficacia 1.170/0.710, vel -0.010/-0.020, coste 2/3)
+INFORME dominancia: escudo: cobre domina a piedra (eficacia 1.150/0.710, vel +0.000/-0.020, coste 2/3)
+INFORME dominancia: escudo: bronce domina a piedra (eficacia 1.200/0.710, vel -0.010/-0.020, coste 2/3)
+INFORME dominancia: escudo: bronce domina a hierro (eficacia 1.200/1.170, vel -0.010/-0.010, coste 2/2)
+INFORME dominancia: espada: hierro domina a piedra (eficacia 1.210/0.830, vel -0.010/-0.020, coste 2/3)
+INFORME dominancia: espada: cobre domina a piedra (eficacia 0.950/0.830, vel +0.000/-0.020, coste 2/3)
+INFORME dominancia: espada: bronce domina a piedra (eficacia 1.400/0.830, vel -0.010/-0.020, coste 2/3)
+INFORME dominancia: espada: bronce domina a hierro (eficacia 1.400/1.210, vel -0.010/-0.010, coste 2/2)
+INFORME dominancia: guantes: bronce domina a hierro (eficacia 1.250/1.180, vel -0.010/-0.010, coste 2/2)
+INFORME dominancia: pantalones: bronce domina a hierro (eficacia 1.200/1.170, vel -0.010/-0.010, coste 2/2)
+INFORME dominancia: torso: bronce domina a hierro (eficacia 1.200/1.170, vel -0.010/-0.010, coste 2/2)
+PASS M0: el registro de dominancias coincide con el conocido (14 pares)
+PASS guardar: escribe el mundo y lo sella con las reglas actuales sin tocar el resto
+PASS cargar: un mundo propio se carga sin aviso
+PASS cargar: el mundo lleva el sello de las reglas actuales
+PASS incompatible: se rechaza el mundo con reglas distintas
+PASS incompatible: el diagnóstico indica qué componente difiere ["autonomia"]
+PASS incompatible: el archivo queda intacto, sin copias ni renombrados
+PASS incompatible: desempaquetar devuelve vacío
+PASS incompatible: otra versión del evaluador se detecta aunque los JSON no cambien
+PASS incompatible: un mundo sin huella se rechaza
+PASS estados: ilegible e inválido siguen distinguiéndose
+PASS incompatible: no se vuelve en silencio al respaldo
+PASS respaldo: un principal corrupto sigue cayendo al .bak compatible
+PASS guardar: sobre un mundo incompatible tiene éxito
+PASS guardar: el mundo incompatible se conserva íntegro en .incompatible
+PASS guardar: el mundo nuevo queda cargable
+PASS excepción: nunca en una compilación sin depuración
+PASS excepción: sin el argumento explícito no hay excepción
+PASS excepción: depuración y argumento explícito
+PASS excepción: apagada por defecto en esta ejecución
+PASS excepción: carga el mundo y lo marca como contaminado con aviso
+PASS excepción: conserva la huella de origen y anota con qué reglas se cargó
+PASS excepción: cargar no modifica el archivo
+PASS excepción: el mundo contaminado se puede guardar
+PASS excepción: sin ella, el mundo contaminado sigue rechazado
+PASS excepción: la marca de contaminado persiste entre guardados
+PASS reproducción: misma semilla y mismos pasos dan el mismo estado canónico []
+PASS mundo vivo: guardar tras 3 horas simuladas
+PASS mundo vivo: se carga con las mismas reglas
+PASS mundo vivo: guardar y cargar conserva el estado canónico
+PASS mundo vivo: Juego.cargar acepta el mundo sellado
+PASS mundo vivo: Juego.cargar devuelve null ante reglas distintas
+PASS P2: carga rechazada por reglas muestra el motivo y los componentes Este mundo se creó con otras reglas de juego (catalogos). El archivo no se modifica.
+PASS P2: archivo ilegible también devuelve null
+PASS P2: archivo ilegible mantiene su mensaje propio No hay partida legible (el archivo no se borra). Crea una nueva.
+PASS P2: sin archivo no hay error de reglas (se podrá crear mundo nuevo)
+PASS P2: la conexión con reglas distintas dice «servidor», no «mundo» Reglas distintas a las del servidor (huella de reglas)
+PASS P2: el guardado con reglas distintas no habla de servidor ni de conexión
+PASS P2: versión de protocolo distinta es un tercer caso diferenciado Versión distinta del servidor
+REGLAS: 82 comprobaciones, 0 fallos
+WARNING: Guardado: user://prueba_reglas.json rechazado, reglas distintas a las del mundo (autonomia)
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:135)
+       [1] _guardado (res://tests/prueba_reglas.gd:358)
+       [2] _init (res://tests/prueba_reglas.gd:69)
+ERROR: Parse JSON failed. Error at line 0: Expected key
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] inspeccionar (res://scripts/guardado.gd:27)
+       [1] _guardado (res://tests/prueba_reglas.gd:376)
+       [2] _init (res://tests/prueba_reglas.gd:69)
+WARNING: Guardado: user://prueba_reglas.json rechazado, reglas distintas a las del mundo (autonomia)
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:135)
+       [1] _guardado (res://tests/prueba_reglas.gd:381)
+       [2] _init (res://tests/prueba_reglas.gd:69)
+ERROR: Parse JSON failed. Error at line 0: Expected key
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] inspeccionar (res://scripts/guardado.gd:27)
+       [1] cargar (res://scripts/guardado.gd:132)
+       [2] _guardado (res://tests/prueba_reglas.gd:385)
+       [3] _init (res://tests/prueba_reglas.gd:69)
+WARNING: Guardado: Mundo cargado con reglas distintas a las de su creación
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:141)
+       [1] _excepcion (res://tests/prueba_reglas.gd:413)
+       [2] _init (res://tests/prueba_reglas.gd:70)
+WARNING: Guardado: user://prueba_reglas.json rechazado, reglas distintas a las del mundo (fauna)
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:135)
+       [1] _excepcion (res://tests/prueba_reglas.gd:420)
+       [2] _init (res://tests/prueba_reglas.gd:70)
+WARNING: Guardado: Mundo cargado con reglas distintas a las de su creación
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:141)
+       [1] _excepcion (res://tests/prueba_reglas.gd:423)
+       [2] _init (res://tests/prueba_reglas.gd:70)
+WARNING: Guardado: user://prueba_reglas.json rechazado, reglas distintas a las del mundo (catalogos)
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:135)
+       [1] cargar (res://scripts/juego.gd:94)
+       [2] _mundo_vivo (res://tests/prueba_reglas.gd:466)
+       [3] _init (res://tests/prueba_reglas.gd:71)
+ERROR: Parse JSON failed. Error at line 0: Expected 'true', 'false', or 'null', got 'no'
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] inspeccionar (res://scripts/guardado.gd:27)
+       [1] cargar (res://scripts/guardado.gd:132)
+       [2] cargar (res://scripts/juego.gd:94)
+       [3] _mundo_vivo (res://tests/prueba_reglas.gd:472)
+       [4] _init (res://tests/prueba_reglas.gd:71)
+WARNING: 62 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

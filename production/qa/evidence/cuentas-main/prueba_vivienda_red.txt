@@ -1,0 +1,39 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS dos clientes conectan con el catálogo y la misma huella
+PASS construcción remota llega a ambas réplicas
+PASS el propietario usa el cofre real desde dentro
+PASS cliente A terminó
+PASS A: cofre
+PASS A: conecto
+PASS A: cubierta_local
+PASS A: dano
+PASS A: deposito
+PASS A: identidad
+PASS A: interaccion
+PASS A: materiales_reparacion
+PASS A: pisos
+PASS A: preparado
+PASS A: recursos
+PASS A: reparacion
+PASS A: repeticion
+PASS A: situado
+PASS A: vivienda
+PASS cliente B terminó
+PASS B: cofre
+PASS B: conecto
+PASS B: cubierta_local
+PASS B: dano
+PASS B: identidad
+PASS B: permisos
+PASS B: pisos
+PASS B: preparado
+PASS B: sin_cobro
+PASS B: situado
+PASS B: vio_reparacion
+PASS B: vivienda
+PASS reinicio conserva una sola instancia y sus inventarios reales
+WARNING: 46 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

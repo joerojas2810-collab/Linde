@@ -17,6 +17,8 @@ var direccion := "127.0.0.1"
 var puerto := Srv.PUERTO
 var nombre := ""
 var clave := ""
+var ticket := ""                 # Cuentas: efímero, un uso, solo tras HTTPS validado.
+var certificado_tls: X509Certificate = null
 var look: Array = [0, 0, 0]
 var j = null                     # Replica
 var yo := ""                     # id del jugador en el servidor
@@ -35,6 +37,10 @@ func _ready() -> void:
 	_t0 = Time.get_ticks_msec()
 	var peer := ENetMultiplayerPeer.new()
 	var err := peer.create_client(direccion, puerto)
+	# create_client encola la conexión; DTLS se configura antes del primer poll/envío.
+	if err==OK and ticket!="":
+		if certificado_tls==null:err=ERR_UNAUTHORIZED
+		else:err=peer.host.dtls_client_setup("linde.local",TLSOptions.client(certificado_tls,"linde.local"))
 	if err != OK:
 		_fallar.call_deferred("No se pudo crear la conexión (%s)" % error_string(err))
 		return
@@ -60,6 +66,8 @@ func _fallar(motivo: String) -> void:
 
 func _conectado() -> void:
 	t_conexion_ms = Time.get_ticks_msec() - _t0
+	if ticket!="":
+		pedir.rpc_id(1,["cuenta",Srv.VERSION,ticket,look,Srv.Huella.huella()]);ticket="";return
 	pedir.rpc_id(1, ["hola", Srv.VERSION, nombre, clave, look, Srv.Huella.huella()])
 
 # Envía una intención: [tipo, ...argumentos] -> [tipo, seq, ...argumentos].

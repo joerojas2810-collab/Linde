@@ -1,0 +1,11 @@
+prueba: OK (330 PASS, 0 FAIL)
+prueba_reglas: OK (82 PASS, 0 FAIL)
+prueba_ui: OK (13 PASS, 0 FAIL)
+prueba_preexistentes: OK (14 PASS, 0 FAIL)
+prueba_preexistentes_ui: OK (13 PASS, 0 FAIL)
+prueba_preexistentes_red: OK (26 PASS, 0 FAIL)
+prueba_vivienda: OK (29 PASS, 0 FAIL)
+prueba_vivienda_ui: OK (8 PASS, 0 FAIL)
+prueba_vivienda_red: OK (33 PASS, 0 FAIL)
+prueba_integracion_visual_a: OK (60 PASS, 0 FAIL)
+10/10 suites sin fallos
