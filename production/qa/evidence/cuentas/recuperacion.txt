@@ -1,0 +1,5 @@
+PASS autoguardado peri�dico escribe sin desconectar
+PASS cliente detecta cierre inesperado
+PASS servicio local se apaga tras perder el latido
+PASS reconecta y recupera progreso tras cierre inesperado
+PASS mundo conserva el �ltimo autoguardado tras reinicio
