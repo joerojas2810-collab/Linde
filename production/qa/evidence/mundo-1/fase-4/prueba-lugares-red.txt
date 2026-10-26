@@ -1,0 +1,37 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+
+PASS dos clientes recibieron el registro inicial
+PASS ampliar no altera lugares preexistentes
+WARNING: 31 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+PASS cliente A terminó
+PASS A: bienvenida
+PASS A: conecto
+PASS A: deposito
+PASS A: expansion
+PASS A: inspeccion
+PASS A: sin_duplicar
+PASS cliente B terminó
+PASS B: bienvenida
+PASS B: conecto
+PASS B: expansion
+PASS B: inspeccion
+PASS B: retiro
+PASS B: vio_deposito
+PASS servidor y dos réplicas comparten el registro ampliado exacto
+PASS transferencia compartida sin duplicar en autoridad
+WARNING: 31 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+PASS reiniciar conserva la expansión de red
+WARNING: 46 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

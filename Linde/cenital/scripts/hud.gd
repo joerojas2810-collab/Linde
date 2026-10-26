@@ -123,7 +123,7 @@ func _panel(vs: Vector2) -> void:
 		_t(esc.dialogo_nombre, d.position + Vector2(112, 24), 32)
 		if ui.fuente_dialogo != null:
 			draw_multiline_string(ui.fuente_dialogo, d.position + Vector2(112, 100), esc.dialogo_txt, HORIZONTAL_ALIGNMENT_LEFT, 912, 24, -1, UiArte.TINTA)
-		_t("[L] Preguntar por lugares e intercambiar mapas · [E / Enter] cerrar", d.position + Vector2(112, d.size.y-44), 16)
+		_t("[L] Preguntar por lugares e intercambiar mapas · [E / Enter] cerrar" if esc.dialogo_npc != "" else "[E / Enter / Esc] cerrar", d.position + Vector2(112, d.size.y-44), 16)
 		return
 	if esc.panel == "inv":
 		_inventario(vs)

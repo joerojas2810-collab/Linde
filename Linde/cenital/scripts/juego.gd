@@ -854,6 +854,8 @@ func interactuar(id: String = LOCAL) -> Dictionary:
 			if cs.get("dueno", "") != id: return {"ok": false, "r": _no("Es la cama de otro jugador", id)}
 			return {"ok": true, "panel": "dormir", "r": dormir(c, id)}
 	if estacion_junto(id) != "": return {"ok": true, "panel": "craft"}
+	var lugar: Dictionary = mundo.lugar_en(base)
+	if not lugar.is_empty(): return {"ok": true, "panel": "dialogo", "nombre": lugar.nombre, "texto": lugar.descripcion, "tipo": "lugar"}
 	return {"ok": false, "r": _no("Nada con qué interactuar", id)}
 
 # Dormir NO avanza el reloj compartido (design/gdd/mundo-vivo.md regla 17): cura y fija la cama. El tiempo sigue por el tick

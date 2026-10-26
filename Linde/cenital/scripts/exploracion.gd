@@ -1,6 +1,6 @@
 extends RefCounted
 ## Mapa personal: reutiliza la cuadrícula y el radio de visión de Autonomia.
-## Solo guarda bloques y procedencia, nunca copias del terreno ni destinos nuevos.
+## Solo guarda bloques y procedencia; las identidades compartidas vienen del registro del mundo.
 const M = preload("res://scripts/mundo.gd")
 
 ## Actualiza lo visto desde la posición autoritativa; legado conserva su estado exacto.
@@ -27,6 +27,14 @@ static func intercambiar(j, npc: String, id: String) -> Dictionary:
 		if not mapa.bloques.has(k):
 			mapa.bloques[k] = "npc:" + npc
 			nuevos += 1
+	# Reutiliza también el horizonte conocido por los habitantes, sin inventar destinos ni revelar coordenadas exactas.
+	for lugar in j.d.mundo.get("registro", {}).get("lugares", {}).values():
+		var c := Vector2i(lugar.centro[0], lugar.centro[1])
+		if j.autonomia.conoce(npc, c):
+			var k: String = j.autonomia._bloque(c)
+			if not mapa.bloques.has(k):
+				mapa.bloques[k] = "npc:" + npc
+				nuevos += 1
 	for k in mapa.bloques:
 		if mapa.bloques[k] == "visto": n[k] = true
 	return j._ok("Intercambiaron referencias: %d zonas nuevas en tu mapa (M). Son aproximadas; explóralas para confirmarlas." % nuevos, id)
@@ -41,4 +49,12 @@ static func hitos(j, id: String) -> Array:
 			var c := Vector2i(int(a[0]) + int(a[2]) / 2, int(a[1]) + int(a[3]) / 2)
 			var k: String = j.autonomia._bloque(c)
 			if bloques.has(k): salida.append({"nombre": h.nombre, "bloque": k, "fuente": bloques[k]})
+	var lugares: Dictionary = j.d.mundo.get("registro", {}).get("lugares", {})
+	var ids: Array = lugares.keys()
+	ids.sort()
+	for lid in ids:
+		var lugar: Dictionary = lugares[lid]
+		var c := Vector2i(lugar.centro[0], lugar.centro[1])
+		var k: String = j.autonomia._bloque(c)
+		if bloques.has(k): salida.append({"id": lid, "nombre": lugar.nombre, "bloque": k, "fuente": bloques[k], "tipo": lugar.tipo})
 	return salida

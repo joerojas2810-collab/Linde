@@ -1,0 +1,11 @@
+MEDIDA_CONFIG herramienta=medir_equivalencia semilla=456 dias=4 tick_s=0.5 ticks_por_dia=2880 combate=desactivado jugadores_activos=1 ignorar= godot=4.7.1-stable (official)
+MEDIDA_ESTADO semilla=456 dia=1 hash_estado=6336d2dfaf28ad11 habitantes=2 camas_huesped=0 casas_completas=0 construcciones=13 caminos=0 ocupaciones=desarrollo:1,proveerse:1 inventario_npc=fibra:33,gema:1,hacha_piedra:1,lingote:2,madera:2,pico_piedra:3
+MEDIDA_CPU semilla=456 dia=1 tick_medio_us=2404.0 tick_max_us=175117
+MEDIDA_ESTADO semilla=456 dia=2 hash_estado=411cd58be2541a45 habitantes=3 camas_huesped=1 casas_completas=0 construcciones=28 caminos=1 ocupaciones=desarrollo:1,proveerse:2 inventario_npc=art1:casco:fibra:ligera:1:1,art1:torso:fibra:ligera:1:1,candado:1,fibra:52,gema:3,hacha_piedra:1,lingote:1,madera:7,mena:2,pico_piedra:3,piedra:2
+MEDIDA_CPU semilla=456 dia=2 tick_medio_us=3164.0 tick_max_us=171364
+MEDIDA_ESTADO semilla=456 dia=3 hash_estado=0c0385110c6d8499 habitantes=4 camas_huesped=2 casas_completas=2 construcciones=39 caminos=3 ocupaciones=proveerse:4 inventario_npc=art1:casco:fibra:ligera:1:1,art1:torso:fibra:ligera:1:1,candado:1,fibra:70,gema:3,lingote:1,madera:13,mena:2,pico_piedra:3,piedra:2
+MEDIDA_CPU semilla=456 dia=3 tick_medio_us=3644.0 tick_max_us=134720
+MEDIDA_ESTADO semilla=456 dia=4 hash_estado=2dfdd6ffb432ac55 habitantes=5 camas_huesped=3 casas_completas=2 construcciones=46 caminos=9 ocupaciones=acumular:1,casa:1,proveerse:3 inventario_npc=art1:casco:fibra:ligera:1:1,art1:torso:fibra:ligera:1:1,baya:1,candado:1,fibra:84,gema:3,hacha_piedra:4,madera:15,mena:2,pico_piedra:2,piedra:14
+MEDIDA_CPU semilla=456 dia=4 tick_medio_us=5006.0 tick_max_us=233880
+MEDIDA_ESTADO semilla=456 final=true dias=4 hash_estado=2dfdd6ffb432ac55 habitantes=5
+MEDIDA_CPU semilla=456 final=true tick_total_ms=40945.9 tick_medio_us=3554.0 p50_us=189 p95_us=27998 p99_us=78684 max_us=233880 ticks_mayores_100ms=74

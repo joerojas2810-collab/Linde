@@ -272,6 +272,9 @@ func _tracker(vs: Vector2, j, h: float) -> void:
 	var celda: Vector2i=esc.j.mundo.celda_de(esc.j.pies)
 	var bioma: String=esc.j.mundo.bioma(celda)
 	var hito: String=esc.j.mundo.hito_en(celda)
+	if not esc.j.mundo.lugar_en(celda).is_empty():
+		lineas.append([hito, 16])
+		hito = ""
 	lineas.append(["%s%s · %d, %d" % [hito + " · " if hito != "" else "",bioma.capitalize(),celda.x,celda.y],16])
 	var alto := 72.0 + (extra + lineas.size()) * 26.0 + (8.0 if not lineas.is_empty() else 0.0)
 	var r := Rect2(vs.x - 16 - 328, 16, 328, alto)
@@ -329,7 +332,7 @@ func _mapa(vs: Vector2) -> void:
 	var j = esc.j
 	ui.panel(self, Rect2(70, 30, vs.x - 140, 620))
 	_t("MAPA PERSONAL · N ↑", Vector2(96, 56), 24)
-	_t("M / Esc cerrar · Flechas mover · +/− zoom · Inicio volver a ti", Vector2(96, 92), 16)
+	_t("M / Esc cerrar · Flechas mover · +/− zoom · Inicio centrar · Av/Re Pág referencias", Vector2(96, 92), 16)
 	var zona := Rect2(96, 134, 740, 450)
 	draw_texture_rect(ui.tex("mapa/bloque.svg"), zona, false, Color("202e33"))
 	var b := int(j.autonomia.reglas.conocimiento.bloque)
@@ -341,8 +344,16 @@ func _mapa(vs: Vector2) -> void:
 		var pos := zona.get_center() + Vector2(c - centro) * escala
 		var r := Rect2(pos, Vector2.ONE * b * escala).intersection(zona)
 		if r.has_area(): draw_texture_rect(ui.tex("mapa/bloque.svg"), r, false, Color("6c9673") if bloques[k] == "visto" else Color("a38b58"))
+	# Solo los tramos recorridos muestran la ruta exacta; los rumores siguen siendo áreas aproximadas.
+	for k in j.d.mundo.get("caminos", {}):
+		var c := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
+		if bloques.get(j.autonomia._bloque(c), "") != "visto": continue
+		var pos := zona.get_center() + (Vector2(c - centro) + Vector2.ONE * 0.25) * escala
+		var r := Rect2(pos, Vector2.ONE * maxf(1, escala * 0.5)).intersection(zona)
+		if r.has_area(): draw_texture_rect(ui.tex("mapa/bloque.svg"), r, false, Color("dfc593"))
+	var referencias: Array = j.Exploracion.hitos(j, esc.J.LOCAL)
 	var numero := 0
-	for h in j.Exploracion.hitos(j, esc.J.LOCAL):
+	for h in referencias:
 		numero += 1
 		var k: String = h.bloque
 		var c := Vector2(int(k.get_slice(",", 0)), int(k.get_slice(",", 1))) * b + Vector2.ONE * b / 2.0
@@ -354,18 +365,20 @@ func _mapa(vs: Vector2) -> void:
 	if zona.has_point(yo):
 		draw_texture_rect(ui.tex("mapa/marca.svg"), Rect2(yo - Vector2(6, 6), Vector2(12, 12)), false)
 		_t("Tú", yo + Vector2(9, -9), 16, Color.WHITE)
-	_t("Verde: recorrido · Ocre: contado · Oscuro: desconocido", Vector2(96, 612), 16)
-	_t("REFERENCIAS APROXIMADAS", Vector2(858, 142), 16)
+	_t("Verde: visto · Ocre: contado · Claro: sendero · Oscuro: sin explorar", Vector2(96, 612), 16)
+	_t("REFERENCIAS · Av/Re Pág", Vector2(858, 142), 16)
 	var y := 182.0
 	numero = 0
-	for h in j.Exploracion.hitos(j, esc.J.LOCAL):
+	for h in referencias:
 		numero += 1
+		if numero <= esc.mapa_primera or numero > esc.mapa_primera + 7: continue
 		_t("%d. %s" % [numero, h.nombre], Vector2(858, y), 16)
 		var fuente: String = h.fuente
 		var n := "Explorado por ti"
 		if fuente != "visto": n = "Según " + str(j.habitantes.fichas.get(fuente.trim_prefix("npc:"), {}).get("n", "un habitante"))
 		_t(n, Vector2(858, y + 21), 14)
 		y += 52
+	_t("%d–%d de %d" % [mini(esc.mapa_primera + 1, referencias.size()), mini(esc.mapa_primera + 7, referencias.size()), referencias.size()], Vector2(858, 580), 14)
 
 ## Tarjeta única, breve y descartable; no desplaza la interacción contextual existente.
 func _pista_contextual(vs: Vector2, j) -> void:

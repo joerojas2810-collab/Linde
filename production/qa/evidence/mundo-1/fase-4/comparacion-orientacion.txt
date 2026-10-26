@@ -1,0 +1,2 @@
+igual: equivalencia-s123-d4.txt
+igual: equivalencia-s456-d4.txt

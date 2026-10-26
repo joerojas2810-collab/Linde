@@ -41,6 +41,7 @@ var sel := 0
 var desplaza := 1        # primera línea visible del panel genérico (la 0 es el título)
 const CABEN := 14        # líneas visibles del panel genérico
 var dialogo_npc := ""
+var mapa_primera := 0
 var mapa_centro := Vector2i.ZERO
 var mapa_escala := 10.0
 var dialogo_txt := ""
@@ -166,6 +167,7 @@ func _unhandled_key_input(e: InputEvent) -> void:
 			if build: build = false
 			else: _abrir("pausa")
 		KEY_M:
+			mapa_primera = 0
 			mapa_centro = Mundo.celda_de(j.pies)
 			_abrir("mapa")
 		KEY_I: _abrir("inv")
@@ -368,8 +370,10 @@ func _tecla_panel(e: InputEvent) -> void:
 			KEY_MINUS: mapa_escala = maxf(1.0, mapa_escala / 1.5)
 			KEY_EQUAL, KEY_PLUS: mapa_escala = minf(20.0, mapa_escala * 1.5)
 			KEY_HOME: mapa_centro = Mundo.celda_de(j.pies)
+			KEY_PAGEUP: mapa_primera = maxi(0, mapa_primera - 7)
+			KEY_PAGEDOWN: mapa_primera = mini(maxi(0, j.Exploracion.hitos(j, J.LOCAL).size() - 7), mapa_primera + 7)
 		return
-	if panel == "dialogo" and e.keycode == KEY_L:
+	if panel == "dialogo" and dialogo_npc != "" and e.keycode == KEY_L:
 		j.preguntar_lugares(dialogo_npc)
 		_cerrar()
 		return
@@ -768,7 +772,7 @@ func _tras_interactuar(r: Dictionary) -> void:
 		"dialogo":
 			dialogo_npc = str(r.get("npc", ""))
 			dialogo_txt = r.texto
-			dialogo_nombre = str(j.habitantes.fichas.get(r.get("npc", ""), {}).get("n", "Habitante"))
+			dialogo_nombre = str(r.get("nombre", j.habitantes.fichas.get(r.get("npc", ""), {}).get("n", "Habitante")))
 			panel = "dialogo"
 		"cofre":
 			cofre_id = r.id
@@ -842,13 +846,17 @@ func _pista() -> String:
 		if oid != "":
 			var ot: String = j.mundo.objetos[oid].t
 			if ot in Mundo.DECO: continue
-			return "E: abrir cofre" if ot == "cofre_fijo" else "Espacio: golpear %s" % C.OBJETOS[ot].n
+			if ot == "cofre_fijo": return "E: abrir cofre"
+			var lugar: Dictionary = j.mundo.lugar_en(base)
+			return "E: examinar " + str(lugar.nombre) if not lugar.is_empty() else "Espacio: golpear %s" % C.OBJETOS[ot].n
 		var cs: Dictionary = j.mundo.constr_en(c)
 		if cs.get("t", "") == "cofre": return "E: abrir cofre"
 		if cs.get("t", "") == "campo": return "E: cosechar" if int(cs.get("listo", 0)) <= int(j.d.min) else "El cultivo aún crece"
 		if cs.get("t", "") == "cama": return "E: dormir" if cs.get("dueno", "") == J.LOCAL else ("Cama de otro jugador" if cs.propia else "Cama de un habitante")
 	var est: String = j.estacion_junto()
-	return "E: fabricar (%s)" % C.CONSTR[est].n.to_lower() if est != "" else ""
+	if est != "": return "E: fabricar (%s)" % C.CONSTR[est].n.to_lower()
+	var lugar: Dictionary = j.mundo.lugar_en(base)
+	return "E: examinar " + str(lugar.nombre) if not lugar.is_empty() else ""
 
 ## Marcador visible cuando falta el arte del personaje: nunca se dibuja el arte anterior.
 func _arte_faltante(origen: Vector2) -> void:
@@ -885,7 +893,7 @@ func _draw() -> void:
 			var c := Vector2i(x, y)
 			arte_mundo.suelo(self, m, c, Time.get_ticks_msec() / 1000.0)
 			var cs: Dictionary = m.constr_en(c)
-			if cs.get("t", "") == "suelo": arte_mundo.constr_suelo(self, c)
+			if cs.get("t", "") == "suelo" or (not Mundo.es_valle(c) and m.tipo(c) == Mundo.T.SUELO): arte_mundo.constr_suelo(self, c)
 	arte_mundo.casa_interior(self)
 	for e in j.combate.enemigos: if e.est == "aviso": _telegrafo(e)
 	var dentro := Mundo.CASA.has_point(Mundo.celda_de(j.pies))
@@ -894,6 +902,10 @@ func _draw() -> void:
 	if red != null:
 		for o in red.otros_jugadores(): lista.append(entrada_dibujo(o.pies, "otro", o, str(o.nombre)))
 	for e in j.combate.enemigos: lista.append(entrada_dibujo(e.pos, "enemigo", e, str(e.tipo) + ActoresArte.clave(e)))
+	for lugar in m.estado.get("registro", {}).get("lugares", {}).values():
+		var c := Vector2i(lugar.centro[0], lugar.centro[1])
+		if vista.grow(80).has_point(Mundo.pies_de_celda(c)):
+			lista.append(entrada_dibujo(Vector2(c) * s + Vector2(s / 2, s), "lugar", lugar, str(lugar.id)))
 	for r in j.autonomia.asentamientos.visibles(): lista.append(entrada_dibujo(r.pos,"regional",r,r.id))
 	for id in m.objetos:
 		var o: Dictionary = m.objetos[id]
@@ -924,6 +936,18 @@ func _draw() -> void:
 				var r: Dictionary=e[2]
 				arte_eq.dibujar(self,r.pos,Vector2i.DOWN,int(Time.get_ticks_msec()/150)%4 if r.mueve else 0,[],r.look,"caminar" if r.mueve else "reposo")
 				_nombre_mundo(r.nombre,r.pos)
+			"lugar":
+				var lugar: Dictionary = e[2]
+				var c := Vector2i(lugar.centro[0], lugar.centro[1])
+				var pies_lugar := Vector2(c) * s + Vector2(s / 2, s)
+				if lugar.tipo == "cueva": arte_mundo.prop(self, "cave_entrance", pies_lugar)
+				elif lugar.tipo == "campamento":
+					var local_c := Mundo.celda_de(j.pies) - c
+					var bajo_techo := absi(local_c.x) <= 2 and local_c.y >= -3 and local_c.y <= 0
+					arte_mundo.prop(self, "crafting_shed", pies_lugar, Color(1, 1, 1, 0.5 if bajo_techo else 1.0))
+				var entrada := Mundo.pies_de_celda(Vector2i(lugar.entrada[0], lugar.entrada[1]))
+				arte_mundo.detalle(self, "letrero", entrada + Vector2(24, 0))
+				_nombre_mundo(str(lugar.nombre), entrada - Vector2(0, 15), Color("f1d692"))
 			"obj": _dibujar_obj(e[2])
 			"constr": _dibujar_constr(e[2])
 			"fachada": arte_mundo.casa_fachada(self, 0.25 if dentro else 1.0, dentro or _cerca_puerta())
