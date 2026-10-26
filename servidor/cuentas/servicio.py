@@ -23,6 +23,7 @@ import threading
 import time
 import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from socketserver import TCPServer
 
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError
@@ -239,6 +240,14 @@ class LimitedServer(ThreadingHTTPServer):
         self.trace = lambda _stage: None
         self.slots = threading.BoundedSemaphore(16)
         super().__init__(*args)
+
+    def server_bind(self):
+        # HTTPServer.server_bind hace getfqdn(): un DNS inverso innecesario puede
+        # bloquear el arranque en macOS antes de listen(). Solo servimos JSON;
+        # no usamos server_name para confianza TLS ni para construir URLs.
+        TCPServer.server_bind(self)
+        self.server_name = self.server_address[0]
+        self.server_port = self.server_address[1]
 
     def process_request(self, request, address):
         if not self.slots.acquire(False):
