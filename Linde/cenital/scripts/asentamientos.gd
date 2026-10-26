@@ -159,6 +159,7 @@ func actualizar() -> void:
    if pueblo.get("estado", "") in ["abandonado", "destruido"]: continue
    pueblo.estado = "sin_residentes" if p.residentes.is_empty() else ("activo" if _sostenible(p) and int(inventario(p).get("baya",0)) > 0 else "sin_sustento")
    _conocimiento(p)
+  var reparador := reparar_local(p) if not _sostenible(p) else ""
   if not _sostenible(p):p.estado="faltan puesto, camas, techo o cofre";continue
   var inv: Dictionary=inventario(p)
   var c:=Vector2i(p.celda[0],p.celda[1])
@@ -171,7 +172,7 @@ func actualizar() -> void:
     for item in cosecha:inv[item]=int(inv.get(item,0))+int(cosecha[item])
     _resultado_regional(p,"cosecha",saldo,antes,{"campo":M.clave(campo)})
   # Tiempo del servidor, no tiempo de pared. Guardar/cargar no repite una cosecha o un consumo.
-  var ocupados := resolver_local(p)
+  var ocupados := resolver_local(p,{reparador:true} if reparador!="" else {})
   var alimento: Dictionary = balance_resumido(p).baya
   if int(alimento.deuda)>0:
    if not _consumir_regional(p,int(alimento.deuda),alimento,"pago_deuda"):p.estado="sin comida; producción detenida";p.produccion_min=int(j.d.min);continue
@@ -373,7 +374,9 @@ func balance_resumido(p: Dictionary) -> Dictionary:
 
 func actualizar_demandas() -> void:
  if not a.activa() or not j.es_autoridad(): return
- for p in datos().puestos.values(): p.viabilidad = evaluar_viabilidad(p)
+ for p in datos().puestos.values():
+  p.viabilidad = evaluar_viabilidad(p)
+  registrar_presion(p)
  datos().demandas = {"version":1, "min":int(j.d.min), "poblados":demandas_colectivas()}
 
 
@@ -420,15 +423,15 @@ func _consumir_regional(p: Dictionary, cantidad: int, saldo: Dictionary, causa: 
 
 
 ## Alternativas materiales dentro del mismo presupuesto de trabajo regional.
-func resolver_local(p: Dictionary) -> Dictionary:
- var usados := {}
+func resolver_local(p: Dictionary, previos: Dictionary = {}) -> Dictionary:
+ var usados := previos.duplicate()
  if not j.es_autoridad() or int(j.d.min)-int(p.produccion_min)<int(cfg.produccion_min): return usados
  if int(p.get("local_min",-1)) == int(j.d.min): return usados
  p.local_min = int(j.d.min)
  var residentes: Array = p.residentes.duplicate()
  residentes.sort_custom(func(x,y): return str(x.id)<str(y.id))
  for r in residentes:
-  if r.has("reserva_viaje"): continue
+  if r.has("reserva_viaje") or usados.has(r.id): continue
   var saldos := balance_resumido(p)
   if int(saldos.baya.pendiente)>0 and _extraer(p,r.oficio,r,"baya"):
    usados[r.id] = true
@@ -483,3 +486,79 @@ func evaluar_viabilidad(p: Dictionary) -> Dictionary:
  amenazas.sort()
  var observada: bool = j.mundo.region_cargada(Vector2i(p.celda[0],p.celda[1]))
  return {"min":int(j.d.min),"residentes":p.residentes.size(),"camas":camas,"deficit_comida":int(saldo.baya.pendiente),"infraestructura":_sostenible(p),"amenazas_observadas":amenazas,"seguridad":"no_observada" if not observada else ("amenazas_observadas" if not amenazas.is_empty() else "sin_amenazas_observadas"),"politica_crisis":"pendiente_aprobacion"}
+
+
+## Reparar la infraestructura propia usa las mismas validaciones y costes que el jugador.
+func reparar_local(p: Dictionary) -> String:
+ if not j.es_autoridad() or p.residentes.is_empty() or not j.d.cofres.has(p.cofre): return ""
+ if int(j.d.min)-int(p.produccion_min)<int(cfg.produccion_min) or int(p.get("reparacion_min",-1))==int(j.d.min): return ""
+ var actor := ""
+ for r in p.residentes:
+  if not r.has("reserva_viaje") and (actor=="" or str(r.id)<actor): actor=r.id
+ if actor=="": return ""
+ var alcance := _alcance(Vector2i(p.celda[0],p.celda[1]))
+ for id in p.get("edificios",[]):
+  var e: Dictionary=j.d.mundo.registro.edificios.get(id,{})
+  if e.is_empty() or e.dueno!=p.dueno: continue
+  var entrada := Vector2i(e.entrada[0],e.entrada[1])
+  if not alcance.has(entrada+Vector2i.DOWN): continue
+  var antes := inventario(p).duplicate(true)
+  var resultado := Edificios.reparar(j,e,inventario(p),self)
+  if not resultado.ok: continue
+  p.reparacion_min=int(j.d.min)
+  _resultado_regional(p,"reparacion_local",{"id":id},antes,{"actor":actor})
+  a.desarrollo.registrar("npc:"+actor,"construccion",resultado.coste)
+  return actor
+ return ""
+
+## Medición de persistencia de carencias, sin convertir duración en umbral de crisis.
+func registrar_presion(p: Dictionary) -> void:
+ if not j.es_autoridad(): return
+ var saldo := balance_resumido(p)
+ var faltas := {"comida":maxi(0,int(saldo.baya.reserva)-int(saldo.baya.stock)),"camas":maxi(0,p.residentes.size()-int(p.viabilidad.camas))}
+ if not p.has("presiones"): p.presiones={}
+ for causa in faltas:
+  if int(faltas[causa])<=0:
+   p.presiones.erase(causa)
+   continue
+  var presion: Dictionary=p.presiones.get_or_add(causa,{"desde":int(j.d.min)})
+  presion.ultimo_min=int(j.d.min)
+  presion.duracion_min=int(j.d.min)-int(presion.desde)
+  presion.deficit=int(faltas[causa])
+  presion.alternativa_local_min=int(p.get("local_min",-1))
+  presion.cobertura_en_curso=int(saldo.baya.en_curso) if causa=="comida" else 0
+
+
+func terreno_reparacion(c: Vector2i, techo: bool) -> bool:
+ if not j.mundo.generador.valida(c) or not j.mundo.tipo(c) in [M.T.PASTO,M.T.CAMINO,M.T.SUELO]: return false
+ var d: Dictionary=j.mundo.generador.datos(c)
+ var despejada: bool=j.d.mundo.registro.get("despejes",{}).has(M.clave(c))
+ if not despejada and str(d.objeto)!="":
+  var oid := str(d.objeto)+"@"+M.clave(c)
+  if not j.d.mundo.rotos.has(oid): return false
+  var horas := int(C.OBJETOS.get(str(d.objeto),{}).get("regen_h",0))
+  if horas>0 and int(j.d.min)-int(j.d.mundo.rotos[oid])>=horas*60: return false
+ return not j.d.mundo.techos.has(M.clave(c)) if techo else j.mundo.constr_en(c).is_empty()
+
+func caja_regional(pies: Vector2) -> bool:
+ var a := Vector2i(((pies-Vector2(M.P.PIES.x/2,M.P.PIES.y))/M.P.CELDA).floor())
+ var b := Vector2i(((pies+Vector2(M.P.PIES.x/2,0)-Vector2(0.001,0.001))/M.P.CELDA).floor())
+ for y in range(a.y,b.y+1):
+  for x in range(a.x,b.x+1):
+   if not _transitable(Vector2i(x,y)): return false
+ return true
+
+func acceso_reparacion(e: Dictionary) -> bool:
+ var entrada := Vector2i(e.entrada[0],e.entrada[1])
+ var alcance := _alcance(entrada+Vector2i.DOWN)
+ if not alcance.has(entrada) or not caja_regional(M.pies_de_celda(entrada)): return false
+ for k in e.interior:
+  var c := Edificios._celda(k)
+  if j.mundo.constr_en(c).is_empty() and (not alcance.has(c) or not caja_regional(M.pies_de_celda(c))): return false
+ for k in e.piezas:
+  if not e.piezas[k].t in ["cama","cama_huesped","cofre","mesa","horno"]: continue
+  var accesible := false
+  for v in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
+   if alcance.has(Edificios._celda(k)+v): accesible=true
+  if not accesible: return false
+ return true

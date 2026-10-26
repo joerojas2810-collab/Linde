@@ -1119,35 +1119,7 @@ func reparar_edificio(eid: String, revision: int, id: String = LOCAL) -> Diction
 	if int(e.revision) != revision: return _no("El edificio cambió; revisa el plano antes de reparar",id)
 	var entrada := Vector2i(e.entrada[0],e.entrada[1])
 	if not Edificios.abierto(e,pies_de(id)): return _no("Acércate al edificio",id)
-	var f := Edificios.faltantes(self,e)
-	var coste := Edificios.coste(f)
-	if coste.is_empty(): return _no("El edificio está completo",id)
-	if not Inv.tiene(jug(id).inv,coste): return _no("Faltan materiales: "+_txt_items(coste),id)
-	for k in f.piezas:
-		var c := Edificios._celda(k)
-		if not mundo.constr_en(c).is_empty() or mundo.puede_poner(c) != "" or ocupada(c): return _no("Hay un obstáculo en la reparación",id)
-	for k in f.techos:
-		if mundo.puede_techar(Edificios._celda(k)) != "": return _no("Hay un obstáculo bajo la cubierta",id)
-	for k in f.pisos:
-		if not mundo.piso_en(Edificios._celda(k)).is_empty(): return _no("Hay otro suelo en la reparación",id)
-	# Comprueba el resultado completo antes de consumir o cambiar una pieza.
-	var anteriores: Dictionary = d.mundo.constr
-	d.mundo.constr = anteriores.duplicate(true)
-	d.mundo.constr.merge(f.piezas,true)
-	mundo.cambiar()
-	var valido := Edificios.accesible(self,e)
-	d.mundo.constr = anteriores
-	mundo.cambiar()
-	if not valido: return _no("La reparación impediría un acceso",id)
-	for k in f.piezas:
-		var cs: Dictionary = f.piezas[k]
-		mundo.poner(Edificios._celda(k),cs.t,true,e.dueno)
-		if cs.t == "cofre": d.cofres.get_or_add("c@"+k,{"inv":{}})
-	for k in f.pisos:
-		d.mundo.registro.pisos[k] = {"dueno":e.dueno,"edificio":e.id}
-		mundo._edificio_editado(Edificios._celda(k))
-	for k in f.techos: mundo.techar(Edificios._celda(k),e.dueno)
-	mundo.cambiar()
-	Inv.quitar(jug(id).inv,coste)
-	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",coste)
+	var resultado := Edificios.reparar(self,e,jug(id).inv)
+	if not resultado.ok: return _no(resultado.motivo,id)
+	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",resultado.coste)
 	return _ok("Edificio reparado",id)
