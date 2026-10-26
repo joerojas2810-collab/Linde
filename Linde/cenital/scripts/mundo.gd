@@ -345,9 +345,12 @@ func mover(pies: Vector2, d: Vector2, medio: Vector2 = P.PIES) -> Vector2:
 	if d.y != 0.0 and caja_libre(p + Vector2(0, d.y), medio): p.y += d.y
 	return p
 
-func alcanzables(desde: Vector2i = ENTRADA, area: Rect2i = Rect2i()) -> Dictionary:
+## Celdas alcanzables desde `desde`. Si `hasta` (celdas como claves) no está vacío, la búsqueda se detiene al alcanzar
+## cualquiera de ellas y devuelve lo visitado hasta ahí; sin `hasta` o sin alcanzar ninguna devuelve el conjunto completo.
+func alcanzables(desde: Vector2i = ENTRADA, area: Rect2i = Rect2i(), hasta: Dictionary = {}) -> Dictionary:
 	if area.size==Vector2i.ZERO:area=_area_ruta(desde)
 	var vistas := {desde: true}
+	if hasta.has(desde): return vistas
 	var cola := [desde]
 	while not cola.is_empty():
 		var c: Vector2i = cola.pop_back()
@@ -355,6 +358,7 @@ func alcanzables(desde: Vector2i = ENTRADA, area: Rect2i = Rect2i()) -> Dictiona
 			var n: Vector2i = c + d
 			if area.has_point(n) and not vistas.has(n) and not bloquea(n):
 				vistas[n] = true
+				if hasta.has(n): return vistas
 				cola.append(n)
 	return vistas
 

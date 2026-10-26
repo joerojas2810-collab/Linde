@@ -276,7 +276,13 @@ func _recurso(nid: String, item: String) -> String:
 		var da: int = absi(origen.x - j.mundo.objetos[a].c.x) + absi(origen.y - j.mundo.objetos[a].c.y)
 		var db: int = absi(origen.x - j.mundo.objetos[b].c.x) + absi(origen.y - j.mundo.objetos[b].c.y)
 		return a < b if da == db else da < db)
-	var alcance: Dictionary = j.mundo.alcanzables(origen, Mundo.AREA_EXPEDICION if expediciones() else Rect2i())   # una sola búsqueda, valle y contorno
+	# Una sola búsqueda, valle y contorno. Gana el primer candidato (el más cercano) con una celda vecina alcanzable:
+	# si el más cercano ya lo es, la búsqueda se detiene al llegar a él; si no, recorre todo como antes.
+	var primeros := {}
+	if not candidatos.is_empty():
+		var c0: Vector2i = j.mundo.objetos[candidatos[0]].c
+		for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]: primeros[c0 + d] = true
+	var alcance: Dictionary = j.mundo.alcanzables(origen, Mundo.AREA_EXPEDICION if expediciones() else Rect2i(), primeros)
 	for oid in candidatos:
 		var c: Vector2i = j.mundo.objetos[oid].c
 		for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
