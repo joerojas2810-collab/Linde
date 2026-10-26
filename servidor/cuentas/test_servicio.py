@@ -47,6 +47,13 @@ class AccountsTest(unittest.TestCase):
         with sqlite3.connect(self.folder/'cuentas.respaldo.sqlite3') as db:
             self.assertEqual(db.execute('PRAGMA integrity_check').fetchone()[0],'ok')
         db.close()
+    def test_password_without_minimum_length(self):
+        first = self.a.auth('registro', self.data(password='x'), '127.0.0.1', identidad=True)
+        second = self.a.auth('login', self.data(password='x'), '127.0.0.1', identidad=True)
+        self.assertEqual(first['id'], second['id'])
+        for password in ('', 'x' * 129):
+            with self.assertRaises(s.Rejected):
+                self.a.auth('registro', self.data('otro', password), '127.0.0.1', identidad=True)
     def test_certificate_reused(self):
         fp=s.certificate(self.folder)
         self.assertEqual(fp,s.certificate(self.folder))

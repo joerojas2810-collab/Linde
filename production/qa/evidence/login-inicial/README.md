@@ -26,3 +26,9 @@ Las pruebas corrompen deliberadamente su propio guardado para verificar `.bak`: 
 No se modificaron `Juego`, `Mundo`, `Guardado`, generación ni datos de reglas. Los argumentos/scripts explícitos de ensayo en builds de depuración mantienen su flujo de prueba; el inicio normal exige acceso, y el servidor valida el permiso auténtico incluso frente a un cliente que omita su UI. La skin permanece en pausa. No se vincularon las partidas antiguas de El Rayo ni se registró una cuenta real por el usuario.
 
 Operación y respaldo: [guía](../../../../Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md); decisión [ADR-0003](../../../../docs/architecture/adr-0003-identidad-antes-del-menu.md).
+
+### Pulido visual del acceso (26/10/2026)
+
+Cuenta, registro, servidor, conexión, configuración y carga de partidas reutilizan los nueve parches E06 de pergamino/madera y las fuentes de la interfaz. Acciones principales en verde petróleo, foco dorado, campos claros y mensajes en recuadro de contraste. Opciones técnicas plegables; se mantienen los valores y el acceso a todos los campos existentes. Revisión con capturas reales a 1280 × 720 y **16/16 comprobaciones** del flujo de acceso/guardados (`estetica_resultados.json`). El ensayo usa autoridad y partidas aisladas de la cuenta real; los errores JSON deliberados comprueban recuperación del respaldo y persisten los avisos conocidos al cerrar. No se repitieron pruebas de red externa.
+
+Además, a petición del usuario, se eliminó el mínimo de longitud de contraseña: sigue siendo obligatoria y su máximo es 128 caracteres. Cinco casos unitarios del servicio superados, incluido registro/login con un carácter y rechazo de vacío/exceso de longitud. Cambios locales sin publicar en `feature/login-inicial`.

@@ -141,8 +141,8 @@ class Accounts:
         if not all(isinstance(x, str) for x in (username, password, server_password)):
             raise Rejected("Campos inválidos")
         username = username.strip().lower()
-        if not USER.fullmatch(username) or not 10 <= len(password) <= 128 or len(server_password) > 128:
-            raise Rejected("Usuario: 3–24 letras sin acentos, cifras, _ o -. Contraseña: 10–128 caracteres.")
+        if not USER.fullmatch(username) or not password or len(password) > 128 or len(server_password) > 128:
+            raise Rejected("Usuario: 3–24 letras sin acentos, cifras, _ o -. Contraseña obligatoria, máximo 128 caracteres.")
         self.limit(ip, username)
         if not self.gate.acquire(blocking=False):
             raise Rejected("Servidor ocupado. Intenta en unos segundos.", 429)

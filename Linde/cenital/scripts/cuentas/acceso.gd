@@ -30,6 +30,7 @@ func _formulario() -> void:
 	texto("Una cuenta para tus partidas y los mundos compartidos.")
 	campo("usuario","Usuario")
 	campo("password","Contraseña","",true)
+	texto("Contraseña obligatoria, sin longitud mínima. Máximo 128 caracteres.",14)
 	if registro:
 		campo("confirmar","Repetir contraseña","",true)
 		campo("nombre","Nombre visible",esc.cr.nombre)
@@ -39,16 +40,26 @@ func _formulario() -> void:
 	boton("Ya tengo una cuenta" if registro else "Registrarme",func():registro=not registro;_formulario())
 	texto("Servicio de cuentas: %s:%d"%[conexion.get("host",""),int(conexion.get("puerto",7790))],14)
 	boton("Configurar servicio de cuentas…",configurar)
-	mensaje=texto("",15)
+	mensaje=estado("",15)
 	if conexion.get("cert","")=="":mensaje.text="Primera vez: configura el servicio de cuentas. No necesitas crear una partida."
 	boton("Salir",func():esc.get_tree().quit())
 	campos.usuario.grab_focus()
 
 func autenticar() -> void:
 	if ocupado:return
+	var usuario=campos.usuario.text.strip_edges().to_lower()
+	var patron=RegEx.new();patron.compile("^[a-z0-9_-]{3,24}$")
+	if patron.search(usuario)==null:
+		mensaje.text="El usuario debe tener 3–24 letras sin acentos, cifras, _ o -.";campos.usuario.grab_focus();return
+	if campos.password.text.is_empty():
+		mensaje.text="Escribe una contraseña para continuar.";campos.password.grab_focus();return
+	if campos.password.text.length()>128:
+		mensaje.text="La contraseña supera el máximo de 128 caracteres.";campos.password.grab_focus();return
 	if registro and campos.password.text!=campos.confirmar.text:mensaje.text="Las contraseñas no coinciden.";return
+	if registro and (campos.nombre.text.strip_edges().length()<2 or campos.nombre.text.strip_edges().length()>16):
+		mensaje.text="El nombre visible debe tener entre 2 y 16 caracteres.";campos.nombre.grab_focus();return
 	ocupado=true
-	var data={"usuario":campos.usuario.text,"password":campos.password.text,"nombre":campos.nombre.text if registro else ""}
+	var data={"usuario":usuario,"password":campos.password.text,"nombre":campos.nombre.text if registro else ""}
 	campos.password.text=""
 	if registro:campos.confirmar.text=""
 	mensaje.text="Validando tu cuenta…"
@@ -74,6 +85,7 @@ func configurar() -> void:
 	campo("cert","Certificado público (.crt)",str(conexion.get("cert","")))
 	boton("Elegir certificado del servicio…",elegir_certificado)
 	boton("Usar este servicio",usar_servicio)
+	opciones_avanzadas("Alojar las cuentas en esta PC")
 	texto("Solo en la PC que aloja las cuentas:",15)
 	var py=OS.get_environment("LINDE_PYTHON")
 	if py=="":py=ProjectSettings.globalize_path("res://../../.venv/"+("Scripts/python.exe" if OS.get_name()=="Windows" else "bin/python"))
@@ -81,7 +93,8 @@ func configurar() -> void:
 	campo("dir","Carpeta de cuentas",str(conexion.get("dir","user://identidad_linde")))
 	boton("Activar servicio de cuentas en esta PC",activar_local)
 	boton("Detener servicio local",detener_local)
-	mensaje=texto("El servicio local sigue activo al cerrar una partida o el juego; la PC debe permanecer encendida.",14)
+	fin_opciones()
+	mensaje=estado("El servicio local sigue activo al cerrar una partida o el juego; la PC debe permanecer encendida.",14)
 	boton("Volver al acceso",mostrar_acceso)
 
 func usar_servicio() -> void:
@@ -145,5 +158,5 @@ func mostrar_partidas() -> void:
 		boton("%s · %s · semilla %d"%[slot.nombre,fecha,int(slot.semilla)],func():
 			if esc._cargar_cuenta(slot.ruta):raiz.hide()
 			else:mensaje.text=esc.menu_msg)
-	mensaje=texto("",15)
+	mensaje=estado("",15)
 	boton("Volver",func():raiz.hide();esc._menu_inicial())

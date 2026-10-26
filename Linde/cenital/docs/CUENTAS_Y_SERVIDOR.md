@@ -24,7 +24,7 @@ En **Configurar servicio de cuentas**, introducir IP/dominio, TCP 7790 y el cert
 
 ## 2. Acceso y menú principal
 
-- Iniciar sesión o registrarse **antes** de elegir una partida. Usuario: 3–24 letras sin acentos, cifras, `_` o `-`; contraseña: 10–128 caracteres. El registro pide confirmación y nombre visible.
+- Iniciar sesión o registrarse **antes** de elegir una partida. Usuario: 3–24 letras sin acentos, cifras, `_` o `-`; contraseña obligatoria sin longitud mínima adicional, máximo 128 caracteres (ajuste solicitado por el usuario el 26/10/2026). El registro pide confirmación y nombre visible.
 - Después del acceso se muestran **Continuar, Nueva partida, Cargar partida, Alojar partida, Unirse, Cerrar sesión y Salir**.
 - Nueva partida conserva las anteriores. Cargar muestra los mundos locales que pertenecen a esa cuenta. Continuar recuerda el elegido anteriormente.
 - Las partidas individuales se guardan **en esa PC**, separadas por identidad y mundo; no hay sincronización de archivos en la nube. En multijugador, personaje y progreso se guardan en el servidor del mundo y se recuperan al entrar desde otra PC con la misma identidad.
