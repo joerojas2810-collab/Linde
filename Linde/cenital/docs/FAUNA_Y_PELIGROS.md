@@ -1,8 +1,16 @@
 # Fauna y peligros por bioma — v1
 
+## Cierre vigente de Fase 7 — 26/10/2026
+
+Alcance autorizado cerrado en `feature/fase7-ecologia`, sin merge/push. [Informe, pruebas y límites](../../../production/qa/evidence/mundo-1/fase-7/cierre/README.md). Navegación regional reutiliza BFS al bloquearse, filtrando la caja real de cada especie; caché de sesión invalidada por destino, geometría/streaming y retroceso. Conserva percepción, velocidades, estados, tolerancias y combate. Destino inaccesible no se atraviesa ni se busca de nuevo cada cuadro. Movimiento histórico de slimes/jefes conservado.
+
+Verificación final: navegación32, decisiones18, fauna31 y señales ENet16, todos sin fallos. Regreso20/20 atascado antes →0/20 después; persecución0/10 atascada. Escenario reconstruido reproducible, no repetición del P2 histórico sin fuente. Aviso antes del daño en los cinco casos controlados:2,20–3,23s; retirada/rodeo sin daño. No son tiempos mínimos universales ni un cambio de balance. R/T se resuelven operativamente reutilizando parámetros actuales según la autorización final, sin nuevos umbrales.
+
+Revisión en escena real con retirada y vida40/40, capturas inspeccionadas. Fuera del alcance: reproducción, migración, economía ecológica, simulación global y ataques nuevos a NPC/edificios. Las notas siguientes documentan implementaciones anteriores; sus pendientes de navegación/R/T quedan superados por este cierre acotado.
+
 ## Avisos observados y memoria histórica — 26/10/2026
 
-La fauna regional viva observada genera un aviso direccional personal en la tarjeta de entorno existente. Usa el radio de conocimiento de Autonomia y el rayo de visión de combate, sin nuevos radios/tiempos ni cambios de detección de enemigos. No consulta poblaciones latentes, no fabrica huellas o sonidos y no presenta una especie pasiva como amenaza hasta que esté provocada. Al morir, alejarse o perderse la visión de la fuente, deja de avisar. No es una garantía de reacción mínima: R/T siguen pendientes.
+La fauna regional viva observada genera un aviso direccional personal en la tarjeta de entorno existente. Usa el radio de conocimiento de Autonomia y el rayo de visión de combate, sin nuevos radios/tiempos ni cambios de detección de enemigos. No consulta poblaciones latentes, no fabrica huellas o sonidos y no presenta una especie pasiva como amenaza hasta que esté provocada. Al morir, alejarse o perderse la visión de la fuente, deja de avisar. No es una garantía universal de reacción mínima; véase el cierre y sus medidas.
 
 Exploración registra el último avistamiento por bloque personal, con fecha/categoría/procedencia e identidades internas de fuente/ancla para auditoría. El mapa muestra bloque aproximado, fecha y leyenda histórica; no sigue enemigos ocultos ni afirma que un registro antiguo siga vivo. Los NPC cercanos pueden observar una fuente real o recibir un testimonio del jugador durante el intercambio voluntario ya existente, y contarlo con su fecha original. La memoria de NPC queda en `d.fauna.informes_npc`, sin nueva simulación ni NPC duplicados.
 
@@ -65,7 +73,7 @@ Son criaturas fantásticas reutilizadas de `Nuevo Juego/public/art/enemies-px`, 
 
 Cada segundo `Fauna.actualizar()` considera las regiones cargadas alrededor de jugadores presentes. Prioriza las más cercanas, con límite global de 24 criaturas regionales activas, adicional a los enemigos del valle. Un punto bloqueado queda aplazado, sin trasladarlo a través de la pared. Hay una franja sin puntos de fauna de 8 celdas alrededor del valle y las apariciones nuevas deben distar 96 px de los jugadores. No hay encuentros regionales nuevos sin jugadores.
 
-Se conserva el combate del juego: aviso visible antes del impacto, recuperación, daño, invulnerabilidad breve, experiencia y botín para quien remata. La fauna regional comprueba obstáculos para detectar y golpear al objetivo. La persecución termina al alejarse más de 144 px del origen; el regreso puede atascarse ante obstáculos porque todavía usa movimiento directo, sin navegación de combate alrededor de árboles. Una criatura puede cruzar una frontera de bioma al perseguir o huir: el bioma determina su origen.
+Se conserva el combate del juego: aviso visible antes del impacto, recuperación, daño, invulnerabilidad breve, experiencia y botín para quien remata. La fauna regional comprueba obstáculos para detectar y golpear al objetivo. La persecución termina al alejarse más de 144 px del origen; regreso y persecución utilizan ahora el BFS existente cuando el movimiento directo colisiona. Una criatura puede cruzar una frontera de bioma al perseguir o huir: el bioma determina su origen.
 
 ## Guardado, descarga y red
 

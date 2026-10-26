@@ -1,0 +1,9 @@
+[
+  {
+    "suite": "prueba_decisiones_fauna",
+    "ok": false,
+    "passes": 18,
+    "fails": 0,
+    "exit": 0
+  }
+]

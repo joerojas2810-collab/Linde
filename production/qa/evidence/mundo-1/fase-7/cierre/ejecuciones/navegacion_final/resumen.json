@@ -1,0 +1,9 @@
+[
+  {
+    "suite": "prueba_navegacion_fauna",
+    "ok": true,
+    "passes": 32,
+    "fails": 0,
+    "exit": 0
+  }
+]

@@ -1,5 +1,13 @@
 # Continuidad: cómo retomar Linde
 
+## Último cierre: Fase 7 completada en su alcance autorizado (26/10/2026)
+
+Rama `feature/fase7-ecologia`, base `eb022a4`; código de cierre `a5e8f3d`, sin push/merge. [Informe final, límites y reproducción](production/qa/evidence/mundo-1/fase-7/cierre/README.md). Hábitats y territorio A/B, señales/memoria personal, bajas/heridas y navegación regional funcionales. BFS existente respeta caja y presupuesto de movimiento; caché transitoria, destinos inaccesibles e invalidación por obras/streaming/golpes. Sin cambios de balance, generación o arquitectura de autoridad.
+
+Última validación: navegación32/32, decisiones18/18, fauna31/31 y señales ENet16/16 (dos clientes reales locales), total97/97. Regreso reproducible20 atascos antes →0 después; persecución0/10. P2 histórico sin fuente, no se equiparan muestras. Revisión automatizada en escena real con retirada, capturas inspeccionadas y vida40/40. Avisos2,20–3,23s antes del daño en casos controlados; se reutilizan parámetros actuales conforme M1-F7-C, sin R/T globales nuevos ni inmunidad. Logs fallidos y finales conservados.
+
+No queda otro bloque obligatorio de Fase7 dentro del alcance autorizado. Siguiente acción de proyecto: revisar/integrar la rama coordinadamente cuando el usuario lo autorice; no iniciar capacidades nuevas ni fusionar main automáticamente. Excluidos reproducción, migración, economía ecológica, simulación global y nuevos ataques a NPC/edificios. Internet/otra PC y reacción humana universal no certificados. Las notas históricas de abajo con Fase7 pendiente quedan superadas por este cierre; mantienen trazabilidad.
+
 ## Qué es
 Linde es un RPG 2D cenital de **mundo vivo** en Godot 4.7.1 (`Linde/cenital`, GDScript): servidor autoritativo con réplica en clientes, habitantes autónomos (necesidades, trueque, construcción, llegada, oficios, saberes), fabricación por gramática, exterior generado por regiones y fauna. La **autonomía es el modo principal**; no hay campaña obligatoria. El objetivo actual es **Mundo 1**: un mundo compartido y persistente, con pueblos que prosperan o decaen, donde exploración, civilización y progresión salgan de un mismo mundo simulado (sin escalado de enemigos al nivel del jugador).
 

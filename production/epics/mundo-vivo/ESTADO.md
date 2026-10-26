@@ -1,5 +1,13 @@
 # Linde — estado verificado
 
+> **Actualización vigente de Fase7, 26/10/2026:** alcance autorizado completado en `feature/fase7-ecologia`, base `eb022a4`, sin push/merge. Código final `a5e8f3d`. [Informe y evidencia](../../qa/evidence/mundo-1/fase-7/cierre/README.md). La consolidación histórica de main siguiente se conserva; esta actualización sólo certifica el alcance y las pruebas descritos.
+
+Hábitats declarativos, distribución territorial A/B compatible y persistida, avisos observables personales, memoria/NPC y bajas/heridas integrados. Corregida navegación al perseguir/regresar con BFS existente y caja real, caché de sesión e invalidación; no se altera balance ni el movimiento histórico de slimes/jefes. Validación final focalizada97/97: navegación32, decisiones18, fauna31, ENet16 con dos clientes locales. Regreso20/20 atascado antes →0/20; persecución0/10. Fixture reconstruido reproducible, distinto del P2 histórico sin fuente. Revisión automatizada de escena real y tres capturas inspeccionadas: detectar, acercarse, retirada y vida40/40.
+
+Avisos previos al daño2,20–3,23s en cinco acercamientos controlados, retirada/rodeo efectivos. Conforme M1-F7-C se mantienen los parámetros actuales: sin mínimos globales inventados ni inmunidad. Coste del bloque IA con24 actores/600 pasos: cercano media0,231ms/pico27,056ms; reposo media0,105ms/pico0,151ms, sin prometer FPS globales. No se repitieron suites históricas. Logs previos/fallidos preservados; avisos conocidos de recursos al cerrar. Sin validación humana de reacción ni otra PC/Internet.
+
+No queda implementación obligatoria pendiente de esta Fase7 autorizada. Reproducción, migración, simulación global, economía ecológica, ataques nuevos a NPC/edificios y viabilidad dependiente de Fase6 quedan explícitamente fuera. Las notas históricas de esta rama que señalan señales/navegación/R/T pendientes están superadas por este cierre. Integración pendiente de coordinación y autorización del usuario.
+
 > **Consolidado**: 2026-10-26 · **Rama**: `main` · **Último commit considerado**: `8483789` · **Modo**: solo (sin revisión independiente)
 >
 > **Nota de hashes (2026-10-25)**: un `git pull --rebase` reescribió los commits locales. Los hashes de este documento son los vigentes en `main`; los previos al rebase eran H0 `a5414fb`, M0 `67d52ca`, K1 `07813c2`, rendimiento `2ccb99a` y mochila `990d549`. Las cifras de pruebas siguen siendo las registradas por cada sesión.

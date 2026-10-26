@@ -1,0 +1,28 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS regreso espectro_bosque giro 0: rodea sin atravesar ni acelerar
+PASS regreso espectro_bosque giro 1: rodea sin atravesar ni acelerar
+PASS regreso espectro_bosque giro 2: rodea sin atravesar ni acelerar
+PASS regreso espectro_bosque giro 3: rodea sin atravesar ni acelerar
+FAIL regreso golem_sierra giro 0: rodea sin atravesar ni acelerar
+PASS regreso golem_sierra giro 1: rodea sin atravesar ni acelerar
+FAIL regreso golem_sierra giro 2: rodea sin atravesar ni acelerar
+PASS regreso golem_sierra giro 3: rodea sin atravesar ni acelerar
+PASS regreso diablillo_secano giro 0: rodea sin atravesar ni acelerar
+PASS regreso diablillo_secano giro 1: rodea sin atravesar ni acelerar
+PASS regreso diablillo_secano giro 2: rodea sin atravesar ni acelerar
+PASS regreso diablillo_secano giro 3: rodea sin atravesar ni acelerar
+PASS regreso arpia_pradera giro 0: rodea sin atravesar ni acelerar
+PASS regreso arpia_pradera giro 1: rodea sin atravesar ni acelerar
+PASS regreso arpia_pradera giro 2: rodea sin atravesar ni acelerar
+PASS regreso arpia_pradera giro 3: rodea sin atravesar ni acelerar
+PASS regreso slime_ribera giro 0: rodea sin atravesar ni acelerar
+PASS regreso slime_ribera giro 1: rodea sin atravesar ni acelerar
+PASS regreso slime_ribera giro 2: rodea sin atravesar ni acelerar
+PASS regreso slime_ribera giro 3: rodea sin atravesar ni acelerar
+MEDICION regreso casos=20 atascos=2 porcentaje=10.0 tiempo_ms=102.84
+RESULTADO 18 PASS 2 FAIL
+WARNING: 32 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 14 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
