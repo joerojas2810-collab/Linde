@@ -156,3 +156,46 @@ Persisten avisos históricos de recursos/ObjectDB al salir y se han observado av
 de buffers UDP llenos en las pruebas; no se certifica rendimiento bajo carga.
 macOS/Linux no tienen paquete portable nuevo en esta entrega; desde fuente requieren
 Godot y Python como antes.
+
+## Mac Apple Silicon
+
+Construcción separada con motor y Python arm64 incluidos, lanzadores `.command` y
+ZIP que conserva permisos/enlaces. Ver [paso a paso Mac](MAC_APPLE_SILICON.md).
+La disponibilidad depende de una ejecución verde del workflow Mac; no usar el ZIP
+Windows en macOS. No hay paquete Intel en esta entrega.
+
+## Cómo se construyó Windows — lógica paso a paso
+
+1. **Reutilizar el servidor real.** `red_servidor.gd` conserva la simulación
+   autoritativa y las reglas; `cuentas/main_servidor.gd` lo ejecuta sin ventana.
+   No se creó otro mundo o motor de red paralelo.
+2. **Separar el modo privado de la cuenta global.** El botón local/privado genera
+   un perfil persistente para los guardados individuales. Para el servidor privado,
+   el cliente guarda una credencial aleatoria por certificado del mundo; el nombre
+   visible no funciona como contraseña ni como prueba de identidad. El servicio
+   conserva el verificador Argon2id y emite un ticket de un uso para entrar.
+3. **Conservar la seguridad de la conexión.** Solo se consulta el certificado público
+   sin confianza previa. El usuario confirma su huella por un canal de confianza;
+   después HTTPS y DTLS verifican ese certificado. Una sustitución no se acepta
+   automáticamente. El modo global de cuentas sigue como alternativa.
+4. **Automatizar el inicio.** `lanzador.py` crea/lee `servidor.json`, resuelve rutas,
+   valida puertos, prepara un archivo temporal privado y arranca Godot headless.
+   Godot consume ese archivo; el JSON persistente no se destruye. Así la contraseña
+   del mundo no se pasa en argumentos de consola.
+5. **Empaquetar lo que antes había que instalar.** `empaquetar_windows.py` copia el
+   proyecto sin cachés viejas ni datos privados, el Godot oficial, CPython 3.11 con
+   sus bibliotecas y las dependencias fijadas. Añade licencias y un manifiesto SHA-256.
+   El paquete contiene fuentes y runtimes, no un export único de Godot.
+6. **Crear tres entradas simples.** `Iniciar servidor.bat`, `Jugar Linde.bat` y
+   `Guardar y cerrar servidor.bat` apuntan a los ejecutables incluidos. El último
+   solicita el cierre por el mecanismo del servidor, en vez de matar el proceso.
+7. **Validar en Windows.** GitHub Actions comprueba el hash del motor, ejecuta Python,
+   importa recursos, compila los scripts dinámicos y prueba guardado/carga local,
+   identidad global, dos clientes y reconexión en los modos existente y privado.
+8. **Probar el producto, no solo el código fuente.** Después de construir, ejecuta
+   el Python y Godot del propio paquete, espera escucha, pide cierre y comprueba
+   el guardado. También espera la liberación del bloqueo del helper de acceso.
+   Solo si esos pasos pasan publica el artefacto descargable.
+9. **Mantener explícito el límite de red.** UDP 7777 mueve la partida; TCP 7778
+   gestiona el acceso seguro. El paquete no abre el router ni resuelve CGNAT.
+   Las pruebas de CI ocurren en una máquina; no certifican conexión entre casas.

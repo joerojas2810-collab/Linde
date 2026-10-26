@@ -1,0 +1,113 @@
+name: Servidor privado Mac Apple Silicon
+on:
+  workflow_dispatch:
+  push:
+    branches: [arena/9a96dc31-linde]
+    paths:
+      - 'servidor/**'
+      - 'Linde/cenital/**'
+      - 'herramientas/empaquetar_macos.py'
+      - '.github/workflows/servidor-macos.yml'
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONNOUSERSITE: '1'
+jobs:
+  paquete:
+    runs-on: macos-15
+    timeout-minutes: 35
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Comprobar Apple Silicon y dependencias
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = arm64
+          python -m pip install -r servidor/cuentas/requirements.txt
+          python -m unittest discover -s servidor/cuentas -p 'test_*.py' -v
+          python -m unittest discover -s servidor/dedicado -v
+      - name: Descargar runtimes con SHA-256 fijado
+        run: |
+          set -euo pipefail
+          mkdir motor interprete
+          curl -fL 'https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_macos.universal.zip' -o godot.zip
+          echo '897cb7f9799796c717ae75f31446aed883dc92b1d6c3b33d893cc7843fff2fa9  godot.zip' | shasum -a 256 -c -
+          ditto -x -k godot.zip motor
+          curl -fL 'https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.11.18%2B20261026-aarch64-apple-darwin-install_only.tar.gz' -o python.tar.gz
+          echo 'cba3455e18516fbe8668cff2820c9b6a53447c552d612443c2b2fb60d390a908  python.tar.gz' | shasum -a 256 -c -
+          tar -xzf python.tar.gz -C interprete
+          python - <<'PY'
+          import base64, json, pathlib, urllib.request
+          for name in ('LICENSE.txt', 'COPYRIGHT.txt'):
+              request = urllib.request.Request('https://api.github.com/repos/godotengine/godot/contents/' + name + '?ref=4.7.1-stable', headers={'User-Agent': 'Linde-build'})
+              with urllib.request.urlopen(request) as response:
+                  data = json.load(response)
+              pathlib.Path('motor/Godot-' + name).write_bytes(base64.b64decode(data['content']))
+          PY
+      - name: Importar recursos y compilar scripts
+        run: |
+          set -euo pipefail
+          G="$PWD/motor/Godot.app/Contents/MacOS/Godot"
+          "$G" --headless --path Linde/cenital --editor --import --quit 2>&1 | tee importacion.log
+          ! grep -E 'SCRIPT ERROR:|Parse Error:|Failed to load script' importacion.log
+          for name in acceso panel privado cliente servidor main_servidor; do
+            "$G" --headless --path Linde/cenital --script "res://scripts/cuentas/$name.gd" --check-only 2>&1 | tee "compilar-$name.log"
+            ! grep -E 'SCRIPT ERROR:|Parse Error:|Failed to load script' "compilar-$name.log"
+          done
+      - name: Perfil local, identidad global y clientes reales
+        run: |
+          set -euo pipefail
+          G="$PWD/motor/Godot.app/Contents/MacOS/Godot"
+          "$G" --headless --path Linde/cenital --script res://tests/prueba_perfil_local.gd -- --salida="$PWD/qa/local"
+          python servidor/cuentas/prueba_identidad_integracion.py --godot "$G" --salida qa/global
+          python servidor/cuentas/prueba_integracion.py --godot "$G" --salida qa/cuentas
+          python servidor/cuentas/prueba_integracion.py --privado --godot "$G" --salida qa/privado
+      - name: Construir paquete portable arm64
+        run: python herramientas/empaquetar_macos.py --godot motor/Godot.app --python interprete/python --salida paquete
+      - name: Probar paquete, relocalización y lanzadores
+        run: |
+          set -euo pipefail
+          mkdir -p 'ensayo con espacios'
+          mv paquete 'ensayo con espacios/Linde Mac'
+          P="$PWD/ensayo con espacios/Linde Mac"
+          "$P/runtime/python/bin/python3" "$P/servidor/dedicado/prueba_paquete.py" --godot "$P/runtime/Godot.app/Contents/MacOS/Godot" 2>&1 | tee qa/paquete.log
+          for command in "$P"/*.command; do bash -n "$command"; test -x "$command"; done
+          mkdir entrega
+          ditto -c -k --sequesterRsrc --keepParent "$P" entrega/Linde-Mac-Apple-Silicon.zip
+          # El archivo de distribución preserva ejecutables/symlinks, no solo la carpeta CI.
+          ditto -x -k entrega/Linde-Mac-Apple-Silicon.zip extraido
+          P="$PWD/extraido/Linde Mac"
+          test -x "$P/Iniciar servidor.command"
+          "$P/runtime/python/bin/python3" "$P/servidor/dedicado/prueba_paquete.py" --godot "$P/runtime/Godot.app/Contents/MacOS/Godot" 2>&1 | tee qa/extraido.log
+      - name: Publicar paquete Apple Silicon
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linde-Mac-Apple-Silicon-servidor-y-juego
+          path: entrega/Linde-Mac-Apple-Silicon.zip
+          retention-days: 14
+      - name: Resumir fallos
+        if: failure()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for log in sorted(Path('qa').rglob('*.log'), key=lambda p: p.stat().st_mtime, reverse=True):
+              body = '\n'.join(log.read_text(errors='replace').splitlines()[-40:])
+              body = body.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+              print(f'::error title={log.name}::{body}')
+          PY
+      - name: Guardar diagnósticos
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-macos
+          path: |
+            importacion.log
+            compilar-*.log
+            qa/**/*.log
+          retention-days: 7
