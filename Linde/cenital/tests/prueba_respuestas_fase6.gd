@@ -50,12 +50,14 @@ func _init()->void:
  ok(resultado.ok and not s.transitos.reservar("duplicar",origen.id,destino.id,[nid],{},{}).ok,"una identidad no reserva simultáneamente dos expediciones")
  ok(s.transitos.salir("migrar").ok and origen.residentes.size()==1,"migración saca la misma entidad del origen")
  var op: Dictionary=resultado.operacion
- var capacidad:=int(s.cfg.capacidad)
- s.cfg.capacidad=1
+ var cama_perdida: Array=destino.camas.back()
+ var clave_techo:=M.clave(Vector2i(cama_perdida[0],cama_perdida[1]))
+ var propietario= j.d.mundo.techos[clave_techo]
+ j.d.mundo.techos.erase(clave_techo)
  j.d.min+=int(op.duracion)
  s.transitos.actualizar()
  ok(op.estado=="detenida" and op.miembros.size()==1 and destino.residentes.size()==1,"capacidad perdida antes de llegar mantiene la identidad en tránsito")
- s.cfg.capacidad=capacidad
+ j.d.mundo.techos[clave_techo]=propietario
  j.mundo.poblado(destino.poblado).estado="abandonado"
  s.transitos.actualizar()
  ok(op.estado=="detenida" and op.motivo=="destino_no_activo" and destino.residentes.size()==1,"llegada no reactiva un destino declarado abandonado")

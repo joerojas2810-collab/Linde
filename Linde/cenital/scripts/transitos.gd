@@ -12,7 +12,7 @@ func _init(asentamientos) -> void:
 func datos() -> Dictionary:
  return s.datos().get_or_add("transitos",{"version":1,"operaciones":{},"politica":{"usar_valores_existentes":true,"aprobacion":"usuario_2026-10-26"}})
 func puesto(id: String) -> Dictionary:
- return s.datos().puestos.get(id,{})
+ return s.datos().puestos.get(id,datos().get("solares",{}).get(id,{}))
 func _celda(k: String) -> Vector2i:
  return Vector2i(int(k.get_slice(",",0)),int(k.get_slice(",",1)))
 func ruta(desde: String, hasta: String) -> Array:
@@ -21,6 +21,9 @@ func ruta(desde: String, hasta: String) -> Array:
  if origen.is_empty() or destino.is_empty(): return []
  var inicio := Vector2i(origen.celda[0],origen.celda[1])
  var fin := Vector2i(destino.celda[0],destino.celda[1])
+ return ruta_celdas(inicio,fin)
+
+func ruta_celdas(inicio: Vector2i, fin: Vector2i) -> Array:
  # Navegación sobre terreno real, con los mismos bloqueos regionales. No genera lugares.
  var margen := int(s.cfg.radio_recursos)
  var minimo := Vector2i(mini(inicio.x,fin.x)-margen,mini(inicio.y,fin.y)-margen)
@@ -93,9 +96,9 @@ func reservar(clave: String, origen: String, destino: String, ids: Array, bienes
   return {"ok":true,"operacion":anterior}
  var a := puesto(origen)
  var b := puesto(destino)
- if a.is_empty() or b.is_empty() or origen==destino or ids.is_empty() or not tipo in ["migracion","comercio","recuperacion"]: return {"ok":false,"motivo":"origen_destino"}
+ if a.is_empty() or b.is_empty() or origen==destino or ids.is_empty() or not tipo in ["migracion","comercio","recuperacion","fundacion"]: return {"ok":false,"motivo":"origen_destino"}
  if j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"] and tipo!="recuperacion": return {"ok":false,"motivo":"requiere_recuperacion"}
- if (not s._sostenible(b) and tipo!="recuperacion") or (tipo!="comercio" and b.residentes.size()+reservas_plaza(destino)+ids.size()>int(s.cfg.capacidad)): return {"ok":false,"motivo":"destino_sin_capacidad"}
+ if (not s._sostenible(b) and not tipo in ["recuperacion","fundacion"]) or (not tipo in ["comercio","fundacion"] and b.residentes.size()+reservas_plaza(destino)+ids.size()>s.capacidad(b)): return {"ok":false,"motivo":"destino_sin_capacidad"}
  var miembros: Array = []
  var vistos := {}
  for id in ids:
@@ -157,6 +160,7 @@ func cancelar(clave: String) -> bool:
   s._resultado_regional(b,"cancelacion_intercambio",{"id":clave},antes_b)
   op.contraoferta={}
  op.bienes={};op.provisiones={};op.estado="cancelada"
+ if op.tipo=="fundacion": datos().get("solares",{}).erase(op.destino)
  s._resultado_regional(a,"cancelacion_viaje",{"id":clave},antes)
  return true
 func salir(clave: String) -> Dictionary:
@@ -166,14 +170,18 @@ func salir(clave: String) -> Dictionary:
  if not datos().politica.get("usar_valores_existentes",true): return {"ok":false,"motivo":"politica_viaje_no_aprobada"}
  var a := puesto(op.origen)
  var b := puesto(op.destino)
+ if op.tipo=="fundacion" and not s.fundacion.validar_salida(op): return {"ok":false,"motivo":"contrato_fundacion"}
  if j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"] and op.tipo!="recuperacion": return {"ok":false,"motivo":"requiere_recuperacion"}
- if (not s._sostenible(b) and op.tipo!="recuperacion") or (op.tipo!="comercio" and b.residentes.size()+reservas_plaza(op.destino)>int(s.cfg.capacidad)): return {"ok":false,"motivo":"destino_sin_capacidad"}
+ if (not s._sostenible(b) and not op.tipo in ["recuperacion","fundacion"]) or (not op.tipo in ["comercio","fundacion"] and b.residentes.size()+reservas_plaza(op.destino)>s.capacidad(b)): return {"ok":false,"motivo":"destino_sin_capacidad"}
  if int(s.balance_resumido(a).baya.vencido)>0 or int(a.get("deuda_comida",0))>0: return {"ok":false,"motivo":"consumo_origen_pendiente"}
  var camino := ruta(op.origen,op.destino)
  if camino.is_empty(): return {"ok":false,"motivo":"sin_ruta"}
  var lote: Dictionary = op.bienes.duplicate(true)
  for item in op.provisiones: lote[item]=int(lote.get(item,0))+int(op.provisiones[item])
  if Inv.slots(lote)>int(s.a.reglas.mochila_habitante)*op.ids.size(): return {"ok":false,"motivo":"sin_capacidad_carga"}
+ if op.tipo=="migracion":
+  if not s.recepcion_viable(b,op.ids.size(),op.bienes,op.provisiones): return {"ok":false,"motivo":"destino_sin_sustento"}
+  if int(s.inventario(a).get("baya",0))<a.residentes.size()-op.ids.size(): return {"ok":false,"motivo":"origen_sin_sustento"}
  var miembros: Array = []
  for r in a.residentes:
   if r.get("reserva_viaje", "")==clave: miembros.append(r)
@@ -220,6 +228,10 @@ func actualizar() -> void:
   if not libre: op.estado="detenida";op.motivo="ruta_bloqueada";continue
   op.avance=siguiente;op.estado="viajando"
   if int(op.avance)<int(op.duracion): continue
+  if op.tipo=="fundacion" and not op.get("regresando",false):
+   if not s.fundacion.llegar(op):
+    _alimentar(op,ahora)
+    op.estado="detenida";op.motivo="solar_no_viable";continue
   var b := puesto(op.destino)
   if op.tipo=="recuperacion" and not op.get("regresando",false):
    if not s.recuperar_llegada(b,op):
@@ -228,9 +240,12 @@ func actualizar() -> void:
   if not b.is_empty() and j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"]:
    _alimentar(op,ahora)
    op.estado="detenida";op.motivo="destino_no_activo";continue
-  if b.is_empty() or not s._sostenible(b) or ((op.tipo!="comercio" or op.get("regresando",false)) and b.residentes.size()+op.miembros.size()>int(s.cfg.capacidad)):
+  if b.is_empty() or not s._sostenible(b) or ((op.tipo!="comercio" or op.get("regresando",false)) and b.residentes.size()+op.miembros.size()>s.capacidad(b)):
    _alimentar(op,ahora)
    op.estado="detenida";op.motivo="destino_sin_capacidad";continue
+  if op.tipo=="migracion" and not s.recepcion_viable(b,op.miembros.size(),op.bienes,op.provisiones):
+   _alimentar(op,ahora)
+   op.estado="detenida";op.motivo="destino_sin_sustento";continue
   if op.tipo=="comercio" and not op.get("regresando",false):
    var antes_entrega: Dictionary=s.inventario(b).duplicate(true)
    for item in op.bienes: s.inventario(b)[item]=int(s.inventario(b).get(item,0))+int(op.bienes[item])
@@ -253,7 +268,7 @@ func actualizar() -> void:
    var ocupadas: Array=pueblo.camas.values()
    for r in b.residentes:
     if pueblo.camas.has(r.id): continue
-    for q in b.get("camas",[]):
+    for q in s.camas_funcionales(b):
      if not q in ocupadas: pueblo.camas[r.id]=q;ocupadas.append(q);break
   s._resultado_regional(b,"llegada",{"id":op.id},antes,{"residentes":op.ids.duplicate()})
 
@@ -279,6 +294,7 @@ func regresar(clave: String) -> bool:
  var indice := mini(op.ruta.size()-1,floori(float(op.avance)/float(op.duracion)*(op.ruta.size()-1)))
  var vuelta: Array=op.ruta.slice(0,indice+1)
  vuelta.reverse()
+ if op.tipo=="fundacion": datos().get("solares",{}).erase(op.destino)
  op.ruta=vuelta;op.destino=op.origen;op.regresando=true;op.avance=0
  op.duracion=maxi(1,ceili((vuelta.size()-1)*float(M.P.CELDA)/H.VEL*C.MIN_POR_SEG))
  op.ultimo_min=int(j.d.min)
@@ -290,7 +306,7 @@ func exportable(p: Dictionary, item: String) -> int:
  var saldos: Dictionary = s.balance_resumido(p)
  var reserva := int(saldos.get(item,{}).get("reserva",0))
  if item in ["madera","piedra"]:
-  reserva=maxi(0,int(saldos.materiales.reserva)-int(inv.get("piedra" if item=="madera" else "madera",0)))
+  reserva=maxi(reserva,maxi(0,int(saldos.materiales.reserva)-int(inv.get("piedra" if item=="madera" else "madera",0))))
  return maxi(0,int(inv.get(item,0))-reserva)
 
 ## Trueque en especie: ambos lotes quedan separados antes de enviar un residente real.

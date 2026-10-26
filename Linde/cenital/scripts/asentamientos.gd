@@ -10,11 +10,14 @@ var a
 var j
 const Transitos = preload("res://scripts/transitos.gd")
 var transitos
+const Fundacion = preload("res://scripts/fundacion.gd")
+var fundacion
 var cfg: Dictionary
 const PIEZAS = [["cama_huesped",1,0],["cama_huesped",1,1],["campo",-1,0],["campo",-1,1],["cofre",0,2]]
 func _init(autonomia) -> void:
  a=autonomia;j=a.j
  transitos=Transitos.new(self)
+ fundacion=Fundacion.new(self)
  cfg=JSON.parse_string(FileAccess.get_file_as_string("res://datos/asentamientos/reglas_v1.json"))
 func datos() -> Dictionary:
  if not a.activa():return {}
@@ -92,10 +95,25 @@ func crear(c: Vector2i, dueno: String, poblado_id: String = "", nombre: String =
 func _sostenible(p: Dictionary) -> bool:
  var c:=Vector2i(p.celda[0],p.celda[1])
  if j.mundo.constr_en(c).get("t","")!="puesto" or not j.d.cofres.has(p.cofre):return false
+ return capacidad(p)>0 and capacidad(p)>=p.residentes.size()
+
+func camas_funcionales(p: Dictionary) -> Array:
+ var c:=Vector2i(p.celda[0],p.celda[1])
+ var alcance := _alcance(c)
+ var salida: Array=[]
  for q in p.get("camas",[[c.x+1,c.y],[c.x+1,c.y+1]]):
+  if q in salida: continue
   var cama := Vector2i(q[0],q[1])
-  if j.mundo.constr_en(cama).get("t","")!="cama_huesped" or not j.mundo.estado.techos.has(M.clave(cama)):return false
- return true
+  var pieza: Dictionary=j.mundo.constr_en(cama)
+  if not pieza.get("t","") in ["cama","cama_huesped"] or not j.d.mundo.techos.has(M.clave(cama)): continue
+  if pieza.get("dueno",p.dueno)!=p.dueno: continue
+  for v in [Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]:
+   if alcance.has(cama+v): salida.append(q);break
+ return salida
+
+func capacidad(p: Dictionary) -> int:
+ return camas_funcionales(p).size()
+
 func _transitable(c: Vector2i) -> bool:
  if not j.mundo.generador.valida(c):return false
  var d: Dictionary=j.mundo.generador.datos(c)
@@ -119,6 +137,11 @@ func _extraer(p: Dictionary, oficio: String, residente_actual: Dictionary = {}, 
  if not j.es_autoridad(): return false
  var saldo: Dictionary = balance_resumido(p)[objetivo]
  if int(saldo.pendiente) <= 0: return false
+ var coste: Dictionary=p.get("obra",p.get("expedicion",{})).get("coste",{})
+ var producto := "madera" if oficio=="recolector" else "piedra"
+ if objetivo=="materiales" and not coste.is_empty() and int(inventario(p).get(producto,0))>=int(coste.get(producto,0)):
+  var otro := "piedra" if producto=="madera" else "madera"
+  if int(inventario(p).get(otro,0))<int(coste.get(otro,0)): return false
  var centro:=Vector2i(p.celda[0],p.celda[1])
  var tipos: Array = ["arbusto"] if objetivo == "baya" else (["arbol"] if oficio=="recolector" else ["roca"])
  var alcance:=_alcance(centro)
@@ -144,7 +167,12 @@ func _extraer(p: Dictionary, oficio: String, residente_actual: Dictionary = {}, 
     var usos_antes := int(residente_actual.get("usos",0))
     j.mundo.romper(id,int(j.d.min))
     j.d.mundo.golpes.erase(id)
-    for item in def.drops:inventario(p)[item]=int(inventario(p).get(item,0))+int(def.drops[item])
+    var drops: Dictionary=def.drops.duplicate()
+    if objetivo=="baya":
+     var rng=j._rng("sociedad","%s:%s:%d" % [residente_actual.get("id",""),id,int(j.d.min)])
+     for prob in def.prob:
+      if rng.randf()<float(prob.p): drops[prob.item]=int(drops.get(prob.item,0))+int(prob.q)
+    for item in drops:inventario(p)[item]=int(inventario(p).get(item,0))+int(drops[item])
     p.producciones=int(p.producciones)+1
     if not residente_actual.is_empty() and objetivo == "materiales": residente_actual.usos = usos_antes-1
     _resultado_regional(p,"recoleccion_alimento" if objetivo == "baya" else "extraccion",saldo,antes,{"objeto":id,"actor":residente_actual.get("id", ""),"usos_antes":usos_antes,"usos_despues":residente_actual.get("usos",usos_antes)})
@@ -361,11 +389,18 @@ func balance_resumido(p: Dictionary) -> Dictionary:
  var objetivo_materiales := int(cfg.tope_stock) if not trabajadores.is_empty() else 0
  # El ejecutor ya exige stock de comida > 0 para trabajar; no consume esta unidad.
  var comida_trabajo := 1 if materiales<objetivo_materiales else 0
- var objetivos := {"baya":int(p.get("deuda_comida", 0)) + vencido + comida_trabajo}
+ var objetivos := {"baya":int(p.get("deuda_comida", 0)) + vencido + maxi(comida_trabajo,p.residentes.size())}
  for r in trabajadores:
   if int(r.get("usos", 0)) > 0: continue
   var herramienta: String = "hacha_piedra" if r.oficio == "recolector" else "pico_piedra"
   objetivos[herramienta] = int(objetivos.get(herramienta, 0)) + 1
+ var obra: Dictionary=p.get("obra",p.get("expedicion",{})).duplicate(true)
+ if p.has("cultivo_pendiente"):
+  obra.get_or_add("coste",{})
+  Edificios._sumar(obra.coste,p.cultivo_pendiente.coste)
+ if not obra.is_empty():
+  for item in obra.coste: objetivos[item]=maxi(int(objetivos.get(item,0)),int(obra.coste[item]))
+  objetivo_materiales=maxi(objetivo_materiales,int(obra.coste.get("madera",0))+int(obra.coste.get("piedra",0)))
  var saldos := {}
  for item in objetivos:
   var objetivo := int(objetivos[item])
@@ -376,7 +411,9 @@ func balance_resumido(p: Dictionary) -> Dictionary:
  saldos.baya.vencido = vencido
  saldos.baya.trabajo = comida_trabajo
  # Bolsa de control del límite existente: no es un ítem ni un inventario nuevo.
- saldos.materiales = {"id":"%s:materiales" % p.get("poblado", "puesto:" + str(p.id)),"componentes":["madera","piedra"],"reserva":objetivo_materiales,"stock":materiales,"comprometido":0,"en_curso":0,"pendiente":maxi(0,objetivo_materiales-materiales)}
+ var faltante_obra := 0
+ for item in ["madera","piedra"]: faltante_obra+=maxi(0,int(obra.get("coste",{}).get(item,0))-int(inv.get(item,0)))
+ saldos.materiales = {"id":"%s:materiales" % p.get("poblado", "puesto:" + str(p.id)),"componentes":["madera","piedra"],"reserva":objetivo_materiales,"stock":materiales,"comprometido":0,"en_curso":0,"pendiente":maxi(faltante_obra,objetivo_materiales-materiales)}
  return saldos
 
 func actualizar_demandas() -> void:
@@ -385,6 +422,7 @@ func actualizar_demandas() -> void:
   p.viabilidad = evaluar_viabilidad(p)
   registrar_presion(p)
  for p in datos().puestos.values(): resolver_crisis(p)
+ for p in datos().puestos.values(): planear_crecimiento(p)
  datos().demandas = {"version":1, "min":int(j.d.min), "poblados":demandas_colectivas()}
 
 
@@ -465,6 +503,13 @@ func resolver_local(p: Dictionary, previos: Dictionary = {}) -> Dictionary:
    a.desarrollo.registrar("npc:"+str(r.id),"artesania",receta.ent)
    usados[r.id] = true
    break
+ if usados.is_empty():
+  var agricultor := ampliar_cultivo(p)
+  if agricultor!="": usados[agricultor]=true
+ if usados.is_empty():
+  var constructor := ejecutar_obra(p)
+  if constructor!="": usados[constructor]=true
+ a.desarrollo.ensenar_regional(p,usados)
  if usados.is_empty(): transitos.comerciar(p)
  return usados
 
@@ -480,10 +525,7 @@ func estacion_regional(p: Dictionary, tipo: String) -> bool:
 ## Observación factual; no inventa umbrales de crisis ni seguridad lejana.
 func evaluar_viabilidad(p: Dictionary) -> Dictionary:
  var saldo := balance_resumido(p)
- var camas := 0
- for q in p.get("camas",[]):
-  var c := Vector2i(q[0],q[1])
-  if j.mundo.constr_en(c).get("t", "")=="cama_huesped" and j.d.mundo.techos.has(M.clave(c)): camas += 1
+ var camas := capacidad(p)
  var amenazas: Array = []
  var pueblo: Dictionary = j.mundo.poblado(p.get("poblado", ""))
  var area: Array = pueblo.get("area", [])
@@ -523,7 +565,7 @@ func reparar_local(p: Dictionary) -> String:
 func registrar_presion(p: Dictionary) -> void:
  if not j.es_autoridad(): return
  var saldo := balance_resumido(p)
- var faltas := {"comida":maxi(0,int(saldo.baya.reserva)-int(saldo.baya.stock)),"camas":maxi(0,p.residentes.size()-int(p.viabilidad.camas))}
+ var faltas := {"comida":maxi(deficit_sostenible(p),maxi(0,int(saldo.baya.deuda)+int(saldo.baya.vencido)+maxi(int(saldo.baya.trabajo),p.residentes.size())-int(saldo.baya.stock))),"camas":maxi(0,p.residentes.size()-int(p.viabilidad.camas))}
  if not p.has("presiones"): p.presiones={}
  for causa in faltas:
   if int(faltas[causa])<=0:
@@ -599,7 +641,9 @@ func resolver_crisis(p: Dictionary) -> void:
   p.estado="abandonado"
   return
  var presion: Dictionary=p.get("presiones",{}).get("comida",{})
- if presion.is_empty() or int(presion.get("duracion_min",0))<int(cfg.comida_min): return
+ if presion.is_empty():
+  p.erase("expedicion");return
+ if int(presion.get("duracion_min",0))<int(cfg.comida_min): return
  # Una alternativa real ya ejecutada o una entrega pendiente prevalecen sobre evacuar.
  if int(p.get("local_min",-1))<int(presion.desde) or int(p.get("comercio_intento_min",-1))<int(presion.desde): return
  if int(balance_resumido(p).baya.en_curso)>0: return
@@ -612,21 +656,28 @@ func resolver_crisis(p: Dictionary) -> void:
   if id==p.id or b.residentes.is_empty() or not _sostenible(b): continue
   var v := evaluar_viabilidad(b)
   if not v.amenazas_observadas.is_empty(): continue
-  var plazas: int = mini(int(v.camas),int(cfg.capacidad))-b.residentes.size()-transitos.reservas_plaza(id)
+  var plazas: int = capacidad(b)-b.residentes.size()-transitos.reservas_plaza(id)
   if plazas<=0: continue
   var saldo := balance_resumido(b)
   # Reserva del próximo ciclo completo, además de obligaciones ya vencidas y trabajo.
-  var comida_libre: int = int(saldo.baya.stock)-int(saldo.baya.reserva)-b.residentes.size()-transitos.reservas_plaza(id)
+  var comida_libre: int = int(saldo.baya.stock)-int(saldo.baya.reserva)-transitos.reservas_plaza(id)
   if comida_libre<=0: continue
   var camino: Array=transitos.ruta(p.id,id)
   if camino.is_empty() or not ruta_sin_amenaza_conocida(camino): continue
   var duracion := maxi(1,ceili((camino.size()-1)*float(M.P.CELDA)/transitos.H.VEL*C.MIN_POR_SEG))
+  var disponibles: Array=[]
   for r in residentes:
-   if r.has("reserva_viaje"): continue
-   var comida := maxi(0,floori(float(int(j.d.min)+duracion-int(r.get("comida_min",p.comida_min)))/float(cfg.comida_min)))
+   if not r.has("reserva_viaje"): disponibles.append(r)
+  for cantidad in range(mini(plazas,mini(comida_libre,disponibles.size())),0,-1):
+   var miembros: Array=disponibles.slice(0,cantidad)
+   var elegidos: Array=[]
+   var comida := 0
+   for r in miembros:
+    elegidos.append(r.id)
+    comida+=maxi(0,floori(float(int(j.d.min)+duracion-int(r.get("comida_min",p.comida_min)))/float(cfg.comida_min)))
    var provisiones := {"baya":comida} if comida>0 else {}
-   var clave := "crisis:%s:%s:%s:%d" % [p.id,id,r.id,int(j.d.min)]
-   var reserva: Dictionary=transitos.reservar(clave,p.id,id,[r.id],{},provisiones)
+   var clave := "crisis:%s:%s:%s:%d" % [p.id,id,":".join(elegidos),int(j.d.min)]
+   var reserva: Dictionary=transitos.reservar(clave,p.id,id,elegidos,{},provisiones)
    if not reserva.ok: continue
    var salida: Dictionary=transitos.salir(clave)
    if not salida.ok:
@@ -635,7 +686,6 @@ func resolver_crisis(p: Dictionary) -> void:
     continue
    p.crisis.estado="migracion_en_curso"
    p.crisis.operacion=clave
-   # El destino materialmente cubre la carencia que permanecer mantiene.
    p.crisis.mejora={"comida_ciclo":true,"cama":true,"infraestructura":true,"destino":id}
    return
 
@@ -667,6 +717,9 @@ func resolver_crisis(p: Dictionary) -> void:
    p.crisis.estado="recuperacion_en_curso";p.crisis.operacion=clave
    return
 
+ if fundacion.intentar(p):
+  p.crisis.estado="fundacion_en_curso"
+
 ## Recuperación explícita por titulares originales, en llegada física; paga desde carga real.
 func recuperar_llegada(p: Dictionary, op: Dictionary) -> bool:
  if not j.es_autoridad() or p.is_empty() or not p.residentes.is_empty(): return false
@@ -679,7 +732,7 @@ func recuperar_llegada(p: Dictionary, op: Dictionary) -> bool:
    var resultado := Edificios.reparar(j,e,op.bienes,self)
    if not resultado.ok: return false
    op.get_or_add("reparaciones",[]).append({"edificio":id,"min":int(op.reloj),"coste":resultado.coste.duplicate(true)})
- if not _sostenible(p) or op.miembros.size()>int(cfg.capacidad): return false
+ if not _sostenible(p) or op.miembros.size()>capacidad(p): return false
  var comida: int=int(inventario(p).get("baya",0))+int(op.bienes.get("baya",0))+int(op.provisiones.get("baya",0))
  if comida<int(p.get("deuda_comida",0))+op.miembros.size(): return false
  # No devuelve inventarios perdidos: la entrega normal acredita únicamente lo transportado.
@@ -687,3 +740,135 @@ func recuperar_llegada(p: Dictionary, op: Dictionary) -> bool:
  p.recuperacion={"min":int(op.reloj),"operacion":op.id,"dueno":p.dueno}
  if p.has("poblado"): j.mundo.poblado(p.poblado).estado="activo"
  return true
+
+
+## Obras dentro de la misma economía: una demanda espacial, su coste exacto y un ejecutor real.
+func solar_vivienda(p: Dictionary) -> Dictionary:
+ var centro := Vector2i(p.celda[0],p.celda[1])
+ var alcance := _alcance(centro)
+ var entradas: Array=alcance.keys()
+ entradas.sort_custom(func(x,y):
+  var dx: int=absi(x.x-centro.x)+absi(x.y-centro.y)
+  var dy: int=absi(y.x-centro.x)+absi(y.y-centro.y)
+  return dx<dy if dx!=dy else (x.x<y.x if x.x!=y.x else x.y<y.y))
+ for entrada in entradas:
+  if not alcance.has(entrada+Vector2i.DOWN): continue
+  var e := Edificios.plano("vivienda",entrada,p.dueno,p.get("poblado",""))
+  if Edificios.solar(j,e,self)=="": return e
+ return {}
+
+func planear_crecimiento(p: Dictionary) -> void:
+ if not j.es_autoridad() or p.residentes.is_empty() or not _sostenible(p): return
+ var obra: Dictionary=p.get("obra",{})
+ if not obra.is_empty():
+  var causa: Dictionary=datos().puestos.get(obra.get("origen_demanda",""),{})
+  if causa.is_empty() or not causa.get("presiones",{}).has("comida"): p.erase("obra")
+  return
+ if capacidad(p)>p.residentes.size()+transitos.reservas_plaza(p.id): return
+ var saldo := balance_resumido(p)
+ if int(saldo.baya.stock)-int(saldo.baya.reserva)<1: return
+ var ids: Array=datos().puestos.keys();ids.sort()
+ for id in ids:
+  var otro: Dictionary=datos().puestos[id]
+  var presion: Dictionary=otro.get("presiones",{}).get("comida",{})
+  if id==p.id or otro.residentes.is_empty() or int(presion.get("duracion_min",0))<int(cfg.comida_min): continue
+  if int(otro.get("comercio_intento_min",-1))<int(presion.get("desde",0)): continue
+  var pendiente := false
+  for b in datos().puestos.values():
+   if b.get("obra",{}).get("origen_demanda","")==id: pendiente=true
+  if pendiente: continue
+  var camino: Array=transitos.ruta(id,p.id)
+  if camino.is_empty() or not ruta_sin_amenaza_conocida(camino): continue
+  var e := solar_vivienda(p)
+  if e.is_empty(): return
+  p.obra={"id":e.id,"plano":e,"coste":Edificios.coste(e),"causa":"alojar_migracion_real","origen_demanda":id,"desde":int(j.d.min)}
+  return
+
+func ejecutar_obra(p: Dictionary) -> String:
+ var obra: Dictionary=p.get("obra",{})
+ if obra.is_empty() or not j.es_autoridad() or not Inv.tiene(inventario(p),obra.coste): return ""
+ var causa: Dictionary=datos().puestos.get(obra.origen_demanda,{})
+ if causa.is_empty() or not causa.get("presiones",{}).has("comida"):
+  p.erase("obra");return ""
+ if capacidad_alimentaria(p)<p.residentes.size()+1 and int(fundacion.fuentes(Vector2i(p.celda[0],p.celda[1])).arbusto)<=0: return ""
+ var saldo := balance_resumido(p)
+ if int(inventario(p).get("baya",0))-int(obra.coste.get("baya",0))<int(saldo.baya.deuda)+int(saldo.baya.vencido)+p.residentes.size()+1: return ""
+ var actores: Array=p.residentes.duplicate();actores.sort_custom(func(x,y):return str(x.id)<str(y.id))
+ for r in actores:
+  if r.has("reserva_viaje"): continue
+  var antes := inventario(p).duplicate(true)
+  if Edificios.instalar(j,obra.plano,self)!="": return ""
+  Inv.quitar(inventario(p),obra.coste)
+  p.get_or_add("edificios",[]).append(obra.id)
+  for k in obra.plano.piezas:
+   if obra.plano.piezas[k].t in ["cama","cama_huesped"]:
+    var c := Edificios._celda(k)
+    p.get_or_add("camas",[]).append([c.x,c.y])
+  if p.has("poblado"):
+   var pueblo: Dictionary=j.mundo.poblado(p.poblado)
+   var area: Array=pueblo.area
+   var union := Rect2i(area[0],area[1],area[2],area[3]).merge(Rect2i(obra.plano.area[0],obra.plano.area[1],obra.plano.area[2],obra.plano.area[3]))
+   pueblo.area=[union.position.x,union.position.y,union.size.x,union.size.y]
+  _resultado_regional(p,"vivienda_pagada",{"id":obra.id},antes,{"actor":r.id,"demanda":obra.origen_demanda})
+  a.desarrollo.registrar("npc:"+str(r.id),"construccion",obra.coste)
+  p.erase("obra")
+  return r.id
+ return ""
+
+
+## Capacidad material observada, sin acreditar ni prometer cosechas al inventario.
+## El horizonte y rendimientos proceden de los ciclos ya vigentes.
+func capacidad_alimentaria(p: Dictionary) -> float:
+ var capacidad_ciclo := 0.0
+ var c := Vector2i(p.celda[0],p.celda[1])
+ var alcance := _alcance(c)
+ for q in p.get("campos",[]):
+  var campo := Vector2i(q[0],q[1])
+  if j.mundo.constr_en(campo).get("t","")!="campo": continue
+  for v in [Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]:
+   if alcance.has(campo+v):
+    capacidad_ciclo+=float(C.CAMPO_COSECHA.get("baya",0))*float(cfg.comida_min)/float(C.CAMPO_CRECE_MIN)
+    break
+ return capacidad_ciclo
+
+func deficit_sostenible(p: Dictionary) -> int:
+ if p.residentes.is_empty(): return 0
+ # Alimento silvestre actualmente alcanzable permite la alternativa local, no una crisis prevista.
+ if int(fundacion.fuentes(Vector2i(p.celda[0],p.celda[1])).arbusto)>0: return 0
+ return maxi(0,ceili(float(p.residentes.size())-capacidad_alimentaria(p)))
+
+func ampliar_cultivo(p: Dictionary) -> String:
+ var entrantes := 1 if p.has("obra") else 0
+ if deficit_sostenible(p)<=0 and (entrantes==0 or capacidad_alimentaria(p)>=p.residentes.size()+entrantes):
+  p.erase("cultivo_pendiente");return ""
+ var centro := Vector2i(p.celda[0],p.celda[1])
+ var alcance := _alcance(centro)
+ var candidatos: Array=alcance.keys()
+ candidatos.sort_custom(func(x,y):return M.clave(x)<M.clave(y))
+ for c in candidatos:
+  if not terreno_reparacion(c,false) or j.mundo.tipo(c)!=M.T.PASTO or j.d.mundo.techos.has(M.clave(c)) or j.ocupada(c): continue
+  if not j.mundo.piso_en(c).is_empty() or a.sociedad.habitat.reservada(c): continue
+  var seguro := true
+  for v in [Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]:
+   if not alcance.has(c+v): seguro=false
+  if not seguro: continue # un campo sólido no puede cortar la única salida
+  p.cultivo_pendiente={"celda":[c.x,c.y],"coste":C.CONSTR.campo.coste.duplicate(true)}
+  if not Inv.tiene(inventario(p),C.CONSTR.campo.coste): return ""
+  for r in p.residentes:
+   if r.has("reserva_viaje"): continue
+   var antes := inventario(p).duplicate(true)
+   Inv.quitar(inventario(p),C.CONSTR.campo.coste)
+   j.mundo.poner(c,"campo",true,p.dueno);j.sembrar(c)
+   p.get_or_add("campos",[]).append([c.x,c.y])
+   p.erase("cultivo_pendiente")
+   _resultado_regional(p,"cultivo_pagado",{"id":p.id+":comida"},antes,{"actor":r.id,"campo":M.clave(c)})
+   return r.id
+ return ""
+
+
+func recepcion_viable(p: Dictionary, entrantes: int, bienes: Dictionary = {}, provisiones: Dictionary = {}) -> bool:
+ if not _sostenible(p) or capacidad(p)<p.residentes.size()+entrantes: return false
+ var saldo := balance_resumido(p)
+ var comida: int=int(saldo.baya.stock)+int(bienes.get("baya",0))+int(provisiones.get("baya",0))
+ if comida<int(saldo.baya.reserva)+entrantes: return false
+ return capacidad_alimentaria(p)>=p.residentes.size()+entrantes or int(fundacion.fuentes(Vector2i(p.celda[0],p.celda[1])).arbusto)>0

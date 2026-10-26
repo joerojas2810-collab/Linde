@@ -46,19 +46,22 @@ static func _sumar(total: Dictionary, lote: Dictionary) -> void:
  for k in lote: total[k] = int(total.get(k,0)) + int(lote[k])
 
 ## Comprueba huella sin mutar el mundo. También se usa en la vista previa.
-static func solar(j, e: Dictionary) -> String:
+static func solar(j, e: Dictionary, regional = null) -> String:
  if e.is_empty(): return "Plano desconocido"
  var a: Array = e.area
  for y in range(a[1],a[1]+a[3]):
   for x in range(a[0],a[0]+a[2]):
    var c := Vector2i(x,y)
    if M.CASA.has_point(c) or not j.mundo.edificio_en(c).is_empty(): return "Hay otro edificio"
-   if j.mundo.puede_poner(c) != "" or j.mundo.estado.techos.has(M.clave(c)) or not j.mundo.piso_en(c).is_empty(): return "La huella necesita terreno libre"
+   var libre: bool=j.mundo.puede_poner(c)=="" if regional==null else regional.terreno_reparacion(c,false)
+   if not libre or j.mundo.estado.techos.has(M.clave(c)) or not j.mundo.piso_en(c).is_empty(): return "La huella necesita terreno libre"
    if j.mundo.tipo(c) == M.T.CAMINO or j.autonomia.sociedad.habitat.reservada(c): return "Hay un camino o solar reservado"
    if j.d.cofres.has("c@"+M.clave(c)): return "Hay un depósito existente en la huella"
    if j.ocupada(c): return "Hay alguien en la huella"
  var acceso := Vector2i(e.entrada[0],e.entrada[1])+Vector2i.DOWN
- if j.mundo.bloquea(acceso) or not j.mundo.caja_libre(M.pies_de_celda(acceso)): return "La entrada sur está bloqueada"
+ if regional==null:
+  if j.mundo.bloquea(acceso) or not j.mundo.caja_libre(M.pies_de_celda(acceso)): return "La entrada sur está bloqueada"
+ elif not regional._transitable(acceso) or not regional.caja_regional(M.pies_de_celda(acceso)): return "La entrada sur está bloqueada"
  return ""
 
 ## Recorrido real desde el exterior, con las mismas colisiones que jugador y NPC.
@@ -81,9 +84,9 @@ static func accesible(j, e: Dictionary) -> bool:
 
 ## Operación común de génesis: valida y materializa una vez, sin reponer nada durante carga o streaming.
 ## El llamador aporta/paga materiales; no concede contenido a cofres ni cambia la población.
-static func instalar(j, e: Dictionary) -> String:
+static func instalar(j, e: Dictionary, regional = null) -> String:
  if not j.es_autoridad(): return "Solo la autoridad construye"
- var motivo := solar(j,e)
+ var motivo := solar(j,e,regional)
  if motivo != "": return motivo
  var m = j.mundo
  var anteriores: Dictionary = m.estado.constr
@@ -93,7 +96,11 @@ static func instalar(j, e: Dictionary) -> String:
  var actores: Array = []
  for actor in j.rt.values(): actores.append(M.celda_de(actor.pies))
  for nid in j.habitantes.ids: actores.append(M.celda_de(j.habitantes.pos(nid)))
- var valida: bool = accesible(j,e) and m.construccion_segura(Vector2i(e.entrada[0],e.entrada[1]),actores)
+ var valida: bool = accesible(j,e) and m.construccion_segura(Vector2i(e.entrada[0],e.entrada[1]),actores) if regional==null else regional.acceso_reparacion(e)
+ if regional!=null:
+  var zona := Rect2i(e.area[0]-1,e.area[1]-1,e.area[2]+2,e.area[3]+2)
+  for actor in actores:
+   if zona.has_point(actor): valida=valida and m.construccion_segura(Vector2i(e.entrada[0],e.entrada[1]),actores)
  m.estado.constr = anteriores
  m.cambiar()
  if not valida: return "El plano impediría un acceso o el uso del interior"

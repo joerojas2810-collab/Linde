@@ -95,7 +95,7 @@ func _init() -> void:
   ok(int(e.secuencia) == secuencia, "deuda pagada no se vuelve a consumir")
  # Carencia de herramienta no fabrica una nueva ni degrada usos por un trabajo fallido.
  inv.madera = 0
- inv.baya = 1
+ inv.baya = p.residentes.size()
  inv.erase("hacha_piedra")
  inv.erase("pico_piedra")
  for r in p.residentes: r.usos = 0
@@ -108,7 +108,7 @@ func _init() -> void:
  var saldo: Dictionary = asen.balance_resumido(p).baya
  ok(saldo.trabajo == 1 and saldo.pendiente > 0, "saldo expresa el requisito existente de comida para trabajar")
  # Agotar las fuentes cercanas no produce un resultado positivo ni gasta usos.
- inv.baya = 1
+ inv.baya = p.residentes.size()
  for r in p.residentes: r.usos = 5
  var centro := Vector2i(p.celda[0],p.celda[1])
  var radio: int = int(asen.cfg.radio_recursos)

@@ -35,6 +35,7 @@ func _init()->void:
  j.combate.enemigos[0].tipo="arpia_pradera"
  ok(s.ruta_sin_amenaza_conocida(camino),"criatura huidiza no se confunde con amenaza hostil")
  j.combate.enemigos=enemigos
+ s.inventario(b).baya-=1;s.inventario(p).baya=1 # alimento real para quien permanece
  var cantidad: int =p.residentes.size()+b.residentes.size()
  s.resolver_crisis(p)
  ok(p.crisis.estado=="migracion_en_curso" and p.residentes.size()==1,"crisis elige una plaza viable con mejora material")
