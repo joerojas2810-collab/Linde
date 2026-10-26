@@ -80,9 +80,10 @@ func restaurar() -> void:
 		rutas[id] = {"act": "", "ruta": [], "v": -1, "i": 0, "fallo": false}
 	reconciliar()    # presentes por variable sin habitante (p. ej. partida guardada tras una llegada)
 
-## Cama del habitante: la fija de Mundo.CAMAS o la de huésped que se le asignó al llegar. (-1,-1) si no tiene.
+## Cama del habitante: la fija de su pueblo (hoy solo el inicial) o la de huésped que se le asignó al llegar. (-1,-1) si no tiene.
 func cama(id: String) -> Vector2i:
-	if Mundo.CAMAS.has(id): return Mundo.CAMAS[id]
+	var fijas: Dictionary = j.mundo.camas(Mundo.ID_INICIAL)
+	if fijas.has(id): return fijas[id]
 	var asig: Dictionary = j.d.mundo_vivo.camas_asignadas
 	for k in asig: if asig[k] == id: return Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
 	return Vector2i(-1, -1)
@@ -111,7 +112,7 @@ func reconciliar() -> void:
 			var libres: Array = j.vivo.camas_libres_lista()
 			if not libres.is_empty(): mv.camas_asignadas[libres[0]] = id   # sin cama libre llega igual y duerme al raso
 		var n: Dictionary = nuevo(id)
-		var p: Vector2 = Mundo.pies_de_celda(Mundo.ENTRADA)
+		var p: Vector2 = Mundo.pies_de_celda(j.mundo.entrada(Mundo.ID_INICIAL))   # todos llegan al pueblo inicial; luego, al que reciba al colono
 		n.pos = [p.x, p.y]
 		j.d.npcs[id] = n
 		rutas[id] = {"act": "", "ruta": [], "v": -1, "i": 0, "fallo": false}
