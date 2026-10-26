@@ -102,3 +102,10 @@ El usuario volvió a indicar la carpeta y ya se encontró y leyó íntegra [LIND
 ### Siguiente decisión: propuesta A de ubicaciones (26/10/2026)
 
 Prototipo y [galería comparativa](production/qa/evidence/mundo-1/fase-7/propuesta-ubicacion/GALERIA.html) preparados, no activados en el juego. Mismas cantidades/especies por región; preferencias de vecinos cardinales con vegetación/roca o despejados, y retorno al punto original si no hay alternativa. 2.523 regiones: 2.271 apariciones, 904 puntos propuestos diferentes; conservación/orden inverso/estado puro y regresión hábitats23. Investigación complementaria ya localizada y leída (`6f78a6b`). Antes de continuar con activación se requiere decisión humana de distribución y persistencia versionada; no sustituir planes de partidas existentes. No merge/push.
+
+
+### Preferencias A aprobadas y activación v2 (26/10/2026)
+
+El usuario aprobó las preferencias de ubicación. Mundos nuevos poblados guardan `d.fauna.distribucion` v2 y una copia de los datos declarativos; los existentes permanecen v1 sin mover sus puntos, bajas o heridas. Modificar defaults no reescribe mundos guardados y una política desconocida rechaza carga con motivo explícito. Cantidades, especie, ID, bioma y región conservados; mismo generador/candidatos, reglas globales selladas intactas. No se activa migración de mundos ni cambios de balance.
+
+Verificado: distribución **17/17**, compatibilidad/hábitats **23/23**, fauna **31/31**, cuentas/reconexión real con dos mundos locales **13/13**; los dos guardados llevan v2. [Informe y límites](production/qa/evidence/mundo-1/fase-7/activacion-v2/README.md). Sin otra PC/Internet. Avisos de recursos conocidos al salir. Siguiente: señales de fuentes reales y propuesta de calma/lugares; R/T y otros cambios territoriales no están aprobados. Rama `feature/fase7-ecologia`, sin merge/push. Esta nota supera el pendiente de aprobación A de las notas anteriores.

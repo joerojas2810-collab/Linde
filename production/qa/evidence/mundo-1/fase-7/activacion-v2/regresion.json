@@ -1,0 +1,23 @@
+[
+  {
+    "suite": "prueba_habitats",
+    "ok": true,
+    "passes": 23,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_fauna",
+    "ok": true,
+    "passes": 31,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_distribucion_fauna",
+    "ok": true,
+    "passes": 17,
+    "fails": 0,
+    "exit": 0
+  }
+]

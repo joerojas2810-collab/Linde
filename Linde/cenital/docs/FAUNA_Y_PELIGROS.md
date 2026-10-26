@@ -1,5 +1,16 @@
 # Fauna y peligros por bioma — v1
 
+## Distribución v2 aprobada: activación en mundos nuevos (26/10/2026)
+
+El usuario aprobó la propuesta A. Los mundos **nuevos en modo poblado** fijan `d.fauna.distribucion` con versión 2 y copia de las preferencias de `datos/fauna/habitats_v2.json`. Los mundos existentes sin ese campo permanecen siempre en v1, incluso en regiones no visitadas; no se migran al cargar. El modo legado sigue intacto. La API de creación admite `version_fauna=1` para herramientas que reproducen mundos anteriores; la escena/servidor normal usan v2.
+
+Se conservan cantidad, especie, bioma, ID y región. Si el punto ya cumple se mantiene; si no, se busca entre los mismos 64 candidatos: espectros junto a árbol/arbusto, gólems junto a roca/vetas, arpías/diablillos con cuatro vecinos cardinales de pasto vacío; slimes conservan su orilla. Sin candidato adecuado se conserva el origen. No modifica conducta de combate, aparición del jugador ni reaparición de bajas.
+
+`Fauna.plan_preferente` y `cumple_preferencia` son compartidos con el comparador. El snapshot del mundo se restaura al cargar, independientemente de futuros defaults, y queda protegido por el checksum del guardado. Es versión de generación, no una sustitución de reglas globales: no se alteran la huella ni sus excepciones. Versiones desconocidas se rechazan con un motivo legible, sin volver a v1. Usar una versión del juego que soporte v2 para estos mundos; no se verificó apertura con builds anteriores. La réplica sigue sin decidir población.
+
+Pruebas de esta activación: distribución **17/17**, compatibilidad/hábitats **23/23**, fauna **31/31**, integración de cuentas y reconexión con dos mundos locales **13/13**; ambos guardados de servidor contienen v2. [Evidencia](../../../production/qa/evidence/mundo-1/fase-7/activacion-v2/README.md). Sin prueba externa. Este subbloque no implementa calma regional, amenazas ligadas a lugares, señales o navegación/P2. Las notas de propuesta no activada de abajo son históricas y quedan superadas para mundos nuevos por esta aprobación.
+
+
 ## Fase 7: primer bloque de hábitats compatibles — 26/10/2026
 
 `Fauna.perfiles_habitat()` normaliza el bloque `biomas` del JSON existente; la cadena de especie sigue siendo la sintaxis abreviada válida. Ejemplo equivalente (todavía no se sustituye el JSON sellado):
