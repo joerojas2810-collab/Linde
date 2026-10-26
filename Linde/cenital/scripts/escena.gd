@@ -50,6 +50,7 @@ var cofre_id := ""
 var forma_plano := "espada"
 var build := false
 var pieza_i := 0
+var edificio_id := ""
 var activa := Vector2i.ZERO
 var t_anim := 0.0
 var debug := false
@@ -179,19 +180,21 @@ func _unhandled_key_input(e: InputEvent) -> void:
 		KEY_C: _abrir("craft")
 		KEY_K: _abrir("hab")
 		KEY_J: _abrir("mis")
-		KEY_B: build = not build
+		KEY_B:
+			build = not build
+			if build: pieza_i = 0
 		KEY_V: _ficha_cercana()
 		KEY_T: j.gestionar_pista("descartar")
 		KEY_H: ayuda_visible = not ayuda_visible
 		KEY_F1: debug = not debug
 		KEY_F5:
 			j.aviso("Guardado." if j.guardar(ruta) else "No se pudo guardar.")
-		KEY_Q: if build: pieza_i = (pieza_i + C.ORDEN_CONSTR.size() - 1) % C.ORDEN_CONSTR.size()
+		KEY_Q: if build: pieza_i = (pieza_i + _opciones_construccion().size() - 1) % _opciones_construccion().size()
 		KEY_E:
-			if build: pieza_i = (pieza_i + 1) % C.ORDEN_CONSTR.size()
+			if build: pieza_i = (pieza_i + 1) % _opciones_construccion().size()
 			else: _interactuar()
 		KEY_SPACE:
-			if build: j.construir(C.ORDEN_CONSTR[pieza_i], Mundo.celda_de(j.pies) + j.mira)
+			if build: j.construir(_opciones_construccion()[pieza_i], Mundo.celda_de(j.pies) + j.mira)
 		KEY_X: if build: j.retirar(Mundo.celda_de(j.pies) + j.mira)
 
 func _tecla_menu(e: InputEvent) -> void:
@@ -486,6 +489,22 @@ func _armar() -> void:
 	var st: Dictionary = j.stats()
 	if panel in ["planos","practica","laminados","saberes"] and not j.autonomia.desarrollo.activa(): panel="desarrollo"
 	match panel:
+		"edificio":
+			var e: Dictionary = j.d.mundo.get("registro",{}).get("edificios",{}).get(edificio_id,{})
+			if e.is_empty(): return
+			_l(e.nombre + " · plano terminado")
+			_parrafo("Entrada sur · cama y cofre en un interior continuo. Las puertas se abren automáticamente al acercarse.")
+			var coste: Dictionary = J.Edificios.coste(J.Edificios.faltantes(j,e))
+			_l("Estado: " + ("completa" if coste.is_empty() else "necesita reparación"))
+			if not coste.is_empty():
+				_l("Reparar: " + Hud.J_txt(coste),func():j.reparar_edificio(e.id,int(e.revision)))
+			_parrafo("Las ampliaciones y la construcción por etapas se incorporarán sobre este mismo plano.")
+		"habitante_regional":
+			var r: Dictionary = j.autonomia.asentamientos.residente(ficha_npc)
+			_l(r.get("nombre","Habitante"))
+			_l("Hogar: " + str(j.mundo.poblado(r.get("hogar", "")).get("nombre", "Puesto regional")))
+			_l("Oficio: " + str(r.get("oficio", "sin registrar")))
+			_parrafo(r.get("historia", "Historia sin registrar."))
 		"inv":
 			_l("INVENTARIO  %d/%d  ·  Nv %d  Daño %d  Def %d  Vida %d  Vel x%.2f" % [Inv.slots(j.jug().inv), st.slots, j.nivel(), st.dmg, st.def, st.hp, st.vel])
 			_l("Bono de set: " + _txt_bono(j.bono_set()))
@@ -630,7 +649,7 @@ func _armar() -> void:
 				var e := "APRENDIDA" if j.jug().hab.has(id) else "coste %d · nv %d%s" % [h.coste, h.niv, (" · req:" + req) if req != "" else ""]
 				_l("[%s] %s  (%s)" % [h.rama.substr(0, 3), h.n, e], func(): j.aprender(id))
 		"mis":
-			_l("SOCIEDAD DEL VALLE  ·  necesidades, acuerdos y grupos" if j.autonomia.activa() else "MISIONES  ·  las de capítulo se piden y entregan hablando con quien las da")
+			_l("SOCIEDAD  ·  necesidades, acuerdos y grupos" if j.autonomia.activa() else "MISIONES  ·  las de capítulo se piden y entregan hablando con quien las da")
 			if j.autonomia.activa():
 				_l("— HABITANTES: necesidades reales (Enter ayuda; requiere cercanía) —")
 				for nid in j.habitantes.ids:
@@ -679,8 +698,12 @@ func _armar() -> void:
 					var obra: Dictionary=sociedad.habitat.datos().obras[k]
 					_l("Casa "+k+": "+obra.estado+(" · "+obra.motivo if obra.motivo!="" else ""))
 				for puesto in j.autonomia.asentamientos.datos().puestos.values():
+					var bloque: String = j.autonomia._bloque(Vector2i(puesto.celda[0], puesto.celda[1]))
+					if puesto.has("poblado") and j.jug().get("mapa",{}).get("bloques",{}).get(bloque, "") != "visto": continue
 					_l("%s · %d residentes · %s"%[puesto.nombre,puesto.residentes.size(),puesto.estado])
-					_l("  Coordenadas %s · %s"%[str(puesto.celda),Hud.J_txt(j.autonomia.asentamientos.inventario(puesto))])
+					_l("  Coordenadas %s · %s"%[str(puesto.celda),Hud.J_txt(j.d.cofres.get(puesto.cofre,{}).get("inv",{}))])
+					for r in puesto.residentes:
+						_l("  %s · %s" % [r.nombre,r.oficio],func():_ver_ficha(r.id))
 				_l("— ECONOMÍA Y PROTECCIÓN —")
 				_l("Valor de la fibra: %.2f · baja cuando abunda" % sociedad.valor("fibra"))
 				_parrafo("Los habitantes dejan fibra sobrante al recoger bayas y usan fibra para renovar ropa y lechos. Fabrica candados en una mesa y colócalos en tus cofres.")
@@ -773,6 +796,9 @@ func _interactuar() -> void:
 func _tras_interactuar(r: Dictionary) -> void:
 	if not r.ok or j == null or panel != "": return
 	match r.panel:
+		"edificio":
+			edificio_id = r.id
+			_abrir("edificio")
 		"dialogo":
 			dialogo_npc = str(r.get("npc", ""))
 			dialogo_txt = r.texto
@@ -857,6 +883,9 @@ func _pista() -> String:
 		if cs.get("t", "") == "cofre": return "E: abrir cofre"
 		if cs.get("t", "") == "campo": return "E: cosechar" if int(cs.get("listo", 0)) <= int(j.d.min) else "El cultivo aún crece"
 		if cs.get("t", "") == "cama": return "E: dormir" if cs.get("dueno", "") == J.LOCAL else ("Cama de otro jugador" if cs.propia else "Cama de un habitante")
+	for r in j.autonomia.asentamientos.visibles():
+		if r.pos.distance_to(j.pies) <= J.ALCANCE_NPC: return "E · Hablar con " + r.nombre + "   V · Conocer a esta persona"
+	if not j.mundo.edificio_en(base+j.mira).is_empty() or not j.mundo.edificio_en(base).is_empty(): return "E: consultar vivienda y reparación"
 	var est: String = j.estacion_junto()
 	if est != "": return "E: fabricar (%s)" % C.CONSTR[est].n.to_lower()
 	var lugar: Dictionary = j.mundo.lugar_en(base)
@@ -897,7 +926,7 @@ func _draw() -> void:
 			var c := Vector2i(x, y)
 			arte_mundo.suelo(self, m, c, Time.get_ticks_msec() / 1000.0)
 			var cs: Dictionary = m.constr_en(c)
-			if cs.get("t", "") == "suelo" or (not Mundo.es_valle(c) and m.tipo(c) == Mundo.T.SUELO): arte_mundo.constr_suelo(self, c)
+			if cs.get("t", "") == "suelo" or not m.piso_en(c).is_empty() or (not Mundo.es_valle(c) and m.tipo(c) == Mundo.T.SUELO): arte_mundo.constr_suelo(self, c)
 	arte_mundo.casa_interior(self)
 	for e in j.combate.enemigos: if e.est == "aviso": _telegrafo(e)
 	var dentro := Mundo.CASA.has_point(Mundo.celda_de(j.pies))
@@ -962,6 +991,9 @@ func _draw() -> void:
 		if ind != null: draw_texture_rect(ind, Rect2((j.pies - Vector2(6, 46 + 0.5 * sin(Time.get_ticks_msec() / 300.0))).round(), Vector2(12, 16)), false)
 	arte_mundo.casa_tejado(self, 0.0 if dentro else 1.0)
 	_dibujar_techos(vista, s)
+	for e in j.d.mundo.get("registro",{}).get("edificios",{}).values():
+		var acceso := Mundo.pies_de_celda(Vector2i(e.entrada[0],e.entrada[1]))
+		if vista.has_point(acceso): _nombre_mundo(e.nombre,acceso+Vector2(0,20))
 	if j.autonomia.sociedad.activa():
 		var marcador: Texture2D = hud.ui.tex("reutilizados/quest_marker.png")
 		for gid in j.autonomia.sociedad.cfg.grupos:
@@ -971,10 +1003,17 @@ func _draw() -> void:
 			_nombre_mundo(j.autonomia.sociedad.nombre_grupo(gid), pos - Vector2(0, 30), Color("f1d692"))
 	if build:
 		var c: Vector2i = Mundo.celda_de(j.pies) + j.mira
-		var id: String = C.ORDEN_CONSTR[pieza_i]
-		var libre: bool = m.puede_techar(c) == "" if id == "techo" else m.puede_poner(c) == "" and not j.ocupada(c)
-		var bien: bool = libre and Inv.tiene(j.jug().inv, C.CONSTR[id].coste)
-		arte_mundo.constr(self, id, c, false, Color(0.5, 1, 0.55, 0.65) if bien else Color(1, 0.4, 0.4, 0.65))
+		var id: String = _opciones_construccion()[pieza_i]
+		if J.Edificios.catalogo().planos.has(id):
+			var plano: Dictionary = J.Edificios.plano(id,c,J.LOCAL)
+			var bien: bool = J.Edificios.solar(j,plano)=="" and Inv.tiene(j.jug().inv,J.Edificios.coste(plano))
+			var tinte := Color(0.5,1,0.55,0.65) if bien else Color(1,0.4,0.4,0.65)
+			for k in plano.pisos: arte_mundo.constr_suelo(self,J.Edificios._celda(k),tinte)
+			for k in plano.piezas: arte_mundo.constr(self,plano.piezas[k].t,J.Edificios._celda(k),false,tinte)
+		else:
+			var libre: bool = m.puede_techar(c) == "" if id == "techo" else m.puede_poner(c) == "" and not j.ocupada(c)
+			var bien: bool = libre and Inv.tiene(j.jug().inv, C.CONSTR[id].coste)
+			arte_mundo.constr(self, id, c, false, Color(0.5, 1, 0.55, 0.65) if bien else Color(1, 0.4, 0.4, 0.65))
 	arte_mundo.letreros_comunitarios(self)
 	_dibujar_rotulos()
 	if debug:
@@ -1173,7 +1212,15 @@ func _dibujar_obj(id: String) -> void:
 
 ## Los techos tapan la casa; los que están conectados al jugador (por dentro o junto a la puerta) se vuelven transparentes.
 func _dibujar_techos(vista: Rect2, s: float) -> void:
-	var techos: Dictionary = j.mundo.estado.techos
+	var techos: Dictionary = j.mundo.estado.techos.duplicate()
+	# Las cubiertas del catálogo usan su máscara exacta y su propia identidad.
+	for e in j.d.mundo.get("registro",{}).get("edificios",{}).values():
+		var alfa: float = 0.10 if J.Edificios.abierto(e,j.pies) else 1.0
+		for k in e.techos:
+			if not techos.has(k): continue
+			techos.erase(k)
+			var c: Vector2i = J.Edificios._celda(k)
+			if vista.has_point(Vector2(c)*s): arte_mundo.techo(self,c,alfa)
 	if techos.is_empty(): return
 	var pj := Mundo.celda_de(j.pies)
 	var abiertos := {}
@@ -1209,7 +1256,16 @@ func _dibujar_techos(vista: Rect2, s: float) -> void:
 func _dibujar_constr(c: Vector2i) -> void:
 	var cs: Dictionary = j.mundo.constr_en(c)
 	var abierta: bool = cs.t == "puerta" and maxi(absi(Mundo.celda_de(j.pies).x - c.x), absi(Mundo.celda_de(j.pies).y - c.y)) <= 1
-	arte_mundo.constr(self, cs.t, c, abierta, Color.WHITE, j.campo_listo(c))
+	var e: Dictionary = j.mundo.edificio_en(c)
+	if cs.t=="puerta" and not e.is_empty():
+		var posiciones: Array=[]
+		for actor in j.actores(): posiciones.append(actor[0])
+		if red != null:
+			for otro in red.otros_jugadores(): posiciones.append(otro.pies)
+		abierta = J.Edificios.puerta_abierta(c,posiciones)
+	var alfa := 1.0
+	if not e.is_empty() and cs.t in ["muro","muro_ladrillo"] and c.y == int(e.entrada[1]) and J.Edificios.abierto(e,j.pies): alfa = 0.18
+	arte_mundo.constr(self, cs.t, c, abierta, Color(1,1,1,alfa), j.campo_listo(c))
 
 ## La puerta se ve abierta con el jugador a una celda o menos (solo presentación; la colisión no cambia).
 func _cerca_puerta() -> bool:
@@ -1235,10 +1291,25 @@ func _navegar_inventario(e:InputEvent)->void:
 		elif e.keycode==KEY_DOWN:sel=mini(ultimo,sel+5)
 
 func _ver_ficha(nid:String)->void:
-	ficha_npc=nid;_abrir("ficha")
+	ficha_npc=nid
+	_abrir("habitante_regional" if not j.autonomia.asentamientos.residente(nid).is_empty() else "ficha")
 func _ficha_cercana()->void:
 	var mejor:="";var distancia:=96.0
 	for id in j.habitantes.ids:
 		var d:float=j.habitantes.pos(id).distance_to(j.pies)
 		if d<distancia:mejor=id;distancia=d
+	for r in j.autonomia.asentamientos.visibles():
+		var d: float = r.pos.distance_to(j.pies)
+		if d < distancia: mejor=r.id;distancia=d
 	if mejor!="":_ver_ficha(mejor)
+
+## El catálogo encabeza la construcción jugada; piezas antiguas siguen como opciones auxiliares hasta incorporar taller/depósito.
+func _opciones_construccion() -> Array:
+	return ["vivienda"] + C.ORDEN_CONSTR if j.mundo.modo_inicio()=="poblado" else C.ORDEN_CONSTR
+
+## Metadatos de la selección para que HUD y vista previa no dupliquen catálogo ni precios.
+func _info_construccion() -> Dictionary:
+	var id: String = _opciones_construccion()[pieza_i]
+	if J.Edificios.catalogo().planos.has(id):
+		return {"n":"Vivienda (acceso sur)", "coste":J.Edificios.coste(J.Edificios.plano(id,Mundo.celda_de(j.pies)+j.mira,J.LOCAL))}
+	return C.CONSTR[id]

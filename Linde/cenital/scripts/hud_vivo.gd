@@ -54,9 +54,9 @@ func _draw() -> void:
 		_t(esc.pista, Vector2(vs.x / 2 - w / 2 + 16, 620), 16)
 	if esc.panel == "" and not esc.ayuda_visible: _pista_contextual(vs, j)
 	if esc.build:
-		var id: String = C.ORDEN_CONSTR[esc.pieza_i]
+		var info: Dictionary = esc._info_construccion()
 		ui.panel(self, Rect2(380, 16, 540, 72))
-		_t("CONSTRUIR: %s · coste %s" % [C.CONSTR[id].n, J_txt(C.CONSTR[id].coste)], Vector2(396, 26), 16)
+		_t("CONSTRUIR: %s · coste %s" % [info.n, J_txt(info.coste)], Vector2(396, 26), 16)
 		_t("[Q/E] cambiar · [Espacio] colocar · [X] retirar · [B] salir", Vector2(396, 52), 16)
 	if esc.panel != "": _panel(vs)
 
@@ -276,6 +276,8 @@ func _tracker(vs: Vector2, j, h: float) -> void:
 	if not esc.j.mundo.lugar_en(celda).is_empty():
 		lineas.append([hito, 16])
 		hito = ""
+	var edificio: Dictionary=esc.j.mundo.edificio_en(celda)
+	if not edificio.is_empty():hito=edificio.nombre
 	lineas.append(["%s%s · %d, %d" % [hito + " · " if hito != "" else "",bioma.capitalize(),celda.x,celda.y],16])
 	var alto := 72.0 + (extra + lineas.size()) * 26.0 + (8.0 if not lineas.is_empty() else 0.0)
 	var r := Rect2(vs.x - 16 - 328, 16, 328, alto)
@@ -376,7 +378,7 @@ func _mapa(vs: Vector2) -> void:
 		_t("%d. %s" % [numero, h.nombre], Vector2(858, y), 16)
 		var fuente: String = h.fuente
 		var n := "Explorado por ti"
-		if fuente != "visto": n = "Según " + str(j.habitantes.fichas.get(fuente.trim_prefix("npc:"), {}).get("n", "un habitante"))
+		if fuente != "visto": n = "Según " + j.nombre_habitante(fuente.trim_prefix("npc:"))
 		_t(n, Vector2(858, y + 21), 14)
 		y += 52
 	_t("%d–%d de %d" % [mini(esc.mapa_primera + 1, referencias.size()), mini(esc.mapa_primera + 7, referencias.size()), referencias.size()], Vector2(858, 580), 14)

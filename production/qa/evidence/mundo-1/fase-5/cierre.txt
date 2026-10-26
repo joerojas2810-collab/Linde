@@ -1,0 +1,8 @@
+Cierre: 39 de 40 suites sin fallos tras las correcciones dirigidas.
+La corrida completa dio 38/40: fallo conocido de arte y cuatro expectativas de prueba_aparicion que solo bloqueaban el Valle.
+Ahora el mundo tiene otras comunidades elegibles. Los escenarios de rechazo total inhabilitan explícitamente esas otras comunidades; no se cambia la validación de seguridad.
+Reejecución específica: prueba_aparicion 32 PASS.
+Revisión posterior de interacción: E prioriza el cofre/cultivo apuntado antes del residente regional cercano.
+Reejecución específica: preexistentes_ui 13 PASS, preexistentes_red 26 PASS, lugares_ui 10 PASS.
+No se repite toda la batería por cambios limitados a estos contratos.
+Fallo persistente de prueba: 329 PASS / 1 FAIL, SHA256 de 96 archivos de arte E04/E05, preexistente.

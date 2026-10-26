@@ -216,7 +216,10 @@ func paso(dt: float) -> void:
 		n.energia = clampf(n.energia + gasto, nec.minimo, nec.maximo)
 		var clave: String = act + ":" + d.lugar + str(d.get("celda", []))
 		if r.act != clave or r.v != j.mundo.version:
-			r.ruta = j.mundo.camino(c, meta, Mundo.AREA_EXPEDICION if j.autonomia != null and j.autonomia.expediciones() else Rect2i())
+			var area := Mundo.AREA_EXPEDICION if j.autonomia != null and j.autonomia.expediciones() else Rect2i()
+			# Una vivienda exterior usa navegación local del terreno, sin ampliar las expediciones del Valle.
+			if not Mundo.es_valle(c) and (not j.mundo.edificio_en(c).is_empty() or (act == "dormir" and not j.mundo.edificio_en(cama(id)).is_empty())): area = Rect2i()
+			r.ruta = j.mundo.camino(c, meta, area)
 			r.act = clave
 			r.v = j.mundo.version
 			r.i = 1

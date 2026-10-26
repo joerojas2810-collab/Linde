@@ -1,0 +1,6 @@
+SUITE                      SALIDA   PASS   FAIL  RESULTADO
+prueba_preexistentes_ui        0     13      0  OK
+prueba_preexistentes_red       0     26      0  OK
+prueba_lugares_ui              0     10      0  OK
+---
+3 de 3 suites sin fallos. Salidas completas en: /tmp/linde-f5-interaccion

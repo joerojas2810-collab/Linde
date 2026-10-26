@@ -20,6 +20,7 @@ Linde tiene **un mundo compartido, persistente y reconocible**, que existe y cam
 - **Orientación**: mapa personal consultable con M, que muestra lo descubierto o sabido; los NPC pueden dar información aproximada sobre lugares; los descubrimientos se pueden compartir.
 - **Exploración**: hay destinos significativos y accesibles (ruinas, campamentos, cuevas como alcance inicial, no como límite) y 1–2 pueblos preexistentes adicionales al principio (alcance inicial, no límite) unidos por caminos. Los pueblos se construyen **generalizando `Asentamientos`**, sin un sistema paralelo.
 - **Evolución visible**: construcciones, caminos, cultivos, habitantes y asentamientos cambian de forma persistente y observable; los NPC fundan y amplían asentamientos.
+- **Edificios funcionales** (precisión del usuario, 26/10): catálogo pequeño de vivienda, taller y depósito; ningún pueblo está obligado a tener los tres. Edificios completos para jugadores/NPC, compuestos por piezas y objetos reales, con interiores continuos, entradas claras, techos que permiten ver el interior y puertas automáticas inicialmente. Planos preparados para construcción progresiva y modificaciones limitadas por reparación/ampliación; primero hacer funcionar edificios terminados, sin bloquear la expansión del mundo por implementar todas las etapas.
 - **Continuidad**: si el pueblo inicial deja de ser viable, quien se une después aparece en otra comunidad segura y coherente.
 
 ## Hitos de evaluación (no son requisitos para el jugador)

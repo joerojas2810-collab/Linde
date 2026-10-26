@@ -15,6 +15,7 @@ const ARGUMENTO_EXCEPCION := "--aceptar-reglas-distintas"
 ## Un componente por grupo de archivos. Faltar un archivo cuenta como «ausente» (p. ej. saberes antes de existir).
 ## Excluido a propósito: equipo/paletas.json (solo colores) y datos/mundo (tarjetas narrativas del director).
 const COMPONENTES := {
+	"edificios": ["res://datos/edificios/catalogo_v1.json"],
 	"desarrollo": ["res://datos/desarrollo/reglas_v1.json", "res://datos/desarrollo/saberes_v1.json"],
 	"autonomia": ["res://datos/autonomia/reglas.json"],
 	"asentamientos": ["res://datos/asentamientos/reglas_v1.json"],

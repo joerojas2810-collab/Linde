@@ -1,7 +1,7 @@
 # Mundo 1 — auditoría de brechas y plan incremental
 
 > **Fecha**: 2026-10-26 · **Visión**: [VISION_MUNDO_1.md](../../design/VISION_MUNDO_1.md) · **Estado implementado (fuente de verdad)**: [ESTADO.md](../../production/epics/mundo-vivo/ESTADO.md) · **Diagnóstico previo**: [CIERRE_MUNDO_INICIAL_Y_EXPLORACION.md](CIERRE_MUNDO_INICIAL_Y_EXPLORACION.md) (su §6 queda sustituido por las fases de este plan).
-> **Aprobado el 2026-10-26** con las precisiones de N1–N6 y de las fases 0 y 5–7; registrado como `M1-*` en la sección F de [DECISIONES.md](../../Linde/cenital/docs/DECISIONES.md). **Fases 0–4 implementadas al 26/10**; alcance verificado en ESTADO.md §§3d–3g. La Fase 5 sigue sin autorización. La preparación histórica de las fases 0 y 1 se conserva en la sección 8.
+> **Aprobado el 2026-10-26** con las precisiones de N1–N6 y de las fases 0 y 5–7; registrado como `M1-*` en la sección F de [DECISIONES.md](../../Linde/cenital/docs/DECISIONES.md). **Fases 0–4 implementadas al 26/10**; alcance verificado en ESTADO.md §§3d–3g. La Fase 5 fue autorizada después: 5a implementada; 5b sigue aplazada según M1-F5. Fase 6 y cuentas/autenticación fuera del alcance. La preparación histórica de las fases 0 y 1 se conserva en la sección 8.
 > **Etiquetas**: **[C]** verificado en código · **[D]** solo documentado en ESTADO/contratos · **[M]** medido · **[I]** inferencia. Contexto aplicable: «partidas viejas no importan» (sin migraciones ni compatibilidad), así que los cambios de esquema son libres.
 
 ## 1. Conclusión
@@ -147,6 +147,7 @@ Cada fase deja un ciclo jugable. Los riesgos de regresión se mitigan con las su
 - **Riesgo**: **medio** (determinismo cliente/servidor del registro, tamaño del guardado).
 
 ### Fase 5 — Pueblos preexistentes y su transición cercana↔lejana (D3, D6)
+**Estado al 26/10:** 5a implementada. Arquitectura de catálogo aprobada después de la revisión: **primera vivienda terminada funcional implementada y validada**, ver ESTADO.md §3i y [ARQUITECTURA_EDIFICIOS_MUNDO_1.md](ARQUITECTURA_EDIFICIOS_MUNDO_1.md). Planos/etapas preparados; el ejecutor progresivo completo no bloquea Fase 5. Taller, depósito y sustitución de puestos aún no realizados. Dos comunidades de génesis en mundos nuevos (`La Hondonada`, `Los Sauces`), con rutas, residentes resumidos identificables, cosechas/extracción reales, mapa e intercambio cercano de información. Ver ESTADO.md §3h para pruebas y límites. No se convierte todavía el resumen en NPC de rutinas completas: 5b conserva su carácter aplazable y no se declara cerrada. No hay migración diseñada de mundos previos.
 - **Objetivo**: otros pueblos con habitantes identificables, actividad económica y evolución observable, sin simular detalle a distancia.
 - **Reutiliza**: `Asentamientos` (puesto con más piezas/residentes), `visibles()` (nivel b), `Habitantes.registrar_colono` (nivel c).
 - **Cambios mínimos, en dos etapas**: **5a** pueblos preexistentes como puestos con oficios y producción resumida, visibles por `visibles()`; **5b** (objetivo de diseño, **aplazable** hasta resolver identidad, recursos y red; no descartable) materialización a habitante completo al acercarse un jugador y reversión al alejarse, devolviendo inventario y memoria al resumen. 5a ya exige identidad estable de cada residente (id, nombre, oficio, historia) para que 5b sea posible después.

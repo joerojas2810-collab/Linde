@@ -91,6 +91,7 @@ func estado(cama: Vector2i, fase: String, motivo: String="") -> void:
  datos().obras[k]=obra
  if datos().parcelas.has(k):datos().parcelas[k].estado=fase
 func permite_pieza(c: Vector2i, pieza: String) -> bool:
+ if not j.mundo.edificio_en(c).is_empty():return false # edificios completos se modifican mediante su plano
  for k in datos().parcelas:
   var cama:=Vector2i(int(k.get_slice(",",0)),int(k.get_slice(",",1)))
   if not _area_de(k).has_point(c):continue

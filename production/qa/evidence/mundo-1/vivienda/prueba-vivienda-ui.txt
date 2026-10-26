@@ -1,0 +1,14 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS B ofrece primero el plano de vivienda completo
+PASS vista previa y HUD muestran el precio del mismo plano
+PASS Espacio instala la vivienda y B sale del modo de colocar
+PASS E en la entrada muestra la vivienda como unidad funcional
+PASS E usa la cama y fija el descanso con el comportamiento habitual
+PASS el mobiliario real tiene prioridad sobre la ficha del edificio
+PASS la unidad muestra el costo concreto de su reparación
+PASS la acción de reparar del panel repone solo la teja faltante
+WARNING: 30 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

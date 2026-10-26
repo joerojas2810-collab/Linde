@@ -1220,6 +1220,10 @@ func _celdas_casa(cama: Vector2i, nombre: String = "") -> Array:
 
 ## Casa completa: tres muros de la cama, sala, puerta, mesa y techo sobre cama y sala.
 func casa_completa(cama: Vector2i) -> bool:
+	var edificio: Dictionary = j.mundo.edificio_en(cama)
+	if not edificio.is_empty():
+		if edificio.familia != "vivienda" or edificio.piezas.get(M.clave(cama),{}).get("t","") not in ["cama","cama_huesped"]: return false
+		return j.Edificios.coste(j.Edificios.faltantes(j,edificio)).is_empty()
 	if j.mundo.constr_en(cama).get("t", "") not in ["cama", "cama_huesped"]: return false
 	for d in plano(cama).base:
 		if j.mundo.constr_en(cama + Vector2i(int(d[0]), int(d[1]))).get("t", "") not in ["muro", "muro_ladrillo"]: return false
