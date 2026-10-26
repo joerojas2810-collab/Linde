@@ -67,8 +67,23 @@ El usuario autorizó push y merge de cuentas y hashes. Se incorporó `origin/mai
 
 Esta nota supera el estado histórico anterior de «rama separada, sin merge». El fallo de hashes de arte está corregido; no debe seguir tratándose como pendiente. Mantener los módulos de cuentas junto con las ampliaciones de viviendas/comunidades de IA 1. La skin permanece en pausa.
 
+## Acceso antes del menú e identidad única (26/10/2026)
+
+El usuario pidió **iniciar sesión/registrarse antes del menú** y eligió cuenta única entre PC. Ajuste desarrollado en `feature/login-inicial` sobre `d223398`, todavía fuera de main. La autoridad de cuentas es independiente del mundo (TCP7790); después de validar se ofrece continuar, nueva/cargar partida, alojar, unirse y cerrar sesión. No se repite el registro ni la contraseña global al elegir mundo. Guardados locales propios, varias partidas y última selección; progreso de mundos compartidos en su servidor.
+
+Ver [ADR-0003](docs/architecture/adr-0003-identidad-antes-del-menu.md), [guía actualizada](Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md) y [evidencia](production/qa/evidence/login-inicial/README.md). Validación: 8 casos unitarios, 16 comprobaciones de flujo UI/guardado, 13 de identidad con dos mundos y 7 suites de regresión, sin fallos. No se verificó otra PC física ni Internet público. Las pruebas de corrupción imprimen errores JSON esperados; ObjectDB/recursos siguen siendo avisos conocidos. Las partidas locales no se sincronizan en nube; los archivos individuales/cuentas anteriores no se migran en silencio. La skin permanece en pausa.
+
+### Formularios alineados con el arte del juego (26/10/2026)
+
+Pulido local de `feature/login-inicial`: reutiliza E06 y tipografías existentes para registro, acceso, alojamiento/conexión, configuración y partidas; opciones avanzadas plegables. Capturas reales y 16/16 comprobaciones del flujo aislado superadas. El usuario pidió también quitar el mínimo de contraseña; continúa obligatoria con máximo 128 y cinco casos unitarios del servicio superados. Detalle en [evidencia](production/qa/evidence/login-inicial/README.md). Galería local `outputs/Acceso_estetica/GALERIA.html`. No se publicaron estos ajustes; no tocar la skin en pausa ni el checkout original.
+
 ## Integración de taller con login y servidor (26/10/2026)
 
 Merge autorizado de `9c0d1c4` (taller/casas comunales) y `d223398` (cuentas, servidor y hashes). Se conservan ambos trabajos; conflictos limitados a notas añadidas en documentación, resueltos manteniendo ambas. El fallo de arte mencionado en el cierre histórico del taller ya está corregido por el trabajo integrado de IA 2. No se agregan funcionalidades ni se repiten baterías extensas.
 
 Verificación mínima del merge: `prueba_taller_ui` **7 PASS/0 FAIL** (escena combinada, plano/precio, construcción y acceso a mesa, horno y cofre). Módulos de cuentas y red idénticos a `origin/main`; núcleo de edificios y asentamientos idéntico al cierre del taller.
+
+
+## Integración publicada de acceso inicial con main (26/10/2026)
+
+El usuario autorizó subir la revisión completa. Integrado origin/main `c84b88e` mediante `cdac6e9`, conservando talleres, casas comunales y tareas de Fase 6. Esta nota supera las notas históricas de revisión sin publicar. Validación combinada: 9 casos unitarios, 16 de acceso/partidas, 13 de identidad con dos mundos, 6 suites de regresión y tareas 16/16. [Detalle y límites](production/qa/evidence/login-inicial/main-c84b88e/README.md). Sin prueba externa ni cambios a la skin.

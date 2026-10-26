@@ -275,6 +275,18 @@ Revisado por solicitud del usuario: 84 PNG intactos; doce JSON afectados por CRL
 
 Aprobada expresamente por el usuario la publicación y fusión con main. Versión combinada con `origin/main` `42bef50`: sin conflictos de Git; conserva Fase 5a y primera vivienda. **10/10 suites seleccionadas** sin fallos (general, reglas, UI, comunidades núcleo/UI/red, vivienda núcleo/UI/red y visual); **35/35 comprobaciones de cuentas** con clientes y servidor reales; capturas y arranque/cierre de formulario en 7777/7778. Detalle en [cuentas-main](../../qa/evidence/cuentas-main/README.md). No se repitió la batería completa de 43 suites. No se probó otra computadora ni Internet público. Se mantiene la skin fuera del alcance, en pausa.
 
+## Acceso inicial con cuenta única — revisión de UI y arquitectura (26/10/2026)
+
+Autorización expresa del usuario: iniciar sesión/registrarse **antes** del menú y cuenta única usable desde distintas PC. Implementación en `feature/login-inicial`, base `d223398`; sin publicar esta revisión todavía. Reutiliza la autoridad SQLite/Argon2id/HTTPS en un servicio independiente, JWT RS256 validados mediante PyJWT y permisos breves ligados al certificado del mundo; el anfitrión recibe solo el permiso y conserva su acceso privado/ENet DTLS. No duplica cuentas ni personajes por mundo en otra base.
+
+Menú posterior con continuar, nueva/cargar, alojar/unirse y cerrar sesión; guardados locales por identidad y varias partidas sin sobrescribir, respaldo y última selección. Configuración de la autoridad una vez; en la PC que la aloja se reactiva conservando sus datos. Cuenta única entre PC; archivos locales no sincronizados en nube. No se atribuyen guardados anteriores automáticamente.
+
+Verificado: **8 casos unitarios**, **16 comprobaciones de flujo real**, **13 de identidad con dos mundos e instancias de cliente**, **7 suites de regresión** sin fallos. La identidad permanece disponible con los mundos cerrados; persistencia, no duplicación de cuentas, contraseñas separadas, bloqueo de sesiones duplicadas, propiedad y respaldo de partidas. Evidencia [login-inicial](../../qa/evidence/login-inicial/README.md); decisiones [ADR-0003](../../../docs/architecture/adr-0003-identidad-antes-del-menu.md). Sin prueba en otra computadora física/Internet, ni repetición de toda la batería. Sin cambios de balance/generación y sin retomar la skin.
+
+### Pulido visual de cuenta y servidor — 26/10/2026
+
+En `feature/login-inicial`, formularios con pergamino/madera E06, fuentes del juego, acciones verde petróleo, foco dorado y avisos con contraste. Opciones técnicas plegables conservando sus campos. Verificado con capturas 1280 × 720 y 16/16 comprobaciones de acceso/guardados en servicio aislado; ver [evidencia](../../qa/evidence/login-inicial/README.md). Se verificaron también 5 casos unitarios tras quitar el mínimo de contraseña por solicitud del usuario (obligatoria, máximo 128). No se repitió la batería global/red externa; continúan avisos conocidos al cerrar las pruebas. Sin publicar esta revisión.
+
 ## Integración de taller con login y servidor (26/10/2026)
 
 Merge autorizado de `9c0d1c4` (taller/casas comunales) y `d223398` (cuentas, servidor y hashes). Se conservan ambos trabajos; conflictos limitados a notas añadidas en documentación, resueltos manteniendo ambas. El fallo de arte mencionado en el cierre histórico del taller ya está corregido por el trabajo integrado de IA 2. No se agregan funcionalidades ni se repiten baterías extensas.
@@ -343,3 +355,8 @@ Las decisiones de recetas y capacidad fueron aprobadas por el usuario; superan l
 **Pruebas puntuales:** aprendizaje 8, expansión/fundación 24, crisis/recuperación 15, tránsito 21, regional 19, respuestas 17: **104/104**, sin suites históricas. [Evidencia y contraste con Diseño Maestro §9](../../qa/evidence/mundo-1/fase-6-cierre/README.md). Incluye conservación exacta por ítem, no duplicación de NPC/edificios, interrupción, continuación equivalente tras reinicio y réplica en proceso. Las corridas de integración preceden los últimos ajustes aislados según se detalla en evidencia. Avisos conocidos del motor al cerrar persisten.
 
 **Cierre funcional del alcance aprobado; ninguna decisión de diseño pendiente en él.** 5b, derechos de terceros y fundación por oportunidad sin crisis permanecen diferidos explícitos. No se certifican aún dos clientes por sockets/Internet, rendimiento a escala, frecuencia natural de fundaciones o matriz general de exploración. No hay publicación remota solicitada para esta entrega.
+
+
+## Integración aprobada de cuentas/UI con talleres y tareas (26/10/2026)
+
+El usuario autorizó subir la revisión completa. Integrado origin/main `c84b88e` mediante `cdac6e9`, conservando talleres, casas comunales y tareas de Fase 6. Esta nota supera las notas históricas de revisión sin publicar. Validación combinada: 9 casos unitarios, 16 de acceso/partidas, 13 de identidad con dos mundos, 6 suites de regresión y tareas 16/16. [Detalle y límites](../../qa/evidence/login-inicial/main-c84b88e/README.md). Sin prueba externa ni cambios a la skin.

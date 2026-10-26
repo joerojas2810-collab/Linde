@@ -30,6 +30,8 @@ from cryptography import x509
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.x509.oid import NameOID
+import jwt
+from identidad import Identidad, TOLERANCIA_SEGUNDOS, huella, verificar
 
 PH = PasswordHasher(time_cost=3, memory_cost=65536, parallelism=4)
 MAX_BODY = 4096
@@ -90,6 +92,9 @@ class Accounts:
                 CREATE TABLE IF NOT EXISTS tickets(
                   hash TEXT PRIMARY KEY, account TEXT NOT NULL REFERENCES accounts(id), expires REAL NOT NULL);
                 CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS admisiones(
+                  hash TEXT PRIMARY KEY, account TEXT NOT NULL, display TEXT NOT NULL, expires REAL NOT NULL);
+                CREATE TABLE IF NOT EXISTS permisos_usados(jti TEXT PRIMARY KEY, expires REAL NOT NULL);
             """)
 
     @contextmanager
@@ -129,15 +134,15 @@ class Accounts:
         except (VerifyMismatchError, VerificationError):
             return False
 
-    def auth(self, action: str, data: dict, ip: str) -> dict:
+    def auth(self, action: str, data: dict, ip: str, identidad: bool = False) -> dict:
         username = data.get("usuario", "")
         password = data.get("password", "")
         server_password = data.get("servidor_password", "")
         if not all(isinstance(x, str) for x in (username, password, server_password)):
             raise Rejected("Campos inválidos")
         username = username.strip().lower()
-        if not USER.fullmatch(username) or not 10 <= len(password) <= 128 or len(server_password) > 128:
-            raise Rejected("Usuario: 3–24 letras sin acentos, cifras, _ o -. Contraseña: 10–128 caracteres.")
+        if not USER.fullmatch(username) or not password or len(password) > 128 or len(server_password) > 128:
+            raise Rejected("Usuario: 3–24 letras sin acentos, cifras, _ o -. Contraseña obligatoria, máximo 128 caracteres.")
         self.limit(ip, username)
         if not self.gate.acquire(blocking=False):
             raise Rejected("Servidor ocupado. Intenta en unos segundos.", 429)
@@ -166,6 +171,8 @@ class Accounts:
                         raise Rejected("Usuario o contraseña incorrectos.", 401)
                     if PH.check_needs_rehash(row[1]):
                         db.execute("UPDATE accounts SET password=? WHERE id=?", (PH.hash(password), row[0]))
+                if identidad:
+                    return {"ok": True, "id": row[0], "nombre": row[2]}
                 ticket = secrets.token_urlsafe(32)
                 db.execute("DELETE FROM tickets WHERE expires<?", (time.time(),))
                 db.execute("INSERT INTO tickets VALUES(?,?,?)",
@@ -181,11 +188,40 @@ class Accounts:
         key = hashlib.sha256(ticket.encode()).hexdigest()
         with self.lock, self.db() as db:
             db.execute("BEGIN IMMEDIATE")
+            admision = db.execute("SELECT account,display,expires FROM admisiones WHERE hash=?", (key,)).fetchone()
+            if admision and admision[2] >= time.time():
+                db.execute("DELETE FROM admisiones WHERE hash=?", (key,))
+                return {"ok": True, "id": admision[0], "nombre": admision[1]}
             row = db.execute("SELECT a.id,a.display,t.expires FROM tickets t JOIN accounts a ON t.account=a.id WHERE t.hash=?", (key,)).fetchone()
             db.execute("DELETE FROM tickets WHERE hash=?", (key,))
             if not row or row[2] < time.time():
                 raise Rejected("La sesión de acceso caducó. Inicia sesión de nuevo.", 401)
         return {"ok": True, "id": row[0], "nombre": row[1]}
+
+    def admitir(self, claims: dict, password: str, ip: str) -> dict:
+        """Permiso firmado ya validado: concede solo entrada, nunca crea otra cuenta."""
+        if not isinstance(password, str) or len(password) > 128:
+            raise Rejected("Contraseña del servidor inválida")
+        self.limit(ip, claims["sub"])
+        if not self.gate.acquire(False):
+            raise Rejected("Servidor ocupado. Intenta en unos segundos.", 429)
+        try:
+            with self.db() as db:
+                row = db.execute("SELECT value FROM meta WHERE key='server_password'").fetchone()
+                if row and row[0] and not self.verify(row[0], password):
+                    raise Rejected("Contraseña del servidor incorrecta.", 403)
+                db.execute("DELETE FROM permisos_usados WHERE expires<?", (time.time(),))
+                db.execute("DELETE FROM admisiones WHERE expires<?", (time.time(),))
+                try:
+                    db.execute("INSERT INTO permisos_usados VALUES(?,?)", (claims["jti"], claims["exp"] + TOLERANCIA_SEGUNDOS))
+                except sqlite3.IntegrityError:
+                    raise Rejected("Este permiso ya se utilizó. Vuelve a conectar.", 401)
+                ticket = secrets.token_urlsafe(32)
+                db.execute("INSERT INTO admisiones VALUES(?,?,?,?)", (hashlib.sha256(ticket.encode()).hexdigest(),
+                           claims["sub"], claims["name"], time.time() + TICKET_SECONDS))
+            return {"ok": True, "ticket": ticket}
+        finally:
+            self.gate.release()
 
     def backup(self):
         with self.db() as source:
@@ -225,9 +261,12 @@ class LimitedServer(ThreadingHTTPServer):
             self.slots.release()
 
 
-def serve(folder: Path, host: str, port: int):
+def serve(folder: Path, host: str, port: int, rol="legado", autoridad: Path | None = None):
     accounts = Accounts(folder)
     control = (folder / "control.key").read_text().strip()
+    identidad = Identidad(folder) if rol == "identidad" else None
+    if rol == "mundo" and (autoridad is None or not autoridad.is_file()):
+        raise RuntimeError("El mundo necesita el certificado de la autoridad de cuentas")
     class Handler(BaseHTTPRequestHandler):
         def setup(self):
             super().setup()
@@ -247,7 +286,7 @@ def serve(folder: Path, host: str, port: int):
 
         def do_GET(self):
             if self.path == "/estado":
-                self.respond(200, {"ok": True})
+                self.respond(200, {"ok": True, "rol": rol})
             else:
                 self.respond(404, {"ok": False, "motivo": "Ruta desconocida"})
 
@@ -260,8 +299,19 @@ def serve(folder: Path, host: str, port: int):
                 if not isinstance(data, dict):
                     raise Rejected("Petición inválida")
                 if self.path in ("/registro", "/login"):
-                    result = accounts.auth(self.path[1:], data, self.client_address[0])
+                    if rol == "mundo":
+                        raise Rejected("Inicia sesión en Linde antes de elegir un mundo.", 403)
+                    result = accounts.auth(self.path[1:], data, self.client_address[0], identidad=rol == "identidad")
+                    if identidad:
+                        token, expires = identidad.emitir(result["id"], result["nombre"])
+                        result.update(token=token, exp=expires)
+                elif self.path == "/permiso" and identidad:
+                    result = {"ok": True, "permiso": identidad.permiso(data.get("token", ""), data.get("destino", ""))}
+                elif self.path == "/admitir" and rol == "mundo":
+                    claims = verificar(data.get("permiso", ""), autoridad, "linde-mundo:" + huella(folder / "servidor.crt"))
+                    result = accounts.admitir(claims, data.get("servidor_password", ""), self.client_address[0])
                 elif self.path == "/consumir":
+                    if rol == "identidad":raise Rejected("Este servicio no aloja partidas.", 403)
                     if not ipaddress.ip_address(self.client_address[0]).is_loopback or not hmac.compare_digest(self.headers.get("X-Linde-Control", ""), control):
                         raise Rejected("No autorizado", 403)
                     result = accounts.claim(data)
@@ -270,6 +320,8 @@ def serve(folder: Path, host: str, port: int):
                 self.respond(200, result)
             except Rejected as e:
                 self.respond(e.status, {"ok": False, "motivo": e.message})
+            except jwt.PyJWTError:
+                self.respond(401, {"ok": False, "motivo": "La sesión no es válida o ha caducado. Inicia sesión de nuevo."})
             except (ValueError, TypeError, UnicodeError):
                 self.respond(400, {"ok": False, "motivo": "Petición inválida"})
             except Exception:
@@ -285,7 +337,7 @@ def serve(folder: Path, host: str, port: int):
         while True:
             time.sleep(1)
             heartbeat = folder / "latido"
-            if (folder / "detener_cuentas").exists() or (heartbeat.exists() and time.time() - heartbeat.stat().st_mtime > 20):
+            if (folder / "detener_cuentas").exists() or (rol != "identidad" and heartbeat.exists() and time.time() - heartbeat.stat().st_mtime > 20):
                 server.shutdown()
                 return
             if time.monotonic() - last_backup > 60:
@@ -318,13 +370,18 @@ def main():
     else:
         import fcntl
         fcntl.flock(lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    rol = "legado"
+    autoridad = None
     if args.iniciar or args.config:
         config = json.loads(args.config.read_text(encoding="utf-8-sig")) if args.config else {}
         if args.config:
             args.config.unlink()
+        rol = config.get("rol", "legado")
+        if rol not in ("identidad", "mundo", "legado"):raise ValueError("Rol de cuentas inválido")
+        autoridad = Path(config["autoridad"]) if config.get("autoridad") else None
         fingerprint = certificate(args.datos)
         accounts = Accounts(args.datos)
-        password = config.get("password", "")
+        password = config.get("password", "") if rol != "identidad" else ""
         if not isinstance(password, str) or len(password) > 128:
             raise ValueError("Contraseña del servidor inválida")
         with accounts.db() as db:
@@ -340,7 +397,7 @@ def main():
         if args.iniciar:
             print(json.dumps(info))
     if not args.iniciar:
-        serve(args.datos, args.host, args.puerto)
+        serve(args.datos, args.host, args.puerto, rol, autoridad)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,13 @@
+PASS registro funciona sin ning�n mundo alojado
+PASS otra instancia de acceso reconoce la misma identidad
+PASS el mismo ID no entra dos veces al mismo mundo
+PASS mundo usa ID global sin recibir contrase�a de Linde
+PASS contrase�a privada sigue separada de la cuenta
+PASS la misma cuenta entra a otro mundo sin registrarse de nuevo
+PASS mundo no duplica cuentas ni hashes globales: mundo1
+PASS mundo no duplica cuentas ni hashes globales: mundo2
+PASS servidor de mundo no acepta un login paralelo
+PASS token global no sirve directamente como permiso de mundo
+PASS progreso preparado en el guardado existente
+PASS reconexi�n desde nueva instancia recupera el personaje global
+PASS las cuentas siguen disponibles con todos los mundos cerrados

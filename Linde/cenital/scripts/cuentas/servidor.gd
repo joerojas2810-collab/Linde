@@ -5,13 +5,15 @@ var carpeta := "user://servidor"
 var python := "python"
 var password := ""
 var puerto_cuentas := 7778
+var autoridad := ""
 var estado_archivo := ""
 var listo := false
 var ultimo_guardado := true
 var _latido_t := 0.0
 
 func _ready() -> void:
-	error=await backend.iniciar(self,carpeta,puerto_cuentas,password,python);password=""
+	var opciones={"rol":"mundo","autoridad":autoridad} if autoridad!="" else {}
+	error=await backend.iniciar(self,carpeta,puerto_cuentas,password,python,opciones);password=""
 	if error!="":return _fallo_inicio(error)
 	var disponible=false
 	for i in 30:

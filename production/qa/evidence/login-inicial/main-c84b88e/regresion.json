@@ -1,0 +1,44 @@
+[
+  {
+    "suite": "prueba_ui",
+    "ok": true,
+    "passes": 13,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_reglas",
+    "ok": true,
+    "passes": 82,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_taller_ui",
+    "ok": true,
+    "passes": 7,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_taller_red",
+    "ok": true,
+    "passes": 36,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_autonomia",
+    "ok": true,
+    "passes": 33,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_sociedad",
+    "ok": true,
+    "passes": 48,
+    "fails": 0,
+    "exit": 0
+  }
+]

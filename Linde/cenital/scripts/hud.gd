@@ -215,6 +215,18 @@ func _fila_inventario(i: int, pos: Vector2, ancho: float) -> void:
 		draw_string(ui.fuente, pos + Vector2(52, 27), texto, HORIZONTAL_ALIGNMENT_LEFT, ancho - 60, 16, UiArte.TINTA)
 
 func _menu(vs: Vector2) -> void:
+	if esc.requiere_acceso:
+		var panel=Rect2(vs.x/2-270,26,540,668)
+		ui.panel(self,panel)
+		ui.texto_centrado(self,"LINDE",vs.x/2,92,42)
+		ui.texto_centrado(self,"Cuenta: "+str(esc.sesion.get("nombre","")),vs.x/2,126,17)
+		objetivos.clear()
+		for i in esc.menu_items.size():
+			var rect=Rect2(panel.position+Vector2(48,128+i*68),Vector2(444,56))
+			objetivos.append({"r":rect,"i":i});ui.boton(self,rect,i==esc.menu_sel)
+			ui.texto_centrado(self,esc.menu_items[i],vs.x/2,rect.position.y+35,21,UiArte.PAPEL)
+		if esc.menu_msg!="":_t(esc.menu_msg,Vector2(panel.position.x+24,panel.end.y-24),14,Color("8a2020"))
+		return
 	var p := Rect2(vs.x / 2 - 240, 40, 480, 620)
 	ui.panel(self, p)
 	ui.texto_centrado(self, "LINDE", vs.x / 2, p.position.y + 82, 48)

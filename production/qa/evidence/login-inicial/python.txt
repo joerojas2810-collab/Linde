@@ -1,0 +1,13 @@
+test_permit_bound_to_world_and_single_use (test_identidad.IdentidadTest.test_permit_bound_to_world_and_single_use) ... ok
+test_rejects_expiry_wrong_issuer_signature_and_algorithm (test_identidad.IdentidadTest.test_rejects_expiry_wrong_issuer_signature_and_algorithm) ... ok
+test_session_stable_and_password_not_copied_to_world (test_identidad.IdentidadTest.test_session_stable_and_password_not_copied_to_world) ... ok
+test_world_password_is_independent (test_identidad.IdentidadTest.test_world_password_is_independent) ... ok
+test_certificate_reused (test_servicio.AccountsTest.test_certificate_reused) ... ok
+test_expiration_limits_and_backup (test_servicio.AccountsTest.test_expiration_limits_and_backup) ... ok
+test_private_server_separate_password (test_servicio.AccountsTest.test_private_server_separate_password) ... ok
+test_registration_login_and_unique_identity (test_servicio.AccountsTest.test_registration_login_and_unique_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 3.746s
+
+OK

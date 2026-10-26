@@ -16,6 +16,7 @@
 | — | Estado por jugador y mundo compartido (formato 2) | Propuesta, vigente | «Estado por jugador y mundo compartido» |
 | — | Servidor autoritativo «mundo anfitrión» (A04) | Propuesta, vigente (protocolo hoy en versión 8) | «Red: servidor autoritativo»; [ADR-0001](../../../docs/architecture/adr-0001-multijugador-mundo-anfitrion.md) |
 | RED-C1 | Cuentas SQLite/Argon2id, acceso privado opcional y HTTPS/DTLS | Usuario (26/10) | [ADR-0002](../../../docs/architecture/adr-0002-cuentas-locales-seguras.md), [guía](CUENTAS_Y_SERVIDOR.md) |
+| RED-C2 | Cuenta única de Linde e inicio de sesión antes del menú; identidad independiente de los mundos | Usuario (26/10) | [ADR-0003](../../../docs/architecture/adr-0003-identidad-antes-del-menu.md), [guía](CUENTAS_Y_SERVIDOR.md) |
 | — | Equipo v1 (familias, piedras, Chispa, sets) | Propuesta, vigente | «Equipo v1» y [sistema-de-equipo.md](../../documentos/sistema-de-equipo.md) |
 | — | Arte de equipo por colores índice; ataque con celda 48 | Propuesta, vigente | Secciones «Arte de equipo…» y «Ataque con equipo» |
 | — | Arte nuevo por defecto; integración estética E01–E06; dibujo procedural retirado | Usuario (24/10) | «Arte nuevo por defecto» e «Integración estética completa» |

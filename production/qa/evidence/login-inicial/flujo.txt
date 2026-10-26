@@ -1,0 +1,55 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 3.3.0 Core Profile Context 23.19.12.03.240603 - Compatibility - Using Device: ATI Technologies Inc. - AMD Radeon(TM) Graphics
+
+PASS el arranque exige acceso antes del menú
+PASS servicio independiente iniciado desde configuración de acceso
+PASS registro válido abre el menú, sin entrar a ningún mundo
+PASS formulario oculto después del registro
+PASS nueva partida queda vinculada a la cuenta
+PASS crear otra partida conserva la anterior
+PASS carga restaura el progreso de la partida elegida
+PASS Continuar recuerda la partida elegida, incluso si no es la más nueva
+ERROR: Parse JSON failed. Error at line 0: Expected '}'
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] datos_propios (res://scripts/cuentas/partidas.gd:21)
+       [1] _cargar_cuenta (res://scripts/escena.gd:183)
+       [2] run (res://tests/prueba_acceso_inicial.gd:51)
+       [3] foto (res://tests/prueba_acceso_inicial.gd:14)
+ERROR: Parse JSON failed. Error at line 0: Expected '}'
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] inspeccionar (res://scripts/guardado.gd:27)
+       [1] cargar (res://scripts/guardado.gd:132)
+       [2] cargar (res://scripts/juego.gd:94)
+       [3] _cargar_cuenta (res://scripts/escena.gd:184)
+       [4] run (res://tests/prueba_acceso_inicial.gd:51)
+       [5] foto (res://tests/prueba_acceso_inicial.gd:14)
+ERROR: Parse JSON failed. Error at line 0: Expected '}'
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] datos_propios (res://scripts/cuentas/partidas.gd:21)
+       [1] marcar (res://scripts/cuentas/partidas.gd:40)
+       [2] _cargar_cuenta (res://scripts/escena.gd:188)
+       [3] run (res://tests/prueba_acceso_inicial.gd:51)
+       [4] foto (res://tests/prueba_acceso_inicial.gd:14)
+PASS la comprobación de propiedad permite recuperar el respaldo válido
+ERROR: Parse JSON failed. Error at line 0: Expected '}'
+   at: parse_string (core/io/json.cpp:629)
+   GDScript backtrace (most recent call first):
+       [0] inspeccionar (res://scripts/guardado.gd:27)
+       [1] guardar (res://scripts/guardado.gd:119)
+       [2] guardar (res://scripts/juego.gd:282)
+       [3] run (res://tests/prueba_acceso_inicial.gd:52)
+       [4] foto (res://tests/prueba_acceso_inicial.gd:14)
+PASS cerrar sesión vuelve al acceso y bloquea el menú
+PASS otra cuenta no puede abrir ni listar las partidas de El Rayo
+PASS contraseña incorrecta no permite entrar al menú
+PASS el login posterior recupera la misma cuenta y sus partidas
+PASS elegir mundo no solicita registrarse ni repetir la contraseña de Linde
+PASS otra instancia reactiva el servicio configurado sin sustituir sus datos
+PASS la nueva instancia conserva la cuenta y sus partidas tras reiniciar el servicio
+WARNING: 78 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

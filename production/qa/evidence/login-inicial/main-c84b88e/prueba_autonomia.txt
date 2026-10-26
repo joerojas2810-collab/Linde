@@ -1,0 +1,79 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+
+
+PASS partida normal arranca en autonomía (modo principal)
+
+PASS NPC sin jugador recolectan objetos reales del mapa
+
+PASS memoria registra acciones efectivamente ejecutadas
+
+PASS la actividad no depende de tarjetas ni misiones del director
+
+PASS necesidad interna avanza con el reloj
+
+PASS misma semilla e intervención reproducen decisiones y recuerdos
+
+PASS agotamiento cambia el plan a pedir; no aparecen recursos de la nada
+
+PASS recuerda la carencia observada
+
+PASS no se puede donar a distancia
+
+PASS ayuda transfiere existencias reales, sin duplicarlas
+
+PASS diálogo consulta memoria individual del ayudante
+
+PASS repetir una entrega no vuelve a consumir ni pagar
+
+PASS memoria de ayuda modifica la decisión de a quién buscar
+
+PASS se puede rechazar una petición sin perder objetos
+
+PASS rechazo tiene enfriamiento y no inunda recuerdos
+
+PASS respeta una negativa reciente: deja de perseguir al jugador
+
+PASS tener ingredientes sin horno no permite fabricar
+
+PASS el jugador construye la estación con materiales reales
+
+PASS fabricación consume exactamente entradas y crea su salida
+
+PASS recuerda producción habilitada por una construcción del jugador
+
+PASS guardado real de necesidades, inventarios, planes y memoria
+
+PASS carga el guardado
+
+PASS reinicio conserva estado y memoria exactos
+
+PASS mismo minuto tras cargar no repite consumo o trabajo
+
+PASS servidor rechaza un destinatario inexistente
+
+PASS servidor rechaza tipos de pedido inválidos
+
+PASS pedido válido transfiere materiales bajo autoridad del servidor
+
+PASS repetición de secuencia de red no duplica la entrega
+
+PASS cliente recibe reservas y memoria al entrar
+
+PASS réplica no simula autonomía ni adelanta el reloj
+
+PASS evento fiable actualiza la réplica sin mutar el servidor
+
+PASS alimentarse consume comida real sin generar reservas
+
+PASS el descanso prevalece sobre el trabajo
+
+AUTONOMIA: 33 comprobaciones, 0 fallos
+
+WARNING: 135 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+
+   at: cleanup (core/object/object.cpp:2536)
+
+ERROR: 14 resources still in use at exit (run with --verbose for details).
+
+   at: clear (core/io/resource.cpp:822)

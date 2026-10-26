@@ -1,91 +1,96 @@
-# Cuentas y servidor privado de Linde
+# Cuenta de Linde, menú y mundos compartidos
 
-Implementación de `feature/cuentas`, sobre Fase 4 (`6bb89f5`). Reutiliza `Juego`, los personajes de `d.jugadores`, la réplica, exploración personal, lugares y `Guardado`; no cambia generación, balance ni progresión.
+Estado del ajuste `feature/login-inicial` (26/10/2026), sobre `main` integrado `d223398`. Implementa el flujo aprobado por el usuario:
 
-## La causa del problema anterior
+**Abrir Linde → iniciar sesión o registrarse → menú principal → continuar, crear/cargar una partida, alojar o unirse.**
 
-La antigua pantalla «Unirse» llamaba «Clave» al token del personaje. El servidor nunca pedía configurar una contraseña de acceso al mundo. Eran conceptos diferentes y el segundo no estaba implementado. El formulario nuevo separa **contraseña de cuenta** y **contraseña opcional de servidor**.
+La cuenta de Linde es independiente de los mundos. Usa un servicio de identidad compartido entre las PC; no es un proveedor externo ni un servicio en la nube ya desplegado.
 
-## Preparar el anfitrión
+## 1. Configuración inicial del servicio de cuentas
 
-1. Instalar Python 3.11 o posterior. Ejecutar `Instalar-Cuentas.bat` (Windows) o `sh Instalar-Cuentas.command` (Linux/macOS). Crea `.venv` en esta copia y usa las versiones fijadas en `servidor/cuentas/requirements.txt`.
-2. Ejecutar `Iniciar-Servidor.bat`, o iniciar Linde y elegir **Alojar partida**. Es el servidor nuevo con cuentas, en un proceso separado; la partida individual se conserva aparte.
-3. Elegir el puerto UDP del juego (7777), el TCP de cuentas (7778), una carpeta de datos y, si se quiere, la contraseña del servidor. Dejarla vacía permite pruebas sin contraseña de servidor; **cada cuenta sigue necesitando su contraseña**.
-4. Pulsar Iniciar. Esperar **Escuchando**. Un error de Python, dependencias, certificado, puertos o carpeta se muestra; «iniciando» no significa conectado públicamente.
-5. Compartir **solo `servidor.crt`**, la huella SHA-256 y la dirección/puertos con los amigos mediante un canal de confianza. Nunca compartir `servidor.key`, `control.key`, la base SQLite ni los archivos de configuración con contraseñas.
+Solo se hace una vez por PC. Todas deben apuntar al **mismo servicio** para reconocer la misma cuenta.
 
-La interfaz acepta una ruta distinta de Python. También admite `LINDE_PYTHON`. Los clientes no necesitan Python.
+### PC que aloja las cuentas
 
-## Conectar y crear una cuenta
+1. Instalar Python 3.11 o posterior y ejecutar `Instalar-Cuentas.bat` (Windows) o `sh Instalar-Cuentas.command`. El entorno `.venv` usa las bibliotecas fijadas en `servidor/cuentas/requirements.txt`.
+2. En el acceso inicial, abrir **Configurar servicio de cuentas** y pulsar **Activar servicio de cuentas en esta PC**. Puerto TCP predeterminado **7790**. Los datos van a `user://identidad_linde` salvo que el administrador elija otra carpeta.
+3. Se crean certificado, claves y SQLite. No se registra automáticamente ninguna cuenta ni se elige una contraseña por el usuario.
+4. El servicio sigue activo al cerrar una partida o el juego. Después de reiniciar la PC, abrir Linde reactiva el servicio que ese administrador configuró, conservando sus claves y su base. No se reemplazan datos perdidos en silencio: restaurar el respaldo.
+5. Compartir con los amigos la dirección y puerto del servicio y **solo su certificado público `servidor.crt`** por un canal de confianza. Mantener la PC encendida y el servicio disponible para nuevos accesos. No se instala un servicio del sistema ni un inicio automático al arrancar Windows.
 
-1. Abrir Linde → Unirse. Introducir IP/dominio, puerto UDP y puerto TCP de cuentas.
-2. Seleccionar el certificado público recibido del anfitrión. Comprobar su huella con él por otro medio si hace falta. No hay un botón para ignorar certificados ni un envío previo en claro.
-3. Introducir usuario (3–24 letras sin acentos, cifras, `_` o `-`) y contraseña de cuenta (10–128 caracteres). Escribir la contraseña del servidor **solo si es privado**.
-4. Para la primera vez marcar Registrar una cuenta nueva y elegir nombre visible del personaje. En ingresos posteriores desmarcarlo y usar la misma cuenta. El nombre/aspecto enviados en otro login no sustituyen el personaje existente.
-5. Al entrar desde otra instancia o computadora, usar el mismo servidor, certificado, usuario y contraseña. La cuenta recupera su mismo identificador/personaje. No copiar una partida del cliente.
+### Otras PC
 
-Se recuerdan dirección, puertos, certificado y usuario, **nunca contraseñas**. El aspecto inicial reutiliza el creador actual; los perfiles guardados conservan su aspecto. Una cuenta tiene un personaje por mundo del servidor. No existe vinculación automática de una partida individual antigua, recuperación por correo, proveedor externo ni transferencia entre servidores diferentes.
+En **Configurar servicio de cuentas**, introducir IP/dominio, TCP 7790 y el certificado público recibido. Pulsar **Usar este servicio**. No activar una autoridad local nueva en cada PC: produciría cuentas independientes. Se recuerda esta conexión, no la contraseña.
 
-## Localhost, LAN e Internet
+## 2. Acceso y menú principal
 
-- Misma PC: `127.0.0.1`, UDP 7777 y TCP 7778.
-- Otra PC de la misma red: IP LAN del anfitrión (ej. `192.168.1.20`). Las escuchas son IPv4 `0.0.0.0`, no solo localhost. Permitir en el firewall **UDP 7777** para Godot y **TCP 7778** para Python/cuentas. Usar los puertos elegidos si se cambiaron. No desactivar el firewall entero.
-- Internet: permitir ambos puertos en el firewall y redirigir **UDP 7777 y TCP 7778** del router a la IP LAN reservada del anfitrión. Conectar a su IP pública o dominio. El router no convierte TCP en UDP. Algunos routers no admiten conectarse a la propia IP pública desde dentro (NAT loopback): probar desde otra red.
-- CGNAT/doble NAT: el reenvío del router puede no bastar; consultar al ISP o usar una red privada entre amigos. No hay UPnP automático, relay ni matchmaking implementados.
-- El certificado fija la identidad del servidor, con nombre interno `linde.local`; sirve aunque la IP cambie. El cliente valida exclusivamente el certificado elegido. Si cambia el certificado, distribuir el nuevo por un medio de confianza, no desactivar la validación.
-- **Alcance verificado**: consultar `production/qa/evidence/cuentas/INFORME.md`. Una conexión a la IP LAN de la misma PC no prueba el firewall entrante desde otro equipo. No se verificó Internet público ni otra computadora real.
+- Iniciar sesión o registrarse **antes** de elegir una partida. Usuario: 3–24 letras sin acentos, cifras, `_` o `-`; contraseña obligatoria sin longitud mínima adicional, máximo 128 caracteres (ajuste solicitado por el usuario el 26/10/2026). El registro pide confirmación y nombre visible.
+- Después del acceso se muestran **Continuar, Nueva partida, Cargar partida, Alojar partida, Unirse, Cerrar sesión y Salir**.
+- Nueva partida conserva las anteriores. Cargar muestra los mundos locales que pertenecen a esa cuenta. Continuar recuerda el elegido anteriormente.
+- Las partidas individuales se guardan **en esa PC**, separadas por identidad y mundo; no hay sincronización de archivos en la nube. En multijugador, personaje y progreso se guardan en el servidor del mundo y se recuperan al entrar desde otra PC con la misma identidad.
+- Cerrar sesión borra la sesión en memoria y vuelve al acceso. Las contraseñas y el token de sesión no se guardan en la configuración del cliente. La sesión dura dos horas; al volver al menú después de caducar se pide el acceso otra vez.
+- El archivo individual antiguo `partida.json` queda conservado. No se atribuye automáticamente a una cuenta ni se migran mundos con reglas incompatibles. Las cuentas antiguas por servidor siguen en sus archivos; este ajuste no las fusiona por coincidencia de nombre.
 
-## Seguridad y distribución del estado
+## 3. Alojar y unirse a un mundo
 
-- `argon2-cffi` implementa Argon2id: 64 MiB, 3 pasadas, paralelismo 4 y sal aleatoria por contraseña. Dos trabajos simultáneos como máximo, 16 conexiones HTTP, tamaño de petición limitado, intentos por IP/usuario y mensajes genéricos para contraseñas de cuenta incorrectas. La contraseña del servidor también se guarda como Argon2id.
-- HTTPS/TLS valida el certificado antes de enviar credenciales. Emite un ticket aleatorio de un uso, válido 30 segundos; SQLite solo guarda su hash. El ticket también viaja cifrado en DTLS/ENet. El servidor consume el ticket por HTTPS local usando una clave de control independiente; un cliente no puede reclamar un ID de cuenta arbitrario.
-- La identidad estable es `cuenta:<UUID>`, creada por el servicio. Es independiente de nombre visible, usuario y peer ID. El servidor conserva una sola sesión por ID. Las acciones mantienen todas las validaciones originales y se ejecutan con la identidad de la sesión.
-- SQLite guarda únicamente usuarios, hashes, tickets y configuración de acceso. El personaje completo (posición, inventario, equipo, XP, mapa, pistas y demás campos) sigue en el único mundo de `Guardado`. No hay tabla paralela de inventario/personajes.
-- El registro es abierto a quien conozca la contraseña del servidor (o a cualquiera con conectividad si se deja vacío). Adecuado para amigos, no endurecido como servicio público de producción. No hay MFA, recuperación de contraseña ni administración remota de cuentas.
-- La seguridad depende de proteger la carpeta del servidor y sus claves con los permisos del usuario del sistema. El anfitrión es la autoridad; un administrador de su PC puede modificar el mundo.
+Después de iniciar sesión, cada PC que aloje un mundo necesita también Python y las dependencias de `Instalar-Cuentas`; las PC que solo juegan como clientes no lo necesitan.
 
-## Guardado, cierre y recuperación
+1. **Alojar partida** permite elegir UDP **7777**, HTTPS/TCP **7778**, carpeta de mundo y contraseña opcional del mundo. Vacío permite acceso sin esa contraseña; la identidad de Linde sigue siendo obligatoria.
+2. El anfitrión confía en la autoridad de cuentas que validó su acceso. El mundo conserva su propio certificado y su guardado.
+3. Esperar **Escuchando**. Compartir el certificado público del mundo, dirección/puertos y contraseña del mundo si tiene. El certificado de identidad y el del mundo cumplen funciones distintas.
+4. **Unirse** pide únicamente dirección/puertos del mundo, su certificado y su contraseña opcional. No pide otra cuenta, registro ni contraseña de Linde.
+5. El servidor conserva una única sesión simultánea del mismo personaje por mundo. La cuenta tiene el mismo ID estable entre mundos; el progreso de cada mundo permanece en su servidor.
+6. **Cerrar servidor y guardar** conserva el mundo. Cerrar la aplicación que inició ese mundo también solicita su cierre. El servicio de identidad es independiente y permanece disponible; se detiene desde su configuración local cuando corresponda.
 
-- Guardado del mundo antes de aceptar al personaje nuevo, cada 30 segundos, al desconectarse y al cerrar ordenadamente. Se reutilizan checksum, escritura temporal y `.bak` de `Guardado`.
-- Cerrar servidor y guardar envía una señal al proceso, que guarda antes de salir. Cerrar la aplicación que lo inició también solicita el cierre. No apagar la PC hasta que termine.
-- SQLite usa WAL, `synchronous=FULL`, transacciones y respaldo mediante la API de SQLite cada minuto y al cerrar el servicio. La carpeta tiene un bloqueo para evitar dos procesos de cuentas sobre el mismo mundo, incluso con puertos diferentes.
-- Si Godot termina inesperadamente, el servicio de cuentas detecta el latido ausente y se apaga después de aproximadamente 20 segundos. Reiniciar después de ese plazo. Se recupera el último autoguardado válido: puede perderse hasta el intervalo de guardado, no hay promesa de cero pérdida.
-- Respaldar la carpeta completa con el servidor cerrado: `mundo.json`, `.bak`, `cuentas.sqlite3`, certificados y claves. No copiar solo un SQLite activo sin su WAL; usar `cuentas.respaldo.sqlite3` o la API de backup. Restaurar mundo y cuentas del mismo conjunto de respaldo; restaurar una sola mitad puede dejar cuentas/personajes desparejados.
-- Reglas de juego incompatibles siguen bloqueando la carga; este sistema no falsifica el sello ni migra mundos de versiones distintas.
+## 4. Red y certificados
 
-## Ejecución sin interfaz
+- Localhost: `127.0.0.1`. Identidad TCP 7790; mundo UDP 7777 y TCP 7778.
+- LAN: IP LAN de la PC correspondiente. La autoridad y el mundo pueden estar en la misma PC o en distintas. Permitir en el firewall los puertos que cada una aloje; no desactivar el firewall completo.
+- Internet: además del firewall, redirigir **TCP 7790** hacia la autoridad, y **UDP 7777 + TCP 7778** hacia el servidor de mundo. Usar los puertos realmente configurados. CGNAT/doble NAT pueden impedirlo; una escucha local no acredita conectividad pública. No hay relay, UPnP automático ni matchmaking.
+- La confianza se establece con los certificados recibidos por un medio seguro. El cliente valida TLS antes de enviar credenciales y comprueba que la conexión inicial corresponde a identidad, no a un mundo. No hay opción de omitir la verificación.
+- Un cambio o pérdida del certificado de autoridad cambia su identidad de confianza: restaurar claves y SQLite del respaldo, no generar otra autoridad suponiendo que es la misma.
+- **No se probó otra computadora física ni Internet público**. Las pruebas usan instancias separadas y dos mundos en la misma PC. Ver el alcance ejecutado en `production/qa/evidence/login-inicial/README.md`.
 
-Crear un JSON de arranque **privado y temporal**:
+## 5. Persistencia y seguridad
+
+- Identidad: SQLite almacena usuarios e ID `cuenta:<UUID>`; contraseña Argon2id con sal por usuario (`argon2-cffi`, 64 MiB/3 pasadas/paralelismo 4), límites de intentos y trabajo simultáneo. Certificados y firma usan `cryptography` y `PyJWT` mantenidos.
+- La autoridad emite una sesión RS256 de dos horas con emisor, audiencia y caducidad exigidos. La sesión se entrega solo a la autoridad para obtener un permiso de 60 segundos ligado al certificado de un mundo concreto. Ese mundo verifica firma/emisor/audiencia/caducidad y evita reutilizar el permiso; comprueba por separado su contraseña y emite el ticket opaco de un uso que ya admite ENet/DTLS.
+- **La contraseña de Linde y su sesión global no se entregan al anfitrión de un mundo**. No hay claves privadas de la autoridad en los clientes ni en otros servidores. La confianza del mundo se configura por su administrador, no por un paquete de un jugador.
+- El personaje completo, inventario, equipo, XP, mapa y progresión siguen en `Juego`/`Guardado`. El mundo no duplica filas de cuentas ni hashes globales. Los guardados locales llevan identidad de propietario y usan rutas separadas; las cuentas no abren accidentalmente guardados ajenos por el menú. No se promete protección frente al administrador del sistema que edite archivos locales.
+- El mundo se guarda antes de aceptar al personaje, cada 30 segundos, al desconectarse y al cerrar. Se conservan checksum, escritura temporal y `.bak`. SQLite utiliza WAL, transacciones y respaldos por API. Una caída puede perder hasta el intervalo de autoguardado.
+- Respaldar datos de identidad (SQLite, certificado, claves) y los mundos. No copiar un SQLite activo sin su WAL; usar el respaldo o cerrar antes. Nunca compartir `servidor.key`, `control.key`, SQLite ni configuraciones privadas.
+- Alcance privado entre amigos: sin MFA, recuperación de contraseña, revocación instantánea de sesiones firmadas ni empaquetado autocontenido del helper. El propietario de la autoridad conserva el control de la identidad; el del mundo, de la simulación.
+
+## 6. Ejecución sin interfaz y compatibilidad
+
+Identidad independiente: crear un JSON temporal `{"rol":"identidad"}` y ejecutar:
+
+```sh
+.venv/bin/python servidor/cuentas/servicio.py --datos /ruta/identidad --config /ruta/inicio-identidad.json --puerto 7790
+```
+
+El archivo temporal se consume. Para el mundo global, JSON de arranque:
 
 ```json
-{"carpeta":"/ruta/datos/linde","puerto":7777,"https":7778,"python":"/ruta/Linde/.venv/bin/python","password":"","semilla":123}
+{"carpeta":"/ruta/mundo","puerto":7777,"https":7778,"python":"/ruta/Linde/.venv/bin/python","password":"","autoridad":"/ruta/certificado-identidad.crt"}
 ```
 
 ```sh
-godot --headless --path Linde/cenital --script res://scripts/cuentas/main_servidor.gd -- --config=/ruta/arranque.json
+godot --headless --path Linde/cenital --script res://scripts/cuentas/main_servidor.gd -- --config=/ruta/inicio-mundo.json
 ```
 
-El archivo de arranque se consume/elimina. No poner la contraseña en argumentos. Cerrar creando `detener_servidor` en la carpeta del servidor, o usar la interfaz. El comando histórico `--servidor` conserva el protocolo previo para pruebas y compatibilidad: **no usa estas cuentas ni cifrado y no debe exponerse a Internet**. La interfaz nueva no lo usa.
+En Windows usar `.venv/Scripts/python.exe`. La contraseña opcional del mundo va solo en el archivo temporal privado; nunca en argumentos. Crear `detener_servidor` en la carpeta del mundo para cerrar guardando; `detener_cuentas` en la autoridad solicita su cierre. Los roles legados y el comando histórico `--servidor` se conservan para las pruebas anteriores; no representan el flujo global nuevo ni su garantía de seguridad. El modo histórico sin cifrado no debe exponerse a Internet.
 
-## Pruebas reproducibles
+Los scripts de ensayo y argumentos explícitos de depuración conservan su acceso de pruebas en builds de depuración. El inicio normal exige cuenta; el servidor de mundo valida siempre el permiso auténtico aunque un cliente modificado omita su propia pantalla.
+
+## 7. Verificación
 
 ```sh
-.venv/bin/python -m unittest discover -s servidor/cuentas -p test_servicio.py -v
-.venv/bin/python servidor/cuentas/prueba_integracion.py --godot /ruta/godot --salida /ruta/vacia/qa
-.venv/bin/python servidor/cuentas/verificar_suites.py --godot /ruta/godot --salida /ruta/qa/regresion
-godot --path Linde/cenital --script res://tests/captura_cuentas.gd
+.venv/bin/python -m unittest discover -s servidor/cuentas -p 'test_*.py' -v
+.venv/bin/python servidor/cuentas/prueba_identidad_integracion.py --godot /ruta/godot --salida /ruta/nueva/qa
+godot --path Linde/cenital --script res://tests/prueba_acceso_inicial.gd -- --config=/ruta/config-ensayo.json
 ```
 
-En Windows usar `.venv/Scripts/python.exe`. La integración crea datos y credenciales ficticias en la carpeta de salida; usar una nueva por ejecución. No ejecutar contra la partida habitual. Las capturas y logs de cierre pueden mostrar los avisos de recursos al salir ya conocidos del proyecto.
+El ensayo de UI recibe `salida`, `identidad`, `python` y `puerto`; usa configuración, cuentas y guardados aislados. Se prueba registro, menú, varias partidas, recuperación de respaldo, aislamiento entre cuentas y reactivación de la autoridad. No apuntar pruebas a cuentas reales. Los avisos ObjectDB/recursos al cerrar ya existentes continúan.
 
-Fuentes técnicas: [ENetConnection/DTLS](https://docs.godotengine.org/en/stable/classes/class_enetconnection.html), [TLSOptions](https://docs.godotengine.org/en/stable/classes/class_tlsoptions.html), [Argon2-cffi](https://argon2-cffi.readthedocs.io/en/stable/parameters.html), [SQLite WAL](https://sqlite.org/wal.html).
-
-### Ejecución de la validación en Windows
-
-El ejecutor de suites genera copias temporales ignoradas para sustituir el prefijo Unix `/tmp` por `OS.get_cache_dir()` y actualizar su autorreferencia de procesos hijo. No cambia las suites originales de IA 1. El resumen consolidado registra las repeticiones necesarias de saberes/orientación y la comprobación del mapa de iconos con los bytes canónicos ya guardados en Git; no elimina el fallo histórico de arte E04/E05.
-
-La instalación actual se ejecuta desde el proyecto fuente: el helper Python y su entorno no se empaquetan automáticamente en un export de Godot. Antes de distribuir un ejecutable independiente habrá que incorporar ese empaquetado.
-
-### Integración a main autorizada (26/10/2026)
-
-El usuario aprobó publicar y fusionar esta implementación con Fase 5a y vivienda (`origin/main` `42bef50`). Se validó la combinación con 10 suites seleccionadas y las 35 comprobaciones de cuentas; ver `production/qa/evidence/cuentas-main/README.md`. Los límites externos y de empaquetado de esta guía siguen vigentes.
+Fuentes técnicas: [PyJWT RS256 y validaciones](https://pyjwt.readthedocs.io/en/stable/usage.html), [Argon2-cffi](https://argon2-cffi.readthedocs.io/en/stable/parameters.html), [TLSOptions](https://docs.godotengine.org/en/stable/classes/class_tlsoptions.html), [SQLite WAL](https://sqlite.org/wal.html).
