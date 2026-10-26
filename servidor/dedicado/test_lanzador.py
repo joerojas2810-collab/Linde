@@ -36,7 +36,13 @@ class LanzadorTests(unittest.TestCase):
 
     def test_resuelve_rutas_relativas(self):
         self.config()
-        self.assertEqual(preparar(self.path)['autoridad'], str(self.root / 'autoridad.crt'))
+        cfg = preparar(self.path)
+        actual = Path(cfg['autoridad'])
+        # Windows puede expandir RUNNER~1 a runneradmin al resolver la ruta.
+        # Comparar el archivo real, no la representación textual de su nombre.
+        self.assertTrue(actual.is_absolute())
+        self.assertTrue(actual.samefile(self.root / 'autoridad.crt'))
+        self.assertEqual(Path(cfg['carpeta']), (self.root / 'mundos/amigos').resolve())
 
     def test_no_destruye_config_y_no_expone_password_en_argumentos(self):
         self.config(password='secreto')

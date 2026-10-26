@@ -8,6 +8,8 @@ on:
       - 'Linde/cenital/**'
       - 'herramientas/empaquetar_windows.py'
       - '.github/workflows/servidor-privado.yml'
+env:
+  PYTHONUTF8: "1"
 permissions:
   contents: read
 jobs:
@@ -22,6 +24,7 @@ jobs:
       - name: Dependencias y pruebas de Python
         run: |
           python -m pip install -r servidor/cuentas/requirements.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python -m unittest discover -s servidor/cuentas -p "test_*.py" -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python -m unittest discover -s servidor/dedicado -v
