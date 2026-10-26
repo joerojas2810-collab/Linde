@@ -1,0 +1,112 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS el catálogo de saberes solo referencia técnicas y laminados existentes
+PASS el punto de partida son 13 saberes: 2 técnicas, 9 laminados y 2 operadores
+PASS Maren conoce técnicas artesanales avanzadas
+PASS Ordal conoce lo que su oficio de cantero justifica
+PASS Nerea conoce lo propio de su actividad, no el catálogo de su profesión
+PASS no todos los habitantes nacen con los mismos saberes
+PASS el jugador empieza sin saberes especializados
+PASS la siembra no atribuye inventor ni aprendices
+PASS fabricar de forma simple es conocimiento común
+PASS conocer una técnica es propio de cada personaje
+PASS saber una técnica no basta: faltan material visto, rango y taller
+PASS validez, saber, poder y preparación son cuatro consultas distintas: una pieza válida no implica que alguien la conozca
+PASS consultar el saber de un desconocido no crea estado
+PASS un principiante solo está preparado para la técnica ligera
+PASS no se aprende a distancia
+PASS no se aprende una técnica sin la preparación necesaria
+PASS un habitante no enseña lo que no conoce
+PASS un habitante que desconfía del jugador no enseña
+PASS el jugador aprende de Maren cuando está cerca y es de fiar
+PASS aprender no concede práctica ni piezas
+PASS el maestro conserva el saber
+PASS queda constancia del aprendizaje sin inventar un descubridor
+PASS repetir la lección no duplica el aprendizaje
+PASS Maren recuerda haber enseñado
+PASS cada aprendizaje real es un evento independiente
+PASS la memoria de Maren se desborda y olvida la lección
+PASS tras 70 creaciones el registro queda en el tope de 64
+PASS con memoria desbordada y más de 64 creaciones, la historia de saberes no cambia
+PASS la historia de saberes no depende de recuerdos ni de las 64 creaciones
+PASS el primer descubrimiento queda atribuido a quien lo logra
+PASS un segundo descubridor no sustituye al primero
+PASS no se conceden saberes que no existen
+PASS la red rechaza tipos inválidos y habitantes inexistentes
+PASS el servidor decide: el cliente no obtiene un saber para el que no está preparado
+PASS una petición válida de enseñanza se resuelve en el servidor
+PASS la red descarta un número de secuencia repetido
+PASS un pedido con un argumento extra de autor se rechaza
+PASS un pedido incompleto se rechaza
+PASS un saber de longitud excesiva se rechaza
+PASS enseñar a un habitante inexistente se rechaza
+PASS un remitente sin sesión se rechaza
+PASS cada rechazo queda contado por remitente
+PASS los pedidos rechazados no cambian el conocimiento ni la historia
+PASS un pedido bien formado pero sin saber que enseñar no es un rechazo de red y no concede nada
+PASS el cliente no obtiene un saber que no tiene por pedir que se enseñe
+PASS la réplica consulta los mismos saberes con la identidad correcta
+PASS la réplica no siembra ni concede saberes: solo la autoridad escribe
+PASS el protocolo declara las nuevas intenciones y la huella en el saludo
+PASS con versión y huella correctas el saludo pasa a la identificación
+PASS un saludo con huella de reglas distinta se rechaza, corta la conexión y no crea jugador
+PASS un saludo sin huella se rechaza
+PASS una versión de protocolo distinta se rechaza antes que la huella
+PASS una partida del subesquema anterior se amplía sin autores inventados
+PASS quien ya podía usar una técnica la conserva; no recibe las que no usaba
+PASS sembrar de nuevo no cambia nada
+PASS punto de partida de A4: Ordal no conoce la técnica ligera
+PASS completar la lección da el saber al alumno NPC
+PASS el alumno no hereda la práctica del maestro
+PASS enseñar no cambia la práctica ni el saber del maestro
+PASS la lección no entrega ninguna pieza ni material
+PASS mucha práctica no concede un saber que nadie ha enseñado
+PASS se guarda un mundo con saberes
+PASS el contenedor conserva el formato 3 y su envoltura
+PASS K1 solo añade datos dentro de mundo_vivo.autonomia.desarrollo
+PASS un mundo guardado con K1 y las reglas actuales se acepta sin excepción
+PASS la huella de reglas incluye saberes_v1.json
+PASS H0 rechaza un mundo sellado antes de K1 y señala el componente «desarrollo»
+WARNING: Guardado: C:/Users/Christian/AppData/Local/linde-saberes-previo-24600.json rechazado, reglas distintas a las del mundo (desarrollo)
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:130)
+       [1] cargar (res://scripts/juego.gd:93)
+       [2] _init (res://tests/_cuentas_windows/prueba_saberes.gd:228)
+WARNING: Guardado: C:/Users/Christian/AppData/Local/linde-saberes-previo-24600.json rechazado, reglas distintas a las del mundo (desarrollo)
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:130)
+       [1] _init (res://tests/_cuentas_windows/prueba_saberes.gd:228)
+PASS cargarlo falla con el motivo «reglas_distintas» y deja el archivo intacto
+WARNING: Guardado: Mundo cargado con reglas distintas a las de su creación
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] cargar (res://scripts/guardado.gd:136)
+       [1] cargar (res://scripts/juego.gd:93)
+       [2] _init (res://tests/_cuentas_windows/prueba_saberes.gd:230)
+PASS con la excepción explícita se carga y el mundo queda marcado como contaminado
+PASS el subesquema 1 se amplía a la versión 2 sin inventar historia
+PASS al cargar, quien ya practicaba conserva lo que usaba y nada más
+PASS antes: Maren conoce la técnica ligera y Ordal no
+VERTICAL: Ordal aprende tras 60 minutos
+PASS sin intervención del jugador, Maren enseña a Ordal
+PASS el maestro conserva el saber y el conocimiento no llega a quien no estuvo
+PASS la historia registra al alumno y al maestro sin atribuir invención
+PASS Ordal recuerda haber aprendido
+PASS enseñar y aprender fortalece la relación
+PASS la enseñanza queda en el diario de sucesos
+PASS la lección completada no queda abierta
+PASS Ordal sabe fabricar la pieza con la técnica aprendida
+PASS sin la lección, el mismo Ordal con la misma práctica no puede
+PASS se guarda el conocimiento adquirido
+PASS cargar restituye exactamente el estado de conocimiento
+PASS el aprendizaje sobrevive a guardar y cargar
+PASS restaurar tras cargar no duplica ni cambia el conocimiento
+PASS seguir simulando tras cargar no repite el aprendizaje
+PASS con la misma semilla el conocimiento se transmite igual
+SABERES: 87 comprobaciones, 0 fallos
+WARNING: 175 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

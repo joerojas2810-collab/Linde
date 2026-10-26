@@ -32,3 +32,14 @@ Thumbs.db
 
 # Zips: duplican las carpetas ya descomprimidas (se comparten aparte)
 *.zip
+
+# Cuentas: entorno, configuración local y secretos/datos del servidor.
+.venv/
+__pycache__/
+Linde/cenital/override.cfg
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.key
+servidor/datos/
+Linde/cenital/tests/_cuentas_windows/

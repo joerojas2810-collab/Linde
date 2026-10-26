@@ -1,0 +1,264 @@
+[
+  {
+    "suite": "prueba",
+    "ok": false,
+    "passes": 329,
+    "fails": 1,
+    "exit": 1
+  },
+  {
+    "suite": "prueba_reglas",
+    "ok": true,
+    "passes": 81,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_saberes",
+    "ok": true,
+    "passes": 87,
+    "fails": 0,
+    "exit": 0,
+    "evidencia": "saberes_portable.txt"
+  },
+  {
+    "suite": "prueba_desarrollo",
+    "ok": true,
+    "passes": 57,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_sociedad",
+    "ok": true,
+    "passes": 48,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_autonomia",
+    "ok": true,
+    "passes": 33,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_arraigo",
+    "ok": true,
+    "passes": 76,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_casas_arraigo",
+    "ok": true,
+    "passes": 3,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_aspecto",
+    "ok": true,
+    "passes": 225,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_ui",
+    "ok": true,
+    "passes": 13,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_proteccion",
+    "ok": true,
+    "passes": 51,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_terreno",
+    "ok": true,
+    "passes": 49,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_fauna",
+    "ok": true,
+    "passes": 31,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_orden_dibujo",
+    "ok": true,
+    "passes": 6,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_caminos",
+    "ok": true,
+    "passes": 7,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_campos_cultivo",
+    "ok": true,
+    "passes": 8,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_casas",
+    "ok": true,
+    "passes": 13,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_crecimiento",
+    "ok": true,
+    "passes": 27,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_carga_crecimiento",
+    "ok": true,
+    "passes": 1,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_poblados",
+    "ok": true,
+    "passes": 28,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_aparicion",
+    "ok": true,
+    "passes": 32,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_amenazas",
+    "ok": true,
+    "passes": 12,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_poblado_inicial",
+    "ok": true,
+    "passes": 18,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_lugares",
+    "ok": true,
+    "passes": 13,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_lugares_ui",
+    "ok": true,
+    "passes": 10,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_lugares_red",
+    "ok": true,
+    "passes": 19,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_exploracion",
+    "ok": true,
+    "passes": 13,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_exploracion_ui",
+    "ok": true,
+    "passes": 6,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_pistas",
+    "ok": true,
+    "passes": 79,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_pistas_ui",
+    "ok": true,
+    "passes": 6,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_orientacion_red",
+    "ok": true,
+    "passes": 14,
+    "fails": 0,
+    "exit": 0,
+    "evidencia": "orientacion_portable.txt"
+  },
+  {
+    "suite": "prueba_red",
+    "ok": true,
+    "passes": 11,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_terreno_red",
+    "ok": true,
+    "passes": 1,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_crecimiento_red",
+    "ok": true,
+    "passes": 1,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_operadores",
+    "ok": true,
+    "passes": 95,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_integracion_visual_a",
+    "ok": true,
+    "passes": 60,
+    "fails": 0,
+    "exit": 0,
+    "evidencia": "integracion_visual_canonica.txt"
+  },
+  {
+    "suite": "prueba_correcciones_a2_a3",
+    "ok": true,
+    "passes": 49,
+    "fails": 0,
+    "exit": 0
+  }
+]

@@ -1,5 +1,5 @@
 {
- "_nota": "Copia sin cambios de E04_v002 y E05_v002 (documentos/INSTRUCCIONES_ARTE_ENTREGABLES). Estado: candidato, aceptaci\u00f3n art\u00edstica pendiente.",
+ "_nota": "Base E04_v002/E05_v002 conservada; E04_objetos.json ampliado en el commit de arte aprobado 44f6f09. Hashes de los archivos vigentes, con JSON en LF.",
  "origen": {
   "E04": "E04_v002",
   "E05": "E05_v002"
@@ -13,7 +13,7 @@
   "E04_grass.png": "22fdb253b587f3f92d6172eae104925e661f2a4b83f60e7eca1f829fc63dbdc8",
   "E04_grass_flecks.png": "ab363cccb027f3e1d5b376c3cfb4ef0ea33aab40e8ff07f8834ac4f129bd2852",
   "E04_grass_periodica.png": "b30d514b1d1c985b5055bc290e17fdb736e294e8b8874b7a5e278116dbed64ee",
-  "E04_objetos.json": "2ac2ad5ac0c19af38ed1d5c72d461774444ab2b72056fe51f5d9c5611301ecb4",
+  "E04_objetos.json": "a9533f12a8b56096ff7310f7fc87fafd320586a8f1c0084f8a63b5a1dcae9f1b",
   "E04_ore_copper.png": "52cca1b353c4a33ccdb796fa3952463798320360634f66184ff62b9c80bb2168",
   "E04_ore_depleted.png": "fa81ad9199c12cbc2c0d120bda99668275d4228c0976551ff5644d4d37316a10",
   "E04_path_47.png": "1970328eb9fb0916d5b8882550ad872218984e71dd3888e153fd50a5938d4dde",
@@ -101,5 +101,14 @@
   "E05_valla_mask_15.png": "451dd3710ac6ceca400082790b8d298afe75a79da2ca7288d841c0efb5399609",
   "E05_vallas_conectadas.json": "ef409d6f0debf044f3e1679024de0b112a4e17052eacc44472dd118540a0f821",
   "E05_workbench.png": "dec419b2324c5ff01551e6067f6dd9f35beddb0f7132c0f21aacf349bc253345"
+ },
+ "adaptaciones": {
+  "E04_objetos.json": {
+   "sha256_origen": "2ac2ad5ac0c19af38ed1d5c72d461774444ab2b72056fe51f5d9c5611301ecb4",
+   "commit": "44f6f09b644c5df95bf1c4f2fc497a5325fe4554",
+   "entradas_conservadas": 32,
+   "entradas_agregadas": 32,
+   "motivo": "Registro de minerales y objetos de pendientes_v1; sin cambios a las entradas originales ni a los PNG E04/E05."
+  }
  }
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "prueba": "autoguardado peri\u00f3dico escribe sin desconectar",
+    "ok": true
+  },
+  {
+    "prueba": "cliente detecta cierre inesperado",
+    "ok": true
+  },
+  {
+    "prueba": "servicio local se apaga tras perder el latido",
+    "ok": true
+  },
+  {
+    "prueba": "reconecta y recupera progreso tras cierre inesperado",
+    "ok": true
+  },
+  {
+    "prueba": "mundo conserva el \u00faltimo autoguardado tras reinicio",
+    "ok": true
+  }
+]

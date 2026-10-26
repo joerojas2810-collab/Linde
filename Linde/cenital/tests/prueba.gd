@@ -1416,7 +1416,7 @@ func t_mundo_arte() -> void:
 	var rutas_ok := true
 	var man = JSON.parse_string(FileAccess.get_file_as_string("res://arte/mundo/manifiesto.json"))
 	for f in man.archivos: if FileAccess.get_sha256("res://arte/mundo/" + f) != str(man.archivos[f]): rutas_ok = false
-	ok(rutas_ok, "mundo arte: los %d archivos copiados de E04/E05 conservan el sha256 del manifiesto" % man.archivos.size())
+	ok(rutas_ok, "mundo arte: los %d archivos E04/E05 coinciden con el sha256 del manifiesto vigente" % man.archivos.size())
 	ok(ma.tex("no_existe.png") == null and ma.faltantes.has(MA.RAIZ + "no_existe.png"), "mundo arte: un recurso inexistente se registra como faltante, sin dibujar arte anterior")
 
 # ---------- E03: enemigos y efectos ----------
