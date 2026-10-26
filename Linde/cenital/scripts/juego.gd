@@ -69,6 +69,16 @@ static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String
 	j.d.mundo.generacion = {"version": 2, "semilla": semilla, "region": 16}
 	j.d.mundo.inicio = {"modo": modo_inicio}
 	j._arrancar()
+	if modo_inicio == Mundo.MODO_POBLADO:   # necesita los habitantes y los enemigos, que existen tras _arrancar()
+		var ap: Dictionary = j.punto_aparicion(LOCAL)
+		j._registrar_aparicion(LOCAL, ap)
+		if ap.ok:
+			var pies := Mundo.pies_de_celda(ap.celda)
+			j.rt[LOCAL].pies = pies
+			j.d.jugadores[LOCAL].pos = [pies.x, pies.y]
+			j.d.jugadores[LOCAL].inicio = [pies.x, pies.y]
+		else:   # mundo recién creado: su poblado inicial no puede estar destruido; se conserva la celda validada por punto_inicio y queda registrado
+			push_warning("Mundo nuevo sin posición de aparición en el poblado: %s" % ap.motivo)
 	return j
 
 ## Resultado de la última `cargar` fallida ({} si no falló o no hubo archivo): `error`, `motivo`, `detalle`, `archivo` de Guardado.cargar.

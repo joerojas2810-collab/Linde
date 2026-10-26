@@ -141,7 +141,10 @@ func _init() -> void:
 	jl.unir("b", "Bea", [0, 0, 0])
 	ok(M.celda_de(jl.pies_de("b")) == esperado_unir, "modo legado: unir usa punto_inicio, como siempre")
 	var jp = J.nueva(123, "Poblado", [0, 0, 0], M.MODO_POBLADO)
-	var ap0: Dictionary = jp.punto_aparicion(J.LOCAL)
+	var c_local: Vector2i = M.celda_de(jp.pies_de())
+	ok(Vector2(c_local - _centro(jp)).length() >= 2.0 and Vector2(c_local - _centro(jp)).length() <= 7.0, "nueva(modo poblado): el primer jugador aparece entre 2 y 7 celdas del centro del poblado")
+	ok(jp.jug().inicio == [jp.pies_de().x, jp.pies_de().y] and jp.jug().pos == jp.jug().inicio, "nueva(modo poblado): posición e inicio guardados coinciden con la celda elegida")
+	ok(jp.d.mundo.inicio.ultimo.jugador == J.LOCAL and jp.d.mundo.inicio.ultimo.ok, "nueva(modo poblado): el resultado queda registrado")
 	ok(jp.mundo.modo_inicio() == M.MODO_POBLADO and jp.d.mundo.inicio.modo == "poblado", "nueva(modo poblado) guarda el modo en el mundo")
 	var previas: Array = [M.celda_de(jp.pies_de())]
 	var union_ok := true
