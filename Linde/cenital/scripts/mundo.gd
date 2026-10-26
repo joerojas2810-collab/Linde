@@ -135,8 +135,8 @@ func camas(poblado_id: String) -> Dictionary:
 ## Hitos del poblado inicial (Mundo 1, paso 1d): lugares ya existentes en el Valle con nombre y área [x, y, ancho, alto]. La plaza y el taller son los
 ## «lugares» de datos/mundo/entities/lugar (celdas 34,25 y 28,20); el resto, las áreas del mapa de autor. Solo entran en el registro en modo poblado.
 const HITOS_INICIALES := [
-	{"id": "plaza", "nombre": "La plaza", "area": [31, 23, 7, 5]},
-	{"id": "taller", "nombre": "La casa del taller", "area": [24, 16, 8, 7]},
+	{"id": "taller", "nombre": "La casa del taller", "area": [24, 16, 8, 7]},   # va antes que la plaza: su área tiene prioridad dentro de la casa
+	{"id": "plaza", "nombre": "La plaza", "area": [25, 16, 15, 15]},   # cubre todo el círculo de aparición (2-7 celdas del cruce 32,23)
 	{"id": "estanque", "nombre": "El estanque", "area": [42, 26, 10, 11]},
 	{"id": "cantera", "nombre": "La cantera", "area": [4, 4, 13, 11]},
 	{"id": "bosque", "nombre": "El bosque", "area": [38, 3, 24, 14]},
