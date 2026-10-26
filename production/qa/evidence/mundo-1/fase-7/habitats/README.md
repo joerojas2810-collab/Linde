@@ -49,3 +49,11 @@ Cerrar y aprobar las reglas de distribución territorial no uniforme: relación 
 No se encontró LINDE_Fase_7_investigacion_ecologia.md en el repositorio ni junto a los dos adjuntos; se pidió su ubicación y queda pendiente de lectura antes de decisiones territoriales nuevas. Las consultas externas citadas por Arena son referencias del documento; no se realizó investigación adicional.
 
 Reproducir: Godot --headless --path Linde/cenital --script res://tests/prueba_habitats.gd. Medición: res://tests/medir_habitats.gd -- --salida=RUTA_ABSOLUTA.json. Las suites históricas con /tmp se ejecutaron mediante el adaptador Windows existente, sin editar sus pruebas originales.
+
+## Complemento localizado y contrastado (26/10/2026)
+
+El usuario indicó nuevamente la carpeta y el archivo ya estaba disponible. Investigación completa leída y versionada en `docs/investigacion/LINDE_Fase_7_investigacion_ecologia.md`; supera la nota histórica de archivo pendiente del apartado anterior. No se ejecutó nueva investigación externa ni se importaron algoritmos/dependencias.
+
+La investigación §5.3 llama imprescindibles a reproducción, dispersión y depredación, y recomienda el modelo de stock regional B. Prevalecen el diseño maestro (§§2, 5, 10 y 11) y la solicitud explícita del usuario: esas propuestas quedan aplazadas; no son requisitos del bloque inicial. Son aprovechables la elegibilidad por terreno/hábitat antes de materialización, la autoridad, la separación de generación/carga y las señales originadas en fuentes reales. La base implementada es compatible con esos principios, sin introducir stock o presión global.
+
+El documento usa el estado histórico de Fase 6 y cifras de fauna/atascos reportadas: no sustituyen la medición de esta rama ni prueban capacidades nuevas del juego. No cambian densidades, reaparición de 720 minutos ni daño/estadísticas. Siguiente decisión sigue siendo la distribución territorial, que requiere propuesta y aprobación antes de activarse. Este complemento solo modifica documentación; no se repitieron pruebas de código.
