@@ -316,3 +316,9 @@ El diseño principal y el informe de experiencia están versionados en `docs/inv
 ### Investigación ecológica localizada (26/10/2026)
 
 El usuario volvió a indicar la carpeta y ya se encontró y leyó íntegra [LINDE_Fase_7_investigacion_ecologia.md](../../../docs/investigacion/LINDE_Fase_7_investigacion_ecologia.md). Se incorpora como referencia sin alterar el diseño maestro ni el alcance autorizado: stock, reproducción, migración y efectos económicos siguen aplazados. Esta nota supera el pendiente de localización anterior. Sin cambios de código ni repetición de pruebas en este complemento; la redistribución territorial sigue pendiente de propuesta/aprobación.
+
+### Propuesta territorial A preparada, sin activar (26/10/2026)
+
+En `feature/fase7-ecologia`, prototipo reutilizando los candidatos y consultas de Fauna: espectros junto a vegetación, gólems junto a roca/vetas, arpías/diablillos con vecinos cardinales despejados y slimes sin mover. Conserva ID, especie, bioma, región y cantidad; sin alternativa adecuada conserva el punto anterior. **Preferencias propuestas, no aprobadas ni activadas.** [Comparativa y límites](../../qa/evidence/mundo-1/fase-7/propuesta-ubicacion/README.md).
+
+Medido en 2.523 regiones de tres semillas: mismas 2.271 apariciones, 904 posiciones diferentes en la propuesta; cumplimiento de preferencia 58,8 % → 98,6 %. Conservación, orden inverso y estado puro comprobados; regresión de hábitats repetida **23/23** después de extraer el cálculo de candidatos sin cambiarlo. No cambia ninguna partida actual/nueva; no demuestra calma regional, seguridad ni tiempos de aviso. Antes de activar hace falta aprobar estas preferencias y diseñar la política versionada por mundo que mantenga el contenido anterior. Sin pruebas redundantes de red ni cambios de balance.

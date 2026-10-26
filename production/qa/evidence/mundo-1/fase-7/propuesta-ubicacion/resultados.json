@@ -1,0 +1,5343 @@
+{
+  "activada": false,
+  "casos": [
+    {
+      "conservacion": true,
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": {
+          "cantidad": 229,
+          "cumplen_antes": 86,
+          "cumplen_despues": 221,
+          "junto_camino_antes": 8,
+          "junto_camino_despues": 1,
+          "movidos": 135
+        },
+        "diablillo_secano": {
+          "cantidad": 63,
+          "cumplen_antes": 32,
+          "cumplen_despues": 60,
+          "junto_camino_antes": 3,
+          "junto_camino_despues": 0,
+          "movidos": 28
+        },
+        "espectro_bosque": {
+          "cantidad": 192,
+          "cumplen_antes": 148,
+          "cumplen_despues": 191,
+          "junto_camino_antes": 6,
+          "junto_camino_despues": 6,
+          "movidos": 43
+        },
+        "golem_sierra": {
+          "cantidad": 212,
+          "cumplen_antes": 127,
+          "cumplen_despues": 211,
+          "junto_camino_antes": 11,
+          "junto_camino_despues": 9,
+          "movidos": 84
+        },
+        "slime_ribera": {
+          "cantidad": 53,
+          "cumplen_antes": 53,
+          "cumplen_despues": 53,
+          "junto_camino_antes": 1,
+          "junto_camino_despues": 1,
+          "movidos": 0
+        }
+      },
+      "orden_inverso": true,
+      "regiones": 841,
+      "semilla": 123
+    },
+    {
+      "conservacion": true,
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": {
+          "cantidad": 297,
+          "cumplen_antes": 135,
+          "cumplen_despues": 289,
+          "junto_camino_antes": 12,
+          "junto_camino_despues": 1,
+          "movidos": 154
+        },
+        "diablillo_secano": {
+          "cantidad": 73,
+          "cumplen_antes": 28,
+          "cumplen_despues": 72,
+          "junto_camino_antes": 3,
+          "junto_camino_despues": 0,
+          "movidos": 44
+        },
+        "espectro_bosque": {
+          "cantidad": 192,
+          "cumplen_antes": 126,
+          "cumplen_despues": 191,
+          "junto_camino_antes": 9,
+          "junto_camino_despues": 6,
+          "movidos": 65
+        },
+        "golem_sierra": {
+          "cantidad": 175,
+          "cumplen_antes": 105,
+          "cumplen_despues": 174,
+          "junto_camino_antes": 6,
+          "junto_camino_despues": 8,
+          "movidos": 69
+        },
+        "slime_ribera": {
+          "cantidad": 30,
+          "cumplen_antes": 30,
+          "cumplen_despues": 30,
+          "junto_camino_antes": 0,
+          "junto_camino_despues": 0,
+          "movidos": 0
+        }
+      },
+      "orden_inverso": true,
+      "regiones": 841,
+      "semilla": 456
+    },
+    {
+      "conservacion": true,
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": {
+          "cantidad": 231,
+          "cumplen_antes": 111,
+          "cumplen_despues": 228,
+          "junto_camino_antes": 12,
+          "junto_camino_despues": 1,
+          "movidos": 117
+        },
+        "diablillo_secano": {
+          "cantidad": 84,
+          "cumplen_antes": 37,
+          "cumplen_despues": 83,
+          "junto_camino_antes": 3,
+          "junto_camino_despues": 0,
+          "movidos": 46
+        },
+        "espectro_bosque": {
+          "cantidad": 217,
+          "cumplen_antes": 158,
+          "cumplen_despues": 215,
+          "junto_camino_antes": 14,
+          "junto_camino_despues": 14,
+          "movidos": 57
+        },
+        "golem_sierra": {
+          "cantidad": 177,
+          "cumplen_antes": 113,
+          "cumplen_despues": 175,
+          "junto_camino_antes": 12,
+          "junto_camino_despues": 9,
+          "movidos": 62
+        },
+        "slime_ribera": {
+          "cantidad": 46,
+          "cumplen_antes": 46,
+          "cumplen_despues": 46,
+          "junto_camino_antes": 1,
+          "junto_camino_despues": 1,
+          "movidos": 0
+        }
+      },
+      "orden_inverso": true,
+      "regiones": 841,
+      "semilla": 789
+    }
+  ],
+  "ejemplos": {
+    "arpia_pradera": {
+      "antes": [
+        8,
+        12
+      ],
+      "celdas": [
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "veta",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "veta",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arcilla",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "veta",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        }
+      ],
+      "despues": [
+        7,
+        13
+      ],
+      "region": [
+        -5,
+        -14
+      ],
+      "semilla": 123
+    },
+    "diablillo_secano": {
+      "antes": [
+        0,
+        0
+      ],
+      "celdas": [
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "arcilla",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "arcilla",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "arcilla",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "secano",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        }
+      ],
+      "despues": [
+        0,
+        2
+      ],
+      "region": [
+        1,
+        -14
+      ],
+      "semilla": 123
+    },
+    "espectro_bosque": {
+      "antes": [
+        13,
+        6
+      ],
+      "celdas": [
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "ribera",
+          "objeto": "",
+          "tipo": 2
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        }
+      ],
+      "despues": [
+        11,
+        10
+      ],
+      "region": [
+        7,
+        -14
+      ],
+      "semilla": 123
+    },
+    "golem_sierra": {
+      "antes": [
+        9,
+        13
+      ],
+      "celdas": [
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbol",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "veta_estano",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "bosque",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "veta",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "veta",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "veta",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "pradera",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "veta",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "veta_cobre",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "roca",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "arbusto",
+          "tipo": 0
+        },
+        {
+          "bioma": "sierra",
+          "objeto": "",
+          "tipo": 0
+        }
+      ],
+      "despues": [
+        11,
+        15
+      ],
+      "region": [
+        -6,
+        -14
+      ],
+      "semilla": 123
+    }
+  },
+  "huella": "c8f0292b54ffba51bde95b4e846dd1908ba41cd7e8290e384c0e1a71476beb2b"
+}

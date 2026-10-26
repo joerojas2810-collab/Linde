@@ -98,3 +98,7 @@ Siguiente: aprobación humana de distribución/calmas/lugares antes de modificar
 ### Investigación ecológica localizada (26/10/2026)
 
 El usuario volvió a indicar la carpeta y ya se encontró y leyó íntegra [LINDE_Fase_7_investigacion_ecologia.md](docs/investigacion/LINDE_Fase_7_investigacion_ecologia.md). Se incorpora como referencia sin alterar el diseño maestro ni el alcance autorizado: stock, reproducción, migración y efectos económicos siguen aplazados. Esta nota supera el pendiente de localización anterior. Sin cambios de código ni repetición de pruebas en este complemento; la redistribución territorial sigue pendiente de propuesta/aprobación.
+
+### Siguiente decisión: propuesta A de ubicaciones (26/10/2026)
+
+Prototipo y [galería comparativa](production/qa/evidence/mundo-1/fase-7/propuesta-ubicacion/GALERIA.html) preparados, no activados en el juego. Mismas cantidades/especies por región; preferencias de vecinos cardinales con vegetación/roca o despejados, y retorno al punto original si no hay alternativa. 2.523 regiones: 2.271 apariciones, 904 puntos propuestos diferentes; conservación/orden inverso/estado puro y regresión hábitats23. Investigación complementaria ya localizada y leída (`6f78a6b`). Antes de continuar con activación se requiere decisión humana de distribución y persistencia versionada; no sustituir planes de partidas existentes. No merge/push.

@@ -71,13 +71,16 @@ func paso(dt: float) -> void:
  actualizar()
 
 ## Plan puro: no depende de construcciones, orden de carga o jugadores presentes.
+func candidata_region(r: Vector2i, intento: int) -> Vector2i:
+ var h: int = M.Terreno.hash_celda(r * 67 + Vector2i(intento, intento * 31), int(j.d.semilla) ^ 0xFA017)
+ return r * 16 + Vector2i(h % 16, (h >> 8) % 16)
+
 func plan_region(r: Vector2i) -> Dictionary:
  var k := M.clave(r)
  if planes.has(k): return planes[k]
  var resultado := {}
  for i in 64:
-  var h: int = M.Terreno.hash_celda(r * 67 + Vector2i(i, i * 31), int(j.d.semilla) ^ 0xFA017)
-  var celda := r * 16 + Vector2i(h % 16, (h >> 8) % 16)
+  var celda := candidata_region(r, i)
   if M.Terreno.distancia_valle(celda) < int(cfg.distancia_valle): continue
   var habitat := habitat_en(celda)
   if habitat.is_empty(): continue
