@@ -282,3 +282,105 @@ Dos tipos de uso. En 1b **todos** pasan `Mundo.ID_INICIAL`: **pertenencia** (¿e
 5. Un commit por archivo de lógica (6) más uno para la firma y el test, cada uno con su comparación de hashes; cualquier diferencia detiene el paso.
 
 **Riesgos de 1b**: rendimiento de `camas()`/`esenciales()` en bucles (§9.2 filas 1, 2, 4, 7, 10, 11); semántica de la unión mal aplicada en sitios de alcanzabilidad (filas 9 y 12); archivos que otras sesiones también editan (`sociedad.gd`, `habitantes.gd`).
+- **Resultado (26/10)**: implementado y verificado; ver [ESTADO.md §3d](../../production/epics/mundo-vivo/ESTADO.md).
+
+## 10. Paso 1c — propuesta técnica (sin implementar)
+
+Objetivo: que quien entra aparezca en el pueblo inicial con una referencia clara de la comunidad, de forma segura, determinista y reutilizando el registro `mundo.poblados`. Proporcionado al estado actual: **un solo pueblo real**, sin sistema de reaparición general.
+
+### 10.1 Lo que dice el código y lo que se midió (26/10, semilla 123, sin cambiar nada)
+| Hallazgo | Evidencia |
+|---|---|
+| Se entra por un solo punto: `Juego.unir` (el servidor lo llama en `red_servidor.gd:130`) y `Juego.nueva`; ambos usan `Mundo.punto_inicio(semilla)`, que no mira a los jugadores ya presentes ni a los enemigos vivos | `juego.gd:56-69, 149-156` [C] |
+| Quien cae sin cama reaparece en `pj.inicio`, la celda guardada al entrar, **sin revalidarla** (`_derrota`) | `juego.gd:340-342` [C] |
+| En `Juego.nueva` la posición se calcula **antes** de crear habitantes y combate (`_arrancar`) | `juego.gd:59-68` [C] |
+| La regla actual (P05) exige ≥12 celdas de cualquier *punto de aparición* de slime. **Con ella no hay ninguna celda válida a 2–7 celdas de la plaza, el cruce, la puerta de la casa, la cantera ni el taller** | [M] `cands.gd`: 0, 0, 0, 0, 0 celdas |
+| Los 12 slimes se generan en cualquier lugar libre del Valle salvo cerca de la entrada sur; el más cercano al cruce está a 2,8 celdas, a la plaza 4,0, a la puerta 7,3, a la cantera 6,4, al taller 6,1 | [M] |
+| El radio con que un slime detecta al jugador es su `vision` del catálogo: 80 px = 5 celdas (el guardián, 140 px = 8,75). Los enemigos en reposo vuelven a su origen y no deambulan | `catalogos.gd:116-118`, `combate.gd` `_paso_enemigo` [C] |
+| Con «fuera del radio de detección» (en vez de 12 celdas) sí hay candidatas: **cruce 41, plaza 69, puerta 34, cantera 28, taller 29** celdas válidas a 2–7 celdas (con 8 celdas: cruce 4, plaza 27, puerta 1) | [M] |
+| Maren duerme en la casa de 20:00 a 06:00 y el horario de datos la lleva al taller (dentro de la casa) de 06:00 a 12:00 y a la **plaza** (34,25) de 12:00 a 14:00; Ordal trabaja en la cantera (10,9). **Con la autonomía activa se desvían**: Maren salió del Valle (x < 0) a las 08:00 y 10:00 | [C] datos; [M] posiciones cada 30 min |
+| Habitante fuera de edificios y dentro del encuadre de la cámara desde un ancla, en 49 muestras de 24 h: cruce 35 %, plaza 33 %, puerta 39 % (de día, 8, 7 y 10 de 29). Hay algún habitante en el Valle fuera de la casa en 35 de 49 muestras (71 %) | [M] |
+| El encuadre es de ≈26,7×15 celdas, es decir ±7,5 celdas en vertical: **un radio ≤7 garantiza ver el ancla** y a quien esté a ese radio | `medir_inicio` (Fase 0) |
+
+**Conclusión de diseño**: la referencia fiable es un **lugar** (el centro del pueblo del registro), no la presencia de los habitantes: sus rutinas son autónomas, salen del Valle y duermen en la casa. Garantizar compañía exigiría mover rutinas, que queda fuera.
+
+### 10.2 Qué entra en 1c y qué no
+| Dentro de 1c | Depende de otro paso |
+|---|---|
+| Elegir la celda de aparición cerca de `poblado.centro`, validada con el estado **actual** del mundo | **1d**: nombres de hitos, estación común, un lugar reconocible (plaza marcada) en vez del cruce de caminos |
+| Dispersión determinista entre jugadores que entran | **1e**: sacar los slimes del núcleo del pueblo. Sin eso el pueblo sigue teniendo enemigos a 3–7 celdas del centro; 1c solo asegura que no te vean al aparecer |
+| Revalidar al reaparecer sin cama (`_derrota`) con la misma función | **Fase 5/6**: que los habitantes estén en el centro (rutinas, comercio, plaza) |
+| Interruptor `legado`/`poblado` | **N6**: viabilidad con umbrales de comida, camas, residentes y seguridad |
+| Política explícita cuando el pueblo no es viable o no hay candidatas | **Fase 4–6**: elegir entre varios pueblos reales |
+
+### 10.3 Alternativas
+| | A. Ancla fija en `poblado.centro` (recomendada) | B. Ancla en el residente más cercano al centro | C. Mantener `punto_inicio` y solo relajar a 8 celdas |
+|---|---|---|---|
+| Idea | Candidatas a 2–7 celdas del centro del pueblo del registro | Igual, pero alrededor de un residente visible si lo hay; si no, el centro | Sigue eligiendo al azar en el Valle |
+| Referencia de comunidad | Un lugar fijo y reconocible, mismo para todos | Compañía cuando existe, pero el sitio cambia con la hora (primer arranque a las 06:00: junto a Ordal en la cantera, a ≈28 celdas del cruce; Maren aún en la casa) | Ninguna |
+| Habitante a la vista (de 24 h) | ≈33–39 % | Hasta ≈71 % (cuando hay alguien en el Valle) | 0/20 en la línea base |
+| Complejidad | Baja: ≈40–60 líneas | Media: añade la selección de anclas dinámicas y casos de borde | Mínima |
+| Extensible a otros pueblos | Sí: cada pueblo tiene su centro | Sí | No |
+| Riesgo principal | Poca gente a la vista a ciertas horas | Aparecer lejos del núcleo y cambiar el sitio con la hora | No resuelve el problema |
+**Recomendación**: **A**. Cumple el objetivo (referencia clara), es proporcionada y no toca rutinas. B es un incremento posible si, tras medir A, se decide que falta compañía; cambia solo la elección del ancla.
+
+### 10.4 Diseño recomendado (A)
+Una única función, `Juego.punto_aparicion(jugador_id) -> Dictionary` (`{celda, poblado, motivo}`), usada por `nueva`, `unir` y `_derrota` (sin cama). Sin sistema aparte: lee el registro y las validaciones existentes.
+1. **Poblados candidatos**, en orden: el del jugador (hoy `ID_INICIAL`), luego los demás por id. Un poblado es elegible si `estado == "activo"`, hay al menos un habitante presente y existe alguna celda válida. Son tres condiciones booleanas; **no se usan umbrales numéricos de viabilidad** (N6 sigue pendiente de medición).
+2. **Celda válida** (reglas existentes + dos nuevas, todas derivadas de datos del juego):
+   - terreno `PASTO` o `CAMINO`, 3×3 sin bloqueo, alcanzable desde `entrada(poblado)` y no ocupada (`bloquea`, `alcanzables`, `ocupada`: ya existen);
+   - fuera del radio de detección (`vision` del catálogo) de cada enemigo **vivo** (`combate.enemigos`, `est != "muerto"`); sustituye a «≥12 celdas de puntos de aparición». *Decisión P05 → ver 10.5*;
+   - a 2–7 celdas (euclídea) de `poblado.centro`: **7** = mitad del alto del encuadre medido (±7,5); **2** = una celda libre de separación respecto al ancla (el sprite ocupa 1 celda).
+3. **Selección y dispersión**: candidatas ordenadas por (distancia al centro, y, x); se descartan las que estén a menos de 2 celdas (Chebyshev) de otro jugador presente (`rt`); entre las restantes se toma `hash(semilla, jugador_id) % n`. Determinista para el mismo estado y mismo jugador, distinta para jugadores distintos mientras haya candidatas. Si la separación deja cero candidatas, se relaja a «celda no ocupada».
+4. **Mundo persistente**: todo se evalúa al entrar con el estado actual; una celda construida, ocupada o con un enemigo cerca queda excluida sin tratamiento especial. Quien ya existe en `d.jugadores` conserva su posición guardada (no pasa por esta función).
+5. *(Sustituido por §10.8 C4: no hay respaldo a `punto_inicio` ni a la entrada.)* **Pueblo inviable / sin candidatas**: se prueba el siguiente poblado. Si ninguno sirve: **política explícita** → `motivo = "sin_poblado_viable"`, se usa el `punto_inicio` anterior (la celda aleatoria válida del Valle); si tampoco hay, la celda `entrada(ID_INICIAL)`, que es esencial y transitable por definición. Siempre se avisa al jugador, se anota un suceso en el diario y se guarda `mundo.inicio.ultimo = {poblado, celda, motivo, min}` para auditoría. Nunca un respaldo silencioso.
+6. **Interruptor**: `estado.inicio = {"modo": "poblado" | "legado"}` creado en `configurar`; con `legado` se llama exactamente a `punto_inicio(semilla)` como hoy. `medir_inicio` y `medir_equivalencia` aceptan `modo=` para comparar. Mundos sin la clave: `legado`.
+7. **`Juego.nueva`**: la posición del primer jugador se calcula después de `_arrancar()` (necesita enemigos y registro) y se asigna a `rt[LOCAL].pies`, `pos` e `inicio`. Con `legado` se conserva el orden actual.
+8. **`_derrota`**: sin cama, llama a la misma función en lugar de usar `pj.inicio` sin revalidar (commit propio y separable; con `legado` no cambia).
+
+### 10.5 Decisiones que necesito *(respuestas y precisiones en §10.8)*
+| ID | Decisión | Recomendación |
+|---|---|---|
+| C1 | La regla P05 («≥12 celdas de los puntos de aparición de slimes») hace imposible aparecer cerca del centro (0 celdas válidas). ¿Se sustituye, para la aparición en un pueblo, por «fuera del radio de detección de cada enemigo vivo» (5 celdas para el slime)? Alternativas: mantener 12 y esperar a 1e (mover slimes), o aparecer en la periferia como hoy | Sustituir, con `legado` disponible; 1e puede volver a endurecerla |
+| C2 | ¿Alcance 7 celdas y separación de 2 celdas entre jugadores (derivados del encuadre y del tamaño del sprite)? | Sí |
+| C3 | ¿Incluir en 1c la reaparición sin cama con la misma función (commit separado)? | Sí; evita un segundo sistema de aparición |
+| C4 | ¿El interruptor es por mundo (`estado.inicio.modo`) y por defecto `poblado` en mundos nuevos? | Sí |
+| C5 | Compañía: ¿A ahora y B solo si la medición lo pide? | Sí |
+
+### 10.6 Pruebas de aceptación (medibles)
+| Criterio | Medición | Aceptación |
+|---|---|---|
+| Seguridad | 500 semillas: tipo, 3×3 libre, alcanzable, no ocupada, distancia a cada enemigo vivo > su `vision` | 100 % válidas; ninguna dentro del radio de detección |
+| Cercanía y orientación | distancia al centro; `centro` y la puerta de la casa dentro del encuadre | 100 % entre 2 y 7 celdas; `centro` siempre en el encuadre; porcentaje con la casa en el encuadre registrado como línea base nueva |
+| Dispersión | 6 `unir` seguidos | 6 celdas distintas, separación ≥ 2 (Chebyshev) mientras haya candidatas, todas a ≤ 7 del centro |
+| Determinismo | misma semilla y secuencia de jugadores, dos corridas | posiciones idénticas; hash de posiciones estable |
+| Estado cambiado | construir sobre candidatas, colocar un slime vivo a 4 celdas, llenar el círculo | las celdas afectadas no se eligen; sin candidatas → siguiente poblado → política 5 con aviso y `inicio.ultimo.motivo` |
+| Pueblo inviable | marcar `estado != "activo"` o vaciar los habitantes | usa otro poblado (sintético) o la política 5 |
+| Persistencia | guardar/cargar | jugador conserva posición e `inicio`; `estado.inicio` se conserva; el siguiente `unir` es consistente |
+| Red | `prueba_poblados`/`prueba_red` con dos clientes reales | ambos aparecen distintos, a ≤ 7 celdas del centro, sin errores; réplica con el mismo registro |
+| Compatibilidad | `modo = legado` | hashes completos idénticos a `fase-1a` (ignorando solo `mundo.inicio`) y mismas posiciones que `punto_inicio` |
+| Sin efectos laterales | `medir_equivalencia` con un jugador en modo `poblado` | hash de NPC/inventarios/construcciones igual al de `legado` salvo la posición del jugador y `mundo.inicio` (se compara por secciones) |
+| Regresión | suites de autonomía, sociedad, arraigo, crecimiento, red, fauna, terreno, ui, `prueba` | sin fallos nuevos (el fallo previo de arte persiste) |
+
+### 10.7 Riesgos
+- **Pueblo con enemigos dentro**: 1c solo evita la detección inmediata; un slime puede acercarse después (hasta 1e). El jugador puede huir (velocidad 4 celdas/s frente a 1,75).
+- **Reordenar `Juego.nueva`**: toca el arranque; cubierto por el interruptor y los hashes de `legado`.
+- **Respawn**: cambiar `_derrota` afecta a todos los jugadores sin cama; commit aparte y con prueba propia.
+- **Compañía**: A no la garantiza (≈33–39 % de las muestras con alguien a la vista); no se oculta ni se resuelve moviendo rutinas.
+- **Retirada de P05 en este caso**: la protección contra «encuentro inevitable» pasa de 12 celdas a 5; si 1e mueve los slimes se puede restablecer.
+- **Posición guardada de quien ya existe**: si se construyera encima de su celda, esta propuesta no la corrige (comportamiento actual).
+
+### 10.8 Precisiones aprobadas por el usuario (26/10) — prevalecen sobre §10.4–10.6
+**Principio de diseño**: los pueblos de Linde **no son zonas mágicamente seguras**; pueden sufrir ataques, perder habitantes y desaparecer. Un jugador nuevo, sin embargo, no debe aparecer junto a un enemigo sin posibilidad razonable de reaccionar. La solución definitiva es ecológica y vendrá de que un pueblo habitado mantenga las amenazas alejadas por su funcionamiento (construcciones, actividad, defensas). Por eso **1c es la solución de aparición y 1e la corrección de la ecología y distribución de amenazas del núcleo inicial**.
+
+| ID | Resolución |
+|---|---|
+| A | Alternativa A aprobada: ancla estable y reconocible del poblado (`poblado.centro`). No se implementa B; no se teletransportan ni se alteran las rutinas de los NPC para garantizar compañía |
+| C1 | Política provisional «fuera del radio de detección de los enemigos vivos» **solo en modo `poblado`**; no se elimina ni reemplaza P05 ni la regla de 12 celdas del modo `legado`. Transitoria hasta 1e. **Antes de confirmarla se mide qué ocurre en los primeros segundos tras aparecer** (aproximación, detección, persecución y daño). Si aparecen riesgos importantes se presentan alternativas; sin invulnerabilidad artificial ni cambios en el comportamiento de los slimes |
+| C2 | Radio 2–7 celdas y separación mínima 2, **valores de prueba**, no de balance. La selección valida ocupación, construcciones, terreno, conectividad y enemigos; el hash solo ordena la búsqueda y **nunca sustituye** esas comprobaciones |
+| C3 | `_derrota` sin cama usa el mismo sistema de validación, en commit separado. La reaparición con cama válida no se altera |
+| C4 | Interruptor por mundo `poblado` / `legado`; el modo `legado` conserva equivalencia completa. **No hay respaldo a una entrada que no haya superado las validaciones esenciales ni a `punto_inicio`.** Recuperación explícita cuando no hay ninguna posición segura, sin inventar una celda ni crear un pueblo: **`unir` rechaza la entrada** con motivo explícito y registro (`mundo.inicio.ultimo`, suceso), sin crear al jugador, y el servidor informa al cliente; **`_derrota` deja al jugador donde cayó** (los enemigos que lo seguían lo olvidan, como ya ocurre) con aviso y registro. Una comunidad destruida (`estado != "activo"` o sin habitantes presentes) no se reactiva para dar cabida a nadie |
+| C5 | Elegimos A |
+El interruptor se crea en `legado`; la política `poblado` pasa a ser el valor por defecto de los mundos nuevos solo si las mediciones de C1 no muestran un riesgo relevante y tras tu aprobación de resultados.
+
+**Pruebas añadidas**: (1) **seguridad posterior a la aparición**: tras aparecer con combate real, el jugador pasivo (peor caso) y el jugador que huye al detectar al enemigo, durante 30 s de juego, con registro de distancia mínima, primer estado de persecución, primer aviso de ataque y daño recibido, en las 500 semillas y con jugadores sucesivos; (2) las 500 semillas de seguridad estática; (3) dispersión de jugadores sucesivos; (4) persistencia; (5) red con clientes reales; (6) rechazo de entrada y reaparición sin posición segura, sin crear celda ni reactivar un pueblo no activo.
