@@ -1009,7 +1009,7 @@ func construir_pieza(nid: String, pieza: String, c: Vector2i, dueno: String = ""
 	j.sembrar(c)
 	var alc: Dictionary=j.mundo.alcanzables()
 	var valido:=true
-	for e in M.ESENCIALES:
+	for e in j.mundo.esenciales(M.ID_INICIAL):   # alcanzabilidad desde la entrada del Valle: solo su pueblo
 		if not alc.has(e):valido=false
 	for gid in cfg.grupos:
 		if not alc.has(_ancla(gid)): valido=false
