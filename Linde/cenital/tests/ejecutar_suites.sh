@@ -17,7 +17,7 @@ mkdir -p "$SALIDA"
 
 SUITES=(prueba prueba_reglas prueba_saberes prueba_desarrollo prueba_sociedad prueba_autonomia
         prueba_arraigo prueba_casas_arraigo prueba_aspecto prueba_ui prueba_proteccion prueba_terreno
-        prueba_fauna prueba_habitats prueba_distribucion_fauna prueba_territorios_fauna prueba_senales_fauna prueba_senales_red prueba_orden_dibujo prueba_caminos prueba_campos_cultivo prueba_casas
+        prueba_fauna prueba_habitats prueba_distribucion_fauna prueba_territorios_fauna prueba_senales_fauna prueba_senales_red prueba_navegacion_fauna prueba_decisiones_fauna prueba_orden_dibujo prueba_caminos prueba_campos_cultivo prueba_casas
         prueba_crecimiento prueba_carga_crecimiento prueba_poblados prueba_aparicion prueba_amenazas prueba_poblado_inicial
         prueba_lugares prueba_lugares_ui prueba_lugares_red prueba_preexistentes prueba_preexistentes_ui prueba_preexistentes_red prueba_vivienda prueba_vivienda_ui prueba_vivienda_red prueba_taller prueba_taller_ui prueba_taller_red prueba_exploracion prueba_exploracion_ui prueba_pistas prueba_pistas_ui prueba_orientacion_red prueba_red prueba_terreno_red prueba_crecimiento_red prueba_operadores prueba_integracion_visual_a prueba_correcciones_a2_a3)
 [ $# -gt 0 ] && SUITES=("$@")

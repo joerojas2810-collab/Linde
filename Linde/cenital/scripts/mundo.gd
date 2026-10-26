@@ -523,7 +523,7 @@ func alcanzables(desde: Vector2i = ENTRADA, area: Rect2i = Rect2i(), hasta: Dict
 	return vistas
 
 # BFS 4-vecinos. Termina al llegar a una celda que cumple meta. [] si no hay ruta; [desde] si ya cumple.
-func camino(desde: Vector2i, meta: Callable, area: Rect2i = Rect2i()) -> Array:
+func camino(desde: Vector2i, meta: Callable, area: Rect2i = Rect2i(), transitable: Callable = Callable()) -> Array:
 	if area.size==Vector2i.ZERO:area=_area_ruta(desde)
 	if meta.call(desde): return [desde]
 	var prev := {desde: desde}
@@ -535,6 +535,7 @@ func camino(desde: Vector2i, meta: Callable, area: Rect2i = Rect2i()) -> Array:
 		for d in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
 			var n: Vector2i = c + d
 			if not area.has_point(n) or prev.has(n) or bloquea(n): continue
+			if transitable.is_valid() and not transitable.call(n): continue
 			prev[n] = c
 			if meta.call(n):
 				var ruta := [n]
