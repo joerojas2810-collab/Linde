@@ -1,11 +1,15 @@
 {
   "version": 1,
-  "nota": "Catálogo complementario de saberes. No modifica reglas_v1.json. La técnica «simple» es conocimiento común y no figura aquí. Los laminados se generan de artesania.combinaciones(). Prefijos: tec = técnica general, lam = proceso de un laminado. Valores provisionales: se ajustan jugando.",
+  "nota": "Catálogo complementario de saberes. No modifica reglas_v1.json. La técnica «simple» es conocimiento común y no figura aquí. Los laminados se generan de artesania.combinaciones(). Prefijos: tec = técnica general, lam = proceso de un laminado, op = operador de variantes (refuerzo, grosor; solo los niveles no predeterminados exigen el saber). Valores provisionales: se ajustan jugando.",
   "tecnicas": {
     "ligera": {"exige": "tec", "rango_min": 0, "afines": ["artesano", "recolector"]},
     "reforzada": {"exige": "tec", "rango_min": 1, "afines": ["cantero", "artesano"]}
   },
   "laminados": {"exige": "lam", "rango_min": 0, "afines": ["artesano"]},
+  "operadores": {
+    "refuerzo": {"exige": "op", "rango_min": 1, "afines": ["cantero", "artesano"]},
+    "grosor": {"exige": "op", "rango_min": 1, "afines": ["artesano"]}
+  },
   "ensenanza": {
     "radio_busqueda_celdas": 12,
     "radio_leccion_celdas": 4,
@@ -21,8 +25,8 @@
   "inicial": {
     "nota": "Cada habitante empieza con lo que su oficio y experiencia justifican, no con todo su catálogo. El jugador empieza sin saberes especializados.",
     "npc": {
-      "maren": ["tec:ligera", "tec:reforzada", "lam:hierro_fibra", "lam:bronce_fibra"],
-      "ordal": ["tec:reforzada", "lam:hierro_piedra"],
+      "maren": ["tec:ligera", "tec:reforzada", "lam:hierro_fibra", "lam:bronce_fibra", "op:refuerzo", "op:grosor"],
+      "ordal": ["tec:reforzada", "lam:hierro_piedra", "op:refuerzo"],
       "nerea": ["tec:ligera"]
     },
     "oficio": {

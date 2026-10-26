@@ -7,6 +7,7 @@ const Srv = preload("res://scripts/red_servidor.gd")
 const Cli = preload("res://scripts/red_cliente.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const J = preload("res://scripts/juego.gd")
+const M = preload("res://scripts/mundo.gd")
 const TMP := "user://prueba_operadores.json"
 const E := 0.000000001
 ## REGISTROS medidos con los coeficientes iniciales de I1a (2026-10-25); no son objetivos. Si cambian, o es un cambio deliberado
@@ -38,6 +39,7 @@ func _init() -> void:
 	_recetas()
 	_clasificacion(informe)
 	_integracion()
+	_saberes_operadores()
 	_rendimiento()
 	print("OPERADORES: %d comprobaciones, %d fallos" % [total, fallos])
 	quit(1 if fallos else 0)
@@ -415,3 +417,103 @@ func _claves1() -> Array:
 					var k := A.clave(f, m, tc, q)
 					if not A.leer(k).is_empty(): lista.append(k)
 	return lista
+
+## E4 (contrato D5 en PLAN_MAESTRO): saberes op:, material visto, individualidad, enseñanza, guardado y réplica.
+func _nuevo():
+	var j = J.nueva(123, "Explorador", [0, 0, 0])
+	j.combate.enemigos.clear()
+	j.autonomia.activar()
+	return j
+
+func _saberes_operadores() -> void:
+	var j = _nuevo()
+	var d = j.autonomia.desarrollo
+	var yo: String = j.actor_desarrollo()
+	var k := "art2:espada:hierro:simple:0:piedra:grueso"      # exige op:refuerzo y op:grosor
+	var k_ref := "art2:espada:hierro:simple:0:piedra:normal"  # solo op:refuerzo
+	var k_gro := "art2:espada:hierro:simple:0:sin:grueso"     # solo op:grosor
+	ok(d.validar_saberes().is_empty() and d.catalogo().has("op:refuerzo") and d.catalogo().has("op:grosor") and d.catalogo()["op:refuerzo"].tipo == "op", "catálogo: existen op:refuerzo y op:grosor y el catálogo es válido " + str(d.validar_saberes()))
+	# saberes_exigidos: exactamente un op: por operador con nivel no predeterminado, en las 1.692 variantes; ninguno en art1.
+	var mal: Array = []
+	for c in A.enumerar2():
+		var p := A.leer2(c)
+		var esperado: Array = []
+		if p.refuerzo != "sin": esperado.append("op:refuerzo")
+		if p.grosor != "normal": esperado.append("op:grosor")
+		var obtenido: Array = d.saberes_exigidos(p).filter(func(id): return id.begins_with("op:"))
+		obtenido.sort()
+		esperado.sort()
+		if obtenido != esperado or esperado.is_empty(): mal.append(c)
+	ok(mal.is_empty(), "D5: cada variante exige un op: por operador no predeterminado (y al menos uno) " + str(mal.slice(0, 3)))
+	ok(d.saberes_exigidos(A.leer("art1:espada:hierro:simple:0")).is_empty() and d.saberes_exigidos(A.leer("art1:espada:hierro:ligera:0")) == ["tec:ligera"], "D5: art1 no exige ningún op:")
+	ok(d.valido(k) and d.valido("art1:espada:hierro:simple:0") and not d.valido("art2:espada:hierro:simple:0:sin:normal"), "valido: reconoce art1 y art2, no las no canónicas")
+	# sabe: sin saberes de operador no se puede; cada operador abre solo lo suyo.
+	ok(not d.sabe(yo, k) and not d.sabe(yo, k_ref) and not d.sabe(yo, k_gro), "sabe: el jugador nuevo no sabe usar ningún operador")
+	ok(d.aprender(yo, "op:refuerzo", "prueba") and d.sabe(yo, k_ref) and not d.sabe(yo, k_gro) and not d.sabe(yo, k), "sabe: op:refuerzo abre el refuerzo pero no el grosor ni la combinación")
+	ok(d.aprender(yo, "op:grosor", "prueba") and d.sabe(yo, k_gro) and d.sabe(yo, k), "sabe: con ambos operadores se conoce la combinación (sin aprender cada variante)")
+	# Individualidad: lo suyo no pasa a otros actores.
+	d.sembrar("npc:nerea")
+	ok(d.sabe("npc:maren", k) and not d.sabe("npc:nerea", k_ref) and not d.sabe("npc:ordal", k_gro) and d.sabe("npc:ordal", k_ref), "individual: Maren sabe ambos, Ordal solo el refuerzo y Nerea ninguno")
+	var bea: Dictionary = j.unir("@bea", "Bea", [0, 0, 0])
+	var actor_bea: String = j.actor_desarrollo("@bea")
+	ok(bea.ok and actor_bea != yo and not d.sabe(actor_bea, k_ref), "individual: otro jugador no hereda lo que sabe el primero")
+	# puede: material base y material de refuerzo vistos; los operadores no conceden materiales.
+	ok(d.estado(yo).materiales.is_empty() and not d.puede(yo, k) and not d.puede(yo, k_gro), "puede: sin materiales vistos no se puede aunque se conozcan los operadores")
+	d.observar(yo, {"lingote": 1})
+	ok(d.puede(yo, k_gro) and not d.puede(yo, k_ref) and not d.puede(yo, k) and not d.conoce(yo, k), "puede: con el hierro visto se puede el grosor, pero reforzar con piedra pide haber visto la piedra")
+	d.observar(yo, {"piedra": 1})
+	ok(d.puede(yo, k) and d.conoce(yo, k) and d.conoce(yo, k_ref), "puede: con base y refuerzo vistos se conoce la combinación")
+	d.observar(actor_bea, {"lingote": 1, "piedra": 1})
+	ok(d.puede(actor_bea, k) and not d.sabe(actor_bea, k) and not d.conoce(actor_bea, k), "puede y sabe son independientes: ver los materiales no da el saber")
+	# art1 intacto: una pieza art1 se conoce igual que antes.
+	ok(d.conoce(yo, "art1:espada:hierro:simple:0") and d.sabe(actor_bea, "art1:espada:hierro:simple:0"), "art1: sigue sin exigir operadores")
+	# Enseñanza: el rango mínimo es el único prerrequisito; nunca el material.
+	var aprendiz: String = j.actor_desarrollo("@bea")
+	ok(d._motivo_no_ensena("npc:maren", aprendiz, "op:refuerzo") == "Aún no está preparado para aprenderlo" and not d.prerrequisitos_ok(aprendiz, "op:refuerzo"), "enseñanza: sin el rango mínimo de artesanía no se aprende un operador")
+	d.estado(aprendiz).practica["artesania"] = int(A.reglas().practica_por_rango) * int(d.catalogo()["op:refuerzo"].rango_min)
+	var materiales_antes: Dictionary = d.estado(aprendiz).materiales.duplicate()
+	ok(d._motivo_no_ensena("npc:maren", aprendiz, "op:refuerzo") == "" and d.aprender(aprendiz, "op:refuerzo", "ensenanza", "npc:maren"), "enseñanza: con el rango mínimo Maren le enseña op:refuerzo")
+	ok(d.estado(aprendiz).materiales == materiales_antes and d.tiene_saber(aprendiz, "op:refuerzo") and not d.tiene_saber(aprendiz, "op:grosor"), "enseñanza: aprender un operador no concede materiales ni otros saberes")
+	ok(d._motivo_no_ensena("npc:nerea", aprendiz, "op:grosor") == "No conoce ese saber", "enseñanza: nadie enseña un operador que no sabe")
+	var ops_candidatos: Callable = func(actor: String) -> Array: return d.candidatos(actor).filter(func(id): return id.begins_with("op:"))
+	ok(ops_candidatos.call("npc:nerea") == [], "enseñanza: sin rango suficiente los operadores no son candidatos")
+	# Fabricación real junto a una mesa: consumo exacto de la receta y registro del saber en la autoridad.
+	j.pies = M.pies_de_celda(Vector2i(28, 21))
+	j.jug().inv.piedra = 5
+	j.jug().inv.madera = 20
+	ok(j.construir("mesa", Vector2i(29, 20)).ok, "fabricar: se construye la mesa de prueba")
+	j.jug().inv.lingote = 4
+	j.jug().inv.piedra = 2
+	var antes: Dictionary = j.jug().inv.duplicate()
+	var r: Dictionary = j.fabricar_artefacto(k)
+	ok(r.ok and j.jug().inv.get(k, 0) == 1 and j.jug().inv.lingote == antes.lingote - 3 and j.jug().inv.get("piedra", 0) == antes.piedra - 2, "fabricar: la variante consume exactamente su receta (3 lingotes, 2 piedras) " + str(r))
+	var dd: Dictionary = j.autonomia.desarrollo.datos()
+	ok(dd.creaciones.size() >= 1 and str(dd.creaciones[dd.creaciones.size() - 1].pieza) == k, "fabricar: la creación queda registrada")
+	var otro_k := "art2:espada:cobre:simple:0:piedra:normal"
+	var inv_antes: Dictionary = j.jug().inv.duplicate()
+	ok(not j.fabricar_artefacto(otro_k).ok and j.jug().inv == inv_antes, "fabricar: sin ver el cobre no se fabrica y no se pierde nada")
+	var k_fino := "art2:espada:hierro:simple:0:sin:fino"
+	d.estado(yo).saber.erase("op:grosor")
+	ok(not j.fabricar_artefacto(k_fino).ok and j.jug().inv == inv_antes, "fabricar: sin op:grosor no se fabrica una variante fina")
+	d.aprender(yo, "op:grosor", "prueba")
+	# Servidor y red: un cliente no puede saltarse el saber.
+	var srv = Srv.new()
+	srv.j = j
+	d.estado(yo).saber.erase("op:refuerzo")
+	var inv2: Dictionary = j.jug().inv.duplicate()
+	ok(srv.ejecutar(J.LOCAL, ["fabricar_artefacto", 1, k_ref]) and j.jug().inv == inv2, "red: pedir una variante sin el saber op: no fabrica ni consume (el servidor decide)")
+	d.aprender(yo, "op:refuerzo", "prueba")
+	# Guardado y carga: los saberes de operador persisten por actor.
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(TMP))
+	ok(j.guardar(TMP), "persistencia: se guarda con saberes de operador")
+	var c = J.cargar(TMP)
+	var dc = c.autonomia.desarrollo
+	ok(c != null and dc.tiene_saber(yo, "op:refuerzo") and dc.tiene_saber(yo, "op:grosor") and dc.sabe(yo, k) and dc.tiene_saber(aprendiz, "op:refuerzo") and not dc.tiene_saber(aprendiz, "op:grosor"), "persistencia: cada actor conserva sus operadores tras cargar")
+	# Réplica: el cliente consulta los mismos saberes sin escribir.
+	var cli = Cli.new()
+	cli._bienvenida(srv.estado_para(J.LOCAL))
+	var dr = cli.j.autonomia.desarrollo
+	ok(dr.sabe(cli.j.actor_desarrollo(), k) == d.sabe(yo, k) and dr.conoce(cli.j.actor_desarrollo(), k) == d.conoce(yo, k) and dr.tiene_saber("npc:maren", "op:grosor"), "recepción: la réplica calcula el mismo sabe/conoce y ve los saberes de operador de los habitantes")
+	cli.free()
+	srv.free()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(TMP))

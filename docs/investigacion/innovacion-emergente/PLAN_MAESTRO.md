@@ -829,6 +829,20 @@ I1a **no está autorizada ni iniciada.** Se distingue lo que K1 ya confirmó por
 **Aceptación.** C1–C3 y C5–C6 del PLAN_IMPLEMENTACION §7 (nivel C) para el jugador; R1–R4 evaluadas con resultado escrito (cumplidas o no).
 **Fuera de alcance.** Invención por NPC (I1b), templado (I2), proporción de aleación.
 
+#### Contrato D5 de I1a — conocimiento de operadores y de materiales (aprobado 2026-10-25; implementado en E4)
+
+| Pregunta | Regla |
+|---|---|
+| ¿Qué saber exige un operador? | Un solo saber por operador, `op:<operador>` (`op:refuerzo`, `op:grosor`). No hay saber por nivel ni por variante: nadie aprende cada variante como una receta. |
+| ¿Cuándo hace falta? | Solo para usar un nivel **no predeterminado** (`sin` en refuerzo, `normal` en grosor, definidos en `reglas_v1.json`). Los niveles predeterminados nunca exigen saber de operador. |
+| `sabe(actor, clave)` | Exige `tec:<técnica>` (como hoy) y, para `art2:`, un `op:` por cada operador con nivel no predeterminado (`saberes_exigidos`). |
+| `puede(actor, clave)` | Además de lo actual (calidad, rango de la técnica, suelo de taller), exige haber **descubierto el material base** y, si hay refuerzo, **el material de refuerzo**. El rango de oficio se mide con el material base. |
+| ¿Conocer un operador da materiales? | No. `op:` y material visto son independientes: se puede saber `op:refuerzo` y no haber visto la piedra (entonces no `puede` reforzar con piedra), y viceversa. |
+| ¿Cómo se aprende un `op:`? | Como cualquier saber (enseñanza entre habitantes o con el jugador, siembra): `prerrequisitos_ok` exige solo el rango general de artesanía `rango_min` del operador (provisional: 1 para ambos). No exige material concreto. |
+| ¿Es individual? | Sí: se guarda por actor en `actores[a].saber`, igual que `tec:`; un jugador no hereda lo de otro. |
+| Siembra inicial | Jugador: ninguno. Maren: `op:refuerzo` y `op:grosor`; Ordal: `op:refuerzo`. Los NPC no fabrican `art2:` en I1a (I1b). |
+| `art1:` | Sin cambios: no exige ningún `op:`. |
+
 ### K2 — Descubrimiento autónomo determinista, con saberes de dominio (M)
 
 **Objetivo.** Un NPC descubre por sí mismo una posibilidad definida, por motivo y capacidad, y queda constancia.

@@ -56,6 +56,9 @@ func catalogo() -> Dictionary:
 		for t in sab.tecnicas:
 			var def: Dictionary = sab.tecnicas[t]
 			_cat["tec:"+t] = {"tipo":"tec","exige":def.exige,"rango_min":int(def.rango_min),"afines":def.afines,"nombre":"técnica "+str(cfg.tecnicas[t].nombre)}
+		for o in sab.get("operadores",{}):
+			var def: Dictionary = sab.operadores[o]
+			_cat["op:"+o] = {"tipo":"op","exige":def.exige,"rango_min":int(def.rango_min),"afines":def.afines,"nombre":"operador de "+str(cfg.operadores[o].nombre).to_lower()}
 		for id in A.combinaciones():
 			var def: Dictionary = sab.laminados
 			_cat["lam:"+id] = {"tipo":"lam","exige":def.exige,"rango_min":int(def.rango_min),"afines":def.afines,"nombre":str(A.material(id).nombre),"componentes":id.split("_")}
@@ -67,7 +70,9 @@ func validar_saberes() -> Array:
 	for t in sab.tecnicas:
 		if not cfg.tecnicas.has(t) or t=="simple": errores.append("técnica inexistente o común: "+t)
 	for id in catalogo():
-		if not catalogo()[id].exige in ["tec","lam"]: errores.append("exigencia no soportada: "+id)
+		if not catalogo()[id].exige in ["tec","lam","op"]: errores.append("exigencia no soportada: "+id)
+	for o in sab.get("operadores",{}):
+		if not cfg.get("operadores",{}).has(o) or not cfg.operadores[o].has("defecto"): errores.append("operador inexistente: "+o)
 	var listas: Array = sab.inicial.npc.values()+sab.inicial.oficio.values()+[sab.inicial.jugador]
 	for lista in listas:
 		for id in lista: if not catalogo().has(id): errores.append("saber inicial inexistente: "+str(id))
@@ -79,6 +84,10 @@ func saberes_exigidos(p: Dictionary) -> Array:
 	var ids: Array = []
 	if catalogo().has("tec:"+str(p.tecnica)): ids.append("tec:"+str(p.tecnica))
 	if catalogo().has("lam:"+str(p.material)): ids.append("lam:"+str(p.material))
+	for id in catalogo():     # D5: un saber op: por cada operador de la pieza con nivel no predeterminado
+		if catalogo()[id].tipo!="op": continue
+		var o: String = id.trim_prefix("op:")
+		if p.has(o) and str(p[o])!=str(cfg.operadores[o].defecto): ids.append(id)
 	return ids
 
 ## Lectura pura (también en la réplica): no crea entradas.
@@ -90,11 +99,20 @@ func tiene_saber(actor: String, id: String) -> bool:
 
 ## ¿Existe esta pieza dentro de las reglas? No depende de ningún actor.
 func valido(clave: String) -> bool:
-	return not A.leer(clave).is_empty()
+	return not _leer(clave).is_empty()
+
+## Descriptor de una pieza fabricable: art1: o art2: ({} si ninguna).
+func _leer(clave: String) -> Dictionary:
+	var p := A.leer(clave)
+	return p if not p.is_empty() else A.leer2(clave)
+
+func _receta(clave: String) -> Dictionary:
+	var r := A.receta(clave)
+	return r if not r.is_empty() else A.receta2(clave)
 
 ## ¿Conoce el procedimiento de esta pieza? Independiente del taller, los materiales y la pericia.
 func sabe(actor: String, clave: String) -> bool:
-	var p := A.leer(clave)
+	var p := _leer(clave)
 	if p.is_empty(): return false
 	for id in saberes_exigidos(p): if not tiene_saber(actor,id): return false
 	return true
@@ -169,7 +187,7 @@ func _materiales(objetos: Dictionary) -> Array:
 		if int(objetos[item])<=0: continue
 		var compuesto:=A.leer_material(str(item))
 		if compuesto!="" and not encontrados.has(compuesto): encontrados.append(compuesto)
-		var p := A.leer(str(item))
+		var p := _leer(str(item))
 		if not p.is_empty() and not encontrados.has(p.material): encontrados.append(p.material)
 		for mat in cfg.materiales:
 			if cfg.materiales[mat].item==item and not encontrados.has(mat): encontrados.append(mat)
@@ -213,8 +231,9 @@ func suelo(actor: String) -> int:
 
 ## ¿Puede hacerla ahora? Material visto, pericia y espacio de taller. Los insumos y la estación se validan al actuar.
 func puede(actor: String, clave: String) -> bool:
-	var p := A.leer(clave)
+	var p := _leer(clave)
 	if p.is_empty() or not estado(actor).materiales.has(p.material): return false
+	if p.has("refuerzo") and p.refuerzo!=cfg.operadores.refuerzo.defecto and not estado(actor).materiales.has(cfg.operadores.refuerzo.niveles[p.refuerzo].material): return false   # D5: ver también el refuerzo
 	var nivel := rango(actor,"artesania",p.material)
 	return int(p.calidad)<=nivel and nivel>=int(cfg.tecnicas[p.tecnica].rango) and suelo(actor)>=suelo_requerido(actor,p.tecnica)
 
@@ -269,12 +288,12 @@ func fabricar(clave: String, id: String) -> Dictionary:
 	if not activa(): return j._no("El taller experimental no está activo",id)
 	var actor: String = j.actor_desarrollo(id)
 	if not conoce(actor,clave): return j._no("Aún no conoces esa combinación o falta espacio de taller",id)
-	var r := A.receta(clave)
+	var r := _receta(clave)
 	if not j.estacion_cerca(r.est,id): return j._no("Necesitas una mesa de trabajo cerca",id)
 	if not Inv.cambiar(j.jug(id).inv,r.ent,r.sal,j.stats(id).slots): return j._no("Faltan materiales o espacio en la mochila",id)
 	_creacion(actor,clave,r.ent)
 	registrar(actor,"artesania",r.ent)
-	return j._ok("Fabricas "+A.info(clave).n,id)
+	return j._ok("Fabricas "+Eq.info(clave).n,id)
 
 func comprar(nid: String, clave: String, id: String) -> Dictionary:
 	if not activa() or not j.habitantes.ids.has(nid) or A.leer(clave).is_empty(): return j._no("No existe esa oferta",id)

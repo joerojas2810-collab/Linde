@@ -56,9 +56,9 @@ func _init() -> void:
 	var d=j.autonomia.desarrollo
 	var yo: String=j.actor_desarrollo()
 	ok(d.validar_saberes().is_empty(),"el catálogo de saberes solo referencia técnicas y laminados existentes")
-	ok(d.catalogo().size()==11 and d.catalogo().has("tec:ligera") and d.catalogo().has("lam:hierro_fibra"),"el punto de partida son 11 saberes: 2 técnicas y 9 laminados")
-	ok(ordenado(d._saber_de("npc:maren").keys())==["lam:bronce_fibra","lam:hierro_fibra","tec:ligera","tec:reforzada"],"Maren conoce técnicas artesanales avanzadas")
-	ok(ordenado(d._saber_de("npc:ordal").keys())==["lam:hierro_piedra","tec:reforzada"],"Ordal conoce lo que su oficio de cantero justifica")
+	ok(d.catalogo().size()==13 and d.catalogo().has("tec:ligera") and d.catalogo().has("lam:hierro_fibra") and d.catalogo().has("op:refuerzo") and d.catalogo().has("op:grosor"),"el punto de partida son 13 saberes: 2 técnicas, 9 laminados y 2 operadores")
+	ok(ordenado(d._saber_de("npc:maren").keys())==["lam:bronce_fibra","lam:hierro_fibra","op:grosor","op:refuerzo","tec:ligera","tec:reforzada"],"Maren conoce técnicas artesanales avanzadas")
+	ok(ordenado(d._saber_de("npc:ordal").keys())==["lam:hierro_piedra","op:refuerzo","tec:reforzada"],"Ordal conoce lo que su oficio de cantero justifica")
 	d.sembrar("npc:nerea")
 	ok(ordenado(d._saber_de("npc:nerea").keys())==["tec:ligera"],"Nerea conoce lo propio de su actividad, no el catálogo de su profesión")
 	ok(d._saber_de("npc:maren").size()!=d._saber_de("npc:nerea").size() and d._saber_de("npc:maren").keys()!=d._saber_de("npc:ordal").keys(),"no todos los habitantes nacen con los mismos saberes")
