@@ -1,0 +1,28 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS escenario usa comunidades reales de génesis
+PASS cada extracción deja objeto roto real y un uso gastado
+PASS ejecutor regional conecta saldos con cosecha, comida, herramientas y extracción
+PASS stock final = stock inicial + suma exacta de resultados, sin inventario paralelo
+PASS repetir el paso del mismo minuto no repite trabajo ni resultados
+PASS saldo completo detiene extracción con el límite existente, sin crear ítems de control
+PASS saldo alimentario insuficiente conserva deuda y causa sin consumo ficticio
+PASS bloqueo repetido no llena el historial
+PASS guarda economía regional
+PASS carga conserva deuda, cursores, saldos, secuencias y resultados exactos
+PASS pagar deuda descuenta exactamente los bienes presentes
+PASS continuación tras reinicio reproduce resultados sin doble cargo
+PASS deuda pagada no se vuelve a consumir
+PASS herramienta ausente mantiene demanda sin producir bienes ni usos
+PASS saldo expresa el requisito existente de comida para trabajar
+PASS fuentes agotadas no generan productos, resultados ni desgaste ficticios
+PASS bienvenida replica historial regional y saldos existentes
+PASS cliente no ejecuta consumo o producción
+PASS actualización fiable conserva resultados sin volver a aplicarlos
+REGIONAL: 19 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 67 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 14 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
