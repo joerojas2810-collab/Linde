@@ -160,7 +160,11 @@ func actualizar() -> void:
    pueblo.estado = "sin_residentes" if p.residentes.is_empty() else ("activo" if _sostenible(p) and int(inventario(p).get("baya",0)) > 0 else "sin_sustento")
    _conocimiento(p)
   var reparador := reparar_local(p) if not _sostenible(p) else ""
-  if not _sostenible(p):p.estado="faltan puesto, camas, techo o cofre";continue
+  if not _sostenible(p):
+   p.estado="faltan puesto, camas, techo o cofre"
+   p.produccion_min=int(j.d.min)
+   continue
+  if reparador!="": p.produccion_min=int(j.d.min)-int(cfg.produccion_min)
   var inv: Dictionary=inventario(p)
   var c:=Vector2i(p.celda[0],p.celda[1])
   for q in p.get("campos",[[c.x-1,c.y],[c.x-1,c.y+1]]):
@@ -190,13 +194,16 @@ func actualizar() -> void:
   # La llegada requiere transferencia de una identidad existente, no población por calendario.
   if p.residentes.is_empty():
    p.estado="sin residentes"
+   p.produccion_min=int(j.d.min)
    continue
   if int(j.d.min)-int(p.produccion_min)>=int(cfg.produccion_min):
    var periodos:=mini(24,floori(float(int(j.d.min)-int(p.produccion_min))/float(cfg.produccion_min)))
    p.produccion_min=int(p.produccion_min)+periodos*int(cfg.produccion_min)
    p.estado="activo"
    for periodo in periodos:
+    var turno_min := int(p.produccion_min)-(periodos-periodo-1)*int(cfg.produccion_min)
     for residente in p.residentes:
+     if int(residente.get("trabajo_min",p.get("fundado_min",0)))>turno_min: continue
      if residente.has("reserva_viaje"): continue
      if periodo == 0 and ocupados.has(residente.id): continue
      var herramienta: String="hacha_piedra" if residente.oficio=="recolector" else "pico_piedra"

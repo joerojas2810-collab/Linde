@@ -211,25 +211,16 @@ func actualizar() -> void:
    var q: Array=op.ruta[i]
    if not s._transitable(Vector2i(q[0],q[1])): libre=false;break
   var tiempo := mini(dt,int(op.duracion)-int(op.avance)) if libre and int(op.avance)<int(op.duracion) else dt
-  op.reloj=int(op.reloj)+tiempo
-  var coste := 0
-  for r in op.miembros: coste+=maxi(0,floori(float(int(op.reloj)-int(r.comida_min))/float(s.cfg.comida_min)))
-  op.deuda_comida=coste
-  if int(op.provisiones.get("baya",0))<coste:
-   op.estado="detenida";op.motivo="sin_comida";continue
-  op.provisiones.baya=int(op.provisiones.get("baya",0))-coste
-  op.consumido=int(op.get("consumido",0))+coste
-  for r in op.miembros:
-   var periodos := maxi(0,floori(float(int(op.reloj)-int(r.comida_min))/float(s.cfg.comida_min)))
-   r.comida_min=int(r.comida_min)+periodos*int(s.cfg.comida_min)
-  op.deuda_comida=0
+  if not _alimentar(op,int(op.reloj)+tiempo): continue
   if not libre: op.estado="detenida";op.motivo="ruta_bloqueada";continue
   op.avance=siguiente;op.estado="viajando"
   if int(op.avance)<int(op.duracion): continue
   var b := puesto(op.destino)
   if not b.is_empty() and j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"]:
+   _alimentar(op,ahora)
    op.estado="detenida";op.motivo="destino_no_activo";continue
   if b.is_empty() or not s._sostenible(b) or ((op.tipo!="comercio" or op.get("regresando",false)) and b.residentes.size()+op.miembros.size()>int(s.cfg.capacidad)):
+   _alimentar(op,ahora)
    op.estado="detenida";op.motivo="destino_sin_capacidad";continue
   if op.tipo=="comercio" and not op.get("regresando",false):
    var antes_entrega: Dictionary=s.inventario(b).duplicate(true)
@@ -244,6 +235,7 @@ func actualizar() -> void:
    for item in lote: s.inventario(b)[item]=int(s.inventario(b).get(item,0))+int(lote[item])
   for r in op.miembros:
    r.hogar=b.get("poblado",b.id)
+   r.trabajo_min=int(op.reloj)
    b.residentes.append(r)
   op.miembros=[];op.bienes={};op.provisiones={};op.estado="entregada"
   _sincronizar(b)
@@ -376,3 +368,19 @@ func retornos(id: String) -> Array:
  for op in datos().operaciones.values():
   if op.tipo=="comercio" and op.origen==id and op.estado in ["viajando","detenida"]: residentes.append_array(op.miembros)
  return residentes
+
+
+func _alimentar(op: Dictionary, hasta: int) -> bool:
+ op.reloj=maxi(int(op.reloj),hasta)
+ var coste := 0
+ for r in op.miembros: coste+=maxi(0,floori(float(int(op.reloj)-int(r.comida_min))/float(s.cfg.comida_min)))
+ op.deuda_comida=coste
+ if int(op.provisiones.get("baya",0))<coste:
+  op.estado="detenida";op.motivo="sin_comida";return false
+ op.provisiones.baya=int(op.provisiones.get("baya",0))-coste
+ op.consumido=int(op.get("consumido",0))+coste
+ for r in op.miembros:
+  var periodos := maxi(0,floori(float(int(op.reloj)-int(r.comida_min))/float(s.cfg.comida_min)))
+  r.comida_min=int(r.comida_min)+periodos*int(s.cfg.comida_min)
+ op.deuda_comida=0
+ return true

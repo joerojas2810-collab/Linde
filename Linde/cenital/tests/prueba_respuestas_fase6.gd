@@ -64,6 +64,7 @@ func _init()->void:
  ok(op.estado=="entregada" and destino.residentes.size()==2 and origen.residentes.size()==1 and ausente.id!=nid,"llegada mueve identidad una vez, sin reposición ficticia")
  var encontrado: Dictionary=s.residente(nid)
  ok(encontrado.id==nid and encontrado.hogar==destino.poblado and j.mundo.poblado(destino.poblado).camas.has(nid),"destino conserva ID, estado y asignación de cama real")
+ ok(int(encontrado.trabajo_min)==int(j.d.min),"trabajo del recién llegado empieza en la llegada, no antes")
  var saldo: Dictionary=s.balance_resumido(destino)
  ok(int(saldo.baya.vencido)==1,"nuevo residente no paga consumo anterior a su llegada")
  s.transitos.actualizar()

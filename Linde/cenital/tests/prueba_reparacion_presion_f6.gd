@@ -54,5 +54,16 @@ func _init()->void:
  inv.baya=int(s.balance_resumido(p).baya.reserva)
  s.actualizar_demandas()
  ok(not p.presiones.has("comida"),"cobertura material real elimina presión sin crear una crisis programada")
+ # Infraestructura que faltó durante muchos periodos no habilita producción retroactiva al repararse.
+ var otro=J.nueva(456,"Presupuesto",[0,0,0],"poblado")
+ var sistema=otro.autonomia.asentamientos
+ sistema.transitos.datos().politica.comercio_autonomo=false
+ var casa: Dictionary=sistema.datos().puestos.values()[0]
+ sistema.inventario(casa).madera=20;sistema.inventario(casa).fibra=20
+ var q: Array=casa.camas[0]
+ otro.d.mundo.techos.erase(M.clave(Vector2i(q[0],q[1])))
+ otro.d.min+=24*int(sistema.cfg.produccion_min)
+ sistema.actualizar()
+ ok(sistema._sostenible(casa) and int(casa.producciones)<=1,"reparar ahora no crea producción de periodos sin infraestructura")
  print("REPARACION_PRESION_F6: %d comprobaciones, %d fallos" % [total,fallos])
  quit(1 if fallos else 0)
