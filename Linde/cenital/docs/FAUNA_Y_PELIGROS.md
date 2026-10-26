@@ -1,5 +1,16 @@
 # Fauna y peligros por bioma — v1
 
+## Avisos observados y memoria histórica — 26/10/2026
+
+La fauna regional viva observada genera un aviso direccional personal en la tarjeta de entorno existente. Usa el radio de conocimiento de Autonomia y el rayo de visión de combate, sin nuevos radios/tiempos ni cambios de detección de enemigos. No consulta poblaciones latentes, no fabrica huellas o sonidos y no presenta una especie pasiva como amenaza hasta que esté provocada. Al morir, alejarse o perderse la visión de la fuente, deja de avisar. No es una garantía de reacción mínima: R/T siguen pendientes.
+
+Exploración registra el último avistamiento por bloque personal, con fecha/categoría/procedencia e identidades internas de fuente/ancla para auditoría. El mapa muestra bloque aproximado, fecha y leyenda histórica; no sigue enemigos ocultos ni afirma que un registro antiguo siga vivo. Los NPC cercanos pueden observar una fuente real o recibir un testimonio del jugador durante el intercambio voluntario ya existente, y contarlo con su fecha original. La memoria de NPC queda en `d.fauna.informes_npc`, sin nueva simulación ni NPC duplicados.
+
+La red envía solo el aviso del observador y su mapa; elimina IDs internos de fauna/ancla de la copia enviada, y no publica esos informes en `mundo_vivo` o perfiles. La réplica no genera avisos desde el estado global. Los guardados mantienen la historia; modo legado no recibe cambios de conocimiento. La novedad es aditiva para mundos poblados v1/v2/v3 y no migra sus distribuciones.
+
+Verificado: señales **20/20**, dos clientes ENet reales **16/16**, regresión de fauna **31/31** y exploración **13/13**, más cuatro capturas reales inspeccionadas. [Detalle y galería](../../../production/qa/evidence/mundo-1/fase-7/senales/README.md). Son avisos y avistamientos, no nuevas huellas gráficas/audio. Sin prueba humana de margen de reacción ni nueva prueba por Internet. Siguiente bloque: reproducir los atascos y mejorar navegación con prueba acotada.
+
+
 ## Distribución territorial v3 — propuesta B aprobada (26/10/2026)
 
 Los nuevos mundos poblados usan v3; los guardados existentes v1/v2 no cambian. `habitats_v3.json` contiene la política aprobada: no nacen hostiles/territoriales sobre rutas registradas, áreas de pueblos ni dentro del núcleo existente de 12 celdas; una parte de la fauna hostil se vincula a ruinas/cuevas compatibles de la misma región, conservando especie, bioma e identidad. Sin candidato válido, la aparición queda pospuesta. No se añade radio al camino ni se cambia combate: las criaturas activas pueden perseguir y entrar en los pueblos.

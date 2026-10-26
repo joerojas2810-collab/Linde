@@ -166,6 +166,8 @@ Cada fase deja un ciclo jugable. Los riesgos de regresión se mitigan con las su
 
 ### Fase 7 — Ecología y dificultad territorial (D12)
 
+**Señales observadas y memoria personal implementadas:** aviso de fuente viva, histórico aproximado/fechado y testimonio NPC, privados por jugador. [Verificación y capturas](../../production/qa/evidence/mundo-1/fase-7/senales/README.md). No cierra el objetivo de reacción R/T ni reemplaza la navegación/P2 pendiente.
+
 **Paso territorial B aprobado y activado en nuevos mundos v3:** decisiones por macrorregión persistidas, sin migrar v1/v2; exclusiones de nacimiento y anclas a lugares según aprobación, con aplazamiento sin candidato. [Validación](../../production/qa/evidence/mundo-1/fase-7/activacion-v3/README.md). Siguiente: señales causales; R/T y navegación permanecen pendientes.
 
 **Preferencias A aprobadas y activadas en mundos nuevos:** política v2 guardada por mundo, sin mover mundos existentes; mismas cantidades/especies/regiones. Ver [activación y pruebas](../../production/qa/evidence/mundo-1/fase-7/activacion-v2/README.md). No se consideran implementadas calma regional, señales ni navegación.
