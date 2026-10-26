@@ -278,3 +278,11 @@ Aprobada expresamente por el usuario la publicación y fusión con main. Versió
 Merge autorizado de `9c0d1c4` (taller/casas comunales) y `d223398` (cuentas, servidor y hashes). Se conservan ambos trabajos; conflictos limitados a notas añadidas en documentación, resueltos manteniendo ambas. El fallo de arte mencionado en el cierre histórico del taller ya está corregido por el trabajo integrado de IA 2. No se agregan funcionalidades ni se repiten baterías extensas.
 
 Verificación mínima del merge: `prueba_taller_ui` **7 PASS/0 FAIL** (escena combinada, plano/precio, construcción y acceso a mesa, horno y cofre). Módulos de cuentas y red idénticos a `origin/main`; núcleo de edificios y asentamientos idéntico al cierre del taller.
+
+## Fase 6 — primer bloque causal (26/10/2026)
+
+Commit `27c7971`. Evidencia de esta ejecución en `production/qa/evidence/mundo-1/fase-6-tareas/`. Autorización posterior a Fase 5: implementado el contrato individual de aprovisionamiento en `tareas.gd`, integrado con Autonomía/Sociedad. Reutiliza necesidades, recetas, rutas, inventarios y reservas. Demanda/tarea con ID estable por actor, reclamo exclusivo de recurso, interrupción/bloqueo con causa, cambios reales de mochila y resultados persistentes acotados. Guardado y réplica usan `mundo_vivo` existente; ejecución exclusiva de autoridad. Sin cambios de balance ni cuentas. [Contrato, contraste y límites](../../../Linde/cenital/docs/AUTONOMIA.md#fase-6--primer-bloque-causal-26102026).
+
+Validación puntual: `prueba_tareas` **16/16**, `prueba_autonomia` **33/33**, `prueba_sociedad` **48/48**. Fabricación con consumo real, exclusión/liberación, bloqueo sin recursos, descanso, guardado/carga, mismo minuto sin repetir y bienvenida de réplica sin simulación cliente. No prueba de sockets ni Internet; sin batería extensa. Avisos de certificados/recursos al cerrar persisten. El primer arranque del motor falló al abrir su log fuera del espacio permitido; usando log en `/tmp` las suites completaron.
+
+No implementado: agregación colectiva/descuento de órdenes en curso, contrato regional resumido, comercio nuevo, viabilidad, migración, fundación ni transición 5b. Siguiente bloque: demanda colectiva y stock accesible/comprometido con depósitos/grupos/Asentamientos existentes. El bloque cerrado es individual detallado; la Fase 6 completa sigue abierta.
