@@ -87,3 +87,9 @@ Verificación mínima del merge: `prueba_taller_ui` **7 PASS/0 FAIL** (escena co
 ## Integración publicada de acceso inicial con main (26/10/2026)
 
 El usuario autorizó subir la revisión completa. Integrado origin/main `c84b88e` mediante `cdac6e9`, conservando talleres, casas comunales y tareas de Fase 6. Esta nota supera las notas históricas de revisión sin publicar. Validación combinada: 9 casos unitarios, 16 de acceso/partidas, 13 de identidad con dos mundos, 6 suites de regresión y tareas 16/16. [Detalle y límites](production/qa/evidence/login-inicial/main-c84b88e/README.md). Sin prueba externa ni cambios a la skin.
+
+## Continuar Fase 7: ecología territorial (26/10/2026)
+
+Rama de trabajo `feature/fase7-ecologia` sobre main `eb022a4`; no merge/push autorizados para esta fase. Diseño obligatorio versionado: [DISENO_MAESTRO_FASE7](docs/investigacion/DISENO_MAESTRO_FASE7.md); contrato existente actualizado: [FAUNA_Y_PELIGROS](Linde/cenital/docs/FAUNA_Y_PELIGROS.md). Primer bloque: perfiles abreviados/explícitos, validación y consulta pura de hábitat integrados en Fauna, sin cambiar distribución, reglas selladas ni persistencia. Evidencia: [hábitats](production/qa/evidence/mundo-1/fase-7/habitats/README.md), con 23 comprobaciones nuevas y equivalencia exacta en 5.046 regiones; base fauna31/terreno49, regresión fauna31 y red exterior localhost1. No declarar terminada la fase ni verificados P2/señales/Internet.
+
+Siguiente: aprobación humana de distribución/calmas/lugares antes de modificar posiciones/densidades/dificultad. No añadir reproducción, migración, simulación global o economía dependiente de Fase 6. `LINDE_Fase_7_investigacion_ecologia.md` no estaba en el repo ni junto a los adjuntos: ubicación solicitada, pendiente. Mantener la skin en pausa y el checkout original intacto.

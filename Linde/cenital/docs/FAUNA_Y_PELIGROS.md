@@ -1,5 +1,19 @@
 # Fauna y peligros por bioma — v1
 
+## Fase 7: primer bloque de hábitats compatibles — 26/10/2026
+
+`Fauna.perfiles_habitat()` normaliza el bloque `biomas` del JSON existente; la cadena de especie sigue siendo la sintaxis abreviada válida. Ejemplo equivalente (todavía no se sustituye el JSON sellado):
+
+```json
+{"ribera":{"tipo":"slime_ribera","suelo":"pasto","sin_objeto":true,"agua_vecina":true}}
+```
+
+`validar_habitats()` comprueba biomas/especies y campos admitidos; no incorpora pesos, horarios ni sustratos nuevos. `habitat_en(celda)` consulta suelo vacío y vecino cardinal de agua sin cargar regiones, alterar el mundo o compartir conocimiento. Devuelve compatibilidad y la conducta del catálogo; **no demuestra que una criatura esté presente**. No usarlo como aviso al jugador sin comprobar la fuente real. La ribera conserva su prioridad sobre el bioma base. `plan_region()` reutiliza esta consulta con el mismo hash, candidatos, ID y caché.
+
+Este primer bloque conserva exactamente la distribución anterior, las reglas selladas y el estado persistente. No añade registros por región porque el algoritmo no cambia y ya existen bajas/heridos; tampoco altera el plazo explícito de reaparición de 720 minutos. La distribución territorial no uniforme necesita aprobación antes de cambiar densidades, ubicaciones/radios o exclusiones. No se han activado nuevas zonas de calma, amenazas ancladas a lugares ni señales ambientales.
+
+Diseño principal: [DISENO_MAESTRO_FASE7](../../../docs/investigacion/DISENO_MAESTRO_FASE7.md). Informe y pruebas actuales: [hábitats](../../../production/qa/evidence/mundo-1/fase-7/habitats/README.md): base fauna 31/terreno 49, nueva suite 23, regresión fauna 31 y red exterior localhost con dos clientes. Equivalencia en 5.046 regiones (tres semillas y dos generadores), carga real de un guardado previo sin excepción de reglas. P2, señales, reproducción/migración y economía quedan fuera de este bloque. Las secciones siguientes son el historial v1; sus cifras no sustituyen esta ejecución.
+
 Implementado el 24/10/2026. Funciona al explorar tanto en partidas nuevas como anteriores. El valle conserva sus slimes y sus dos jefes; se añaden encuentros en el exterior sin cambiar la huella del generador de terreno.
 
 | Bioma de origen | Criatura | Conducta | Vida / daño | Botín |
