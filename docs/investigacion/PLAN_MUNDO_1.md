@@ -166,6 +166,8 @@ Cada fase deja un ciclo jugable. Los riesgos de regresión se mitigan con las su
 
 ### Fase 7 — Ecología y dificultad territorial (D12)
 
+**Paso territorial B aprobado y activado en nuevos mundos v3:** decisiones por macrorregión persistidas, sin migrar v1/v2; exclusiones de nacimiento y anclas a lugares según aprobación, con aplazamiento sin candidato. [Validación](../../production/qa/evidence/mundo-1/fase-7/activacion-v3/README.md). Siguiente: señales causales; R/T y navegación permanecen pendientes.
+
 **Preferencias A aprobadas y activadas en mundos nuevos:** política v2 guardada por mundo, sin mover mundos existentes; mismas cantidades/especies/regiones. Ver [activación y pruebas](../../production/qa/evidence/mundo-1/fase-7/activacion-v2/README.md). No se consideran implementadas calma regional, señales ni navegación.
 
 **Inicio autorizado el 26/10:** implementación incremental guiada por [DISENO_MAESTRO_FASE7](DISENO_MAESTRO_FASE7.md), contrastado con las decisiones vigentes. Primer bloque compatible de perfiles en `Fauna`; distribución anterior conservada hasta aprobación de los cambios territoriales. Estado/pruebas: [evidencia](../../production/qa/evidence/mundo-1/fase-7/habitats/README.md). No se consideran cerrados los criterios generales de esta fase. Investigación complementaria [LINDE_Fase_7_investigacion_ecologia](LINDE_Fase_7_investigacion_ecologia.md) localizada y leída después; referencia no vinculante. Sus propuestas de stock/reproducción/migración no amplían el alcance autorizado.

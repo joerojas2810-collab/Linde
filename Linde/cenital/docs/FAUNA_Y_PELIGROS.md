@@ -1,5 +1,16 @@
 # Fauna y peligros por bioma — v1
 
+## Distribución territorial v3 — propuesta B aprobada (26/10/2026)
+
+Los nuevos mundos poblados usan v3; los guardados existentes v1/v2 no cambian. `habitats_v3.json` contiene la política aprobada: no nacen hostiles/territoriales sobre rutas registradas, áreas de pueblos ni dentro del núcleo existente de 12 celdas; una parte de la fauna hostil se vincula a ruinas/cuevas compatibles de la misma región, conservando especie, bioma e identidad. Sin candidato válido, la aparición queda pospuesta. No se añade radio al camino ni se cambia combate: las criaturas activas pueden perseguir y entrar en los pueblos.
+
+`d.fauna.territorios` conserva una vez las decisiones de las macrorregiones generadas por `Lugares`: 36 planes, incluidas ausencias, celdas, ID de ancla y estado pospuesto. No duplica terreno, rutas o edificios. La génesis inicial de fauna espera a que los pueblos preexistentes estén completos; las nuevas macrorregiones se registran en autoridad antes de materializar/guardar. La consulta `plan_region` de una región desconocida no genera nada. Obras posteriores no reescriben los planes ya persistidos. El aplazamiento se conserva al reiniciar y no ocupa cupo: no hay reevaluación/recuperación automática nueva.
+
+Los datos incompletos o desconocidos se rechazan al cargar, sin resembrar. Las herramientas pueden crear explícitamente v1/v2 para verificar compatibilidad; no se convierten mundos existentes a v3. El guardado mantiene la política propia y sus decisiones; ni se cambia la huella global ni se utiliza su excepción. La evolución causal posterior de lugares/pueblos no está implementada como reubicación de fauna.
+
+Verificación final: territorios **18/18**, v2 **17/17**, v1/hábitats **23/23**, amenazas **12/12**, integración local con dos servidores y reconexión **13/13**. Expansión en orden inverso, macrorregiones negativas, anclas B exactas en tres semillas, aplazamiento, caché negativa y persistencia. [Informe](../../../production/qa/evidence/mundo-1/fase-7/activacion-v3/README.md). Sin otra PC/Internet ni playtest R/T. Siguiente: señales causales de amenazas reales y conocimiento personal. Las notas de propuesta B sin activar quedan superadas para mundos nuevos, sin cerrar toda la Fase 7.
+
+
 ## Distribución v2 aprobada: activación en mundos nuevos (26/10/2026)
 
 El usuario aprobó la propuesta A. Los mundos **nuevos en modo poblado** fijan `d.fauna.distribucion` con versión 2 y copia de las preferencias de `datos/fauna/habitats_v2.json`. Los mundos existentes sin ese campo permanecen siempre en v1, incluso en regiones no visitadas; no se migran al cargar. El modo legado sigue intacto. La API de creación admite `version_fauna=1` para herramientas que reproducen mundos anteriores; la escena/servidor normal usan v2.
