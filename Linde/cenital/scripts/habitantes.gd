@@ -93,7 +93,7 @@ func aspecto(id: String) -> Array:
 	return Aspecto.npc(id)
 
 ## Reconcilia la presencia (design/gdd/mundo-vivo.md regla 12-14): todo `<id>_presente` true con ficha tiene habitante.
-## Idempotente. Un recién llegado nace en Mundo.ENTRADA y recibe la primera cama de huésped libre (j.vivo.camas_libres_lista()).
+## Idempotente. Un recién llegado nace en la entrada del pueblo inicial (`Mundo.entrada(Mundo.ID_INICIAL)`) y recibe la primera cama de huésped libre (j.vivo.camas_libres_lista()).
 func reconciliar() -> void:
 	var mv: Dictionary = j.vivo.restaurar()
 	_cargar_colonos()
