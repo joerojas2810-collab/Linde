@@ -33,19 +33,22 @@ jobs:
           python -m unittest discover -s servidor/cuentas -p 'test_*.py' -v
           python -m unittest discover -s servidor/dedicado -v
       - name: Descargar runtimes con SHA-256 fijado
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          exec > >(tee runtimes.log) 2>&1
           mkdir motor interprete
-          curl -fL 'https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_macos.universal.zip' -o godot.zip
+          curl --retry 3 --retry-delay 2 -fL 'https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_macos.universal.zip' -o godot.zip
           echo '897cb7f9799796c717ae75f31446aed883dc92b1d6c3b33d893cc7843fff2fa9  godot.zip' | shasum -a 256 -c -
           ditto -x -k godot.zip motor
-          curl -fL 'https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.11.18%2B20261026-aarch64-apple-darwin-install_only.tar.gz' -o python.tar.gz
+          curl --retry 3 --retry-delay 2 -fL 'https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.11.18%2B20261026-aarch64-apple-darwin-install_only.tar.gz' -o python.tar.gz
           echo 'cba3455e18516fbe8668cff2820c9b6a53447c552d612443c2b2fb60d390a908  python.tar.gz' | shasum -a 256 -c -
           tar -xzf python.tar.gz -C interprete
           python - <<'PY'
-          import base64, json, pathlib, urllib.request
+          import base64, json, os, pathlib, urllib.request
           for name in ('LICENSE.txt', 'COPYRIGHT.txt'):
-              request = urllib.request.Request('https://api.github.com/repos/godotengine/godot/contents/' + name + '?ref=4.7.1-stable', headers={'User-Agent': 'Linde-build'})
+              request = urllib.request.Request('https://api.github.com/repos/godotengine/godot/contents/' + name + '?ref=4.7.1-stable', headers={'User-Agent': 'Linde-build', 'Authorization': 'Bearer ' + os.environ['GH_TOKEN']})
               with urllib.request.urlopen(request) as response:
                   data = json.load(response)
               pathlib.Path('motor/Godot-' + name).write_bytes(base64.b64decode(data['content']))
@@ -96,8 +99,10 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          for log in sorted(Path('qa').rglob('*.log'), key=lambda p: p.stat().st_mtime, reverse=True):
-              body = '\n'.join(log.read_text(errors='replace').splitlines()[-40:])
+          logs = list(Path('qa').rglob('*.log')) + list(Path('.').glob('*.log'))
+          for log in sorted(logs, key=lambda p: p.stat().st_mtime, reverse=True):
+              lines = log.read_text(errors='replace').splitlines()
+              body = '\n'.join(lines if len(lines) < 60 else lines[:15] + ['...'] + lines[-40:])
               body = body.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
               print(f'::error title={log.name}::{body}')
           PY
@@ -107,7 +112,6 @@ jobs:
         with:
           name: diagnostico-macos
           path: |
-            importacion.log
-            compilar-*.log
+            *.log
             qa/**/*.log
           retention-days: 7
