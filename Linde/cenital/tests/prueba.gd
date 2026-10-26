@@ -1445,9 +1445,9 @@ func t_actores_arte() -> void:
 
 # ---------- Regla maestra: el arte procedural anterior no vuelve ----------
 ## Recorre scripts/ y falla si aparece dibujo por código fuera de la lista blanca aprobada. Cada entrada es un máximo exacto:
-## marcadores magenta de «arte faltante» (ui_arte 8, mundo_arte 2, actores_arte 2, escena 2), selección de panel (hud 2),
+## marcadores magenta de «arte faltante» (ui_arte 8, mundo_arte 2, actores_arte 2, escena 2), selección de panel (hud 0: ahora usa los botones con arte),
 ## zonas de aviso técnicas de enemigos (escena 2), cajas de depuración F1 (escena 2), barra de vida de enemigo (escena 2) e
-## indicador de golpes (escena 1), fondo de etiquetas (escena 1), foco/bordes de inventario (hud 3) y
+## indicador de golpes (escena 1), fondo de etiquetas (escena 1), foco/bordes de inventario (hud 3: línea divisoria y foco) y
 ## superposición de mineral (mundo_arte 1). Un dibujo nuevo obliga a revisar esta lista.
 ## EXCEPCIONES APROBADAS (usuario, 25/10, «arte vivo» 88571a6; ver DECISIONES.md «Excepciones de dibujo por código»):
 ## solo estos tres scripts y solo estas funciones, con máximo exacto por función (49 llamadas). No es una excepción general:
@@ -1475,7 +1475,7 @@ func _dibujos_por_funcion(src: String, re: RegEx) -> Dictionary:
 	return cuentas
 
 func t_sin_arte_procedural() -> void:
-	var lista := {"ui_arte.gd": 8, "mundo_arte.gd": 3, "actores_arte.gd": 2, "hud.gd": 5, "escena.gd": 10}
+	var lista := {"ui_arte.gd": 8, "mundo_arte.gd": 3, "actores_arte.gd": 2, "hud.gd": 3, "escena.gd": 10}
 	var re := RegEx.new()
 	re.compile("draw_(rect|circle|colored_polygon|polygon|line|arc|polyline)\\(")
 	var fuera := []

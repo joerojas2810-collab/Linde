@@ -1,7 +1,5 @@
 extends "res://scripts/hud.gd"
-var objetivos:Array=[]
 var boton_accion:=Rect2()
-var boton_cerrar:=Rect2()
 
 func _init()->void:ui=preload("res://scripts/ui_viva.gd").new()
 
@@ -45,13 +43,8 @@ func _draw() -> void:
 		ui.panel(self, Rect2(16, 660 - alto - 8, 520, alto))
 		for i in msgs.size(): _t(str(msgs[i]), Vector2(32, 660 - alto + 4 + i * 22.0), 16)
 	ui.panel(self, Rect2(vs.x / 2 - 310, 668, 620, 40))
-	ui.texto_en(self,"I  Mochila     E  Interactuar     Espacio  Acción     H  Ayuda",Rect2(vs.x/2-288,676,576,24),16,UiArte.TINTA,true)
-	if esc.ayuda_visible and esc.panel=="":
-		ui.panel(self, Rect2(vs.x / 2 - 310, 518, 620, 142))
-		_t("CONTROLES", Vector2(vs.x / 2 - 288, 536), 20)
-		_t("WASD / Flechas  Moverse     Esc  Menú     V  Ficha", Vector2(vs.x / 2 - 288, 570), 17)
-		_t("C  Fabricar     F  Forja     G  Materiales y planos", Vector2(vs.x / 2 - 288, 598), 17)
-		_t("K  Habilidades     J  Valle     B  Construir     F5  Guardar", Vector2(vs.x / 2 - 288, 626), 17)
+	ui.texto_en(self,"I  Mochila     E  Interactuar     Espacio  Atacar / golpear     H  Ayuda",Rect2(vs.x/2-288,676,576,24),16,UiArte.TINTA,true)
+	if esc.ayuda_visible and esc.panel=="":_ayuda(vs,j)
 	if esc.debug: _t("anim: %s #%d" % [esc._anim.estado, esc._anim.cuadro], Vector2(vs.x - 200, 700), 16, UiArte.FOCO)
 	if esc.pista != "" and esc.panel=="" and not esc.ayuda_visible:
 		var w: float = ui.ancho_texto(esc.pista, 16) + 32.0
@@ -64,6 +57,40 @@ func _draw() -> void:
 		_t("[Q/E] cambiar · [Espacio] colocar · [X] retirar · [B] salir", Vector2(396, 52), 16)
 	if esc.panel != "": _panel(vs)
 
+
+## Controles reales (teclas de escena.gd); [clave, descripción] y los títulos de grupo llevan clave vacía.
+func _ayuda(vs:Vector2,j)->void:
+	var valle:String="Sociedad del Valle: habitantes, grupos y acuerdos" if j.autonomia.activa() else "Misiones"
+	var filas:Array=[
+		["","MOVERSE Y ACTUAR"],
+		["WASD / flechas","Moverse"],
+		["E","Interactuar: hablar, cofre, cama, cultivo, mesa u horno"],
+		["Espacio","Atacar o golpear árbol, roca o veta (mantener pulsado)"],
+		["V","Ficha del habitante cercano"],
+		["Esc","Menú de pausa · F5 guardar · H cerrar esta ayuda"],
+		["","PANELES Y MODOS"],
+		["I","Mochila y equipo"],
+		["C","Fabricar (necesita mesa u horno a 2 celdas o menos)"],
+		["F","Forja: mejorar piezas de set"],
+		["G","Taller: materiales, planos y saberes"],
+		["K","Habilidades"],
+		["J",valle],
+		["B","Construir: Q/E cambia pieza · Espacio coloca · X retira · B sale"],
+		["","DENTRO DE UN PANEL"],
+		["↑ ↓  ·  rueda","Elegir o desplazar  (Av Pág / Re Pág: página)"],
+		["Enter / E  ·  clic","Activar el botón elegido. Lo que no es botón es solo información"],
+		["Esc  ·  ×","Cerrar"]]
+	var r:=Rect2(vs.x/2-380,56,760,28+filas.size()*28+40)
+	ui.panel(self,r)
+	ui.texto_en(self,"CONTROLES",Rect2(r.position+Vector2(28,14),Vector2(300,28)),22)
+	var y:=r.position.y+54
+	for f in filas:
+		if f[0]=="":
+			ui.texto_en(self,str(f[1]),Rect2(r.position.x+28,y,r.size.x-56,24),15,Color("12363b"))
+		else:
+			ui.texto_en(self,str(f[0]),Rect2(r.position.x+40,y,170,24),16,UiArte.TINTA)
+			ui.texto_en(self,str(f[1]),Rect2(r.position.x+216,y,r.size.x-244,24),16,UiArte.TINTA)
+		y+=28
 
 func _icono_item(clave:String,ranura:String="")->String:
 	var info:Dictionary=Eq.info(clave) if clave!="" else {}
@@ -170,23 +197,60 @@ func _inventario(vs:Vector2)->void:
 	ui.marco(self,pie,Color("12363b"))
 	ui.texto_en(self,"↑↓ / ←→ Seleccionar    Enter Usar / Equipar    Esc Cerrar",pie.grow(-9),15,Color("fff0c7"),true)
 
+## Ratón: el mismo camino que el teclado. Cada pantalla publica sus zonas en `objetivos` al dibujarse.
 func _input(event:InputEvent)->void:
-	if esc==null or esc.panel!="inv" or not event is InputEventMouseButton:return
-	if not event.pressed or event.button_index!=MOUSE_BUTTON_LEFT:return
-	var p:=get_local_mouse_position()
-	if boton_cerrar.has_point(p):esc._cerrar()
-	elif boton_accion.has_point(p):_activar()
-	else:
-		for objetivo in objetivos:
-			if objetivo.r.has_point(p):
-				esc.sel=objetivo.i
-				if event.double_click:_activar()
-				break
+	if esc==null or not (event is InputEventMouseButton or event is InputEventMouseMotion):return
+	var p:Vector2=event.position
+	var zona:=-1
+	for objetivo in objetivos:
+		if objetivo.r.has_point(p):zona=objetivo.i;break
+	if event is InputEventMouseMotion:
+		if zona>=0 and esc.panel!="inv":
+			if esc.panel!="" and esc.panel!="dialogo":esc.sel=zona
+			elif esc.modo=="menu":esc.menu_sel=zona
+		return
+	if not event.pressed:return
+	var boton:int=event.button_index
+	if esc.modo!="juego":
+		if boton==MOUSE_BUTTON_LEFT or boton==MOUSE_BUTTON_RIGHT:_clic_pantalla(zona,p,boton)
+		return
+	if esc.panel=="":return
+	if esc.panel=="dialogo" or esc.panel=="ficha":
+		if boton==MOUSE_BUTTON_LEFT:esc._cerrar()
+	elif boton==MOUSE_BUTTON_WHEEL_UP or boton==MOUSE_BUTTON_WHEEL_DOWN:
+		if esc.panel!="inv":esc._desplazar(-3 if boton==MOUSE_BUTTON_WHEEL_UP else 3)
+	elif boton==MOUSE_BUTTON_LEFT:
+		if boton_cerrar.has_point(p):esc._cerrar()
+		elif esc.panel=="inv" and boton_accion.has_point(p):_activar()
+		elif zona>=0:
+			esc.sel=zona
+			if esc.panel!="inv" or event.double_click:_activar()
 	get_viewport().set_input_as_handled()
 
+## Menú inicial, creador y «Unirse»: clic = elegir; en el creador, un segundo clic en el valor del campo activo cambia la opción (derecho, la anterior).
+func _clic_pantalla(zona:int,p:Vector2,boton:int)->void:
+	if zona<0:return
+	if esc.modo=="menu":
+		esc.menu_sel=zona
+		_tecla(KEY_ENTER)
+	elif esc.modo=="creador":
+		var ya_activo:bool=esc.cr.campo==zona
+		esc.cr.campo=zona
+		var total:int=Aspecto.CAMPOS.size()+2
+		if zona==total-1:_tecla(KEY_ENTER)
+		elif ya_activo and zona>0 and p.x>objetivos[zona].r.position.x+objetivos[zona].r.size.x*0.45:_tecla(KEY_LEFT if boton==MOUSE_BUTTON_RIGHT else KEY_RIGHT)
+	elif esc.modo=="unirse":
+		esc.un.campo=zona
+		if zona==3 and boton==MOUSE_BUTTON_LEFT:_tecla(KEY_ENTER)
+	else:return
+	get_viewport().set_input_as_handled()
+
+func _tecla(codigo:Key)->void:
+	var e:=InputEventKey.new();e.pressed=true;e.keycode=codigo
+	esc._unhandled_key_input(e)
+
 func _activar()->void:
-	var e:=InputEventKey.new();e.pressed=true;e.keycode=KEY_ENTER
-	esc._tecla_panel(e)
+	esc._ejecutar_sel()
 
 func _tracker(vs: Vector2, j, h: float) -> void:
 	var lineas: Array = []   # [texto, tamaño]

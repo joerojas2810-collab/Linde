@@ -425,6 +425,15 @@ func estacion_cerca(est: String, id: String = LOCAL) -> bool:
 		if maxi(absi(int(p[0]) - c.x), absi(int(p[1]) - c.y)) <= ALCANCE_ESTACION: return true
 	return false
 
+## Tipo de la estación (mesa, horno) en una celda contigua al jugador, o "". Es la puerta de E al panel de fabricar.
+func estacion_junto(id: String = LOCAL) -> String:
+	var c := Mundo.celda_de(pies_de(id))
+	for dy in range(-1, 2):
+		for dx in range(-1, 2):
+			var cs := mundo.constr_en(c + Vector2i(dx, dy))
+			if C.CONSTR.get(cs.get("t", ""), {}).get("est", "") != "": return cs.t
+	return ""
+
 func fabricar(rid: String, id: String = LOCAL) -> Dictionary:
 	var pj := jug(id)
 	var rs: Dictionary = Eq.recetas()      # C.RECETAS + piezas fabricables y joyas generadas desde datos
@@ -733,6 +742,7 @@ func interactuar(id: String = LOCAL) -> Dictionary:
 			if not cs.propia: return {"ok": false, "r": _no("Es la cama de un habitante", id)}
 			if cs.get("dueno", "") != id: return {"ok": false, "r": _no("Es la cama de otro jugador", id)}
 			return {"ok": true, "panel": "dormir", "r": dormir(c, id)}
+	if estacion_junto(id) != "": return {"ok": true, "panel": "craft"}
 	return {"ok": false, "r": _no("Nada con qué interactuar", id)}
 
 # Dormir NO avanza el reloj compartido (design/gdd/mundo-vivo.md regla 17): cura y fija la cama. El tiempo sigue por el tick

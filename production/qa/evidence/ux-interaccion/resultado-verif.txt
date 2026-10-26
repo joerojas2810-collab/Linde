@@ -1,0 +1,31 @@
+PASS J abre el panel
+PASS selección inicial en una acción (sel=7)
+PASS 40 pulsaciones ↓: nunca sobre texto (desplaza=29 sel=42)
+PASS ↑ vuelve al inicio (desplaza=1)
+PASS AvPág desplaza (14)
+PASS hover selecciona la fila bajo el ratón (8)
+PASS clic en acción ejecuta y el panel sigue abierto
+PASS rueda desplaza (1 -> 10)
+PASS clic en × cierra
+PASS clic en 'Materiales' abre el submenú
+PASS en solo lectura ↓ desplaza el texto (desplaza=2)
+PASS Esc abre pausa
+PASS clic en Continuar cierra la pausa
+PASS pista junto al horno: 'E: fabricar (horno)'
+PASS E junto al horno abre Fabricar
+PASS hover en menú
+PASS clic en 'Nueva partida' abre el creador
+PASS clic en un campo del creador lo enfoca
+PASS el primer clic solo enfoca (valor sin cambios)
+PASS segundo clic en el valor cambia a la siguiente opción
+PASS clic derecho vuelve a la anterior
+PASS clic en 'Comenzar' entra al juego
+PASS pista en diagonal: 'E: fabricar (horno)'
+PASS E en diagonal abre Fabricar
+PASS lejos: sin pista de fabricar ('')
+PASS I abre mochila
+PASS clic en casilla de mochila la selecciona
+PASS × cierra la mochila
+PASS K abre habilidades
+PASS × cierra el cofre
+PASS clic cierra el diálogo

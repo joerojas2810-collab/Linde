@@ -7,6 +7,8 @@ const Eq = preload("res://scripts/equipo.gd")
 const UiArte = preload("res://scripts/ui_arte.gd")
 var esc
 var ui = UiArte.new()
+var objetivos: Array = []      # zonas de ratón del cuadro actual: {r: Rect2, i: índice de línea / campo / opción}
+var boton_cerrar := Rect2()    # vacío si la pantalla no tiene botón ×
 
 func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -111,6 +113,8 @@ func _tracker(vs: Vector2, j, h: float) -> void:
 
 func _panel(vs: Vector2) -> void:
 	if esc.panel == "dialogo":
+		objetivos.clear()
+		boton_cerrar = Rect2()
 		var alto_texto: float = ui.fuente_dialogo.get_multiline_string_size(esc.dialogo_txt,HORIZONTAL_ALIGNMENT_LEFT,912,24).y if ui.fuente_dialogo != null else 100.0
 		var alto: float = clampf(alto_texto+144.0,256.0,600.0)
 		var d := Rect2(112,648-alto,1056,alto)
@@ -126,27 +130,47 @@ func _panel(vs: Vector2) -> void:
 		return
 	var r := Rect2(vs.x / 2 - 448, 40, 896, 600)
 	ui.panel(self, r)
+	objetivos.clear()
 	var fila := 34.0
-	var caben := int((r.size.y - 120.0) / fila)                    # líneas visibles; la cabecera (0) siempre se ve
-	var ini := maxi(1, esc.sel - caben + 2)                        # desplaza para que la selección quede a la vista
-	if esc.lineas.size() > 0: _t(esc.lineas[0], r.position + Vector2(24, 16), 24)
+	var caben: int = esc.CABEN                                      # líneas visibles; la cabecera (0) siempre se ve
+	var ini: int = esc.desplaza
+	var total: int = esc.lineas.size()
+	if total > 0: _t(esc.lineas[0], r.position + Vector2(24, 16), 24)
+	boton_cerrar = Rect2(r.end.x - 64, r.position.y + 16, 36, 32)
+	ui.boton(self, boton_cerrar, false)
+	ui.texto_centrado(self, "×", boton_cerrar.get_center().x, boton_cerrar.position.y + 24, 22, UiArte.PAPEL)
 	var y := r.position.y + 72.0
-	for i in range(1, esc.lineas.size()):
-		if i < ini: continue
-		var activa: bool = esc.acc[i] != null
+	var hay_acciones := false
+	for i in range(1, total):
+		if esc.acc[i] != null: hay_acciones = true
+		if i < ini or i >= ini + caben: continue
+		var txt: String = esc.lineas[i]
 		var rr := Rect2(r.position.x + 20, y, r.size.x - 40, fila - 2)
-		if i == esc.sel and activa:
-			draw_rect(rr, Color(UiArte.FOCO, 0.35))
-			draw_rect(rr, UiArte.FOCO, false, 2)
 		var x := r.position.x + 32
 		var ic: String = esc.iconos[i] if i < esc.iconos.size() else ""
-		if ic != "":
-			ui.icono(self, ic, Rect2(Vector2(x, y), Vector2(32, 32)))
-			x += 40
-		_t(esc.lineas[i], Vector2(x, y + 6), 16, UiArte.TINTA if activa else Color(UiArte.TINTA, 0.7))
+		if esc.acc[i] != null:
+			# Solo lo que se puede activar se dibuja como botón; el resto es texto.
+			if i == esc.sel: ui.ranura(self, rr, true)
+			else: ui.boton(self, rr, false)
+			objetivos.append({"r": rr, "i": i})
+			if ic != "":
+				ui.icono(self, ic, Rect2(Vector2(x, y), Vector2(32, 32)))
+				x += 40
+			ui.texto_en(self, ("▶ " if i == esc.sel else "") + txt.strip_edges(), Rect2(x, y, rr.end.x - x - 12, rr.size.y), 16, Color("fff0c7") if i == esc.sel else UiArte.PAPEL)
+		elif txt.begins_with("—"):
+			ui.texto_en(self, txt.trim_prefix("—").trim_suffix("—").strip_edges().to_upper(), Rect2(x, y + 6, rr.size.x - 24, fila - 6), 15, Color("12363b"))
+		else:
+			if ic != "":
+				ui.icono(self, ic, Rect2(Vector2(x, y), Vector2(32, 32)))
+				x += 40
+			var detalle := txt.begins_with("  ")
+			ui.texto_en(self, txt.strip_edges(), Rect2(x + (16 if detalle else 0), y, rr.end.x - x - 12, fila - 4), 16, UiArte.TINTA if detalle else Color("12363b"))
 		y += fila
-		if y > r.end.y - 56: break
-	_t("[↑↓] mover · [Enter] elegir · [Esc] cerrar", Vector2(r.position.x + 24, r.end.y - 36), 16)
+	var pie := "[↑↓] elegir  ·  [Enter / clic] activar  ·  [Esc] cerrar" if hay_acciones else "Solo lectura  ·  [↑↓] leer  ·  [Esc] cerrar"
+	if total - 1 > caben: pie += "  ·  [Av Pág / Re Pág / rueda] desplazar  ·  %d–%d de %d" % [ini, mini(ini + caben - 1, total - 1), total - 1]
+	_t(pie, Vector2(r.position.x + 24, r.end.y - 36), 16)
+	if ini > 1: _t("▲", Vector2(r.end.x - 52, r.position.y + 70), 16)
+	if ini + caben < total: _t("▼", Vector2(r.end.x - 52, r.end.y - 70), 16)
 
 # Conserva los índices y acciones de escena: solo cambia su presentación.
 func _inventario(vs: Vector2) -> void:
@@ -195,8 +219,10 @@ func _menu(vs: Vector2) -> void:
 	ui.panel(self, p)
 	ui.texto_centrado(self, "LINDE", vs.x / 2, p.position.y + 82, 48)
 	ui.texto_centrado(self, "RPG de mundo vivo · prototipo cenital", vs.x / 2, p.position.y + 116, 16)
+	objetivos.clear()
 	for i in esc.menu_items.size():
 		var b := Rect2(p.position.x + 48, p.position.y + 150 + i * 80, 384, 64)
+		objetivos.append({"r": b, "i": i})
 		ui.boton(self, b, i == esc.menu_sel)
 		ui.texto_centrado(self, esc.menu_items[i], vs.x / 2, b.position.y + 40, 24, UiArte.PAPEL)
 	if esc.menu_msg != "": _t(esc.menu_msg, Vector2(p.position.x + 48, p.end.y - 40), 16, Color("8a2020"))
@@ -210,8 +236,10 @@ func _creador(vs: Vector2) -> void:
 	var vals: Array = [cr.nombre + ("_" if cr.campo == 0 else "")]
 	for i in Aspecto.CAMPOS.size(): vals.append(Aspecto.etiqueta(i, cr[Aspecto.CAMPOS[i]], cr.identidad))
 	vals.append("Enter")
+	objetivos.clear()
 	for i in nombres.size():
 		var b := Rect2(p.position.x + 24, p.position.y + 60 + i * 52, 496, 48)
+		objetivos.append({"r": b, "i": i})
 		ui.boton(self, b, i == cr.campo)
 		_t(nombres[i], b.position + Vector2(20, 14), 20, UiArte.PAPEL)
 		_t(str(vals[i]), b.position + Vector2(240, 14), 20, UiArte.PAPEL)
@@ -231,8 +259,10 @@ func _unirse(vs: Vector2) -> void:
 	_t("UNIRSE A UN MUNDO", p.position + Vector2(24, 16), 32)
 	var nombres: Array = ["Dirección", "Nombre", "Clave", "Conectar"]
 	var vals: Array = [un.dir, un.nombre, "*".repeat(un.clave.length()), "Enter"]
+	objetivos.clear()
 	for i in nombres.size():
 		var b := Rect2(p.position.x + 32, p.position.y + 84 + i * 76, 736, 64)
+		objetivos.append({"r": b, "i": i})
 		ui.boton(self, b, i == un.campo)
 		_t(nombres[i], b.position + Vector2(28, 20), 24, UiArte.PAPEL)
 		_t("%s%s" % [vals[i], "_" if i == un.campo and i < 3 else ""], b.position + Vector2(220, 20), 24, UiArte.PAPEL)

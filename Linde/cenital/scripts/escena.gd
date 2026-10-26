@@ -38,6 +38,8 @@ var lineas: Array = []
 var acc: Array = []
 var iconos: Array = []   # ruta de icono (res://arte/interfaz) por línea de panel; "" = sin icono
 var sel := 0
+var desplaza := 1        # primera línea visible del panel genérico (la 0 es el título)
+const CABEN := 14        # líneas visibles del panel genérico
 var dialogo_txt := ""
 var dialogo_nombre := ""
 var cofre_id := ""
@@ -339,6 +341,7 @@ func _unirse() -> void:
 func _abrir(p: String) -> void:
 	panel = p
 	sel = 0
+	desplaza = 1
 	_armar()
 	_sel_valida(1)
 
@@ -361,32 +364,61 @@ func _tecla_panel(e: InputEvent) -> void:
 		KEY_K: if panel == "hab": _cerrar()
 		KEY_J: if panel == "mis": _cerrar()
 		KEY_G: _cerrar()
-		KEY_UP:
-			sel -= 1
-			_sel_valida(-1)
-		KEY_DOWN:
-			sel += 1
-			_sel_valida(1)
-		KEY_ENTER, KEY_KP_ENTER, KEY_E:
-			if sel < acc.size() and acc[sel] != null:
-				var antes := sel
-				var pagina := panel
-				acc[sel].call()
-				if panel != "":
-					_armar()
-					if panel == pagina: sel = mini(antes, lineas.size() - 1)
-					_sel_valida(-1 if panel == pagina else 1)
+		KEY_UP: _mover_sel(-1)
+		KEY_DOWN: _mover_sel(1)
+		KEY_PAGEUP: _desplazar(-CABEN + 1)
+		KEY_PAGEDOWN: _desplazar(CABEN - 1)
+		KEY_HOME: _desplazar(-lineas.size())
+		KEY_END: _desplazar(lineas.size())
+		KEY_ENTER, KEY_KP_ENTER, KEY_E: _ejecutar_sel()
 
+## Ejecuta la acción de la línea seleccionada (teclado y ratón comparten este camino).
+func _ejecutar_sel() -> void:
+	if sel < 0 or sel >= acc.size() or acc[sel] == null: return
+	var antes := sel
+	var pagina := panel
+	acc[sel].call()
+	if panel != "":
+		_armar()
+		if panel == pagina: sel = mini(antes, lineas.size() - 1)
+		_sel_valida(-1 if panel == pagina else 1)
+		if panel != pagina: desplaza = 1
+		else: _ver_sel()
+
+## Busca la acción más cercana en esa dirección; sin selección posible queda en -1.
 func _sel_valida(paso: int) -> void:
 	if lineas.is_empty(): return
-	if panel in ["materiales","practica","mis"]:
-		sel=clampi(sel,1,maxi(1,lineas.size()-1))
-		return
 	sel = clampi(sel, 0, lineas.size() - 1)
 	var n := 0
 	while acc[sel] == null and n < lineas.size():
 		sel = (sel + paso + lineas.size()) % lineas.size()
 		n += 1
+	if acc[sel] == null: sel = -1
+
+## Flechas: pasa a la siguiente acción si ya está a la vista; si no, desplaza el texto hasta mostrarla.
+func _mover_sel(paso: int) -> void:
+	var i := sel + paso
+	while i >= 1 and i < lineas.size() and acc[i] == null: i += paso
+	var existe := i >= 1 and i < lineas.size()
+	var visible := existe and i >= desplaza and i < desplaza + CABEN
+	if visible:
+		sel = i
+		_ver_sel()
+	elif desplaza + paso >= 1 and desplaza + paso <= maxi(1, lineas.size() - CABEN): desplaza += paso
+	elif existe: sel = i; _ver_sel()
+	elif lineas.size() <= CABEN + 1:    # todo cabe en pantalla: la lista da la vuelta
+		sel = -1
+		_sel_valida(paso)
+
+func _desplazar(n: int) -> void:
+	desplaza = clampi(desplaza + n, 1, maxi(1, lineas.size() - CABEN))
+
+## Mantiene la selección dentro de las líneas visibles.
+func _ver_sel() -> void:
+	if sel >= 1:
+		if sel < desplaza: desplaza = sel
+		elif sel >= desplaza + CABEN: desplaza = sel - CABEN + 1
+	desplaza = clampi(desplaza, 1, maxi(1, lineas.size() - CABEN))
 
 func _l(t: String, f = null, ic: String = "") -> void:
 	lineas.append(t)
@@ -715,6 +747,7 @@ func _tras_interactuar(r: Dictionary) -> void:
 		"cofre":
 			cofre_id = r.id
 			_abrir("cofre")
+		"craft": _abrir("craft")
 
 # ---------- bucle ----------
 func oscuridad(h: float) -> float:
@@ -746,6 +779,7 @@ func _process(delta: float) -> void:
 				auto_t = 0.0
 				j.guardar(ruta)
 		if panel != "dialogo": _armar()
+		if panel not in ["dialogo", "inv"] and (sel < 0 or sel >= acc.size() or acc[sel] == null): _sel_valida(1)   # la lista se rearma cada cuadro
 		return
 	delta = minf(delta, 1.0 / 30.0)    # evita saltos mayores que la caja de pies
 	activa = Mundo.dir_cardinal(_held(), activa)
@@ -781,8 +815,10 @@ func _pista() -> String:
 			return "E: abrir cofre" if ot == "cofre_fijo" else "Espacio: golpear %s" % C.OBJETOS[ot].n
 		var cs: Dictionary = j.mundo.constr_en(c)
 		if cs.get("t", "") == "cofre": return "E: abrir cofre"
+		if cs.get("t", "") == "campo": return "E: cosechar" if int(cs.get("listo", 0)) <= int(j.d.min) else "El cultivo aún crece"
 		if cs.get("t", "") == "cama": return "E: dormir" if cs.get("dueno", "") == J.LOCAL else ("Cama de otro jugador" if cs.propia else "Cama de un habitante")
-	return ""
+	var est: String = j.estacion_junto()
+	return "E: fabricar (%s)" % C.CONSTR[est].n.to_lower() if est != "" else ""
 
 ## Marcador visible cuando falta el arte del personaje: nunca se dibuja el arte anterior.
 func _arte_faltante(origen: Vector2) -> void:
