@@ -1,6 +1,7 @@
 """Smoke test aislado del paquete: inicia, espera escucha y solicita cierre guardando."""
 import argparse
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -52,15 +53,33 @@ def main():
                         proc.wait(timeout=20)
                     except subprocess.TimeoutExpired:
                         proc.kill(); proc.wait()
-                # El helper HTTPS recibe el cierre desde Godot y sale de forma independiente.
-                deadline = time.monotonic() + 8
-                while time.monotonic() < deadline:
-                    try:
-                        for f in data.glob('*.sqlite3*'):
-                            f.rename(f)
-                        break
-                    except OSError:
-                        time.sleep(.2)
+                # Godot solicita parar el helper, pero puede salir antes que Python.
+                # Esperar su bloqueo real, no solo el de SQLite: Windows no permite
+                # borrar servidor.lock hasta que el proceso propietario lo cierre.
+                esperar_cierre_backend(data)
+
+
+def esperar_cierre_backend(folder, timeout=12):
+    lock = folder / 'servidor.lock'
+    if not lock.exists():
+        return
+    deadline = time.monotonic() + timeout
+    while True:
+        try:
+            with lock.open('r+b') as file:
+                if os.name == 'nt':
+                    import msvcrt
+                    msvcrt.locking(file.fileno(), msvcrt.LK_NBLCK, 1)
+                    msvcrt.locking(file.fileno(), msvcrt.LK_UNLCK, 1)
+                else:
+                    import fcntl
+                    fcntl.flock(file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    fcntl.flock(file.fileno(), fcntl.LOCK_UN)
+            return
+        except OSError:
+            if time.monotonic() >= deadline:
+                raise TimeoutError('El helper de acceso no liberó servidor.lock al cerrar')
+            time.sleep(.2)
 
 
 if __name__ == '__main__':
