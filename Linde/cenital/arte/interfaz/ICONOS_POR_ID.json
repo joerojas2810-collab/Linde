@@ -16,7 +16,9 @@
     "chispa": "E06_chispa",
     "mena": "E06_mena_hierro",
     "lingote": "E06_lingote_hierro",
-    "escudo_madera": "E06_escudo"
+    "escudo_madera": "E06_escudo",
+    "hacha_cobre": "E06_hacha_piedra",
+    "pico_cobre": "E06_pico_piedra"
   },
   "equipo_dinamico": {
     "formato": "eq:<familia>:<ranura>:<variante>:<nivel>",

@@ -18,6 +18,7 @@ const Srv = preload("res://scripts/red_servidor.gd")
 const Cli = preload("res://scripts/red_cliente.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const ArteEq = preload("res://scripts/arte_equipo.gd")
+const PresentacionNPC = preload("res://scripts/presentacion_npc.gd")
 var actores = ActoresArte.new()   # E03: enemigos, residuos y efectos de combate
 var arte_mundo = MundoArte.new()   # E04+E05: terreno, objetos, casa (res://arte/mundo)
 var arte_eq = ArteEq.new()   # base + equipo por índices (res://arte/equipo); preferido si está completo
@@ -47,6 +48,7 @@ var activa := Vector2i.ZERO
 var t_anim := 0.0
 var debug := false
 var _anim := {"estado": "reposo", "cuadro": 0}
+var _golpe_visual: Dictionary = {} # Solo presentación de la última extracción local aceptada.
 var pista := ""
 var ayuda_visible := false
 var rotulos: Array = []
@@ -742,7 +744,7 @@ func _process(delta: float) -> void:
 		if activa != Vector2i.ZERO: j.mira = activa
 	else:
 		j.mover_pj(activa, delta)
-		if Input.is_key_pressed(KEY_SPACE): j.accion()
+		if Input.is_key_pressed(KEY_SPACE): _accion_local_visual()
 	if auto_ataque >= 0.0:
 		auto_ataque += delta
 		if auto_ataque >= AUTO_ATAQUE_S and j.combate.atacar(j.mira): auto_ataque = 0.0
@@ -811,7 +813,7 @@ func _draw() -> void:
 	for e in j.combate.enemigos: if e.est == "aviso": _telegrafo(e)
 	var dentro := Mundo.CASA.has_point(Mundo.celda_de(j.pies))
 	var lista: Array = [entrada_dibujo(j.pies, "pj", null, "local"), entrada_dibujo(Vector2(Mundo.CASA.position.x * s, Mundo.CASA.end.y * s - 8.0), "fachada", null, "casa")]
-	for id in j.habitantes.ids: lista.append(entrada_dibujo(j.habitantes.pos(id), "npc", id, id))
+	for id in j.habitantes.ids: lista.append(entrada_dibujo(_pies_visuales_npc(id), "npc", id, id))
 	if red != null:
 		for o in red.otros_jugadores(): lista.append(entrada_dibujo(o.pies, "otro", o, str(o.nombre)))
 	for e in j.combate.enemigos: lista.append(entrada_dibujo(e.pos, "enemigo", e, str(e.tipo) + ActoresArte.clave(e)))
@@ -829,7 +831,7 @@ func _draw() -> void:
 		var pies_rotulo: Vector2
 		match item[1]:
 			"pj": pies_rotulo = j.pies
-			"npc": pies_rotulo = j.habitantes.pos(item[2])
+			"npc": pies_rotulo = _pies_visuales_npc(item[2])
 			"otro": pies_rotulo = item[2].pies
 			"enemigo", "regional": pies_rotulo = item[2].pos
 			_: continue
@@ -910,26 +912,55 @@ func _sombra(pies: Vector2, escala: float = 1.0) -> void:
 	if t == null: draw_rect(r, hud.ui.MARCADOR)
 	else: draw_texture_rect(t, r, false, Color(1, 1, 1, 0.25))
 
-## Hacha visible solo al talar un árbol con hacha en el inventario (dato de presentación del jugador local; el
-## protocolo no transmite la herramienta de los remotos, así que ellos no la muestran).
-## Presentation only: choose the actual tool for the target, including the new regional resources.
+## Congela el objetivo y la categoría de herramienta antes de que el golpe agote el recurso.
+## Se llama a la acción original una sola vez. El resultado gobierna únicamente la presentación.
+func _accion_local_visual() -> Dictionary:
+	if not j.es_autoridad(): return j.accion()
+	if j.rt[J.LOCAL].cd_obj > 0.0: return j.accion()
+	var objetivo := ""
+	if not j.combate.hay_enemigo_cerca(24.0):
+		var base: Vector2i = Mundo.celda_de(j.pies)
+		for c in [base + j.mira, base]:
+			var oid: String = j.mundo.objeto_presente(c)
+			if oid != "" and j.mundo.objetos[oid].t != "cofre_fijo" and not j.mundo.objetos[oid].t in Mundo.DECO:
+				objetivo = oid
+				break
+	var herramienta := ""
+	if objetivo != "":
+		var def: Dictionary = C.OBJETOS[j.mundo.objetos[objetivo].t]
+		var golpes: int = int(def.golpes.get("", 9999))
+		for item in j.jug().inv:
+			var tag: String = Eq.info(item).get("tag", "")
+			if tag != "" and int(def.golpes.get(tag, 9999)) < golpes:
+				golpes = int(def.golpes[tag])
+				herramienta = "hacha" if tag == "talar" else "pico" if tag == "picar" else ""
+	var antes: float = j.herr_t
+	var r: Dictionary = j.accion()
+	if objetivo != "" and j.herr_t > antes:
+		_golpe_visual = {"sesion": j.get_instance_id(), "herramienta": herramienta if r.get("ok", false) else "", "objetivo": objetivo}
+	return r
+
 func _herramienta_local() -> String:
 	if _anim.estado != "herramienta": return ""
-	var oid: String = j.mundo.por_celda.get(Mundo.celda_de(j.pies) + j.mira, "")
-	if oid == "": return ""
-	var tipo: String = j.mundo.objetos[oid].t
-	var tag := "talar" if tipo == "arbol" else ("picar" if tipo in ["roca", "veta", "veta_cobre", "arcilla"] else "")
-	if tag == "": return ""
-	for it in j.jug().inv:
-		if Eq.info(it).get("tag", "") == tag: return "hacha" if tag == "talar" else "pico"
-	return ""
+	# Conserva la presentación previa en réplica; no añade confirmaciones ni protocolo de A5.
+	if not j.es_autoridad():
+		var oid: String = j.mundo.por_celda.get(Mundo.celda_de(j.pies) + j.mira, "")
+		if oid == "": return ""
+		var tipo: String = j.mundo.objetos[oid].t
+		var tag := "talar" if tipo == "arbol" else ("picar" if tipo in ["roca", "veta", "veta_cobre", "arcilla"] else "")
+		for item in j.jug().inv:
+			if tag != "" and Eq.info(item).get("tag", "") == tag: return "hacha" if tag == "talar" else "pico"
+		return ""
+	if j.herr_t <= 0.0: return ""
+	if _golpe_visual.get("sesion", -1) != j.get_instance_id(): return ""
+	return str(_golpe_visual.get("herramienta", ""))
+
+func _area_herramienta() -> Rect2:
+	if _herramienta_local() == "": return Rect2()
+	return Rect2(j.pies - Vector2(18,32),Vector2(36,32))
 
 func _hacha_local() -> bool:
-	if _anim.estado != "herramienta": return false
-	var oid: String = j.mundo.por_celda.get(Mundo.celda_de(j.pies) + j.mira, "")
-	if oid == "" or j.mundo.objetos[oid].t != "arbol": return false
-	for it in j.jug().inv: if Eq.info(it).get("tag", "") == "talar": return true
-	return false
+	return _herramienta_local() == "hacha"
 
 ## Cuadro para el arte por capas: caminata, ataque, herramienta y daño animan; el resto usa el cuadro 0.
 static func _cuadro_arte(an: Dictionary) -> int:
@@ -950,14 +981,28 @@ func _dibujar_otro(o: Dictionary) -> void:
 	else: _arte_faltante(origen)
 	_nombre_mundo(o.nombre, o.pies, Color("f1d692"))
 
+## Proyección exclusiva de presentación: la posición y la ruta del habitante no cambian.
+func _cama_visual_npc(id: String) -> bool:
+	return j.d.npcs[id].act == "dormir" and j.habitantes.cama_existe(id) and j.mundo.es_adyacente(Mundo.celda_de(j.habitantes.pos(id)), j.habitantes.cama(id))
+
+func _pies_visuales_npc(id: String) -> Vector2:
+	if _cama_visual_npc(id): return Vector2(j.habitantes.cama(id)) * P.CELDA + Vector2(8, 16.01)
+	return j.habitantes.pos(id)
+
 func _dibujar_npc(id: String) -> void:
-	var p: Vector2 = j.habitantes.pos(id)
-	var origen: Vector2 = (p - Vector2(P.SPRITE.x / 2.0, P.SPRITE.y)).round()
-	_sombra(p)
+	var logica: Vector2 = j.habitantes.pos(id)
+	var p := _pies_visuales_npc(id)
 	var act: String = j.d.npcs[id].act
-	var st: Dictionary = actores.npc_estado(id, p)
-	var cuadro := int(Time.get_ticks_msec() / 120.0) % 4 if st.mueve else 0
-	arte_eq.dibujar(self, p, st.dir, cuadro, [], j.habitantes.aspecto(id), "caminar" if st.mueve else "reposo")
+	var st: Dictionary = actores.npc_estado(id, logica)
+	var visual := PresentacionNPC.resolver(act, st, Time.get_ticks_msec() / 1000.0)
+	if _cama_visual_npc(id):
+		# El atlas existente tiene cabecero al norte; no depende del rumbo de llegada.
+		var tex: Texture2D = arte_eq.viajero071.texture(j.habitantes.aspecto(id), Vector2i.DOWN, "reposo", 0, [], "")
+		draw_texture_rect(tex, Rect2(p + Vector2(-14.4, -41.2), Vector2(28.8, 28.8)), false)
+		arte_mundo.cobija_cama(self, p, j.mundo.constr_en(j.habitantes.cama(id)).t == "cama_huesped")
+	else:
+		_sombra(p)
+		arte_eq.dibujar(self, p, visual.dir, visual.cuadro, [], j.habitantes.aspecto(id), visual.estado)
 	if p.distance_to(j.pies) <= 128.0:
 		_nombre_mundo(j.habitantes.fichas[id].n + (" · zzz" if act == "dormir" else ""), p)
 
@@ -1003,10 +1048,14 @@ func _dibujar_obj(id: String) -> void:
 	var p := Vector2(o.c) * P.CELDA
 	var roto: bool = j.mundo.estado.rotos.has(id)
 	match o.t:
-		"arbol", "roca", "veta", "veta_cobre", "veta_estano", "arcilla", "arbusto": arte_mundo.natural(self, o.t, o.c, roto, j.pies)
+		"arbol", "roca", "veta", "veta_cobre", "veta_estano", "arcilla", "arbusto": arte_mundo.natural(self, o.t, o.c, roto, j.pies, _area_herramienta())
 		"barril": arte_mundo.prop(self, "barrel", Vector2(o.c) * P.CELDA + Vector2(8, 16))
 		"valla": arte_mundo.valla(self, j.mundo, o.c)
 		"cofre_fijo": arte_mundo.cofre(self, o.c, j.d.cofres.tesoro_cantera.get("abierto", false))
+	# Únicamente la herramienta sobre la mena golpeada; los demás objetos conservan su profundidad.
+	if id == _golpe_visual.get("objetivo", "") and _herramienta_local() != "" and p.y + 16 >= j.pies.y:
+		var capa: Texture2D = arte_eq.viajero071.herramienta_textura(j.mira, _cuadro_arte(_anim), _herramienta_local())
+		draw_texture_rect(capa, Rect2(j.pies - Vector2(24,48),Vector2(48,48)), false)
 	var g: int = j.mundo.estado.golpes.get(id, 0)
 	if g > 0 and not roto: draw_rect(Rect2(p + Vector2(2, -2), Vector2(12, 2)), Color(1, 1, 1, 0.8))
 

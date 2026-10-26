@@ -90,7 +90,7 @@ func pose(view:int,state:String,frame:int)->Dictionary:
 	var v={"head":Transform2D.IDENTITY,"body":Transform2D.IDENTITY,"arm0":Transform2D.IDENTITY,"arm1":Transform2D.IDENTITY,"leg0":Transform2D.IDENTITY,"leg1":Transform2D.IDENTITY}
 	var step=[0.0,1.0,0.0,-1.0][posmod(frame,4)]
 	var a0=0.0;var a1=0.0;var l0=0.0;var l1=0.0;var bob=0.0
-	var weapon=1 if view in [2,3] else 0
+	var weapon=1 if view in ([1,2] if state=="herramienta" else [2,3]) else 0
 	if state=="caminar":
 		a0=step*12;a1=-step*12;l0=-step*(16 if view in [1,3] else 9);l1=-l0;bob=-2*absf(step)
 	elif state in ["ataque","herramienta"]:
@@ -105,6 +105,7 @@ func pose(view:int,state:String,frame:int)->Dictionary:
 		var angle=deg_to_rad(pair[1]);var pivot:Vector2=pair[2]
 		v[pair[0]]=Transform2D(angle,pivot-pivot.rotated(angle)+Vector2(0,bob if str(pair[0]).begins_with("arm") else 0))
 	var aims=[[45.0,-90.0,135.0,45.0],[20.0,-90.0,45.0,20.0],[-135.0,90.0,-45.0,-135.0],[-90.0,45.0,-135.0,-90.0]][view]
+	if state=="herramienta" and view in [1,3]:aims=[45.0,135.0,90.0,45.0] if view==1 else [-45.0,-135.0,-90.0,-45.0]
 	v._weapon_rotation=deg_to_rad(aims[posmod(frame,4)] if state=="ataque" else aims[[1,2,0][posmod(frame,3)]] if state=="herramienta" else aims[0])
 	return v
 
@@ -170,7 +171,7 @@ func held_image(name:String,palette:Dictionary={})->Image:
 	images[key]=src;return src
 
 func held(dst:Image,name:String,view:int,poses:Dictionary,weapon:bool,palette:Dictionary={}):
-	var side=(1 if view in [2,3] else 0) if weapon else (0 if view in [2,3] else 1)
+	var side=(1 if view in ([1,2] if name in ["pico","hacha"] else [2,3]) else 0) if weapon else (0 if view in [2,3] else 1)
 	var key="arm%d"%side;var t:Transform2D=poses[key]
 	var hand=(arm_left(view) if side==0 else arm_right(view))+Vector2(-2 if side==0 else 2,20)
 	if weapon:
@@ -253,4 +254,15 @@ func texture(look:Array,dir:Vector2i,state:String,frame:int,equipment:Array,tool
 	if not cache.has(key):
 		if cache.size()>=384:cache.erase(cache.keys()[0])
 		cache[key]=ImageTexture.create_from_image(image(look,view,state,frame,equipment,tool));generados+=1
+	return cache[key]
+
+## Capa reutilizada para ordenar el útil sobre su objetivo, nunca sobre todo el escenario.
+func herramienta_textura(dir:Vector2i,frame:int,tool:String)->Texture2D:
+	var view=DIRS.find(dir);if view<0:view=0
+	var key="util:"+str([view,frame,tool])
+	if not cache.has(key):
+		if cache.size()>=384:cache.erase(cache.keys()[0])
+		var im=Image.create(192,192,false,Image.FORMAT_RGBA8)
+		held(im,tool,view,pose(view,"herramienta",frame),true)
+		cache[key]=ImageTexture.create_from_image(im)
 	return cache[key]

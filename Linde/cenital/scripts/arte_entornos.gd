@@ -68,7 +68,7 @@ func color_objeto(bioma:String,tipo:String)->Color:
 	if bioma=="sierra" and tipo=="roca":return Color(0.93,1.02,1.11)
 	return Color.WHITE
 
-func natural(ci: CanvasItem,tipo:String,c:Vector2i,agotado:bool,jugador:Vector2) -> void:
+func natural(ci: CanvasItem,tipo:String,c:Vector2i,agotado:bool,jugador:Vector2,accion:Rect2=Rect2()) -> void:
 	if agotado:
 		super.natural(ci,tipo,c,agotado,jugador);return
 	var nombre: String = "tree_"+ARBOLES[posmod(c.x*7+c.y*3,3)] if tipo=="arbol" else "bush_berries" if tipo=="arbusto" else "rock" if tipo in ["roca","arcilla"] else "ore_copper"
@@ -80,11 +80,14 @@ func natural(ci: CanvasItem,tipo:String,c:Vector2i,agotado:bool,jugador:Vector2)
 	var r:=Rect2((pies-Vector2(d.pivote[0],d.pivote[1])+Vector2(bbox[0],bbox[1])).round(),Vector2(bbox[2]-bbox[0],bbox[3]-bbox[1]))
 	var tint: Color=TINTE_MENA.get(tipo,Color.WHITE)*color_objeto(mundo_actual.bioma(c) if mundo_actual!=null else "valle",tipo)
 	# Si la copa tapa al viajero, se conserva el tronco y se atenúa solo el follaje.
-	if tipo=="arbol" and r.has_point(jugador-Vector2(0,14)) and pies.y>=jugador.y:
+	if tipo=="arbol" and ((r.has_point(jugador-Vector2(0,14)) and pies.y>=jugador.y) or (accion.has_area() and r.intersects(accion) and pies.y>=jugador.y)):
 		var region: Rect2=regiones[nombre]
 		var corte:=0.78
 		ci.draw_texture_rect_region(atlas,Rect2(r.position,Vector2(r.size.x,r.size.y*corte)),Rect2(region.position,Vector2(region.size.x,region.size.y*corte)),Color(1,1,1,0.40))
 		ci.draw_texture_rect_region(atlas,Rect2(r.position+Vector2(0,r.size.y*corte),Vector2(r.size.x,r.size.y*(1-corte))),Rect2(region.position+Vector2(0,region.size.y*corte),Vector2(region.size.x,region.size.y*(1-corte))))
+	elif tipo=="arbusto" and accion.has_area() and r.intersects(accion) and pies.y>=jugador.y:
+		# Misma política de follaje: solo durante un golpe real y cerca del útil.
+		_original(ci,nombre,r,tint*Color(1,1,1,0.40))
 	else:_original(ci,nombre,r,tint)
 
 var base=preload("res://scripts/mundo_arte.gd").new()
@@ -120,3 +123,11 @@ func prop(ci:CanvasItem,nombre:String,pies:Vector2,tinte:Color=Color.WHITE)->voi
 	if d.is_empty():super.prop(ci,nombre,pies,tinte);return
 	var b:Array=d.bbox
 	_original(ci,nombre,Rect2((pies-Vector2(d.pivote[0],d.pivote[1])+Vector2(b[0],b[1])).round(),Vector2(b[2]-b[0],b[3]-b[1])),tinte)
+
+## Recorte del mismo atlas: cobija y piecero delante del durmiente; sin cama nueva.
+func cobija_cama(ci:CanvasItem,pies:Vector2,huesped:bool=false)->void:
+	var region:Rect2=regiones.bed
+	var fraccion:=11.0/31.0
+	var destino:=Rect2((pies+Vector2(-12,-20)).round(),Vector2(25,20))
+	var fuente:=Rect2(region.position+Vector2(0,region.size.y*fraccion),Vector2(region.size.x,region.size.y*(1.0-fraccion)))
+	ci.draw_texture_rect_region(atlas,destino,fuente,Color(0.6,0.85,1.3) if huesped else Color.WHITE)

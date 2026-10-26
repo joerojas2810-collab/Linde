@@ -1,8 +1,8 @@
 {
- "_nota": "Copia sin cambios de E06_v001 (assets, tipograf\u00eda Pixelify Sans con OFL.txt; el .ttf conserva el contenido original con nombre sin corchetes). Candidato; aceptaci\u00f3n pendiente.",
+ "_nota": "E06_v001: recursos gr\u00e1ficos originales conservados; mapa de iconos ampliado en A1 con dos reutilizaciones de herramientas. Las fuentes actuales Nunito/Lora se conservan sin cambios.",
  "origen": "E06_v001",
  "archivos": {
-  "ICONOS_POR_ID.json": "5f7c585ffd57b5b90164946fb18525a93f6cf91e4f181a8d0afb1fe584a09c56",
+  "ICONOS_POR_ID.json": "5fe0e8f2756e51ae5b843aa8d98a59a656930e3a889740c8553efc7239118bf2",
   "tipografia/OFL.txt": "921ba087e40693958a9b2519d489b8872a894a6f5b1a9bfae37639146c1effe9",
   "tipografia/PixelifySans.ttf": "9ba86cd010a4de309d263ceff8e8044092c9db7efda869620cb9ff1c4389e8a5",
   "nuevos/botas.png": "0b6e233597e5367bab8318e4f55bb0a637d1be9709d10304f25ee4e53426e613",
@@ -54,5 +54,13 @@
   "reutilizados/tooltip_panel.png": "490c8282e71479980babd0037118f06800ce9ad5cdbc18e0be933c27dbb84ffe",
   "reutilizados/unguento.png": "e8695c42996fd2fe52a7041deb3ab70a2933318b83fd16deab5f9f32dd805db4"
  },
- "_ajuste_propio": "luz_ambiente.gdshader: (1) COLOR ya incluye la textura en Godot 4; se quit\u00f3 la segunda multiplicaci\u00f3n por texture(TEXTURE, UV), que oscurec\u00eda y saturaba todo el mundo; (2) tinte nocturno (0.44,0.55,0.76) -> (0.55,0.62,0.82)."
+ "_ajuste_propio": "luz_ambiente.gdshader: (1) COLOR ya incluye la textura en Godot 4; se quit\u00f3 la segunda multiplicaci\u00f3n por texture(TEXTURE, UV), que oscurec\u00eda y saturaba todo el mundo; (2) tinte nocturno (0.44,0.55,0.76) -> (0.55,0.62,0.82).",
+ "integracion_A1": {
+  "mapa_original_sha256": "5f7c585ffd57b5b90164946fb18525a93f6cf91e4f181a8d0afb1fe584a09c56",
+  "reutilizacion": {
+   "hacha_cobre": "reutilizados/hacha_piedra.png",
+   "pico_cobre": "reutilizados/pico_piedra.png"
+  },
+  "criterio": "Iconos gen\u00e9ricos de herramienta; nombre y material reales en la ficha. Sin sprites nuevos."
+ }
 }
