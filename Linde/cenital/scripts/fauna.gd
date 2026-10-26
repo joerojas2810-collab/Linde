@@ -3,6 +3,7 @@ extends RefCounted
 ## Un punto determinista por región; bajas y heridas durables, simulación solo en autoridad.
 const M = preload("res://scripts/mundo.gd")
 const C = preload("res://scripts/catalogos.gd")
+const L = preload("res://scripts/lugares.gd")
 var combate
 var j
 var cfg: Dictionary
@@ -22,16 +23,22 @@ func _init(c) -> void:
 
 ## Política de generación copiada al mundo nuevo, no reglas globales de combate.
 ## Un guardado sin este campo conserva siempre la distribución v1.
-static func politica_inicial() -> Dictionary:
- return JSON.parse_string(FileAccess.get_file_as_string("res://datos/fauna/habitats_v2.json"))
+static func politica_inicial(version:int=3) -> Dictionary:
+ return JSON.parse_string(FileAccess.get_file_as_string("res://datos/fauna/habitats_v%d.json"%version))
 
 static func distribucion_valida(p) -> bool:
  if not p is Dictionary:return false
  if p.is_empty():return true
  if p.get("version",0)==1:return p.size()==1
- if p.get("version",0)!=2 or not p.get("preferencias") is Dictionary:return false
+ var version=p.get("version",0)
+ if not (version is int or version is float) or version!=int(version):return false
+ if not int(version) in [2,3] or not p.get("preferencias") is Dictionary:return false
+ if p.version==3:
+  var t=p.get("territorial")
+  if p.size()!=3 or not t is Dictionary or t.size()!=4:return false
+  if t.get("radio_nucleo")!=12 or t.get("evitar_rutas")!=true or t.get("sin_ubicacion")!="posponer" or t.get("anclar")!=["ruinas","cueva"]:return false
  var tipos=["espectro_bosque","golem_sierra","diablillo_secano","arpia_pradera","slime_ribera"]
- if p.size()!=2 or p.preferencias.size()!=tipos.size():return false
+ if (p.version==2 and p.size()!=2) or p.preferencias.size()!=tipos.size():return false
  for tipo in tipos:
   var regla=p.preferencias.get(tipo)
   if not regla is Dictionary or regla.size()!=1:return false
@@ -105,7 +112,7 @@ func habitat_en(celda: Vector2i) -> Dictionary:
 
 ## Lectura territorial del registro existente, no regla de aparición ni conocimiento del jugador.
 ## No genera lugares, rutas o regiones. Distancias sin radio de seguridad implícito.
-func contexto_territorial(celda:Vector2i) -> Dictionary:
+func contexto_territorial(celda:Vector2i,radio:float=M.NUCLEO_RADIO) -> Dictionary:
  var registro:Dictionary=j.d.mundo.get("registro",{})
  var result={"ruta":"","distancia_ruta":-1,"en_ruta":false,"lugares":[],"poblados":[],"nucleos_1e":[]}
  var rutas:Dictionary=registro.get("rutas",{});var ids=rutas.keys();ids.sort()
@@ -123,8 +130,89 @@ func contexto_territorial(celda:Vector2i) -> Dictionary:
   if p.has("area"):
    var a:Array=p.area
    if Rect2i(a[0],a[1],a[2],a[3]).has_point(celda):result.poblados.append(id)
-  if j.mundo.modo_inicio()==M.MODO_POBLADO and p.has("centro") and Vector2(celda).distance_to(Vector2(p.centro[0],p.centro[1]))<M.NUCLEO_RADIO:result.nucleos_1e.append(id)
+  if j.mundo.modo_inicio()==M.MODO_POBLADO and p.has("centro") and Vector2(celda).distance_to(Vector2(p.centro[0],p.centro[1]))<radio:result.nucleos_1e.append(id)
  return result
+
+func _espacio_humano(celda:Vector2i,radio:float) -> bool:
+ var ctx=contexto_territorial(celda,radio)
+ return ctx.en_ruta or not ctx.nucleos_1e.is_empty() or not ctx.poblados.is_empty()
+
+## Se evalúa al registrar la génesis, nunca al leer un plan ya persistido.
+func plan_territorial(r:Vector2i,base:Dictionary,territorial:Dictionary) -> Dictionary:
+ var result=base.duplicate(true)
+ if result.is_empty():return result
+ result.ancla="";result.pospuesto=false
+ var conducta=habitat_en(result.celda).conducta
+ if not conducta in ["hostil","territorial"]:return result
+ var lugares:Dictionary=j.d.mundo.get("registro",{}).get("lugares",{});var ids=lugares.keys();ids.sort();var ancla={}
+ for id in ids:
+  var lugar:Dictionary=lugares[id]
+  if conducta=="hostil" and lugar.tipo in territorial.anclar and M.Terreno.region(Vector2i(lugar.centro[0],lugar.centro[1]))==r:ancla=lugar;break
+ if ancla.is_empty() and not _espacio_humano(result.celda,territorial.radio_nucleo):return result
+ var candidatos=[];var preferidos=[]
+ for i in 64:
+  var c=candidata_region(r,i)
+  if M.Terreno.distancia_valle(c)<int(cfg.distancia_valle):continue
+  var h=habitat_en(c)
+  if h.get("tipo","")!=base.tipo or h.get("bioma","")!=base.bioma or _espacio_humano(c,territorial.radio_nucleo):continue
+  candidatos.append(c)
+  if cumple_preferencia(c,base.tipo,distribucion.preferencias):preferidos.append(c)
+ if candidatos.is_empty():result.pospuesto=true;return result
+ var elegibles=preferidos if not preferidos.is_empty() else candidatos
+ result.celda=elegibles[0]
+ if not ancla.is_empty():
+  var mejor=2147483647
+  for c in elegibles:
+   var distancia=absi(c.x-int(ancla.entrada[0]))+absi(c.y-int(ancla.entrada[1]))
+   if distancia<mejor:result.celda=c;mejor=distancia
+  result.ancla=ancla.id
+ return result
+
+## Decisiones durables en el estado de fauna existente, sin copias del terreno.
+## La identidad/geometría del macro debe estar registrada antes de congelarlas.
+func registrar_territorios() -> void:
+ if int(distribucion.get("version",1))!=3 or not j.es_autoridad() or j.preparando_mundo:return
+ var registro:Dictionary=j.d.mundo.get("registro",{});var macros:Dictionary=registro.get("macros",{})
+ var guardados:Dictionary=j.d.fauna.get_or_add("territorios",{})
+ var ids=macros.keys();ids.sort();var tam=int(L.datos().macro_celdas)/16
+ for id in ids:
+  if guardados.has(id):continue
+  var origen=Vector2i(int(id.get_slice(",",0)),int(id.get_slice(",",1)));var regiones={}
+  for y in range(origen.y*tam,(origen.y+1)*tam):
+   for x in range(origen.x*tam,(origen.x+1)*tam):
+    var r=Vector2i(x,y);var base=plan_base_region(r)
+    if not base.is_empty():base=plan_preferente(r,base,distribucion.preferencias)
+    var p=plan_territorial(r,base,distribucion.territorial)
+    if not p.is_empty():p.celda=[p.celda.x,p.celda.y]
+    regiones[M.clave(r)]=p
+    planes.erase(M.clave(r))
+  guardados[id]={"version":3,"regiones":regiones}
+
+func _plan_guardado(r:Vector2i) -> Dictionary:
+ var macro=M.clave(L.macro(r*16))
+ var datos:Dictionary=j.d.fauna.get("territorios",{}).get(macro,{})
+ var p:Dictionary=datos.get("regiones",{}).get(M.clave(r),{}).duplicate(true)
+ if not p.is_empty():p.celda=Vector2i(p.celda[0],p.celda[1])
+ return p
+
+static func territorios_validos(fauna:Dictionary) -> bool:
+ if fauna.get("distribucion",{}).get("version",1)!=3:return true
+ var territorios=fauna.get("territorios",{})
+ if not territorios is Dictionary:return false
+ for macro in territorios:
+  var t=territorios[macro]
+  if not t is Dictionary or t.get("version")!=3 or not t.get("regiones") is Dictionary or t.regiones.size()!=36:return false
+  for k in t.regiones:
+   var p=t.regiones[k]
+   if not p is Dictionary:return false
+   if p.is_empty():continue
+   if p.get("id","")!="fauna_v1@"+k or p.get("region")!=k or not C.ENEMIGOS.has(p.get("tipo","")):return false
+   if not p.get("celda") is Array or p.celda.size()!=2 or not p.get("pospuesto") is bool or not p.get("ancla") is String:return false
+   for n in p.celda:
+    if not n is int and not n is float:return false
+   var c=Vector2i(p.celda[0],p.celda[1])
+   if M.clave(M.Terreno.region(c))!=k or M.clave(L.macro(c))!=macro:return false
+ return true
 
 func restaurar() -> Dictionary:
  var d: Dictionary = j.d.get_or_add("fauna", {})
@@ -149,6 +237,8 @@ func plan_region(r: Vector2i) -> Dictionary:
  if planes.has(k): return planes[k]
  if not distribucion_valida(distribucion):
   push_error("Distribución de fauna no soportada");return {}
+ if int(distribucion.get("version",1))==3:
+  var p=_plan_guardado(r);planes[k]=p;return p
  var resultado=plan_base_region(r)
  if int(distribucion.get("version",1))==2:resultado=plan_preferente(r,resultado,distribucion.preferencias)
  planes[k]=resultado
@@ -175,6 +265,7 @@ func _distancia_region(r: Vector2i, centros: Array) -> int:
 
 func actualizar() -> void:
  if not j.es_autoridad() or j.mundo.generador == null: return
+ registrar_territorios()
  var estado := restaurar()
  for sid in estado.bajas.keys():
   if int(j.d.min) >= int(estado.bajas[sid]): estado.bajas.erase(sid)
@@ -196,7 +287,7 @@ func actualizar() -> void:
  for r in regiones:
   if deseados.size() >= int(cfg.max_activos): break
   var p := plan_region(r)
-  if not p.is_empty(): deseados[p.id] = p
+  if not p.is_empty() and not p.get("pospuesto",false): deseados[p.id] = p
  for e in combate.enemigos.duplicate():
   if not e.has("fauna_id"): continue
   if not deseados.has(e.fauna_id) or not j.mundo.region_cargada(M.celda_de(e.pos)):
@@ -219,6 +310,7 @@ func actualizar() -> void:
   var e: Dictionary = combate._nuevo(p.tipo, home)
   e.fauna_id = sid
   e.region = p.region
+  if p.get("ancla","")!="":e.ancla=p.ancla
   e.pos = posicion
   e.hp = int(herida.get("hp", e.hp))
   e.alertado = bool(herida.get("alertado", false))
@@ -235,6 +327,7 @@ func recordar(e: Dictionary) -> void:
  else: d.heridos.erase(e.fauna_id)
 
 func guardar() -> void:
+ registrar_territorios()
  for e in combate.enemigos: recordar(e)
 
 func baja(e: Dictionary) -> void:

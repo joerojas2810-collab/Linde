@@ -19,6 +19,7 @@ func iniciar() -> void:
 	var game=J.cargar(path)
 	if game==null and not J.ultimo_error.is_empty():printerr(J.mensaje_carga(J.ultimo_error));quit(1);return
 	if game==null:game=J.nueva(int(config.get("semilla",1)),"Anfitrión",[0,0,0],J.MODO_JUEGO)
+	if game==null:printerr("No se pudo crear el mundo; revisa la política de generación de fauna.");quit(1);return
 	var server=load("res://scripts/cuentas/servidor.gd").new()
 	server.name="Red";server.j=game;server.ruta=path;server.puerto=port;server.puerto_cuentas=https
 	server.carpeta=dir;server.password=str(config.get("password",""));server.python=str(config.get("python","python"))

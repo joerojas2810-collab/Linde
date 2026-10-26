@@ -23,7 +23,7 @@ func viajar(j):
  j.pies=M.pies_de_celda(Vector2i(-200,-256));j.actualizar_regiones();j.combate.fauna.actualizar()
 func _init():
  var aprobado=JSON.parse_string(FileAccess.get_file_as_string(BASE+"propuesta-ubicacion/resultados.json"))
- var j=J.nueva(123,"Muestra",[0,0,0],M.MODO_POBLADO)
+ var j=J.nueva(123,"Muestra",[0,0,0],M.MODO_POBLADO,2)
  ok(j.d.fauna.distribucion.version==2 and F.distribucion_valida(j.d.fauna.distribucion),"mundo nuevo poblado activa la política aprobada v2")
  ok(not J.nueva(123,"Legado",[0,0,0]).d.fauna.has("distribucion"),"modo legado conserva generación anterior")
  var viejo=J.cargar(BASE+"habitats/guardado_previo.json")
@@ -31,7 +31,7 @@ func _init():
  var antes=firma(viejo);viejo.guardar(ruta("anterior"));var otra=J.cargar(ruta("anterior"))
  ok(otra!=null and firma(otra,true)==antes and not otra.d.fauna.has("distribucion"),"guardar/reiniciar mundo anterior no migra sus puntos")
  for caso in aprobado.casos:
-  var juego=J.nueva(int(caso.semilla),"Muestra",[0,0,0],M.MODO_POBLADO)
+  var juego=J.nueva(int(caso.semilla),"Muestra",[0,0,0],M.MODO_POBLADO,2)
   var invariantes=true;var cuentas={};var movidos={};var estado=H.hash_de(juego.d)
   for y in range(-14,15):
    for x in range(-14,15):
@@ -44,7 +44,7 @@ func _init():
    invariantes=invariantes and cuentas.get(tipo)==int(caso.especies[tipo].cantidad) and movidos.get(tipo)==int(caso.especies[tipo].movidos)
   ok(invariantes and estado==H.hash_de(juego.d),"v2 coincide con cantidades y movimientos aprobados, semilla "+str(caso.semilla))
  for ejemplo in aprobado.ejemplos.values():
-  var e=J.nueva(int(ejemplo.semilla),"Ejemplo",[0,0,0],M.MODO_POBLADO)
+  var e=J.nueva(int(ejemplo.semilla),"Ejemplo",[0,0,0],M.MODO_POBLADO,2)
   var r=Vector2i(ejemplo.region[0],ejemplo.region[1]);var p:Dictionary=e.combate.fauna.plan_region(r)
   ok(p.celda==r*16+Vector2i(ejemplo.despues[0],ejemplo.despues[1]),"posición activada coincide con la comparativa aprobada "+p.tipo)
  var f1=firma(j);j.guardar(ruta("nuevo"));var rec=J.cargar(ruta("nuevo"))

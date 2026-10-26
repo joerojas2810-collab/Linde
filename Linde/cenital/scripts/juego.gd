@@ -31,6 +31,7 @@ var habitantes
 var autonomia
 var vivo    # director de Mundo vivo (variables + eventos)
 var combate
+var preparando_mundo:=false
 var rt := {}            # id -> {pies, mira, cd_obj, herr_t, msgs}: sesión de cada jugador (pies se vuelca a pos al guardar)
 var _acum := 0.0
 var _seg := 0.0
@@ -59,8 +60,9 @@ static func nuevo_jugador(nombre: String, look: Array, p: Vector2) -> Dictionary
 
 ## `modo_inicio`: ver `Mundo.MODO_LEGADO` / `MODO_POBLADO`. Los mundos que se juegan (escena) usan `MODO_JUEGO`; las pruebas y herramientas, `legado` salvo que lo pidan.
 const MODO_JUEGO := Mundo.MODO_POBLADO   # validado con medir_aparicion (production/qa/evidence/mundo-1/fase-1c); las pruebas y herramientas siguen en legado por defecto
-static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String = Mundo.MODO_LEGADO, version_fauna:int=2):
+static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String = Mundo.MODO_LEGADO, version_fauna:int=3):
 	var j = new()
+	j.preparando_mundo=true
 	j.d = {"semilla": semilla}
 	var p := Mundo.pies_de_celda(j.mundo.punto_inicio(semilla))
 	var rt_: RandomNumberGenerator = j._rng("botin", "tesoro_cantera")
@@ -73,8 +75,8 @@ static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String
 	j.d.mundo.generacion = {"version": 2, "semilla": semilla, "region": 16}
 	j.d.mundo.inicio = {"modo": modo_inicio}
 	if modo_inicio==Mundo.MODO_POBLADO and version_fauna!=1:
-		if version_fauna!=2:push_error("Versión de fauna no soportada");return null
-		var politica=Comb.Fauna.politica_inicial()
+		if not version_fauna in [2,3]:push_error("Versión de fauna no soportada");return null
+		var politica=Comb.Fauna.politica_inicial(version_fauna)
 		if not Comb.Fauna.distribucion_valida(politica):push_error("Política inicial de fauna inválida");return null
 		j.d.fauna={"distribucion":politica}
 	j._arrancar(true)
@@ -90,6 +92,8 @@ static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String
 		else:   # mundo recién creado: su poblado inicial no puede estar destruido; se conserva la celda validada por punto_inicio y queda registrado
 			push_warning("Mundo nuevo sin posición de aparición en el poblado: %s" % ap.motivo)
 	j.actualizar_mapa()
+	j.preparando_mundo=false
+	j.combate.fauna.registrar_territorios()
 	return j
 
 ## Resultado de la última `cargar` fallida ({} si no falló o no hubo archivo): `error`, `motivo`, `detalle`, `archivo` de Guardado.cargar.
@@ -101,11 +105,12 @@ static func cargar(ruta: String):
 	if r.d.is_empty(): return null
 	var j = new()
 	j.d = _enteros(r.d)
-	if not Comb.Fauna.distribucion_valida(j.d.get("fauna",{}).get("distribucion",{})):
+	if not Comb.Fauna.distribucion_valida(j.d.get("fauna",{}).get("distribucion",{})) or not Comb.Fauna.territorios_validos(j.d.get("fauna",{})):
 		ultimo_error={"error":"distribucion_fauna","motivo":"Distribución de fauna no soportada; conserva el guardado y utiliza una versión compatible."};return null
 	for id in j.d.jugadores:
 		_sanear_equipo(j.d.jugadores[id])
 	j._arrancar()
+	j.combate.fauna.registrar_territorios()
 	j.aviso("Partida cargada (%s)." % r.origen)
 	return j
 

@@ -6,7 +6,7 @@ const L=preload("res://scripts/lugares.gd")
 func _init():
  var salida=OS.get_cmdline_user_args()[0];var casos=[];var errores=0
  for seed in [123,456,789]:
-  var j=J.nueva(seed,"Medición",[0,0,0],M.MODO_POBLADO)
+  var j=J.nueva(seed,"Medición",[0,0,0],M.MODO_POBLADO,2)
   var original=H.hash_de(j.d);var regiones=j.mundo.regiones.size()
   var consultas=0;var prueba_rutas=true;var prueba_lugares=true;var prueba_pueblos=true
   var f=j.combate.fauna
