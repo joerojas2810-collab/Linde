@@ -132,6 +132,64 @@ func camas(poblado_id: String) -> Dictionary:
 	for id in p.camas: d[id] = Vector2i(int(p.camas[id][0]), int(p.camas[id][1]))
 	return d
 
+## Hitos del poblado inicial (Mundo 1, paso 1d): lugares ya existentes en el Valle con nombre y área [x, y, ancho, alto]. La plaza y el taller son los
+## «lugares» de datos/mundo/entities/lugar (celdas 34,25 y 28,20); el resto, las áreas del mapa de autor. Solo entran en el registro en modo poblado.
+const HITOS_INICIALES := [
+	{"id": "plaza", "nombre": "La plaza", "area": [31, 23, 7, 5]},
+	{"id": "taller", "nombre": "La casa del taller", "area": [24, 16, 8, 7]},
+	{"id": "estanque", "nombre": "El estanque", "area": [42, 26, 10, 11]},
+	{"id": "cantera", "nombre": "La cantera", "area": [4, 4, 13, 11]},
+	{"id": "bosque", "nombre": "El bosque", "area": [38, 3, 24, 14]},
+	{"id": "ruinas", "nombre": "Las ruinas", "area": [46, 38, 12, 9]},
+	{"id": "entrada_sur", "nombre": "La entrada sur", "area": [30, 44, 5, 4]},
+]
+## Instalaciones comunitarias iniciales (sin dueño: «las estaciones son del mundo»): la mesa de trabajo del taller y el horno de la cantera,
+## junto a la plaza, donde todos las ven. Las usan los habitantes (`permite_estacion`: sin dueño de grupo) y los jugadores.
+const INSTALACIONES_INICIALES := ["mesa", "horno"]
+
+## Nombre del hito que contiene la celda ("" si ninguno): referencia de orientación para el HUD (y, más adelante, el mapa).
+func hito_en(c: Vector2i) -> String:
+	for h in poblado(ID_INICIAL).get("hitos", []):
+		var a: Array = h.area
+		if Rect2i(int(a[0]), int(a[1]), int(a[2]), int(a[3])).has_point(c): return str(h.nombre)
+	return ""
+
+## Primera celda libre de hierba a distancia Chebyshev rmin..rmax de `centro` (anillos crecientes, y luego y, x), fuera de las celdas esenciales.
+func _celda_libre_cerca(centro: Vector2i, rmin: int, rmax: int) -> Vector2i:
+	for r in range(rmin, rmax + 1):
+		for dy in range(-r, r + 1):
+			for dx in range(-r, r + 1):
+				if maxi(absi(dx), absi(dy)) != r: continue
+				var c := centro + Vector2i(dx, dy)
+				if es_valle(c) and tipo(c) == T.PASTO and puede_poner(c) == "" and not esenciales(ID_INICIAL).has(c): return c
+	return SIN_CELDA
+
+## Solo al CREAR un mundo en modo poblado: registra los hitos y coloca las instalaciones comunitarias junto a la plaza (mesa y, pegado a ella,
+## el horno), comprobando que siguen siendo alcanzables todas las celdas esenciales. No se vuelve a llamar al cargar: si alguien las derriba,
+## no reaparecen.
+func instalar_poblado_inicial() -> void:
+	var p: Dictionary = estado.get("poblados", {}).get(ID_INICIAL, {})
+	if p.is_empty() or p.has("instalaciones"): return
+	p["hitos"] = HITOS_INICIALES.duplicate(true)
+	var puestas: Array = []
+	var ancla := Vector2i(34, 25)
+	var rmin := 1
+	for pieza in INSTALACIONES_INICIALES:
+		var c := _celda_libre_cerca(ancla, rmin, 5)
+		while c != SIN_CELDA:
+			poner(c, pieza, false)
+			var alc: Dictionary = alcanzables()
+			var ok := true
+			for e in esenciales(ID_INICIAL): if not alc.has(e): ok = false
+			if ok: break
+			quitar(c)
+			c = _celda_libre_cerca(c, 1, 5)
+		if c == SIN_CELDA: continue
+		puestas.append({"pieza": pieza, "celda": [c.x, c.y]})
+		ancla = c
+		rmin = 1
+	p["instalaciones"] = puestas
+
 ## Ids de los poblados del registro: el inicial primero y el resto por orden alfabético (orden estable).
 func poblados_ids() -> Array:
 	var ids: Array = estado.get("poblados", {}).keys()

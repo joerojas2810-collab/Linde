@@ -70,6 +70,7 @@ static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String
 	j.d.mundo.inicio = {"modo": modo_inicio}
 	j._arrancar()
 	if modo_inicio == Mundo.MODO_POBLADO:   # necesita los habitantes y los enemigos, que existen tras _arrancar()
+		j.mundo.instalar_poblado_inicial()   # hitos e instalaciones comunitarias (paso 1d), antes de elegir dónde aparece el jugador
 		var ap: Dictionary = j.punto_aparicion(LOCAL)
 		j._registrar_aparicion(LOCAL, ap)
 		if ap.ok:

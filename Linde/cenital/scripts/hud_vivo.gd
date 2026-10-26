@@ -268,7 +268,8 @@ func _tracker(vs: Vector2, j, h: float) -> void:
 	var extra := 1 if esc.red != null else 0
 	var celda: Vector2i=esc.j.mundo.celda_de(esc.j.pies)
 	var bioma: String=esc.j.mundo.bioma(celda)
-	lineas.append(["%s · %d, %d" % [bioma.capitalize(),celda.x,celda.y],16])
+	var hito: String=esc.j.mundo.hito_en(celda)
+	lineas.append(["%s%s · %d, %d" % [hito + " · " if hito != "" else "",bioma.capitalize(),celda.x,celda.y],16])
 	var alto := 72.0 + (extra + lineas.size()) * 26.0 + (8.0 if not lineas.is_empty() else 0.0)
 	var r := Rect2(vs.x - 16 - 328, 16, 328, alto)
 	ui.panel(self, r)
