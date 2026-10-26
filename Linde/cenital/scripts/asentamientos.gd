@@ -286,3 +286,36 @@ func dialogo(nid: String) -> String:
  var pueblo: Dictionary = j.mundo.poblado(r.get("hogar",""))
  var p: Dictionary = datos().puestos.get(pueblo.get("puesto",""),{})
  return "Soy %s de %s. Aquí trabajo como %s. Situación de la comunidad: %s. Puedes preguntar por lugares con L o consultar las reservas del pueblo en J." % [r.nombre, pueblo.get("nombre", "este puesto"), r.oficio, p.get("estado", "sin información")]
+
+## Vista persistible, sin otro inventario ni simulador. Los grupos conservan su titularidad.
+func demandas_colectivas() -> Dictionary:
+ var resultado := {}
+ if a.sociedad.activa():
+  var grupos := {}
+  for gid in a.sociedad.cfg.grupos: grupos[gid] = a.sociedad.balance_grupo(gid)
+  resultado[M.ID_INICIAL] = {"modo":"detallado", "grupos":grupos}
+ for p in datos().puestos.values():
+  var pid: String = p.get("poblado", "puesto:" + str(p.id))
+  resultado[pid] = {"modo":"resumido", "items":balance_resumido(p), "ejecucion":"existente"}
+ return resultado
+
+## Adaptador de contabilidad: solo deuda/consumo vencido y herramientas ya exigidas.
+## No promete las tasas futuras ni cosechas sin ejecutar; no altera el ejecutor regional.
+func balance_resumido(p: Dictionary) -> Dictionary:
+ var inv: Dictionary = j.d.cofres.get(p.cofre, {}).get("inv", {})
+ var periodos := maxi(0, floori(float(int(j.d.min) - int(p.comida_min)) / float(cfg.comida_min)))
+ var objetivos := {"baya":int(p.get("deuda_comida", 0)) + periodos * p.residentes.size()}
+ for r in p.residentes:
+  if int(r.get("usos", 0)) > 0: continue
+  var herramienta: String = "hacha_piedra" if r.oficio == "recolector" else "pico_piedra"
+  objetivos[herramienta] = int(objetivos.get(herramienta, 0)) + 1
+ var saldos := {}
+ for item in objetivos:
+  var objetivo := int(objetivos[item])
+  var stock := int(inv.get(item, 0))
+  saldos[item] = {"id":"%s:%s" % [p.get("poblado", "puesto:" + str(p.id)),item], "reserva":objetivo, "stock":stock, "comprometido":0, "en_curso":0, "pendiente":maxi(0, objetivo-stock)}
+ return saldos
+
+func actualizar_demandas() -> void:
+ if not a.activa() or not j.es_autoridad(): return
+ datos().demandas = {"version":1, "min":int(j.d.min), "poblados":demandas_colectivas()}
