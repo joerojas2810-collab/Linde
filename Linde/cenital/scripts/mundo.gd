@@ -92,6 +92,9 @@ static func poblado_inicial() -> Dictionary:
 ## `poblado`: alrededor del centro del poblado inicial, validada con el estado actual (Mundo 1, paso 1c).
 const MODO_LEGADO := "legado"
 const MODO_POBLADO := "poblado"
+## Radio del núcleo habitado sin nidos de slime: radio máximo de aparición (7 celdas) + radio de detección del slime (80 px = 5 celdas), de modo que
+## ninguna celda de aparición queda dentro de la detección de un slime generado. `prueba_amenazas` comprueba que no baja de esa suma.
+const NUCLEO_RADIO := 12.0
 const SIN_CELDA := Vector2i(-1, -1)   # `entrada()` de un poblado que no existe
 
 ## Datos del poblado `poblado_id` ({} si no existe en el registro de este mundo).
@@ -155,6 +158,7 @@ func configurar(semilla: int) -> void:
 		if not estado.has(campo): estado[campo] = {}   # guardados anteriores
 	if not estado.has("poblados"): estado.poblados = {ID_INICIAL: poblado_inicial()}
 	if not estado.has("inicio"): estado.inicio = {"modo": MODO_LEGADO}   # cómo aparecen los jugadores (Mundo 1, paso 1c); guardados sin la clave: legado
+	if modo_inicio() == MODO_POBLADO: regenerar_amenazas_nucleo()   # sin nidos de slime en el núcleo habitado (paso 1e)
 	if not estado.has("generacion"): estado.generacion={"version":1,"semilla":semilla,"region":Terreno.TAM}
 	generador=Terreno2.new(int(estado.generacion.semilla)) if int(estado.generacion.version)==2 else Terreno.new(int(estado.generacion.semilla))
 	_firma_regiones=""
@@ -273,14 +277,29 @@ func _generar_objetos() -> void:
 				elif f < 0.045: _agregar("arbusto", c)
 				elif f < 0.050 and not (x % 6 == 0 or y % 6 == 0): _agregar("roca", c)
 
-func _generar_slimes() -> void:
+## `nucleos`: centros de poblados cuyo núcleo habitado se excluye (modo poblado, Mundo 1 paso 1e); vacío = generación de siempre.
+func _generar_slimes(nucleos: Array = []) -> void:
 	var k := 0
 	while spawns_slime.size() < N_SLIMES and k < 4000:
 		var c := Vector2i(h(k, 1, MAPA) % ANCHO, h(k, 2, MAPA) % ALTO)
 		k += 1
 		if not _libre_para_objeto(c) or por_celda.has(c): continue
 		if Vector2(c).distance_to(Vector2(ENTRADA)) < 14.0 or Vector2(c).distance_to(Vector2(CLARO)) < 8.0: continue
+		var en_nucleo := false
+		for n in nucleos: if Vector2(c).distance_to(Vector2(n)) < NUCLEO_RADIO: en_nucleo = true
+		if en_nucleo: continue
 		spawns_slime.append(c)
+
+## Mundo 1, paso 1e: en el modo poblado los slimes no anidan en el núcleo habitado de ningún poblado del registro. Se vuelven a generar con la
+## misma secuencia determinista saltando los puntos del núcleo (siguen siendo N_SLIMES y los demás conservan su lugar). Es una regla de la
+## generación inicial, no una zona invulnerable: un slime que persigue a alguien puede entrar en el pueblo.
+func regenerar_amenazas_nucleo() -> void:
+	var centros: Array = []
+	for pid in poblados_ids():
+		var p: Dictionary = poblado(pid)
+		if p.has("centro"): centros.append(Vector2i(int(p.centro[0]), int(p.centro[1])))
+	spawns_slime.clear()
+	_generar_slimes(centros)
 
 static func clave(c: Vector2i) -> String:
 	return "%d,%d" % [c.x, c.y]

@@ -1,7 +1,7 @@
 extends SceneTree
 ## Seguridad POSTERIOR a la aparición (Mundo 1, paso 1c): qué ocurre en los primeros segundos con los enemigos reales.
 ## Uso:  Godot --headless --path Linde/cenital -s res://tests/medir_aparicion.gd -- semillas=200 segundos=30 [modo=poblado|legado]
-## Para cada semilla, el jugador aparece según `modo` (poblado: Juego.punto_aparicion; legado: punto_inicio) con el combate REAL activo y
+## Para cada semilla se crea un mundo en `modo` (poblado: Juego.punto_aparicion y slimes fuera del núcleo; legado: punto_inicio, todo como siempre) con el combate REAL activo y
 ## se simulan `segundos` de juego (ticks de 0,1 s) en tres comportamientos:
 ##   pasivo      no actúa (peor caso de «no reaccionar»);
 ##   imprudente  camina hacia el enemigo vivo más cercano sin mirar el peligro, hasta recibir daño;
@@ -30,13 +30,10 @@ func _init() -> void:
 		var dano: Array = []
 		var min_dist: Array = []
 		for s in range(1, n + 1):
-			var j = J.nueva(s, "Medidor", [0, 0, 0])
-			if a.modo == "poblado":
-				var ap: Dictionary = j.punto_aparicion(J.LOCAL)
-				if not ap.ok:
-					r.sin_aparicion += 1
-					continue
-				j.rt[J.LOCAL].pies = M.pies_de_celda(ap.celda)
+			var j = J.nueva(s, "Medidor", [0, 0, 0], a.modo)   # el modo decide también la distribución inicial de slimes (paso 1e)
+			if a.modo == "poblado" and not j.d.mundo.inicio.ultimo.ok:
+				r.sin_aparicion += 1
+				continue
 			var celda0: Vector2i = M.celda_de(j.pies_de())
 			var res: Dictionary = _correr(j, esc, seg)
 			if a.detalle == "si" and res.dano > 0: Com.linea("MEDIDA_DETALLE", {"escenario": esc, "semilla": s, "celda_inicial": "%d,%d" % [celda0.x, celda0.y], "t_muerte_o_dano_s": res.t_fin, "celda_final": "%d,%d" % [res.fin.x, res.fin.y], "perseguidores": res.perseg, "muerto": res.muerto})
