@@ -174,5 +174,31 @@ func _init() -> void:
 	srv.peers[9] = {"id": ""}
 	var ent: Dictionary = srv.entrar(9, [Srv.VERSION, "Tardona", "clave-larga-1", [0, 0, 0]])
 	ok(not ent.ok and ent.motivo.begins_with("No hay ningún lugar seguro") and not jp.d.jugadores.has("@tardona") and srv.peers[9].id == "", "el servidor deniega la entrada con el motivo y sin crear estado")
+	# 8. Reaparición tras caer (`_derrota`): con cama no cambia; sin cama en modo poblado se revalida; sin posición segura se queda.
+	var jd = J.nueva(123, "Cae", [0, 0, 0], M.MODO_POBLADO)
+	var antes: Vector2 = jd.pies_de()
+	jd.jug().cama = [200.0, 300.0]
+	jd.danar_pj(1000)
+	ok(jd.pies_de() == Vector2(200.0, 300.0) and jd.jug().hp == int(jd.stats().hp / 2.0), "con cama la reaparición no cambia (va a la cama, con la mitad de vida)")
+	jd.jug().cama = []
+	jd.rt[J.LOCAL].pies = M.pies_de_celda(Vector2i(50, 30))   # lejos del poblado
+	jd.jug().inicio = [1.0, 1.0]                              # el inicio guardado ya no se usa
+	jd.danar_pj(1000)
+	var cd: Vector2i = M.celda_de(jd.pies_de())
+	ok(Vector2(cd - _centro(jd)).length() >= 2.0 and Vector2(cd - _centro(jd)).length() <= 7.0 and jd.jug().inicio == [jd.pies_de().x, jd.pies_de().y],
+		"sin cama en modo poblado reaparece en una celda validada del poblado y actualiza el inicio")
+	var jd2 = J.nueva(123, "Cae2", [0, 0, 0], M.MODO_POBLADO)
+	for dy in range(-8, 9):
+		for dx in range(-8, 9):
+			var c3 := _centro(jd2) + Vector2i(dx, dy)
+			if jd2.mundo.puede_poner(c3) == "" and not jd2.ocupada(c3): jd2.mundo.poner(c3, "muro", false, "mundo")
+	jd2.rt[J.LOCAL].pies = M.pies_de_celda(Vector2i(50, 30))
+	jd2.danar_pj(1000)
+	ok(M.celda_de(jd2.pies_de()) == Vector2i(50, 30) and jd2.jug().hp == int(jd2.stats().hp / 2.0) and jd2.d.mundo.inicio.ultimo.ok == false,
+		"sin posición segura se queda donde cayó (sin celda inventada) y queda registrado")
+	var jd3 = J.nueva(123, "Cae3", [0, 0, 0])
+	jd3.jug().inicio = [320.0, 400.0]
+	jd3.danar_pj(1000)
+	ok(jd3.pies_de() == Vector2(320.0, 400.0), "modo legado: sin cama vuelve al inicio guardado, como siempre")
 	print("APARICION: %d fallos" % fallos)
 	quit(fallos)

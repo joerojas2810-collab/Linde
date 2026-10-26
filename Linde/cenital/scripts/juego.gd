@@ -426,13 +426,27 @@ func danar_pj(n: int, id: String = LOCAL) -> void:
 # Solo: el encuentro se reinicia. Con más jugadores no se toca a los demás: los enemigos que te seguían te olvidan.
 func _derrota(id: String) -> void:
 	var pj := jug(id)
-	var c: Array = pj.cama if not pj.cama.is_empty() else pj.inicio
-	rt[id].pies = Vector2(c[0], c[1])
+	# Con cama válida (o en modo legado) nada cambia. En modo poblado y sin cama se revalida la aparición con el mismo sistema que al entrar.
+	var revalidar: bool = pj.cama.is_empty() and mundo.modo_inicio() == Mundo.MODO_POBLADO
+	if not revalidar:
+		var c: Array = pj.cama if not pj.cama.is_empty() else pj.inicio
+		rt[id].pies = Vector2(c[0], c[1])
 	actualizar_regiones()
 	pj.hp = int(stats(id).hp / 2.0)
 	if rt.size() == 1: combate.reiniciar()
 	else: combate.olvidar(id)
 	combate.ataque(id).est = "libre"
+	if revalidar:   # tras reiniciar el encuentro: los enemigos vuelven a su origen y la validación los ve donde estarán
+		var ap: Dictionary = punto_aparicion(id)
+		_registrar_aparicion(id, ap)
+		if ap.ok:
+			var pies := Mundo.pies_de_celda(ap.celda)
+			rt[id].pies = pies
+			pj.inicio = [pies.x, pies.y]
+			actualizar_regiones()
+		else:   # sin posición segura: no se inventa una celda ni se reactiva un poblado; se queda donde cayó (los que lo seguían ya lo olvidaron)
+			aviso("No hay un lugar seguro donde despertar: te quedas donde caíste.", id)
+			return
 	aviso("Caes derrotado. Despiertas a salvo.", id)
 
 # ---------- acciones ----------
