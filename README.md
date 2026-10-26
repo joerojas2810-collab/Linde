@@ -11,10 +11,12 @@ Juego cenital (vista superior) en Godot 4.7.1. Estado, controles y decisiones: `
 
 `--equipo=` y `--mira=` solo aplican junto a `--nueva=`. El arte anterior (dibujo por código) ya no existe.
 
-## Servidor privado entre amigos (en desarrollo)
+## Servidor privado entre amigos (experimental)
 
-Modo opcional sin cuenta global y paquete portable Windows preparados, **pendientes
-de validar con Godot y construir**. No hay paquete publicado todavía.
+Modo opcional sin cuenta global y paquete portable **Windows x64**, construido y
+validado automáticamente con Godot 4.7.1 el 26/10/2026.
+[Descarga y ejecución aprobada en Actions](https://github.com/joerojas2810-collab/Linde/actions/runs/40418982569).
+Falta prueba manual entre equipos y por Internet; no es un release estable.
 [Guía de juego local, servidor, conexión y respaldos](Linde/cenital/docs/SERVIDOR_PRIVADO.md).
 El flujo anterior de cuentas sigue disponible.
 

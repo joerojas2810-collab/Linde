@@ -376,3 +376,19 @@ reconexión/guardado y construcción del paquete son pruebas escritas para GitHu
 NO ejecutadas en esta sesión. LAN/dos casas y Windows limpio siguen pendientes.
 Plan único en [CUENTAS_Y_SERVIDOR §8](../../../Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md#8-servidor-dedicado-estilo-forge--implementación-sin-validación-godot-26102026);
 guía en [SERVIDOR_PRIVADO](../../../Linde/cenital/docs/SERVIDOR_PRIVADO.md).
+
+### Actualización CI Windows — 26/10/2026 (supera los pendientes de motor anteriores)
+
+Ejecución [40418982569](https://github.com/joerojas2810-collab/Linde/actions/runs/40418982569),
+commit `d1c5372`, **success**. Pasaron: 20 pruebas Python, importación Godot 4.7.1,
+compilación explícita de scripts de acceso/servidor, perfil local con guardado/carga,
+identidad global, dos clientes con reconexión/progreso en modos existente y privado,
+construcción portable Windows y escucha/cierre guardando desde el paquete construido.
+Artefacto `Linde-Windows-servidor-y-juego`, 124.695.287 bytes comprimidos, retención
+14 días. Corregidos conflicto de nombre con método heredado `privado` y espera de
+liberación de `servidor.lock` al limpiar la prueba Windows. No se omitieron pruebas.
+
+Solo procesos separados en runner Windows; falta playtest manual, PC física limpia,
+LAN entre equipos e Internet entre casas. Hay avisos históricos de recursos/ObjectDB
+al salir y avisos UDP de buffer lleno durante algunas pruebas; no se certifica
+rendimiento. `main` no fue modificada.
