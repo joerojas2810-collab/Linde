@@ -14,7 +14,7 @@ R = Path(__file__).resolve().parents[2]
 P = R / 'Linde/cenital'
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--godot',required=True);ap.add_argument('--salida',type=Path,required=True);args=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--godot',required=True);ap.add_argument('--salida',type=Path,required=True);ap.add_argument('--privado',action='store_true');args=ap.parse_args()
     out=args.salida.resolve();out.mkdir(parents=True,exist_ok=True)
     data=out/'datos';data.mkdir(exist_ok=True)
     results=[];server=None;logs=[];bots=[]
@@ -29,7 +29,7 @@ def main():
         return proc
     def start(password='',port=17977):
         (data/'estado.json').unlink(missing_ok=True)
-        cfg=write(out/'inicio.json',dict(carpeta=str(data),puerto=port,https=port+1,python=sys.executable,password=password,semilla=123))
+        cfg=write(out/'inicio.json',dict(carpeta=str(data),puerto=port,https=port+1,python=sys.executable,password=password,semilla=123,privado=args.privado))
         proc=run_gd('scripts/cuentas/main_servidor.gd',cfg,'servidor_'+str(len(results)),False)
         for _ in range(150):
             if proc.poll() is not None:raise RuntimeError('El servidor terminó al arrancar; consulta logs')
@@ -45,7 +45,7 @@ def main():
         check(proc.returncode==0,'cierre ordenado del servidor')
     def bot(name,registrar=False,password='PruebaSegura123!',private='',hold=1,host='127.0.0.1',cert=None,wait=True):
         idx=len(bots);path=out/f'cliente_{idx}.json';output=out/f'cliente_{idx}_resultado.json'
-        cfg=dict(direccion=host,puerto=17977,puerto_cuentas=17978,usuario=name,password=password,servidor_password=private,registrar=registrar,nombre='El Rayo' if name=='rayo' else 'Amigo',certificado_ruta=str(cert or data/'servidor.crt'),salida=str(output),mantener=hold)
+        cfg=dict(direccion=host,puerto=17977,puerto_cuentas=17978,usuario=name,password=password,servidor_password=private,registrar=registrar,nombre='El Rayo' if name=='rayo' else 'Amigo',certificado_ruta=str(cert or data/'servidor.crt'),salida=str(output),mantener=hold,privado=args.privado)
         write(path,cfg);proc=run_gd('tests/bot_cuentas.gd',path,f'cliente_{idx}',wait);bots.append(proc)
         if not wait:return proc,output
         check(proc.returncode==0,'cliente de prueba finaliza');return json.loads(output.read_text(encoding="utf-8"))
@@ -76,7 +76,7 @@ def main():
         check(recovered['inv'].get('madera')==7 and recovered['xp']==43 and recovered['equipo']['arma']=='espada_hierro','conserva inventario, progreso y equipo')
         check(recovered['look']==[1,2,3,0,0,1,2,1] and recovered['mapa']['bloques'].get('99,99')=='npc:maren','conserva aspecto y exploración personal')
         other=bot('amigo');check(other['id']==second['id'] and other['xp']!=43,'otra cuenta no recibe el personaje ajeno')
-        wrong=bot('rayo',password='Equivocada123!');check(not wrong['ok'] and 'incorrectos' in wrong['motivo'],'rechaza contraseña de cuenta incorrecta')
+        wrong=bot('rayo',password='Equivocada123!');check(not wrong['ok'] and ('ya existe' in wrong['motivo'] if args.privado else 'incorrectos' in wrong['motivo']),'rechaza contraseña de cuenta incorrecta')
         # Otra instancia de cliente usando una dirección de interfaz local (no otra PC).
         lan=socket.gethostbyname(socket.gethostname())
         local_lan=bot('rayo',host=lan)
@@ -86,7 +86,7 @@ def main():
         rejected=bot('amigo',private='Incorrecta')
         check(not rejected['ok'] and 'servidor incorrecta' in rejected['motivo'],'servidor privado rechaza contraseña de servidor incorrecta')
         accepted=bot('amigo',private='ServidorPrivado123!');check(accepted['ok'],'servidor privado acepta cuenta y contraseña de servidor correctas')
-        duplicate_cfg=write(out/'inicio_duplicado.json',dict(carpeta=str(data),puerto=17975,https=17976,python=sys.executable,password='NoDebeCambiar123!',estado=str(out/'estado_duplicado.json')))
+        duplicate_cfg=write(out/'inicio_duplicado.json',dict(carpeta=str(data),puerto=17975,https=17976,python=sys.executable,password='NoDebeCambiar123!',estado=str(out/'estado_duplicado.json'),privado=args.privado))
         duplicate_server=run_gd('scripts/cuentas/main_servidor.gd',duplicate_cfg,'servidor_duplicado')
         check(duplicate_server.returncode!=0,'rechaza segundo servidor sobre el mismo directorio')
         still_alive=bot('amigo',private='ServidorPrivado123!')

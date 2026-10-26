@@ -9,7 +9,7 @@ func run():
 		if a.begins_with("--config="):path=a.trim_prefix("--config=")
 	cfg=JSON.parse_string(FileAccess.get_file_as_string(path))
 	cliente=load("res://scripts/cuentas/cliente.gd").new();cliente.name="Red"
-	for k in ["direccion","puerto","puerto_cuentas","usuario","password","servidor_password","registrar","nombre","certificado_ruta","sesion_linde"]:
+	for k in ["direccion","puerto","puerto_cuentas","usuario","password","servidor_password","registrar","nombre","certificado_ruta","sesion_linde","privado"]:
 		if cfg.has(k):cliente.set(k,cfg[k])
 	cliente.look=[0,1,0,0,0,0,0,0]
 	cliente.listo.connect(listo)

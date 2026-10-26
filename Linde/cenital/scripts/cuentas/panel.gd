@@ -11,6 +11,7 @@ var pid_servidor := -1
 var carpeta_servidor := ""
 var _tiempo := 0.0
 var pagina := ""
+var privado_ocupado := false
 var destino:VBoxContainer
 
 func _ready() -> void:
@@ -117,6 +118,9 @@ func abrir(tipo:String) -> void:
 			else:mensaje.text="Primero inicia el servidor para crear su certificado.")
 		boton("Elegir un mundo para jugar" if not esc.sesion.is_empty() else "Ir a registro / inicio de sesión",func():abrir("cliente"))
 	else:
+		if esc.sesion.get("privado",false):
+			_cliente_privado(cfg)
+			return
 		if not esc.sesion.is_empty():
 			_cliente_con_sesion(cfg)
 			return
@@ -165,7 +169,8 @@ func iniciar_servidor() -> void:
 	carpeta_servidor=ProjectSettings.globalize_path(campos.carpeta.text)
 	DirAccess.make_dir_recursive_absolute(carpeta_servidor)
 	var config={"puerto":int(campos.puerto.text),"https":int(campos.https.text),"password":campos.password.text,"carpeta":carpeta_servidor,"python":campos.python.text}
-	if not esc.sesion.is_empty():config.autoridad=esc.sesion.autoridad.cert
+	if esc.sesion.get("privado",false):config.privado=true
+	elif not esc.sesion.is_empty():config.autoridad=esc.sesion.autoridad.cert
 	var path=carpeta_servidor.path_join("arranque.json")
 	var f=FileAccess.open(path,FileAccess.WRITE)
 	if f==null:mensaje.text="No se pudo escribir la configuración del servidor.";return
@@ -203,6 +208,8 @@ func entrar() -> void:
 	esc.red=client;get_tree().root.add_child(client)
 
 func volver() -> void:
+	if privado_ocupado:
+		mensaje.text="Espera la conexión o cancela la verificación del certificado.";return
 	raiz.hide();esc._menu_inicial()
 
 func _process(delta:float) -> void:
@@ -220,3 +227,21 @@ func _process(delta:float) -> void:
 
 func _exit_tree() -> void:
 	if pid_servidor>0 and OS.is_process_running(pid_servidor):detener_servidor()
+
+# El perfil privado no es una cuenta global ni se presenta como tal al servidor.
+var privado_control
+func _cliente_privado(cfg:ConfigFile) -> void:
+	texto("SERVIDOR PRIVADO",28)
+	campo("host","Dirección del servidor",str(cfg.get_value("conexion","host","127.0.0.1")))
+	campo("puerto","Puerto del juego (UDP)",str(cfg.get_value("conexion","puerto","7777")))
+	campo("nombre","Nombre visible",esc.cr.nombre)
+	campo("servidor_password","Contraseña del mundo (si tiene)","",true)
+	opciones_avanzadas()
+	campo("https","Acceso del mundo (TCP)",str(cfg.get_value("conexion","https","7778")))
+	fin_opciones()
+	texto("La primera vez debes comparar la huella con el anfitrión. No se envían credenciales antes de confirmar.",14)
+	conectar=boton("Conectar",func():
+		if privado_control==null:privado_control=load("res://scripts/cuentas/privado.gd").new()
+		privado_control.conectar(self))
+	mensaje=estado("",15)
+	boton("Volver al menú",volver)

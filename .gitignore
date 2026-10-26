@@ -43,3 +43,7 @@ Linde/cenital/override.cfg
 *.key
 servidor/datos/
 Linde/cenital/tests/_cuentas_windows/
+
+# Paquetes portables y ensayos del servidor dedicado.
+/paquete/
+/qa/

@@ -285,7 +285,9 @@ def serve(folder: Path, host: str, port: int, rol="legado", autoridad: Path | No
             self.wfile.write(body)
 
         def do_GET(self):
-            if self.path == "/estado":
+            if self.path == "/certificado" and rol == "privado":
+                self.respond(200, {"ok": True, "certificado": (folder / "servidor.crt").read_text(), "huella": huella(folder / "servidor.crt")})
+            elif self.path == "/estado":
                 self.respond(200, {"ok": True, "rol": rol})
             else:
                 self.respond(404, {"ok": False, "motivo": "Ruta desconocida"})
@@ -298,7 +300,15 @@ def serve(folder: Path, host: str, port: int, rol="legado", autoridad: Path | No
                 data = json.loads(self.rfile.read(length))
                 if not isinstance(data, dict):
                     raise Rejected("Petición inválida")
-                if self.path in ("/registro", "/login"):
+                if self.path == "/privado" and rol == "privado":
+                    # Credencial aleatoria persistida por el cliente, nunca un nombre elegido como ID.
+                    try:
+                        result = accounts.auth("login", data, self.client_address[0])
+                    except Rejected as exc:
+                        if exc.status != 401:
+                            raise
+                        result = accounts.auth("registro", data, self.client_address[0])
+                elif self.path in ("/registro", "/login"):
                     if rol == "mundo":
                         raise Rejected("Inicia sesión en Linde antes de elegir un mundo.", 403)
                     result = accounts.auth(self.path[1:], data, self.client_address[0], identidad=rol == "identidad")
@@ -377,7 +387,7 @@ def main():
         if args.config:
             args.config.unlink()
         rol = config.get("rol", "legado")
-        if rol not in ("identidad", "mundo", "legado"):raise ValueError("Rol de cuentas inválido")
+        if rol not in ("identidad", "mundo", "legado", "privado"):raise ValueError("Rol de cuentas inválido")
         autoridad = Path(config["autoridad"]) if config.get("autoridad") else None
         fingerprint = certificate(args.datos)
         accounts = Accounts(args.datos)

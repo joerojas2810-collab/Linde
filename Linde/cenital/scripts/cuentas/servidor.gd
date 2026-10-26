@@ -6,13 +6,14 @@ var python := "python"
 var password := ""
 var puerto_cuentas := 7778
 var autoridad := ""
+var privado := false
 var estado_archivo := ""
 var listo := false
 var ultimo_guardado := true
 var _latido_t := 0.0
 
 func _ready() -> void:
-	var opciones={"rol":"mundo","autoridad":autoridad} if autoridad!="" else {}
+	var opciones={"rol":"privado"} if privado else ({"rol":"mundo","autoridad":autoridad} if autoridad!="" else {})
 	error=await backend.iniciar(self,carpeta,puerto_cuentas,password,python,opciones);password=""
 	if error!="":return _fallo_inicio(error)
 	var disponible=false
@@ -27,6 +28,7 @@ func _ready() -> void:
 	if error!="":return _fallo_inicio(error)
 	listo=true
 	_escribir_estado({"ok":true,"estado":"Escuchando","udp":puerto,"https":puerto_cuentas,"certificado":backend.carpeta.path_join("servidor.crt"),"huella":backend.huella})
+	print("Huella SHA-256 para verificar con tus amigos: "+backend.huella)
 	print("LINDE CUENTAS: escuchando UDP %d (DTLS) y TCP %d (HTTPS). No implica conectividad pública."%[puerto,puerto_cuentas])
 
 func _fallo_inicio(motivo:String) -> void:

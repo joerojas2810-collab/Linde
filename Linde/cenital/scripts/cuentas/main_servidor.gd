@@ -23,6 +23,7 @@ func iniciar() -> void:
 	server.name="Red";server.j=game;server.ruta=path;server.puerto=port;server.puerto_cuentas=https
 	server.carpeta=dir;server.password=str(config.get("password",""));server.python=str(config.get("python","python"))
 	server.autoridad=str(config.get("autoridad",""))
+	server.privado=bool(config.get("privado",false))
 	server.estado_archivo=str(config.get("estado",dir.path_join("estado.json")))
 	server.duracion=float(config.get("duracion",0))
 	Engine.max_fps=60;root.add_child(server)

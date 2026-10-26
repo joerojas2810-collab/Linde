@@ -5,6 +5,7 @@ var conexion:Dictionary={}
 var identidad_backend=preload("res://scripts/cuentas/backend.gd").new()
 var ocupado:=false
 var registro:=false
+var perfil_path:="user://perfil_local.cfg"
 
 func _ready() -> void:
 	super._ready()
@@ -39,6 +40,7 @@ func _formulario() -> void:
 	boton("Crear cuenta" if registro else "Iniciar sesión",autenticar)
 	boton("Ya tengo una cuenta" if registro else "Registrarme",func():registro=not registro;_formulario())
 	texto("Servicio de cuentas: %s:%d"%[conexion.get("host",""),int(conexion.get("puerto",7790))],14)
+	boton("Jugar local / servidores privados (sin cuenta global)",_local_privado)
 	boton("Configurar servicio de cuentas…",configurar)
 	mensaje=estado("",15)
 	if conexion.get("cert","")=="":mensaje.text="Primera vez: configura el servicio de cuentas. No necesitas crear una partida."
@@ -160,3 +162,15 @@ func mostrar_partidas() -> void:
 			else:mensaje.text=esc.menu_msg)
 	mensaje=estado("",15)
 	boton("Volver",func():raiz.hide();esc._menu_inicial())
+
+func _local_privado() -> void:
+	var cfg=ConfigFile.new()
+	cfg.load(perfil_path)
+	var id=str(cfg.get_value("perfil","id",""))
+	if id=="":
+		id=Crypto.new().generate_random_bytes(16).hex_encode()
+		cfg.set_value("perfil","id",id)
+		if cfg.save(perfil_path)!=OK:
+			mensaje.text="No se pudo guardar el perfil local.";return
+	esc.sesion={"id":"local:"+id,"nombre":"Aventurero","emisor":"perfil-local","exp":253402300799.0,"privado":true}
+	raiz.hide();esc._menu_inicial()

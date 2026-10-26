@@ -360,3 +360,19 @@ Las decisiones de recetas y capacidad fueron aprobadas por el usuario; superan l
 ## Integración aprobada de cuentas/UI con talleres y tareas (26/10/2026)
 
 El usuario autorizó subir la revisión completa. Integrado origin/main `c84b88e` mediante `cdac6e9`, conservando talleres, casas comunales y tareas de Fase 6. Esta nota supera las notas históricas de revisión sin publicar. Validación combinada: 9 casos unitarios, 16 de acceso/partidas, 13 de identidad con dos mundos, 6 suites de regresión y tareas 16/16. [Detalle y límites](../../qa/evidence/login-inicial/main-c84b88e/README.md). Sin prueba externa ni cambios a la skin.
+
+## Servidor dedicado sencillo — implementación 26/10/2026
+
+En `arena/9a96dc31-linde`, modo privado opcional y perfil local sin cuenta global;
+entrada por dirección/contraseña y confianza explícita de huella, credencial persistente
+por certificado, lanzadores y construcción portable Windows preparados. Conserva
+el flujo global de cuentas. **No validado con Godot ni publicado como paquete.**
+
+Ejecutadas: 13 pruebas Python del servicio (9 previas + 4 HTTPS privado reales), 7
+del lanzador con proceso simulado, compilación sintáctica Python y parseo externo de
+GDScript modificado. Godot no está instalado y la descarga oficial está bloqueada
+por su redirección. Importación Godot, interfaz, perfil local en motor, dos clientes,
+reconexión/guardado y construcción del paquete son pruebas escritas para GitHub Actions,
+NO ejecutadas en esta sesión. LAN/dos casas y Windows limpio siguen pendientes.
+Plan único en [CUENTAS_Y_SERVIDOR §8](../../../Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md#8-servidor-dedicado-estilo-forge--implementación-sin-validación-godot-26102026);
+guía en [SERVIDOR_PRIVADO](../../../Linde/cenital/docs/SERVIDOR_PRIVADO.md).
