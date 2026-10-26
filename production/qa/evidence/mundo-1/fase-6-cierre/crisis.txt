@@ -1,0 +1,16 @@
+PASS temporizador por sí solo no ordena migración
+PASS ruta real sin amenaza confirmada admite seguridad desconocida
+PASS amenaza hostil conocida usa alcance vigente y bloquea esa ruta
+PASS criatura huidiza no se confunde con amenaza hostil
+PASS crisis elige una plaza viable con mejora material
+PASS conserva identidades existentes sin población de reemplazo
+PASS destino con viajeros no se abandona
+PASS guarda decisión y trayecto
+PASS reinicio conserva causalidad y operación única
+PASS llegada real ocupa cama sin duplicar residentes
+PASS abandono conserva inventario, propiedad y registro
+PASS terceros no adquieren derechos de un sitio abandonado
+PASS recuperación reserva materiales sin reparar a distancia
+PASS propietario original llega y paga reparación real antes de recuperar el sitio
+PASS repetición no duplica reparación, carga ni identidad
+CRISIS_F6: 15 comprobaciones, 0 fallos

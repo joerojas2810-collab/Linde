@@ -1,0 +1,9 @@
+PASS oficio y cofre no conceden conocimiento
+PASS lección ocupa maestro y alumno sin aprendizaje instantáneo
+PASS repetir minuto no adelanta enseñanza
+PASS guarda avance parcial
+PASS enseñanza real persiste tiempo, receta y procedencia
+PASS no duplica receta aprendida
+PASS migración transporta el conocimiento en la misma identidad
+PASS destino conserva procedencia sin crear otro aprendiz
+APRENDIZAJE_REGIONAL: 8 comprobaciones, 0 fallos

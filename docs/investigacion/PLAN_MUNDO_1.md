@@ -411,3 +411,12 @@ El usuario aprobó los contratos de crisis/migración, fundación mínima y aban
 Pruebas puntuales: crisis/recuperación 15, integración de respuestas 17, reparación/presión 12, sin fallos; las dos últimas se ejecutaron antes de los últimos ajustes del selector/recuperación. Evidencia: `production/qa/evidence/mundo-1/fase-6-ciclo/`. Sin suites históricas ni publicación remota solicitada.
 
 **Fase 6 aún abierta:** fundación exige dos fundadores y origen viable, pero las comunidades regionales actuales tienen dos residentes/tope fijo dos. Se consultó crecimiento mediante viviendas pagadas y capacidad derivada de camas físicas, con residentes por migración real, sin crear NPC. También se consultó adquisición regional de recetas por enseñanza con maestro real y tiempos/requisitos vigentes. Ambas respuestas están pendientes: no se implementaron reglas por inferencia. Propiedad de terceros y fundación por oportunidad sin crisis permanecen excluidas; transición 5b sigue diferida.
+
+
+## Fase 6 — alcance funcional aprobado completado (26/10/2026)
+
+Recibidas las dos decisiones pendientes: enseñanza regional por maestro real y capacidad física por camas/viviendas pagadas. `e15bfda` y `ab86408` integran aprendizaje, crecimiento agrícola/habitacional, recepción de NPC existentes y expedición fundadora por crisis/ventaja territorial, conservando los bloques anteriores. Se usan Desarrollo, Sociedad, Asentamientos, Edificios y Tránsitos; ningún poblado se materializa antes de llegada/pago y ninguna vivienda concede población. Proyección alimentaria usa ciclos/rendimientos vigentes y no se acredita como stock.
+
+104 comprobaciones puntuales sin fallos, incluyendo conservación por ítem, conocimiento e identidad durante migración, interrupción, reinicio equivalente y réplica en proceso. Evidencia: `production/qa/evidence/mundo-1/fase-6-cierre/README.md`; límites de integración temporal y contraste con los seis invariantes del Diseño Maestro allí. Sin nuevas auditorías o suites históricas.
+
+No hay decisiones de diseño abiertas en este alcance. Lo diferido sigue siendo 5b, derechos de terceros y fundación por oportunidad sin crisis; la certificación externa/red real, escala y frecuencias naturales sigue siendo validación posterior, no aprobación automática de balance.

@@ -1,5 +1,7 @@
 # Linde — estado verificado
 
+> **Actualización Fase 6, 26/10/2026:** alcance funcional aprobado completado en `codex/fase6-economia-regional`, commits `e15bfda` y `ab86408`. Validación puntual y límites en la sección final. Las verificaciones históricas restantes conservan sus fechas originales.
+
 > **Consolidado**: 2026-10-26 · **Rama**: `main` · **Último commit considerado**: `8483789` · **Modo**: solo (sin revisión independiente)
 >
 > **Nota de hashes (2026-10-25)**: un `git pull --rebase` reescribió los commits locales. Los hashes de este documento son los vigentes en `main`; los previos al rebase eran H0 `a5414fb`, M0 `67d52ca`, K1 `07813c2`, rendimiento `2ccb99a` y mochila `990d549`. Las cifras de pruebas siguen siendo las registradas por cada sesión.
@@ -327,3 +329,17 @@ El usuario aprobó los contratos de crisis/migración, fundación mínima y aban
 Pruebas puntuales: crisis/recuperación 15, integración de respuestas 17, reparación/presión 12, sin fallos; las dos últimas se ejecutaron antes de los últimos ajustes del selector/recuperación. Evidencia: `production/qa/evidence/mundo-1/fase-6-ciclo/`. Sin suites históricas ni publicación remota solicitada.
 
 **Fase 6 aún abierta:** fundación exige dos fundadores y origen viable, pero las comunidades regionales actuales tienen dos residentes/tope fijo dos. Se consultó crecimiento mediante viviendas pagadas y capacidad derivada de camas físicas, con residentes por migración real, sin crear NPC. También se consultó adquisición regional de recetas por enseñanza con maestro real y tiempos/requisitos vigentes. Ambas respuestas están pendientes: no se implementaron reglas por inferencia. Propiedad de terceros y fundación por oportunidad sin crisis permanecen excluidas; transición 5b sigue diferida.
+
+
+## Fase 6 — cierre funcional aprobado (26/10/2026)
+
+Las decisiones de recetas y capacidad fueron aprobadas por el usuario; superan los pendientes de la sección anterior. Commits `e15bfda` y `ab86408`, rama `codex/fase6-economia-regional`, conservando todo el avance previo y los cambios ajenos.
+
+- Enseñanza regional con maestro real conocedor, disponibilidad/confianza/tiempos vigentes, presupuesto laboral compartido y procedencia persistente en el NPC. Conocimiento e inventarios acompañan la identidad migrante.
+- Camas propias funcionales y accesibles determinan capacidad; viviendas y cultivos adicionales se pagan con costes reales del catálogo y alimentan demandas existentes. No población por espera ni por cama vacía.
+- Reserva alimentaria del siguiente ciclo por residente real y evaluación de sustento renovable con tasas vigentes, sin anticipar cosechas como stock. Alternativas agrícolas locales antes de fundar. Recolección alimentaria usa el botín probabilístico existente sin garantía nueva.
+- Fundación autónoma por crisis no resuelta y ventaja territorial comprobable: dos residentes existentes, origen materialmente viable, rutas/carga/provisiones reales, solar pendiente solo en Tránsitos; poblado/casa/campos se registran y pagan al llegar. Conserva identidad y continuidad en interrupciones, reinicios y repetición de llegada. Continúa el ciclo de abandono/recuperación ya aprobado.
+
+**Pruebas puntuales:** aprendizaje 8, expansión/fundación 24, crisis/recuperación 15, tránsito 21, regional 19, respuestas 17: **104/104**, sin suites históricas. [Evidencia y contraste con Diseño Maestro §9](../../qa/evidence/mundo-1/fase-6-cierre/README.md). Incluye conservación exacta por ítem, no duplicación de NPC/edificios, interrupción, continuación equivalente tras reinicio y réplica en proceso. Las corridas de integración preceden los últimos ajustes aislados según se detalla en evidencia. Avisos conocidos del motor al cerrar persisten.
+
+**Cierre funcional del alcance aprobado; ninguna decisión de diseño pendiente en él.** 5b, derechos de terceros y fundación por oportunidad sin crisis permanecen diferidos explícitos. No se certifican aún dos clientes por sockets/Internet, rendimiento a escala, frecuencia natural de fundaciones o matriz general de exploración. No hay publicación remota solicitada para esta entrega.
