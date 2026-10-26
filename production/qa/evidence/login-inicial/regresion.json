@@ -1,0 +1,51 @@
+[
+  {
+    "suite": "prueba_ui",
+    "ok": true,
+    "passes": 13,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_reglas",
+    "ok": true,
+    "passes": 82,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_preexistentes_ui",
+    "ok": true,
+    "passes": 13,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_preexistentes_red",
+    "ok": true,
+    "passes": 26,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_vivienda_ui",
+    "ok": true,
+    "passes": 8,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_vivienda_red",
+    "ok": true,
+    "passes": 33,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_integracion_visual_a",
+    "ok": true,
+    "passes": 60,
+    "fails": 0,
+    "exit": 0
+  }
+]
