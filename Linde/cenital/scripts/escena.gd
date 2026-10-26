@@ -49,6 +49,8 @@ var t_anim := 0.0
 var debug := false
 var _anim := {"estado": "reposo", "cuadro": 0}
 var _golpe_visual: Dictionary = {} # Solo presentación de la última extracción local aceptada.
+var ficha_npc := ""
+var arte_vida=preload("res://scripts/arte_vida.gd").new()
 var pista := ""
 var ayuda_visible := false
 var rotulos: Array = []
@@ -164,6 +166,7 @@ func _unhandled_key_input(e: InputEvent) -> void:
 		KEY_K: _abrir("hab")
 		KEY_J: _abrir("mis")
 		KEY_B: build = not build
+		KEY_V: _ficha_cercana()
 		KEY_H: ayuda_visible = not ayuda_visible
 		KEY_F1: debug = not debug
 		KEY_F5:
@@ -347,7 +350,7 @@ func _tecla_panel(e: InputEvent) -> void:
 	if panel=="inv" and e.keycode in [KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT]:
 		_navegar_inventario(e)
 		return
-	if panel == "dialogo":
+	if panel in ["dialogo","ficha"]:
 		if e.keycode in [KEY_E, KEY_ENTER, KEY_ESCAPE, KEY_SPACE]: _cerrar()
 		return
 	match e.keycode:
@@ -571,7 +574,7 @@ func _armar() -> void:
 					if j.autonomia.perfil(nid).is_empty(): continue
 					var n: Dictionary = j.autonomia.estado(nid)
 					var falta: Dictionary = j.autonomia.necesidad(nid)
-					_l("%s · hambre %d/100 · %s" % [j.habitantes.fichas[nid].n, int(n.hambre), str(n.plan.get("act", "rutina"))])
+					_l("Ver ficha: %s · hambre %d/100 · %s" % [j.habitantes.fichas[nid].n, int(n.hambre), str(n.plan.get("act", "rutina"))],func():_ver_ficha(nid))
 					if j.autonomia.sociedad.activa(): _l("  " + j.autonomia.sociedad.texto_trabajo(nid))
 					if j.autonomia.sociedad.activa():
 						_l("  Grupo: " + j.autonomia.sociedad.nombre_grupo(j.autonomia.sociedad.grupo_de(nid)) + " · " + str(n.get("objetivo", "buscar oportunidades")))
@@ -681,6 +684,12 @@ func _armar() -> void:
 			_l("Continuar", func(): _cerrar())
 			_l("Guardar", func(): j.aviso("Guardado." if j.guardar(ruta) else "No se pudo guardar."); _cerrar())
 			_l("Guardar y salir al menú", func(): j.guardar(ruta); _cerrar(); j = null; _menu_inicial())
+
+	if panel=="mis":
+		for nid in j.d.get("mundo_vivo",{}).get("autonomia",{}).get("colonos",{}):
+			if j.autonomia.sociedad.arraigo.estado(nid)=="ausente":
+				var nombre:String=j.d.mundo_vivo.autonomia.colonos[nid].npc.name
+				_l("Ver ficha: "+nombre+" · Ausente",func():_ver_ficha(nid))
 
 func _n_ranura(r: String) -> String:
 	return str(Eq.datos().ranuras.get(r, {}).get("n", r.capitalize()))
@@ -795,6 +804,8 @@ func _draw() -> void:
 	if modo != "juego" or j == null: return
 	rotulos.clear()
 	cuerpos_rotulo.clear()
+	arte_mundo.parcelas=j.d.get("mundo_vivo",{}).get("autonomia",{}).get("sociedad",{}).get("parcelas",{})
+	arte_mundo.plano_comunitario=j.autonomia.reglas.sociedad.vivienda.comunitaria.get("piezas",[])
 	var s := P.CELDA
 	var vp := get_viewport_rect().size / float(P.ZOOM)
 	var vista := Rect2(cam.position - vp / 2.0, vp).grow(40)
@@ -870,6 +881,7 @@ func _draw() -> void:
 		var libre: bool = m.puede_techar(c) == "" if id == "techo" else m.puede_poner(c) == "" and not j.ocupada(c)
 		var bien: bool = libre and Inv.tiene(j.jug().inv, C.CONSTR[id].coste)
 		arte_mundo.constr(self, id, c, false, Color(0.5, 1, 0.55, 0.65) if bien else Color(1, 0.4, 0.4, 0.65))
+	arte_mundo.letreros_comunitarios(self)
 	_dibujar_rotulos()
 	if debug:
 		draw_rect(Rect2(j.pies - Vector2(P.PIES.x / 2, P.PIES.y), P.PIES), Color(1, 0, 0, 0.5))
@@ -993,16 +1005,22 @@ func _dibujar_npc(id: String) -> void:
 	var logica: Vector2 = j.habitantes.pos(id)
 	var p := _pies_visuales_npc(id)
 	var act: String = j.d.npcs[id].act
-	var st: Dictionary = actores.npc_estado(id, logica)
-	var visual := PresentacionNPC.resolver(act, st, Time.get_ticks_msec() / 1000.0)
-	if _cama_visual_npc(id):
-		# El atlas existente tiene cabecero al norte; no depende del rumbo de llegada.
-		var tex: Texture2D = arte_eq.viajero071.texture(j.habitantes.aspecto(id), Vector2i.DOWN, "reposo", 0, [], "")
-		draw_texture_rect(tex, Rect2(p + Vector2(-14.4, -41.2), Vector2(28.8, 28.8)), false)
-		arte_mundo.cobija_cama(self, p, j.mundo.constr_en(j.habitantes.cama(id)).t == "cama_huesped")
+	var st:Dictionary=actores.npc_estado(id,logica)
+	var visual:=PresentacionNPC.resolver(act,st,Time.get_ticks_msec()/1000.0)
+	var en_cama:=_cama_visual_npc(id)
+	if en_cama:
+		var tex:Texture2D=arte_eq.viajero071.texture(j.habitantes.aspecto(id),Vector2i.DOWN,"reposo",0,[],"")
+		draw_texture_rect(tex,Rect2(p+Vector2(-14.4,-41.2),Vector2(28.8,28.8)),false)
+		arte_mundo.cobija_cama(self,p,j.mundo.constr_en(j.habitantes.cama(id)).t=="cama_huesped")
 	else:
 		_sombra(p)
-		arte_eq.dibujar(self, p, visual.dir, visual.cuadro, [], j.habitantes.aspecto(id), visual.estado)
+		if act=="sin_cama":arte_vida.petate(self,p)
+		arte_eq.dibujar(self,p,visual.dir,visual.cuadro,[],j.habitantes.aspecto(id),visual.estado)
+		if visual.estado!="dormir":arte_vida.oficio(self,p,visual.dir,str(j.autonomia.perfil(id).get("oficio","")))
+	if p.distance_to(j.pies)<=128 and not en_cama:
+		arte_vida.permanencia(self,p,j.autonomia.sociedad.arraigo.estado(id))
+		var estado_auto:Dictionary=j.d.get("mundo_vivo",{}).get("autonomia",{}).get("npcs",{}).get(id,{})
+		if visual.estado!="dormir":arte_vida.ocupacion(self,p,str(estado_auto.get("ocupacion","")),t_anim)
 	if p.distance_to(j.pies) <= 128.0:
 		_nombre_mundo(j.habitantes.fichas[id].n + (" · zzz" if act == "dormir" else ""), p)
 
@@ -1121,3 +1139,12 @@ func _navegar_inventario(e:InputEvent)->void:
 		elif e.keycode==KEY_RIGHT:sel=mini(ultimo,sel+1)
 		elif e.keycode==KEY_UP:sel=maxi(primero,sel-5)
 		elif e.keycode==KEY_DOWN:sel=mini(ultimo,sel+5)
+
+func _ver_ficha(nid:String)->void:
+	ficha_npc=nid;_abrir("ficha")
+func _ficha_cercana()->void:
+	var mejor:="";var distancia:=96.0
+	for id in j.habitantes.ids:
+		var d:float=j.habitantes.pos(id).distance_to(j.pies)
+		if d<distancia:mejor=id;distancia=d
+	if mejor!="":_ver_ficha(mejor)

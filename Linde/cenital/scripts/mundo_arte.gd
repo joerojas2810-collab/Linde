@@ -112,8 +112,15 @@ func suelo(ci: CanvasItem, m, c: Vector2i, tiempo: float) -> void:
 
 # Un solo arte de mena (cobre): el hierro se distingue con tinte frío y la arcilla es roca rojiza. Sustituir cuando haya arte propio.
 const TINTE_MENA := {"veta": Color(0.72, 0.78, 1.0), "veta_estano": Color(0.8, 1.0, 1.05), "arcilla": Color(1.25, 0.7, 0.55)}
+const RECURSOS_PROPIOS := {"veta":"hierro","veta_cobre":"cobre","veta_estano":"estano","arcilla":"arcilla"}
 # ---------- naturaleza (árbol, roca, veta, arbusto) ----------
 func natural(ci: CanvasItem, tipo: String, c: Vector2i, agotado: bool, jugador: Vector2) -> void:
+	if RECURSOS_PROPIOS.has(tipo):
+		var clave_recurso:String="mineral_"+RECURSOS_PROPIOS[tipo]+("_agotado" if agotado else "")
+		var d:Dictionary=objetos[clave_recurso]
+		var pies_recurso:=Vector2(c)*CELDA+Vector2(8,16)
+		_tex_rect(ci,d.archivo,Rect2(pies_recurso-Vector2(d.pivote[0],d.pivote[1]),Vector2(d.canvas[0],d.canvas[1])))
+		return
 	var clave := ""
 	if tipo == "arbol":
 		var n: String = ARBOLES[posmod(c.x * 7 + c.y * 3, 3)]

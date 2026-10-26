@@ -110,3 +110,19 @@ Las verificaciones originales (36, 14, 20, 11 casos, capturas) se hicieron con s
 ## 7. Mapa del historial archivado
 
 El [archivo](../../../docs/archivo/ESTADO-mundo-vivo-hasta-2026-10-25.md) conserva sin cambios: §1–9 estado original del epic; §10 prueba de autonomía; §11 decisión «autonomía modo principal» y sociedad; §12 desarrollo; §13 mundo que crece; §14 protección y economía; §15 exterior por regiones; §16 arte de biomas; §17 fauna; superposición al caminar; inspección consolidada del 25/10.
+
+## Revisión local de arte — 25/10/2026
+
+Minerales y arcilla: borrador de 8 estados propios sobre 03fc1b8, pendiente de aprobación visual. Comprobación gráfica puntual: ocho recursos dibujados, cero faltantes y estado del mundo conservado; sin suite general ni red. Procedencia y límites en `Linde/cenital/arte/mundo/minerales_v1/README.md`. No se ha hecho commit/push de este borrador.
+
+## Arte pendiente, revisión completa local — 25/10/2026
+
+Borrador sobre 03fc1b8 pendiente de aprobación visual; no publicado. Seis pares de entornos, láminas de fauna/equipo/oficios/vivienda y ficha de colono generado. QA acotado: 24 objetos, 60 tiras orientadas, seis siluetas de arma/escudo distintas, ficha de biografía real/ausente y cierre aprobados. No suite general ni red. Alcance, animación derivada y piezas conservadas en `Linde/cenital/arte/pendientes_v1/README.md`. No se actualizan los resultados históricos de simulación.
+
+## Integración local sobre 5b87517 — 25/10/2026
+
+Acabado local reaplicado a la última base remota, conservando art2 y correcciones A1–A3. 60 comprobaciones visuales y 49 de pico/cama aprobadas, más revisión dirigida de arte/fichas y equipar/quitar art2. Indicadores nuevos como PNG; suelo reduce sus excepciones de 15 a 13. Sin cambios a reglas ni pruebas generales/red. Evidencia local: `outputs/Arte_pendiente_completo/integracion_5b87517/INFORME.md`. **Sin commit/push.**
+
+## Publicación autorizada — 25/10/2026
+
+El usuario solicitó commit y push de esta integración sobre 5b87517. La evidencia vigente se conserva en `production/qa/evidence/arte-pendiente-integrado/`; los estados de borrador y sin publicar anteriores son históricos. Se mantienen los límites artísticos y de pruebas documentados; la publicación se identifica en el historial de Git.

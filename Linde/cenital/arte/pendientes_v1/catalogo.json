@@ -1,0 +1,530 @@
+{
+  "arbol_seco": {
+    "archivo": "../pendientes_v1/arbol_seco.png",
+    "bbox": [
+      5,
+      12,
+      59,
+      62
+    ],
+    "canvas": [
+      64,
+      64
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      32,
+      62
+    ],
+    "resolucion_nativa": [
+      128,
+      128
+    ]
+  },
+  "arbusto_bosque": {
+    "archivo": "../pendientes_v1/arbusto_bosque.png",
+    "bbox": [
+      12,
+      19,
+      36,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "arbusto_flores": {
+    "archivo": "../pendientes_v1/arbusto_flores.png",
+    "bbox": [
+      9,
+      21,
+      39,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "arbusto_pradera": {
+    "archivo": "../pendientes_v1/arbusto_pradera.png",
+    "bbox": [
+      9,
+      19,
+      39,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "arbusto_ribera": {
+    "archivo": "../pendientes_v1/arbusto_ribera.png",
+    "bbox": [
+      9,
+      20,
+      39,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "arbusto_secano": {
+    "archivo": "../pendientes_v1/arbusto_secano.png",
+    "bbox": [
+      11,
+      19,
+      37,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "arbusto_sierra": {
+    "archivo": "../pendientes_v1/arbusto_sierra.png",
+    "bbox": [
+      9,
+      22,
+      39,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "arbusto_valle": {
+    "archivo": "../pendientes_v1/arbusto_valle.png",
+    "bbox": [
+      9,
+      19,
+      39,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "arenisca": {
+    "archivo": "../pendientes_v1/arenisca.png",
+    "bbox": [
+      6,
+      13,
+      41,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "bayas_ancha": {
+    "archivo": "../pendientes_v1/bayas_ancha.png",
+    "bbox": [
+      9,
+      21,
+      39,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "bayas_redonda": {
+    "archivo": "../pendientes_v1/bayas_redonda.png",
+    "bbox": [
+      9,
+      23,
+      39,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "canas": {
+    "archivo": "../pendientes_v1/canas.png",
+    "bbox": [
+      11,
+      19,
+      37,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "espinoso": {
+    "archivo": "../pendientes_v1/espinoso.png",
+    "bbox": [
+      10,
+      19,
+      38,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "helecho": {
+    "archivo": "../pendientes_v1/helecho.png",
+    "bbox": [
+      9,
+      19,
+      38,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "jergon": {
+    "archivo": "../pendientes_v1/jergon.png",
+    "bbox": [
+      10,
+      21,
+      37,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "juncos": {
+    "archivo": "../pendientes_v1/juncos.png",
+    "bbox": [
+      11,
+      19,
+      37,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "letrero": {
+    "archivo": "../pendientes_v1/letrero.png",
+    "bbox": [
+      11,
+      19,
+      36,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "penasco": {
+    "archivo": "../pendientes_v1/penasco.png",
+    "bbox": [
+      9,
+      13,
+      39,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "petate": {
+    "archivo": "../pendientes_v1/petate.png",
+    "bbox": [
+      12,
+      23,
+      36,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "pino_ralo": {
+    "archivo": "../pendientes_v1/pino_ralo.png",
+    "bbox": [
+      5,
+      3,
+      59,
+      62
+    ],
+    "canvas": [
+      64,
+      64
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      32,
+      62
+    ],
+    "resolucion_nativa": [
+      128,
+      128
+    ]
+  },
+  "roca_caliza": {
+    "archivo": "../pendientes_v1/roca_caliza.png",
+    "bbox": [
+      8,
+      13,
+      40,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "roca_pizarra": {
+    "archivo": "../pendientes_v1/roca_pizarra.png",
+    "bbox": [
+      8,
+      13,
+      40,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "roca_redonda": {
+    "archivo": "../pendientes_v1/roca_redonda.png",
+    "bbox": [
+      7,
+      13,
+      40,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  },
+  "tronco_caido": {
+    "archivo": "../pendientes_v1/tronco_caido.png",
+    "bbox": [
+      10,
+      23,
+      38,
+      43
+    ],
+    "canvas": [
+      48,
+      48
+    ],
+    "escala_dibujada": 1,
+    "pivote": [
+      24,
+      43
+    ],
+    "resolucion_nativa": [
+      96,
+      96
+    ]
+  }
+}

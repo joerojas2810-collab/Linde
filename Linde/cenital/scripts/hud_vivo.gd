@@ -12,6 +12,7 @@ func _draw() -> void:
 	if esc.modo == "creador": return _creador(vs)
 	if esc.modo == "unirse" or esc.modo == "conectando": return _unirse(vs)
 	if esc.panel=="inv":return _inventario(vs)
+	if esc.panel=="ficha":return _panel(vs)
 	var j = esc.j
 	var h: float = j.hora_dia()
 	var st: Dictionary = j.stats()
@@ -48,7 +49,7 @@ func _draw() -> void:
 	if esc.ayuda_visible and esc.panel=="":
 		ui.panel(self, Rect2(vs.x / 2 - 310, 518, 620, 142))
 		_t("CONTROLES", Vector2(vs.x / 2 - 288, 536), 20)
-		_t("WASD / Flechas  Moverse     Esc  Menú", Vector2(vs.x / 2 - 288, 570), 17)
+		_t("WASD / Flechas  Moverse     Esc  Menú     V  Ficha", Vector2(vs.x / 2 - 288, 570), 17)
 		_t("C  Fabricar     F  Forja     G  Materiales y planos", Vector2(vs.x / 2 - 288, 598), 17)
 		_t("K  Habilidades     J  Valle     B  Construir     F5  Guardar", Vector2(vs.x / 2 - 288, 626), 17)
 	if esc.debug: _t("anim: %s #%d" % [esc._anim.estado, esc._anim.cuadro], Vector2(vs.x - 200, 700), 16, UiArte.FOCO)
@@ -67,7 +68,11 @@ func _draw() -> void:
 func _icono_item(clave:String,ranura:String="")->String:
 	var info:Dictionary=Eq.info(clave) if clave!="" else {}
 	var slot:String=ranura if ranura!="" else str(info.get("equipo",""))
-	if slot=="arma":return "reutilizados/espada_hierro.png"
+	if slot in ["arma","escudo"]:
+		var indice:=0
+		if clave!="":
+			for e in Eq.visible({slot:clave}):indice=maxi(0,["ligera","media","pesada"].find(e.get("arquetipo","ligera")))
+		return "../pendientes_v1/"+("espada" if slot=="arma" else "escudo")+"_"+str(indice)+".png"
 	return ui.ruta_icono(clave,slot)
 
 func _celda(r:Rect2,i:int,clave:String,ranura:String="",cantidad:int=0)->void:
@@ -211,3 +216,40 @@ func _tracker(vs: Vector2, j, h: float) -> void:
 	for l in lineas:
 		ui.texto_en(self,str(l[0]),Rect2(r.position+Vector2(22,y),Vector2(284,24)),int(l[1]))
 		y += 26.0
+
+func _panel(vs:Vector2)->void:
+	if esc.panel!="ficha":super._panel(vs);return
+	var nid:String=esc.ficha_npc
+	var perfil:Dictionary=esc.j.autonomia.perfil(nid)
+	var estado:Dictionary=esc.j.d.get("mundo_vivo",{}).get("autonomia",{}).get("npcs",{}).get(nid,{})
+	var r:=Rect2(vs.x/2-420,118,840,490)
+	ui.panel(self,r)
+	var nombre:String=esc.j.habitantes.fichas.get(nid,{}).get("n",nid)
+	ui.texto_en(self,nombre,Rect2(r.position+Vector2(30,24),Vector2(780,40)),28)
+	var tarjeta:=Rect2(r.position+Vector2(28,88),Vector2(224,288))
+	ui.marco(self,tarjeta,Color("12363b"))
+	var look:Array=esc.j.habitantes.aspecto(nid) if esc.j.habitantes.fichas.has(nid) else [0,1,0,0,0,0,0,0]
+	draw_set_transform(tarjeta.position+Vector2(112,238),0,Vector2(6,6))
+	esc.arte_eq.dibujar(self,Vector2.ZERO,Vector2i.DOWN,0,[],look,"reposo")
+	draw_set_transform(Vector2.ZERO,0,Vector2.ONE)
+	var permanencia:String=esc.j.autonomia.sociedad.arraigo.estado(nid)
+	draw_set_transform(tarjeta.position+Vector2(184,24),0,Vector2(3,3))
+	esc.arte_vida.permanencia(self,Vector2(-11,32),permanencia)
+	draw_set_transform(Vector2.ZERO,0,Vector2.ONE)
+	ui.texto_en(self,permanencia.capitalize(),Rect2(tarjeta.position+Vector2(20,245),Vector2(184,26)),17,Color("f8e4af"),true)
+	var x:=r.position.x+280;var y:=r.position.y+94
+	ui.texto_en(self,"Oficio: "+str(perfil.get("oficio","habitante")).capitalize(),Rect2(x,y,524,30),20)
+	ui.texto_en(self,"Ahora: "+str(estado.get("ocupacion","sin ocupación registrada")).capitalize(),Rect2(x,y+38,524,28),17)
+	var bio:Dictionary=perfil.get("biografia",{})
+	var cfg:Dictionary=esc.j.autonomia.sociedad.cfg.biografia
+	var lineas:Array=[]
+	if bio.is_empty():lineas.append("Biografía sin registrar.")
+	else:
+		lineas.append("Origen: "+str(cfg.origenes.get(bio.get("origen",""),"Sin registrar")))
+		var antecedente:String=cfg.antecedentes.get(bio.get("antecedente",""),{}).get("texto","Sin registrar")
+		if "%s" in antecedente:antecedente=antecedente%esc.j.habitantes.fichas.get(bio.get("con",""),{}).get("n","alguien")
+		lineas.append("Historia: "+antecedente)
+		lineas.append("Aspiración: "+str(cfg.aspiraciones.get(bio.get("aspiracion",""),{}).get("texto","Sin registrar")))
+	var texto:String="\n\n".join(lineas)
+	draw_multiline_string(ui.fuente,Vector2(x,y+110),texto,HORIZONTAL_ALIGNMENT_LEFT,510,17,8,UiArte.TINTA)
+	ui.texto_en(self,"V cerca de un habitante · E / Enter / Esc cerrar",Rect2(r.position+Vector2(28,432),Vector2(784,30)),16)

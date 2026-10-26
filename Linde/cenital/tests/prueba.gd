@@ -1452,12 +1452,12 @@ func t_actores_arte() -> void:
 ## EXCEPCIONES APROBADAS (usuario, 25/10, «arte vivo» 88571a6; ver DECISIONES.md «Excepciones de dibujo por código»):
 ## solo estos tres scripts y solo estas funciones, con máximo exacto por función (49 llamadas). No es una excepción general:
 ## una llamada nueva, un script nuevo o una función nueva con dibujo hace fallar la prueba.
-##  arte_entornos.gd  suelo 15 (velos de bioma/cantera/ruinas, sombra de la casa, motas, hierbas, piedrecillas, juncos, musgo, destello del agua),
+##  arte_entornos.gd  suelo 13 (velos de bioma/cantera/ruinas, sombra de la casa, motas, hierbas, piedrecillas, juncos, musgo, destello del agua),
 ##                    _flor 4, _sombra_suelo 2 (sombras de contacto)
 ##  hud_vivo.gd       _celda 1 (cuadro de color cuando un ítem no tiene icono), _inventario 4 (botón cerrar y dos círculos de fondo)
 ##  ui_viva.gd        marco 13 (marcos de panel, tooltip y botón), ranura 5 (casilla de inventario), medidor 5 (barras de vida y XP)
 const DIBUJOS_APROBADOS := {
-	"arte_entornos.gd": {"suelo": 15, "_flor": 4, "_sombra_suelo": 2},
+	"arte_entornos.gd": {"suelo": 13, "_flor": 4, "_sombra_suelo": 2},
 	"hud_vivo.gd": {"_celda": 1, "_inventario": 4},
 	"ui_viva.gd": {"marco": 13, "ranura": 5, "medidor": 5},
 }

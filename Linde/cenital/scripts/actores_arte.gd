@@ -97,7 +97,7 @@ func _fx(tipo: String, pos: Vector2) -> void:
 func _celda(ci: CanvasItem, tipo: String, pos: Vector2, dir: Vector2, col: int, tinte: Color = Color.WHITE) -> void:
 	if FAUNA.has(tipo):
 		var accion := "defeat" if col >= COL.der_a else "hit" if col == COL.dano else "attack" if col in [COL.aviso, COL.impacto, COL.recup] else "idle"
-		_fauna(ci, tipo, pos, accion, float(col) * 0.15, tinte)
+		_fauna(ci, tipo, pos, accion, float(col) * 0.15, tinte,dir)
 		return
 	var d: Dictionary = ENEMIGOS[tipo]
 	var c: int = d.celda
@@ -120,7 +120,7 @@ func enemigo(ci: CanvasItem, e: Dictionary, tiempo: float) -> void:
 		elif e.est in ["recupera", "rec", "activo"]:
 			accion = "attack"
 			reloj = 0.3
-		_fauna(ci, e.tipo, e.pos, accion, reloj)
+		_fauna(ci, e.tipo, e.pos, accion, reloj,Color.WHITE,e.dir)
 		return
 	var col: int = COL.reposo
 	match e.est:
@@ -133,8 +133,17 @@ func enemigo(ci: CanvasItem, e: Dictionary, tiempo: float) -> void:
 	_celda(ci, e.tipo, e.pos, e.dir, col)
 
 ## Tiras existentes con alfa y pies nativos; el cuadro se deduce de las dimensiones reales.
-## Son vistas frontales: no simular orientaciones que el arte no contiene.
-func _fauna(ci: CanvasItem, tipo: String, pos: Vector2, accion: String, tiempo: float, tinte: Color = Color.WHITE) -> void:
+## Frente heredado y tres vistas propias; los cuadros laterales/traseros son derivados nativos del atlas.
+func _fauna(ci: CanvasItem, tipo: String, pos: Vector2, accion: String, tiempo: float, tinte: Color = Color.WHITE,dir:Vector2=Vector2.DOWN) -> void:
+	var orientacion:=fila(cardinal(dir))
+	if orientacion!=0:
+		var recurso="res://arte/pendientes_v1/fauna_"+tipo+"_"+accion+"_"+str(orientacion)+".png"
+		if not texturas.has(recurso):texturas[recurso]=load(recurso)
+		var tx:Texture2D=texturas[recurso]
+		var cant:=2 if accion=="hit" else 4
+		var frame:=posmod(int(tiempo*6),cant) if accion=="idle" else mini(cant-1,int(tiempo*10))
+		ci.draw_texture_rect_region(tx,Rect2((pos-Vector2(17.5,45)).round(),Vector2(35,48)),Rect2(frame*140,0,140,180),tinte)
+		return
 	var textura := tex("fauna/" + FAUNA[tipo] + "_" + accion + ".png")
 	var destino := Rect2((pos - Vector2(17.5, 45)).round(), Vector2(35, 48))
 	if textura == null:
@@ -150,7 +159,7 @@ func _marcador(ci: CanvasItem, destino: Rect2) -> void:
 
 func residuo(ci: CanvasItem) -> void:
 	for r in residuos:
-		if FAUNA.has(r.tipo): _fauna(ci, r.tipo, r.pos, "defeat", float(r.t) * 2.0)
+		if FAUNA.has(r.tipo): _fauna(ci, r.tipo, r.pos, "defeat", float(r.t) * 2.0,Color.WHITE,r.dir)
 		else: _celda(ci, r.tipo, r.pos, r.dir, COL.der_a if r.t < DUR_DERROTA / 2.0 else COL.der_b)
 
 func efectos_dibujar(ci: CanvasItem) -> void:

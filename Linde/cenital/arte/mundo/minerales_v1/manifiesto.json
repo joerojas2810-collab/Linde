@@ -1,0 +1,17 @@
+{
+  "base": "03fc1b8",
+  "generaciones": 1,
+  "herramienta": "image_gen integrada",
+  "recorte": "Godot, nearest; bandas y gutters medidos; canvas96, pivote48,86, destino48, pivote24,43",
+  "archivos": {
+    "arcilla.png": "f0b41cc56a5f351678b447582d77996d49bfe8e6a7a8c477c6b004077bf07089",
+    "arcilla_agotado.png": "0a14b1f2d545ae58f4cdb4e05f4a5ad9322b4c8c52947da78bf630269d24d57c",
+    "cobre.png": "42b41b250a939f9dc55453ed1d1c9059238e065b13c78265ddf5f7ca42354baf",
+    "cobre_agotado.png": "2d643d62b190ba19d27bda566bec4852a8589f2ca5238d4142fc12367d6ec8d2",
+    "estano.png": "653ff261dfaa721550f380933ccf0f09bd874d4c494af9f1ba78dd726f3c42c7",
+    "estano_agotado.png": "b4d4981f86328800554cb166fc8316a065012f878b828dac863185722ce58d67",
+    "fuente.png": "6022abed8979ebf230137aa272d7847ce81025d1a8c73ad0f69f42a1a94e72c7",
+    "hierro.png": "69b1849434344f49f9df92d1e7669dd6c9577881cbe3bba3dbb1a9258cd82e38",
+    "hierro_agotado.png": "f42611cb2e5033af79e09792f5de46ea492c5f5bcf181df1003eb08600daf4aa"
+  }
+}

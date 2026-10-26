@@ -275,3 +275,6 @@ Se integraron los seis entregables de arte (E01–E06, candidatos sin aceptació
 - No autoriza generar personajes, edificios, árboles ni otros recursos con primitivas (`draw_rect`, `draw_circle`, polígonos, líneas) sin revisión.
 - Una llamada nueva, una función nueva con dibujo o un script nuevo hace fallar `t_sin_arte_procedural`; añadir una excepción exige nueva aprobación del usuario y una fila aquí.
 - Es **provisional**: la aceptación artística de los lotes sigue pendiente (ver [ARTE_PENDIENTE](ARTE_PENDIENTE.md)) y estas excepciones pueden retirarse sustituyéndolas por recursos.
+
+### Actualización de implementación de las excepciones — integración local 5b87517
+Los juncos nuevos, las marcas de bayas y los indicadores de oficios/permanencia/ocupación usan sprites PNG. Se reducen las llamadas permitidas de `arte_entornos.gd/suelo` de 15 a 13 al sustituir los juncos procedurales; no se autoriza ninguna función nueva de dibujo por primitivas. La azada y los indicadores conservan el aspecto del borrador revisado mediante rasterización del fuente nativo en herramientas/arte. El resto de máximos permanece igual.

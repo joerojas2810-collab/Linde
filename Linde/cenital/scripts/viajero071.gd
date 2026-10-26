@@ -135,6 +135,7 @@ func warp(dst:Image,src:Image,t:Transform2D,region:String,view:int,base_layer:bo
 
 func equipment_image(e:Dictionary,view:int)->Image:
 	var path=ART+"equipo/%s_%s_%d.png"%[e.get("arquetipo","media"),e.ranura,view]
+	if e.ranura!="casco" and e.get("arquetipo","") in ["ligera","pesada"]:path="res://arte/pendientes_v1/%s_%s_%d.png"%[e.arquetipo,e.ranura,view]
 	var im:Image=source(path)
 	if im==null:return null
 	var key=path+JSON.stringify(e.get("paleta",{}))+JSON.stringify(e.get("delta",{}))
@@ -158,8 +159,10 @@ func held_image(name:String,palette:Dictionary={})->Image:
 	var key="held"+name+JSON.stringify(palette)
 	if images.has(key):return images[key]
 	var path="res://arte/interfaz/reutilizados/"+{"espada":"espada_hierro","escudo":"escudo","hacha":"hacha_piedra","pico":"pico_piedra"}[name]+".png"
+	if name in ["espada","escudo"]:
+		path="res://arte/pendientes_v1/"+name+"_"+str(clampi(int(palette.get("_silueta",0)),0,2))+".png"
 	var src:Image=source(path).duplicate();src.resize(48 if name!="escudo" else 36,48 if name!="escudo" else 36,Image.INTERPOLATE_NEAREST)
-	if not palette.is_empty():
+	if palette.has("principal"):
 		var target=Color(str(palette.get("principal", "#e0e4ea")))
 		for y in src.get_height():
 			for x in src.get_width():
@@ -213,9 +216,9 @@ func image(look:Array,view:int,state:String,frame:int,equipment:Array=[],tool:St
 	var sword_palette:Dictionary={}
 	var shield_palette:Dictionary={}
 	for entry in equipment:
-		if not entry is Dictionary or not entry.has("familia"):continue
-		if entry.get("ranura", "")=="espada":sword_palette=entry.get("paleta", {})
-		elif entry.get("ranura", "")=="escudo":shield_palette=entry.get("paleta", {})
+		if not entry is Dictionary:continue
+		if entry.get("ranura", "")=="espada":sword_palette=entry.get("paleta", {}).duplicate();sword_palette._silueta=["ligera","media","pesada"].find(entry.get("arquetipo","ligera"))
+		elif entry.get("ranura", "")=="escudo":shield_palette=entry.get("paleta", {}).duplicate();shield_palette._silueta=["ligera","media","pesada"].find(entry.get("arquetipo","ligera"))
 	var shield=equipment.any(func(e):return e is Dictionary and e.get("ranura","")=="escudo")
 	var sword=equipment.any(func(e):return e is Dictionary and e.get("ranura","")=="espada")
 	var lying=state in ["caida","dormir"]

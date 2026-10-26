@@ -1,5 +1,7 @@
 # Arte pendiente del mundo — 25/10/2026
 
+> Estado local actualizado: consultar «Revisión completa 01» al final. La auditoría original se conserva como referencia del punto de partida.
+
 Auditoría hecha leyendo `scripts/mundo_arte.gd` y `arte/mundo/`. Formato destino: PNG de 16 px por celda (copas/troncos de 64 px para árboles), con pivote en `E04_objetos.json`.
 
 ## Sprites compartidos o prestados (sustituir primero)
@@ -46,3 +48,21 @@ Generar el PNG, copiarlo a `arte/mundo/`, registrarlo en `E04_objetos.json` (arc
 
 ## Dibujo por código aceptado (provisional, 25/10)
 Lo siguiente se dibuja hoy con primitivas por excepción aprobada ([DECISIONES](DECISIONES.md#excepciones-de-dibujo-por-código-usuario-2510-provisional)) y puede sustituirse por recursos sin cambiar el aspecto: motas de pradera, hierbas, piedrecillas de secano, juncos de ribera, flor y musgo de ruinas (`arte_entornos.gd`); marcos, casillas y barras de la interfaz (`ui_viva.gd`, como 9-patch con este mismo aspecto). Al sustituirlos, bajar el máximo correspondiente en `DIBUJOS_APROBADOS`.
+
+## Avance local — 25/10/2026: minerales y arcilla
+
+Borrador de ocho sprites propios (hierro/cobre/estaño/arcilla, disponibles y agotados) integrado en ambos dibujantes para revisión visual. Registro y procedencia: `arte/mundo/minerales_v1/README.md`. Comparativa controlada en `outputs/Arte_minerales/revision_01/GALERIA.html` del espacio de trabajo. Una generación; ocho estados comprobados sin faltantes y sin modificar el estado del mundo. **Pendiente de aprobación visual; no marcar las filas como terminadas todavía.**
+
+## Revisión completa 01 — 25/10/2026
+
+Todos los apartados cuentan con borrador local: variantes/vegetación, orientaciones de fauna, siluetas de equipo y presentación de arraigo/oficios/vivienda. Primer lote de minerales aprobado; resto pendiente de aprobación visual. Detalle por punto, procedencia y límites en `arte/pendientes_v1/README.md`; galería del espacio de trabajo `outputs/Arte_pendiente_completo/revision_01/GALERIA.html`.
+
+Límites: fauna lateral/trasera animada por derivación de poses; cascos del jugador y armadura media conservados; animales reales opcionales no incluidos; árboles de clima seco/alpino asignados a árboles existentes y sus transiciones. No se han modificado reglas/densidades. QA dirigido y captura de seis entornos aprobados. **Sin commit ni push; no marcar como entrega final hasta la revisión del usuario.**
+
+## Integración local sobre 5b87517 — 25/10/2026
+
+Acabado local reaplicado a la última base remota, conservando art2 y correcciones A1–A3. 60 comprobaciones visuales y 49 de pico/cama aprobadas, más revisión dirigida de arte/fichas y equipar/quitar art2. Indicadores nuevos como PNG; suelo reduce sus excepciones de 15 a 13. Sin cambios a reglas ni pruebas generales/red. Evidencia local: `outputs/Arte_pendiente_completo/integracion_5b87517/INFORME.md`. **Sin commit/push.**
+
+## Publicación autorizada — 25/10/2026
+
+El usuario solicitó commit y push de esta integración sobre 5b87517. La evidencia vigente se conserva en `production/qa/evidence/arte-pendiente-integrado/`; los estados de borrador y sin publicar anteriores son históricos. Se mantienen los límites artísticos y de pruebas documentados; la publicación se identifica en el historial de Git.
