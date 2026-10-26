@@ -88,27 +88,35 @@ static func poblado_inicial() -> Dictionary:
 	return {"id": ID_INICIAL, "nombre": "Valle", "estado": "activo", "centro": [CENTRO_INICIAL.x, CENTRO_INICIAL.y],
 		"area": [0, 0, ANCHO, ALTO], "entrada": [ENTRADA.x, ENTRADA.y], "esenciales": esenciales, "camas": camas}
 
-## Datos del poblado `id` ({} si no existe o el guardado no trae registro).
-func poblado(id: String = ID_INICIAL) -> Dictionary:
-	return estado.get("poblados", {}).get(id, {})
+const SIN_CELDA := Vector2i(-1, -1)   # `entrada()` de un poblado que no existe
 
-## Entrada del poblado inicial; sin registro, la constante `ENTRADA`.
-func entrada() -> Vector2i:
-	var p: Dictionary = poblado()
-	return Vector2i(int(p.entrada[0]), int(p.entrada[1])) if p.has("entrada") else ENTRADA
+## Datos del poblado `poblado_id` ({} si no existe en el registro de este mundo).
+func poblado(poblado_id: String) -> Dictionary:
+	return estado.get("poblados", {}).get(poblado_id, {})
 
-## Celdas que la construcción no puede cerrar; sin registro, la constante `ESENCIALES`.
-func esenciales() -> Array:
-	var p: Dictionary = poblado()
-	if not p.has("esenciales"): return ESENCIALES
+## Solo cuando el guardado o la réplica no traen el registro (nunca cuando el registro existe sin ese poblado) el poblado
+## inicial se describe con las constantes; cualquier otro id inexistente da vacío.
+func _respaldo(poblado_id: String) -> bool:
+	return poblado_id == ID_INICIAL and not estado.has("poblados")
+
+## Entrada del poblado indicado; `SIN_CELDA` si no existe. Sin registro, el poblado inicial usa `ENTRADA`.
+func entrada(poblado_id: String) -> Vector2i:
+	var p: Dictionary = poblado(poblado_id)
+	if p.has("entrada"): return Vector2i(int(p.entrada[0]), int(p.entrada[1]))
+	return ENTRADA if _respaldo(poblado_id) else SIN_CELDA
+
+## Celdas que la construcción no puede cerrar en el poblado indicado; [] si no existe. Sin registro, el inicial usa `ESENCIALES`.
+func esenciales(poblado_id: String) -> Array:
+	var p: Dictionary = poblado(poblado_id)
+	if not p.has("esenciales"): return ESENCIALES if _respaldo(poblado_id) else []
 	var l: Array = []
 	for e in p.esenciales: l.append(Vector2i(int(e[0]), int(e[1])))
 	return l
 
-## Cama fija de cada habitante inicial (id -> celda); sin registro, la constante `CAMAS`.
-func camas() -> Dictionary:
-	var p: Dictionary = poblado()
-	if not p.has("camas"): return CAMAS
+## Camas fijas del poblado indicado (id de habitante -> celda); {} si no existe. Sin registro, el inicial usa `CAMAS`.
+func camas(poblado_id: String) -> Dictionary:
+	var p: Dictionary = poblado(poblado_id)
+	if not p.has("camas"): return CAMAS if _respaldo(poblado_id) else {}
 	var d := {}
 	for id in p.camas: d[id] = Vector2i(int(p.camas[id][0]), int(p.camas[id][1]))
 	return d
