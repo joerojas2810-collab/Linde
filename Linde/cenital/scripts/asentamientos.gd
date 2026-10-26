@@ -3,6 +3,7 @@ extends RefCounted
 ## Extrae recursos reales del mapa y cosecha campos reales; no hay producción gratuita al descargar.
 const M=preload("res://scripts/mundo.gd")
 const Lugares = preload("res://scripts/lugares.gd")
+const Edificios = preload("res://scripts/edificios.gd")
 const C=preload("res://scripts/catalogos.gd")
 var a
 var j
@@ -33,18 +34,36 @@ func validar(c: Vector2i) -> String:
     if celda==c+Vector2i(int(pieza[1]),int(pieza[2])):construida=true
    if construida and j.ocupada(celda):return "Hay alguien donde irá una pieza del puesto"
  return ""
-func crear(c: Vector2i, dueno: String, poblado_id: String = "", nombre: String = "") -> void:
+func crear(c: Vector2i, dueno: String, poblado_id: String = "", nombre: String = "") -> bool:
  var k:=M.clave(c)
  var cid:="c@"+M.clave(c+Vector2i(0,2))
- for pieza in PIEZAS:
-  var celda:=c+Vector2i(int(pieza[1]),int(pieza[2]))
-  j.mundo.poner(celda,pieza[0],true,dueno)
-  j.sembrar(celda)
+ var camas: Array = [[c.x+1,c.y],[c.x+1,c.y+1]]
+ var campos: Array = [[c.x-1,c.y],[c.x-1,c.y+1]]
+ if poblado_id != "":
+  var e := Edificios.plano("casa_regional",c+Vector2i(0,2),dueno,poblado_id)
+  var motivo := Edificios.instalar(j,e)
+  if motivo != "":
+   return false
+  camas = [[c.x-2,c.y-2],[c.x+2,c.y-2]]
+  campos = [[c.x-2,c.y+3],[c.x+2,c.y+3]]
+  cid = "c@"+M.clave(c+Vector2i(0,-2))
+  for q in campos:
+   var campo := Vector2i(q[0],q[1])
+   j.mundo.poner(campo,"campo",true,dueno)
+   j.sembrar(campo)
+ else:
+  for pieza in PIEZAS:
+   var celda:=c+Vector2i(int(pieza[1]),int(pieza[2]))
+   j.mundo.poner(celda,pieza[0],true,dueno)
+   j.sembrar(celda)
+  for dy in [0,1]:j.mundo.techar(c+Vector2i(1,dy),dueno)
  j.d.cofres[cid]={"inv":{"baya":4,"hacha_piedra":1,"pico_piedra":1}}
- for dy in [0,1]:j.mundo.techar(c+Vector2i(1,dy),dueno)
  datos().puestos[k]={"id":k,"nombre":"Puesto "+str(datos().puestos.size()+1),"celda":[c.x,c.y],"dueno":dueno,"cofre":cid,"residentes":[],"ultimo_min":int(j.d.min),"fundado_min":int(j.d.min),"llegada_min":int(j.d.min),"comida_min":int(j.d.min),"produccion_min":int(j.d.min),"estado":"esperando colonos","producciones":0}
  if poblado_id != "":
   var p: Dictionary = datos().puestos[k]
+  p.camas = camas
+  p.campos = campos
+  p.edificios = ["edificio@"+M.clave(c+Vector2i(0,2))]
   p.poblado = poblado_id
   p.nombre = nombre
   p.estado = "activo"
@@ -57,19 +76,21 @@ func crear(c: Vector2i, dueno: String, poblado_id: String = "", nombre: String =
    var r := {"id": nid, "nombre": cfg.nombres[(primero + i) % cfg.nombres.size()], "oficio": "recolector" if i == 0 else "cantero", "look": [rng.randi_range(0,2),rng.randi_range(0,2),rng.randi_range(0,2)], "hogar": poblado_id, "historia": "Trabaja en " + nombre + " desde antes de tu llegada.", "bloques": {}}
    a._ver(r, c, int(a.reglas.conocimiento.radio_inicial))
    p.residentes.append(r)
-  var camas := {}
+  var asignaciones := {}
   var ids: Array = []
   for i in p.residentes.size():
    ids.append(p.residentes[i].id)
-   camas[p.residentes[i].id] = [c.x + 1, c.y + i]
-  j.d.mundo.poblados[poblado_id] = {"id": poblado_id, "nombre": nombre, "estado": "activo", "centro": [c.x,c.y], "entrada": [c.x,c.y+3], "area": [c.x-3,c.y-3,7,7], "esenciales": [[c.x,c.y+3],[c.x,c.y+1],[c.x,c.y+2]], "camas": camas, "residentes": ids, "puesto": k}
+   asignaciones[p.residentes[i].id] = camas[i]
+  j.d.mundo.poblados[poblado_id] = {"id": poblado_id, "nombre": nombre, "estado": "activo", "centro": [c.x,c.y], "entrada": [c.x,c.y+3], "area": [c.x-3,c.y-3,7,7], "esenciales": [[c.x,c.y+3],[c.x,c.y+1],[c.x,c.y+2]], "camas": asignaciones, "residentes": ids, "puesto": k}
  else:
   j.aviso_todos("Se funda un puesto regional. Lleva comida a su cofre para atraer residentes.")
+ return true
 func _sostenible(p: Dictionary) -> bool:
  var c:=Vector2i(p.celda[0],p.celda[1])
  if j.mundo.constr_en(c).get("t","")!="puesto" or not j.d.cofres.has(p.cofre):return false
- for dy in [0,1]:
-  if j.mundo.constr_en(c+Vector2i(1,dy)).get("t","")!="cama_huesped" or not j.mundo.estado.techos.has(M.clave(c+Vector2i(1,dy))):return false
+ for q in p.get("camas",[[c.x+1,c.y],[c.x+1,c.y+1]]):
+  var cama := Vector2i(q[0],q[1])
+  if j.mundo.constr_en(cama).get("t","")!="cama_huesped" or not j.mundo.estado.techos.has(M.clave(cama)):return false
  return true
 func _transitable(c: Vector2i) -> bool:
  if not j.mundo.generador.valida(c):return false
@@ -129,8 +150,8 @@ func actualizar() -> void:
   if not _sostenible(p):p.estado="faltan puesto, camas, techo o cofre";continue
   var inv: Dictionary=inventario(p)
   var c:=Vector2i(p.celda[0],p.celda[1])
-  for dy in [0,1]:
-   var campo:=c+Vector2i(-1,dy)
+  for q in p.get("campos",[[c.x-1,c.y],[c.x-1,c.y+1]]):
+   var campo:=Vector2i(q[0],q[1])
    if not p.residentes.is_empty() and j.campo_listo(campo):
     var cosecha: Dictionary=j.cosechar(campo)
     for item in cosecha:inv[item]=int(inv.get(item,0))+int(cosecha[item])
@@ -176,7 +197,7 @@ func visibles() -> Array:
    var fase:=posmod(int(j.d.min),60)
    var t:=clampf(float(fase)/2.0,0,1) if fase<30 else 1.0-clampf(float(fase-30)/2.0,0,1)
    var desde:=M.pies_de_celda(c+Vector2i(0,i))
-   var hasta:=M.pies_de_celda(c+Vector2i(-1,i))
+   var hasta:=M.pies_de_celda(c+Vector2i(1 if p.has("edificios") else -1,i))
    resultado.append({"id":r.id,"nombre":r.nombre,"look":r.look,"pos":desde.lerp(hasta,t),"mueve":fase<2 or (fase>=30 and fase<32)})
  return resultado
 
@@ -188,9 +209,12 @@ func inicializar_preexistentes() -> void:
  var d := datos()
  if d.has("preexistentes"): return
  var generacion: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://datos/asentamientos/preexistentes_v1.json"))
- var huella: Array = [[0,0]]
- for pieza in PIEZAS:
-  if C.CONSTR[pieza[0]].get("bloquea",false): huella.append([pieza[1],pieza[2]])
+ var huella: Array = []
+ var plantilla := Edificios.plano("casa_regional",Vector2i(0,2),"generacion")
+ for k in plantilla.piezas:
+  if C.CONSTR[plantilla.piezas[k].t].get("bloquea",false):
+   var q := Edificios._celda(k)
+   huella.append([q.x,q.y])
  generacion.emplazamiento.huella = huella
  var elegidos: Array = []
  for dato in generacion.macros_candidatas:
@@ -203,13 +227,22 @@ func inicializar_preexistentes() -> void:
   var lugar: Dictionary = plan.lugares[id]
   lugar.nombre = generacion.nombres[elegidos.size()]
   lugar.poblado = id
+  var mundo_anterior: Dictionary=j.d.mundo.duplicate(true)
+  var cofres_anteriores: Dictionary=j.d.cofres.duplicate(true)
   Lugares.ampliar(j, r, plan)
   var c := Vector2i(lugar.centro[0],lugar.centro[1])
-  j.mundo.poner(c,"puesto",false,"poblado:"+id)
-  crear(c,"poblado:"+id,id,lugar.nombre)
+  j.mundo.actualizar_regiones([c])
+  if not crear(c,"poblado:"+id,id,lugar.nombre):
+   # Una candidata rechazada no deja rutas, cofres o edificios huérfanos.
+   j.d.mundo.clear();j.d.mundo.merge(mundo_anterior,true)
+   j.d.cofres=cofres_anteriores
+   j.mundo.configurar(int(j.d.semilla))
+   j.mundo.actualizar_regiones([c])
+   continue
   j.d.mundo.registro.poblados.append(id)
   elegidos.append(id)
  d.preexistentes = {"version": generacion.version, "ids": elegidos}
+ j.actualizar_regiones()
 
 ## La identidad y los recuerdos permanecen en el residente resumido; nunca se añade otro actor detallado al acercarse.
 func residente(nid: String) -> Dictionary:

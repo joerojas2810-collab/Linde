@@ -157,9 +157,9 @@ func _arrancar(nuevo: bool = false) -> void:
 	habitantes = Hab.new(self)
 	habitantes.restaurar()
 	autonomia = Autonomia.new(self)
-	if nuevo: autonomia.asentamientos.inicializar_preexistentes()
 	combate = Comb.new(self)
 	combate.reiniciar()
+	if nuevo: autonomia.asentamientos.inicializar_preexistentes()
 	evaluar_misiones()
 
 func _sesion(id: String) -> void:
@@ -1100,6 +1100,7 @@ func construir_edificio(tipo: String, entrada: Vector2i, id: String = LOCAL) -> 
 	if not es_autoridad() or not rt.has(id): return _no("Solo la autoridad construye",id)
 	var c := Mundo.celda_de(pies_de(id))
 	if maxi(absi(c.x-entrada.x),absi(c.y-entrada.y)) > 2: return _no("Acércate al acceso sur",id)
+	if Edificios.catalogo().planos.get(tipo,{}).get("solo_generacion",false): return _no("Plano de comunidad preexistente",id)
 	var e := Edificios.plano(tipo,entrada,id)
 	if e.is_empty(): return _no("Plano desconocido",id)
 	var coste := Edificios.coste(e)

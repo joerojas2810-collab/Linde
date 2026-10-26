@@ -1,0 +1,17 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+MEDIDA_CONFIG herramienta=medir_equivalencia semilla=123 dias=4 tick_s=0.5 ticks_por_dia=2880 combate=desactivado jugadores_activos=1 ignorar= godot=4.7.1-stable (official)
+MEDIDA_ESTADO semilla=123 dia=1 hash_estado=b5aa68f0230a0d36 habitantes=2 camas_huesped=0 casas_completas=0 construcciones=7 caminos=0 ocupaciones=acumular:1,desarrollo:1 inventario_npc=fibra:40,hacha_piedra:1,madera:4,mena:2,pico_piedra:3,piedra:1
+MEDIDA_CPU semilla=123 dia=1 tick_medio_us=2206.0 tick_max_us=284892
+MEDIDA_ESTADO semilla=123 dia=2 hash_estado=a38d56fc25a68b1d habitantes=3 camas_huesped=1 casas_completas=0 construcciones=24 caminos=2 ocupaciones=cosechar:1,desarrollo:1,proveerse:1 inventario_npc=art1:casco:fibra:ligera:1:1,art1:torso:fibra:ligera:1:1,fibra:44,lingote:2,madera:10,pico_piedra:2,piedra:5
+MEDIDA_CPU semilla=123 dia=2 tick_medio_us=2402.0 tick_max_us=138107
+MEDIDA_ESTADO semilla=123 dia=3 hash_estado=82d68e0b0db1a4bd habitantes=4 camas_huesped=2 casas_completas=1 construcciones=31 caminos=3 ocupaciones=acumular:1,mantener:2,proveerse:1 inventario_npc=art1:casco:fibra:ligera:1:1,art1:torso:fibra:ligera:1:1,baya:1,candado:1,fibra:66,madera:10,mena:2,pico_piedra:2,piedra:3
+MEDIDA_CPU semilla=123 dia=3 tick_medio_us=2392.0 tick_max_us=185190
+MEDIDA_ESTADO semilla=123 dia=4 hash_estado=500b011b52c66364 habitantes=5 camas_huesped=3 casas_completas=2 construcciones=42 caminos=12 ocupaciones=proveerse:1,refugio:1,vivienda:3 inventario_npc=art1:casco:fibra:ligera:1:1,art1:torso:fibra:ligera:1:1,baya:5,candado:1,fibra:90,gema:1,madera:19,mena:2,pico_piedra:2,piedra:8
+MEDIDA_CPU semilla=123 dia=4 tick_medio_us=3801.0 tick_max_us=172821
+MEDIDA_ESTADO semilla=123 final=true dias=4 hash_estado=500b011b52c66364 habitantes=5
+MEDIDA_CPU semilla=123 final=true tick_total_ms=31108.4 tick_medio_us=2700.0 p50_us=227 p95_us=18857 p99_us=74237 max_us=284892 ticks_mayores_100ms=33
+WARNING: 30 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

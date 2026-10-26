@@ -1,7 +1,8 @@
 extends "res://tests/captura_lugares.gd"
 const Prueba = preload("res://tests/prueba_vivienda.gd")
 func foto(n: String) -> void:
- var e: Dictionary=esc.j.d.mundo.get("registro",{}).get("edificios",{}).values()[0] if not esc.j.d.mundo.get("registro",{}).get("edificios",{}).is_empty() else {}
+ var propias: Array=esc.j.d.mundo.get("registro",{}).get("edificios",{}).values().filter(func(e):return e.dueno==esc.J.LOCAL)
+ var e: Dictionary=propias[0] if not propias.is_empty() else {}
  if e.is_empty():esc.cam.position=esc.j.pies-Vector2(0,48)
  else:esc.cam.position=esc.Mundo.pies_de_celda(Vector2i(e.entrada[0],e.entrada[1]-2))
  esc.queue_redraw()

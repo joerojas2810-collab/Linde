@@ -1263,6 +1263,9 @@ func _dibujar_constr(c: Vector2i) -> void:
 		abierta = J.Edificios.puerta_abierta(c,posiciones)
 	var alfa := 1.0
 	if not e.is_empty() and cs.t in ["muro","muro_ladrillo"] and c.y == int(e.entrada[1]) and J.Edificios.abierto(e,j.pies): alfa = 0.18
+	if cs.t=="puesto" and not e.is_empty():
+		arte_mundo.detalle(self,"letrero",Mundo.pies_de_celda(c))
+		return
 	arte_mundo.constr(self, cs.t, c, abierta, Color(1,1,1,alfa), j.campo_listo(c))
 
 ## La puerta se ve abierta con el jugador a una celda o menos (solo presentación; la colisión no cambia).
