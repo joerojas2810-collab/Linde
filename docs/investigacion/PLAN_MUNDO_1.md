@@ -212,3 +212,73 @@ Todas son scripts de medición. **Decisión pendiente**: guardarlos como `tests/
 
 ### 8.3 Pruebas mínimas de la Fase 1 (resumen)
 Hash de estado por día (1a, 1b) · 500 semillas de inicio (1c) · `prueba_red` con dos `unir` (1c) · `prueba_autonomia`, `prueba_sociedad`, `prueba_arraigo`, `prueba_casas_arraigo`, `prueba_crecimiento`, `prueba_saberes`, `prueba_fauna`, `prueba_terreno` y `prueba` tras cada paso que toque lógica. No se piden corridas largas sin hipótesis.
+
+### 8.4 Fase 0 completada (26/10) y propuesta del paso 1a
+**Hecho**: herramientas `tests/medir_*.gd` y línea base en [production/qa/evidence/mundo-1/fase-0](../../production/qa/evidence/mundo-1/fase-0/README.md) (commit `9687dd2`).
+**Bloqueos reales observados** (cotas inferiores, no una partida jugada):
+1. **Nadie a la vista al aparecer**: 0 de 20 semillas con un habitante en el encuadre; mediana de 23,8 celdas a la puerta de la casa.
+2. **El ritmo temporal no es el problema**: un jugador de referencia completa hacha, pico, mesa, horno, nivel 3, «artesano» y primer lingote en ≈2,3 min y sale del Valle a los ≈2,7 min. Lo que falta es saber qué hacer (orientación y pistas), no tiempo.
+3. **Recursos finitos y escasos en el Valle**: 3 vetas, 29 rocas y 94 árboles que no regeneran; el jugador voraz agota las 3 vetas y 17–25 rocas en menos de 3 minutos. La mena de hierro obliga a salir del Valle de inmediato y compite con el oficio de cantero de los habitantes [I: no medida su producción].
+4. **La estación común no se justifica por tiempo** (el jugador construye mesa y horno en ≈30–48 s); sí por coherencia del pueblo (M1-D5).
+
+**Paso 1a (solo `scripts/mundo.gd` + una suite nueva; no cambia comportamiento)**:
+- Constante `ID_INICIAL`; función estática que devuelve el poblado inicial **a partir de las constantes actuales** (`ENTRADA`, `ESENCIALES`, `CAMAS`, área del Valle y centro en el cruce de caminos), con campos: `id`, `nombre`, `centro`, `area`, `entrada`, `esenciales`, `camas`, `estado`.
+- `Mundo.configurar` (donde ya se añaden `caminos/pisadas/techos`) crea `estado.poblados = {ID_INICIAL: ...}` si falta.
+- Lectores `entrada()`, `esenciales()`, `camas()` que leen el registro y, si falta, devuelven las constantes (un cliente o guardado sin el registro sigue funcionando). **Ningún consumidor cambia** (eso es 1b).
+- **Pruebas**: `tests/prueba_poblados.gd` (los lectores igualan las constantes en partida nueva; el registro sobrevive a guardar y cargar; llega al cliente por `estado_para`; los lectores usan el respaldo si el registro falta) + `medir_equivalencia ... ignorar=mundo.poblados` en las semillas 123 y 456 debe dar los hashes de la línea base + `prueba`, `prueba_red`, `prueba_autonomia`, `prueba_terreno` sin fallos nuevos (el fallo previo de arte persiste).
+- **Reversión**: revertir el commit; nada depende del registro. **Riesgo**: bajo (solo si una suite compara el conjunto exacto de claves de `mundo.estado`).
+- **Resultado (26/10)**: implementado y verificado en `2ac3f67`; ver [ESTADO.md §3d](../../production/epics/mundo-vivo/ESTADO.md).
+
+## 9. Revisión de consumidores del paso 1b (sin implementar)
+
+Alcance: solo `entrada()`, `esenciales()` y `camas()`. No se sustituyen otras constantes geométricas ni se eliminan los respaldos. Criterio: refactorización sin cambios de comportamiento, comprobada con los **hashes completos** del estado (sin `ignorar`) frente a una línea base tomada con 1a ya aplicado.
+
+### 9.1 Interfaz aprobada (26/10)
+Los lectores de 1a no recibían argumento y devolvían siempre el poblado inicial. Se cambian en 1b a una interfaz con contexto territorial **explícito**: ninguna operación consulta «todos los pueblos» por defecto, porque la pertenencia a cualquier pueblo no equivale a la pertenencia al pueblo relevante para una acción.
+| Lector | Firma | Semántica |
+|---|---|---|
+| `entrada` | `entrada(poblado_id: String) -> Vector2i` | Entrada de ese pueblo; `Vector2i(-1, -1)` si el id no existe |
+| `esenciales` | `esenciales(poblado_id: String) -> Array` | Celdas esenciales de ese pueblo; `[]` si no existe |
+| `camas` | `camas(poblado_id: String) -> Dictionary` | Camas fijas de ese pueblo (id de habitante → celda); `{}` si no existe |
+Sin valores por defecto: cada llamador nombra el pueblo. Los consumidores que todavía dependen del Valle pasan `Mundo.ID_INICIAL` de forma explícita (con comentario); la generalización posterior sustituirá ese identificador por el pueblo correspondiente. Si un consumidor necesitara de verdad una unión global, se añadirá un lector con nombre propio (`todos_los_esenciales()`, `todas_las_camas()`) con su justificación; **en 1b ninguno la necesita**. Los lectores consultan el `estado.poblados` de su propia instancia de `Mundo` (sin caché estática). Respaldo: solo para `ID_INICIAL`, si el registro falta, devuelven las constantes; para cualquier otro id inexistente devuelven vacío.
+
+### 9.2 Tabla de consumidores
+Dos tipos de uso. En 1b **todos** pasan `Mundo.ID_INICIAL`: **pertenencia** (¿esta celda es esencial en el pueblo relevante?) y **alcanzabilidad/llegada** (relación con la entrada de un pueblo concreto). Los de pertenencia podrían necesitar más adelante «el pueblo que contiene la celda» o una unión con nombre propio; se decide cuando exista un segundo pueblo.
+
+| # | Archivo y función | Constante hoy | Lector que la reemplaza | ¿Conserva exactamente el comportamiento? | Riesgo o dependencia |
+|---|---|---|---|---|---|
+| 1 | `desarrollo.gd` `_ampliar` (l. 331) | `M.ESENCIALES.has(c)` | `j.mundo.esenciales(M.ID_INICIAL).has(c)` (pertenencia) | Sí: mismo contenido y orden, `has` igual | Está dentro de 3 bucles anidados: **sacar el lector fuera de los bucles** (`var ess := ...`) para no crear un `Array` por celda |
+| 2 | `habitat.gd` `admisible` (l. 51) | `M.ESENCIALES.has(c)` | `j.mundo.esenciales(M.ID_INICIAL).has(c)` (pertenencia) | Sí | Recorre cada celda de la zona (≈42) y se llama hasta 64 veces por búsqueda: lector fuera del bucle. La función sigue atada al Valle por `habitat.gd:45` (`es_valle`), que **no** se toca |
+| 3 | `habitat.gd` `reservar` (l. 78) | `M.ENTRADA` en `camino(M.ENTRADA, …)` | `j.mundo.entrada(M.ID_INICIAL)` (llegada) | Sí | Dependencia explícita del poblado inicial; a futuro, el poblado de la parcela |
+| 4 | `habitantes.gd` `cama` (l. 85) | `Mundo.CAMAS.has(id)` / `Mundo.CAMAS[id]` | `var c := j.mundo.camas(Mundo.ID_INICIAL); c.has(id)` | Sí | **Camino caliente** (11 llamadores): un `Dictionary` por llamada. Requiere medir CPU; si hace falta, caché **por instancia** invalidada al cambiar el registro |
+| 5 | `habitantes.gd` `reconciliar` (l. 114) | `Mundo.ENTRADA` en `pies_de_celda` | `j.mundo.entrada(M.ID_INICIAL)` (llegada) | Sí | Hoy todos los recién llegados nacen en la entrada del Valle: aquí está la futura decisión «¿en qué poblado llega?» (Fase 6) |
+| 6 | `mundo_vivo.gd` `_llegadas_posibles` (l. 115) | `Mundo.ENTRADA` en `camino(...)` | `j.mundo.entrada(Mundo.ID_INICIAL)` (llegada) | Sí | Igual que 5 |
+| 7 | `sociedad.gd` `_construir_cerca` (l. 975) | `M.ESENCIALES.has(c)` | `esenciales(M.ID_INICIAL).has(c)` (pertenencia) | Sí | Bucle por celdas: lector fuera del bucle |
+| 8 | `sociedad.gd` `construir_pieza` (l. 1006) | `M.ESENCIALES.has(c)` | `esenciales(M.ID_INICIAL).has(c)` (pertenencia) | Sí | — |
+| 9 | `sociedad.gd` `construir_pieza` (l. 1011) | `for e in M.ESENCIALES: if not alc.has(e)` con `alc = j.mundo.alcanzables()` | `for e in j.mundo.esenciales(M.ID_INICIAL)` (**alcanzabilidad**) | Sí | `alcanzables()` parte de la entrada del Valle; con una unión, los esenciales de otro pueblo no serían alcanzables y se prohibiría construir en todas partes. Suposición de un solo pueblo, explícita |
+| 10 | `sociedad.gd` `_refugio` (l. 1188) | `M.ESENCIALES.has(w)` | `esenciales(M.ID_INICIAL).has(w)` (pertenencia) | Sí | Bucle: lector fuera |
+| 11 | `sociedad.gd` `_casa` (l. 1249) | `M.ESENCIALES.has(c)` | `esenciales(M.ID_INICIAL).has(c)` (pertenencia) | Sí | Bucle: lector fuera |
+| 12 | `mundo.gd` `construccion_segura` (l. 433) | `for e in ESENCIALES: if not alc.has(e)` con `alc = alcanzables()` (rama del Valle) | `for e in esenciales(ID_INICIAL)` (**alcanzabilidad**) | Sí | Mismo motivo que 9. La rama exterior no usa esenciales |
+
+12 sustituciones en 6 archivos (`desarrollo` 1, `habitantes` 2, `habitat` 2, `mundo_vivo` 1, `sociedad` 5, `mundo` 1).
+
+### 9.3 Usos que **no** se tocan en 1b (siguen dependiendo del Valle)
+| Dónde | Constante | Motivo |
+|---|---|---|
+| `mundo.gd` `_init` (l. 75) | `CAMAS` al colocar las camas del Valle | Es la definición del mapa de autor; ocurre antes de que exista el registro (y el registro se deriva de ella) |
+| `mundo.gd` `_libre_para_objeto` (l. 215), `_generar_slimes` (l. 245) | `ENTRADA` | Generación del mapa de autor en `_init`, antes del registro; afectaría a la ubicación de objetos y enemigos (pasos 1d/1e) |
+| `mundo.gd` `alcanzables(desde = ENTRADA, …)` (l. 389) | `ENTRADA` como valor por defecto | Es un uso de la constante **fuera de los tres lectores** y es la suposición más profunda: las llamadas `alcanzables()` sin argumento (`punto_inicio`, `construccion_segura`, `sociedad` l. 1009 …) parten siempre de la entrada del Valle. GDScript permite que un valor por defecto invoque un método de la instancia (comprobado), así que se podrá resolver sin cambiar a los llamadores, pero modifica la semántica y queda fuera del alcance de 1b |
+| Pruebas (`prueba.gd`, `prueba_arraigo.gd`, `prueba_sociedad.gd`, `prueba_saberes.gd`, `prueba_desarrollo.gd`, `prueba_casas.gd`, `prueba_carga_crecimiento.gd`, `medir_*.gd`) | constantes | Código de verificación: no cambia |
+
+### 9.4 Respuesta a la preocupación estructural
+- Cambiar constantes por funciones **no esconde el Valle**: los 12 sitios pasan `ID_INICIAL` explícitamente (contables con `grep`) y los lectores no tienen valor por defecto ni unión implícita.
+- Lo que 1b **no** resuelve y queda a la vista: el valor por defecto de `alcanzables` (§9.3), `habitat.gd:45` (`es_valle`), las rutinas de `Habitantes` (lugares del Valle en el paquete de datos), la ubicación de colonos en `reconciliar` y las exclusiones de generación de 1e.
+
+### 9.5 Verificación propuesta para 1b
+1. **Línea base nueva con 1a ya aplicado** y **sin `ignorar`**: `medir_todo.sh production/qa/evidence/mundo-1/fase-1a` (ya generada o por generar antes de tocar nada). Después de 1b: `medir_todo.sh --comparar fase-1a <nueva>` debe dar 8 de 8 «igual» **con los hashes completos**.
+2. `prueba_poblados` actualizado a la nueva firma, con casos de ids válidos, ids inexistentes, aislamiento entre dos pueblos sintéticos y respaldo del registro.
+3. Suites: `prueba`, `prueba_autonomia`, `prueba_sociedad`, `prueba_arraigo`, `prueba_casas_arraigo`, `prueba_crecimiento`, `prueba_desarrollo`, `prueba_saberes`, `prueba_red`, `prueba_proteccion`, `prueba_terreno`, `prueba_fauna` y `prueba_casas`.
+4. **Compuerta de CPU** (no de comportamiento): comparar `tick_medio_us` de `medir_equivalencia` con la línea base de 1a; si sube de forma apreciable, introducir caché por instancia y volver a medir (el umbral concreto se fija con la medición, no se supone).
+5. Un commit por archivo de lógica (6) más uno para la firma y el test, cada uno con su comparación de hashes; cualquier diferencia detiene el paso.
+
+**Riesgos de 1b**: rendimiento de `camas()`/`esenciales()` en bucles (§9.2 filas 1, 2, 4, 7, 10, 11); semántica de la unión mal aplicada en sitios de alcanzabilidad (filas 9 y 12); archivos que otras sesiones también editan (`sociedad.gd`, `habitantes.gd`).
