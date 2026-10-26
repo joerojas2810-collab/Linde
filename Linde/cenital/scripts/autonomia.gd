@@ -8,6 +8,8 @@ const Inv = preload("res://scripts/inventario.gd")
 const Asentamientos = preload("res://scripts/asentamientos.gd")
 const Sociedad = preload("res://scripts/sociedad.gd")
 const Desarrollo = preload("res://scripts/desarrollo.gd")
+const Tareas = preload("res://scripts/tareas.gd")
+var tareas
 var desarrollo
 var asentamientos
 var sociedad
@@ -16,6 +18,7 @@ var reglas: Dictionary
 
 func _init(juego) -> void:
 	j = juego
+	tareas = Tareas.new(self)
 	reglas = JSON.parse_string(FileAccess.get_file_as_string("res://datos/autonomia/reglas.json"))
 	sociedad = Sociedad.new(self)
 	asentamientos = Asentamientos.new(self)
@@ -83,7 +86,7 @@ func _recordar(nid: String, hecho: String, detalle: String, actor: String = "") 
 
 ## Avanza necesidades una sola vez por minuto; tras reinicio no repite consumo ni trabajo.
 func paso() -> void:
-	if not activa(): return
+	if not activa() or not j.es_autoridad(): return
 	var a: Dictionary = j.d.mundo_vivo.autonomia
 	var ahora: int = j.d.min
 	if ahora <= int(a.ultimo_min): return
@@ -104,6 +107,7 @@ func paso() -> void:
 		# Descanso y sueño conservan prioridad. No se fabrica caminando o desde la cama.
 		var rutina: Dictionary = j.habitantes.rutina(nid)
 		if rutina.act in ["dormir", "descansar"]:
+			tareas.cancelar(nid, "descanso")
 			n.plan = {}
 			continue
 		if ahora - int(n.accion_min) < int(reglas.intervalo_accion_min): continue
@@ -168,6 +172,18 @@ func necesidad(nid: String) -> Dictionary:
 	return {"estacion": receta.est, "motivo": "fabricar " + C.ITEMS[producto].n}
 
 func _decidir(nid: String) -> void:
+	var antes: Dictionary = estado(nid).inv.duplicate(true)
+	if not sociedad.activa():
+		var meta := necesidad(nid)
+		if not meta.is_empty(): tareas.iniciar(nid, meta)
+		else: tareas.cancelar(nid, "necesidad_satisfecha")
+	_elegir(nid)
+	if not sociedad.activa(): tareas.resultado(nid, antes, estado(nid).plan.get("act", "") != "pedir")
+	# Una ocupación ajena al aprovisionamiento interrumpe su reclamo anterior.
+	if sociedad.activa() and not tareas.visitados.get(nid, false): tareas.cancelar(nid, "otra_ocupacion")
+	tareas.visitados.erase(nid)
+
+func _elegir(nid: String) -> void:
 	if sociedad.activa():
 		sociedad.decidir(nid)
 		return
@@ -182,6 +198,7 @@ func _decidir(nid: String) -> void:
 			n.plan = _pedir(nid, falta.motivo)
 			_recordar(nid, "sin_recurso", falta.item)
 			return
+		if not tareas.reclamar(nid, objetivo): return
 		var celda: Vector2i = j.mundo.objetos[objetivo].c
 		n.plan = {"act": "recolectar", "celda": [celda.x, celda.y], "objeto": objetivo, "motivo": falta.motivo}
 		var actual := Mundo.celda_de(j.habitantes.pos(nid))
@@ -267,6 +284,7 @@ func _recurso(nid: String, item: String) -> String:
 		var o: Dictionary = j.mundo.objetos[oid]
 		if not expediciones() and not Mundo.es_valle(o.c): continue
 		if j.mundo.objeto_presente(o.c) != oid or not C.OBJETOS.has(o.t): continue
+		if not tareas.disponible(nid, oid): continue
 		if sociedad.activa() and not sociedad.permite_recurso(nid, oid): continue
 		if not conoce(nid, o.c): continue
 		var def: Dictionary = C.OBJETOS[o.t]

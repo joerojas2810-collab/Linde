@@ -10,6 +10,25 @@
       "entrada": [0, 0],
       "mobiliario": [{"t": "cama", "d": [-2, -4]}, {"t": "cofre", "d": [2, -4]}],
       "etapas": ["suelo", "estructura", "mobiliario", "cubierta"]
+    },
+    "taller": {
+      "nombre": "Taller",
+      "familia": "taller",
+      "area": [-3, -5, 7, 6],
+      "interior": [-2, -4, 5, 4],
+      "entrada": [0, 0],
+      "mobiliario": [{"t": "mesa", "d": [-2, -4]}, {"t": "horno", "d": [2, -4]}, {"t": "cofre", "d": [2, -2]}],
+      "etapas": ["suelo", "estructura", "mobiliario", "cubierta"]
+    },
+    "casa_regional": {
+      "nombre": "Casa comunal",
+      "familia": "vivienda",
+      "area": [-3, -5, 7, 6],
+      "interior": [-2, -4, 5, 4],
+      "entrada": [0, 0],
+      "mobiliario": [{"t": "cama_huesped", "d": [-2, -4]}, {"t": "cama_huesped", "d": [2, -4]}, {"t": "cofre", "d": [0, -4]}, {"t": "mesa", "d": [-2, -2]}, {"t": "horno", "d": [2, -2]}, {"t": "puesto", "d": [0, -2]}],
+      "etapas": ["suelo", "estructura", "mobiliario", "cubierta"],
+      "solo_generacion": true
     }
   }
 }

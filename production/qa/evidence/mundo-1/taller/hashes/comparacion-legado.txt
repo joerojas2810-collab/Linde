@@ -1,0 +1,4 @@
+PASS semilla=123: 5/5 lineas de estado completo identicas al cierre de vivienda, sin excluir claves.
+MEDIDA_ESTADO semilla=123 final=true dias=4 hash_estado=500b011b52c66364 habitantes=5
+PASS semilla=456: 5/5 lineas de estado completo identicas al cierre de vivienda, sin excluir claves.
+MEDIDA_ESTADO semilla=456 final=true dias=4 hash_estado=2dfdd6ffb432ac55 habitantes=5

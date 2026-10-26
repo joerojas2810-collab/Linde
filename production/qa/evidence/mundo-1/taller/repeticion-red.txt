@@ -1,0 +1,5 @@
+SUITE                      SALIDA   PASS   FAIL  RESULTADO
+prueba_vivienda_red            0     33      0  OK
+prueba_taller_red              1     35      1  FALLA
+---
+1 de 2 suites sin fallos. Salidas completas en: /tmp/linde-taller-identidad-final

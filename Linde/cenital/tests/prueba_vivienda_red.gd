@@ -50,7 +50,7 @@ func bot(nombre: String,puerto: int)->void:
    r.sin_cobro=cli.j.jug().inv=={"madera":1,"fibra":1}
    r.vio_reparacion=await esperar(func():return cli.j.d.mundo.techos.has(J.Mundo.clave(c+Vector2i(0,-3))))
   r.cofre=cli.j.d.cofres[cid].inv=={"madera":3}
-  r.identidad=cli.j.mundo.edificio_en(c).id==eid and cli.j.d.mundo.registro.edificios.size()==1
+  r.identidad=cli.j.mundo.edificio_en(c).id==eid and cli.j.d.mundo.registro.edificios.values().filter(func(ed):return ed.id==eid).size()==1
  FileAccess.open(carpeta+"/"+nombre+".json",FileAccess.WRITE).store_string(JSON.stringify(r))
  cli.cerrar();quit()
 func servidor()->void:

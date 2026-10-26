@@ -555,7 +555,8 @@ func _armar() -> void:
 			var e: Dictionary = j.d.mundo.get("registro",{}).get("edificios",{}).get(edificio_id,{})
 			if e.is_empty(): return
 			_l(e.nombre + " · plano terminado")
-			_parrafo("Entrada sur · cama y cofre en un interior continuo. Las puertas se abren automáticamente al acercarse.")
+			_parrafo("Entrada sur · interior continuo y puertas automáticas.")
+			_parrafo("Servicios: " + ", ".join(J.Edificios.servicios(e)))
 			var coste: Dictionary = J.Edificios.coste(J.Edificios.faltantes(j,e))
 			_l("Estado: " + ("completa" if coste.is_empty() else "necesita reparación"))
 			if not coste.is_empty():
@@ -943,11 +944,12 @@ func _pista() -> String:
 			return "E: examinar " + str(lugar.nombre) if not lugar.is_empty() else "Espacio: golpear %s" % C.OBJETOS[ot].n
 		var cs: Dictionary = j.mundo.constr_en(c)
 		if cs.get("t", "") == "cofre": return "E: abrir cofre"
+		if cs.get("t", "") in ["mesa","horno"] and not j.mundo.edificio_en(c).is_empty(): return "E: fabricar (%s)" % C.CONSTR[cs.t].n.to_lower()
 		if cs.get("t", "") == "campo": return "E: cosechar" if int(cs.get("listo", 0)) <= int(j.d.min) else "El cultivo aún crece"
 		if cs.get("t", "") == "cama": return "E: dormir" if cs.get("dueno", "") == J.LOCAL else ("Cama de otro jugador" if cs.propia else "Cama de un habitante")
 	for r in j.autonomia.asentamientos.visibles():
 		if r.pos.distance_to(j.pies) <= J.ALCANCE_NPC: return "E · Hablar con " + r.nombre + "   V · Conocer a esta persona"
-	if not j.mundo.edificio_en(base+j.mira).is_empty() or not j.mundo.edificio_en(base).is_empty(): return "E: consultar vivienda y reparación"
+	if not j.mundo.edificio_en(base+j.mira).is_empty() or not j.mundo.edificio_en(base).is_empty(): return "E: consultar edificio y reparación"
 	var est: String = j.estacion_junto()
 	if est != "": return "E: fabricar (%s)" % C.CONSTR[est].n.to_lower()
 	var lugar: Dictionary = j.mundo.lugar_en(base)
@@ -1327,6 +1329,9 @@ func _dibujar_constr(c: Vector2i) -> void:
 		abierta = J.Edificios.puerta_abierta(c,posiciones)
 	var alfa := 1.0
 	if not e.is_empty() and cs.t in ["muro","muro_ladrillo"] and c.y == int(e.entrada[1]) and J.Edificios.abierto(e,j.pies): alfa = 0.18
+	if cs.t=="puesto" and not e.is_empty():
+		arte_mundo.detalle(self,"letrero",Mundo.pies_de_celda(c))
+		return
 	arte_mundo.constr(self, cs.t, c, abierta, Color(1,1,1,alfa), j.campo_listo(c))
 
 ## La puerta se ve abierta con el jugador a una celda o menos (solo presentación; la colisión no cambia).
@@ -1367,11 +1372,11 @@ func _ficha_cercana()->void:
 
 ## El catálogo encabeza la construcción jugada; piezas antiguas siguen como opciones auxiliares hasta incorporar taller/depósito.
 func _opciones_construccion() -> Array:
-	return ["vivienda"] + C.ORDEN_CONSTR if j.mundo.modo_inicio()=="poblado" else C.ORDEN_CONSTR
+	return ["vivienda", "taller"] + C.ORDEN_CONSTR if j.mundo.modo_inicio()=="poblado" else C.ORDEN_CONSTR
 
 ## Metadatos de la selección para que HUD y vista previa no dupliquen catálogo ni precios.
 func _info_construccion() -> Dictionary:
 	var id: String = _opciones_construccion()[pieza_i]
 	if J.Edificios.catalogo().planos.has(id):
-		return {"n":"Vivienda (acceso sur)", "coste":J.Edificios.coste(J.Edificios.plano(id,Mundo.celda_de(j.pies)+j.mira,J.LOCAL))}
+		return {"n":J.Edificios.catalogo().planos[id].nombre + " (acceso sur)", "coste":J.Edificios.coste(J.Edificios.plano(id,Mundo.celda_de(j.pies)+j.mira,J.LOCAL))}
 	return C.CONSTR[id]

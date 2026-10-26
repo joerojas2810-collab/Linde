@@ -854,6 +854,15 @@ func _prospectar(nid: String) -> bool:
 	return false
 
 func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: String) -> bool:
+	if not cadena.is_empty(): return _obtener_material(nid, item, cantidad, cadena, motivo)
+	a.tareas.visitados[nid] = true
+	a.tareas.iniciar(nid, {"item": item, "cantidad": cantidad, "motivo": motivo})
+	var antes: Dictionary = a.estado(nid).inv.duplicate(true)
+	var viable := _obtener_material(nid, item, cantidad, cadena, motivo)
+	a.tareas.resultado(nid, antes, viable)
+	return viable
+
+func _obtener_material(nid: String, item: String, cantidad: int, cadena: Array, motivo: String) -> bool:
 	if cadena.size()>8: return false
 	var n: Dictionary = a.estado(nid)
 	var gid := grupo_de(nid)
@@ -921,7 +930,7 @@ func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: S
 
 func _recolectar(nid: String, oid: String, motivo: String) -> bool:
 	var o: Dictionary=j.mundo.objetos[oid]
-	if not permite_recurso(nid,oid): return false
+	if not permite_recurso(nid,oid) or not a.tareas.reclamar(nid, oid): return false
 	if not _ir(nid,o.c,"recolectar",motivo): return true
 	var def: Dictionary=C.OBJETOS[o.t]
 	var golpe: int=int(j.d.mundo.golpes.get(oid,0))+1

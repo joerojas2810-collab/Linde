@@ -157,9 +157,9 @@ func _arrancar(nuevo: bool = false) -> void:
 	habitantes = Hab.new(self)
 	habitantes.restaurar()
 	autonomia = Autonomia.new(self)
-	if nuevo: autonomia.asentamientos.inicializar_preexistentes()
 	combate = Comb.new(self)
 	combate.reiniciar()
+	if nuevo: autonomia.asentamientos.inicializar_preexistentes()
 	evaluar_misiones()
 
 func _sesion(id: String) -> void:
@@ -673,7 +673,7 @@ func ocupada(c: Vector2i) -> bool:
 
 func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
 	if Edificios.catalogo().planos.has(pieza): return construir_edificio(pieza,c,id)
-	if not mundo.edificio_en(c).is_empty(): return _no("Usa el plano de reparación de la vivienda",id)
+	if not mundo.edificio_en(c).is_empty(): return _no("Usa el plano de reparación del edificio",id)
 	var pj := jug(id)
 	if not C.CONSTR.has(pieza): return _no("Pieza desconocida", id)
 	var def: Dictionary = C.CONSTR[pieza]
@@ -726,7 +726,7 @@ func cosechar(c: Vector2i) -> Dictionary:
 	return C.CAMPO_COSECHA.duplicate()
 
 func retirar(c: Vector2i, id: String = LOCAL) -> Dictionary:
-	if not mundo.edificio_en(c).is_empty(): return _no("La vivienda se modifica mediante reparación o ampliación",id)
+	if not mundo.edificio_en(c).is_empty(): return _no("El edificio se modifica mediante reparación o ampliación",id)
 	var pj := jug(id)
 	var k := Mundo.clave(c)
 	var cs: Dictionary = mundo.constr_en(c)
@@ -853,6 +853,7 @@ func interactuar(id: String = LOCAL) -> Dictionary:
 		var cs := mundo.constr_en(c)
 		if cs.is_empty(): continue
 		if cs.t == "cofre": return {"ok": true, "panel": "cofre", "id": "c@" + Mundo.clave(c)}
+		if C.CONSTR[cs.t].get("est","") != "" and not mundo.edificio_en(c).is_empty(): return {"ok":true,"panel":"craft"}
 		if cs.t == "campo":
 			var falta := int(cs.get("listo", 0)) - int(d.min)
 			if falta > 0: return {"ok": false, "r": _no("El cultivo crece: faltan %d h" % ceili(falta / 60.0), id)}
@@ -1099,6 +1100,7 @@ func construir_edificio(tipo: String, entrada: Vector2i, id: String = LOCAL) -> 
 	if not es_autoridad() or not rt.has(id): return _no("Solo la autoridad construye",id)
 	var c := Mundo.celda_de(pies_de(id))
 	if maxi(absi(c.x-entrada.x),absi(c.y-entrada.y)) > 2: return _no("Acércate al acceso sur",id)
+	if Edificios.catalogo().planos.get(tipo,{}).get("solo_generacion",false): return _no("Plano de comunidad preexistente",id)
 	var e := Edificios.plano(tipo,entrada,id)
 	if e.is_empty(): return _no("Plano desconocido",id)
 	var coste := Edificios.coste(e)
@@ -1107,19 +1109,19 @@ func construir_edificio(tipo: String, entrada: Vector2i, id: String = LOCAL) -> 
 	if motivo != "": return _no(motivo,id)
 	Inv.quitar(jug(id).inv,coste)
 	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",coste)
-	return _ok("Vivienda terminada. Entra por la puerta sur; E permite consultar y reparar.",id)
+	return _ok(e.nombre + ": obra terminada. Entra por la puerta sur; E permite consultar y reparar.",id)
 
 ## Reparación limitada, con revisión optimista y precio de los faltantes reales. No sobrescribe muebles o inventarios.
 func reparar_edificio(eid: String, revision: int, id: String = LOCAL) -> Dictionary:
 	if not es_autoridad() or not rt.has(id): return _no("Solo la autoridad repara",id)
 	var e: Dictionary = d.mundo.get("registro",{}).get("edificios",{}).get(eid,{})
-	if e.is_empty() or e.dueno != id: return _no("Esa vivienda no es tuya",id)
-	if int(e.revision) != revision: return _no("La vivienda cambió; revisa el plano antes de reparar",id)
+	if e.is_empty() or e.dueno != id: return _no("Esta construcción no es tuya",id)
+	if int(e.revision) != revision: return _no("El edificio cambió; revisa el plano antes de reparar",id)
 	var entrada := Vector2i(e.entrada[0],e.entrada[1])
-	if not Edificios.abierto(e,pies_de(id)): return _no("Acércate a la vivienda",id)
+	if not Edificios.abierto(e,pies_de(id)): return _no("Acércate al edificio",id)
 	var f := Edificios.faltantes(self,e)
 	var coste := Edificios.coste(f)
-	if coste.is_empty(): return _no("La vivienda está completa",id)
+	if coste.is_empty(): return _no("El edificio está completo",id)
 	if not Inv.tiene(jug(id).inv,coste): return _no("Faltan materiales: "+_txt_items(coste),id)
 	for k in f.piezas:
 		var c := Edificios._celda(k)
@@ -1148,4 +1150,4 @@ func reparar_edificio(eid: String, revision: int, id: String = LOCAL) -> Diction
 	mundo.cambiar()
 	Inv.quitar(jug(id).inv,coste)
 	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",coste)
-	return _ok("Vivienda reparada",id)
+	return _ok("Edificio reparado",id)

@@ -26,7 +26,7 @@ func bot(nombre: String, puerto: int) -> void:
   resultado.identidad=puesto.residentes.size()==2 and not c.j.habitantes.ids.has(nid) and a.residente(nid).hogar==pid
   bandera(nombre+".listo")
   resultado.situado=await esperar(func():return FileAccess.file_exists(carpeta+"/situados") and c.j.pies.distance_to(a.posicion(nid))<J.ALCANCE_NPC)
-  c.j.mira=Vector2i.UP
+  c.j.mira=Vector2i.DOWN
   c.j.interactuar()
   resultado.dialogo=await esperar(func():return dialogo.ok)
   if nombre=="A":
@@ -65,12 +65,12 @@ func servidor() -> void:
  ok(await esperar(func():return FileAccess.file_exists(carpeta+"/A.listo") and FileAccess.file_exists(carpeta+"/B.listo")),"dos clientes reciben las comunidades persistidas")
  for id in j.rt:
   if id==J.LOCAL:continue
-  j.rt[id].pies=J.Mundo.pies_de_celda(Vector2i(p.centro[0],p.centro[1]+1))
+  j.rt[id].pies=J.Mundo.pies_de_celda(Vector2i(p.centro[0],p.centro[1]-1))
   j.jug(id).inv={"madera":3} if j.jug(id).nombre=="VisitanteA" else {}
  j.actualizar_regiones()
  bandera("situados")
  ok(await esperar(func():return FileAccess.file_exists(carpeta+"/retiro")),"los dos clientes operan sobre el mismo depósito")
- j.mundo.quitar(Vector2i(p.centro[0]+1,p.centro[1]))
+ j.mundo.quitar(Vector2i(puesto.camas[0][0],puesto.camas[0][1]))
  a.actualizar()
  await esperar(func():return FileAccess.file_exists(carpeta+"/A.json") and FileAccess.file_exists(carpeta+"/B.json"),240)
  for n in ["A","B"]:

@@ -1,0 +1,25 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS demanda equivalente conserva identidad y reclamo único del actor
+PASS dos tareas no reclaman el mismo recurso
+PASS interrupción libera recurso
+PASS tarea usa fabricación existente
+PASS resultado consume insumos reales
+PASS resultado causal y cierre de tarea satisfecho
+PASS fallo sin efecto libera reclamo y conserva causa
+PASS fallo idéntico no llena historial
+PASS ejecutor sin fuentes no inventa una solución
+PASS bloqueo real conserva demanda sin crear bienes
+PASS descanso del NPC interrumpe su tarea desde paso
+PASS guardado real
+PASS carga conserva IDs, demandas, tareas y resultados
+PASS mismo minuto no repite resultado
+PASS bienvenida replica contrato persistente
+PASS cliente no ejecuta ni cancela trabajo
+TAREAS: 16 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 67 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 14 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

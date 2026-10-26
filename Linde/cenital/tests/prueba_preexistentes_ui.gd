@@ -22,11 +22,16 @@ func _init() -> void:
  j.pies=M.pies_de_celda(Vector2i(lugar.entrada[0],lugar.entrada[1]))
  j.actualizar_regiones();j.actualizar_mapa()
  ok(j.Exploracion.hitos(j,J.LOCAL).any(func(h):return h.get("id","")==pid and h.fuente=="visto"),"la visita confirma la comunidad en el mapa personal")
- j.pies=M.pies_de_celda(Vector2i(p.centro[0],p.centro[1]+3))
+ j.pies=M.pies_de_celda(Vector2i(p.centro[0],p.centro[1]-1))
  j.mira=Vector2i.UP
  tecla(e,KEY_E)
  ok(e.panel=="cofre" and e.cofre_id==a.datos().puestos[p.puesto].cofre,"E abre el depósito apuntado aunque haya un residente cerca")
  tecla(e,KEY_ESCAPE)
+ for dx in [-1,1]:
+  j.pies=M.pies_de_celda(Vector2i(p.centro[0]+dx,p.centro[1]));j.mira=Vector2i(dx,0)
+  tecla(e,KEY_E)
+  ok(e.panel=="craft","E prioriza la estación interior apuntada sobre el residente cercano")
+  tecla(e,KEY_ESCAPE)
  j.pies=a.posicion(r.id)
  j.mira=Vector2i.DOWN
  tecla(e,KEY_E)

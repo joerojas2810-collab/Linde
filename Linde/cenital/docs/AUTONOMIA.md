@@ -65,3 +65,21 @@ Las pruebas nuevas guardan sus partidas en `/tmp/`. `tests/captura_sociedad.gd` 
 ## Crecimiento y exterior (25/10)
 
 Las obras conservan solares y accesos, reintentan piezas bloqueadas y reconocen recetas aprendidas. Los puestos regionales son una simulación resumida separada de las rutinas completas del valle. Detalles, costes y límites en [CRECIMIENTO_Y_ASENTAMIENTOS.md](CRECIMIENTO_Y_ASENTAMIENTOS.md).
+
+## Fase 6 — primer bloque causal (26/10/2026)
+
+Implementación autorizada por el usuario sobre el [diseño maestro de Arena](../../../docs/investigacion/Diseno_Maestro_Fase6_Linde.md). Sus recomendaciones no sustituyen decisiones aprobadas. Contraste acotado: `Autonomia.necesidad` y `Sociedad.objetivos/_obtener` ya generan carencias y cadenas de insumos; `_recurso/_estacion/_ir` comprueban acceso; `comprometer/reserva` y acuerdos ya protegen materiales privados/garantías. `Guardado` y la bienvenida/eventos fiables ya transportan `mundo_vivo`. Se amplían estos contratos, sin otro planificador, inventario, sistema de pueblos o umbral económico.
+
+`tareas.gd` conserva `mundo_vivo.autonomia.trabajo` versión 1: secuencia monotónica, una demanda/tarea activa por actor y resultados acotados por el tope existente de recuerdos. Una demanda equivalente (actor, ítem, motivo) conserva ID; su cantidad se actualiza desde la necesidad real. Las subrecetas siguen dentro de esa tarea, sin multiplicar órdenes. Estados: reclamada o bloqueada; completar/cancelar deja resultado y retira la tarea activa.
+
+- El aprovisionamiento de Sociedad y el modo básico de necesidades reutilizan sus ejecutores. Se registra el delta real de mochila por intento, incluida producción intermedia, y el recurso reclamado. No se vuelve a aplicar un resultado guardado.
+- Un recurso reclamado por una tarea de aprovisionamiento queda fuera de la búsqueda de otros actores hasta liberar el reclamo. Se revalidan accesibilidad y existencias con el código existente en cada decisión. Descanso, otra ocupación, cambio de necesidad, bloqueo y efecto material liberan el reclamo.
+- Las reservas de insumos personales conservan `comprometido/compromiso_hasta`; las garantías de acuerdos siguen bajo Sociedad. No se inventa reserva de un stock comunitario abstracto ni se cancelan garantías por interrumpir una tarea. No hay una nueva reserva material que devolver.
+- Bloqueos conservan causa `sin_opcion_factible`; el ejecutor actual registra detalles en recuerdos/sucesos y decide el reintento con `bloqueos/reintento_min`. La tarea no introduce otro temporizador. El historial suprime repeticiones consecutivas del mismo bloqueo.
+- Solo autoridad ejecuta/cancela. Guardados anteriores obtienen el contenedor al primer uso, sin cambiar formato ni balance. La réplica lo recibe por las vías existentes; no hay nuevos pedidos de cliente.
+
+**Alcance:** aprovisionamiento individual detallado, incluida su cadena de receta; no todo movimiento económico. El delta de mochila puede incluir trueque/retirada, por lo que no equivale a producción neta mundial. Construcción, enseñanza, consumo automático y acuerdos conservan sus registros propios. Las demandas colectivas aún no deducen trabajo de todos los actores; los pueblos resumidos no usan este contrato todavía. No se declara cerrado el diseño completo de Fase 6 ni la etapa económica colectiva. La prioridad/continuidad sigue siendo la del selector existente.
+
+**Verificación puntual (26/10):** `prueba_tareas.gd` 16 comprobaciones (fabricación real, reclamo exclusivo/liberación, bloqueo real, descanso, persistencia y bienvenida de réplica, autoridad); regresiones `prueba_autonomia.gd` 33 y `prueba_sociedad.gd` 48. No son pruebas con clientes conectados por sockets ni de Internet. Permanecen avisos del motor sobre certificados y recursos al cerrar.
+
+**Siguiente bloque:** agregar demanda colectiva y descontar stock accesible, compromisos y trabajo en curso, reutilizando depósitos/grupos y `Asentamientos`; después integrar la economía resumida con balances conservativos. Sin comercio nuevo, migración ni fundación todavía.
