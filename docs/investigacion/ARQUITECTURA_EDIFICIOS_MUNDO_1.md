@@ -1,6 +1,6 @@
 # Construcciones y catálogo de edificios de Linde
 
-Fecha: 26/10/2026. **Diagnóstico y propuesta; no es una decisión aprobada ni una implementación.** La última precisión del usuario prioriza un catálogo limitado de edificios completos y funcionales, reemplazando la propuesta anterior de construcción libre por piezas. Se pausa la ampliación de asentamientos de Fase 5 hasta resolver esta arquitectura. No se interviene en cuentas/autenticación ni se inicia Fase 6.
+Fecha: 26/10/2026. **Arquitectura aprobada posteriormente por el usuario; diagnóstico histórico y contrato de la primera implementación al final.** La última precisión del usuario prioriza un catálogo limitado de edificios completos y funcionales, reemplazando la propuesta anterior de construcción libre por piezas. El usuario aprobó vivienda/taller/depósito y priorizó primero una vivienda terminada, preparando etapas futuras sin bloquear Fase 5. No se interviene en cuentas/autenticación ni se inicia Fase 6.
 
 ## Conclusión
 
@@ -122,3 +122,29 @@ Criterios de aceptación: acceso evidente al verlo, entrar/circular/salir con mo
 ## Verificación y límites de esta revisión
 
 Lectura directa de scripts, plantillas JSON, pruebas vigentes y capturas de Fase 5a. No existía `graphify-out/graph.json`; no se construyó un grafo general para esta auditoría acotada. La batería ya ejecutada de Fase 5 incluye `prueba_casas` (13 PASS), `prueba_casas_arraigo` (3 PASS) y crecimiento/red. Esas pruebas validan sus contratos actuales; **no prueban** el catálogo propuesto ni resuelven claridad visual o una habitación arbitraria. La revisión arquitectónica no cambió scripts de juego ni ejecutó otra batería. El código de Fase 5a implementado antes de esta solicitud queda separado de esta propuesta.
+
+
+## 7. Primera vivienda implementada y validada (26/10)
+
+La aprobación `M1-ED1` confirma las tres familias, puertas automáticas y modificaciones por reparación/ampliación. La construcción progresiva mediante planos es la dirección futura, **no un requisito previo para expandir el mundo**. Esta entrega hace funcionar primero una vivienda terminada. No implementa taller, depósito, ampliaciones o un ejecutor completo de etapas, ni sustituye aún las viviendas/puestos anteriores.
+
+### Contrato aplicado
+
+- `datos/edificios/catalogo_v1.json`: tres familias declaradas y solo el plano `vivienda` disponible. Huella 7×6, interior 5×4, entrada al sur, cama y cofre. Etapas previstas: suelo, estructura, mobiliario y cubierta.
+- `scripts/edificios.gd`: resuelve el plano por coordenadas globales, calcula precio con las piezas existentes, valida solar/accesos y materializa una única instancia terminada. Servicio común utilizable por futura génesis/obra; el flujo pagado actual entra por `Juego.construir`.
+- Identidad `edificio@<entrada>` independiente de la cama. `mundo.registro.edificios` guarda plano/version, geometría resuelta, dueño, referencia de pueblo, revisión y etapas. No copia inventarios, habitantes ni objetos; el catálogo no se reejecuta al cargar.
+- `mundo.registro.pisos` separa suelo construido de ocupantes; muros/cama/cofre permanecen en `mundo.constr`, cubierta en `mundo.techos`, inventario en `d.cofres`. `Desarrollo.suelo` cuenta también los suelos nuevos, sin contar dos veces la misma celda. Despejes persistentes evitan restos/regeneración de vegetación dentro del edificio.
+- 21 muros, una puerta, cama, cofre vacío, 20 suelos y 41 techos: **114 madera y 45 fibra**, suma exacta de costos unitarios existentes. El porche/umbral queda sin teja para que la puerta se vea. No hay provisiones iniciales ni nuevos bonos o multiplicadores. El pago del plano es único; no se vuelve a cobrar por pieza.
+- Solar libre, acceso sur despejado, ocupación y rutas se validan antes de instalar/cobrar. Simulación temporal de la huella sin `await`, restaurada antes de confirmar. No se borra un depósito previo para insertar el edificio.
+- Una máscara exacta de cubierta por instancia evita unir viviendas adyacentes por simple contigüidad o rellenar huecos por rectángulo envolvente. Cubierta y paredes frontales se atenúan localmente en el interior/umbral. La puerta se ve abierta al acercarse un actor; sigue siendo transitable, sin llave ni nueva regla de acceso.
+- `Sociedad.casa_completa` reconoce las viviendas del catálogo y mantiene el bono ya existente en la configuración. Los faltantes invalidan ese cumplimiento. La navegación de NPC junto a una vivienda exterior usa el área local del terreno; no se amplían expediciones ni se añade migración/materialización de población.
+- Construcción libre y retirada de componentes se rechazan dentro de la huella tanto para jugador como para NPC. Reparar usa costo de faltantes, dueño y revisión; valida ocupación y accesibilidad, preserva contenido de cofres y rechaza una revisión obsoleta. Los cambios por APIs de piezas incrementan la revisión del edificio. Ampliación/demolición integral pendientes de su contrato, sin borrar contenidos silenciosamente.
+- Multijugador usa el registro/diferencias fiables existentes. Se amplía la intención de construir para aceptar el plano y se añade intención de reparación con ID/revisión. No se modifica identificación, cuentas o autenticación. El catálogo entra en la huella de reglas: servidor y clientes deben usar esta revisión. Guardado rechaza una versión de edificio futura; no se diseña migración de partidas anteriores.
+
+### Experiencia jugable y validación
+
+En modo poblado, **B** ofrece primero Vivienda; Q/E permite cambiar opciones y Espacio coloca la huella frente al jugador. Situarse al sur mirando arriba permite colocar la puerta sin ocupar la huella. El HUD y la vista previa usan el mismo plano/precio que la autoridad. Se necesita limpiar el solar y reunir los materiales. **E** en la entrada consulta la unidad y ofrece reparación; dentro se usan cama y cofre con sus interacciones habituales. La paleta anterior continúa como auxiliar para no retirar estaciones/cultivos antes de contar con sus edificios de catálogo.
+
+Pruebas: núcleo **29 PASS**, UI **8 PASS**, dos clientes ENet reales **33 PASS**; batería completa **42/43 suites sin fallos**, único FAIL histórico del manifiesto de arte. Estado completo de legado idéntico al cierre anterior durante cuatro días en semillas 123/456, sin excluir claves. Evidencia y capturador en `production/qa/evidence/mundo-1/vivienda/` y `tests/captura_vivienda.gd`.
+
+Las pruebas preparan solares, posiciones y asignación de cama del NPC; verifican recorrido real, descanso y persistencia, no un proceso autónomo de mudanza o construcción NPC. Los faltantes para reparar se preparan desde el escenario, sin añadir destrucción automática. Se inspeccionaron capturas de exterior, puerta, interior, cofre, reparación y NPC durmiendo. Sin playtest humano prolongado, Internet real o afirmación de equilibrio económico de largo plazo. La apariencia reutiliza recursos existentes; no se añade una nueva colección de arte.
