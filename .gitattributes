@@ -5,3 +5,7 @@
 *.png binary
 *.zip binary
 *.exe binary
+
+# Estos JSON se verifican por SHA-256: conservar los bytes LF también en Windows.
+Linde/cenital/arte/mundo/*.json text eol=lf
+Linde/cenital/arte/interfaz/ICONOS_POR_ID.json text eol=lf

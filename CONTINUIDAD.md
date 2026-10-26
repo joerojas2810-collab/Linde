@@ -45,3 +45,7 @@ Trabajo autorizado y separado de Fase 5 en `feature/cuentas`, base Fase 4 `6bb89
 Validación de esta rama: cuatro casos unitarios Python; 35 comprobaciones de integración con procesos reales; cinco de autoguardado/cierre inesperado; interfaz iniciando/cerrando en 7777/7778; regresión final **36 de 37 suites**. Permanece únicamente el fallo previo de hashes E04/E05; las adaptaciones de rutas temporales y CRLF para probar en Windows están detalladas. Localhost y conexión a la IP LAN propia ejecutados; **no otra computadora ni Internet real**. No se incorporó la skin en pausa.
 
 Leer [CUENTAS_Y_SERVIDOR](Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md), [ADR-0002](docs/architecture/adr-0002-cuentas-locales-seguras.md) e [informe](production/qa/evidence/cuentas/INFORME.md). Iniciar desde `Iniciar-Servidor.bat` después de `Instalar-Cuentas.bat`. El comando histórico `--servidor` sigue siendo legado sin cifrado; no es la entrada nueva para Internet. Coordinar cambios compartidos de escena/HUD/red y documentación antes de integrar con IA 1; esta rama no se fusionó con main.
+
+### Hashes de arte revisados (26/10/2026)
+
+El fallo previo E04/E05 quedó corregido: CRLF del checkout Windows y un hash de catálogo pendiente de actualizar desde el arte aprobado `44f6f09`. Se mantienen los PNG y las entradas originales; manifiesto con procedencia y JSON fijados a LF. Auditoría 96/96, general 330/0 y visual 60/0; informe en `production/qa/evidence/arte-hashes/INFORME.md`. No asumir que se repitió toda la batería histórica. La corrección es separable de la rama de cuentas.

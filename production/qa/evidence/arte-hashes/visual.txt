@@ -1,0 +1,67 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS A1 icono reutilizado: hacha_cobre
+PASS A1 nombre real: hacha_cobre
+PASS A1 icono reutilizado: pico_cobre
+PASS A1 nombre real: pico_cobre
+PASS A1 exactamente siete iconos pendientes, sin ocultar carencias
+PASS A1 hash vigente del mapa en manifiesto
+PASS A2 herramienta aceptada: arbol
+PASS A2 misma extracción y estado persistente que acción original: arbol
+PASS A2 orientación posterior no cambia la herramienta del golpe: arbol
+PASS A2 herramienta termina con la animación: arbol
+PASS A2 herramienta aceptada: roca
+PASS A2 misma extracción y estado persistente que acción original: roca
+PASS A2 orientación posterior no cambia la herramienta del golpe: roca
+PASS A2 herramienta termina con la animación: roca
+PASS A2 herramienta aceptada: veta
+PASS A2 misma extracción y estado persistente que acción original: veta
+PASS A2 orientación posterior no cambia la herramienta del golpe: veta
+PASS A2 herramienta termina con la animación: veta
+PASS A2 herramienta aceptada: veta_cobre
+PASS A2 misma extracción y estado persistente que acción original: veta_cobre
+PASS A2 orientación posterior no cambia la herramienta del golpe: veta_cobre
+PASS A2 herramienta termina con la animación: veta_cobre
+PASS A2 herramienta aceptada: veta_estano
+PASS A2 misma extracción y estado persistente que acción original: veta_estano
+PASS A2 orientación posterior no cambia la herramienta del golpe: veta_estano
+PASS A2 herramienta termina con la animación: veta_estano
+PASS A2 herramienta aceptada: arcilla
+PASS A2 misma extracción y estado persistente que acción original: arcilla
+PASS A2 orientación posterior no cambia la herramienta del golpe: arcilla
+PASS A2 herramienta termina con la animación: arcilla
+PASS A2 sin pico: rechazo sin herramienta visual
+PASS A2 extracción bajo los pies usa el objetivo real
+PASS A2 último golpe mantiene pico sobre recurso agotado
+PASS A2 inventario lleno: rechazo sin pico visual
+PASS A3 sueño efectivo conserva orientación: dormir(0, 1)
+PASS A3 sueño efectivo conserva orientación: sin_cama(0, 1)
+PASS A3 descanso sin sueño: (0, 1)
+PASS A3 desplazamiento: (0, 1)
+PASS A3 no inventa trabajo A4: (0, 1)
+PASS A3 sueño efectivo conserva orientación: dormir(1, 0)
+PASS A3 sueño efectivo conserva orientación: sin_cama(1, 0)
+PASS A3 descanso sin sueño: (1, 0)
+PASS A3 desplazamiento: (1, 0)
+PASS A3 no inventa trabajo A4: (1, 0)
+PASS A3 sueño efectivo conserva orientación: dormir(0, -1)
+PASS A3 sueño efectivo conserva orientación: sin_cama(0, -1)
+PASS A3 descanso sin sueño: (0, -1)
+PASS A3 desplazamiento: (0, -1)
+PASS A3 no inventa trabajo A4: (0, -1)
+PASS A3 sueño efectivo conserva orientación: dormir(-1, 0)
+PASS A3 sueño efectivo conserva orientación: sin_cama(-1, 0)
+PASS A3 descanso sin sueño: (-1, 0)
+PASS A3 desplazamiento: (-1, 0)
+PASS A3 no inventa trabajo A4: (-1, 0)
+PASS A3 presentación no modifica estado persistente
+PASS A3 sueño efectivo desde Habitantes
+PASS A3 sin cama efectivo desde Habitantes
+PASS A3 decodificación de réplica: dormir
+PASS A3 decodificación de réplica: sin_cama
+PASS A3 decodificación de réplica: descansar
+VISUAL_A1_A3: 60 comprobaciones, 0 fallos
+WARNING: 206 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
