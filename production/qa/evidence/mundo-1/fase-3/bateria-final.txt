@@ -1,0 +1,37 @@
+SUITE                      SALIDA   PASS   FAIL  RESULTADO
+prueba                         1    329      1  FALLA
+prueba_reglas                  0     81      0  OK
+prueba_saberes                 0     87      0  OK
+prueba_desarrollo              0     57      0  OK
+prueba_sociedad                0     48      0  OK
+prueba_autonomia               0     33      0  OK
+prueba_arraigo                 0     76      0  OK
+prueba_casas_arraigo           0      3      0  OK
+prueba_aspecto                 0    225      0  OK
+prueba_ui                      0     13      0  OK
+prueba_proteccion              0     51      0  OK
+prueba_terreno                 0     49      0  OK
+prueba_fauna                   0     31      0  OK
+prueba_orden_dibujo            0      6      0  OK
+prueba_caminos                 0      7      0  OK
+prueba_campos_cultivo          0      8      0  OK
+prueba_casas                   0     13      0  OK
+prueba_crecimiento             0     27      0  OK
+prueba_carga_crecimiento       0      1      0  OK
+prueba_poblados                0     28      0  OK
+prueba_aparicion               0     32      0  OK
+prueba_amenazas                0     12      0  OK
+prueba_poblado_inicial         0     18      0  OK
+prueba_exploracion             0     13      0  OK
+prueba_exploracion_ui          0      6      0  OK
+prueba_pistas                  0     79      0  OK
+prueba_pistas_ui               0      6      0  OK
+prueba_orientacion_red         0     14      0  OK
+prueba_red                     0     11      0  OK
+prueba_terreno_red             0      1      0  OK
+prueba_crecimiento_red         0      1      0  OK
+prueba_operadores              0     95      0  OK
+prueba_integracion_visual_a     0     60      0  OK
+prueba_correcciones_a2_a3      0     49      0  OK
+---
+33 de 34 suites sin fallos. Salidas completas en: /tmp/linde-f23-bateria-final

@@ -1,7 +1,7 @@
 # Mundo 1 — auditoría de brechas y plan incremental
 
 > **Fecha**: 2026-10-26 · **Visión**: [VISION_MUNDO_1.md](../../design/VISION_MUNDO_1.md) · **Estado implementado (fuente de verdad)**: [ESTADO.md](../../production/epics/mundo-vivo/ESTADO.md) · **Diagnóstico previo**: [CIERRE_MUNDO_INICIAL_Y_EXPLORACION.md](CIERRE_MUNDO_INICIAL_Y_EXPLORACION.md) (su §6 queda sustituido por las fases de este plan).
-> **Aprobado el 2026-10-26** con las precisiones de N1–N6 y de las fases 0 y 5–7; registrado como `M1-*` en la sección F de [DECISIONES.md](../../Linde/cenital/docs/DECISIONES.md). **Aún no se implementa ninguna fase.** La ejecución de las fases 0 y 1 se prepara en la sección 8.
+> **Aprobado el 2026-10-26** con las precisiones de N1–N6 y de las fases 0 y 5–7; registrado como `M1-*` en la sección F de [DECISIONES.md](../../Linde/cenital/docs/DECISIONES.md). **Fases 0–3 implementadas al 26/10**; alcance verificado en ESTADO.md §§3d–3f. La Fase 4 sigue sin autorización. La preparación histórica de las fases 0 y 1 se conserva en la sección 8.
 > **Etiquetas**: **[C]** verificado en código · **[D]** solo documentado en ESTADO/contratos · **[M]** medido · **[I]** inferencia. Contexto aplicable: «partidas viejas no importan» (sin migraciones ni compatibilidad), así que los cambios de esquema son libres.
 
 ## 1. Conclusión
@@ -124,6 +124,8 @@ Cada fase deja un ciclo jugable. Los riesgos de regresión se mitigan con las su
 - **Riesgo**: bajo-medio (guardado por jugador, tamaño).
 
 ### Fase 3 — Aprendizaje contextual (D7)
+
+**Implementada y verificada 26/10/2026**: 14 pistas en datos, historial personal, descarte y silencio; pruebas y límites en ESTADO.md §3f.
 - **Objetivo**: pistas que dependen de lo que pasa y se olvidan tras verse.
 - **Reutiliza**: `Escena._pista()`, `Desarrollo.sabe/puede`, panel de ayuda.
 - **Cambios mínimos**: reglas en datos («evento + precondición + texto + enfriamiento»), estado `pj.pistas` (mostrada/descartada), interruptor «ya conozco los sistemas». Sin misiones.

@@ -14,11 +14,14 @@ Solo si la tarea lo pide: el contrato del sistema en `Linde/cenital/docs/` y `de
 
 ## Estado y próxima fase
 - **Implementado de Mundo 1**: Fase 0 (herramientas de medición y línea base), paso 1a/1b (registro `mundo.poblados` y lectores por poblado) y **Fase 1 completa (1c aparición en el pueblo, 1d hitos y estaciones comunitarias, 1e slimes fuera del núcleo)**. Detalle y limitaciones: ESTADO.md §3d.
-- **Próxima fase** (aún no autorizada): **Fase 2 (mapa personal con M) y Fase 3 (pistas contextuales)**, independientes entre sí; luego la Fase 4 (registro de lugares y destinos). Ver PLAN_MUNDO_1.md §4. No avances sin autorización expresa del usuario.
+- **Fases 2 y 3 completas** (autorizadas el 26/10): mapa personal con M, flechas, +/− e Inicio; verde = observado, ocre = contado; E → L en conversación intercambia información con NPC cercano. Catorce pistas opcionales, T para descartar y Esc para silenciar/reactivar; descubrimientos, fuentes e historial persisten por jugador y se replican solo a su dueño. Commits `8669f62` y `7fa3e74`. Pruebas y límites: ESTADO.md §§3e–3f.
+- **Próxima fase: Fase 4 (registro de lugares y destinos), NO autorizada**. El usuario prohibió avanzar a ella en esta sesión. No generes nuevos lugares, caminos o pueblos sin nueva autorización.
+- **Cierre verificado de Fases 2–3 (26/10)**: 33 de 34 suites sin fallos; única falla previa de arte. Hashes completos de legado idénticos antes/después de cada funcionalidad (dos semillas, cuatro días), batería determinista 8/8 igual. Sin cambios de balance. Evidencia y resumen final en `production/qa/evidence/mundo-1/fase-3/`.
 - **Fallo conocido, previo a Mundo 1**: `prueba` falla una comprobación sobre el hash de 96 archivos de arte (E04/E05); no lo ocultes ni lo "arregles" sin investigarlo.
 
 ## Cómo ejecutar las pruebas
 Godot local: `herramientas/runtime/Godot.app/Contents/MacOS/Godot` (no está en el PATH). Detalle en ESTADO.md §4.
+- Orientación: suites `prueba_exploracion`, `prueba_exploracion_ui`, `prueba_pistas`, `prueba_pistas_ui` y `prueba_orientacion_red`; capturas `captura_exploracion.gd` y `captura_pistas.gd`. Evidencia en `production/qa/evidence/mundo-1/fase-2/` y `fase-3/`.
 - Una suite: `Godot --headless --path Linde/cenital --script res://tests/<suite>.gd`.
 - Todas: `Linde/cenital/tests/ejecutar_suites.sh [suite ...]` (las `*_red` reescriben JSON de evidencia versionados: restáuralos si no son tu cambio).
 - Medición y equivalencia: `Linde/cenital/tests/medir_todo.sh <carpeta>` y `--comparar <base> <nueva>` (líneas base en `production/qa/evidence/mundo-1/`; `IGNORAR=<ruta>` excluye solo las claves nuevas que añadas).

@@ -1,6 +1,6 @@
 # Linde — estado verificado
 
-> **Consolidado**: 2026-10-25 · **Rama**: `main` · **Último commit considerado**: `324f339` · **Modo**: solo (sin revisión independiente)
+> **Consolidado**: 2026-10-26 · **Rama**: `main` · **Último commit considerado**: `7fa3e74` · **Modo**: solo (sin revisión independiente)
 >
 > **Nota de hashes (2026-10-25)**: un `git pull --rebase` reescribió los commits locales. Los hashes de este documento son los vigentes en `main`; los previos al rebase eran H0 `a5414fb`, M0 `67d52ca`, K1 `07813c2`, rendimiento `2ccb99a` y mochila `990d549`. Las cifras de pruebas siguen siendo las registradas por cada sesión.
 >
@@ -104,6 +104,28 @@ Diseño objetivo (**no implementado salvo lo que sigue**): [VISION_MUNDO_1](../.
 - **Fallo preexistente (no relacionado con 1a)**: `prueba` falla 1 comprobación sobre 329 PASS: «mundo arte: los 96 archivos copiados de E04/E05 conservan el sha256 del manifiesto». Falla igual sin los cambios de 1a y de la optimización de `_recurso`; sin investigar.
 - **Optimización de `_recurso` (commit `785c0c4`)**: búsqueda de alcanzabilidad que se detiene al llegar al candidato más cercano; mismos hashes de estado por día y mismos resultados de `_recurso` que antes (semillas 123 y 456, 4 días; 123, 9 días con 10 habitantes); coste total de tick −50 % a −62 %. Detalle y límites (sin corrida de 12 habitantes) en [RESULTADOS_OPTIMIZACION_RECURSO](../../../docs/investigacion/RESULTADOS_OPTIMIZACION_RECURSO.md).
 
+## 3e. Mundo 1 — Fase 2 (26/10/2026)
+
+**Commit de Fase 2: `8669f62`; cierre gráfico e integración: `7fa3e74`.** Mapa personal con M, flechas, zoom y centrado con Inicio; verde para bloques vistos, ocre para información recibida y referencias numeradas a los hitos existentes. Conversación E → L intercambia bloques con el NPC cercano: conserva procedencia, confirma rumores al visitar y entrega al NPC solo lo recorrido. Usa la cuadrícula/radio de Autonomia; no genera lugares ni altera economía. Solo modo poblado; legado no añade estado.
+
+Verificación: `prueba_exploracion` 13 PASS (ruta exacta, negativos, cercanía, intercambio, procedencia, persistencia, privacidad de bienvenida/perfiles y presupuesto); `prueba_exploracion_ui` 6 PASS (M, navegación y conversación real). `prueba_ui` 13, `prueba_poblados` 28, `prueba_aparicion` y `prueba_poblado_inicial` sin fallos; `prueba_red` 11 OK y `prueba_terreno_red`/`prueba_crecimiento_red` PASS con clientes reales. Capturas renderizadas e inspeccionadas en `production/qa/evidence/mundo-1/fase-2/`.
+
+Presupuesto fijado antes de medir: **4 MiB por jugador tras 60 minutos**. Ruta recta a la velocidad base existente (14.400 celdas): 5.409 bloques, **90.433 bytes JSON**. Es una medición de cartografía, no un playtest de una hora ni una cota para mundos indefinidos. El mapa es esquemático por bloques y las referencias son aproximadas; no muestra terreno detallado, enemigos ni recursos. No se implementa Fase 4.
+
+## 3f. Mundo 1 — Fase 3 y cierre de orientación (26/10/2026)
+
+**Commit `7fa3e74`.** Catorce pistas opcionales en `datos/pistas.json`, elegidas por estado real (amenaza, herida, cercanía de NPC, mesa, horno, rumores, exterior, noche, madera, piedra, equipo, saber pendiente y cama propia; orientación al reconocer un hito). Una pista activa, duración de 12 segundos de sesión y 30 segundos de enfriamiento; son tiempos de presentación en datos, no cambios del ritmo del mundo. T descarta; Esc → «Ya conozco los sistemas: ocultar pistas» silencia y permite reactivar. `pj.pistas` conserva mostradas, descartadas y preferencia; la tarjeta y sus temporizadores son de sesión. Las pistas vistas no se vuelven a ofrecer al cargar. No añade misiones, recompensas, balance ni destinos.
+
+**Pruebas nuevas**: `prueba_pistas` **79 PASS** (las 14 condiciones, selección individual, unicidad, descarte, silencio, expiración, enfriamiento, persistencia, independencia entre jugadores y retirada al aprender el saber); `prueba_pistas_ui` **6 PASS** (solicitud en juego, T, menú, silencio/reactivación y ayuda abierta); `prueba_orientacion_red` **14 PASS** con dos réplicas ENet reales (intercambio cercano con NPC, privacidad, pista personal, silencio y descarte). Esta última usa posiciones y conocimiento preparados para aislar el contrato; no es un playtest multijugador libre. Capturas con render real e inspección de texto/solapamientos en `production/qa/evidence/mundo-1/fase-3/`.
+
+**Equivalencia por funcionalidad**: batería `medir_todo.sh` antes del mapa, tras Fase 2 y tras Fase 3: **8/8 archivos deterministas idénticos en cada comparación**, sin ignorar ninguna clave. Incluye hashes completos de estado por día de dos semillas (123, 456) durante cuatro días, inicio (200 semillas, visibilidad en 20) y ritmo en cinco semillas. Hashes finales de legado: `500b011b52c66364` y `2dfdd6ffb432ac55`. Evidencia: `fase-2/comparacion-hashes.txt`, `fase-3/comparacion-hashes.txt` y sus carpetas `hashes/`. No certifica equivalencia indefinida ni partidas con otras acciones.
+
+**Contratos conservados**: el mapa final dibuja recursos SVG importados, sin ampliar excepciones de arte procedural. `pistas.json` se clasifica explícitamente como presentación en la comprobación de cobertura de reglas; no cambia la huella de fabricación, sus componentes ni sus dorados. El ejecutor incorpora las cuatro suites de Fase 1 y las cinco nuevas de orientación: **34 suites en total**.
+
+**Batería final completa (26/10)**: **33 de 34 suites sin fallos**. `prueba` conserva **329 PASS y 1 FAIL**: hash de los 96 archivos de arte E04/E05, preexistente. Todas las demás pasan: reglas 81, saberes 87, desarrollo 57, sociedad 48, autonomía 33, arraigo 76, casas_arraigo 3, aspecto 225, UI 13, protección 51, terreno 49, fauna 31, orden_dibujo 6, caminos 7, campos_cultivo 8, casas 13, crecimiento 27, carga_crecimiento 1, poblados 28, aparición 32, amenazas 12, poblado_inicial 18, exploración 13, UI exploración 6, pistas 79, UI pistas 6, orientación_red 14, red 11, terreno_red 1, crecimiento_red 1, operadores 95, integración visual A 60 y correcciones A2/A3 49. No se oculta ni modifica la comprobación fallida de arte. Resumen retenido: `production/qa/evidence/mundo-1/fase-3/bateria-final.txt`. Las evidencias JSON de red ya estaban modificadas al empezar, fueron regeneradas por sus suites y quedan fuera de los commits de esta sesión, junto a los otros cambios previos.
+
+**Límites**: mapa esquemático de bloques 8×8 con radio de visión existente, sin terreno detallado ni detección de recursos/enemigos. Intercambio voluntario con NPC; el NPC recibe lo recorrido personalmente y el jugador recibe lo conocido por él, incluidos sus rumores. Referencias solo a hitos ya existentes. Red probada en localhost, sin latencia ni Internet real. No hubo playtest humano. La **Fase 4 no se implementó ni está autorizada**.
+
 ## 4. Cómo verificarlo
 
 Desde la raíz del repo, con `herramientas/runtime/Godot.app/Contents/MacOS/Godot`:
@@ -153,11 +175,3 @@ Acabado local reaplicado a la última base remota, conservando art2 y correccion
 ## Publicación autorizada — 25/10/2026
 
 El usuario solicitó commit y push de esta integración sobre 5b87517. La evidencia vigente se conserva en `production/qa/evidence/arte-pendiente-integrado/`; los estados de borrador y sin publicar anteriores son históricos. Se mantienen los límites artísticos y de pruebas documentados; la publicación se identifica en el historial de Git.
-
-## 3e. Mundo 1 — Fase 2 (26/10/2026)
-
-Mapa personal con M, flechas, zoom y centrado con Inicio; verde para bloques vistos, ocre para información recibida y referencias numeradas a los hitos existentes. Conversación E → L intercambia bloques con el NPC cercano: conserva procedencia, confirma rumores al visitar y entrega al NPC solo lo recorrido. Usa la cuadrícula/radio de Autonomia; no genera lugares ni altera economía. Solo modo poblado; legado no añade estado.
-
-Verificación: `prueba_exploracion` 13 PASS (ruta exacta, negativos, cercanía, intercambio, procedencia, persistencia, privacidad de bienvenida/perfiles y presupuesto); `prueba_exploracion_ui` 6 PASS (M, navegación y conversación real). `prueba_ui` 13, `prueba_poblados` 28, `prueba_aparicion` y `prueba_poblado_inicial` sin fallos; `prueba_red` 11 OK y `prueba_terreno_red`/`prueba_crecimiento_red` PASS con clientes reales. Capturas renderizadas e inspeccionadas en `production/qa/evidence/mundo-1/fase-2/`.
-
-Presupuesto fijado antes de medir: **4 MiB por jugador tras 60 minutos**. Ruta recta a la velocidad base existente (14.400 celdas): 5.409 bloques, **90.433 bytes JSON**. Es una medición de cartografía, no un playtest de una hora ni una cota para mundos indefinidos. El mapa es esquemático por bloques y las referencias son aproximadas; no muestra terreno detallado, enemigos ni recursos. No se implementa Fase 4.
