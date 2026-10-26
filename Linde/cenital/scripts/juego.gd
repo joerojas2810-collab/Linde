@@ -149,6 +149,64 @@ func _sesion(id: String) -> void:
 	var pos: Array = d.jugadores[id].pos
 	rt[id] = {"pies": Vector2(pos[0], pos[1]), "mira": Vector2i.DOWN, "cd_obj": 0.0, "herr_t": 0.0, "msgs": []}
 
+## Aparición en un poblado (Mundo 1, paso 1c). Valores de PRUEBA (M1-C2), no de balance: radio de 2 a 7 celdas del centro del poblado
+## (7 = mitad del alto del encuadre medido, ±7,5) y separación mínima de 2 celdas entre jugadores (el sprite ocupa 1 celda).
+const APARICION_RADIO_MIN := 2.0
+const APARICION_RADIO_MAX := 7.0
+const APARICION_SEPARACION := 2
+
+## Habitantes presentes del poblado. Hoy solo el inicial tiene vínculo con `habitantes`; los demás declaran `residentes` en el registro.
+func _residentes_presentes(poblado_id: String) -> int:
+	if poblado_id == Mundo.ID_INICIAL: return habitantes.ids.size()
+	return mundo.poblado(poblado_id).get("residentes", []).size()
+
+## Fuera del radio de detección (`vision` del catálogo) de cada enemigo vivo: no lo adquiere al aparecer. Política provisional hasta 1e.
+func _a_salvo_de_enemigos(c: Vector2i) -> bool:
+	var centro_pj := Mundo.pies_de_celda(c) - Vector2(0, 6)   # igual que Combate.centro_pj
+	for e in combate.enemigos:
+		if e.est == "muerto": continue
+		if Comb.centro(e).distance_to(centro_pj) <= float(C.ENEMIGOS[e.tipo].vision): return false
+	return true
+
+## Celda donde aparecería `jugador_id`: {ok, celda, poblado, motivo}. Prueba los poblados en orden (el inicial primero) y toma el primero
+## activo, con habitantes presentes y alguna celda válida. Sin ninguno: ok = false con el motivo; NO inventa una celda, NO recurre a
+## `punto_inicio` ni a la entrada y NO reactiva un poblado que no está activo. El hash (`_rng`) solo escoge entre celdas ya validadas.
+func punto_aparicion(jugador_id: String) -> Dictionary:
+	var otros: Array = []
+	for k in rt:
+		if k != jugador_id: otros.append(Mundo.celda_de(rt[k].pies))
+	var motivo := "sin_poblado_activo"
+	for pid in mundo.poblados_ids():
+		var p: Dictionary = mundo.poblado(pid)
+		if str(p.get("estado", "")) != "activo": continue
+		if _residentes_presentes(pid) <= 0:
+			motivo = "sin_residentes"
+			continue
+		var entrada := mundo.entrada(pid)
+		if entrada == Mundo.SIN_CELDA or not p.has("centro"):
+			motivo = "poblado_sin_datos"
+			continue
+		var centro := Vector2i(int(p.centro[0]), int(p.centro[1]))
+		var alc: Dictionary = mundo.alcanzables(entrada)
+		var validas: Array = []
+		var r_max := int(ceil(APARICION_RADIO_MAX))
+		for dy in range(-r_max, r_max + 1):
+			for dx in range(-r_max, r_max + 1):
+				var dist := Vector2(dx, dy).length()
+				if dist < APARICION_RADIO_MIN or dist > APARICION_RADIO_MAX: continue
+				var c := centro + Vector2i(dx, dy)
+				if not mundo.celda_apta_aparicion(c, alc) or ocupada(c) or not _a_salvo_de_enemigos(c): continue
+				validas.append([dist, c.y, c.x])
+		validas.sort()
+		if validas.is_empty():
+			motivo = "sin_celda_valida"
+			continue
+		var separadas: Array = validas.filter(func(v): return otros.all(func(o): return maxi(absi(o.x - v[2]), absi(o.y - v[1])) >= APARICION_SEPARACION))
+		var lista: Array = separadas if not separadas.is_empty() else validas
+		var v: Array = lista[_rng("aparicion", jugador_id).randi() % lista.size()]
+		return {"ok": true, "celda": Vector2i(v[2], v[1]), "poblado": pid, "motivo": "poblado" if not separadas.is_empty() else "poblado_sin_separacion"}
+	return {"ok": false, "celda": Mundo.SIN_CELDA, "poblado": "", "motivo": motivo}
+
 # Añade un jugador al mundo (servidor/pruebas). Empieza en el inicio de la semilla, con estado propio vacío.
 func unir(id: String, nombre: String, look: Array) -> Dictionary:
 	if d.jugadores.has(id): return _no("Ese jugador ya está en el mundo", id)

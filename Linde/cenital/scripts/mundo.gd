@@ -129,6 +129,26 @@ func camas(poblado_id: String) -> Dictionary:
 	for id in p.camas: d[id] = Vector2i(int(p.camas[id][0]), int(p.camas[id][1]))
 	return d
 
+## Ids de los poblados del registro: el inicial primero y el resto por orden alfabético (orden estable).
+func poblados_ids() -> Array:
+	var ids: Array = estado.get("poblados", {}).keys()
+	ids.sort()
+	if ids.has(ID_INICIAL):
+		ids.erase(ID_INICIAL)
+		ids.push_front(ID_INICIAL)
+	return ids
+
+## ¿Puede un jugador aparecer en `c`? Terreno transitable, 3×3 sin bloqueo (las mismas condiciones que `punto_inicio`) y conectada
+## con `alc` (alcanzables desde la entrada del poblado). No mira ocupación ni enemigos: eso es de `Juego.punto_aparicion`.
+func celda_apta_aparicion(c: Vector2i, alc: Dictionary) -> bool:
+	var t := tipo(c)
+	if t != T.PASTO and t != T.CAMINO: return false
+	if not alc.has(c): return false
+	for dy in range(-1, 2):
+		for dx in range(-1, 2):
+			if bloquea(c + Vector2i(dx, dy)): return false
+	return true
+
 ## Migración aditiva: el valle y todas sus diferencias se mantienen.
 func configurar(semilla: int) -> void:
 	for campo in ["caminos", "pisadas", "techos"]:
