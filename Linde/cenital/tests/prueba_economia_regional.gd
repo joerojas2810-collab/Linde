@@ -25,6 +25,7 @@ func _init() -> void:
  var j = J.nueva(123, "Regional", [0,0,0], "poblado")
  var a = j.autonomia
  var asen = a.asentamientos
+ asen.transitos.datos().politica.comercio_autonomo=false
  var puestos: Array = asen.datos().puestos.values()
  ok(puestos.size() >= 2, "escenario usa comunidades reales de génesis")
  var p: Dictionary = puestos[0]
@@ -66,6 +67,7 @@ func _init() -> void:
  for q in p.campos: j.mundo.constr_en(Vector2i(q[0],q[1])).listo = int(j.d.min)+10000
  inv.erase("baya")
  p.comida_min = int(j.d.min)-int(asen.cfg.comida_min)
+ for r in p.residentes: r.comida_min=int(p.comida_min)
  secuencia = e.secuencia
  asen.actualizar()
  var deuda: int = p.deuda_comida

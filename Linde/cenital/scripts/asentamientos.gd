@@ -4,13 +4,17 @@ extends RefCounted
 const M=preload("res://scripts/mundo.gd")
 const Lugares = preload("res://scripts/lugares.gd")
 const Edificios = preload("res://scripts/edificios.gd")
+const Inv = preload("res://scripts/inventario.gd")
 const C=preload("res://scripts/catalogos.gd")
 var a
 var j
+const Transitos = preload("res://scripts/transitos.gd")
+var transitos
 var cfg: Dictionary
 const PIEZAS = [["cama_huesped",1,0],["cama_huesped",1,1],["campo",-1,0],["campo",-1,1],["cofre",0,2]]
 func _init(autonomia) -> void:
  a=autonomia;j=a.j
+ transitos=Transitos.new(self)
  cfg=JSON.parse_string(FileAccess.get_file_as_string("res://datos/asentamientos/reglas_v1.json"))
 func datos() -> Dictionary:
  if not a.activa():return {}
@@ -111,12 +115,12 @@ func _alcance(centro: Vector2i) -> Dictionary:
    if maxi(absi(n.x-centro.x),absi(n.y-centro.y))>r or vistos.has(n) or not _transitable(n):continue
    vistos[n]=true;cola.append(n)
  return vistos
-func _extraer(p: Dictionary, oficio: String, residente_actual: Dictionary = {}) -> bool:
+func _extraer(p: Dictionary, oficio: String, residente_actual: Dictionary = {}, objetivo: String = "materiales") -> bool:
  if not j.es_autoridad(): return false
- var saldo: Dictionary = balance_resumido(p).materiales
+ var saldo: Dictionary = balance_resumido(p)[objetivo]
  if int(saldo.pendiente) <= 0: return false
  var centro:=Vector2i(p.celda[0],p.celda[1])
- var tipos: Array=["arbol"] if oficio=="recolector" else ["roca"]
+ var tipos: Array = ["arbusto"] if objetivo == "baya" else (["arbol"] if oficio=="recolector" else ["roca"])
  var alcance:=_alcance(centro)
  for radio in range(2,int(cfg.radio_recursos)+1):
   for dy in range(-radio,radio+1):
@@ -142,17 +146,18 @@ func _extraer(p: Dictionary, oficio: String, residente_actual: Dictionary = {}) 
     j.d.mundo.golpes.erase(id)
     for item in def.drops:inventario(p)[item]=int(inventario(p).get(item,0))+int(def.drops[item])
     p.producciones=int(p.producciones)+1
-    if not residente_actual.is_empty(): residente_actual.usos = usos_antes-1
-    _resultado_regional(p,"extraccion",saldo,antes,{"objeto":id,"actor":residente_actual.get("id", ""),"usos_antes":usos_antes,"usos_despues":residente_actual.get("usos",usos_antes)})
+    if not residente_actual.is_empty() and objetivo == "materiales": residente_actual.usos = usos_antes-1
+    _resultado_regional(p,"recoleccion_alimento" if objetivo == "baya" else "extraccion",saldo,antes,{"objeto":id,"actor":residente_actual.get("id", ""),"usos_antes":usos_antes,"usos_despues":residente_actual.get("usos",usos_antes)})
     return true
  return false
 func actualizar() -> void:
  if not a.activa() or not j.es_autoridad():return
+ transitos.actualizar()
  for p in datos().puestos.values():
   if p.has("poblado"):
    var pueblo: Dictionary = j.mundo.poblado(p.poblado)
    if pueblo.get("estado", "") in ["abandonado", "destruido"]: continue
-   pueblo.estado = "activo" if _sostenible(p) and int(inventario(p).get("baya",0)) > 0 else "sin_sustento"
+   pueblo.estado = "sin_residentes" if p.residentes.is_empty() else ("activo" if _sostenible(p) and int(inventario(p).get("baya",0)) > 0 else "sin_sustento")
    _conocimiento(p)
   if not _sostenible(p):p.estado="faltan puesto, camas, techo o cofre";continue
   var inv: Dictionary=inventario(p)
@@ -166,28 +171,33 @@ func actualizar() -> void:
     for item in cosecha:inv[item]=int(inv.get(item,0))+int(cosecha[item])
     _resultado_regional(p,"cosecha",saldo,antes,{"campo":M.clave(campo)})
   # Tiempo del servidor, no tiempo de pared. Guardar/cargar no repite una cosecha o un consumo.
+  var ocupados := resolver_local(p)
   var alimento: Dictionary = balance_resumido(p).baya
   if int(alimento.deuda)>0:
    if not _consumir_regional(p,int(alimento.deuda),alimento,"pago_deuda"):p.estado="sin comida; producción detenida";p.produccion_min=int(j.d.min);continue
    p.deuda_comida=0
   alimento = balance_resumido(p).baya
   if int(j.d.min)-int(p.comida_min)>=int(cfg.comida_min):
-   var periodos:=floori(float(int(j.d.min)-int(p.comida_min))/float(cfg.comida_min))
+   var base := int(p.comida_min)
+   var periodos:=floori(float(int(j.d.min)-base)/float(cfg.comida_min))
    var coste:int=int(alimento.vencido)
-   p.comida_min=int(p.comida_min)+periodos*int(cfg.comida_min)
+   for r in p.residentes:
+    var ultimo := int(r.get("comida_min",base))
+    r.comida_min=ultimo+maxi(0,floori(float(int(j.d.min)-ultimo)/float(cfg.comida_min)))*int(cfg.comida_min)
+   p.comida_min=base+periodos*int(cfg.comida_min)
    if not _consumir_regional(p,coste,alimento,"consumo"):p.deuda_comida=coste;p.estado="sin comida; producción detenida";p.produccion_min=int(j.d.min);continue
-  if p.residentes.size()<int(cfg.capacidad) and int(inv.get("baya",0))>=2 and int(j.d.min)-int(p.llegada_min)>=int(cfg.llegada_min):
-   var n:int=p.residentes.size()
-   var rng=j._rng("colono_regional",p.id+":"+str(n))
-   p.residentes.append({"id":p.id+":"+str(n),"nombre":cfg.nombres[rng.randi()%cfg.nombres.size()],"oficio":"recolector" if n==0 else "cantero","look":[rng.randi_range(0,2),rng.randi_range(0,2),rng.randi_range(0,2)]})
-   p.llegada_min=int(j.d.min)
-   j.aviso_todos("Un colono se instala en "+p.nombre)
+  # La llegada requiere transferencia de una identidad existente, no población por calendario.
+  if p.residentes.is_empty():
+   p.estado="sin residentes"
+   continue
   if int(j.d.min)-int(p.produccion_min)>=int(cfg.produccion_min):
    var periodos:=mini(24,floori(float(int(j.d.min)-int(p.produccion_min))/float(cfg.produccion_min)))
    p.produccion_min=int(p.produccion_min)+periodos*int(cfg.produccion_min)
    p.estado="activo"
    for periodo in periodos:
     for residente in p.residentes:
+     if residente.has("reserva_viaje"): continue
+     if periodo == 0 and ocupados.has(residente.id): continue
      var herramienta: String="hacha_piedra" if residente.oficio=="recolector" else "pico_piedra"
      var saldo_herramienta: Dictionary = balance_resumido(p)[herramienta] if int(residente.get("usos",0))<=0 else {}
      if int(residente.get("usos",0))<=0:
@@ -222,6 +232,11 @@ func visibles() -> Array:
    var desde:=M.pies_de_celda(c+Vector2i(0,i))
    var hasta:=M.pies_de_celda(c+Vector2i(1 if p.has("edificios") else -1,i))
    resultado.append({"id":r.id,"nombre":r.nombre,"look":r.look,"pos":desde.lerp(hasta,t),"mueve":fase<2 or (fase>=30 and fase<32)})
+ for op in transitos.datos().operaciones.values():
+  if not op.estado in ["viajando","detenida"]: continue
+  var pos: Vector2 = transitos.posicion(op)
+  if not j.mundo.region_cargada(M.celda_de(pos)): continue
+  for r in op.miembros: resultado.append({"id":r.id,"nombre":r.nombre,"look":r.look,"pos":pos,"mueve":op.estado=="viajando"})
  return resultado
 
 
@@ -272,6 +287,9 @@ func residente(nid: String) -> Dictionary:
  for p in j.d.get("mundo_vivo",{}).get("autonomia",{}).get("asentamientos",{}).get("puestos",{}).values():
   for r in p.residentes:
    if r.id == nid: return r
+ for op in transitos.datos().operaciones.values():
+  for r in op.miembros:
+   if r.id==nid: return r
  return {}
 
 ## Posición de la representación actual, solo donde el mundo está cargado.
@@ -327,12 +345,16 @@ func demandas_colectivas() -> Dictionary:
 func balance_resumido(p: Dictionary) -> Dictionary:
  var inv: Dictionary = j.d.cofres.get(p.cofre, {}).get("inv", {})
  var periodos := maxi(0, floori(float(int(j.d.min) - int(p.comida_min)) / float(cfg.comida_min)))
+ var vencido := 0
+ for r in p.residentes: vencido+=maxi(0,floori(float(int(j.d.min)-int(r.get("comida_min",p.comida_min)))/float(cfg.comida_min)))
  var materiales := int(inv.get("madera",0)) + int(inv.get("piedra",0))
- var objetivo_materiales := int(cfg.tope_stock) if not p.residentes.is_empty() else 0
+ var trabajadores: Array=p.residentes.duplicate()
+ trabajadores.append_array(transitos.retornos(str(p.id)))
+ var objetivo_materiales := int(cfg.tope_stock) if not trabajadores.is_empty() else 0
  # El ejecutor ya exige stock de comida > 0 para trabajar; no consume esta unidad.
  var comida_trabajo := 1 if materiales<objetivo_materiales else 0
- var objetivos := {"baya":int(p.get("deuda_comida", 0)) + periodos * p.residentes.size() + comida_trabajo}
- for r in p.residentes:
+ var objetivos := {"baya":int(p.get("deuda_comida", 0)) + vencido + comida_trabajo}
+ for r in trabajadores:
   if int(r.get("usos", 0)) > 0: continue
   var herramienta: String = "hacha_piedra" if r.oficio == "recolector" else "pico_piedra"
   objetivos[herramienta] = int(objetivos.get(herramienta, 0)) + 1
@@ -340,9 +362,10 @@ func balance_resumido(p: Dictionary) -> Dictionary:
  for item in objetivos:
   var objetivo := int(objetivos[item])
   var stock := int(inv.get(item, 0))
-  saldos[item] = {"id":"%s:%s" % [p.get("poblado", "puesto:" + str(p.id)),item], "reserva":objetivo, "stock":stock, "comprometido":0, "en_curso":0, "pendiente":maxi(0, objetivo-stock)}
+  var entrante: int = transitos.entrante(str(p.id),str(item))
+  saldos[item] = {"id":"%s:%s" % [p.get("poblado", "puesto:" + str(p.id)),item], "reserva":objetivo, "stock":stock, "comprometido":0, "en_curso":entrante, "pendiente":maxi(0, objetivo-stock-entrante)}
  saldos.baya.deuda = int(p.get("deuda_comida",0))
- saldos.baya.vencido = periodos * p.residentes.size()
+ saldos.baya.vencido = vencido
  saldos.baya.trabajo = comida_trabajo
  # Bolsa de control del límite existente: no es un ítem ni un inventario nuevo.
  saldos.materiales = {"id":"%s:materiales" % p.get("poblado", "puesto:" + str(p.id)),"componentes":["madera","piedra"],"reserva":objetivo_materiales,"stock":materiales,"comprometido":0,"en_curso":0,"pendiente":maxi(0,objetivo_materiales-materiales)}
@@ -350,6 +373,7 @@ func balance_resumido(p: Dictionary) -> Dictionary:
 
 func actualizar_demandas() -> void:
  if not a.activa() or not j.es_autoridad(): return
+ for p in datos().puestos.values(): p.viabilidad = evaluar_viabilidad(p)
  datos().demandas = {"version":1, "min":int(j.d.min), "poblados":demandas_colectivas()}
 
 
@@ -393,3 +417,69 @@ func _consumir_regional(p: Dictionary, cantidad: int, saldo: Dictionary, causa: 
  inv.baya=int(inv.get("baya",0))-cantidad
  _resultado_regional(p,causa,saldo,antes)
  return true
+
+
+## Alternativas materiales dentro del mismo presupuesto de trabajo regional.
+func resolver_local(p: Dictionary) -> Dictionary:
+ var usados := {}
+ if not j.es_autoridad() or int(j.d.min)-int(p.produccion_min)<int(cfg.produccion_min): return usados
+ if int(p.get("local_min",-1)) == int(j.d.min): return usados
+ p.local_min = int(j.d.min)
+ var residentes: Array = p.residentes.duplicate()
+ residentes.sort_custom(func(x,y): return str(x.id)<str(y.id))
+ for r in residentes:
+  if r.has("reserva_viaje"): continue
+  var saldos := balance_resumido(p)
+  if int(saldos.baya.pendiente)>0 and _extraer(p,r.oficio,r,"baya"):
+   usados[r.id] = true
+   continue
+  var recetas: Array = r.get("recetas",[]).duplicate()
+  recetas.sort()
+  for rid in recetas:
+   if not C.RECETAS.has(rid): continue
+   var receta: Dictionary = C.RECETAS[rid]
+   if receta.get("hab", "") != "" or receta.get("herr", "") != "": continue
+   var responde := false
+   var demanda := {}
+   for item in receta.sal:
+    if saldos.has(item) and int(saldos[item].pendiente)>0:
+     responde = true
+     demanda = saldos[item]
+   if not responde or not Inv.tiene(inventario(p),receta.ent): continue
+   if str(receta.est)!="" and not estacion_regional(p,str(receta.est)): continue
+   var antes := inventario(p).duplicate(true)
+   Inv.quitar(inventario(p),receta.ent)
+   for item in receta.sal: inventario(p)[item]=int(inventario(p).get(item,0))+int(receta.sal[item])
+   _resultado_regional(p,"fabricacion_local",demanda,antes,{"actor":r.id,"receta":rid})
+   a.desarrollo.registrar("npc:"+str(r.id),"artesania",receta.ent)
+   usados[r.id] = true
+   break
+ if usados.is_empty(): transitos.comerciar(p)
+ return usados
+
+func estacion_regional(p: Dictionary, tipo: String) -> bool:
+ var alcance := _alcance(Vector2i(p.celda[0],p.celda[1]))
+ for k in j.d.mundo.constr:
+  if C.CONSTR.get(j.d.mundo.constr[k].t,{}).get("est", "")!=tipo: continue
+  var c := Vector2i(int(k.get_slice(",",0)),int(k.get_slice(",",1)))
+  for v in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
+   if alcance.has(c+v): return true
+ return false
+
+## Observación factual; no inventa umbrales de crisis ni seguridad lejana.
+func evaluar_viabilidad(p: Dictionary) -> Dictionary:
+ var saldo := balance_resumido(p)
+ var camas := 0
+ for q in p.get("camas",[]):
+  var c := Vector2i(q[0],q[1])
+  if j.mundo.constr_en(c).get("t", "")=="cama_huesped" and j.d.mundo.techos.has(M.clave(c)): camas += 1
+ var amenazas: Array = []
+ var pueblo: Dictionary = j.mundo.poblado(p.get("poblado", ""))
+ var area: Array = pueblo.get("area", [])
+ if area.size()==4:
+  var rect := Rect2i(area[0],area[1],area[2],area[3])
+  for enemigo in j.combate.enemigos:
+   if enemigo.get("est", "")!="muerto" and rect.has_point(M.celda_de(enemigo.pos)): amenazas.append(str(enemigo.get("fauna_id",str(enemigo.tipo)+"@"+M.clave(M.celda_de(enemigo.pos)))))
+ amenazas.sort()
+ var observada: bool = j.mundo.region_cargada(Vector2i(p.celda[0],p.celda[1]))
+ return {"min":int(j.d.min),"residentes":p.residentes.size(),"camas":camas,"deficit_comida":int(saldo.baya.pendiente),"infraestructura":_sostenible(p),"amenazas_observadas":amenazas,"seguridad":"no_observada" if not observada else ("amenazas_observadas" if not amenazas.is_empty() else "sin_amenazas_observadas"),"politica_crisis":"pendiente_aprobacion"}
