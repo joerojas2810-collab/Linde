@@ -298,3 +298,8 @@ Commit `27c7971`. Evidencia de esta ejecución en `production/qa/evidence/mundo-
 Validación puntual: `prueba_tareas` **16/16**, `prueba_autonomia` **33/33**, `prueba_sociedad` **48/48**. Fabricación con consumo real, exclusión/liberación, bloqueo sin recursos, descanso, guardado/carga, mismo minuto sin repetir y bienvenida de réplica sin simulación cliente. No prueba de sockets ni Internet; sin batería extensa. Avisos de certificados/recursos al cerrar persisten. El primer arranque del motor falló al abrir su log fuera del espacio permitido; usando log en `/tmp` las suites completaron.
 
 No implementado: agregación colectiva/descuento de órdenes en curso, contrato regional resumido, comercio nuevo, viabilidad, migración, fundación ni transición 5b. Siguiente bloque: demanda colectiva y stock accesible/comprometido con depósitos/grupos/Asentamientos existentes. El bloque cerrado es individual detallado; la Fase 6 completa sigue abierta.
+
+
+## Integración aprobada de cuentas/UI con talleres y tareas (26/10/2026)
+
+El usuario autorizó subir la revisión completa. Integrado origin/main `c84b88e` mediante `cdac6e9`, conservando talleres, casas comunales y tareas de Fase 6. Esta nota supera las notas históricas de revisión sin publicar. Validación combinada: 9 casos unitarios, 16 de acceso/partidas, 13 de identidad con dos mundos, 6 suites de regresión y tareas 16/16. [Detalle y límites](../../qa/evidence/login-inicial/main-c84b88e/README.md). Sin prueba externa ni cambios a la skin.

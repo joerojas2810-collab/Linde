@@ -82,3 +82,8 @@ Pulido local de `feature/login-inicial`: reutiliza E06 y tipografías existentes
 Merge autorizado de `9c0d1c4` (taller/casas comunales) y `d223398` (cuentas, servidor y hashes). Se conservan ambos trabajos; conflictos limitados a notas añadidas en documentación, resueltos manteniendo ambas. El fallo de arte mencionado en el cierre histórico del taller ya está corregido por el trabajo integrado de IA 2. No se agregan funcionalidades ni se repiten baterías extensas.
 
 Verificación mínima del merge: `prueba_taller_ui` **7 PASS/0 FAIL** (escena combinada, plano/precio, construcción y acceso a mesa, horno y cofre). Módulos de cuentas y red idénticos a `origin/main`; núcleo de edificios y asentamientos idéntico al cierre del taller.
+
+
+## Integración publicada de acceso inicial con main (26/10/2026)
+
+El usuario autorizó subir la revisión completa. Integrado origin/main `c84b88e` mediante `cdac6e9`, conservando talleres, casas comunales y tareas de Fase 6. Esta nota supera las notas históricas de revisión sin publicar. Validación combinada: 9 casos unitarios, 16 de acceso/partidas, 13 de identidad con dos mundos, 6 suites de regresión y tareas 16/16. [Detalle y límites](production/qa/evidence/login-inicial/main-c84b88e/README.md). Sin prueba externa ni cambios a la skin.

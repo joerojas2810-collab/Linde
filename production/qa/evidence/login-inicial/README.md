@@ -32,3 +32,8 @@ Operación y respaldo: [guía](../../../../Linde/cenital/docs/CUENTAS_Y_SERVIDOR
 Cuenta, registro, servidor, conexión, configuración y carga de partidas reutilizan los nueve parches E06 de pergamino/madera y las fuentes de la interfaz. Acciones principales en verde petróleo, foco dorado, campos claros y mensajes en recuadro de contraste. Opciones técnicas plegables; se mantienen los valores y el acceso a todos los campos existentes. Revisión con capturas reales a 1280 × 720 y **16/16 comprobaciones** del flujo de acceso/guardados (`estetica_resultados.json`). El ensayo usa autoridad y partidas aisladas de la cuenta real; los errores JSON deliberados comprueban recuperación del respaldo y persisten los avisos conocidos al cerrar. No se repitieron pruebas de red externa.
 
 Además, a petición del usuario, se eliminó el mínimo de longitud de contraseña: sigue siendo obligatoria y su máximo es 128 caracteres. Cinco casos unitarios del servicio superados, incluido registro/login con un carácter y rechazo de vacío/exceso de longitud. Cambios locales sin publicar en `feature/login-inicial`.
+
+
+### Integración y publicación autorizadas (26/10/2026)
+
+Incorporado main `c84b88e`, con talleres y tareas. La nueva validación está en [main-c84b88e](main-c84b88e/README.md); la galería de los formularios aprobados en [estetica/GALERIA.html](estetica/GALERIA.html). Esta nota supera el estado histórico de revisión local de los apartados anteriores.
