@@ -1,6 +1,6 @@
 extends SceneTree
 ## Ritmo de la experiencia inicial (Fase 0 de Mundo 1): cuánto tarda un «jugador de referencia» en cada hito.
-## Uso:  Godot --headless --path Linde/cenital -s res://tests/medir_ritmo.gd -- semilla=123 limite_s=3600
+## Uso:  Godot --headless --path Linde/cenital -s res://tests/medir_ritmo.gd -- semilla=123 limite_s=3600 [ignorar=mundo.poblados]
 ## El jugador de referencia usa la API REAL de Juego (golpear_objeto, fabricar, construir, aprender), con las reglas reales,
 ## y avanza el mundo con `Juego.tick` mientras actúa (los habitantes compiten por los recursos). Tiempos en segundos de juego;
 ## 1 s real = 1 minuto de juego, así que «segundos» equivale a minutos reales de partida dividido por 60.
@@ -26,17 +26,19 @@ var limite := 3600.0
 var semilla := 0
 var estacion := {}   # tipo -> celda
 var agotado := false
+var ignorar: Array = []   # rutas de estado que no cuentan en el hash (ver medir_comun.hash_estado)
 var ultimo := ""   # motivo del último fallo, para el informe
 
 func _init() -> void:
-	var a := Com.args({"semilla": "123", "limite_s": "3600"})
+	var a := Com.args({"semilla": "123", "limite_s": "3600", "ignorar": ""})
+	ignorar = [] if str(a.ignorar) == "" else str(a.ignorar).split(",")
 	semilla = int(a.semilla)
 	limite = float(a.limite_s)
 	var c0 := Time.get_ticks_usec()
 	j = J.nueva(semilla, "Referencia", [0, 0, 0])
 	j.combate.enemigos.clear()
 	Com.linea("MEDIDA_CONFIG", {"herramienta": "medir_ritmo", "semilla": semilla, "limite_s": limite, "golpe_s": GOLPE_S, "celdas_por_s": P.VELOCIDAD / P.CELDA,
-		"combate": "desactivado", "politica": "voraz_fija", "inicio": "%d,%d" % [M.celda_de(j.pies_de()).x, M.celda_de(j.pies_de()).y],
+		"combate": "desactivado", "politica": "voraz_fija", "ignorar": ",".join(ignorar), "inicio": "%d,%d" % [M.celda_de(j.pies_de()).x, M.celda_de(j.pies_de()).y],
 		"habitantes_iniciales": j.habitantes.ids.size(), "godot": Engine.get_version_info().string})
 	_hito("inicio")
 	_recursos_restantes("inicio")
@@ -78,7 +80,7 @@ func _init() -> void:
 	_recursos_restantes("final")
 	var r: Dictionary = Com.resumen_npc(j)
 	var kv := {"semilla": semilla, "tiempo_total_s": snappedf(t, 0.1), "limite_alcanzado": agotado, "nivel": j.nivel(), "xp": j.jug().xp, "golpes": golpes,
-		"celdas_recorridas": celdas, "objetos_rotos": objetos, "hash_estado": Com.hash_estado(j)}
+		"celdas_recorridas": celdas, "objetos_rotos": objetos, "hash_estado": Com.hash_estado(j, ignorar)}
 	kv.merge(r)
 	Com.linea("MEDIDA_ESTADO", kv)
 	Com.linea("MEDIDA_CPU", {"semilla": semilla, "script_ms": snappedf((Time.get_ticks_usec() - c0) / 1000.0, 1)})
