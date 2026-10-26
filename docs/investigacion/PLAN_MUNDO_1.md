@@ -402,3 +402,12 @@ Una única función, `Juego.punto_aparicion(jugador_id) -> Dictionary` (`{celda,
 El interruptor se crea en `legado`; la política `poblado` pasa a ser el valor por defecto de los mundos nuevos solo si las mediciones de C1 no muestran un riesgo relevante y tras tu aprobación de resultados.
 
 **Pruebas añadidas**: (1) **seguridad posterior a la aparición**: tras aparecer con combate real, el jugador pasivo (peor caso) y el jugador que huye al detectar al enemigo, durante 30 s de juego, con registro de distancia mínima, primer estado de persecución, primer aviso de ataque y daño recibido, en las 500 semillas y con jugadores sucesivos; (2) las 500 semillas de seguridad estática; (3) dispersión de jugadores sucesivos; (4) persistencia; (5) red con clientes reales; (6) rechazo de entrada y reaparición sin posición segura, sin crear celda ni reactivar un pueblo no activo.
+
+
+## Continuación de Fase 6 — ciclo aprobado y dependencias (26/10/2026)
+
+El usuario aprobó los contratos de crisis/migración, fundación mínima y abandono/recuperación; quedan superadas las referencias anteriores que los indicaban pendientes. Commit `63fff6f`: selector de migración con mejora material tras un ciclo persistente e intentos locales/comerciales, evaluación de amenazas según conducta/visión vigente, abandono físico conservativo y recuperación por propietarios originales con reparación pagada desde carga a la llegada. Reutiliza Autonomía/Asentamientos/Tránsitos, sin nuevos valores o población. Deuda vencida no se cancela para forzar viajes.
+
+Pruebas puntuales: crisis/recuperación 15, integración de respuestas 17, reparación/presión 12, sin fallos; las dos últimas se ejecutaron antes de los últimos ajustes del selector/recuperación. Evidencia: `production/qa/evidence/mundo-1/fase-6-ciclo/`. Sin suites históricas ni publicación remota solicitada.
+
+**Fase 6 aún abierta:** fundación exige dos fundadores y origen viable, pero las comunidades regionales actuales tienen dos residentes/tope fijo dos. Se consultó crecimiento mediante viviendas pagadas y capacidad derivada de camas físicas, con residentes por migración real, sin crear NPC. También se consultó adquisición regional de recetas por enseñanza con maestro real y tiempos/requisitos vigentes. Ambas respuestas están pendientes: no se implementaron reglas por inferencia. Propiedad de terceros y fundación por oportunidad sin crisis permanecen excluidas; transición 5b sigue diferida.

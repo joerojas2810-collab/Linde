@@ -331,3 +331,10 @@ Los juncos nuevos, las marcas de bayas y los indicadores de oficios/permanencia/
 ### RED-C1 — Cuentas y acceso privado (26/10/2026, Usuario)
 
 Autoriza el sistema de cuentas personales persistentes, SQLite, Argon2id mantenido y transporte autenticado/cifrado; contraseña opcional del servidor independiente de la cuenta. Conservar servidor autoritativo, personaje/guardado existentes y no modificar Fases 1–4 ni interferir con IA 1/Fase 5. Rama independiente `feature/cuentas`, sin merge no coordinado. Fundamentos y límites: [ADR-0002](../../../docs/architecture/adr-0002-cuentas-locales-seguras.md), [guía](CUENTAS_Y_SERVIDOR.md) y [validación](../../../production/qa/evidence/cuentas/INFORME.md). Sustituye el alcance previo sin cuentas/cifrado solo en los formularios nuevos; el transporte legado conserva su alcance y no debe exponerse a Internet.
+
+
+### M1-AUT6-CICLO — políticas aprobadas, 26/10/2026
+
+Usuario: déficit alimentario persistente durante un ciclo regional vigente tras intentar alternativas locales/comercio; migrar exige camas, comida, infraestructura y mejora real, nunca temporizador solo. Rutas y amenazas se evalúan individualmente; seguridad desconocida no es peligro confirmado. Fundación mínima aprobada con dos residentes existentes/oficios, vivienda de dos plazas/campos/estaciones, materiales/provisiones pagados, origen viable y ventaja territorial comprobada; inicialmente solo tras agotar alternativas y migración a pueblos existentes. Fundación sin crisis por oportunidad no se implementa. Abandono físico sin residentes ni retornos previstos, conservando identidad/infraestructura/inventarios/derechos; recuperación por originales con recursos y reparación real. Propiedad/reclamación de terceros pendiente.
+
+Implementación del ciclo de crisis/abandono/recuperación: `63fff6f`. No aprueba por inferencia cambiar la capacidad fija regional de dos plazas ni enseñar recetas regionales automáticamente. Se consultaron capacidad física con crecimiento pagado y enseñanza mediante maestro real; pendientes de respuesta. [Contrato y dependencias](AUTONOMIA.md#fase-6--políticas-aprobadas-de-crisis-y-ciclo-físico-26102026).
