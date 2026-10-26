@@ -47,6 +47,15 @@ jobs:
           & ./motor/Godot_v4.7.1-stable_win64.exe --headless --path Linde/cenital --editor --import --quit 2>&1 | Tee-Object importacion.log
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           if (Select-String -Path importacion.log -Pattern 'SCRIPT ERROR:|Parse Error:|Failed to load script') { throw 'Error en scripts Godot' }
+      - name: Compilar scripts de acceso y servidor
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($name in @('acceso', 'panel', 'privado', 'cliente', 'servidor', 'main_servidor')) {
+            & ./motor/Godot_v4.7.1-stable_win64.exe --headless --path Linde/cenital --script "res://scripts/cuentas/$name.gd" --check-only 2>&1 | Tee-Object "qa-compilar-$name.log"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            if (Select-String -Path "qa-compilar-$name.log" -Pattern 'SCRIPT ERROR:|Parse Error:|Failed to load script') { throw "Error compilando $name" }
+          }
       - name: Perfil local sin cuentas, guardado y carga
         run: ./motor/Godot_v4.7.1-stable_win64.exe --headless --path Linde/cenital --script res://tests/prueba_perfil_local.gd -- --salida=${{ github.workspace }}/qa/local
       - name: Identidad global existente
@@ -60,7 +69,7 @@ jobs:
       - name: Prueba de arranque del paquete
         shell: pwsh
         run: |
-          & ./paquete/runtime/python/python.exe ./paquete/servidor/dedicado/prueba_paquete.py --godot ./paquete/runtime/Godot.exe
+          & ./paquete/runtime/python/python.exe ./paquete/servidor/dedicado/prueba_paquete.py --godot ./paquete/runtime/Godot.exe 2>&1 | Tee-Object qa/paquete.log
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Guardar paquete
         uses: actions/upload-artifact@v4
@@ -72,7 +81,7 @@ jobs:
         if: failure()
         shell: pwsh
         run: |
-          Get-ChildItem qa -Filter *.log -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
+          Get-ChildItem qa -Filter *.log -Recurse -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | ForEach-Object {
             $body = (Get-Content $_.FullName -Tail 45) -join "`n"
             $body = $body.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
             Write-Output "::error title=$($_.Name)::$body"
