@@ -231,6 +231,9 @@ class Replica extends "res://scripts/juego.gd":
 	func pista_contextual(_id: String = LOCAL) -> Dictionary:
 		return jug().get("pista_contextual", {})
 
+	func aviso_ecologico(_id:String=LOCAL) -> Dictionary:
+		return jug().get("aviso_ecologico",{})
+
 	func preguntar_lugares(npc: String, _id: String = LOCAL) -> Dictionary:
 		red.enviar(["preguntar_lugares", npc])
 		return {"ok": true}

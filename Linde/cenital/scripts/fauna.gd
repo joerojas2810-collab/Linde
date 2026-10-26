@@ -335,3 +335,28 @@ func baja(e: Dictionary) -> void:
  var d := restaurar()
  d.heridos.erase(e.fauna_id)
  d.bajas[e.fauna_id] = int(j.d.min) + int(cfg.reaparicion_min)
+
+## Percepción de una fuente viva: radio de conocimiento existente y visión de combate.
+## No consulta planes latentes, no emite coordenadas ni declara rastros ficticios.
+func senal_desde(posicion:Vector2) -> Dictionary:
+ if not j.es_autoridad() or j.mundo.modo_inicio()!=M.MODO_POBLADO:return {}
+ var radio=float(j.autonomia.reglas.conocimiento.radio_vision)*M.P.CELDA
+ var candidatos=[]
+ for e in combate.enemigos:
+  if not e.has("fauna_id") or e.est=="muerto" or int(e.hp)<=0:continue
+  var conducta=C.ENEMIGOS[e.tipo].get("conducta","hostil")
+  if not conducta in ["hostil","territorial"] and not e.get("alertado",false):continue
+  if e.pos.distance_to(posicion)<=radio:candidatos.append(e)
+ candidatos.sort_custom(func(a,b):
+  var da=a.pos.distance_squared_to(posicion);var db=b.pos.distance_squared_to(posicion)
+  return str(a.fauna_id)<str(b.fauna_id) if da==db else da<db)
+ for e in candidatos:
+  if not combate.linea_visible(e.pos,posicion):continue
+  var delta:Vector2=e.pos-posicion
+  var direccion=["este","sureste","sur","suroeste","oeste","noroeste","norte","noreste"][posmod(roundi(delta.angle()/(PI/4.0)),8)]
+  if delta.is_zero_approx():direccion="aquí"
+  var categoria=str(C.ENEMIGOS[e.tipo].get("conducta","hostil"))
+  if not categoria in ["hostil","territorial"]:categoria="en alerta"
+  var texto="Fauna %s muy cerca de ti."%categoria if direccion=="aquí" else "Fauna %s hacia el %s. Puedes observar o rodear la zona."%[categoria,direccion]
+  return {"fuente":e.fauna_id,"ancla":e.get("ancla",""),"bloque":j.autonomia._bloque(M.celda_de(e.pos)),"categoria":categoria,"min":int(j.d.min),"direccion":direccion,"texto":texto}
+ return {}

@@ -368,7 +368,7 @@ func _mapa(vs: Vector2) -> void:
 	if zona.has_point(yo):
 		draw_texture_rect(ui.tex("mapa/marca.svg"), Rect2(yo - Vector2(6, 6), Vector2(12, 12)), false)
 		_t("Tú", yo + Vector2(9, -9), 16, Color.WHITE)
-	_t("Verde: visto · Ocre: contado · Claro: sendero · Oscuro: sin explorar", Vector2(96, 612), 16)
+	_t("Verde: visto · Ocre: contado · Claro: sendero · Avistamientos históricos", Vector2(96, 612), 16)
 	_t("REFERENCIAS · Av/Re Pág", Vector2(858, 142), 16)
 	var y := 182.0
 	numero = 0
@@ -379,17 +379,19 @@ func _mapa(vs: Vector2) -> void:
 		var fuente: String = h.fuente
 		var n := "Explorado por ti"
 		if fuente != "visto": n = "Según " + j.nombre_habitante(fuente.trim_prefix("npc:"))
+		if h.get("tipo","")=="avistamiento":n="D%d %02d:%02d · %s"%[int(h.min)/1440+1,(int(h.min)%1440)/60,int(h.min)%60,n]
 		_t(n, Vector2(858, y + 21), 14)
 		y += 52
 	_t("%d–%d de %d" % [mini(esc.mapa_primera + 1, referencias.size()), mini(esc.mapa_primera + 7, referencias.size()), referencias.size()], Vector2(858, 580), 14)
 
 ## Tarjeta única, breve y descartable; no desplaza la interacción contextual existente.
 func _pista_contextual(vs: Vector2, j) -> void:
-	var actual: Dictionary = j.pista_contextual()
+	var aviso:Dictionary=j.aviso_ecologico()
+	var actual: Dictionary = j.pista_contextual() if aviso.is_empty() else aviso
 	if actual.is_empty(): return
 	var r := Rect2(vs.x / 2 - 330, 180, 660, 120)
 	ui.panel(self, r)
-	_t("UNA PISTA · T ocultar · Esc configurar", r.position + Vector2(20, 14), 16)
+	_t("ENTORNO · Dirección aproximada · M avistamientos" if not aviso.is_empty() else "UNA PISTA · T ocultar · Esc configurar", r.position + Vector2(20, 14), 16)
 	var lineas: Array = []
 	var linea := ""
 	for palabra in str(actual.texto).split(" "):

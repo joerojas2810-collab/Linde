@@ -179,9 +179,12 @@ func _mas_cercano(e: Dictionary) -> Array:
 func _visible(e: Dictionary, id: String) -> bool:
 	if not e.has("fauna_id"): return true # conservar los encuentros históricos
 	var hasta: Vector2 = j.pies_de(id)
-	var pasos := maxi(1, ceili(e.pos.distance_to(hasta) / 4.0))
+	return linea_visible(e.pos,hasta)
+
+func linea_visible(desde:Vector2,hasta:Vector2) -> bool:
+	var pasos := maxi(1, ceili(desde.distance_to(hasta) / 4.0))
 	for i in range(1, pasos):
-		if j.mundo.bloquea(Mundo.celda_de(e.pos.lerp(hasta, float(i) / pasos))): return false
+		if j.mundo.bloquea(Mundo.celda_de(desde.lerp(hasta, float(i) / pasos))): return false
 	return true
 
 func _paso_enemigo(e: Dictionary, dt: float) -> void:

@@ -1091,6 +1091,9 @@ func jefe_derrotado(jid: String, id: String = LOCAL) -> void:
 func actualizar_mapa() -> void:
 	for id in rt: Exploracion.observar(self, id)
 
+func aviso_ecologico(id:String=LOCAL) -> Dictionary:
+	return Exploracion.aviso_actual(self,id)
+
 ## El servidor valida cercanía y decide qué información se intercambia.
 func preguntar_lugares(npc: String, id: String = LOCAL) -> Dictionary:
 	return Exploracion.intercambiar(self, npc, id)
