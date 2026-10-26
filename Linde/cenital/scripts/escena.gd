@@ -116,7 +116,7 @@ func _ready() -> void:
 	if pantalla_ini == "creador": modo = "creador"       # depuración/capturas: abre la pantalla sin teclear
 	elif pantalla_ini == "unirse": _abrir_unirse()
 	if nueva >= 0:
-		j = J.nueva(nueva, cr.nombre, Aspecto.de_creador(cr))
+		j = J.nueva(nueva, cr.nombre, Aspecto.de_creador(cr), J.MODO_JUEGO)
 		modo = "juego"
 		if ir != "":
 			var p := ir.split(",")
@@ -228,7 +228,7 @@ func _tecla_creador(e: InputEvent) -> void:
 					un.nombre = cr.nombre
 					modo = "unirse"
 					return
-				j = J.nueva(randi() % 100000, cr.nombre, Aspecto.de_creador(cr))
+				j = J.nueva(randi() % 100000, cr.nombre, Aspecto.de_creador(cr), J.MODO_JUEGO)
 				j.guardar(ruta)
 				modo = "juego"
 				if destino_creador == "alojar": _alojar()
@@ -249,7 +249,7 @@ func _servidor_sin_ventana(o: Dictionary) -> void:
 		printerr("Linde: " + J.mensaje_carga(J.ultimo_error))
 		get_tree().quit(1)
 		return
-	if g == null: g = J.nueva(o.get("semilla", 1), "Anfitrión", [0, 0, 0])
+	if g == null: g = J.nueva(o.get("semilla", 1), "Anfitrión", [0, 0, 0], J.MODO_JUEGO)
 	var s = Srv.new()
 	s.name = "Red"
 	s.j = g
@@ -267,7 +267,7 @@ func _alojar() -> void:
 		menu_msg = J.mensaje_carga(J.ultimo_error)
 		return
 	if g == null:
-		g = J.nueva(randi() % 100000, cr.nombre, Aspecto.de_creador(cr))
+		g = J.nueva(randi() % 100000, cr.nombre, Aspecto.de_creador(cr), J.MODO_JUEGO)
 		g.guardar(ruta)
 	var s = Srv.new()
 	s.name = "Red"

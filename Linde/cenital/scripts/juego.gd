@@ -54,7 +54,7 @@ static func nuevo_jugador(nombre: String, look: Array, p: Vector2) -> Dictionary
 		"pendientes": {}, "relacion": {}}
 
 ## `modo_inicio`: ver `Mundo.MODO_LEGADO` / `MODO_POBLADO`. Los mundos que se juegan (escena) usan `MODO_JUEGO`; las pruebas y herramientas, `legado` salvo que lo pidan.
-const MODO_JUEGO := Mundo.MODO_LEGADO   # pasa a MODO_POBLADO cuando se validan las mediciones de seguridad (1c)
+const MODO_JUEGO := Mundo.MODO_POBLADO   # validado con medir_aparicion (production/qa/evidence/mundo-1/fase-1c); las pruebas y herramientas siguen en legado por defecto
 static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String = Mundo.MODO_LEGADO):
 	var j = new()
 	j.d = {"semilla": semilla}
