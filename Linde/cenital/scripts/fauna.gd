@@ -103,6 +103,29 @@ func habitat_en(celda: Vector2i) -> Dictionary:
  if bool(p.agua_vecina) and not agua: return {}
  return {"bioma": bioma, "tipo": p.tipo, "conducta": C.ENEMIGOS[p.tipo].get("conducta", "hostil"), "agua_vecina": agua}
 
+## Lectura territorial del registro existente, no regla de aparición ni conocimiento del jugador.
+## No genera lugares, rutas o regiones. Distancias sin radio de seguridad implícito.
+func contexto_territorial(celda:Vector2i) -> Dictionary:
+ var registro:Dictionary=j.d.mundo.get("registro",{})
+ var result={"ruta":"","distancia_ruta":-1,"en_ruta":false,"lugares":[],"poblados":[],"nucleos_1e":[]}
+ var rutas:Dictionary=registro.get("rutas",{});var ids=rutas.keys();ids.sort()
+ for id in ids:
+  for pos in rutas[id].celdas:
+   var distancia=absi(celda.x-int(pos[0]))+absi(celda.y-int(pos[1]))
+   if result.distancia_ruta<0 or distancia<int(result.distancia_ruta):result.ruta=id;result.distancia_ruta=distancia
+ result.en_ruta=result.distancia_ruta==0
+ var lugares:Dictionary=registro.get("lugares",{});ids=lugares.keys();ids.sort()
+ for id in ids:
+  var a:Array=lugares[id].area
+  if Rect2i(a[0],a[1],a[2],a[3]).has_point(celda):result.lugares.append(id)
+ for id in j.mundo.poblados_ids():
+  var p:Dictionary=j.mundo.poblado(id)
+  if p.has("area"):
+   var a:Array=p.area
+   if Rect2i(a[0],a[1],a[2],a[3]).has_point(celda):result.poblados.append(id)
+  if j.mundo.modo_inicio()==M.MODO_POBLADO and p.has("centro") and Vector2(celda).distance_to(Vector2(p.centro[0],p.centro[1]))<M.NUCLEO_RADIO:result.nucleos_1e.append(id)
+ return result
+
 func restaurar() -> Dictionary:
  var d: Dictionary = j.d.get_or_add("fauna", {})
  if not d.has("version"): d.version = 1
