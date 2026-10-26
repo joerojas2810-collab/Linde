@@ -227,6 +227,10 @@ func suelo(actor: String) -> int:
 		if j.d.mundo.constr[clave].t!="suelo": continue
 		var c := Vector2i(int(clave.get_slice(",",0)),int(clave.get_slice(",",1)))
 		if maxi(absi(c.x-origen.x),absi(c.y-origen.y)) <= int(cfg.radio_taller): cantidad+=1
+	for clave in j.d.mundo.get("registro",{}).get("pisos",{}):
+		if j.d.mundo.constr.get(clave,{}).get("t","")=="suelo": continue
+		var c := Vector2i(int(clave.get_slice(",",0)),int(clave.get_slice(",",1)))
+		if maxi(absi(c.x-origen.x),absi(c.y-origen.y)) <= int(cfg.radio_taller): cantidad+=1
 	return cantidad
 
 ## ¿Puede hacerla ahora? Material visto, pericia y espacio de taller. Los insumos y la estación se validan al actuar.

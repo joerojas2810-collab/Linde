@@ -1,0 +1,35 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS hay solar de prueba con huella y acceso en el exterior
+PASS el precio es la suma exacta de 21 muros, puerta, cama, cofre, 20 suelos y 41 techos
+PASS sin materiales no se crea nada ni se pierde inventario
+PASS entrada bloqueada: rechazo sin consumir materiales
+PASS un depósito previo nunca se borra para instalar el edificio
+PASS los intentos rechazados no dejan piezas ni un edificio parcial
+PASS construcción completa, sin doble cobro ni materiales gratuitos
+PASS identidad estable y plano preparado para etapas futuras
+PASS puerta automática por proximidad, sin cambiar su colisión transitable
+PASS interior y uso de cama/cofre alcanzables desde el exterior
+PASS los servicios de vivienda reconocen el plano con el bono de descanso existente
+PASS los NPC tampoco modifican libremente el interior del plano
+PASS suelo y mobiliario coexisten sin ocupar dos veces la misma capa
+PASS entrar, circular y salir sin transición de escena ni teletransporte
+PASS la cama real conserva descanso y punto de retorno existentes
+PASS el cofre interior se abre con la interacción habitual
+PASS almacenamiento real sin inventario paralelo del edificio
+PASS el edificio no se desarma ni modifica mediante construcción libre
+PASS ocultación distinta dentro/fuera, sin cambiar el estado compartido
+PASS los suelos pagados conservan la superficie útil de las técnicas existentes
+PASS el NPC entra por la puerta, alcanza su cama asignada y descansa
+PASS una vivienda con faltantes deja de cumplir el contrato de casa completa
+PASS reiniciar conserva faltantes, identidad e inventario sin regenerarlos
+PASS plano y asignación de NPC persistidos exactamente
+PASS reparar paga solo muro y teja faltantes, conservando los demás objetos
+PASS la reparación respeta propiedad sin tocar cuentas o credenciales
+PASS una revisión vieja no duplica reparación, cobros ni contenido
+PASS descargar y volver conserva una vivienda única que cruza regiones
+PASS versiones futuras de edificios se rechazan explícitamente
+WARNING: 46 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

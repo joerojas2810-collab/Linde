@@ -17,6 +17,7 @@ const Anim = preload("res://scripts/anim_pj.gd")
 const Eq = preload("res://scripts/equipo.gd")
 const Lugares = preload("res://scripts/lugares.gd")
 const Pistas = preload("res://scripts/pistas.gd")
+const Edificios = preload("res://scripts/edificios.gd")
 const Exploracion = preload("res://scripts/exploracion.gd")
 const LOCAL := P.LOCAL
 const CAP_COFRE := 30
@@ -671,6 +672,8 @@ func ocupada(c: Vector2i) -> bool:
 	return false
 
 func construir(pieza: String, c: Vector2i, id: String = LOCAL) -> Dictionary:
+	if Edificios.catalogo().planos.has(pieza): return construir_edificio(pieza,c,id)
+	if not mundo.edificio_en(c).is_empty(): return _no("Usa el plano de reparación de la vivienda",id)
 	var pj := jug(id)
 	if not C.CONSTR.has(pieza): return _no("Pieza desconocida", id)
 	var def: Dictionary = C.CONSTR[pieza]
@@ -723,6 +726,7 @@ func cosechar(c: Vector2i) -> Dictionary:
 	return C.CAMPO_COSECHA.duplicate()
 
 func retirar(c: Vector2i, id: String = LOCAL) -> Dictionary:
+	if not mundo.edificio_en(c).is_empty(): return _no("La vivienda se modifica mediante reparación o ampliación",id)
 	var pj := jug(id)
 	var k := Mundo.clave(c)
 	var cs: Dictionary = mundo.constr_en(c)
@@ -864,6 +868,9 @@ func interactuar(id: String = LOCAL) -> Dictionary:
 		if r.pos.distance_to(p) <= ALCANCE_NPC:
 			return {"ok": true, "panel": "dialogo", "npc": r.id, "nombre": r.nombre, "texto": autonomia.asentamientos.dialogo(r.id), "tipo": "regional"}
 	if estacion_junto(id) != "": return {"ok": true, "panel": "craft"}
+	var edificio: Dictionary = mundo.edificio_en(base + m)
+	if edificio.is_empty(): edificio = mundo.edificio_en(base)
+	if not edificio.is_empty(): return {"ok":true,"panel":"edificio","id":edificio.id}
 	var lugar: Dictionary = mundo.lugar_en(base)
 	if not lugar.is_empty(): return {"ok": true, "panel": "dialogo", "nombre": lugar.nombre, "texto": lugar.descripcion, "tipo": "lugar"}
 	return {"ok": false, "r": _no("Nada con qué interactuar", id)}
@@ -1086,3 +1093,59 @@ func pista_contextual(id: String = LOCAL) -> Dictionary:
 func nombre_habitante(nid: String) -> String:
 	if habitantes.fichas.has(nid): return str(habitantes.fichas[nid].n)
 	return str(autonomia.asentamientos.residente(nid).get("nombre", "un habitante"))
+
+## Primera entrega: paga exactamente el plano completo y lo instala terminado, sin inventario inicial.
+func construir_edificio(tipo: String, entrada: Vector2i, id: String = LOCAL) -> Dictionary:
+	if not es_autoridad() or not rt.has(id): return _no("Solo la autoridad construye",id)
+	var c := Mundo.celda_de(pies_de(id))
+	if maxi(absi(c.x-entrada.x),absi(c.y-entrada.y)) > 2: return _no("Acércate al acceso sur",id)
+	var e := Edificios.plano(tipo,entrada,id)
+	if e.is_empty(): return _no("Plano desconocido",id)
+	var coste := Edificios.coste(e)
+	if not Inv.tiene(jug(id).inv,coste): return _no("Faltan materiales: "+_txt_items(coste),id)
+	var motivo := Edificios.instalar(self,e)
+	if motivo != "": return _no(motivo,id)
+	Inv.quitar(jug(id).inv,coste)
+	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",coste)
+	return _ok("Vivienda terminada. Entra por la puerta sur; E permite consultar y reparar.",id)
+
+## Reparación limitada, con revisión optimista y precio de los faltantes reales. No sobrescribe muebles o inventarios.
+func reparar_edificio(eid: String, revision: int, id: String = LOCAL) -> Dictionary:
+	if not es_autoridad() or not rt.has(id): return _no("Solo la autoridad repara",id)
+	var e: Dictionary = d.mundo.get("registro",{}).get("edificios",{}).get(eid,{})
+	if e.is_empty() or e.dueno != id: return _no("Esa vivienda no es tuya",id)
+	if int(e.revision) != revision: return _no("La vivienda cambió; revisa el plano antes de reparar",id)
+	var entrada := Vector2i(e.entrada[0],e.entrada[1])
+	if not Edificios.abierto(e,pies_de(id)): return _no("Acércate a la vivienda",id)
+	var f := Edificios.faltantes(self,e)
+	var coste := Edificios.coste(f)
+	if coste.is_empty(): return _no("La vivienda está completa",id)
+	if not Inv.tiene(jug(id).inv,coste): return _no("Faltan materiales: "+_txt_items(coste),id)
+	for k in f.piezas:
+		var c := Edificios._celda(k)
+		if not mundo.constr_en(c).is_empty() or mundo.puede_poner(c) != "" or ocupada(c): return _no("Hay un obstáculo en la reparación",id)
+	for k in f.techos:
+		if mundo.puede_techar(Edificios._celda(k)) != "": return _no("Hay un obstáculo bajo la cubierta",id)
+	for k in f.pisos:
+		if not mundo.piso_en(Edificios._celda(k)).is_empty(): return _no("Hay otro suelo en la reparación",id)
+	# Comprueba el resultado completo antes de consumir o cambiar una pieza.
+	var anteriores: Dictionary = d.mundo.constr
+	d.mundo.constr = anteriores.duplicate(true)
+	d.mundo.constr.merge(f.piezas,true)
+	mundo.cambiar()
+	var valido := Edificios.accesible(self,e)
+	d.mundo.constr = anteriores
+	mundo.cambiar()
+	if not valido: return _no("La reparación impediría un acceso",id)
+	for k in f.piezas:
+		var cs: Dictionary = f.piezas[k]
+		mundo.poner(Edificios._celda(k),cs.t,true,e.dueno)
+		if cs.t == "cofre": d.cofres.get_or_add("c@"+k,{"inv":{}})
+	for k in f.pisos:
+		d.mundo.registro.pisos[k] = {"dueno":e.dueno,"edificio":e.id}
+		mundo._edificio_editado(Edificios._celda(k))
+	for k in f.techos: mundo.techar(Edificios._celda(k),e.dueno)
+	mundo.cambiar()
+	Inv.quitar(jug(id).inv,coste)
+	autonomia.desarrollo.registrar(actor_desarrollo(id),"construccion",coste)
+	return _ok("Vivienda reparada",id)

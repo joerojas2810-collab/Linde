@@ -367,6 +367,7 @@ func tipo(c: Vector2i) -> int:
 	return T.CAMINO if t == T.PASTO and estado.get("caminos", {}).has(clave(c)) else t
 
 func _base(c: Vector2i) -> int:
+	if not piso_en(c).is_empty(): return T.SUELO
 	var cambios: Dictionary = estado.get("registro", {}).get("suelos", {})
 	if cambios.has(clave(c)): return int(cambios[clave(c)])
 	if es_valle(c):return celdas[c.y*ANCHO+c.x]
@@ -436,7 +437,7 @@ func regenerar(hora: int, ocupada: Callable) -> int:
 		var r: int = C.OBJETOS[objeto.t].regen_h
 		if r > 0 and hora - estado.rotos[id] >= r * 60:
 			var c: Vector2i = objeto.c
-			if constr_en(c).is_empty() and not ocupada.call(c):
+			if constr_en(c).is_empty() and piso_en(c).is_empty() and not ocupada.call(c):
 				estado.rotos.erase(id)
 				n += 1
 	if n > 0: cambiar()
@@ -456,6 +457,7 @@ func poner(c: Vector2i, pieza: String, propia: bool, dueno: String = "") -> void
 	var cs := {"t": pieza, "propia": propia}
 	if dueno != "": cs["dueno"] = dueno
 	estado.constr[clave(c)] = cs
+	_edificio_editado(c)
 	cambiar()
 
 ## Los techos van aparte de las piezas: una celda puede tener cama, mesa o muro y además techo. El valor es el dueño.
@@ -469,14 +471,17 @@ func puede_techar(c: Vector2i) -> String:
 
 func techar(c: Vector2i, dueno: String) -> void:
 	estado.techos[clave(c)] = dueno
+	_edificio_editado(c)
 	cambiar()
 
 func destechar(c: Vector2i) -> void:
 	estado.techos.erase(clave(c))
+	_edificio_editado(c)
 	cambiar()
 
 func quitar(c: Vector2i) -> void:
 	estado.constr.erase(clave(c))
+	_edificio_editado(c)
 	cambiar()
 
 static func pies_de_celda(c: Vector2i) -> Vector2:
@@ -598,6 +603,11 @@ func aplicar_registro() -> void:
 				objetos.erase(id)
 			else: presentes.append(id)
 		regiones[k].ids = presentes
+	if not estado.get("registro",{}).get("edificios",{}).is_empty():
+		for id in objetos.keys():
+			if es_valle(objetos[id].c) and despejes.has(clave(objetos[id].c)):
+				por_celda.erase(objetos[id].c)
+				objetos.erase(id)
 	cambiar()
 
 ## Lugar persistente que contiene la celda, sin crear ninguno al consultar.
@@ -606,3 +616,18 @@ func lugar_en(c: Vector2i) -> Dictionary:
 		var a: Array = lugar.area
 		if Rect2i(a[0], a[1], a[2], a[3]).has_point(c): return lugar
 	return {}
+
+## Suelo construido en una capa independiente: admite muebles y conserva identidad/propiedad.
+func piso_en(c: Vector2i) -> Dictionary:
+	return estado.get("registro",{}).get("pisos",{}).get(clave(c),{})
+
+## Unidad persistente que contiene la celda; consultar nunca crea datos de mundo.
+func edificio_en(c: Vector2i) -> Dictionary:
+	for e in estado.get("registro",{}).get("edificios",{}).values():
+		var a: Array = e.area
+		if Rect2i(a[0],a[1],a[2],a[3]).has_point(c): return e
+	return {}
+
+func _edificio_editado(c: Vector2i) -> void:
+	var e := edificio_en(c)
+	if not e.is_empty(): e.revision = int(e.revision)+1

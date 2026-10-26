@@ -1,0 +1,2 @@
+IGUAL semilla=123 dias=4 estado_completo=true lineas=5 sin_exclusiones=true
+IGUAL semilla=456 dias=4 estado_completo=true lineas=5 sin_exclusiones=true
