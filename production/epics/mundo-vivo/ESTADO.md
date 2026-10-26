@@ -195,3 +195,13 @@ Acabado local reaplicado a la última base remota, conservando art2 y correccion
 ## Publicación autorizada — 25/10/2026
 
 El usuario solicitó commit y push de esta integración sobre 5b87517. La evidencia vigente se conserva en `production/qa/evidence/arte-pendiente-integrado/`; los estados de borrador y sin publicar anteriores son históricos. Se mantienen los límites artísticos y de pruebas documentados; la publicación se identifica en el historial de Git.
+
+## IA 2 — cuentas y persistencia, rama independiente (26/10/2026)
+
+**Base:** Fase 4 `6bb89f5`; **rama:** `feature/cuentas`, sin merge con main. Se corrige la confusión entre la clave de identidad antigua y la contraseña del servidor: el menú permite iniciar un servidor separado, configurar UDP/TCP y contraseña opcional, registrar/iniciar sesión por cuenta y detener guardando. Cuentas SQLite con Argon2id y UUID; HTTPS con certificado verificado, tickets efímeros de un uso, DTLS/ENet, límites de intentos y bloqueo de sesiones duplicadas. La autoridad y el personaje completo siguen en Juego/Guardado, con mapa personal y progreso; SQLite no replica personajes. Incluye autoguardado, desconexión, cierre y respaldo de cuentas.
+
+**Ejecutado en esta rama el 26/10:** cuatro casos unitarios Python sin fallos; 35 comprobaciones de integración con procesos reales sin fallos; cinco de recuperación/autoguardado sin fallos; inicio/cierre de interfaz en puertos predeterminados y capturas inspeccionadas; **36/37 suites de regresión sin fallos**. Único fallo restante: SHA de los 96 archivos E04/E05 ya registrado. Rutas temporales Unix adaptadas solo en copias de ejecución y bytes canónicos del mapa de iconos para Windows: detalle y resultados por suite en [informe](../../qa/evidence/cuentas/INFORME.md).
+
+**Conectividad:** localhost y `192.168.100.190` desde esta misma PC. No se probó una segunda computadora, firewall entrante de otra máquina ni Internet/NAT real. No declarar LAN externa o Internet superados. Se necesitan UDP 7777 y TCP 7778 por defecto. El modo legado `--servidor` permanece sin cifrado para compatibilidad y sus pruebas; los formularios nuevos usan el servidor seguro.
+
+**Límites:** instalación Python/dependencias en el anfitrión, certificado público compartido manualmente; sin recuperación de contraseña ni exportación empaquetada; pérdida posible hasta el intervalo de autoguardado ante caída. Partida individual y skin de El Rayo no modificadas. Núcleo de mundo/reglas/datos idéntico a la base; ver [guía](../../../Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md) y [ADR-0002](../../../docs/architecture/adr-0002-cuentas-locales-seguras.md). No se intervino el checkout de IA 1; coordinar antes de integrar escena/HUD/red y estas notas con Fase 5.

@@ -15,6 +15,7 @@
 | A01 | Combate en tiempo real provisional | Propuesta, pendiente | «A01 — Combate» |
 | — | Estado por jugador y mundo compartido (formato 2) | Propuesta, vigente | «Estado por jugador y mundo compartido» |
 | — | Servidor autoritativo «mundo anfitrión» (A04) | Propuesta, vigente (protocolo hoy en versión 8) | «Red: servidor autoritativo»; [ADR-0001](../../../docs/architecture/adr-0001-multijugador-mundo-anfitrion.md) |
+| RED-C1 | Cuentas SQLite/Argon2id, acceso privado opcional y HTTPS/DTLS | Usuario (26/10) | [ADR-0002](../../../docs/architecture/adr-0002-cuentas-locales-seguras.md), [guía](CUENTAS_Y_SERVIDOR.md) |
 | — | Equipo v1 (familias, piedras, Chispa, sets) | Propuesta, vigente | «Equipo v1» y [sistema-de-equipo.md](../../documentos/sistema-de-equipo.md) |
 | — | Arte de equipo por colores índice; ataque con celda 48 | Propuesta, vigente | Secciones «Arte de equipo…» y «Ataque con equipo» |
 | — | Arte nuevo por defecto; integración estética E01–E06; dibujo procedural retirado | Usuario (24/10) | «Arte nuevo por defecto» e «Integración estética completa» |
@@ -317,3 +318,7 @@ Se integraron los seis entregables de arte (E01–E06, candidatos sin aceptació
 
 ### Actualización de implementación de las excepciones — integración local 5b87517
 Los juncos nuevos, las marcas de bayas y los indicadores de oficios/permanencia/ocupación usan sprites PNG. Se reducen las llamadas permitidas de `arte_entornos.gd/suelo` de 15 a 13 al sustituir los juncos procedurales; no se autoriza ninguna función nueva de dibujo por primitivas. La azada y los indicadores conservan el aspecto del borrador revisado mediante rasterización del fuente nativo en herramientas/arte. El resto de máximos permanece igual.
+
+### RED-C1 — Cuentas y acceso privado (26/10/2026, Usuario)
+
+Autoriza el sistema de cuentas personales persistentes, SQLite, Argon2id mantenido y transporte autenticado/cifrado; contraseña opcional del servidor independiente de la cuenta. Conservar servidor autoritativo, personaje/guardado existentes y no modificar Fases 1–4 ni interferir con IA 1/Fase 5. Rama independiente `feature/cuentas`, sin merge no coordinado. Fundamentos y límites: [ADR-0002](../../../docs/architecture/adr-0002-cuentas-locales-seguras.md), [guía](CUENTAS_Y_SERVIDOR.md) y [validación](../../../production/qa/evidence/cuentas/INFORME.md). Sustituye el alcance previo sin cuentas/cifrado solo en los formularios nuevos; el transporte legado conserva su alcance y no debe exponerse a Internet.

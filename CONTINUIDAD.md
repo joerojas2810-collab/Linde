@@ -37,3 +37,11 @@ Godot local: `herramientas/runtime/Godot.app/Contents/MacOS/Godot` (no está en 
 - Reutiliza lo que existe (registro de poblados, `Asentamientos`, `Autonomia`, validaciones); no crees sistemas paralelos. Los pueblos siguen las mismas reglas que cualquier comunidad y **ninguno es invulnerable ni inmortal**.
 - Un commit por cambio funcional, con hashes de estado comparados antes y después; los guardados antiguos no importan (sin migraciones).
 - Tras implementar y probar algo, registra el resultado verificado (con fecha, alcance y limitaciones) en ESTADO.md; las cifras se registran, no se asumen.
+
+## Rama IA 2 — cuentas y servidor (26/10/2026)
+
+Trabajo autorizado y separado de Fase 5 en `feature/cuentas`, base Fase 4 `6bb89f5`. Nuevo menú de servidor con puerto UDP 7777, HTTPS 7778 y contraseña opcional independiente de cada cuenta; registro/login con SQLite y Argon2id, HTTPS y DTLS con certificado validado, ID de cuenta estable y un personaje en el guardado existente. No duplica inventario/mundo ni modifica generación, economía o progresión.
+
+Validación de esta rama: cuatro casos unitarios Python; 35 comprobaciones de integración con procesos reales; cinco de autoguardado/cierre inesperado; interfaz iniciando/cerrando en 7777/7778; regresión final **36 de 37 suites**. Permanece únicamente el fallo previo de hashes E04/E05; las adaptaciones de rutas temporales y CRLF para probar en Windows están detalladas. Localhost y conexión a la IP LAN propia ejecutados; **no otra computadora ni Internet real**. No se incorporó la skin en pausa.
+
+Leer [CUENTAS_Y_SERVIDOR](Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md), [ADR-0002](docs/architecture/adr-0002-cuentas-locales-seguras.md) e [informe](production/qa/evidence/cuentas/INFORME.md). Iniciar desde `Iniciar-Servidor.bat` después de `Instalar-Cuentas.bat`. El comando histórico `--servidor` sigue siendo legado sin cifrado; no es la entrada nueva para Internet. Coordinar cambios compartidos de escena/HUD/red y documentación antes de integrar con IA 1; esta rama no se fusionó con main.
