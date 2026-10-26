@@ -67,5 +67,12 @@ func solicitar(parent:Node,ruta:String,datos:Dictionary={},interno:bool=false) -
 	var err=req.request("https://127.0.0.1:%d%s"%[puerto,ruta],headers,method,"" if method==HTTPClient.METHOD_GET else JSON.stringify(datos))
 	if err!=OK:req.queue_free();return {"ok":false,"motivo":"Servicio de cuentas no disponible."}
 	var result=await req.request_completed;req.queue_free()
-	var body=JSON.parse_string(result[3].get_string_from_utf8())
-	return body if result[0]==HTTPRequest.RESULT_SUCCESS and body is Dictionary else {"ok":false,"motivo":"Servicio de cuentas no disponible."}
+	if result[0]!=HTTPRequest.RESULT_SUCCESS or result[1]!=200:
+		var motivo="Servicio local no disponible (transporte %d, HTTP %d)."%[int(result[0]),int(result[1])]
+		push_warning(motivo)
+		return {"ok":false,"motivo":motivo}
+	var parsed=JSON.new()
+	if parsed.parse(result[3].get_string_from_utf8())!=OK or not parsed.data is Dictionary:
+		push_warning("El servicio local no devolvió un objeto JSON válido.")
+		return {"ok":false,"motivo":"Respuesta del servicio local inválida."}
+	return parsed.data
