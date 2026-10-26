@@ -438,7 +438,7 @@ func _area_ruta(desde: Vector2i) -> Rect2i:
 func construccion_segura(c: Vector2i, actores: Array) -> bool:
 	if es_valle(c):
 		var alc:=alcanzables()
-		for e in ESENCIALES:if not alc.has(e):return false
+		for e in esenciales(ID_INICIAL):if not alc.has(e):return false   # alcanzabilidad desde la entrada del Valle: solo su pueblo
 		for actor in actores:
 			if es_valle(actor) and not (alc.has(actor) or bloquea(actor)):return false
 		return true
