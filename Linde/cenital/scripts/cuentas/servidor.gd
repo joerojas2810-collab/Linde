@@ -6,14 +6,14 @@ var python := "python"
 var password := ""
 var puerto_cuentas := 7778
 var autoridad := ""
-var privado := false
+var modo_privado := false
 var estado_archivo := ""
 var listo := false
 var ultimo_guardado := true
 var _latido_t := 0.0
 
 func _ready() -> void:
-	var opciones={"rol":"privado"} if privado else ({"rol":"mundo","autoridad":autoridad} if autoridad!="" else {})
+	var opciones={"rol":"privado"} if modo_privado else ({"rol":"mundo","autoridad":autoridad} if autoridad!="" else {})
 	error=await backend.iniciar(self,carpeta,puerto_cuentas,password,python,opciones);password=""
 	if error!="":return _fallo_inicio(error)
 	var disponible=false
