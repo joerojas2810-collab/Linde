@@ -5,7 +5,7 @@ const C = preload("res://scripts/catalogos.gd")
 const Inv = preload("res://scripts/inventario.gd")
 static var _catalogo: Dictionary = {}
 
-## Solo vivienda disponible: las otras familias esperan validación de este primer edificio.
+## Catálogo reducido: las funciones provienen de las piezas existentes, sin bonos propios.
 static func catalogo() -> Dictionary:
  if _catalogo.is_empty(): _catalogo = JSON.parse_string(FileAccess.get_file_as_string("res://datos/edificios/catalogo_v1.json"))
  return _catalogo
@@ -132,3 +132,12 @@ static func puerta_abierta(c: Vector2i, posiciones: Array) -> bool:
   var d: Vector2i = (M.celda_de(p)-c).abs()
   if maxi(d.x,d.y)<=1:return true
  return false
+
+## Texto derivado del plano resuelto, también válido para variantes de generación.
+static func servicios(e: Dictionary) -> PackedStringArray:
+ var nombres := PackedStringArray()
+ for pieza in e.piezas.values():
+  if pieza.t in ["cama","cama_huesped","mesa","horno","cofre"]:
+   var n: String = C.CONSTR[pieza.t].n
+   if not nombres.has(n): nombres.append(n)
+ return nombres

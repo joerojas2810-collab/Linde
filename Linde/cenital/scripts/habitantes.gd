@@ -217,8 +217,10 @@ func paso(dt: float) -> void:
 		var clave: String = act + ":" + d.lugar + str(d.get("celda", []))
 		if r.act != clave or r.v != j.mundo.version:
 			var area := Mundo.AREA_EXPEDICION if j.autonomia != null and j.autonomia.expediciones() else Rect2i()
-			# Una vivienda exterior usa navegación local del terreno, sin ampliar las expediciones del Valle.
-			if not Mundo.es_valle(c) and (not j.mundo.edificio_en(c).is_empty() or (act == "dormir" and not j.mundo.edificio_en(cama(id)).is_empty())): area = Rect2i()
+			# Un edificio exterior usa navegación local, sin ampliar las expediciones del Valle.
+			var destino: Array = d.get("celda",[])
+			var edificio_destino: bool = destino.size()==2 and not j.mundo.edificio_en(Vector2i(destino[0],destino[1])).is_empty()
+			if not Mundo.es_valle(c) and (not j.mundo.edificio_en(c).is_empty() or edificio_destino or (act == "dormir" and not j.mundo.edificio_en(cama(id)).is_empty())): area = Rect2i()
 			r.ruta = j.mundo.camino(c, meta, area)
 			r.act = clave
 			r.v = j.mundo.version
