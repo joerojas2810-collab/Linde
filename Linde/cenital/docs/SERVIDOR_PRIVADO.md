@@ -1,13 +1,14 @@
 # Linde — jugar local y servidor privado entre amigos
 
-**Implementación del 26/10/2026, pendiente de ejecutar con Godot.** Las instrucciones
-siguientes describen el flujo implementado, no una certificación de funcionamiento.
-No hay un release publicado. El primer empaquetado automatizado es para **Windows x64**.
+**Paquete experimental Windows x64 — 26/10/2026.** El workflow comprueba el
+proyecto con Godot y publica el paquete solo tras pasar sus pruebas automatizadas.
+No es una certificación de conexión entre dos computadoras físicas o por Internet.
+La distribución se realiza como artefacto de Actions, no como release permanente.
 El modo global de cuentas sigue disponible y no es necesario para este modo privado.
 
 ## Conseguir el paquete Windows
 
-En GitHub, una vez publicados estos cambios en la rama:
+En GitHub:
 
 1. Abrir **Actions → Servidor privado Windows**.
 2. Ejecutar **Run workflow** sobre `arena/9a96dc31-linde`, o abrir la ejecución
@@ -141,13 +142,17 @@ No hay migración automática del personaje en ese caso.
 
 ## Alcance y comprobaciones pendientes
 
-Ejecutadas en Linux sin Godot: pruebas Python, HTTPS real del modo privado,
-validación sintáctica externa de los GDScript modificados. Esto no demuestra que
-compilen en Godot ni que la interfaz, DTLS o el mundo funcionen juntos.
+El workflow Windows comprueba Python, importa recursos y compila los scripts de
+acceso/servidor con Godot 4.7.1. También ejecuta perfil local con guardado/carga,
+identidad global y dos clientes en modos existente y privado, incluyendo reconexión,
+contraseñas y certificados incorrectos. Después construye el paquete con Python y
+Godot incluidos y verifica escucha y cierre con mundo guardado usando ese paquete.
 
-El workflow escrito intenta importar el proyecto con Godot 4.7.1, probar el flujo
-seguro anterior y el privado con dos clientes, reconexión y guardado, construir el
-paquete Windows y arrancar/cerrar ese paquete. **Su existencia no significa que
-ya se haya ejecutado o aprobado.** Faltan pruebas manuales en una PC Windows limpia,
-dos computadoras LAN y dos casas distintas. macOS/Linux no tienen paquete portable
-nuevo en esta entrega; desde fuente requieren Godot y Python como antes.
+Descargar únicamente el artefacto de una ejecución **verde**. Consultar la ejecución
+que produjo ese artefacto para conocer el resultado real, no solo esta descripción.
+Estas pruebas usan procesos separados en un runner Windows; **no equivalen a un
+playtest manual, una PC limpia física, dos computadoras LAN ni dos casas distintas**.
+Persisten avisos históricos de recursos/ObjectDB al salir y se han observado avisos
+de buffers UDP llenos en las pruebas; no se certifica rendimiento bajo carga.
+macOS/Linux no tienen paquete portable nuevo en esta entrega; desde fuente requieren
+Godot y Python como antes.
