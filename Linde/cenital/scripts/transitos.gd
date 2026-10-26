@@ -93,7 +93,8 @@ func reservar(clave: String, origen: String, destino: String, ids: Array, bienes
   return {"ok":true,"operacion":anterior}
  var a := puesto(origen)
  var b := puesto(destino)
- if a.is_empty() or b.is_empty() or origen==destino or ids.is_empty(): return {"ok":false,"motivo":"origen_destino"}
+ if a.is_empty() or b.is_empty() or origen==destino or ids.is_empty() or not tipo in ["migracion","comercio"]: return {"ok":false,"motivo":"origen_destino"}
+ if j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"]: return {"ok":false,"motivo":"recuperacion_no_aprobada"}
  if not s._sostenible(b) or (tipo!="comercio" and b.residentes.size()+reservas_plaza(destino)+ids.size()>int(s.cfg.capacidad)): return {"ok":false,"motivo":"destino_sin_capacidad"}
  var miembros: Array = []
  var vistos := {}
@@ -226,6 +227,8 @@ func actualizar() -> void:
   op.avance=siguiente;op.estado="viajando"
   if int(op.avance)<int(op.duracion): continue
   var b := puesto(op.destino)
+  if not b.is_empty() and j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"]:
+   op.estado="detenida";op.motivo="destino_no_activo";continue
   if b.is_empty() or not s._sostenible(b) or ((op.tipo!="comercio" or op.get("regresando",false)) and b.residentes.size()+op.miembros.size()>int(s.cfg.capacidad)):
    op.estado="detenida";op.motivo="destino_sin_capacidad";continue
   if op.tipo=="comercio" and not op.get("regresando",false):

@@ -56,6 +56,10 @@ func _init()->void:
  s.transitos.actualizar()
  ok(op.estado=="detenida" and op.miembros.size()==1 and destino.residentes.size()==1,"capacidad perdida antes de llegar mantiene la identidad en tránsito")
  s.cfg.capacidad=capacidad
+ j.mundo.poblado(destino.poblado).estado="abandonado"
+ s.transitos.actualizar()
+ ok(op.estado=="detenida" and op.motivo=="destino_no_activo" and destino.residentes.size()==1,"llegada no reactiva un destino declarado abandonado")
+ j.mundo.poblado(destino.poblado).estado="activo"
  s.transitos.actualizar()
  ok(op.estado=="entregada" and destino.residentes.size()==2 and origen.residentes.size()==1 and ausente.id!=nid,"llegada mueve identidad una vez, sin reposición ficticia")
  var encontrado: Dictionary=s.residente(nid)
