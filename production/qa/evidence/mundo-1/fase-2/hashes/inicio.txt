@@ -1,0 +1,10 @@
+MEDIDA_CONFIG herramienta=medir_inicio semillas=200 visibilidad_semillas=20 encuadre_celdas=26.7x15.0 celdas_alcanzables=2832 godot=4.7.1-stable (official)
+MEDIDA_ESTADO posiciones_distintas=139 hash_posiciones=38d3860205ee6bc5
+MEDIDA_ESTADO distancia_celdas=puerta_casa min=13.0 p10=16.3 p50=23.8 p90=34.2 max=36.4
+MEDIDA_ESTADO distancia_celdas=cama_maren min=15.5 p10=17.9 p50=25.5 p90=32.0 max=34.9
+MEDIDA_ESTADO distancia_celdas=salida_sur min=1.0 p10=4.1 p50=24.4 p90=35.8 max=41.1
+MEDIDA_ESTADO distancia_celdas=guardian min=14.0 p10=14.9 p50=18.2 p90=27.1 max=56.4
+MEDIDA_ESTADO distancia_celdas=slime_mas_cercano min=12.0 p10=12.4 p50=17.0 p90=22.0 max=27.1
+MEDIDA_ESTADO distancia_celdas=estanque min=2.0 p10=3.0 p50=11.4 p90=22.0 max=43.9
+MEDIDA_ESTADO visibilidad=habitante_en_encuadre semillas=20 con_habitante_visible=0 distancia_habitante_p50=25.5 distancia_habitante_max=36.1
+MEDIDA_CPU punto_inicio_us_por_semilla=20451.0 nueva_ms_por_semilla=32.9

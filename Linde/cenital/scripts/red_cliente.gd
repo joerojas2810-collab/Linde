@@ -214,6 +214,10 @@ class Replica extends "res://scripts/juego.gd":
 	func tick(_dt: float) -> void:
 		pass                                   # el mundo lo avanza el servidor
 
+	func preguntar_lugares(npc: String, _id: String = LOCAL) -> Dictionary:
+		red.enviar(["preguntar_lugares", npc])
+		return {"ok": true}
+
 	func guardar(_ruta: String) -> bool:
 		return true                            # el mundo lo guarda el servidor
 

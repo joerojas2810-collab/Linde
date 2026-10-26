@@ -114,6 +114,8 @@ Cada fase deja un ciclo jugable. Los riesgos de regresión se mitigan con las su
 - **Riesgo de regresión**: **medio-alto** por las constantes del Valle en 9 archivos; mitigar con una indirección (leer del registro, mismo valor por defecto) antes de mover contenido.
 
 ### Fase 2 — Mapa personal y orientación (D4, D9)
+
+**Implementada y verificada 26/10/2026**: alcance, pruebas y límites en ESTADO.md §3e.
 - **Objetivo**: tecla M con lo descubierto y lo sabido; NPC que orientan.
 - **Reutiliza**: la estructura `bloques` y `_ver` de `Autonomia`, `pj` del guardado, el diálogo de habitante.
 - **Cambios mínimos**: `pj.mapa.bloques` (mismas claves 8×8), actualizado por posición; panel M que dibuja bloques y hitos conocidos; «preguntar por lugares» devuelve un área aproximada a partir de los bloques del NPC; compartir = unir bloques con procedencia (como el rumor actual).

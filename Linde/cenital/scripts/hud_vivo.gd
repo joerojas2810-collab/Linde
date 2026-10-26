@@ -9,6 +9,7 @@ func _draw() -> void:
 	if esc.modo == "menu": return _menu(vs)
 	if esc.modo == "creador": return _creador(vs)
 	if esc.modo == "unirse" or esc.modo == "conectando": return _unirse(vs)
+	if esc.panel=="mapa": return _mapa(vs)
 	if esc.panel=="inv":return _inventario(vs)
 	if esc.panel=="ficha":return _panel(vs)
 	var j = esc.j
@@ -43,7 +44,7 @@ func _draw() -> void:
 		ui.panel(self, Rect2(16, 660 - alto - 8, 520, alto))
 		for i in msgs.size(): _t(str(msgs[i]), Vector2(32, 660 - alto + 4 + i * 22.0), 16)
 	ui.panel(self, Rect2(vs.x / 2 - 310, 668, 620, 40))
-	ui.texto_en(self,"I  Mochila     E  Interactuar     Espacio  Atacar / golpear     H  Ayuda",Rect2(vs.x/2-288,676,576,24),16,UiArte.TINTA,true)
+	ui.texto_en(self,"I  Mochila    M  Mapa    E  Interactuar    Espacio  Actuar    H  Ayuda",Rect2(vs.x/2-288,676,576,24),16,UiArte.TINTA,true)
 	if esc.ayuda_visible and esc.panel=="":_ayuda(vs,j)
 	if esc.debug: _t("anim: %s #%d" % [esc._anim.estado, esc._anim.cuadro], Vector2(vs.x - 200, 700), 16, UiArte.FOCO)
 	if esc.pista != "" and esc.panel=="" and not esc.ayuda_visible:
@@ -74,6 +75,7 @@ func _ayuda(vs:Vector2,j)->void:
 		["F","Forja: mejorar piezas de set"],
 		["G","Taller: materiales, planos y saberes"],
 		["K","Habilidades"],
+		["M","Mapa personal: flechas desplazan, +/− zoom, Inicio centra"],
 		["J",valle],
 		["B","Construir: Q/E cambia pieza · Espacio coloca · X retira · B sale"],
 		["","DENTRO DE UN PANEL"],
@@ -318,3 +320,48 @@ func _panel(vs:Vector2)->void:
 	var texto:String="\n\n".join(lineas)
 	draw_multiline_string(ui.fuente,Vector2(x,y+110),texto,HORIZONTAL_ALIGNMENT_LEFT,510,17,8,UiArte.TINTA)
 	ui.texto_en(self,"V cerca de un habitante · E / Enter / Esc cerrar",Rect2(r.position+Vector2(28,432),Vector2(784,30)),16)
+
+## Cartografía por bloques; jamás revela terreno, enemigos ni objetos no observados.
+func _mapa(vs: Vector2) -> void:
+	objetivos.clear()
+	boton_cerrar = Rect2()
+	var j = esc.j
+	ui.panel(self, Rect2(70, 30, vs.x - 140, 620))
+	_t("MAPA PERSONAL · N ↑", Vector2(96, 56), 24)
+	_t("M / Esc cerrar · Flechas mover · +/− zoom · Inicio volver a ti", Vector2(96, 92), 16)
+	var zona := Rect2(96, 134, 740, 450)
+	draw_rect(zona, Color("202e33"))
+	var b := int(j.autonomia.reglas.conocimiento.bloque)
+	var centro: Vector2i = esc.mapa_centro
+	var escala: float = esc.mapa_escala
+	var bloques: Dictionary = j.jug().get("mapa", {}).get("bloques", {})
+	for k in bloques:
+		var c := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1))) * b
+		var pos := zona.get_center() + Vector2(c - centro) * escala
+		var r := Rect2(pos, Vector2.ONE * b * escala).intersection(zona)
+		if r.has_area(): draw_rect(r, Color("6c9673") if bloques[k] == "visto" else Color("a38b58"))
+	var numero := 0
+	for h in j.Exploracion.hitos(j, esc.J.LOCAL):
+		numero += 1
+		var k: String = h.bloque
+		var c := Vector2(int(k.get_slice(",", 0)), int(k.get_slice(",", 1))) * b + Vector2.ONE * b / 2.0
+		var pos := zona.get_center() + (c - Vector2(centro)) * escala
+		if zona.grow(-16).has_point(pos):
+			draw_circle(pos, 10, Color("f3de99"))
+			_t(str(numero), pos + Vector2(-4, -9), 14)
+	var yo := zona.get_center() + Vector2(esc.J.Mundo.celda_de(j.pies) - centro) * escala
+	if zona.has_point(yo):
+		draw_circle(yo, 6, Color.WHITE)
+		_t("Tú", yo + Vector2(9, -9), 16, Color.WHITE)
+	_t("Verde: recorrido · Ocre: contado · Oscuro: desconocido", Vector2(96, 612), 16)
+	_t("REFERENCIAS APROXIMADAS", Vector2(858, 142), 16)
+	var y := 182.0
+	numero = 0
+	for h in j.Exploracion.hitos(j, esc.J.LOCAL):
+		numero += 1
+		_t("%d. %s" % [numero, h.nombre], Vector2(858, y), 16)
+		var fuente: String = h.fuente
+		var n := "Explorado por ti"
+		if fuente != "visto": n = "Según " + str(j.habitantes.fichas.get(fuente.trim_prefix("npc:"), {}).get("n", "un habitante"))
+		_t(n, Vector2(858, y + 21), 14)
+		y += 52

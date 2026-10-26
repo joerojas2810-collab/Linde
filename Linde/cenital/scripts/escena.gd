@@ -40,6 +40,9 @@ var iconos: Array = []   # ruta de icono (res://arte/interfaz) por línea de pan
 var sel := 0
 var desplaza := 1        # primera línea visible del panel genérico (la 0 es el título)
 const CABEN := 14        # líneas visibles del panel genérico
+var dialogo_npc := ""
+var mapa_centro := Vector2i.ZERO
+var mapa_escala := 10.0
 var dialogo_txt := ""
 var dialogo_nombre := ""
 var cofre_id := ""
@@ -161,6 +164,9 @@ func _unhandled_key_input(e: InputEvent) -> void:
 		KEY_ESCAPE:
 			if build: build = false
 			else: _abrir("pausa")
+		KEY_M:
+			mapa_centro = Mundo.celda_de(j.pies)
+			_abrir("mapa")
 		KEY_I: _abrir("inv")
 		KEY_F: _abrir("forja")
 		KEY_G: _abrir("desarrollo")
@@ -350,6 +356,21 @@ func _cerrar() -> void:
 	cofre_id = ""
 
 func _tecla_panel(e: InputEvent) -> void:
+	if panel == "mapa":
+		match e.keycode:
+			KEY_M, KEY_ESCAPE: _cerrar()
+			KEY_LEFT: mapa_centro.x -= 8
+			KEY_RIGHT: mapa_centro.x += 8
+			KEY_UP: mapa_centro.y -= 8
+			KEY_DOWN: mapa_centro.y += 8
+			KEY_MINUS: mapa_escala = maxf(1.0, mapa_escala / 1.5)
+			KEY_EQUAL, KEY_PLUS: mapa_escala = minf(20.0, mapa_escala * 1.5)
+			KEY_HOME: mapa_centro = Mundo.celda_de(j.pies)
+		return
+	if panel == "dialogo" and e.keycode == KEY_L:
+		j.preguntar_lugares(dialogo_npc)
+		_cerrar()
+		return
 	if panel=="inv" and e.keycode in [KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT]:
 		_navegar_inventario(e)
 		return
@@ -741,6 +762,7 @@ func _tras_interactuar(r: Dictionary) -> void:
 	if not r.ok or j == null or panel != "": return
 	match r.panel:
 		"dialogo":
+			dialogo_npc = str(r.get("npc", ""))
 			dialogo_txt = r.texto
 			dialogo_nombre = str(j.habitantes.fichas.get(r.get("npc", ""), {}).get("n", "Habitante"))
 			panel = "dialogo"

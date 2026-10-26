@@ -153,3 +153,11 @@ Acabado local reaplicado a la última base remota, conservando art2 y correccion
 ## Publicación autorizada — 25/10/2026
 
 El usuario solicitó commit y push de esta integración sobre 5b87517. La evidencia vigente se conserva en `production/qa/evidence/arte-pendiente-integrado/`; los estados de borrador y sin publicar anteriores son históricos. Se mantienen los límites artísticos y de pruebas documentados; la publicación se identifica en el historial de Git.
+
+## 3e. Mundo 1 — Fase 2 (26/10/2026)
+
+Mapa personal con M, flechas, zoom y centrado con Inicio; verde para bloques vistos, ocre para información recibida y referencias numeradas a los hitos existentes. Conversación E → L intercambia bloques con el NPC cercano: conserva procedencia, confirma rumores al visitar y entrega al NPC solo lo recorrido. Usa la cuadrícula/radio de Autonomia; no genera lugares ni altera economía. Solo modo poblado; legado no añade estado.
+
+Verificación: `prueba_exploracion` 13 PASS (ruta exacta, negativos, cercanía, intercambio, procedencia, persistencia, privacidad de bienvenida/perfiles y presupuesto); `prueba_exploracion_ui` 6 PASS (M, navegación y conversación real). `prueba_ui` 13, `prueba_poblados` 28, `prueba_aparicion` y `prueba_poblado_inicial` sin fallos; `prueba_red` 11 OK y `prueba_terreno_red`/`prueba_crecimiento_red` PASS con clientes reales. Capturas renderizadas e inspeccionadas en `production/qa/evidence/mundo-1/fase-2/`.
+
+Presupuesto fijado antes de medir: **4 MiB por jugador tras 60 minutos**. Ruta recta a la velocidad base existente (14.400 celdas): 5.409 bloques, **90.433 bytes JSON**. Es una medición de cartografía, no un playtest de una hora ni una cota para mundos indefinidos. El mapa es esquemático por bloques y las referencias son aproximadas; no muestra terreno detallado, enemigos ni recursos. No se implementa Fase 4.

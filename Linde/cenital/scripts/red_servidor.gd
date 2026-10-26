@@ -228,6 +228,9 @@ func ejecutar(id: String, datos) -> bool:
 			if not _sig(a, [TYPE_STRING,TYPE_STRING]) or not j.habitantes.ids.has(a[0]): return _rechazo(id,tipo)
 			if tipo == "ensenar_saber": j.ensenar_saber(a[0],a[1],id)
 			else: j.pedir_saber(a[0],a[1],id)
+		"preguntar_lugares":
+			if not _sig(a, [TYPE_STRING]): return _rechazo(id, tipo)
+			j.preguntar_lugares(a[0], id)
 		"aportar_grupo":
 			if not _sig(a, [TYPE_STRING]): return _rechazo(id, tipo)
 			j.aportar_grupo(a[0], id)

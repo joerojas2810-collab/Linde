@@ -15,6 +15,7 @@ const Vivo = preload("res://scripts/mundo_vivo.gd")
 const Comb = preload("res://scripts/combate.gd")
 const Anim = preload("res://scripts/anim_pj.gd")
 const Eq = preload("res://scripts/equipo.gd")
+const Exploracion = preload("res://scripts/exploracion.gd")
 const LOCAL := P.LOCAL
 const CAP_COFRE := 30
 const ALCANCE_ESTACION := 2     # celdas (Chebyshev)
@@ -80,6 +81,7 @@ static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String
 			j.d.jugadores[LOCAL].inicio = [pies.x, pies.y]
 		else:   # mundo recién creado: su poblado inicial no puede estar destruido; se conserva la celda validada por punto_inicio y queda registrado
 			push_warning("Mundo nuevo sin posición de aparición en el poblado: %s" % ap.motivo)
+	j.actualizar_mapa()
 	return j
 
 ## Resultado de la última `cargar` fallida ({} si no falló o no hubo archivo): `error`, `motivo`, `detalle`, `archivo` de Guardado.cargar.
@@ -240,6 +242,7 @@ func unir(id: String, nombre: String, look: Array) -> Dictionary:
 		p = Mundo.pies_de_celda(mundo.punto_inicio(int(d.semilla)))
 	d.jugadores[id] = nuevo_jugador(nombre, look, p)
 	_sesion(id)
+	Exploracion.observar(self, id)
 	evaluar_misiones(id)
 	return _ok("Entras al mundo.", id)
 
@@ -347,6 +350,7 @@ func _hora_en_punto() -> void:
 		aviso_todos(vivo.nombre(ev))
 
 func _chequeos() -> void:
+	actualizar_mapa()
 	for id in rt:
 		var pj: Dictionary = d.jugadores[id]
 		if Mundo.ARENA.has_point(Mundo.celda_de(pies_de(id))): pj.eventos["visito_ruinas"] = true
@@ -457,6 +461,7 @@ func mover_pj(dir: Vector2i, dt: float, id: String = LOCAL) -> void:
 	if dir == Vector2i.ZERO or e == "aviso" or e == "activo": return
 	rt[id].mira = dir
 	rt[id].pies = mundo.mover(pies_de(id), Vector2(dir) * P.VELOCIDAD * stats(id).vel * dt)
+	Exploracion.observar(self, id)
 
 func accion(id: String = LOCAL) -> Dictionary:
 	var s: Dictionary = rt[id]
@@ -1044,3 +1049,11 @@ func jefe_derrotado(jid: String, id: String = LOCAL) -> void:
 		dar_o_pendiente(C.ENEMIGOS[jid].recompensa, id)
 		_botin_jefe(jid, int(st.veces), id)
 	aviso_todos("¡%s derrotado!" % C.ENEMIGOS[jid].n)
+
+## Registra solo lo observado por jugadores presentes, sin modificar la simulación.
+func actualizar_mapa() -> void:
+	for id in rt: Exploracion.observar(self, id)
+
+## El servidor valida cercanía y decide qué información se intercambia.
+func preguntar_lugares(npc: String, id: String = LOCAL) -> Dictionary:
+	return Exploracion.intercambiar(self, npc, id)
