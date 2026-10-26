@@ -9,14 +9,15 @@ var control := ""
 var huella := ""
 var propietario := false
 
-func iniciar(parent:Node,dir: String, port: int, password: String, py: String) -> String:
+func iniciar(parent:Node,dir: String, port: int, password: String, py: String, opciones:Dictionary={}) -> String:
 	carpeta=ProjectSettings.globalize_path(dir);puerto=port;python=py
 	DirAccess.make_dir_recursive_absolute(carpeta)
 	var inicio=Crypto.new().generate_random_bytes(16).hex_encode()
 	var peticion=carpeta.path_join("inicio_cuentas_"+inicio+".json")
 	var f=FileAccess.open(peticion,FileAccess.WRITE)
 	if f==null:return "No se puede escribir en la carpeta del servidor."
-	f.store_string(JSON.stringify({"password":password,"inicio":inicio}));f.close()
+	var config=opciones.duplicate();config.merge({"password":password,"inicio":inicio},true)
+	f.store_string(JSON.stringify(config));f.close()
 	var script=ProjectSettings.globalize_path("res://../../servidor/cuentas/servicio.py")
 	var estado=carpeta.path_join("backend_estado_"+inicio+".json")
 	DirAccess.remove_absolute(estado)
