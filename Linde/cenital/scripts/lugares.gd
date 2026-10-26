@@ -21,7 +21,7 @@ static func _celda(m, c: Vector2i, cache: Dictionary) -> Dictionary:
 
 ## Solo semilla, versión de terreno y coordenadas. Nunca consulta jugadores, diferencias ni regiones cargadas.
 ## AStarGrid2D del motor resuelve la ruta con costes de terreno y evita agua y muros del propio plan.
-static func plan_macro(m, r: Vector2i) -> Dictionary:
+static func plan_macro(m, r: Vector2i, comunidad: Dictionary = {}) -> Dictionary:
 	var cfg := datos()
 	var tam := int(cfg.macro_celdas)
 	var origen := r * tam
@@ -46,11 +46,13 @@ static func plan_macro(m, r: Vector2i) -> Dictionary:
 	grafo.set_point_solid(ancla, false)
 	var reservadas := {}
 	var radio := int(cfg.radio_sitio)
-	for tipo in cfg.tipos:
+	var tipos: Array = cfg.tipos.duplicate(true)
+	if not comunidad.is_empty(): tipos.push_front(comunidad)
+	for tipo in tipos:
 		var mejor := Vector2i.ZERO
 		var puntuacion := 9223372036854775807
 		var encontrado := false
-		for y in range(int(cfg.inicio_y_min) if inicial else int(cfg.margen_sitio), tam - int(cfg.margen_sitio), int(cfg.paso_candidato)):
+		for y in range(int(tipo.get("y_min", cfg.inicio_y_min if inicial else cfg.margen_sitio)), int(tipo.get("y_max", tam - int(cfg.margen_sitio))), int(cfg.paso_candidato)):
 			for x in range(int(tipo.x_min), int(tipo.x_max), int(cfg.paso_candidato)):
 				var c := origen + Vector2i(x, y)
 				var d := _celda(m, c, cache)
@@ -77,11 +79,11 @@ static func plan_macro(m, r: Vector2i) -> Dictionary:
 				var t := M.T.PASTO
 				if tipo.id == "ruinas":
 					t = M.T.MURO_RUINA if (absi(dx) == radio or absi(dy) == radio) and (dx + dy) % 3 != 0 else M.T.RUINA
-				elif tipo.id == "campamento":
+				elif tipo.id in ["campamento", "poblado"]:
 					t = M.T.SUELO if absi(dx) <= 2 and dy <= 0 and dy >= -2 else M.T.PASTO
 				else:
 					t = M.T.MURO_RUINA if dy <= -2 or (absi(dx) == radio and dy <= 0) else M.T.RUINA
-				if dx == 0 and dy >= 0: t = M.T.RUINA if tipo.id != "campamento" else M.T.PASTO
+				if dx == 0 and dy >= 0: t = M.T.RUINA if tipo.id not in ["campamento", "poblado"] else M.T.PASTO
 				suelos[M.clave(q)] = t
 				grafo.set_point_solid(q, t == M.T.MURO_RUINA)
 		if tipo.id == "campamento":
@@ -89,6 +91,9 @@ static func plan_macro(m, r: Vector2i) -> Dictionary:
 				var q: Vector2i = c + par[0]
 				piezas[M.clave(q)] = {"t": par[1], "propia": false}
 				grafo.set_point_solid(q, true)
+		# El plano conoce la huella del puesto antes de trazar los caminos.
+		for pieza in tipo.get("huella", []):
+			grafo.set_point_solid(c + Vector2i(pieza[0], pieza[1]), true)
 		var entrada := c + Vector2i(0, radio)
 		var camino := grafo.get_id_path(ancla, entrada)
 		if camino.is_empty():
@@ -116,12 +121,12 @@ static func plan_macro(m, r: Vector2i) -> Dictionary:
 	return plan
 
 ## Instala una macrorregión una sola vez en autoridad; volver a cargar nunca repone piezas retiradas o cofres vaciados.
-static func ampliar(j, r: Vector2i) -> void:
+static func ampliar(j, r: Vector2i, decidido: Dictionary = {}) -> void:
 	if not j.es_autoridad() or j.mundo.modo_inicio() != M.MODO_POBLADO: return
 	var registro: Dictionary = j.d.mundo.get_or_add("registro", {"version": 1, "poblados": [M.ID_INICIAL], "macros": {}, "lugares": {}, "rutas": {}, "suelos": {}, "despejes": {}})
 	var k := M.clave(r)
 	if registro.macros.has(k): return
-	var plan := plan_macro(j.mundo, r)
+	var plan: Dictionary = plan_macro(j.mundo, r) if decidido.is_empty() else decidido
 	# Un emplazamiento generado nunca pisa una obra posterior de un jugador/NPC: el registro conserva la decisión y omite la pieza ocupada.
 	registro.macros[k] = {"version": plan.version, "lugares": plan.lugares.keys()}
 	for campo in ["lugares", "rutas", "suelos", "despejes"]: registro[campo].merge(plan[campo])

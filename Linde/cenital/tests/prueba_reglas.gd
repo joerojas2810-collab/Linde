@@ -32,7 +32,8 @@ const DOMINANCIAS_CONOCIDAS: Array = [
 	"guantes:bronce>hierro",
 	"pantalones:bronce>hierro",
 	"torso:bronce>hierro"]
-const EXCLUIDOS := ["res://datos/lugares/generacion_v1.json", # Génesis versionada del mundo: resultados persistidos por autoridad, fuera de la huella de fabricación.
+const EXCLUIDOS := ["res://datos/asentamientos/preexistentes_v1.json", # Génesis persistida; tasas económicas en reglas_v1.json permanecen selladas.
+	"res://datos/lugares/generacion_v1.json", # Génesis versionada del mundo: resultados persistidos por autoridad, fuera de la huella de fabricación.
 	"res://datos/pistas.json", # Solo textos, condiciones de ayuda y tiempos de presentación; no decide resultados del mundo.
 	"res://datos/equipo/paletas.json"]   # solo color; datos/mundo es narrativa del director
 var fallos := 0

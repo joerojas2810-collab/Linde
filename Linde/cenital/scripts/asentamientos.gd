@@ -1,7 +1,8 @@
 extends RefCounted
-## Puestos fundados por jugadores. Población regional resumida, sin cargar regiones lejanas.
+## Puestos del jugador y comunidades preexistentes. Una sola población regional resumida, sin cargar regiones lejanas.
 ## Extrae recursos reales del mapa y cosecha campos reales; no hay producción gratuita al descargar.
 const M=preload("res://scripts/mundo.gd")
+const Lugares = preload("res://scripts/lugares.gd")
 const C=preload("res://scripts/catalogos.gd")
 var a
 var j
@@ -20,7 +21,7 @@ func inventario(p: Dictionary) -> Dictionary:
 func validar(c: Vector2i) -> String:
  if not a.activa():return "El puesto requiere un mundo autónomo"
  if M.Terreno.distancia_valle(c)<32:return "Busca un lugar a 32 celdas del valle"
- if datos().puestos.size()>=int(cfg.max_puestos):return "Ya hay tres puestos regionales"
+ if datos().puestos.values().filter(func(p): return not p.has("poblado")).size()>=int(cfg.max_puestos):return "Ya hay tres puestos regionales"
  for p in datos().puestos.values():
   if Vector2(c).distance_to(Vector2(p.celda[0],p.celda[1]))<32:return "Demasiado cerca de otro puesto"
  for dy in range(-1,4):
@@ -32,7 +33,7 @@ func validar(c: Vector2i) -> String:
     if celda==c+Vector2i(int(pieza[1]),int(pieza[2])):construida=true
    if construida and j.ocupada(celda):return "Hay alguien donde irá una pieza del puesto"
  return ""
-func crear(c: Vector2i, dueno: String) -> void:
+func crear(c: Vector2i, dueno: String, poblado_id: String = "", nombre: String = "") -> void:
  var k:=M.clave(c)
  var cid:="c@"+M.clave(c+Vector2i(0,2))
  for pieza in PIEZAS:
@@ -42,7 +43,28 @@ func crear(c: Vector2i, dueno: String) -> void:
  j.d.cofres[cid]={"inv":{"baya":4,"hacha_piedra":1,"pico_piedra":1}}
  for dy in [0,1]:j.mundo.techar(c+Vector2i(1,dy),dueno)
  datos().puestos[k]={"id":k,"nombre":"Puesto "+str(datos().puestos.size()+1),"celda":[c.x,c.y],"dueno":dueno,"cofre":cid,"residentes":[],"ultimo_min":int(j.d.min),"fundado_min":int(j.d.min),"llegada_min":int(j.d.min),"comida_min":int(j.d.min),"produccion_min":int(j.d.min),"estado":"esperando colonos","producciones":0}
- j.aviso_todos("Se funda un puesto regional. Lleva comida a su cofre para atraer residentes.")
+ if poblado_id != "":
+  var p: Dictionary = datos().puestos[k]
+  p.poblado = poblado_id
+  p.nombre = nombre
+  p.estado = "activo"
+  p.origen = "preexistente"
+  var nombres = j._rng("nombres_preexistentes",poblado_id)
+  var primero: int = nombres.randi() % cfg.nombres.size()
+  for i in int(cfg.capacidad):
+   var rng = j._rng("residente_preexistente", poblado_id + ":" + str(i))
+   var nid := "regional:" + poblado_id + ":" + str(i)
+   var r := {"id": nid, "nombre": cfg.nombres[(primero + i) % cfg.nombres.size()], "oficio": "recolector" if i == 0 else "cantero", "look": [rng.randi_range(0,2),rng.randi_range(0,2),rng.randi_range(0,2)], "hogar": poblado_id, "historia": "Trabaja en " + nombre + " desde antes de tu llegada.", "bloques": {}}
+   a._ver(r, c, int(a.reglas.conocimiento.radio_inicial))
+   p.residentes.append(r)
+  var camas := {}
+  var ids: Array = []
+  for i in p.residentes.size():
+   ids.append(p.residentes[i].id)
+   camas[p.residentes[i].id] = [c.x + 1, c.y + i]
+  j.d.mundo.poblados[poblado_id] = {"id": poblado_id, "nombre": nombre, "estado": "activo", "centro": [c.x,c.y], "entrada": [c.x,c.y+3], "area": [c.x-3,c.y-3,7,7], "esenciales": [[c.x,c.y+3],[c.x,c.y+1],[c.x,c.y+2]], "camas": camas, "residentes": ids, "puesto": k}
+ else:
+  j.aviso_todos("Se funda un puesto regional. Lleva comida a su cofre para atraer residentes.")
 func _sostenible(p: Dictionary) -> bool:
  var c:=Vector2i(p.celda[0],p.celda[1])
  if j.mundo.constr_en(c).get("t","")!="puesto" or not j.d.cofres.has(p.cofre):return false
@@ -52,10 +74,10 @@ func _sostenible(p: Dictionary) -> bool:
 func _transitable(c: Vector2i) -> bool:
  if not j.mundo.generador.valida(c):return false
  var d: Dictionary=j.mundo.generador.datos(c)
- if int(d.tipo)==M.T.AGUA:return false
+ if int(d.tipo)==M.T.AGUA or j.mundo.tipo(c) in [M.T.AGUA,M.T.PARED,M.T.MURO_RUINA]:return false
  if C.CONSTR.get(j.mundo.constr_en(c).get("t",""),{}).get("bloquea",false):return false
  var id: String=str(d.objeto)+"@"+M.clave(c)
- return str(d.objeto)=="" or not C.OBJETOS.get(str(d.objeto),{}).get("bloquea",true) or j.d.mundo.rotos.has(id)
+ return j.mundo.estado.get("registro",{}).get("despejes",{}).has(M.clave(c)) or str(d.objeto)=="" or not C.OBJETOS.get(str(d.objeto),{}).get("bloquea",true) or j.d.mundo.rotos.has(id)
 func _alcance(centro: Vector2i) -> Dictionary:
  var vistos: Dictionary={centro:true}
  var cola: Array=[centro]
@@ -77,7 +99,7 @@ func _extraer(p: Dictionary, oficio: String) -> bool:
    for dx in range(-radio,radio+1):
     if maxi(absi(dx),absi(dy))!=radio:continue
     var c:=centro+Vector2i(dx,dy)
-    if not j.mundo.generador.valida(c) or not j.mundo.constr_en(c).is_empty():continue
+    if not j.mundo.generador.valida(c) or not j.mundo.constr_en(c).is_empty() or j.mundo.estado.get("registro",{}).get("despejes",{}).has(M.clave(c)):continue
     var d: Dictionary=j.mundo.generador.datos(c)
     if not d.objeto in tipos:continue
     var accesible:=false
@@ -99,6 +121,11 @@ func _extraer(p: Dictionary, oficio: String) -> bool:
 func actualizar() -> void:
  if not a.activa() or not j.es_autoridad():return
  for p in datos().puestos.values():
+  if p.has("poblado"):
+   var pueblo: Dictionary = j.mundo.poblado(p.poblado)
+   if pueblo.get("estado", "") in ["abandonado", "destruido"]: continue
+   pueblo.estado = "activo" if _sostenible(p) and int(inventario(p).get("baya",0)) > 0 else "sin_sustento"
+   _conocimiento(p)
   if not _sostenible(p):p.estado="faltan puesto, camas, techo o cofre";continue
   var inv: Dictionary=inventario(p)
   var c:=Vector2i(p.celda[0],p.celda[1])
@@ -152,3 +179,77 @@ func visibles() -> Array:
    var hasta:=M.pies_de_celda(c+Vector2i(-1,i))
    resultado.append({"id":r.id,"nombre":r.nombre,"look":r.look,"pos":desde.lerp(hasta,t),"mueve":fase<2 or (fase>=30 and fase<32)})
  return resultado
+
+
+## Génesis de 1–2 comunidades adicionales. Reutiliza el plan de lugares y crear(), sin recursos extra ni simulación paralela.
+## Se ejecuta una vez por mundo y solo en autoridad; no es fundación autónoma (Fase 6).
+func inicializar_preexistentes() -> void:
+ if not a.activa() or not j.es_autoridad() or j.mundo.modo_inicio() != M.MODO_POBLADO: return
+ var d := datos()
+ if d.has("preexistentes"): return
+ var generacion: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://datos/asentamientos/preexistentes_v1.json"))
+ var huella: Array = [[0,0]]
+ for pieza in PIEZAS:
+  if C.CONSTR[pieza[0]].get("bloquea",false): huella.append([pieza[1],pieza[2]])
+ generacion.emplazamiento.huella = huella
+ var elegidos: Array = []
+ for dato in generacion.macros_candidatas:
+  if elegidos.size() >= int(generacion.cantidad): break
+  var r := Vector2i(dato[0],dato[1])
+  var plan := Lugares.plan_macro(j.mundo, r, generacion.emplazamiento)
+  var id := "poblado@" + M.clave(r)
+  if not plan.lugares.has(id): continue
+  if j.d.mundo.get("registro",{}).get("macros",{}).has(M.clave(r)): continue
+  var lugar: Dictionary = plan.lugares[id]
+  lugar.nombre = generacion.nombres[elegidos.size()]
+  lugar.poblado = id
+  Lugares.ampliar(j, r, plan)
+  var c := Vector2i(lugar.centro[0],lugar.centro[1])
+  j.mundo.poner(c,"puesto",false,"poblado:"+id)
+  crear(c,"poblado:"+id,id,lugar.nombre)
+  j.d.mundo.registro.poblados.append(id)
+  elegidos.append(id)
+ d.preexistentes = {"version": generacion.version, "ids": elegidos}
+
+## La identidad y los recuerdos permanecen en el residente resumido; nunca se añade otro actor detallado al acercarse.
+func residente(nid: String) -> Dictionary:
+ for p in j.d.get("mundo_vivo",{}).get("autonomia",{}).get("asentamientos",{}).get("puestos",{}).values():
+  for r in p.residentes:
+   if r.id == nid: return r
+ return {}
+
+## Posición de la representación actual, solo donde el mundo está cargado.
+func posicion(nid: String) -> Vector2:
+ for r in visibles():
+  if r.id == nid: return r.pos
+ return Vector2.INF
+
+func _conocimiento(p: Dictionary) -> void:
+ var c := Vector2i(p.celda[0],p.celda[1])
+ for r in p.residentes:
+  if not r.has("bloques"): r.bloques = {}
+  a._ver(r,c,int(a.reglas.conocimiento.radio_vision))
+  for otro in p.residentes:
+   r.bloques.merge(otro.get("bloques",{}))
+  for nid in j.habitantes.ids:
+   if Vector2(M.celda_de(j.habitantes.pos(nid))).distance_to(Vector2(c)) <= float(a.reglas.conocimiento.radio_rumor):
+    var n: Dictionary = a.estado(nid)
+    r.bloques.merge(n.get("bloques",{}))
+    n.get_or_add("bloques",{}).merge(r.bloques)
+
+## Bloques que cuentan los residentes cercanos, con el mismo radio de rumor de Autonomia.
+func rumores_cerca(c: Vector2i) -> Dictionary:
+ var bloques := {}
+ for p in j.d.get("mundo_vivo",{}).get("autonomia",{}).get("asentamientos",{}).get("puestos",{}).values():
+  if not p.has("poblado"): continue
+  if Vector2(c).distance_to(Vector2(p.celda[0],p.celda[1])) > float(a.reglas.conocimiento.radio_rumor): continue
+  for r in p.residentes: bloques.merge(r.get("bloques",{}))
+ return bloques
+
+## Saludo basado en identidad y estado económico real, sin misión ni recompensa.
+func dialogo(nid: String) -> String:
+ var r := residente(nid)
+ if r.is_empty(): return ""
+ var pueblo: Dictionary = j.mundo.poblado(r.get("hogar",""))
+ var p: Dictionary = datos().puestos.get(pueblo.get("puesto",""),{})
+ return "Soy %s de %s. Aquí trabajo como %s. Situación de la comunidad: %s. Puedes preguntar por lugares con L o consultar las reservas del pueblo en J." % [r.nombre, pueblo.get("nombre", "este puesto"), r.oficio, p.get("estado", "sin información")]

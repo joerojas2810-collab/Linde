@@ -48,6 +48,8 @@ static func migrar(d: Dictionary) -> Dictionary:
 	if f > FORMATO: return {}
 	var registro = d.get("mundo", {}).get("registro", null)
 	if registro != null and (not registro is Dictionary or int(registro.get("version", -1)) != 1): return {}
+	var preexistentes = d.get("mundo_vivo",{}).get("autonomia",{}).get("asentamientos",{}).get("preexistentes",null)
+	if preexistentes != null and (not preexistentes is Dictionary or int(preexistentes.get("version",-1)) != 1): return {}
 	var generacion = d.get("mundo",{}).get("generacion",null)
 	if generacion!=null:
 		if not generacion is Dictionary:return {}

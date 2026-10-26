@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "cantidad": 2,
+  "macros_candidatas": [[1,0],[0,1],[-1,1],[1,1],[2,0],[0,2]],
+  "nombres": ["La Hondonada", "Los Sauces"],
+  "emplazamiento": {"id":"poblado", "nombre":"Comunidad", "x_min":8, "x_max":86, "y_min":8, "y_max":86, "biomas":["pradera","bosque","secano","sierra"], "descripcion":"Una comunidad habitada. Sus campos, camas y reservas pertenecen al mismo mundo; sus residentes trabajan mientras el servidor está activo."}
+}

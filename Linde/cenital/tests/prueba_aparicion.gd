@@ -164,6 +164,9 @@ func _init() -> void:
 		for dx in range(-8, 9):
 			var c2 := _centro(jp) + Vector2i(dx, dy)
 			if jp.mundo.puede_poner(c2) == "" and not jp.ocupada(c2): jp.mundo.poner(c2, "muro", false, "mundo")
+	# Rechazo total: además del Valle bloqueado, ninguna comunidad adicional es elegible.
+	for pid in jp.mundo.poblados_ids():
+		if pid != M.ID_INICIAL: jp.mundo.poblado(pid).estado = "abandonado"
 	var n_jug: int = jp.d.jugadores.size()
 	var rr: Dictionary = jp.unir("tarde", "Tarde", [0, 0, 0])
 	ok(not rr.ok and not jp.d.jugadores.has("tarde") and jp.d.jugadores.size() == n_jug and not jp.rt.has("tarde"), "sin posición segura unir rechaza y no crea al jugador")
@@ -192,6 +195,8 @@ func _init() -> void:
 		for dx in range(-8, 9):
 			var c3 := _centro(jd2) + Vector2i(dx, dy)
 			if jd2.mundo.puede_poner(c3) == "" and not jd2.ocupada(c3): jd2.mundo.poner(c3, "muro", false, "mundo")
+	for pid in jd2.mundo.poblados_ids():
+		if pid != M.ID_INICIAL: jd2.mundo.poblado(pid).estado = "abandonado"
 	jd2.rt[J.LOCAL].pies = M.pies_de_celda(Vector2i(50, 30))
 	jd2.danar_pj(1000)
 	ok(M.celda_de(jd2.pies_de()) == Vector2i(50, 30) and jd2.jug().hp == int(jd2.stats().hp / 2.0) and jd2.d.mundo.inicio.ultimo.ok == false,

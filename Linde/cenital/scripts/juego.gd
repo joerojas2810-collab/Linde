@@ -71,7 +71,7 @@ static func nueva(semilla: int, nombre: String, look: Array, modo_inicio: String
 		"jugadores": {LOCAL: nuevo_jugador(nombre, look, p)}}
 	j.d.mundo.generacion = {"version": 2, "semilla": semilla, "region": 16}
 	j.d.mundo.inicio = {"modo": modo_inicio}
-	j._arrancar()
+	j._arrancar(true)
 	if modo_inicio == Mundo.MODO_POBLADO:   # necesita los habitantes y los enemigos, que existen tras _arrancar()
 		j.mundo.instalar_poblado_inicial()   # hitos e instalaciones comunitarias (paso 1d), antes de elegir dónde aparece el jugador
 		var ap: Dictionary = j.punto_aparicion(LOCAL)
@@ -145,7 +145,7 @@ func actor_desarrollo(id: String = LOCAL) -> String:
 func es_autoridad() -> bool:
 	return true
 
-func _arrancar() -> void:
+func _arrancar(nuevo: bool = false) -> void:
 	mundo.estado = d.mundo
 	mundo.configurar(int(d.semilla))
 	mundo.cambiar()
@@ -156,6 +156,7 @@ func _arrancar() -> void:
 	habitantes = Hab.new(self)
 	habitantes.restaurar()
 	autonomia = Autonomia.new(self)
+	if nuevo: autonomia.asentamientos.inicializar_preexistentes()
 	combate = Comb.new(self)
 	combate.reiniciar()
 	evaluar_misiones()
@@ -202,6 +203,11 @@ func punto_aparicion(jugador_id: String) -> Dictionary:
 			motivo = "poblado_sin_datos"
 			continue
 		var centro := Vector2i(int(p.centro[0]), int(p.centro[1]))
+		if pid != Mundo.ID_INICIAL:
+			var centros: Array = [centro]
+			for actor in rt.values(): centros.append(Mundo.celda_de(actor.pies))
+			for nid in habitantes.ids: centros.append(Mundo.celda_de(habitantes.pos(nid)))
+			mundo.actualizar_regiones(centros)
 		var alc: Dictionary = mundo.alcanzables(entrada)
 		var validas: Array = []
 		var r_max := int(ceil(APARICION_RADIO_MAX))
@@ -770,6 +776,7 @@ func info_cofre(cid: String, id: String = LOCAL) -> Dictionary:
 	var nombre: String = str(d.jugadores.get(dueno,{}).get("nombre","Otro jugador"))
 	if dueno.begins_with("npc:"): nombre = str(habitantes.fichas.get(dueno.trim_prefix("npc:"),{}).get("n","Habitante"))
 	elif dueno.begins_with("grupo:"): nombre = autonomia.sociedad.nombre_grupo(dueno.trim_prefix("grupo:"))
+	elif dueno.begins_with("poblado:"): nombre = str(mundo.poblado(dueno.trim_prefix("poblado:")).get("nombre", "Comunidad"))
 	elif dueno=="anfitrion:local": nombre="Anfitrión"
 	elif dueno=="": nombre="Compartido"
 	return {"dueno": dueno, "nombre":nombre, "propio": propio, "candado": bool(cf.get("candado", false)), "cerrado": bool(cf.get("cerrado", false)), "permitidos": permisos, "acceso": not bool(cf.get("cerrado", false)) or autorizado}
@@ -853,6 +860,9 @@ func interactuar(id: String = LOCAL) -> Dictionary:
 			if not cs.propia: return {"ok": false, "r": _no("Es la cama de un habitante", id)}
 			if cs.get("dueno", "") != id: return {"ok": false, "r": _no("Es la cama de otro jugador", id)}
 			return {"ok": true, "panel": "dormir", "r": dormir(c, id)}
+	for r in autonomia.asentamientos.visibles():
+		if r.pos.distance_to(p) <= ALCANCE_NPC:
+			return {"ok": true, "panel": "dialogo", "npc": r.id, "nombre": r.nombre, "texto": autonomia.asentamientos.dialogo(r.id), "tipo": "regional"}
 	if estacion_junto(id) != "": return {"ok": true, "panel": "craft"}
 	var lugar: Dictionary = mundo.lugar_en(base)
 	if not lugar.is_empty(): return {"ok": true, "panel": "dialogo", "nombre": lugar.nombre, "texto": lugar.descripcion, "tipo": "lugar"}
@@ -1071,3 +1081,8 @@ func gestionar_pista(comando: String, id: String = LOCAL) -> void:
 ## Pista activa solo en sesión; las mostradas/descartadas sí persisten.
 func pista_contextual(id: String = LOCAL) -> Dictionary:
 	return rt[id].get("pista_actual", {})
+
+## Nombre público de una identidad, detallada o regional, sin crear otro habitante.
+func nombre_habitante(nid: String) -> String:
+	if habitantes.fichas.has(nid): return str(habitantes.fichas[nid].n)
+	return str(autonomia.asentamientos.residente(nid).get("nombre", "un habitante"))
