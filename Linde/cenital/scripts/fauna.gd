@@ -7,6 +7,7 @@ var combate
 var j
 var cfg: Dictionary
 var habitats: Dictionary
+var distribucion: Dictionary
 var planes := {}
 var reloj := 0.0
 
@@ -17,6 +18,51 @@ func _init(c) -> void:
  habitats = perfiles_habitat(cfg.biomas)
  for error in validar_habitats(cfg.biomas): push_error(error)
  restaurar()
+ distribucion = j.d.fauna.get("distribucion", {}).duplicate(true)
+
+## Política de generación copiada al mundo nuevo, no reglas globales de combate.
+## Un guardado sin este campo conserva siempre la distribución v1.
+static func politica_inicial() -> Dictionary:
+ return JSON.parse_string(FileAccess.get_file_as_string("res://datos/fauna/habitats_v2.json"))
+
+static func distribucion_valida(p) -> bool:
+ if not p is Dictionary:return false
+ if p.is_empty():return true
+ if p.get("version",0)==1:return p.size()==1
+ if p.get("version",0)!=2 or not p.get("preferencias") is Dictionary:return false
+ var tipos=["espectro_bosque","golem_sierra","diablillo_secano","arpia_pradera","slime_ribera"]
+ if p.size()!=2 or p.preferencias.size()!=tipos.size():return false
+ for tipo in tipos:
+  var regla=p.preferencias.get(tipo)
+  if not regla is Dictionary or regla.size()!=1:return false
+  if regla.has("vecino_objeto"):
+   if not regla.vecino_objeto is Array or regla.vecino_objeto.is_empty():return false
+   for objeto in regla.vecino_objeto:
+    if not objeto is String or not C.OBJETOS.has(objeto):return false
+  elif regla.get("vecinos_despejados",false)!=true and regla.get("conservar_origen",false)!=true:return false
+ return true
+
+func cumple_preferencia(celda:Vector2i,tipo:String,preferencias:Dictionary) -> bool:
+ var regla:Dictionary=preferencias[tipo]
+ if regla.get("conservar_origen",false):return true
+ var junto=false
+ for v in [Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]:
+  var d:Dictionary=j.mundo.generador.datos(celda+v)
+  if regla.has("vecino_objeto") and str(d.objeto) in regla.vecino_objeto:junto=true
+  if regla.get("vecinos_despejados",false) and (int(d.tipo)!=M.T.PASTO or str(d.objeto)!=""):return false
+ return junto if regla.has("vecino_objeto") else true
+
+## Misma población, especie, bioma y región; sin candidato preferido conserva el origen.
+func plan_preferente(r:Vector2i,base:Dictionary,preferencias:Dictionary) -> Dictionary:
+ var p=base.duplicate(true)
+ if p.is_empty() or cumple_preferencia(p.celda,p.tipo,preferencias):return p
+ for i in 64:
+  var celda=candidata_region(r,i)
+  if M.Terreno.distancia_valle(celda)<int(cfg.distancia_valle):continue
+  var habitat=habitat_en(celda)
+  if habitat.get("tipo","")!=p.tipo or habitat.get("bioma","")!=p.bioma:continue
+  if cumple_preferencia(celda,p.tipo,preferencias):p.celda=celda;break
+ return p
 
 ## Las cadenas v1 son la forma abreviada del perfil; no se cambia el archivo sellado.
 static func perfiles_habitat(biomas: Dictionary) -> Dictionary:
@@ -78,6 +124,15 @@ func candidata_region(r: Vector2i, intento: int) -> Vector2i:
 func plan_region(r: Vector2i) -> Dictionary:
  var k := M.clave(r)
  if planes.has(k): return planes[k]
+ if not distribucion_valida(distribucion):
+  push_error("Distribución de fauna no soportada");return {}
+ var resultado=plan_base_region(r)
+ if int(distribucion.get("version",1))==2:resultado=plan_preferente(r,resultado,distribucion.preferencias)
+ planes[k]=resultado
+ return resultado
+
+func plan_base_region(r:Vector2i) -> Dictionary:
+ var k=M.clave(r)
  var resultado := {}
  for i in 64:
   var celda := candidata_region(r, i)
@@ -86,7 +141,6 @@ func plan_region(r: Vector2i) -> Dictionary:
   if habitat.is_empty(): continue
   resultado = {"id": "fauna_v1@" + k, "region": k, "celda": celda, "tipo": str(habitat.tipo), "bioma": str(habitat.bioma)}
   break
- planes[k] = resultado
  return resultado
 
 func _distancia_region(r: Vector2i, centros: Array) -> int:

@@ -8,25 +8,10 @@ const VECINOS=[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]
 var preferencias:Dictionary
 
 func cumple(j,c:Vector2i,tipo:String) -> bool:
- var regla:Dictionary=preferencias[tipo]
- if regla.get("conservar_origen",false):return true
- var junto=false
- for v in VECINOS:
-  var d:Dictionary=j.mundo.generador.datos(c+v)
-  if regla.has("vecino_objeto") and str(d.objeto) in regla.vecino_objeto:junto=true
-  if regla.get("vecinos_despejados",false) and (int(d.tipo)!=M.T.PASTO or str(d.objeto)!=""):return false
- return junto if regla.has("vecino_objeto") else true
+ return j.combate.fauna.cumple_preferencia(c,tipo,preferencias)
 
 func proponer(j,r:Vector2i) -> Dictionary:
- var p:Dictionary=j.combate.fauna.plan_region(r).duplicate(true)
- if p.is_empty() or cumple(j,p.celda,p.tipo):return p
- for i in 64:
-  var c:Vector2i=j.combate.fauna.candidata_region(r,i)
-  if M.Terreno.distancia_valle(c)<int(j.combate.fauna.cfg.distancia_valle):continue
-  var habitat:Dictionary=j.combate.fauna.habitat_en(c)
-  if habitat.get("tipo","")!=p.tipo or habitat.get("bioma","")!=p.bioma:continue
-  if cumple(j,c,p.tipo):p.celda=c;break
- return p
+ return j.combate.fauna.plan_preferente(r,j.combate.fauna.plan_region(r),preferencias)
 
 func junto_camino(j,c:Vector2i) -> bool:
  return VECINOS.any(func(v):return int(j.mundo.generador.datos(c+v).tipo)==M.T.CAMINO)
@@ -36,7 +21,7 @@ func _init() -> void:
  var salida=OS.get_cmdline_user_args()[0]
  var casos:Array=[];var ejemplos:Dictionary={};var fallos=0
  for seed in [123,456,789]:
-  var j=J.nueva(seed,"Muestra",[0,0,0],M.MODO_POBLADO)
+  var j=J.nueva(seed,"Muestra",[0,0,0],M.MODO_POBLADO,1)
   var estado=H.hash_de(j.d);var cargadas=j.mundo.regiones.size();var stats:Dictionary={}
   var planes:Dictionary={};var iguales=true
   for y in range(-14,15):

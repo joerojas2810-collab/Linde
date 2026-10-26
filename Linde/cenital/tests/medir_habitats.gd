@@ -5,7 +5,8 @@ const M=preload("res://scripts/mundo.gd")
 const H=preload("res://scripts/huella.gd")
 
 static func caso(seed:int,version:int,inverso:bool=false) -> Dictionary:
- var j=J.nueva(seed,"Muestra",[0,0,0],M.MODO_POBLADO)
+ # Línea base congelada: crear explícitamente una política de generación v1.
+ var j=J.nueva(seed,"Muestra",[0,0,0],M.MODO_POBLADO,1)
  j.d.mundo.generacion.version=version;j.mundo.configurar(seed);j.combate.fauna.planes.clear()
  var estado=H.hash_de(j.d);var cargadas=j.mundo.regiones.size()
  var coords:Array=[];var por_region:Dictionary={};var especies:Dictionary={};var terreno:Array=[]
