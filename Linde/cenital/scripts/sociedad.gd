@@ -968,11 +968,12 @@ func _construir_cerca(nid: String, pieza: String, cadena: Array, centro_p: Vecto
 		if falta>0:return _obtener(nid,item,falta,cadena,"construir " + C.CONSTR[pieza].n)
 	var centro: Vector2i=_ancla(grupo_de(nid)) if centro_p==Vector2i(-1,-1) else centro_p
 	var alcanzables: Dictionary = {}   # una sola exploración desde donde está, reutilizada para todas las candidatas
+	var esenciales: Array = j.mundo.esenciales(M.ID_INICIAL)   # solo el pueblo inicial por ahora; luego, el del constructor
 	for radio in range(1,int(cfg.radio_construccion)+1):
 		for y in range(centro.y-radio,centro.y+radio+1):
 			for x in range(centro.x-radio,centro.x+radio+1):
 				var c:=Vector2i(x,y)
-				if M.ESENCIALES.has(c) or c == centro or j.mundo.puede_poner(c)!="" or j.ocupada(c) or not habitat.permite_pieza(c,pieza):continue
+				if esenciales.has(c) or c == centro or j.mundo.puede_poner(c)!="" or j.ocupada(c) or not habitat.permite_pieza(c,pieza):continue
 				if alcanzables.is_empty(): alcanzables = j.mundo.alcanzables(M.celda_de(j.habitantes.pos(nid)))
 				if not _llega_junto_a(alcanzables,c):continue
 				if not _ir(nid,c,"construir","construir " + C.CONSTR[pieza].n):return true
@@ -1003,7 +1004,7 @@ func construir_pieza(nid: String, pieza: String, c: Vector2i, dueno: String = ""
 		a._recordar(nid,"construyo",C.CONSTR.techo.n)
 		suceso("construccion",C.CONSTR.techo.n,nid,grupo_de(nid))
 		return true
-	if not Inv.tiene(n.inv,C.CONSTR[pieza].coste) or M.ESENCIALES.has(c) or j.mundo.puede_poner(c)!="" or j.ocupada(c):return false
+	if not Inv.tiene(n.inv,C.CONSTR[pieza].coste) or j.mundo.esenciales(M.ID_INICIAL).has(c) or j.mundo.puede_poner(c)!="" or j.ocupada(c):return false
 	j.mundo.poner(c,pieza,false,dueno if dueno!="" else "grupo:"+grupo_de(nid))
 	j.sembrar(c)
 	var alc: Dictionary=j.mundo.alcanzables()
@@ -1179,13 +1180,14 @@ func _refugio(nid: String) -> bool:
 	var hechos: Dictionary = datos().get("refugios", {})
 	var claves: Array = j.d.mundo.constr.keys()
 	claves.sort()
+	var esenciales: Array = j.mundo.esenciales(M.ID_INICIAL)   # solo el pueblo inicial por ahora; luego, el de la cama
 	for k in claves:
 		if j.d.mundo.constr[k].t != "cama_huesped": continue
 		var cama := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
 		if habitat.es_pieza_ajena(cama) or not _constructor(nid, cama): continue
 		for dd in plano(cama).base:
 			var w: Vector2i = cama + Vector2i(int(dd[0]), int(dd[1]))
-			if M.ESENCIALES.has(w) or j.mundo.puede_poner(w) != "" or j.ocupada(w): continue
+			if esenciales.has(w) or j.mundo.puede_poner(w) != "" or j.ocupada(w): continue
 			a.estado(nid).objetivo = "levantar un refugio"
 			var coste: Dictionary = C.CONSTR[muro].coste
 			comprometer(nid, coste)
@@ -1232,6 +1234,7 @@ func _casa(nid: String) -> bool:
 	var hechas: Dictionary = datos().get("casas", {})
 	var claves: Array = j.d.mundo.constr.keys()
 	claves.sort()
+	var esenciales: Array = j.mundo.esenciales(M.ID_INICIAL)   # solo el pueblo inicial por ahora; luego, el de la cama
 	for k in claves:
 		if j.d.mundo.constr[k].t != "cama_huesped" or not datos().get("refugios", {}).has(k): continue
 		var cama := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1)))
@@ -1246,7 +1249,7 @@ func _casa(nid: String) -> bool:
 			var c: Vector2i = paso[1]
 			# Sin ladrillos a mano el muro se levanta de madera: casa_completa() acepta ambos y la casa no se queda a medias.
 			if pieza == "muro_ladrillo" and (not "ladrillo" in a.recetas_de(nid) or not Inv.tiene(a.estado(nid).inv, C.CONSTR[pieza].coste)): pieza = "muro"
-			if _pieza_puesta(pieza, c) or _pieza_puesta(paso[0], c) or M.ESENCIALES.has(c) or (pieza != "techo" and j.ocupada(c)): continue   # el techo no estorba a quien está debajo
+			if _pieza_puesta(pieza, c) or _pieza_puesta(paso[0], c) or esenciales.has(c) or (pieza != "techo" and j.ocupada(c)): continue   # el techo no estorba a quien está debajo
 			if (j.mundo.puede_techar(c) if pieza == "techo" else j.mundo.puede_poner(c)) != "":
 				habitat.estado(cama,"bloqueada","Hay un obstáculo en "+M.clave(c))
 				continue
