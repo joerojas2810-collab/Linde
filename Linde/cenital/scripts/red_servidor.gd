@@ -127,7 +127,8 @@ func entrar(pid: int, datos) -> Dictionary:
 		j.entrar(id)
 		j.aviso("Vuelves al mundo.", id)
 	else:
-		j.unir(id, nombre, look)
+		var alta: Dictionary = j.unir(id, nombre, look)
+		if not alta.ok: return {"ok": false, "motivo": str(alta.msg)}   # modo poblado sin posición segura: no se crea al jugador
 		var sal := Crypto.new().generate_random_bytes(16).hex_encode()
 		j.jug(id)["clave"] = {"sal": sal, "hash": hash_clave(sal, clave)}
 	peers[pid].id = id

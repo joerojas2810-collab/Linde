@@ -6,6 +6,7 @@ const J = preload("res://scripts/juego.gd")
 const M = preload("res://scripts/mundo.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Comb = preload("res://scripts/combate.gd")
+const Srv = preload("res://scripts/red_servidor.gd")
 var fallos := 0
 
 func ok(c: bool, t: String) -> void:
@@ -133,5 +134,42 @@ func _init() -> void:
 	ok(not j.punto_aparicion("x").ok, "un poblado sin centro no se usa")
 	j.d.mundo.erase("poblados")
 	ok(not j.punto_aparicion("x").ok, "sin registro de poblados no hay aparición (no se recurre a constantes)")
+	# 7. Flujo real de entrada (`unir`) en modo poblado, rechazo sin posición segura y modo legado intacto.
+	var jl = J.nueva(123, "Legado", [0, 0, 0])
+	ok(jl.mundo.modo_inicio() == M.MODO_LEGADO and M.celda_de(jl.pies_de()) == M.new().punto_inicio(123), "modo legado: el primer jugador aparece donde dice punto_inicio al crear el mundo")
+	var esperado_unir: Vector2i = jl.mundo.punto_inicio(123)   # con las regiones del contorno ya cargadas, como en Juego.unir
+	jl.unir("b", "Bea", [0, 0, 0])
+	ok(M.celda_de(jl.pies_de("b")) == esperado_unir, "modo legado: unir usa punto_inicio, como siempre")
+	var jp = J.nueva(123, "Poblado", [0, 0, 0], M.MODO_POBLADO)
+	var ap0: Dictionary = jp.punto_aparicion(J.LOCAL)
+	ok(jp.mundo.modo_inicio() == M.MODO_POBLADO and jp.d.mundo.inicio.modo == "poblado", "nueva(modo poblado) guarda el modo en el mundo")
+	var previas: Array = [M.celda_de(jp.pies_de())]
+	var union_ok := true
+	var unicas2 := {}
+	for i in 5:
+		var id := "u%d" % i
+		var r: Dictionary = jp.unir(id, "U%d" % i, [0, 0, 0])
+		var c: Vector2i = M.celda_de(jp.pies_de(id))
+		if not r.ok or Vector2(c - _centro(jp)).length() > 7.0 or Vector2(c - _centro(jp)).length() < 2.0: union_ok = false
+		for o in previas: if maxi(absi(o.x - c.x), absi(o.y - c.y)) < 2 and o != c: union_ok = false
+		unicas2[c] = true
+		previas.append(c)
+	ok(union_ok and unicas2.size() == 5, "unir en modo poblado: cinco jugadores, todos entre 2 y 7 celdas del centro, sin coincidir")
+	ok(jp.d.mundo.inicio.ultimo.ok and jp.d.mundo.inicio.ultimo.poblado == M.ID_INICIAL and jp.d.mundo.inicio.ultimo.jugador == "u4", "el último resultado de aparición queda registrado")
+	# Rechazo: se llena el círculo; no se crea al jugador y queda el motivo.
+	for dy in range(-8, 9):
+		for dx in range(-8, 9):
+			var c2 := _centro(jp) + Vector2i(dx, dy)
+			if jp.mundo.puede_poner(c2) == "" and not jp.ocupada(c2): jp.mundo.poner(c2, "muro", false, "mundo")
+	var n_jug: int = jp.d.jugadores.size()
+	var rr: Dictionary = jp.unir("tarde", "Tarde", [0, 0, 0])
+	ok(not rr.ok and not jp.d.jugadores.has("tarde") and jp.d.jugadores.size() == n_jug and not jp.rt.has("tarde"), "sin posición segura unir rechaza y no crea al jugador")
+	ok(jp.d.mundo.inicio.ultimo.ok == false and jp.d.mundo.inicio.ultimo.motivo == "sin_celda_valida", "el rechazo deja su motivo en el registro")
+	# Servidor: el rechazo llega al cliente como entrada denegada y no deja un jugador a medias.
+	var srv = Srv.new()
+	srv.j = jp
+	srv.peers[9] = {"id": ""}
+	var ent: Dictionary = srv.entrar(9, [Srv.VERSION, "Tardona", "clave-larga-1", [0, 0, 0]])
+	ok(not ent.ok and ent.motivo.begins_with("No hay ningún lugar seguro") and not jp.d.jugadores.has("@tardona") and srv.peers[9].id == "", "el servidor deniega la entrada con el motivo y sin crear estado")
 	print("APARICION: %d fallos" % fallos)
 	quit(fallos)

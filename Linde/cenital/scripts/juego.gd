@@ -207,10 +207,26 @@ func punto_aparicion(jugador_id: String) -> Dictionary:
 		return {"ok": true, "celda": Vector2i(v[2], v[1]), "poblado": pid, "motivo": "poblado" if not separadas.is_empty() else "poblado_sin_separacion"}
 	return {"ok": false, "celda": Mundo.SIN_CELDA, "poblado": "", "motivo": motivo}
 
-# Añade un jugador al mundo (servidor/pruebas). Empieza en el inicio de la semilla, con estado propio vacío.
+## Anota el último resultado de aparición en el mundo (auditoría). Los fallos también quedan en el diario de sucesos.
+func _registrar_aparicion(jugador_id: String, ap: Dictionary) -> void:
+	var inicio: Dictionary = d.mundo.get_or_add("inicio", {"modo": Mundo.MODO_LEGADO})
+	var c: Vector2i = ap.celda
+	inicio["ultimo"] = {"jugador": jugador_id, "poblado": ap.poblado, "celda": [c.x, c.y], "motivo": ap.motivo, "ok": ap.ok, "min": int(d.min)}
+	if not ap.ok and autonomia != null and autonomia.activa():
+		autonomia.sociedad.suceso("aparicion", "Sin lugar seguro para %s (%s)" % [jugador_id, ap.motivo])
+
+# Añade un jugador al mundo (servidor/pruebas). Empieza en el inicio de la semilla (modo legado) o en su poblado (modo poblado), con estado
+# propio vacío. En modo poblado, si no hay ninguna posición segura NO se crea al jugador: {ok: false, msg} y el motivo queda registrado.
 func unir(id: String, nombre: String, look: Array) -> Dictionary:
 	if d.jugadores.has(id): return _no("Ese jugador ya está en el mundo", id)
-	var p := Mundo.pies_de_celda(mundo.punto_inicio(int(d.semilla)))
+	var p: Vector2
+	if mundo.modo_inicio() == Mundo.MODO_POBLADO:
+		var ap: Dictionary = punto_aparicion(id)
+		_registrar_aparicion(id, ap)
+		if not ap.ok: return {"ok": false, "msg": "No hay ningún lugar seguro donde aparecer ahora mismo (%s)." % ap.motivo}
+		p = Mundo.pies_de_celda(ap.celda)
+	else:
+		p = Mundo.pies_de_celda(mundo.punto_inicio(int(d.semilla)))
 	d.jugadores[id] = nuevo_jugador(nombre, look, p)
 	_sesion(id)
 	evaluar_misiones(id)
