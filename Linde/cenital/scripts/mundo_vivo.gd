@@ -112,7 +112,7 @@ func _llegadas_posibles(nuevas: Dictionary, antes: Dictionary) -> String:
 		if libres.is_empty(): continue
 		var parts: PackedStringArray = libres.pop_front().split(",")
 		var cama := Vector2i(int(parts[0]), int(parts[1]))
-		if j.mundo.camino(Mundo.ENTRADA, func(c): return j.mundo.es_adyacente(c, cama)).is_empty(): return "%s: sin ruta desde la entrada" % id
+		if j.mundo.camino(j.mundo.entrada(Mundo.ID_INICIAL), func(c): return j.mundo.es_adyacente(c, cama)).is_empty(): return "%s: sin ruta desde la entrada" % id   # el director solo opera en el pueblo inicial
 	return ""
 
 ## Valores de todas las variables ahora: persistidas (de d.mundo_vivo.vars) y derivadas (recalculadas).
