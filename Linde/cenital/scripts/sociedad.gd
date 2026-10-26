@@ -145,12 +145,17 @@ func suceso(tipo: String, detalle: String, quien: String = "", otro: String = ""
 	lista.append({"min": int(j.d.min), "tipo": tipo, "detalle": detalle, "quien": quien, "otro": otro})
 	while lista.size() > int(cfg.tope_sucesos): lista.pop_front()
 
+func _estado_relacion(nid: String) -> Dictionary:
+	var regional: Dictionary=a.asentamientos.residente(nid) if a.asentamientos!=null else {}
+	return regional if not regional.is_empty() else a.estado(nid)
+
 func confianza(nid: String, otro: String) -> int:
-	return int(a.estado(nid).vinculos.get("npc:" + otro, {}).get("confianza", cfg.confianza_inicial))
+	return int(_estado_relacion(nid).get_or_add("vinculos",{}).get("npc:" + otro, {}).get("confianza", cfg.confianza_inicial))
 
 func _vinculo(nid: String, otro: String, delta: int) -> void:
 	if delta < 0: delta = -ceili(float(-delta) * (1.0 + float(caracter(nid).rencor) / 100.0))   # quien guarda rencor pierde más confianza
-	var n: Dictionary = a.estado(nid)
+	var n: Dictionary = _estado_relacion(nid)
+	n.get_or_add("vinculos",{})
 	var clave := "npc:" + otro
 	var v: Dictionary = n.vinculos.get(clave, {})
 	v["confianza"] = clampi(confianza(nid, otro) + delta, int(cfg.confianza_min), int(cfg.confianza_max))
