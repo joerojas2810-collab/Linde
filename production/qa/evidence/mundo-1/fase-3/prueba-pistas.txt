@@ -1,0 +1,85 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS al menos doce pistas en datos
+PASS contexto real: peligro
+PASS se muestra: peligro
+PASS una sola activa: peligro
+PASS descarte: peligro
+PASS no se repite: peligro
+PASS contexto real: herida
+PASS se muestra: herida
+PASS una sola activa: herida
+PASS descarte: herida
+PASS no se repite: herida
+PASS contexto real: habitante
+PASS se muestra: habitante
+PASS una sola activa: habitante
+PASS descarte: habitante
+PASS no se repite: habitante
+PASS contexto real: mesa
+PASS se muestra: mesa
+PASS una sola activa: mesa
+PASS descarte: mesa
+PASS no se repite: mesa
+PASS contexto real: horno
+PASS se muestra: horno
+PASS una sola activa: horno
+PASS descarte: horno
+PASS no se repite: horno
+PASS contexto real: rumores
+PASS se muestra: rumores
+PASS una sola activa: rumores
+PASS descarte: rumores
+PASS no se repite: rumores
+PASS contexto real: exterior
+PASS se muestra: exterior
+PASS una sola activa: exterior
+PASS descarte: exterior
+PASS no se repite: exterior
+PASS contexto real: noche
+PASS se muestra: noche
+PASS una sola activa: noche
+PASS descarte: noche
+PASS no se repite: noche
+PASS contexto real: madera
+PASS se muestra: madera
+PASS una sola activa: madera
+PASS descarte: madera
+PASS no se repite: madera
+PASS contexto real: piedra
+PASS se muestra: piedra
+PASS una sola activa: piedra
+PASS descarte: piedra
+PASS no se repite: piedra
+PASS contexto real: equipo
+PASS se muestra: equipo
+PASS una sola activa: equipo
+PASS descarte: equipo
+PASS no se repite: equipo
+PASS contexto real: saberes
+PASS se muestra: saberes
+PASS una sola activa: saberes
+PASS descarte: saberes
+PASS no se repite: saberes
+PASS contexto real: cama
+PASS se muestra: cama
+PASS una sola activa: cama
+PASS descarte: cama
+PASS no se repite: cama
+PASS contexto real: orientacion
+PASS se muestra: orientacion
+PASS una sola activa: orientacion
+PASS descarte: orientacion
+PASS no se repite: orientacion
+PASS silencio impide toda pista
+PASS silencio persiste al cargar
+PASS desaparece al agotar duración
+PASS enfriamiento evita encadenar pistas
+PASS pista vista no se repite al cargar
+PASS preferencia personal independiente
+PASS el saber aprendido retira la pista correspondiente
+PASS comandos de pistas no modifican legado
+WARNING: 302 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

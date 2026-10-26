@@ -1,0 +1,95 @@
+{
+  "duracion_s": 12,
+  "enfriamiento_s": 30,
+  "reglas": [
+    {
+      "id": "peligro",
+      "evento": "amenaza",
+      "precondicion": "enemigo_cerca",
+      "texto": "Las amenazas pertenecen al lugar. Puedes alejarte; no necesitas combatir para explorar."
+    },
+    {
+      "id": "herida",
+      "evento": "estado",
+      "precondicion": "herido",
+      "texto": "Estás herido. Una cama propia permite descansar; conserva una ruta de regreso."
+    },
+    {
+      "id": "habitante",
+      "evento": "encuentro",
+      "precondicion": "npc_cerca",
+      "texto": "E abre la conversación. Allí, L intercambia referencias para tu mapa con este habitante."
+    },
+    {
+      "id": "mesa",
+      "evento": "estacion",
+      "precondicion": "mesa",
+      "texto": "Esta mesa permite fabricar con C. Las recetas muestran sus materiales y requisitos."
+    },
+    {
+      "id": "horno",
+      "evento": "estacion",
+      "precondicion": "horno",
+      "texto": "Junto al horno, C muestra las recetas disponibles. La estación no entrega materiales gratis."
+    },
+    {
+      "id": "rumores",
+      "evento": "mapa",
+      "precondicion": "rumor",
+      "texto": "En M, el ocre señala zonas contadas por habitantes. Al recorrerlas se confirman en verde."
+    },
+    {
+      "id": "exterior",
+      "evento": "exploracion",
+      "precondicion": "exterior",
+      "texto": "Estás fuera del pueblo inicial. M conserva tu recorrido; Inicio centra el mapa en tu posición."
+    },
+    {
+      "id": "noche",
+      "evento": "reloj",
+      "precondicion": "noche",
+      "texto": "Los habitantes tienen sus propios horarios. Si no los encuentras, pueden estar descansando o viajando."
+    },
+    {
+      "id": "madera",
+      "evento": "inventario",
+      "precondicion": "madera",
+      "texto": "La madera sirve para herramientas y construcciones. C muestra recetas; B permite colocar piezas."
+    },
+    {
+      "id": "piedra",
+      "evento": "inventario",
+      "precondicion": "piedra",
+      "texto": "Consulta C para combinar piedra y madera. Puedes revisar requisitos antes de gastar materiales."
+    },
+    {
+      "id": "equipo",
+      "evento": "inventario",
+      "precondicion": "equipable",
+      "texto": "En I puedes equipar lo que llevas y comparar sus propiedades. Fabricar una pieza no la equipa."
+    },
+    {
+      "id": "saberes",
+      "evento": "oficio",
+      "precondicion": "saber_pendiente",
+      "texto": "G abre el taller y los Saberes. Los habitantes pueden enseñar procedimientos que aún no conoces."
+    },
+    {
+      "id": "cama",
+      "evento": "descanso",
+      "precondicion": "cama_propia",
+      "texto": "Tu cama sirve de regreso al caer. Acércate e interactúa con E para descansar."
+    },
+    {
+      "id": "orientacion",
+      "evento": "lugar",
+      "precondicion": "hito",
+      "texto": "M abre tu mapa personal. H reúne los controles. Puedes ocultar estas pistas desde Esc."
+    }
+  ],
+  "radio_amenaza_px": 80,
+  "proporcion_vida": 0.5,
+  "noche_desde": 20,
+  "noche_hasta": 6,
+  "saber_clave": "art1:espada:madera:ligera:0"
+}

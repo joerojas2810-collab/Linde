@@ -14,6 +14,8 @@ static func observar(j, id: String) -> void:
 ## Intercambio voluntario y cercano: el NPC aporta rumores; recibe lo recorrido por el jugador.
 ## Un rumor conserva la primera fuente y nunca sustituye un bloque visto personalmente.
 static func intercambiar(j, npc: String, id: String) -> Dictionary:
+	if not j.es_autoridad() or j.mundo.modo_inicio() != "poblado":
+		return j._no("El mapa personal está disponible en mundos de poblado.", id)
 	if not j.habitantes.ids.has(npc) or j.habitantes.pos(npc).distance_to(j.pies_de(id)) > j.ALCANCE_NPC:
 		return j._no("Acércate para preguntar por lugares.", id)
 	observar(j, id)

@@ -13,9 +13,7 @@ PASS guarda mapa
 PASS carga conserva descubrimientos y fuentes
 MAPA_60_MIN bloques=5409 bytes=90433 presupuesto=4194304
 PASS mapa de 60 min dentro del presupuesto de 4 MiB
-PASS legado no añade estado
-ERROR: Condition "ret != noErr" is true. Returning: ""
-   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+PASS legado no añade estado ni permite intercambio
 WARNING: 62 ObjectDB instances were leaked at exit (run with `--verbose` for details).
    at: cleanup (core/object/object.cpp:2536)
 ERROR: 13 resources still in use at exit (run with --verbose for details).

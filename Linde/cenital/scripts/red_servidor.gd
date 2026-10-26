@@ -228,6 +228,9 @@ func ejecutar(id: String, datos) -> bool:
 			if not _sig(a, [TYPE_STRING,TYPE_STRING]) or not j.habitantes.ids.has(a[0]): return _rechazo(id,tipo)
 			if tipo == "ensenar_saber": j.ensenar_saber(a[0],a[1],id)
 			else: j.pedir_saber(a[0],a[1],id)
+		"gestionar_pista":
+			if not _sig(a, [TYPE_STRING]) or a[0] not in ["pedir", "descartar", "silenciar", "activar"]: return _rechazo(id, tipo)
+			j.gestionar_pista(a[0], id)
 		"preguntar_lugares":
 			if not _sig(a, [TYPE_STRING]): return _rechazo(id, tipo)
 			j.preguntar_lugares(a[0], id)
@@ -441,6 +444,7 @@ func privado(id: String) -> Dictionary:
 	var pr: Dictionary = j.jug(id).duplicate(true)
 	pr.erase("clave")
 	pr.erase("pos")
+	pr["pista_contextual"] = j.pista_contextual(id).duplicate(true)
 	pr["msgs"] = j.rt[id].msgs.duplicate() if j.rt.has(id) else []
 	return pr
 

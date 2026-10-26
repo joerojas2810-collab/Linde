@@ -57,6 +57,7 @@ var _golpe_visual: Dictionary = {} # Solo presentación de la última extracció
 var ficha_npc := ""
 var arte_vida=preload("res://scripts/arte_vida.gd").new()
 var pista := ""
+var pista_pedido_t := 0.0
 var ayuda_visible := false
 var rotulos: Array = []
 var cuerpos_rotulo: Array = []
@@ -175,6 +176,7 @@ func _unhandled_key_input(e: InputEvent) -> void:
 		KEY_J: _abrir("mis")
 		KEY_B: build = not build
 		KEY_V: _ficha_cercana()
+		KEY_T: j.gestionar_pista("descartar")
 		KEY_H: ayuda_visible = not ayuda_visible
 		KEY_F1: debug = not debug
 		KEY_F5:
@@ -737,6 +739,8 @@ func _armar() -> void:
 			_l("Continuar", func(): _cerrar())
 			_l("Guardar", func(): j.aviso("Guardado." if j.guardar(ruta) else "No se pudo guardar."); _cerrar())
 			_l("Guardar y salir al menú", func(): j.guardar(ruta); _cerrar(); j = null; _menu_inicial())
+			var silencio: bool = j.jug().get("pistas", {}).get("silenciadas", false)
+			_l("Activar pistas contextuales" if silencio else "Ya conozco los sistemas: ocultar pistas", func(): j.gestionar_pista("activar" if silencio else "silenciar"))
 
 	if panel=="mis":
 		for nid in j.d.get("mundo_vivo",{}).get("autonomia",{}).get("colonos",{}):
@@ -789,6 +793,10 @@ func _held() -> Array:
 func _process(delta: float) -> void:
 	queue_redraw()
 	if modo != "juego" or j == null: return
+	pista_pedido_t -= delta
+	if panel == "" and not ayuda_visible and pista_pedido_t <= 0:
+		pista_pedido_t = 1.0
+		j.gestionar_pista("pedir")
 	cam.position = j.pies - Vector2(0, 12)
 	if material is ShaderMaterial: (material as ShaderMaterial).set_shader_parameter("noche", oscuridad(j.hora_dia()) / 0.5)
 	actores.actualizar(delta, j.combate.enemigos, int(j.jug().hp), j.combate.centro_pj(), j.mundo, red is Cli, j.d.get("fauna", {}).get("bajas", {}))

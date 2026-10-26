@@ -32,7 +32,8 @@ const DOMINANCIAS_CONOCIDAS: Array = [
 	"guantes:bronce>hierro",
 	"pantalones:bronce>hierro",
 	"torso:bronce>hierro"]
-const EXCLUIDOS := ["res://datos/equipo/paletas.json"]   # solo color; datos/mundo es narrativa del director
+const EXCLUIDOS := ["res://datos/pistas.json", # Solo textos, condiciones de ayuda y tiempos de presentación; no decide resultados del mundo.
+	"res://datos/equipo/paletas.json"]   # solo color; datos/mundo es narrativa del director
 var fallos := 0
 var total := 0
 

@@ -51,6 +51,7 @@ func _draw() -> void:
 		var w: float = ui.ancho_texto(esc.pista, 16) + 32.0
 		ui.tooltip(self, Rect2(vs.x / 2 - w / 2, 610, w, 40))
 		_t(esc.pista, Vector2(vs.x / 2 - w / 2 + 16, 620), 16)
+	if esc.panel == "" and not esc.ayuda_visible: _pista_contextual(vs, j)
 	if esc.build:
 		var id: String = C.ORDEN_CONSTR[esc.pieza_i]
 		ui.panel(self, Rect2(380, 16, 540, 72))
@@ -330,7 +331,7 @@ func _mapa(vs: Vector2) -> void:
 	_t("MAPA PERSONAL · N ↑", Vector2(96, 56), 24)
 	_t("M / Esc cerrar · Flechas mover · +/− zoom · Inicio volver a ti", Vector2(96, 92), 16)
 	var zona := Rect2(96, 134, 740, 450)
-	draw_rect(zona, Color("202e33"))
+	draw_texture_rect(ui.tex("mapa/bloque.svg"), zona, false, Color("202e33"))
 	var b := int(j.autonomia.reglas.conocimiento.bloque)
 	var centro: Vector2i = esc.mapa_centro
 	var escala: float = esc.mapa_escala
@@ -339,7 +340,7 @@ func _mapa(vs: Vector2) -> void:
 		var c := Vector2i(int(k.get_slice(",", 0)), int(k.get_slice(",", 1))) * b
 		var pos := zona.get_center() + Vector2(c - centro) * escala
 		var r := Rect2(pos, Vector2.ONE * b * escala).intersection(zona)
-		if r.has_area(): draw_rect(r, Color("6c9673") if bloques[k] == "visto" else Color("a38b58"))
+		if r.has_area(): draw_texture_rect(ui.tex("mapa/bloque.svg"), r, false, Color("6c9673") if bloques[k] == "visto" else Color("a38b58"))
 	var numero := 0
 	for h in j.Exploracion.hitos(j, esc.J.LOCAL):
 		numero += 1
@@ -347,11 +348,11 @@ func _mapa(vs: Vector2) -> void:
 		var c := Vector2(int(k.get_slice(",", 0)), int(k.get_slice(",", 1))) * b + Vector2.ONE * b / 2.0
 		var pos := zona.get_center() + (c - Vector2(centro)) * escala
 		if zona.grow(-16).has_point(pos):
-			draw_circle(pos, 10, Color("f3de99"))
+			draw_texture_rect(ui.tex("mapa/marca.svg"), Rect2(pos - Vector2(10, 10), Vector2(20, 20)), false, Color("f3de99"))
 			_t(str(numero), pos + Vector2(-4, -9), 14)
 	var yo := zona.get_center() + Vector2(esc.J.Mundo.celda_de(j.pies) - centro) * escala
 	if zona.has_point(yo):
-		draw_circle(yo, 6, Color.WHITE)
+		draw_texture_rect(ui.tex("mapa/marca.svg"), Rect2(yo - Vector2(6, 6), Vector2(12, 12)), false)
 		_t("Tú", yo + Vector2(9, -9), 16, Color.WHITE)
 	_t("Verde: recorrido · Ocre: contado · Oscuro: desconocido", Vector2(96, 612), 16)
 	_t("REFERENCIAS APROXIMADAS", Vector2(858, 142), 16)
@@ -365,3 +366,20 @@ func _mapa(vs: Vector2) -> void:
 		if fuente != "visto": n = "Según " + str(j.habitantes.fichas.get(fuente.trim_prefix("npc:"), {}).get("n", "un habitante"))
 		_t(n, Vector2(858, y + 21), 14)
 		y += 52
+
+## Tarjeta única, breve y descartable; no desplaza la interacción contextual existente.
+func _pista_contextual(vs: Vector2, j) -> void:
+	var actual: Dictionary = j.pista_contextual()
+	if actual.is_empty(): return
+	var r := Rect2(vs.x / 2 - 330, 180, 660, 120)
+	ui.panel(self, r)
+	_t("UNA PISTA · T ocultar · Esc configurar", r.position + Vector2(20, 14), 16)
+	var lineas: Array = []
+	var linea := ""
+	for palabra in str(actual.texto).split(" "):
+		if ui.ancho_texto(linea + " " + palabra, 16) > r.size.x - 40:
+			lineas.append(linea)
+			linea = palabra
+		else: linea += (" " if linea != "" else "") + palabra
+	if linea != "": lineas.append(linea)
+	for i in lineas.size(): _t(lineas[i], r.position + Vector2(20, 46 + i * 22), 16)

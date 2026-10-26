@@ -49,5 +49,7 @@ func _init() -> void:
 	ok(bytes < 4194304, "mapa de 60 min dentro del presupuesto de 4 MiB")
 	var legado = J.nueva(123, "Legado", [0, 0, 0])
 	legado.actualizar_mapa()
-	ok(not legado.jug().has("mapa"), "legado no añade estado")
+	legado.pies = legado.habitantes.pos(legado.habitantes.ids[0])
+	legado.preguntar_lugares(legado.habitantes.ids[0])
+	ok(not legado.jug().has("mapa"), "legado no añade estado ni permite intercambio")
 	quit(1 if fallos else 0)

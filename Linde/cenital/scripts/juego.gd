@@ -15,6 +15,7 @@ const Vivo = preload("res://scripts/mundo_vivo.gd")
 const Comb = preload("res://scripts/combate.gd")
 const Anim = preload("res://scripts/anim_pj.gd")
 const Eq = preload("res://scripts/equipo.gd")
+const Pistas = preload("res://scripts/pistas.gd")
 const Exploracion = preload("res://scripts/exploracion.gd")
 const LOCAL := P.LOCAL
 const CAP_COFRE := 30
@@ -318,6 +319,7 @@ func tick(dt: float) -> void:
 		if d.min % 60 == 0: _hora_en_punto()
 	for id in rt:
 		var s: Dictionary = rt[id]
+		Pistas.paso(self, id, dt)
 		s.cd_obj = maxf(0.0, s.cd_obj - dt)
 		s.herr_t = maxf(0.0, s.herr_t - dt)
 	habitantes.paso(dt)
@@ -1057,3 +1059,11 @@ func actualizar_mapa() -> void:
 ## El servidor valida cercanía y decide qué información se intercambia.
 func preguntar_lugares(npc: String, id: String = LOCAL) -> Dictionary:
 	return Exploracion.intercambiar(self, npc, id)
+
+## Pide, descarta o silencia ayuda contextual personal y opcional.
+func gestionar_pista(comando: String, id: String = LOCAL) -> void:
+	Pistas.accion(self, id, comando)
+
+## Pista activa solo en sesión; las mostradas/descartadas sí persisten.
+func pista_contextual(id: String = LOCAL) -> Dictionary:
+	return rt[id].get("pista_actual", {})

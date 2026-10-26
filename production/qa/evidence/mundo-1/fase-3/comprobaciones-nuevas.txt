@@ -1,0 +1,10 @@
+SUITE                      SALIDA   PASS   FAIL  RESULTADO
+prueba                         1    329      1  FALLA
+prueba_reglas                  0     81      0  OK
+prueba_exploracion             0     13      0  OK
+prueba_exploracion_ui          0      6      0  OK
+prueba_pistas                  0     79      0  OK
+prueba_pistas_ui               0      6      0  OK
+prueba_orientacion_red         0     14      0  OK
+---
+6 de 7 suites sin fallos. Salidas completas en: /tmp/linde-f23-final-check

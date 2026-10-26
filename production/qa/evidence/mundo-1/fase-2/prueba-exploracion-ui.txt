@@ -1,0 +1,12 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS M abre el mapa
+PASS desplazamiento y zoom
+PASS Inicio centra al jugador
+PASS M cierra el mapa
+PASS conversación conserva identidad
+PASS L intercambia y cierra
+WARNING: 30 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 13 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

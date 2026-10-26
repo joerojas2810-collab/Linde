@@ -214,6 +214,12 @@ class Replica extends "res://scripts/juego.gd":
 	func tick(_dt: float) -> void:
 		pass                                   # el mundo lo avanza el servidor
 
+	func gestionar_pista(comando: String, _id: String = LOCAL) -> void:
+		red.enviar(["gestionar_pista", comando])
+
+	func pista_contextual(_id: String = LOCAL) -> Dictionary:
+		return jug().get("pista_contextual", {})
+
 	func preguntar_lugares(npc: String, _id: String = LOCAL) -> Dictionary:
 		red.enviar(["preguntar_lugares", npc])
 		return {"ok": true}
