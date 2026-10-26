@@ -16,12 +16,18 @@ static func observar(j, id: String) -> void:
 static func intercambiar(j, npc: String, id: String) -> Dictionary:
 	if not j.es_autoridad() or j.mundo.modo_inicio() != "poblado":
 		return j._no("El mapa personal está disponible en mundos de poblado.", id)
-	if not j.habitantes.ids.has(npc) or j.habitantes.pos(npc).distance_to(j.pies_de(id)) > j.ALCANCE_NPC:
+	var regional: Dictionary = j.autonomia.asentamientos.residente(npc)
+	var detallado: bool = j.habitantes.ids.has(npc)
+	var pos: Vector2 = j.habitantes.pos(npc) if detallado else j.autonomia.asentamientos.posicion(npc)
+	if (not detallado and regional.is_empty()) or pos.distance_to(j.pies_de(id)) > j.ALCANCE_NPC:
 		return j._no("Acércate para preguntar por lugares.", id)
 	observar(j, id)
 	var mapa: Dictionary = j.jug(id).get_or_add("mapa", {"bloques": {}})
-	if not j.autonomia.estado(npc).has("bloques"): j.autonomia._explorar(npc)
-	var n: Dictionary = j.autonomia.estado(npc).bloques
+	if detallado and not j.autonomia.estado(npc).has("bloques"): j.autonomia._explorar(npc)
+	if not detallado and not regional.has("bloques"):
+		regional.bloques = {}
+		j.autonomia._ver(regional,M.celda_de(pos),int(j.autonomia.reglas.conocimiento.radio_inicial))
+	var n: Dictionary = j.autonomia.estado(npc).bloques if detallado else regional.bloques
 	var nuevos := 0
 	for k in n:
 		if not mapa.bloques.has(k):
@@ -30,7 +36,7 @@ static func intercambiar(j, npc: String, id: String) -> Dictionary:
 	# Reutiliza también el horizonte conocido por los habitantes, sin inventar destinos ni revelar coordenadas exactas.
 	for lugar in j.d.mundo.get("registro", {}).get("lugares", {}).values():
 		var c := Vector2i(lugar.centro[0], lugar.centro[1])
-		if j.autonomia.conoce(npc, c):
+		if (detallado and j.autonomia.conoce(npc, c)) or n.has(j.autonomia._bloque(c)):
 			var k: String = j.autonomia._bloque(c)
 			if not mapa.bloques.has(k):
 				mapa.bloques[k] = "npc:" + npc

@@ -245,6 +245,7 @@ func _explorar(nid: String) -> void:
 		n.bloques = {}
 		_ver(n, pos, int(reglas.conocimiento.radio_inicial))
 	_ver(n, pos, int(reglas.conocimiento.radio_vision))
+	if j.mundo.modo_inicio() == "poblado": n.bloques.merge(asentamientos.rumores_cerca(pos))
 	for otro in j.habitantes.ids:   # rumor: al cruzarse comparten lo que conocen
 		if otro == nid or perfil(otro).is_empty() or not estado(otro).has("bloques"): continue
 		if Vector2(Mundo.celda_de(j.habitantes.pos(otro))).distance_to(Vector2(pos)) <= float(reglas.conocimiento.radio_rumor):

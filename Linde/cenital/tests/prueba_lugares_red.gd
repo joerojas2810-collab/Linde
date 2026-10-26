@@ -29,7 +29,7 @@ func bot(nombre: String, puerto: int) -> void:
 	if resultado.conecto:
 		resultado.bienvenida = c.j.d.mundo.get("registro", {}).get("lugares", {}).has("campamento@0,0")
 		bandera(nombre + ".listo")
-		resultado.expansion = await esperar(func(): return c.j.d.mundo.registro.macros.has("1,0"))
+		resultado.expansion = await esperar(func(): return c.j.d.mundo.registro.macros.has("3,0"))
 		await create_timer(0.3).timeout
 		resultado.registro = S.Huella.hash_de(c.j.d.mundo.registro)
 		var camp: Dictionary = c.j.d.mundo.registro.lugares["campamento@0,0"]
@@ -72,7 +72,7 @@ func servidor() -> void:
 		if id == J.LOCAL: continue
 		j.rt[id].pies = J.Mundo.pies_de_celda(cc + Vector2i.DOWN)
 		j.jug(id).inv = {"madera": 3} if j.jug(id).nombre == "VisitanteA" else {}
-	j.Lugares.ampliar(j, Vector2i(1, 0))
+	j.Lugares.ampliar(j, Vector2i(3, 0))
 	ok(inicial.keys().all(func(k): return j.d.mundo.registro.lugares[k] == inicial[k]), "ampliar no altera lugares preexistentes")
 	await esperar(func(): return FileAccess.file_exists(carpeta + "/A.json") and FileAccess.file_exists(carpeta + "/B.json"), 240)
 	var resultados := {}

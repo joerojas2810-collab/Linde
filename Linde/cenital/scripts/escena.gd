@@ -482,6 +482,12 @@ func _armar() -> void:
 	var st: Dictionary = j.stats()
 	if panel in ["planos","practica","laminados","saberes"] and not j.autonomia.desarrollo.activa(): panel="desarrollo"
 	match panel:
+		"habitante_regional":
+			var r: Dictionary = j.autonomia.asentamientos.residente(ficha_npc)
+			_l(r.get("nombre","Habitante"))
+			_l("Hogar: " + str(j.mundo.poblado(r.get("hogar", "")).get("nombre", "Puesto regional")))
+			_l("Oficio: " + str(r.get("oficio", "sin registrar")))
+			_parrafo(r.get("historia", "Historia sin registrar."))
 		"inv":
 			_l("INVENTARIO  %d/%d  ·  Nv %d  Daño %d  Def %d  Vida %d  Vel x%.2f" % [Inv.slots(j.jug().inv), st.slots, j.nivel(), st.dmg, st.def, st.hp, st.vel])
 			_l("Bono de set: " + _txt_bono(j.bono_set()))
@@ -626,7 +632,7 @@ func _armar() -> void:
 				var e := "APRENDIDA" if j.jug().hab.has(id) else "coste %d · nv %d%s" % [h.coste, h.niv, (" · req:" + req) if req != "" else ""]
 				_l("[%s] %s  (%s)" % [h.rama.substr(0, 3), h.n, e], func(): j.aprender(id))
 		"mis":
-			_l("SOCIEDAD DEL VALLE  ·  necesidades, acuerdos y grupos" if j.autonomia.activa() else "MISIONES  ·  las de capítulo se piden y entregan hablando con quien las da")
+			_l("SOCIEDAD  ·  necesidades, acuerdos y grupos" if j.autonomia.activa() else "MISIONES  ·  las de capítulo se piden y entregan hablando con quien las da")
 			if j.autonomia.activa():
 				_l("— HABITANTES: necesidades reales (Enter ayuda; requiere cercanía) —")
 				for nid in j.habitantes.ids:
@@ -675,8 +681,12 @@ func _armar() -> void:
 					var obra: Dictionary=sociedad.habitat.datos().obras[k]
 					_l("Casa "+k+": "+obra.estado+(" · "+obra.motivo if obra.motivo!="" else ""))
 				for puesto in j.autonomia.asentamientos.datos().puestos.values():
+					var bloque: String = j.autonomia._bloque(Vector2i(puesto.celda[0], puesto.celda[1]))
+					if puesto.has("poblado") and j.jug().get("mapa",{}).get("bloques",{}).get(bloque, "") != "visto": continue
 					_l("%s · %d residentes · %s"%[puesto.nombre,puesto.residentes.size(),puesto.estado])
-					_l("  Coordenadas %s · %s"%[str(puesto.celda),Hud.J_txt(j.autonomia.asentamientos.inventario(puesto))])
+					_l("  Coordenadas %s · %s"%[str(puesto.celda),Hud.J_txt(j.d.cofres.get(puesto.cofre,{}).get("inv",{}))])
+					for r in puesto.residentes:
+						_l("  %s · %s" % [r.nombre,r.oficio],func():_ver_ficha(r.id))
 				_l("— ECONOMÍA Y PROTECCIÓN —")
 				_l("Valor de la fibra: %.2f · baja cuando abunda" % sociedad.valor("fibra"))
 				_parrafo("Los habitantes dejan fibra sobrante al recoger bayas y usan fibra para renovar ropa y lechos. Fabrica candados en una mesa y colócalos en tus cofres.")
@@ -853,6 +863,8 @@ func _pista() -> String:
 		if cs.get("t", "") == "cofre": return "E: abrir cofre"
 		if cs.get("t", "") == "campo": return "E: cosechar" if int(cs.get("listo", 0)) <= int(j.d.min) else "El cultivo aún crece"
 		if cs.get("t", "") == "cama": return "E: dormir" if cs.get("dueno", "") == J.LOCAL else ("Cama de otro jugador" if cs.propia else "Cama de un habitante")
+	for r in j.autonomia.asentamientos.visibles():
+		if r.pos.distance_to(j.pies) <= J.ALCANCE_NPC: return "E · Hablar con " + r.nombre + "   V · Conocer a esta persona"
 	var est: String = j.estacion_junto()
 	if est != "": return "E: fabricar (%s)" % C.CONSTR[est].n.to_lower()
 	var lugar: Dictionary = j.mundo.lugar_en(base)
@@ -1231,10 +1243,14 @@ func _navegar_inventario(e:InputEvent)->void:
 		elif e.keycode==KEY_DOWN:sel=mini(ultimo,sel+5)
 
 func _ver_ficha(nid:String)->void:
-	ficha_npc=nid;_abrir("ficha")
+	ficha_npc=nid
+	_abrir("habitante_regional" if not j.autonomia.asentamientos.residente(nid).is_empty() else "ficha")
 func _ficha_cercana()->void:
 	var mejor:="";var distancia:=96.0
 	for id in j.habitantes.ids:
 		var d:float=j.habitantes.pos(id).distance_to(j.pies)
 		if d<distancia:mejor=id;distancia=d
+	for r in j.autonomia.asentamientos.visibles():
+		var d: float = r.pos.distance_to(j.pies)
+		if d < distancia: mejor=r.id;distancia=d
 	if mejor!="":_ver_ficha(mejor)

@@ -149,7 +149,7 @@ func _bienvenida(e: Dictionary) -> void:
 func _mundo(cambios: Dictionary) -> void:
 	for k in cambios:
 		match k:
-			"rotos", "golpes", "caminos", "techos": j.d.mundo[k] = cambios[k]
+			"rotos", "golpes", "caminos", "techos", "poblados": j.d.mundo[k] = cambios[k]
 			"registro":
 				if not cambios[k].is_empty(): j.d.mundo.registro = cambios[k]
 				j.mundo.aplicar_registro()

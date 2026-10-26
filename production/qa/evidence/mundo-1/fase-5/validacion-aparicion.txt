@@ -1,0 +1,4 @@
+SUITE                      SALIDA   PASS   FAIL  RESULTADO
+prueba_aparicion               0     32      0  OK
+---
+1 de 1 suites sin fallos. Salidas completas en: /tmp/linde-f5-aparicion

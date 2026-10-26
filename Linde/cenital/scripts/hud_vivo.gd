@@ -375,7 +375,7 @@ func _mapa(vs: Vector2) -> void:
 		_t("%d. %s" % [numero, h.nombre], Vector2(858, y), 16)
 		var fuente: String = h.fuente
 		var n := "Explorado por ti"
-		if fuente != "visto": n = "Según " + str(j.habitantes.fichas.get(fuente.trim_prefix("npc:"), {}).get("n", "un habitante"))
+		if fuente != "visto": n = "Según " + j.nombre_habitante(fuente.trim_prefix("npc:"))
 		_t(n, Vector2(858, y + 21), 14)
 		y += 52
 	_t("%d–%d de %d" % [mini(esc.mapa_primera + 1, referencias.size()), mini(esc.mapa_primera + 7, referencias.size()), referencias.size()], Vector2(858, 580), 14)
