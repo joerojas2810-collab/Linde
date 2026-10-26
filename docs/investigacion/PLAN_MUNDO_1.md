@@ -1,0 +1,214 @@
+# Mundo 1 — auditoría de brechas y plan incremental
+
+> **Fecha**: 2026-10-26 · **Visión**: [VISION_MUNDO_1.md](../../design/VISION_MUNDO_1.md) · **Estado implementado (fuente de verdad)**: [ESTADO.md](../../production/epics/mundo-vivo/ESTADO.md) · **Diagnóstico previo**: [CIERRE_MUNDO_INICIAL_Y_EXPLORACION.md](CIERRE_MUNDO_INICIAL_Y_EXPLORACION.md) (su §6 queda sustituido por las fases de este plan).
+> **Aprobado el 2026-10-26** con las precisiones de N1–N6 y de las fases 0 y 5–7; registrado como `M1-*` en la sección F de [DECISIONES.md](../../Linde/cenital/docs/DECISIONES.md). **Aún no se implementa ninguna fase.** La ejecución de las fases 0 y 1 se prepara en la sección 8.
+> **Etiquetas**: **[C]** verificado en código · **[D]** solo documentado en ESTADO/contratos · **[M]** medido · **[I]** inferencia. Contexto aplicable: «partidas viejas no importan» (sin migraciones ni compatibilidad), así que los cambios de esquema son libres.
+
+## 1. Conclusión
+Mundo Vivo ya contiene casi todos los *mecanismos* que Mundo 1 necesita (terreno determinista con diferencias persistentes, autonomía, construcción, llegada de colonos, puestos resumidos con visualización, conocimiento por bloques, rumor entre NPC, saberes, fauna determinista, red autoritativa). Lo que falta es, sobre todo, **dejar de tratar el Valle como un caso especial codificado en constantes** y **añadir la capa de mundo compartido** (registro de poblados y lugares generado una vez, mapa personal, destinos). No hace falta reescribir nada; sí tres generalizaciones:
+1. «El Valle» → **un poblado más**, descrito por datos (centro, área, accesos, depósitos, camas), no por constantes.
+2. **Registro de mundo** (poblados, lugares, caminos) generado una vez y guardado, extensible por macrorregión.
+3. **Dos niveles de población** ya existen (resumida y detallada); falta el puente entre ambos.
+
+## 2. Auditoría por sistema
+
+### 2.1 Generación y persistencia del mundo
+| | |
+|---|---|
+| **Funciona [C]** | Terreno por coordenadas globales, regiones de 16, sin orden de carga; `rotos/golpes/constr/caminos/techos` por coordenadas globales; versionado v1/v2 con huella; caché acotada de 25 regiones; servidor autoritativo; clientes reconstruyen con la misma semilla; protocolo 7 con huella de reglas |
+| **Parcial** | Límite ±65.536; carga síncrona; el exterior no guarda *decisiones de generación*, solo diferencias; «no se guardan copias de regiones sin modificar» |
+| **Falta** | **Registro persistente de lo generado con identidad** (qué pueblos/lugares existen, dónde, con qué historia) — hoy cambiar el generador cambiaría el mundo salvo por versión; expansión «por orden» controlada |
+| **Reutilizar** | El patrón de `Fauna.plan_region` (función pura por región con hash propio, sin tocar `terreno_v1/v2`) + `estado` del guardado; `Guardado` ya versiona |
+| **Riesgos** | Mantener determinismo cliente/servidor (los clientes deben llegar al mismo registro: guardarlo en `mundo.estado` y replicarlo como las diferencias); no alterar la huella de terreno |
+
+### 2.2 Pueblo inicial y asentamientos regionales
+| | |
+|---|---|
+| **Funciona [C]** | Valle de autor 64×48; 2 habitantes iniciales con rutinas completas; llegada por presión (`Sociedad._inmigrar`, tope técnico 12); casas por plano con solares reservados (`habitat.gd`); grupos con depósitos; puestos regionales (máx. 3, 2 residentes, producción resumida con costes reales y persistencia) |
+| **Parcial** | **El Valle está codificado en constantes** (`Mundo.CASA/CAMAS/ENTRADA/ESENCIALES/CLARO/SPAWN_GUARDIAN`, grupos con depósitos fijos en `reglas.json`). `habitat.gd:45` exige que toda zona esté en el Valle. Los recién llegados nacen en `Mundo.ENTRADA`. Existen **dos regímenes**: rutinas completas solo en el Valle; resumen en puestos [C] |
+| **Falta** | Un concepto de **poblado** como dato; otros pueblos preexistentes; el pueblo inicial regido por las mismas reglas que los puestos; decadencia/abandono (los puestos solo se «detienen»: `sin comida; producción detenida`) |
+| **Reutilizar** | `Asentamientos.crear/validar/actualizar/visibles` (piezas, cofre, residentes, producción); `Arraigo` (visitante→aspirante→residente→ausente) como modelo de permanencia; `Habitat.reservar` |
+| **Riesgos** | El Valle tiene `ESENCIALES`, jefes y slimes en su interior; sacar constantes toca `mundo.gd`, `habitantes.gd`, `habitat.gd`, `mundo_vivo.gd`, `combate.gd`, `escena.gd` y arte (`mundo_arte.gd`, `arte_entornos.gd`). Alto acoplamiento [C: referencias a esas constantes en 9 archivos] |
+
+### 2.3 NPC autónomos y fundación de asentamientos
+| | |
+|---|---|
+| **Funciona [C]** | Necesidades, metas con alternativas y reintentos, trueque con garantías, confianza, grupos, memoria, oficios, práctica, enseñanza de saberes, expediciones al contorno, construcción (camas, casas, talleres, campos) |
+| **Parcial** | `Asentamientos.crear` **solo se llama desde la construcción del jugador** (`juego.gd:587`) [C]. Los NPC extraen recursos pero no fundan. La optimización de `_recurso` ya hecha reduce el coste de planificación (−50 % a −62 %, sin confirmar) |
+| **Falta** | Decisión de fundar: criterio (excedente, presión, sitio), viaje, coste real, efecto en el poblado de origen; ampliación autónoma de puestos; migración entre poblados |
+| **Reutilizar** | `Asentamientos.validar/crear` con dueño NPC; costes reales de `reglas_v1.json`; `Sociedad.presion()` y `_inmigrar` como modelo de «salir» |
+| **Riesgos** | Equilibrio (no tocar sin medición, D14); persistencia de grupos en viaje; límites técnicos de población y red (`mundo_vivo` se reenvía completo: TD-007/008) |
+
+### 2.4 Construcción y evolución territorial
+| | |
+|---|---|
+| **Funciona [C]** | Construcción validada (huella, rutas, ocupación), retiro, cofres con candado, techos, campos que maduran, caminos por pisadas (20), regeneración de recursos, persistencia y réplica |
+| **Parcial** | Las casas autónomas no se completan de forma consistente en 4–5 días simulados [D]; el exterior no evoluciona salvo puestos |
+| **Falta** | Ruina/abandono; mejora de camino (sendero→camino→puente); percepción de evolución en una hora de juego real |
+| **Reutilizar** | `Mundo.pisar`, `estado.caminos/techos`, `Habitat`, `Sociedad._casa/_refugio` |
+| **Riesgos** | Medir antes de tocar el equilibrio de materiales (D14) |
+
+### 2.5 Exploración, mapa y lugares de interés
+| | |
+|---|---|
+| **Funciona [C]** | «Bioma · x, y» en el HUD. **Para NPC**: conocimiento por bloques de 8×8 (`Autonomia._explorar/conoce`), visión por radio, **rumor al cruzarse (`radio_rumor`)** y horizonte del contorno |
+| **Parcial** | Los habitantes ya «conocen» partes del mundo y se las pasan entre sí |
+| **Falta [C]** | Mapa del jugador; memoria de exploración del jugador; hitos con nombre; transmisión NPC→jugador de información aproximada; compartir; **lugares de interés fuera del Valle** (el contrato dice que no hay mazmorras ni ruinas exteriores) |
+| **Reutilizar** | **La misma estructura `bloques` para el jugador** (clave `"bx,by"` de 8×8, ya probada con rumor); `pj` del guardado para persistir; el diálogo/ficha (`V`, `E`) como canal de información de NPC |
+| **Riesgos** | Tamaño del guardado por jugador; el terreno es reconstruible por el cliente, así que el mapa es memoria/presentación, no seguridad |
+
+### 2.6 Fauna y dificultad territorial
+| | |
+|---|---|
+| **Funciona [C][D]** | 5 especies por bioma (el gólem de sierra ya es más duro que el espectro del bosque: la dificultad ya depende del hábitat), conductas, telegrafiado, planes deterministas por región, bajas y heridas persistentes, techo de 24, franja segura de 8 celdas alrededor del Valle |
+| **Parcial** | Una criatura por región elegible (85 % de las regiones [M]); densidad casi uniforme; sin zonas de calma; sin señales previas; atascos [M: 31 % regreso, 14 % persecución en escenario sintético] |
+| **Falta** | Perfiles de hábitat/actividad, amenazas ancladas a lugares (cueva, campamento), efecto de caminos/asentamientos en el peligro, acontecimientos que cambian el riesgo, señales |
+| **Reutilizar** | `Fauna.plan_region` + `datos/fauna/reglas_v1.json` (ampliar por datos), `bajas`/`heridos` como deltas, `Combate._paso_enemigo` |
+| **Riesgos** | No cambiar estadísticas ni botines (D14); `prueba_fauna` (31) debe seguir pasando |
+
+### 2.7 Simulación cercana y lejana
+| | |
+|---|---|
+| **Funciona [C]** | Servidor avanza `Autonomia.paso` por minuto de juego sin jugadores; `Asentamientos.actualizar` produce **sin cargar regiones lejanas** (terreno por coordenadas); `Asentamientos.visibles()` dibuja residentes resumidos con un vaivén cuando la región está cargada |
+| **Parcial** | Tres niveles *de hecho*: (a) resumen sin cuerpo, (b) **marioneta visible** (residente resumido que se mueve entre dos celdas), (c) habitante completo con rutina, ruta y necesidades. El nivel (c) existe solo en el Valle; no hay paso de (a/b) a (c) |
+| **Falta** | Transición resumido↔detallado; reglas comunes; simulación de poblados lejanos sin jugadores |
+| **Reutilizar** | `Habitantes.registrar_colono` (crea habitante desde una ficha en tiempo de ejecución) como mecanismo de **materialización**; `Asentamientos.visibles` como etapa intermedia barata; `Autonomia.estado` para devolver inventario y memoria al resumen |
+| **Riesgos** | Duplicar/perder recursos al pasar de un nivel a otro; red (identidad de habitante estable); `AREA_EXPEDICION` limita el pathing de NPC al Valle y su contorno |
+
+### 2.8 Incorporación de jugadores y selección de inicio
+| | |
+|---|---|
+| **Funciona [C]** | `Juego.unir` crea el jugador con estado propio en `punto_inicio(semilla)`; reaparición en cama o inicio con mitad de vida |
+| **Parcial** | `punto_inicio` es una celda aleatoria válida del Valle (mediana a 23,8 celdas de la puerta de la casa [M]); todos los jugadores obtienen **la misma celda** |
+| **Falta** | Inicio por poblado vivo y viable; cercanía con dispersión entre compañeros; fallback a otra comunidad (D13); registro del motivo; manejo de cero candidatos (hoy `rng.randi() % cand.size()` fallaría con 0) |
+| **Reutilizar** | La lógica de validación de `punto_inicio`; el registro de poblados (fase 1) para elegir comunidad viable |
+| **Riesgos** | Carreras al unirse varios a la vez; depender de que haya un poblado «viable» definido |
+
+## 3. Decisiones resueltas (26/10)
+| ID | Resolución del usuario |
+|---|---|
+| N1 | Transformar el Valle en el pueblo inicial aprovechando lo existente, **sin conservar obligatoriamente su estructura ni identidad**; el resultado es una comunidad coherente de Mundo 1 |
+| N2 | Empezar con 1–2 pueblos preexistentes adicionales (alcance inicial, no límite) |
+| N3 | Registro persistente de poblados, lugares y caminos; generación determinista, independiente del orden de exploración, que conserva resultados. **Generación controlada ≠ simple carga de regiones** |
+| N4 | Reutilizar y generalizar `Asentamientos`; sin sistema paralelo de pueblos |
+| N5 | Límites técnicos configurables por poblado y globales, sujetos a medición; no permanentes |
+| N6 | Viabilidad = comida + camas + residentes + seguridad, con información existente; umbrales pendientes de medición y aprobación |
+
+## 4. Plan incremental
+
+Cada fase deja un ciclo jugable. Los riesgos de regresión se mitigan con las suites ya existentes (nombradas).
+
+### Fase 0 — Línea base de ritmo (sin cambiar el juego)
+- **Objetivo**: medir el ritmo actual con pruebas acotadas (sin depender de playtests humanos; si se hacen, enriquecen pero no bloquean).
+- **Reutiliza**: `simular_crecimiento.gd`, `medir_i1a.gd`.
+- **Mínimo**: guion automático de ruta mínima (hacha→mesa→pico→salir→volver) y playtest humano de 3–4 personas.
+- **Aceptación**: tiempos por hito en 5 semillas; lista de bloqueos observados.
+- **Riesgo**: ninguno.
+
+### Fase 1 — «Entrar en un pueblo con sentido» (poblado como dato)
+- **Objetivo**: aparecer junto a la gente, ver el pueblo, no perderse (D1, D2, D5, D13 parcial).
+- **Reutiliza**: `Mundo` (terreno del Valle), `Habitat`, `Habitantes.reconciliar`, `punto_inicio`, `Asentamientos` (cofre, piezas).
+- **Cambios mínimos**: (1) un registro `poblados` en el guardado (`id`, centro, área, accesos, camas, depósitos), con el Valle como `poblado 0` leído de constantes existentes; (2) `punto_inicio` elige dentro del área del poblado cerca de la plaza/casa con dispersión entre compañeros y fallback registrado; (3) hitos con nombre y una estación común coherente con los oficios (N1/D5) construida como parte del poblado; (4) sin tocar balance.
+- **Dependencias**: N1, N5, N6.
+- **Aceptación**: en 500 semillas el inicio cumple pruebas duras actuales y está a ≤X celdas de la plaza y a la vista de ≥1 habitante; dos jugadores seguidos quedan en celdas distintas y cercanas; con el poblado inutilizable el fallback usa otra comunidad o un campamento y lo registra; `prueba`, `prueba_red`, `prueba_autonomia`, `prueba_arraigo` sin regresión nueva.
+- **Riesgo de regresión**: **medio-alto** por las constantes del Valle en 9 archivos; mitigar con una indirección (leer del registro, mismo valor por defecto) antes de mover contenido.
+
+### Fase 2 — Mapa personal y orientación (D4, D9)
+- **Objetivo**: tecla M con lo descubierto y lo sabido; NPC que orientan.
+- **Reutiliza**: la estructura `bloques` y `_ver` de `Autonomia`, `pj` del guardado, el diálogo de habitante.
+- **Cambios mínimos**: `pj.mapa.bloques` (mismas claves 8×8), actualizado por posición; panel M que dibuja bloques y hitos conocidos; «preguntar por lugares» devuelve un área aproximada a partir de los bloques del NPC; compartir = unir bloques con procedencia (como el rumor actual).
+- **Dependencias**: Fase 1 (hitos).
+- **Aceptación**: tras recorrer una ruta el mapa muestra exactamente lo visto (más el radio fijo); persiste al guardar y cargar; la réplica no recibe el mapa de otro jugador; presupuesto de bytes de guardado tras 60 min fijado antes; `prueba_ui` y `prueba_red` sin regresión.
+- **Riesgo**: bajo-medio (guardado por jugador, tamaño).
+
+### Fase 3 — Aprendizaje contextual (D7)
+- **Objetivo**: pistas que dependen de lo que pasa y se olvidan tras verse.
+- **Reutiliza**: `Escena._pista()`, `Desarrollo.sabe/puede`, panel de ayuda.
+- **Cambios mínimos**: reglas en datos («evento + precondición + texto + enfriamiento»), estado `pj.pistas` (mostrada/descartada), interruptor «ya conozco los sistemas». Sin misiones.
+- **Dependencias**: ninguna fuerte; conviene después de Fase 1.
+- **Aceptación**: ≥12 pistas, cada una sale una vez, no se repite tras guardar y cargar, nunca dos a la vez, silenciable; `prueba_ui`, `prueba_saberes` sin regresión.
+- **Riesgo**: bajo.
+
+### Fase 4 — Mundo compartido: registro de lugares y primeros destinos (D3, D10, D11)
+- **Objetivo**: algo significativo que visitar, igual para todos los jugadores de la partida y estable.
+- **Reutiliza**: patrón de `Fauna.plan_region`; `estado`/`rotos` para el estado de cada lugar; `caminos` ya persistidos.
+- **Cambios mínimos**: `mundo.registro` guardado (poblados, lugares, caminos con id/versión); génesis determinista por macrorregión (N3) que decide ruinas, campamentos y cuevas (solo entrada) con restricciones (bioma, agua, distancia, accesibilidad) y los une con caminos sembrados en `estado.caminos` (A* con coste: un solo algoritmo nuevo y pequeño); lugares como datos; estado de cada lugar por deltas.
+- **Dependencias**: Fase 1 (registro de poblados), N2/N3.
+- **Aceptación**: mismo registro con cualquier orden de carga y tras reiniciar; ≥1 lugar y 1 pueblo preexistente a ≤N celdas de la salida en el 100 % de 100 semillas, alcanzables por BFS desde un camino; ampliar a una macrorregión nueva no cambia lo ya generado; `prueba_terreno` (49), `prueba_terreno_red`, `prueba_fauna` sin regresión.
+- **Riesgo**: **medio** (determinismo cliente/servidor del registro, tamaño del guardado).
+
+### Fase 5 — Pueblos preexistentes y su transición cercana↔lejana (D3, D6)
+- **Objetivo**: otros pueblos con habitantes identificables, actividad económica y evolución observable, sin simular detalle a distancia.
+- **Reutiliza**: `Asentamientos` (puesto con más piezas/residentes), `visibles()` (nivel b), `Habitantes.registrar_colono` (nivel c).
+- **Cambios mínimos, en dos etapas**: **5a** pueblos preexistentes como puestos con oficios y producción resumida, visibles por `visibles()`; **5b** (objetivo de diseño, **aplazable** hasta resolver identidad, recursos y red; no descartable) materialización a habitante completo al acercarse un jugador y reversión al alejarse, devolviendo inventario y memoria al resumen. 5a ya exige identidad estable de cada residente (id, nombre, oficio, historia) para que 5b sea posible después.
+- **Dependencias**: Fase 4; contrato de transición (qué se persiste, qué identidad conservan).
+- **Aceptación**: 5a: tras 3 días simulados los pueblos preexistentes cambian de forma observable (cosecha, construcción) sin jugadores y sin duplicar/perder recursos al guardar y cargar. 5b: el recorrido resumido→detallado→resumido conserva recursos y memoria (suma de inventarios idéntica) y el mismo id.
+- **Riesgo**: **alto en 5b** (identidad en red, recursos); por eso se separa.
+
+### Fase 6 — NPC fundan y los pueblos decaen (D3, D6, D13)
+- **Objetivo**: que el mundo crezca y se contraiga por sí mismo, **por necesidades y condiciones reales** (no por eventos programados para garantizar una fundación periódica).
+- **Reutiliza**: `Asentamientos.validar/crear` con dueño NPC, costes reales, `Sociedad.presion()`, `Arraigo`.
+- **Cambios mínimos**: criterio de fundación basado en excedente/presión ya medidos; viaje de los fundadores; estado de poblado `activo/en declive/abandonado/recuperado` con umbrales sostenidos; el abandono conserva nombre, restos y conocimiento; la viabilidad (N6: comida, camas, residentes y seguridad; umbrales por medir) alimenta el fallback de Fase 1.
+- **Dependencias**: Fases 1 y 5; mediciones de equilibrio de comida/materiales (D14).
+- **Aceptación**: en 10 días simulados, ≥1 fundación en alguna semilla sin entregar materiales y sin sobrepasar el tope técnico; un poblado sin comida pasa a declive y luego a abandono; un nuevo jugador cuando el inicial está abandonado aparece en otro viable; todas las suites de autonomía y crecimiento sin regresión.
+- **Riesgo**: **alto** (equilibrio, estabilidad de la población, red).
+
+### Fase 7 — Ecología y dificultad territorial (D12)
+- **Objetivo**: peligro orgánico, reconocible y cambiante.
+- **Reutiliza**: `Fauna.plan_region` + datos; `bajas/heridos`; `Combate`.
+- **Cambios mínimos**: perfil de hábitat por bioma en datos; zonas de calma alrededor de caminos y poblados; amenazas ligadas a lugares de Fase 4; señales (rastros) derivadas del estado real; efecto de acontecimientos (un campamento arrasado cambia la densidad local) por deltas; **arreglo del atasco** con el BFS existente (P2). Sin escalado por nivel ni cambios de estadísticas ni de balance sin medición.
+- **Dependencias**: Fase 4.
+- **Aceptación**: tasa de atasco <5 % en el escenario P2; en el trayecto al primer lugar, ninguna criatura hostil a <R celdas del camino; todo peligro anunciado ≥T s; `prueba_fauna` (31) sin regresión; ninguna estadística cambia.
+- **Riesgo**: medio (balance indirecto: la densidad también es balance; medir).
+
+## 5. Orden, paralelismo y primeras entregas
+Orden recomendado: **0 → 1 → (2 ∥ 3) → 4 → 5a → 7 → 5b → 6**. Las fases 2 y 3 son independientes entre sí y de bajo riesgo. Primer ciclo jugable completo = fases 0–4 (pueblo con sentido, mapa, pistas, destinos). El mundo que cambia por sí mismo (5a, 6, 7) es la segunda tanda.
+
+## 6. Reutilización frente a trabajo nuevo
+- **Se reutiliza tal cual**: terreno y diferencias, red, guardado, fauna, saberes, trueque, construcción, `Asentamientos`, `Arraigo`, `Habitat`, `bloques`/rumor de NPC.
+- **Trabajo nuevo, pequeño y acotado**: registro de poblados/lugares; A* de caminos con coste (el BFS actual no pondera); materialización resumido→detallado (5b); reglas de pistas en datos; panel de mapa.
+- **No se necesita**: nuevas dependencias externas, `terreno_v3`, motor de IA, simulación detallada de todos los pueblos.
+
+## 7. Qué está verificado y qué no
+- **Verificado en código**: todo lo marcado [C] (leí `asentamientos.gd` completo, `autonomia.gd` de conocimiento, `habitantes.gd`, `sociedad._inmigrar`, `mundo.gd`, `juego.gd` de inicio y tick, y las referencias a constantes del Valle).
+- **Solo documentado**: casas, equilibrio, comportamiento con Internet real, fauna en red, expediciones/cultivos con clientes reales.
+- **No verificado**: que los pueblos «no inmortales» sean estables; costes de la materialización; tamaño del guardado con mapa; cuánto tarda un jugador en cada hito.
+- Los umbrales y valores (X, N, R, T) se fijan con mediciones y con tu aprobación (D14).
+
+## 8. Preparación de las fases 0 y 1
+
+### 8.1 Confirmación: ¿puede la Fase 1 hacerse de forma incremental y reversible?
+**Sí, con una condición**: dividirla en cinco pasos, cada uno en su propio commit, los dos primeros sin cambio de comportamiento y los demás tras un interruptor en el registro. La herramienta que lo hace comprobable ya existe: el **hash del estado completo por día** usado en la optimización de `_recurso` (idéntico antes y después = ningún comportamiento cambió).
+
+Dependencias reales del Valle fuera del arte [C, `grep` de hoy]:
+| Constante | Dónde se usa (no arte) |
+|---|---|
+| `ENTRADA` | `habitat.gd:78`, `habitantes.gd:114` (los colonos nacen allí), `mundo_vivo.gd:115`, `mundo.gd` (semilla de `alcanzables`, exclusiones de objetos y slimes) |
+| `ESENCIALES` | `habitat.gd:51`, `desarrollo.gd:331`, `sociedad.gd:975,1006,1011,1188,1249`, `mundo.gd:394` |
+| `CAMAS` | `habitantes.gd:85` |
+| `CLARO`, `SPAWN_GUARDIAN` | `combate.gd:69` (jefes), `mundo.gd` (slimes, `punto_inicio`) |
+| `CASA`, `PUERTA_C` | solo presentación: `arte_entornos.gd`, `escena.gd`, `mundo_arte.gd` |
+Total: 6 archivos de lógica y 3 de presentación.
+
+| Paso | Qué hace | Cambia el comportamiento | Reversión | Verificación mínima |
+|---|---|---|---|---|
+| **1a** Registro `poblados` | Crea `d.mundo.poblados` con el poblado inicial cuyos campos **son** las constantes actuales; valores por defecto en código si falta (así un cliente o guardado sin el registro sigue funcionando) | No | Revertir el commit | Hash de estado por día idéntico, ignorando la clave nueva; `prueba_red` (el registro viaja en `estado_para`, que copia `mundo` entero [C]) |
+| **1b** Indirección | `entrada()`, `esenciales()`, `camas()` leen del registro; los 6 archivos de lógica dejan de usar las constantes directas, uno por commit | No | Revertir commits | Mismo hash por día; `prueba_autonomia`, `prueba_sociedad`, `prueba_arraigo`, `prueba_casas_arraigo` |
+| **1c** Inicio por poblado | `punto_inicio` pasa a elegir cerca de la plaza o casa del poblado, con dispersión entre compañeros, registro del motivo y fallback explícito; el modo anterior se conserva como `inicio.modo = "legado"` | **Sí, solo la aparición** | Interruptor | 500 semillas: pruebas duras actuales + cercanía + dispersión; cero candidatos usa el fallback sin error; dos `unir` seguidos válidos; `prueba` y `prueba_red` sin fallos nuevos |
+| **1d** Hitos y estación común | Nombres y posiciones de hitos como datos; instalación comunitaria coherente con los oficios (M1-D5) | **Sí, el mundo inicial** (los habitantes dejan de construir esa estación) | Interruptor `estacion_comun` | Alcanzable por BFS; simulación corta con y sin interruptor, comparando qué construyen; sin tocar costes |
+| **1e** Contenido hostil fuera del núcleo | Parametrizar las zonas de exclusión de slimes y la ubicación del guardián respecto del poblado | **Sí, la ubicación de enemigos** | Interruptor | `prueba_fauna`, `prueba` (combate); distancias mínimas medidas |
+Los pasos 1d y 1e **cambian el mundo inicial**, así que se aprueban por separado; 1a–1c pueden hacerse sin tocar el juego visible.
+
+**Riesgos que persisten**: (1) 1b toca 6 archivos que otras sesiones también editan; (2) si el registro tomara valores de un JSON nuevo bajo `datos/`, habría que decidir si entra en la huella de reglas (`huella.gd`); se evita en 1a manteniendo los valores por defecto en código; (3) el cliente debe tener el registro antes de llamar a los getters (los valores por defecto lo cubren); (4) «partidas viejas no importan», por lo que no se necesitan migraciones.
+
+### 8.2 Fase 0: pruebas mínimas (sin cambiar el juego)
+| # | Prueba | Salida | Criterio |
+|---|---|---|---|
+| P0.1 | Guion de ritmo: con el mundo real, un «jugador» ejecuta por la API (`golpear`, `fabricar`, `poner`) la ruta mínima hacha→mesa→pico→salida→regreso, usando el intervalo de golpe y la velocidad reales leídos del código | golpes, pasos y minutos de juego/reales por hito, en 5 semillas | Termina en las 5 semillas; tabla de hitos |
+| P0.2 | Tiempo hasta «artesano» (nivel 3) con la ruta de P0.1 y recolección repetida | minutos y acciones | Dato medido (hoy no existe) |
+| P0.3 | Hash de equivalencia por día (herramienta de la optimización) fijado como línea base del Valle actual | hash por día para semillas 123 y 456, 4 días | Reproducible dos veces (control) |
+| P0.4 | Inicio actual en 200 semillas (ya hecho) | distancias | Se conserva como línea base de 1c |
+Todas son scripts de medición. **Decisión pendiente**: guardarlos como `tests/medir_*.gd` en el repositorio (código nuevo no de producción) o dejarlos fuera; recomiendo guardarlos, porque P0.3 es la red de seguridad de la Fase 1.
+
+### 8.3 Pruebas mínimas de la Fase 1 (resumen)
+Hash de estado por día (1a, 1b) · 500 semillas de inicio (1c) · `prueba_red` con dos `unir` (1c) · `prueba_autonomia`, `prueba_sociedad`, `prueba_arraigo`, `prueba_casas_arraigo`, `prueba_crecimiento`, `prueba_saberes`, `prueba_fauna`, `prueba_terreno` y `prueba` tras cada paso que toque lógica. No se piden corridas largas sin hipótesis.

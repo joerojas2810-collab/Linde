@@ -35,6 +35,36 @@ Servidor siempre encendido, sin congelar el mundo; crecimiento mixto (los hitos 
 - 9 decisiones tomadas por el usuario para el plan: [PLAN_IMPLEMENTACION §1](../../../docs/investigacion/innovacion-emergente/PLAN_IMPLEMENTACION.md).
 - D01–D12 (recomendaciones con evidencia y alternativa evaluada, todas *Propuesta*): [DECISIONES de la investigación](../../../docs/investigacion/innovacion-emergente/DECISIONES.md). Allí viven las alternativas; no se copian aquí.
 
+### F. Mundo 1 (26/10, del usuario)
+Dirección de diseño aprobada. Visión: [VISION_MUNDO_1.md](../../../design/VISION_MUNDO_1.md). Auditoría, fases y fundamentos: [PLAN_MUNDO_1.md](../../../docs/investigacion/PLAN_MUNDO_1.md). Los ID llevan el prefijo `M1-` para no chocar con D01–D12 de la investigación (sección D). **Es diseño objetivo: nada de esto está implementado** salvo lo que [ESTADO.md](../../../production/epics/mundo-vivo/ESTADO.md) registre. Los valores numéricos (radios, umbrales, límites) quedan pendientes de medición y aprobación; no hay cambios de balance sin ellas (M1-D14).
+
+| ID | Decisión | Estado |
+|---|---|---|
+| M1-D1 | Inicio en un pueblo habitado y coherente con Mundo 1, con aparición segura y comprensible | Usuario (26/10) |
+| M1-D2 | Los jugadores de una misma partida comienzan en posiciones cercanas y válidas | Usuario (26/10) |
+| M1-D3 | Mundo persistente compartido con varios asentamientos preexistentes y fundación autónoma; las semillas generan y amplían | Usuario (26/10) |
+| M1-D4 | Mapa de exploración personal, compartible; los NPC transmiten información aproximada de lugares | Usuario (26/10) |
+| M1-D5 | Instalaciones comunitarias coherentes con los oficios del pueblo y sujetas a las reglas del mundo | Usuario (26/10) |
+| M1-D6 | Evolución visible y persistente de construcciones, caminos, cultivos, habitantes, asentamientos y territorios | Usuario (26/10) |
+| M1-D7 | Aprendizaje contextual y opcional; sin tutorial obligatorio ni misiones artificiales | Usuario (26/10) |
+| M1-D8 | Los hitos de 15 y 60 minutos evalúan la experiencia; no son requisitos para el jugador | Usuario (26/10) |
+| M1-D9 | Mapa consultable con M; sin minimapa permanente como requisito inicial | Usuario (26/10) |
+| M1-D10 | Destinos significativos y accesibles; el resultado generado del mundo compartido se conserva | Usuario (26/10) |
+| M1-D11 | Ruinas, campamentos y cuevas son el alcance inicial, no un límite | Usuario (26/10) |
+| M1-D12 | Dificultad territorial orgánica (ecología, amenazas, recursos, acontecimientos); sin escalado por nivel ni regiones bloqueadas | Usuario (26/10) |
+| M1-D13 | Ningún pueblo es inmortal; si el inicial deja de ser viable, los nuevos jugadores aparecen en otra comunidad segura | Usuario (26/10) |
+| M1-D14 | Sin cambios de balance (XP, fabricación, daño, recompensas, progresión) sin mediciones y aprobación | Usuario (26/10) |
+| M1-N1 | El Valle se transforma en el pueblo inicial aprovechando lo existente, **sin conservar obligatoriamente su estructura ni identidad anterior**; el resultado es una comunidad coherente de Mundo 1 | Usuario (26/10) |
+| M1-N2 | Empezar con 1–2 pueblos preexistentes adicionales; alcance inicial, no límite | Usuario (26/10) |
+| M1-N3 | Registro persistente de poblados, lugares y caminos; generación determinista, independiente del orden de exploración, que conserva sus resultados; **la generación controlada se distingue de la simple carga de regiones** | Usuario (26/10) |
+| M1-N4 | Reutilizar y generalizar `Asentamientos`; sin un sistema paralelo de pueblos | Usuario (26/10) |
+| M1-N5 | Límites técnicos configurables por poblado y globales, sujetos a medición; no son límites permanentes del diseño | Usuario (26/10) |
+| M1-N6 | Viabilidad = comida, camas, residentes y seguridad, con información ya existente; umbrales pendientes de medición y aprobación | Usuario (26/10) |
+| M1-F0 | Fase 0: medir el ritmo actual con pruebas acotadas; no se bloquea el avance por falta de playtests humanos | Usuario (26/10) |
+| M1-F5 | Fase 5a: pueblos preexistentes con habitantes identificables, actividad económica y evolución observable (simulación resumida al inicio). Fase 5b (transición resumido↔detallado) es objetivo de diseño, aplazable hasta resolver identidad, recursos y red | Usuario (26/10) |
+| M1-F6 | Fase 6: la fundación autónoma depende de necesidades y condiciones reales, no de eventos programados | Usuario (26/10) |
+| M1-F7 | Fase 7: dificultad orgánica, sin escalado por nivel ni cambios de balance sin medición | Usuario (26/10) |
+
 ### E. Otros registros
 [ADR-0001 multijugador](../../../docs/architecture/adr-0001-multijugador-mundo-anfitrion.md) · [canon de trabajo](../../../design/narrative/canon-de-trabajo.md) · [registro de entidades](../../../design/registry/entities.yaml) · [deuda técnica](../../../docs/tech-debt-register.md).
 
