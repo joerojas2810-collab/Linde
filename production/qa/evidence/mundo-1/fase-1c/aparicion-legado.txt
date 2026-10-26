@@ -1,0 +1,4 @@
+MEDIDA_CONFIG herramienta=medir_aparicion semillas=200 segundos=30.0 modo=legado tick_s=0.1 godot=4.7.1-stable (official)
+MEDIDA_ESTADO escenario=pasivo modo=legado sin_aparicion=0 con_deteccion=0 con_dano=0 muertes=0 dist_inicial_min_celdas=12.0 dist_inicial_p50=14.7 dano_p50=0 dano_max=0
+MEDIDA_ESTADO escenario=imprudente modo=legado sin_aparicion=0 con_deteccion=107 con_dano=50 muertes=50 dist_inicial_min_celdas=12.0 dist_inicial_p50=14.7 t_deteccion_min_s=1.2 t_deteccion_p50_s=1.9 ventana_deteccion_a_dano_min_s=1.3 ventana_p50_s=1.9 dano_p50=0 dano_max=40
+MEDIDA_ESTADO escenario=reactivo modo=legado sin_aparicion=0 con_deteccion=107 con_dano=18 muertes=2 dist_inicial_min_celdas=12.0 dist_inicial_p50=14.7 t_deteccion_min_s=1.2 t_deteccion_p50_s=1.9 ventana_deteccion_a_dano_min_s=14.5 ventana_p50_s=20.3 dano_p50=0 dano_max=40

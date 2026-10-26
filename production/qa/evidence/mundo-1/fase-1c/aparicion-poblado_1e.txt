@@ -1,0 +1,4 @@
+MEDIDA_CONFIG herramienta=medir_aparicion semillas=200 segundos=30.0 modo=poblado tick_s=0.1 godot=4.7.1-stable (official)
+MEDIDA_ESTADO escenario=pasivo modo=poblado sin_aparicion=0 con_deteccion=0 con_dano=0 muertes=0 dist_inicial_min_celdas=8.5 dist_inicial_p50=14.3 dano_p50=0 dano_max=0
+MEDIDA_ESTADO escenario=imprudente modo=poblado sin_aparicion=0 con_deteccion=146 con_dano=146 muertes=146 dist_inicial_min_celdas=8.5 dist_inicial_p50=14.3 t_deteccion_min_s=1.0 t_deteccion_p50_s=2.5 ventana_deteccion_a_dano_min_s=1.4 ventana_p50_s=1.6 dano_p50=40 dano_max=40
+MEDIDA_ESTADO escenario=reactivo modo=poblado sin_aparicion=0 con_deteccion=146 con_dano=0 muertes=0 dist_inicial_min_celdas=8.5 dist_inicial_p50=14.3 t_deteccion_min_s=1.0 t_deteccion_p50_s=2.5 dano_p50=0 dano_max=0
