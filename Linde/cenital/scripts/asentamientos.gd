@@ -111,7 +111,10 @@ func _alcance(centro: Vector2i) -> Dictionary:
    if maxi(absi(n.x-centro.x),absi(n.y-centro.y))>r or vistos.has(n) or not _transitable(n):continue
    vistos[n]=true;cola.append(n)
  return vistos
-func _extraer(p: Dictionary, oficio: String) -> bool:
+func _extraer(p: Dictionary, oficio: String, residente_actual: Dictionary = {}) -> bool:
+ if not j.es_autoridad(): return false
+ var saldo: Dictionary = balance_resumido(p).materiales
+ if int(saldo.pendiente) <= 0: return false
  var centro:=Vector2i(p.celda[0],p.celda[1])
  var tipos: Array=["arbol"] if oficio=="recolector" else ["roca"]
  var alcance:=_alcance(centro)
@@ -133,10 +136,14 @@ func _extraer(p: Dictionary, oficio: String) -> bool:
      var regeneracion:int=int(def.regen_h)*60
      if regeneracion<=0 or int(j.d.min)-int(j.d.mundo.rotos[id])<regeneracion:continue
     # Un paso productivo es una extracción completa real, anotada con el mismo ID que el jugador.
+    var antes := inventario(p).duplicate(true)
+    var usos_antes := int(residente_actual.get("usos",0))
     j.mundo.romper(id,int(j.d.min))
     j.d.mundo.golpes.erase(id)
     for item in def.drops:inventario(p)[item]=int(inventario(p).get(item,0))+int(def.drops[item])
     p.producciones=int(p.producciones)+1
+    if not residente_actual.is_empty(): residente_actual.usos = usos_antes-1
+    _resultado_regional(p,"extraccion",saldo,antes,{"objeto":id,"actor":residente_actual.get("id", ""),"usos_antes":usos_antes,"usos_despues":residente_actual.get("usos",usos_antes)})
     return true
  return false
 func actualizar() -> void:
@@ -153,18 +160,22 @@ func actualizar() -> void:
   for q in p.get("campos",[[c.x-1,c.y],[c.x-1,c.y+1]]):
    var campo:=Vector2i(q[0],q[1])
    if not p.residentes.is_empty() and j.campo_listo(campo):
+    var saldo: Dictionary = balance_resumido(p).baya
+    var antes := inv.duplicate(true)
     var cosecha: Dictionary=j.cosechar(campo)
     for item in cosecha:inv[item]=int(inv.get(item,0))+int(cosecha[item])
+    _resultado_regional(p,"cosecha",saldo,antes,{"campo":M.clave(campo)})
   # Tiempo del servidor, no tiempo de pared. Guardar/cargar no repite una cosecha o un consumo.
-  if int(p.get("deuda_comida",0))>0:
-   if int(inv.get("baya",0))<int(p.deuda_comida):p.estado="sin comida; producción detenida";p.produccion_min=int(j.d.min);continue
-   inv.baya=int(inv.get("baya",0))-int(p.deuda_comida);p.deuda_comida=0
+  var alimento: Dictionary = balance_resumido(p).baya
+  if int(alimento.deuda)>0:
+   if not _consumir_regional(p,int(alimento.deuda),alimento,"pago_deuda"):p.estado="sin comida; producción detenida";p.produccion_min=int(j.d.min);continue
+   p.deuda_comida=0
+  alimento = balance_resumido(p).baya
   if int(j.d.min)-int(p.comida_min)>=int(cfg.comida_min):
    var periodos:=floori(float(int(j.d.min)-int(p.comida_min))/float(cfg.comida_min))
-   var coste:int=periodos*p.residentes.size()
+   var coste:int=int(alimento.vencido)
    p.comida_min=int(p.comida_min)+periodos*int(cfg.comida_min)
-   if int(inv.get("baya",0))<coste:p.deuda_comida=coste;p.estado="sin comida; producción detenida";p.produccion_min=int(j.d.min);continue
-   inv.baya=int(inv.get("baya",0))-coste
+   if not _consumir_regional(p,coste,alimento,"consumo"):p.deuda_comida=coste;p.estado="sin comida; producción detenida";p.produccion_min=int(j.d.min);continue
   if p.residentes.size()<int(cfg.capacidad) and int(inv.get("baya",0))>=2 and int(j.d.min)-int(p.llegada_min)>=int(cfg.llegada_min):
    var n:int=p.residentes.size()
    var rng=j._rng("colono_regional",p.id+":"+str(n))
@@ -178,13 +189,25 @@ func actualizar() -> void:
    for periodo in periodos:
     for residente in p.residentes:
      var herramienta: String="hacha_piedra" if residente.oficio=="recolector" else "pico_piedra"
+     var saldo_herramienta: Dictionary = balance_resumido(p)[herramienta] if int(residente.get("usos",0))<=0 else {}
      if int(residente.get("usos",0))<=0:
-      if int(inv.get(herramienta,0))<=0:p.estado="faltan herramientas en el cofre";continue
+      if int(saldo_herramienta.stock)<=0:
+       p.estado="faltan herramientas en el cofre"
+       _bloqueo_regional(p,"sin_herramienta",saldo_herramienta)
+       continue
+      var antes := inv.duplicate(true)
+      var usos_antes := int(residente.get("usos",0))
       inv[herramienta]=int(inv[herramienta])-1;residente.usos=50
-     if int(inv.get("baya",0))<=0:p.estado="sin comida; producción detenida";continue
-     if int(inv.get("madera",0))+int(inv.get("piedra",0))>=int(cfg.tope_stock):p.estado="reservas completas";continue
-     if not _extraer(p,residente.oficio):p.estado="faltan recursos cercanos"
-     else:residente.usos=int(residente.usos)-1
+      _resultado_regional(p,"asignar_herramienta",saldo_herramienta,antes,{"actor":residente.id,"usos_antes":usos_antes,"usos_despues":50})
+     if int(inv.get("baya",0))<=0:
+      p.estado="sin comida; producción detenida"
+      _bloqueo_regional(p,"sin_comida_para_trabajar",balance_resumido(p).baya)
+      continue
+     var saldo_materiales: Dictionary = balance_resumido(p).materiales
+     if int(saldo_materiales.pendiente)<=0:p.estado="reservas completas";continue
+     if not _extraer(p,residente.oficio,residente):
+      p.estado="faltan recursos cercanos"
+      _bloqueo_regional(p,"sin_recurso_accesible",saldo_materiales)
   p.ultimo_min=int(j.d.min)
 func visibles() -> Array:
  var resultado: Array=[]
@@ -296,15 +319,19 @@ func demandas_colectivas() -> Dictionary:
   resultado[M.ID_INICIAL] = {"modo":"detallado", "grupos":grupos}
  for p in datos().puestos.values():
   var pid: String = p.get("poblado", "puesto:" + str(p.id))
-  resultado[pid] = {"modo":"resumido", "items":balance_resumido(p), "ejecucion":"existente"}
+  resultado[pid] = {"modo":"resumido", "items":balance_resumido(p), "ejecucion":"saldos_conectados"}
  return resultado
 
 ## Adaptador de contabilidad: solo deuda/consumo vencido y herramientas ya exigidas.
-## No promete las tasas futuras ni cosechas sin ejecutar; no altera el ejecutor regional.
+## Comparte obligaciones y límite con el ejecutor; nunca promete tasas futuras ni cosechas sin ejecutar.
 func balance_resumido(p: Dictionary) -> Dictionary:
  var inv: Dictionary = j.d.cofres.get(p.cofre, {}).get("inv", {})
  var periodos := maxi(0, floori(float(int(j.d.min) - int(p.comida_min)) / float(cfg.comida_min)))
- var objetivos := {"baya":int(p.get("deuda_comida", 0)) + periodos * p.residentes.size()}
+ var materiales := int(inv.get("madera",0)) + int(inv.get("piedra",0))
+ var objetivo_materiales := int(cfg.tope_stock) if not p.residentes.is_empty() else 0
+ # El ejecutor ya exige stock de comida > 0 para trabajar; no consume esta unidad.
+ var comida_trabajo := 1 if materiales<objetivo_materiales else 0
+ var objetivos := {"baya":int(p.get("deuda_comida", 0)) + periodos * p.residentes.size() + comida_trabajo}
  for r in p.residentes:
   if int(r.get("usos", 0)) > 0: continue
   var herramienta: String = "hacha_piedra" if r.oficio == "recolector" else "pico_piedra"
@@ -314,8 +341,55 @@ func balance_resumido(p: Dictionary) -> Dictionary:
   var objetivo := int(objetivos[item])
   var stock := int(inv.get(item, 0))
   saldos[item] = {"id":"%s:%s" % [p.get("poblado", "puesto:" + str(p.id)),item], "reserva":objetivo, "stock":stock, "comprometido":0, "en_curso":0, "pendiente":maxi(0, objetivo-stock)}
+ saldos.baya.deuda = int(p.get("deuda_comida",0))
+ saldos.baya.vencido = periodos * p.residentes.size()
+ saldos.baya.trabajo = comida_trabajo
+ # Bolsa de control del límite existente: no es un ítem ni un inventario nuevo.
+ saldos.materiales = {"id":"%s:materiales" % p.get("poblado", "puesto:" + str(p.id)),"componentes":["madera","piedra"],"reserva":objetivo_materiales,"stock":materiales,"comprometido":0,"en_curso":0,"pendiente":maxi(0,objetivo_materiales-materiales)}
  return saldos
 
 func actualizar_demandas() -> void:
  if not a.activa() or not j.es_autoridad(): return
  datos().demandas = {"version":1, "min":int(j.d.min), "poblados":demandas_colectivas()}
+
+
+## Contabilidad aditiva en el puesto original; solo registra operaciones ya aplicadas.
+func economia_regional(p: Dictionary) -> Dictionary:
+ if not p.has("economia"): p.economia = {"version":1,"secuencia":0,"resultados":[],"bloqueo":{}}
+ return p.economia
+
+func _resultado_regional(p: Dictionary, causa: String, demanda: Dictionary, antes: Dictionary, detalle: Dictionary = {}) -> void:
+ if not j.es_autoridad(): return
+ var delta := {}
+ var despues := inventario(p)
+ var items := antes.keys()
+ for item in despues:
+  if not item in items: items.append(item)
+ for item in items:
+  var cantidad := int(despues.get(item,0))-int(antes.get(item,0))
+  if cantidad != 0: delta[item] = cantidad
+ if delta.is_empty(): return
+ var e := economia_regional(p)
+ e.secuencia = int(e.secuencia)+1
+ e.resultados.append({"id":"%s:%d" % [p.id,int(e.secuencia)],"min":int(j.d.min),"causa":causa,"demanda":demanda.duplicate(true),"delta":delta,"detalle":detalle.duplicate(true)})
+ while e.resultados.size()>int(a.reglas.sociedad.tope_sucesos): e.resultados.pop_front()
+ e.bloqueo = {}
+
+func _bloqueo_regional(p: Dictionary, causa: String, demanda: Dictionary) -> void:
+ if not j.es_autoridad(): return
+ var e := economia_regional(p)
+ # Estado actual, no una cola de reintentos ni una sucesión de resultados sin efecto.
+ if e.bloqueo.get("causa", "") == causa and e.bloqueo.get("demanda", "") == demanda.id: return
+ e.bloqueo = {"min":int(j.d.min),"causa":causa,"demanda":demanda.id}
+
+func _consumir_regional(p: Dictionary, cantidad: int, saldo: Dictionary, causa: String) -> bool:
+ if not j.es_autoridad(): return false
+ if int(saldo.stock)<cantidad:
+  _bloqueo_regional(p,"sin_comida",saldo)
+  return false
+ if cantidad<=0: return true
+ var inv := inventario(p)
+ var antes := inv.duplicate(true)
+ inv.baya=int(inv.get("baya",0))-cantidad
+ _resultado_regional(p,causa,saldo,antes)
+ return true

@@ -189,7 +189,7 @@ func _init() -> void:
  # Adaptador regional: obligaciones reales, no tasas futuras ni recursos de génesis nuevos.
  var p := {"id":"prueba","cofre":"sin_cofre","residentes":[{"oficio":"recolector","usos":0}],"comida_min":int(j.d.min),"deuda_comida":2}
  var regional: Dictionary = a.asentamientos.balance_resumido(p)
- ok(regional.baya.pendiente == 2 and regional.hacha_piedra.pendiente == 1, "resumen informa deuda y herramienta real sin simular producción")
+ ok(regional.baya.pendiente == 3 and regional.hacha_piedra.pendiente == 1, "resumen informa deuda, comida de trabajo y herramienta real sin simular producción")
  # Integración con perfiles originales, sin ajustes del escenario contable.
  j = J.nueva(456, "Persistencia", [0,0,0], "poblado")
  a = j.autonomia
