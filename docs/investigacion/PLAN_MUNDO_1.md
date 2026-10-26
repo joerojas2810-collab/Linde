@@ -1,7 +1,7 @@
 # Mundo 1 — auditoría de brechas y plan incremental
 
 > **Fecha**: 2026-10-26 · **Visión**: [VISION_MUNDO_1.md](../../design/VISION_MUNDO_1.md) · **Estado implementado (fuente de verdad)**: [ESTADO.md](../../production/epics/mundo-vivo/ESTADO.md) · **Diagnóstico previo**: [CIERRE_MUNDO_INICIAL_Y_EXPLORACION.md](CIERRE_MUNDO_INICIAL_Y_EXPLORACION.md) (su §6 queda sustituido por las fases de este plan).
-> **Aprobado el 2026-10-26** con las precisiones de N1–N6 y de las fases 0 y 5–7; registrado como `M1-*` en la sección F de [DECISIONES.md](../../Linde/cenital/docs/DECISIONES.md). **Fases 0–3 implementadas al 26/10**; alcance verificado en ESTADO.md §§3d–3f. La Fase 4 sigue sin autorización. La preparación histórica de las fases 0 y 1 se conserva en la sección 8.
+> **Aprobado el 2026-10-26** con las precisiones de N1–N6 y de las fases 0 y 5–7; registrado como `M1-*` en la sección F de [DECISIONES.md](../../Linde/cenital/docs/DECISIONES.md). **Fases 0–4 implementadas al 26/10**; alcance verificado en ESTADO.md §§3d–3g. La Fase 5 sigue sin autorización. La preparación histórica de las fases 0 y 1 se conserva en la sección 8.
 > **Etiquetas**: **[C]** verificado en código · **[D]** solo documentado en ESTADO/contratos · **[M]** medido · **[I]** inferencia. Contexto aplicable: «partidas viejas no importan» (sin migraciones ni compatibilidad), así que los cambios de esquema son libres.
 
 ## 1. Conclusión
@@ -134,11 +134,16 @@ Cada fase deja un ciclo jugable. Los riesgos de regresión se mitigan con las su
 - **Riesgo**: bajo.
 
 ### Fase 4 — Mundo compartido: registro de lugares y primeros destinos (D3, D10, D11)
+
+**Implementada y verificada 26/10/2026** (`a2548f6`, `3634a67`): registro persistido por macrorregión, tres tipos de lugares, rutas con AStarGrid2D y réplica autoritativa (protocolo 8). Inspección, mapa y referencias de NPC jugables. Detalles, cifras y límites: ESTADO.md §3g.
+
+**Precisión de alcance del usuario**: no avanzar a Fase 5. Por eso el criterio histórico de incluir un pueblo preexistente adicional se difiere a esa fase; aquí no se generan pueblos ni residentes. Los campamentos están desocupados. La entrada de cueva no contiene un interior.
+
 - **Objetivo**: algo significativo que visitar, igual para todos los jugadores de la partida y estable.
 - **Reutiliza**: patrón de `Fauna.plan_region`; `estado`/`rotos` para el estado de cada lugar; `caminos` ya persistidos.
 - **Cambios mínimos**: `mundo.registro` guardado (poblados, lugares, caminos con id/versión); génesis determinista por macrorregión (N3) que decide ruinas, campamentos y cuevas (solo entrada) con restricciones (bioma, agua, distancia, accesibilidad) y los une con caminos sembrados en `estado.caminos` (A* con coste: un solo algoritmo nuevo y pequeño); lugares como datos; estado de cada lugar por deltas.
 - **Dependencias**: Fase 1 (registro de poblados), N2/N3.
-- **Aceptación**: mismo registro con cualquier orden de carga y tras reiniciar; ≥1 lugar y 1 pueblo preexistente a ≤N celdas de la salida en el 100 % de 100 semillas, alcanzables por BFS desde un camino; ampliar a una macrorregión nueva no cambia lo ya generado; `prueba_terreno` (49), `prueba_terreno_red`, `prueba_fauna` sin regresión.
+- **Aceptación vigente en Fase 4**: mismo registro con cualquier orden de generación de macrorregiones y tras reiniciar; ≥1 lugar a ≤128 celdas euclídeas de la salida en el 100 % de 100 semillas, con ruta continua y colisión real transitable desde el camino; ampliar a una macrorregión nueva no cambia lo ya generado; `prueba_terreno`, `prueba_terreno_red`, `prueba_fauna` sin regresión. El requisito original de otro pueblo queda para Fase 5, según la precisión anterior.
 - **Riesgo**: **medio** (determinismo cliente/servidor del registro, tamaño del guardado).
 
 ### Fase 5 — Pueblos preexistentes y su transición cercana↔lejana (D3, D6)

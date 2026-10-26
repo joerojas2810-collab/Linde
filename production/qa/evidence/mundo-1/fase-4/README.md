@@ -1,0 +1,13 @@
+# Mundo 1 — cierre de Fase 4 (26/10/2026)
+
+Commits funcionales: `a2548f6` (registro/génesis) y `3634a67` (destinos, mapa e interacción). Contrato y limitaciones: `production/epics/mundo-vivo/ESTADO.md` §3g y `Linde/cenital/docs/MUNDO_POR_REGIONES.md`.
+
+- `ruinas.png`, `campamento.png`, `cueva.png`, `cueva-inspeccion.png`, `mapa-lugares-y-rutas.png`: render real del juego, posiciones preparadas para QA, no playtest humano. Texto, referencias, techo y composición inspeccionados; sprites existentes, sin ampliar la lista de dibujo procedural. Reproducir con `captura_lugares.gd` sin `--headless`.
+- `prueba-lugares.txt`: 13 PASS. Orden inverso, persistencia, ampliación negativa, no reinstalación, recursos despejados y rechazo de versión futura. Cierre con 100 semillas: 100 tienen al menos un destino inicial a ≤128 celdas euclídeas de la salida y rutas transitables con la caja del jugador; 91 tienen los tres tipos. Omite sitios incompatibles en lugar de terraformar agua. Plan de macro: p50 25.244 µs, p95 27.426 µs, máximo 29.386 µs, corrida local específica del núcleo.
+- `prueba-lugares-ui.txt`: 10 PASS. Destinos ocultos, información real del NPC, confirmación al visitar, inspección E, paginado y recorrido usando el movimiento normal. Fabricación con costes existentes, depósito, guardado y retiro por otro jugador sin duplicación.
+- `prueba-lugares-red.txt`: 19 PASS, dos procesos cliente ENet y un servidor. Misma expansión en vivo y reinicio, inspección autoritativa y un mismo cofre de campamento; posiciones e inventarios preparados para aislar el contrato. No certifica Internet o latencia real.
+- `comparacion-nucleo.txt` y `nucleo-hashes/`: batería determinista de ocho archivos antes/después del núcleo, todos iguales, sin excluir estado. Referencia previa a la fase: misma línea base que el cierre de Fases 2–3, hash final de legado `500b011b52c66364` (123) y `2dfdd6ffb432ac55` (456).
+- `comparacion-orientacion.txt` y `orientacion-hashes/`: segundo cierre, se repiten solo hashes completos por día de esas dos semillas durante cuatro días, idénticos al núcleo. No se repiten mediciones de inicio/ritmo que no se modificaron. Los tiempos de CPU no se comparan para igualdad.
+- `bateria-final.txt`: una batería completa de cierre con 37 suites, **36 sin fallos**. La general tiene 329 PASS y conserva la única falla preexistente del hash de arte E04/E05. No se modifica ni se omite esa comprobación.
+
+No hay nuevos pueblos, residentes, simulación lejana, botín, cambios de costes/XP/daño ni interiores de cuevas. El criterio histórico del plan que pedía un pueblo adicional se difiere expresamente a Fase 5 por la instrucción del usuario de no iniciarla. Las evidencias JSON de red existentes se restauran a su contenido previo a esta sesión.

@@ -48,3 +48,13 @@ Los enemigos, jefes, ruinas y lugares de la campaña conservan sus posiciones de
 `tests/prueba_terreno_red.gd` usa un servidor y dos clientes reales en procesos separados. Ambos cruzan el borde del valle; uno construye y cierra un cofre, el otro no puede retirar objetos sin permiso, y después recibe acceso. Se comparan sus huellas del terreno y se verifica el guardado del servidor.
 
 `tests/captura_terreno.gd` muestra la escena real en valle, salida y biomas; posiciona al jugador para QA. Las capturas no son un recorrido jugado. Evidencia en `production/qa/evidence/terreno/`.
+
+## Mundo 1 — lugares persistentes (Fase 4, 26/10/2026)
+
+Solo en modo `poblado`, la autoridad prepara lugares por macrorregiones de 96×96, con margen de 16 celdas respecto al jugador. `lugares.gd` usa el terreno base congelado y AStarGrid2D con costes; el plan no consulta construcciones, estado de recursos, caché ni orden de carga. Ruinas, campamentos vacíos y entradas de cuevas ocupan huellas secas de 7×7; cada tipo puede omitirse si no encuentra sitio/acceso. La selección inicial se restringe al exterior sur. No se fuerza agua a convertirse en suelo.
+
+`mundo.registro` v1 conserva las macrorregiones decididas y sus lugares (ID, versión, entrada, área, bioma, nombre, descripción y ruta), rutas, suelos y despejes de recursos. Su lista `poblados` referencia el registro de poblados existente, sin duplicarlo. `mundo.caminos`, `constr` y `d.cofres` conservan la representación jugable habitual. Generar una identidad y cargar las regiones son pasos separados. Volver a visitar/cargar una macrorregión registrada no instala de nuevo piezas ni repone cofres; las huellas y caminos no regeneran recursos que bloqueen el paso. El resultado guardado prevalece sobre recalcular el plan. No editar silenciosamente `generacion_v1.json`; los cambios de génesis requieren una versión explícita.
+
+El protocolo es 8: el servidor replica `registro` tanto en bienvenida como en diferencias de ejecución; las réplicas aplican la geometría almacenada y no generan lugares. Guardado rechaza versiones futuras desconocidas del registro. No hay migración diseñada de mundos previos; evaluar con partida nueva. El modo `legado` no añade el registro y conserva hashes completos de estado.
+
+M muestra solo referencias conocidas y senderos en bloques observados. Los NPC usan sus bloques y el horizonte de `Autonomia.conoce` para transmitir áreas aproximadas; E examina el lugar. Los campamentos permiten trabajar/almacenar mediante la mesa y el cofre normales, sin habitantes, botín ni suministro automático. Las cuevas solo tienen entrada. No se implementa Fase 5. Pruebas, capturas y limitaciones medidas: ESTADO.md §3g y `production/qa/evidence/mundo-1/fase-4/`.

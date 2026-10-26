@@ -14,7 +14,7 @@
 | P03–P06 y sin ID | Movimiento, celda, mapa de autor, sin avance con la app cerrada; reglas de inventario, botín, construcción, misiones, habilidades, jefes | Propuesta | Sección «Decisiones» más abajo |
 | A01 | Combate en tiempo real provisional | Propuesta, pendiente | «A01 — Combate» |
 | — | Estado por jugador y mundo compartido (formato 2) | Propuesta, vigente | «Estado por jugador y mundo compartido» |
-| — | Servidor autoritativo «mundo anfitrión» (A04) | Propuesta, vigente (protocolo hoy en versión 5) | «Red: servidor autoritativo»; [ADR-0001](../../../docs/architecture/adr-0001-multijugador-mundo-anfitrion.md) |
+| — | Servidor autoritativo «mundo anfitrión» (A04) | Propuesta, vigente (protocolo hoy en versión 8) | «Red: servidor autoritativo»; [ADR-0001](../../../docs/architecture/adr-0001-multijugador-mundo-anfitrion.md) |
 | — | Equipo v1 (familias, piedras, Chispa, sets) | Propuesta, vigente | «Equipo v1» y [sistema-de-equipo.md](../../documentos/sistema-de-equipo.md) |
 | — | Arte de equipo por colores índice; ataque con celda 48 | Propuesta, vigente | Secciones «Arte de equipo…» y «Ataque con equipo» |
 | — | Arte nuevo por defecto; integración estética E01–E06; dibujo procedural retirado | Usuario (24/10) | «Arte nuevo por defecto» e «Integración estética completa» |
@@ -70,6 +70,7 @@ Dirección de diseño aprobada. Visión: [VISION_MUNDO_1.md](../../../design/VIS
 | M1-C3 | `_derrota` sin cama usa el mismo sistema de validación (commit separado); la reaparición con cama válida no cambia | Usuario (26/10) |
 | M1-C4 | Interruptor por mundo `poblado` / `legado` con equivalencia completa del legado; sin respaldo a una celda no validada ni a la entrada; recuperación explícita sin posiciones seguras (`unir` rechaza con motivo registrado; `_derrota` deja al jugador donde cayó); una comunidad destruida no se reactiva para dar cabida a nadie | Usuario (26/10) |
 | M1-C5 | Alternativa A: ancla estable y reconocible del poblado (`poblado.centro`); no se persigue a los NPC ni se alteran sus rutinas para garantizar compañía | Usuario (26/10) |
+| M1-F4 | Fase 4 autorizada: lugares persistentes compartidos (ruinas, campamentos y entradas de cuevas) y rutas; reutilizar generación, exploración, NPC y guardado; independencia del orden de exploración. Ejecución autónoma y commits por funcionalidad. No iniciar Fase 5; pruebas específicas durante implementación y extensas solo al cerrar | Usuario (26/10) |
 | M1-F23 | Fases 2 y 3 autorizadas con autonomía para diseñar, implementar, probar y confirmar por funcionalidad; mapa personal M, descubrimientos persistentes, intercambio con NPC y pistas contextuales opcionales. Sin avanzar a Fase 4 ni cambiar balance | Usuario (26/10) |
 | M1-AUT | Fase 1 (pasos 1c, 1d y 1e) autorizada con ejecución autónoma, commits separados, pruebas durante el desarrollo y batería completa al cerrar cada paso; sin cambios de balance, progresión o economía sin evidencia; sin alterar el modo legado. Detenerse solo ante decisiones que contradigan lo aprobado, regresiones irresolubles, cambios significativos de balance, dependencias que exijan reestructurar sistemas ajenos o imposibilidad de garantizar una aparición segura | Usuario (26/10) |
 
