@@ -1,0 +1,25 @@
+MEDIDA_CONFIG herramienta=medir_ritmo semilla=123 limite_s=3600.0 golpe_s=0.3 celdas_por_s=4.0 combate=desactivado politica=voraz_fija inicio=56,25 habitantes_iniciales=2 godot=4.7.1-stable (official)
+MEDIDA_HITO semilla=123 hito=inicio t_s=0.0 t_min_reales=0.0 golpes=0 celdas=0 objetos=0 nivel=1 xp=0 hora_juego=06:00
+MEDIDA_ESTADO semilla=123 momento=inicio recurso_valle=arbol presentes=94 accesibles=94 regenera_h=0
+MEDIDA_ESTADO semilla=123 momento=inicio recurso_valle=roca presentes=29 accesibles=29 regenera_h=0
+MEDIDA_ESTADO semilla=123 momento=inicio recurso_valle=veta presentes=3 accesibles=3 regenera_h=0
+MEDIDA_ESTADO semilla=123 momento=inicio recurso_valle=arbusto presentes=50 accesibles=50 regenera_h=24
+MEDIDA_HITO semilla=123 hito=primera_fibra t_s=0.3 t_min_reales=0.01 golpes=1 celdas=0 objetos=1 nivel=1 xp=0 hora_juego=06:00
+MEDIDA_HITO semilla=123 hito=hacha_piedra t_s=8.1 t_min_reales=0.13 golpes=17 celdas=12 objetos=3 nivel=1 xp=4 hora_juego=06:08
+MEDIDA_HITO semilla=123 hito=pico_piedra t_s=29.4 t_min_reales=0.49 golpes=37 celdas=73 objetos=6 nivel=1 xp=10 hora_juego=06:29
+MEDIDA_HITO semilla=123 hito=mesa t_s=32.5 t_min_reales=0.54 golpes=40 celdas=82 objetos=8 nivel=1 xp=14 hora_juego=06:32
+MEDIDA_HITO semilla=123 hito=horno t_s=48.1 t_min_reales=0.8 golpes=48 celdas=135 objetos=12 nivel=1 xp=22 hora_juego=06:48
+MEDIDA_HITO semilla=123 hito=nivel_2 t_s=50.8 t_min_reales=0.85 golpes=51 celdas=142 objetos=14 nivel=2 xp=26 hora_juego=06:50
+MEDIDA_HITO semilla=123 hito=nivel_3 t_s=136.0 t_min_reales=2.27 golpes=111 celdas=411 objetos=46 nivel=3 xp=100 hora_juego=08:16
+MEDIDA_HITO semilla=123 hito=artesano t_s=136.0 t_min_reales=2.27 golpes=111 celdas=411 objetos=46 nivel=3 xp=100 hora_juego=08:16
+MEDIDA_HITO semilla=123 hito=mena_de_hierro t_s=136.0 t_min_reales=2.27 golpes=111 celdas=411 objetos=46 nivel=3 xp=100 hora_juego=08:16
+MEDIDA_HITO semilla=123 hito=lingote t_s=136.8 t_min_reales=2.28 golpes=111 celdas=414 objetos=46 nivel=3 xp=100 hora_juego=08:16
+MEDIDA_HITO semilla=123 hito=llegada_a_la_salida t_s=150.5 t_min_reales=2.51 golpes=111 celdas=469 objetos=46 nivel=3 xp=100 hora_juego=08:30
+MEDIDA_HITO semilla=123 hito=fuera_del_valle t_s=153.5 t_min_reales=2.56 golpes=111 celdas=481 objetos=46 nivel=3 xp=100 hora_juego=08:33
+MEDIDA_HITO semilla=123 hito=regreso_a_la_casa t_s=163.5 t_min_reales=2.73 golpes=111 celdas=521 objetos=46 nivel=3 xp=100 hora_juego=08:43
+MEDIDA_ESTADO semilla=123 momento=final recurso_valle=arbol presentes=76 accesibles=76 regenera_h=0
+MEDIDA_ESTADO semilla=123 momento=final recurso_valle=roca presentes=11 accesibles=11 regenera_h=0
+MEDIDA_ESTADO semilla=123 momento=final recurso_valle=veta presentes=0 accesibles=0 regenera_h=0
+MEDIDA_ESTADO semilla=123 momento=final recurso_valle=arbusto presentes=38 accesibles=38 regenera_h=24
+MEDIDA_ESTADO semilla=123 tiempo_total_s=163.5 limite_alcanzado=false nivel=3 xp=100 golpes=111 celdas_recorridas=521 objetos_rotos=46 hash_estado=83240c6e03d07991 habitantes=2 camas_huesped=0 casas_completas=0 construcciones=5 caminos=0 ocupaciones=proveerse:2 inventario_npc=baya:4,fibra:22,piedra:2
+MEDIDA_CPU semilla=123 script_ms=4804.0
