@@ -154,8 +154,8 @@ Estas pruebas usan procesos separados en un runner Windows; **no equivalen a un
 playtest manual, una PC limpia física, dos computadoras LAN ni dos casas distintas**.
 Persisten avisos históricos de recursos/ObjectDB al salir y se han observado avisos
 de buffers UDP llenos en las pruebas; no se certifica rendimiento bajo carga.
-macOS/Linux no tienen paquete portable nuevo en esta entrega; desde fuente requieren
-Godot y Python como antes.
+Linux y Mac Intel no tienen paquete portable nuevo en esta entrega; desde fuente
+requieren Godot y Python como antes. Para Mac Apple Silicon, ver la sección siguiente.
 
 ## Mac Apple Silicon
 

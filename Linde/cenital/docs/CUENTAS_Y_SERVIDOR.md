@@ -103,7 +103,9 @@ sin cuenta global, conservando el acceso de cuentas anterior.
 
 **Guía de uso, red, respaldo y limitaciones:** [SERVIDOR_PRIVADO.md](SERVIDOR_PRIVADO.md).
 Paquete Windows x64 construido y publicado como artefacto de Actions. No hay release
-permanente ni paquete macOS/Linux. Ejecución aprobada: [40418982569](https://github.com/joerojas2810-collab/Linde/actions/runs/40418982569),
+permanente ni paquete Linux/Mac Intel. Mac Apple Silicon también está construido y
+validado: [ejecución 40422320525](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320525),
+[guía Mac](MAC_APPLE_SILICON.md). Ejecución aprobada: [40418982569](https://github.com/joerojas2810-collab/Linde/actions/runs/40418982569),
 código `d1c5372`, artefacto `Linde-Windows-servidor-y-juego` (124.695.287 bytes comprimido).
 Retención de 14 días, sujeto a las políticas y disponibilidad de GitHub.
 
@@ -154,3 +156,19 @@ Además, compilación de sintaxis Python y análisis de sintaxis GDScript median
 `gdparse` (herramienta externa de desarrollo, no sustituto del compilador Godot).
 El lanzador desde fuente sigue requiriendo Godot y Python; el paquete publicado incluye
 el motor, el intérprete y las dependencias para no requerir su instalación global.
+
+### Validación Mac Apple Silicon — 26/10/2026
+
+Commit `9c9896d`, ejecución `40422320525` aprobada: 21 pruebas Python, importación y
+compilación Godot, perfil local, identidad global y dos clientes en ambos modos con
+reconexión. Construcción arm64 con Python standalone relocatable, prueba tras mover a
+una ruta con espacios y repetición de arranque/cierre después de crear y extraer el
+ZIP preservando permisos y symlinks. Artefacto `Linde-Mac-Apple-Silicon-servidor-y-juego`,
+236.526.264 bytes. Windows del mismo commit aprobado en `40422320588`.
+
+Corregido arranque del listener Python: HTTPServer ejecutaba DNS inverso innecesario
+antes de listen(), bloqueándose en el runner macOS. Se usa bind TCP sin getfqdn;
+prueba de regresión con getfqdn simulado como error. No se deshabilitó TLS. Los
+trazados de etapas solo se activan con LINDE_DIAGNOSTICO=1 y no incluyen credenciales.
+La validación no cubre Gatekeeper/cuarentena de descargas personales ni una sesión
+cruzada Mac/Windows o dos redes físicas.

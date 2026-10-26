@@ -392,3 +392,17 @@ Solo procesos separados en runner Windows; falta playtest manual, PC física lim
 LAN entre equipos e Internet entre casas. Hay avisos históricos de recursos/ObjectDB
 al salir y avisos UDP de buffer lleno durante algunas pruebas; no se certifica
 rendimiento. `main` no fue modificada.
+
+### Paquete Mac Apple Silicon — 26/10/2026
+
+En `arena/9a96dc31-linde`, código `9c9896d`, ejecuciones aprobadas
+[Mac arm64 40422320525](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320525)
+y [Windows 40422320588](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320588).
+Mac: 21 pruebas Python y suites Godot de perfil local, identidad global y dos clientes
+existentes/privados; portable Godot + CPython standalone arm64, tres `.command`,
+prueba en ruta relocalizada con espacios y ZIP extraído conservando ejecutables y
+symlinks. Artefacto Mac 236.526.264 bytes, 14 días de retención. Corregido DNS inverso
+bloqueante antes de listen en HTTPServer con prueba de regresión. No se omiten pruebas
+ni se desactiva TLS. Gatekeeper en una Mac personal, juego cruzado físico y redes
+externas siguen sin validar. [Guía Mac](../../../Linde/cenital/docs/MAC_APPLE_SILICON.md).
+La explicación paso a paso del empaquetado Windows está en la guía general del servidor.
