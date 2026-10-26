@@ -74,6 +74,12 @@ var cr := {"nombre": "Viajero", "piel": 0, "pelo": 1, "ropa": 0, "identidad": 0,
 var destino_creador := "juego"
 var red: Node = null          # red_servidor (alojando) o red_cliente (unido); null = un jugador sin red
 var cuentas_panel: Node = null
+var acceso_panel: Node = null
+var sesion:Dictionary={}
+var requiere_acceso:=true
+var forzar_acceso:=false # Solo pruebas de la pantalla real mediante SceneTree de ensayo.
+var cuentas_config_path:="user://cuentas_linde.cfg"
+const Partidas=preload("res://scripts/cuentas/partidas.gd")
 var un := {"dir": "127.0.0.1:7777", "nombre": "", "clave": "", "campo": 0}   # formulario «Unirse»
 const RED_CFG := "user://red.cfg"
 
@@ -119,7 +125,10 @@ func _ready() -> void:
 	capa.add_child(hud)
 	add_child(capa)
 	get_tree().auto_accept_quit = false
+	# Herramientas/suites de depuración conservan sus rutas explícitas. El arranque normal exige cuenta.
+	requiere_acceso=forzar_acceso or not (OS.is_debug_build() and ("--script" in OS.get_cmdline_args() or nueva>=0 or pantalla_ini=="creador"))
 	_menu_inicial()
+	if requiere_acceso:return
 	if pantalla_ini == "creador": modo = "creador"       # depuración/capturas: abre la pantalla sin teclear
 	elif pantalla_ini == "unirse": _abrir_cuentas("cliente")
 	elif pantalla_ini == "servidor": _abrir_cuentas("servidor")
@@ -148,10 +157,53 @@ func _depurar_arte(dbg: Dictionary) -> void:
 
 func _menu_inicial() -> void:
 	_cerrar_red()
+	if requiere_acceso:
+		if not _sesion_activa():_mostrar_acceso();return
+		modo="menu";menu_items=["Continuar","Nueva partida","Cargar partida","Alojar partida","Unirse","Cerrar sesión","Salir"]
+		if DisplayServer.get_name()!="headless":DisplayServer.window_set_title("Linde — "+str(sesion.nombre))
+		ruta=Partidas.ultima(sesion)
+		menu_sel=0 if ruta!="" else 1
+		return
 	modo = "menu"
 	menu_items = ["Continuar", "Nueva partida", "Alojar partida", "Unirse", "Salir"]
 	menu_sel = 0 if FileAccess.file_exists(ruta) or FileAccess.file_exists(ruta + ".bak") else 1
 	if ruta.begins_with("user://"): ruta = ProjectSettings.globalize_path(ruta)
+
+func _sesion_activa() -> bool:
+	return not sesion.is_empty() and float(sesion.get("exp",0))>Time.get_unix_time_from_system()
+
+func _mostrar_acceso() -> void:
+	sesion={}
+	modo="cuentas"
+	if DisplayServer.get_name()!="headless":DisplayServer.window_set_title("Linde — Iniciar sesión")
+	if acceso_panel==null:
+		acceso_panel=load("res://scripts/cuentas/acceso.gd").new();acceso_panel.esc=self;add_child(acceso_panel)
+	else:acceso_panel.mostrar_acceso()
+
+func _cargar_cuenta(path:String) -> bool:
+	if not _sesion_activa():_mostrar_acceso();return false
+	if Partidas.datos_propios(path,sesion).is_empty():menu_msg="Esa partida no pertenece a esta cuenta o no es legible.";return false
+	var g=J.cargar(path)
+	if g==null:menu_msg=J.mensaje_carga(J.ultimo_error);return false
+	for id in g.rt.keys():
+		if id!=J.LOCAL:g.salir(id)
+	ruta=path;j=g;modo="juego";Partidas.marcar(sesion,path);return true
+
+func _tecla_menu_cuenta(e:InputEvent) -> void:
+	if e.keycode==KEY_UP:menu_sel=posmod(menu_sel-1,menu_items.size());return
+	if e.keycode==KEY_DOWN:menu_sel=posmod(menu_sel+1,menu_items.size());return
+	if e.keycode not in [KEY_ENTER,KEY_KP_ENTER,KEY_SPACE]:return
+	if not _sesion_activa():_mostrar_acceso();return
+	match menu_sel:
+		0:
+			if ruta=="":menu_msg="No hay partidas guardadas para esta cuenta."
+			else:_cargar_cuenta(ruta)
+		1:destino_creador="juego";cr.nombre=sesion.nombre;cr.campo=0;modo="creador"
+		2:acceso_panel.mostrar_partidas()
+		3:_abrir_cuentas("servidor")
+		4:_abrir_cuentas("cliente")
+		5:sesion={};j=null;ruta="";_cerrar_red();_mostrar_acceso()
+		6:get_tree().quit()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
@@ -198,6 +250,7 @@ func _unhandled_key_input(e: InputEvent) -> void:
 		KEY_X: if build: j.retirar(Mundo.celda_de(j.pies) + j.mira)
 
 func _tecla_menu(e: InputEvent) -> void:
+	if requiere_acceso:return _tecla_menu_cuenta(e)
 	match e.keycode:
 		KEY_UP: menu_sel = (menu_sel + menu_items.size() - 1) % menu_items.size()
 		KEY_DOWN: menu_sel = (menu_sel + 1) % menu_items.size()
@@ -240,8 +293,14 @@ func _tecla_creador(e: InputEvent) -> void:
 					un.nombre = cr.nombre
 					modo = "unirse"
 					return
+				if requiere_acceso:
+					if not _sesion_activa():_mostrar_acceso();return
+					ruta=Partidas.nueva(sesion)
+					if ruta=="":_menu_inicial();menu_msg="No se pudo crear la carpeta de partidas.";return
 				j = J.nueva(randi() % 100000, cr.nombre, Aspecto.de_creador(cr), J.MODO_JUEGO)
+				if requiere_acceso:j.d["propietario_cuenta"]=Partidas.propietario(sesion)
 				j.guardar(ruta)
+				if requiere_acceso:Partidas.marcar(sesion,ruta)
 				modo = "juego"
 				if destino_creador == "alojar": _alojar()
 		_:
@@ -249,12 +308,15 @@ func _tecla_creador(e: InputEvent) -> void:
 
 # ---------- red ----------
 func _abrir_cuentas(pagina:String) -> void:
+	if requiere_acceso and not _sesion_activa():_mostrar_acceso();return
 	if cuentas_panel==null:
 		cuentas_panel=load("res://scripts/cuentas/panel.gd").new();cuentas_panel.esc=self;add_child(cuentas_panel)
 	cuentas_panel.abrir(pagina)
 
 func _cerrar_red() -> void:
-	if red != null: red.queue_free()
+	if red != null:
+		if red is Cli:red.cerrar()
+		red.queue_free()
 	red = null
 
 func _servidor_sin_ventana(o: Dictionary) -> void:

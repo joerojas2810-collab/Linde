@@ -19,7 +19,8 @@ func _ready() -> void:
 	var panel=PanelContainer.new();panel.custom_minimum_size=Vector2(860,650);center.add_child(panel)
 	var style=StyleBoxFlat.new();style.bg_color=Color("183638");style.border_color=Color("d7b778");style.set_border_width_all(3);style.set_content_margin_all(24);panel.add_theme_stylebox_override("panel",style)
 	var theme=Theme.new();theme.default_font=esc.hud.ui.fuente;theme.default_font_size=17;panel.theme=theme
-	caja=VBoxContainer.new();caja.add_theme_constant_override("separation",8);panel.add_child(caja)
+	var scroll=ScrollContainer.new();scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;panel.add_child(scroll)
+	caja=VBoxContainer.new();caja.size_flags_horizontal=Control.SIZE_EXPAND_FILL;caja.add_theme_constant_override("separation",8);scroll.add_child(caja)
 	abrir("cliente")
 
 func limpiar() -> void:
@@ -40,7 +41,7 @@ func boton(value:String,accion:Callable) -> Button:
 func abrir(tipo:String) -> void:
 	pagina=tipo;raiz.show();esc.modo="cuentas";esc.menu_msg="";limpiar()
 	var cfg=ConfigFile.new();cfg.load("user://cuentas_cliente.cfg")
-	texto("CREAR SERVIDOR" if tipo=="servidor" else "ENTRAR CON TU CUENTA",28)
+	texto("CREAR SERVIDOR" if tipo=="servidor" else "UNIRSE A UN MUNDO" if not esc.sesion.is_empty() else "ENTRAR CON TU CUENTA",28)
 	if tipo=="servidor":
 		campo("puerto","Puerto del juego (UDP)","7777")
 		campo("https","Puerto de cuentas (TCP)","7778")
@@ -55,8 +56,11 @@ func abrir(tipo:String) -> void:
 		boton("Abrir carpeta del servidor (certificado .crt)",func():
 			if carpeta_servidor!="":OS.shell_open(carpeta_servidor)
 			else:mensaje.text="Primero inicia el servidor para crear su certificado.")
-		boton("Ir a registro / inicio de sesión",func():abrir("cliente"))
+		boton("Elegir un mundo para jugar" if not esc.sesion.is_empty() else "Ir a registro / inicio de sesión",func():abrir("cliente"))
 	else:
+		if not esc.sesion.is_empty():
+			_cliente_con_sesion(cfg)
+			return
 		campo("host","IP o dominio",str(cfg.get_value("conexion","host","127.0.0.1")))
 		campo("puerto","Puerto del juego (UDP)",str(cfg.get_value("conexion","puerto","7777")))
 		campo("https","Puerto de cuentas (TCP)",str(cfg.get_value("conexion","https","7778")))
@@ -70,6 +74,18 @@ func abrir(tipo:String) -> void:
 		conectar=boton("Conectar",entrar)
 	texto("El certificado se recibe del anfitrión por un medio de confianza. No uses certificados de desconocidos.",14)
 	mensaje=texto("",15)
+	boton("Volver al menú",volver)
+
+func _cliente_con_sesion(cfg:ConfigFile) -> void:
+	texto("Cuenta: "+str(esc.sesion.nombre)+" · elige el mundo al que quieres entrar.")
+	campo("host","IP o dominio",str(cfg.get_value("conexion","host","127.0.0.1")))
+	campo("puerto","Puerto del juego (UDP)",str(cfg.get_value("conexion","puerto","7777")))
+	campo("https","Acceso del mundo (TCP)",str(cfg.get_value("conexion","https","7778")))
+	campo("cert","Certificado del mundo (.crt)",str(cfg.get_value("conexion","cert","")))
+	boton("Seleccionar certificado del mundo…",elegir_certificado)
+	campo("servidor_password","Contraseña del mundo (si tiene)","",true)
+	conectar=boton("Entrar al mundo",entrar)
+	mensaje=texto("Tu contraseña de Linde no se envía al anfitrión.",15)
 	boton("Volver al menú",volver)
 
 func elegir_certificado() -> void:
@@ -88,6 +104,7 @@ func iniciar_servidor() -> void:
 	carpeta_servidor=ProjectSettings.globalize_path(campos.carpeta.text)
 	DirAccess.make_dir_recursive_absolute(carpeta_servidor)
 	var config={"puerto":int(campos.puerto.text),"https":int(campos.https.text),"password":campos.password.text,"carpeta":carpeta_servidor,"python":campos.python.text}
+	if not esc.sesion.is_empty():config.autoridad=esc.sesion.autoridad.cert
 	var path=carpeta_servidor.path_join("arranque.json")
 	var f=FileAccess.open(path,FileAccess.WRITE)
 	if f==null:mensaje.text="No se pudo escribir la configuración del servidor.";return
@@ -107,13 +124,18 @@ func entrar() -> void:
 	if esc.red!=null:esc._cerrar_red()
 	var client=load("res://scripts/cuentas/cliente.gd").new();client.name="Red"
 	client.direccion=campos.host.text.strip_edges();client.puerto=int(campos.puerto.text);client.puerto_cuentas=int(campos.https.text)
-	client.usuario=campos.usuario.text;client.password=campos.password.text;client.servidor_password=campos.servidor_password.text
-	client.nombre=campos.nombre.text;client.registrar=campos.registrar.button_pressed;client.certificado_ruta=campos.cert.text
+	client.servidor_password=campos.servidor_password.text;client.certificado_ruta=campos.cert.text
+	if not esc.sesion.is_empty():
+		client.sesion_linde=esc.sesion.duplicate(true)
+	else:
+		client.usuario=campos.usuario.text;client.password=campos.password.text
+		client.nombre=campos.nombre.text;client.registrar=campos.registrar.button_pressed
 	client.look=esc.Aspecto.de_creador(esc.cr)
 	var cfg=ConfigFile.new()
-	for k in ["host","puerto","https","cert","usuario"]:cfg.set_value("conexion",k,campos[k].text)
+	for k in ["host","puerto","https","cert"]:cfg.set_value("conexion",k,campos[k].text)
 	cfg.save("user://cuentas_cliente.cfg")
-	campos.password.text="";campos.servidor_password.text="";conectar.disabled=true;mensaje.text="Validando certificado y cuenta…"
+	if campos.has("password"):campos.password.text=""
+	campos.servidor_password.text="";conectar.disabled=true;mensaje.text="Autorizando la entrada al mundo…"
 	client.listo.connect(func():esc.j=client.j;esc.panel="";esc.modo="juego";raiz.hide())
 	client.fallo.connect(func(motivo):esc.j=null;esc.modo="cuentas";raiz.show();conectar.disabled=false;mensaje.text=motivo)
 	client.interaccion.connect(esc._tras_interactuar)
