@@ -45,10 +45,11 @@ func admisible(cama: Vector2i, plano: String="casa") -> bool:
  if not M.es_valle(zona.position) or not M.es_valle(zona.end-Vector2i.ONE):return false
  for k in datos().parcelas:
   if zona.intersects(_area_de(k)):return false
+ var esenciales: Array=j.mundo.esenciales(M.ID_INICIAL)   # el Valle es el único pueblo con casas planificadas; luego, el de la parcela
  for y in range(zona.position.y,zona.end.y):
   for x in range(zona.position.x,zona.end.x):
    var c:=Vector2i(x,y)
-   if M.ESENCIALES.has(c) or j.mundo.tipo(c)==M.T.CAMINO or not j.mundo.constr_en(c).is_empty():return false
+   if esenciales.has(c) or j.mundo.tipo(c)==M.T.CAMINO or not j.mundo.constr_en(c).is_empty():return false
  for c in necesarias(cama,plano):
   if j.mundo.puede_poner(c)!="" or j.ocupada(c):return false
  return true
@@ -75,7 +76,7 @@ func reservar(nid: String, plano: String="casa") -> Dictionary:
   busqueda.indice+=1
   if not admisible(cama,plano):continue
   var entrada:=cama+Vector2i(0,4)
-  if j.mundo.camino(M.ENTRADA,func(c):return c==entrada).is_empty():continue
+  if j.mundo.camino(j.mundo.entrada(M.ID_INICIAL),func(c):return c==entrada).is_empty():continue   # entrada del pueblo de la parcela (hoy el inicial)
   var p: Dictionary={"cama":[cama.x,cama.y],"dueno":nid,"estado":"reservada","plano":plano}
   datos().parcelas[M.clave(cama)]=p
   busquedas.erase(gid)
