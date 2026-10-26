@@ -6,6 +6,7 @@ const C = preload("res://scripts/catalogos.gd")
 var combate
 var j
 var cfg: Dictionary
+var habitats: Dictionary
 var planes := {}
 var reloj := 0.0
 
@@ -13,7 +14,48 @@ func _init(c) -> void:
  combate = c
  j = c.j
  cfg = JSON.parse_string(FileAccess.get_file_as_string("res://datos/fauna/reglas_v1.json"))
+ habitats = perfiles_habitat(cfg.biomas)
+ for error in validar_habitats(cfg.biomas): push_error(error)
  restaurar()
+
+## Las cadenas v1 son la forma abreviada del perfil; no se cambia el archivo sellado.
+static func perfiles_habitat(biomas: Dictionary) -> Dictionary:
+ var resultado := {}
+ for bioma in biomas:
+  var valor = biomas[bioma]
+  var perfil: Dictionary = {"tipo": valor} if valor is String else valor.duplicate(true) if valor is Dictionary else {}
+  perfil.merge({"suelo": "pasto", "sin_objeto": true, "agua_vecina": bioma == "ribera"}, false)
+  resultado[bioma] = perfil
+ return resultado
+
+static func validar_habitats(biomas: Dictionary) -> Array:
+ var errores := []
+ var perfiles := perfiles_habitat(biomas)
+ for bioma in perfiles:
+  var p: Dictionary = perfiles[bioma]
+  if not bioma in ["bosque", "sierra", "secano", "pradera", "ribera"]: errores.append("Bioma desconocido: " + str(bioma))
+  if not p.get("tipo", null) is String or not C.ENEMIGOS.has(p.get("tipo", "")): errores.append("Especie desconocida: " + str(bioma))
+  # Ampliar el sustrato vigente exige una decisión territorial; nada de pesos nuevos.
+  if p.suelo != "pasto" or p.sin_objeto != true or not p.agua_vecina is bool: errores.append("Condición de hábitat no admitida: " + str(bioma))
+  for clave in p:
+   if not clave in ["tipo", "suelo", "sin_objeto", "agua_vecina"]: errores.append("Campo no admitido: " + str(clave))
+ return errores
+
+## Consulta pura del terreno base. No carga regiones ni revela conocimiento al jugador.
+## La ribera conserva la prioridad v1 sobre el bioma de la celda.
+func habitat_en(celda: Vector2i) -> Dictionary:
+ if j.mundo.generador == null: return {}
+ var d: Dictionary = j.mundo.generador.datos(celda)
+ if int(d.tipo) != M.T.PASTO or str(d.objeto) != "": return {}
+ var bioma: String = d.bioma
+ var agua := false
+ for v in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+  if int(j.mundo.generador.datos(celda + v).tipo) == M.T.AGUA:
+   agua = true;bioma = "ribera";break
+ if not habitats.has(bioma): return {}
+ var p: Dictionary = habitats[bioma]
+ if bool(p.agua_vecina) and not agua: return {}
+ return {"bioma": bioma, "tipo": p.tipo, "conducta": C.ENEMIGOS[p.tipo].get("conducta", "hostil"), "agua_vecina": agua}
 
 func restaurar() -> Dictionary:
  var d: Dictionary = j.d.get_or_add("fauna", {})
@@ -37,15 +79,9 @@ func plan_region(r: Vector2i) -> Dictionary:
   var h: int = M.Terreno.hash_celda(r * 67 + Vector2i(i, i * 31), int(j.d.semilla) ^ 0xFA017)
   var celda := r * 16 + Vector2i(h % 16, (h >> 8) % 16)
   if M.Terreno.distancia_valle(celda) < int(cfg.distancia_valle): continue
-  var d: Dictionary = j.mundo.generador.datos(celda)
-  if int(d.tipo) != M.T.PASTO or str(d.objeto) != "": continue
-  var bioma: String = d.bioma
-  for v in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
-   if int(j.mundo.generador.datos(celda + v).tipo) == M.T.AGUA:
-    bioma = "ribera"
-    break
-  if not cfg.biomas.has(bioma): continue
-  resultado = {"id": "fauna_v1@" + k, "region": k, "celda": celda, "tipo": str(cfg.biomas[bioma]), "bioma": bioma}
+  var habitat := habitat_en(celda)
+  if habitat.is_empty(): continue
+  resultado = {"id": "fauna_v1@" + k, "region": k, "celda": celda, "tipo": str(habitat.tipo), "bioma": str(habitat.bioma)}
   break
  planes[k] = resultado
  return resultado
