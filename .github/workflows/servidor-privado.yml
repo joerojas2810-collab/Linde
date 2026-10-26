@@ -68,6 +68,15 @@ jobs:
           name: Linde-Windows-servidor-y-juego
           path: paquete/
           retention-days: 14
+      - name: Resumir fallos del motor en anotaciones
+        if: failure()
+        shell: pwsh
+        run: |
+          Get-ChildItem qa -Filter *.log -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
+            $body = (Get-Content $_.FullName -Tail 45) -join "`n"
+            $body = $body.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output "::error title=$($_.Name)::$body"
+          }
       - name: Guardar diagnósticos (no contiene cuentas reales)
         if: failure()
         uses: actions/upload-artifact@v4
