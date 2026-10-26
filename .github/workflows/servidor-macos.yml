@@ -64,6 +64,8 @@ jobs:
             ! grep -E 'SCRIPT ERROR:|Parse Error:|Failed to load script' "compilar-$name.log"
           done
       - name: Perfil local, identidad global y clientes reales
+        env:
+          LINDE_DIAGNOSTICO: "1"
         run: |
           set -euo pipefail
           G="$PWD/motor/Godot.app/Contents/MacOS/Godot"
