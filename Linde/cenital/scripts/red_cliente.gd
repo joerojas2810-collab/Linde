@@ -274,6 +274,7 @@ class Replica extends "res://scripts/juego.gd":
 		return _env(["ayudar_habitante", npc, rechazar])
 
 	func construir(pieza: String, c: Vector2i, _id: String = LOCAL) -> Dictionary: return _env(["construir", pieza, c])
+	func reparar_edificio(eid: String, revision: int, _id: String = LOCAL) -> Dictionary: return _env(["reparar_edificio",eid,revision])
 	func retirar(c: Vector2i, _id: String = LOCAL) -> Dictionary: return _env(["retirar", c])
 	func fabricar(rid: String, _id: String = LOCAL) -> Dictionary: return _env(["fabricar", rid])
 	func usar(item: String, _id: String = LOCAL) -> Dictionary: return _env(["usar", item])

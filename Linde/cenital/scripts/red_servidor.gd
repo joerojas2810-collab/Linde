@@ -244,9 +244,12 @@ func ejecutar(id: String, datos) -> bool:
 			if not a.is_empty(): return _rechazo(id, tipo)
 			_dormir(id)
 		"construir":
-			if not _sig(a, [TYPE_STRING, TYPE_VECTOR2I]) or not C.CONSTR.has(a[0]) or not _cerca(id, a[1]): return _rechazo(id, tipo)
+			if not _sig(a, [TYPE_STRING, TYPE_VECTOR2I]) or (not C.CONSTR.has(a[0]) and not j.Edificios.catalogo().planos.has(a[0])) or not _cerca(id, a[1]): return _rechazo(id, tipo)
 			_mirar(id, a[1] - Mundo.celda_de(j.pies_de(id)))
 			j.construir(a[0], a[1], id)
+		"reparar_edificio":
+			if not _sig(a, [TYPE_STRING, TYPE_INT]): return _rechazo(id, tipo)
+			j.reparar_edificio(a[0],a[1],id)
 		"retirar":
 			if not _sig(a, [TYPE_VECTOR2I]) or not _cerca(id, a[0]): return _rechazo(id, tipo)
 			j.retirar(a[0], id)
