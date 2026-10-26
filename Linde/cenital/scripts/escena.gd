@@ -72,6 +72,7 @@ var menu_msg := ""
 var cr := {"nombre": "Viajero", "piel": 0, "pelo": 1, "ropa": 0, "identidad": 0, "peinado": 0, "pantalon": 0, "botas": 0, "cinturon": 0, "campo": 0}
 var destino_creador := "juego"
 var red: Node = null          # red_servidor (alojando) o red_cliente (unido); null = un jugador sin red
+var cuentas_panel: Node = null
 var un := {"dir": "127.0.0.1:7777", "nombre": "", "clave": "", "campo": 0}   # formulario «Unirse»
 const RED_CFG := "user://red.cfg"
 
@@ -119,7 +120,8 @@ func _ready() -> void:
 	get_tree().auto_accept_quit = false
 	_menu_inicial()
 	if pantalla_ini == "creador": modo = "creador"       # depuración/capturas: abre la pantalla sin teclear
-	elif pantalla_ini == "unirse": _abrir_unirse()
+	elif pantalla_ini == "unirse": _abrir_cuentas("cliente")
+	elif pantalla_ini == "servidor": _abrir_cuentas("servidor")
 	if nueva >= 0:
 		j = J.nueva(nueva, cr.nombre, Aspecto.de_creador(cr), J.MODO_JUEGO)
 		modo = "juego"
@@ -158,6 +160,7 @@ func _notification(what: int) -> void:
 # ---------- entrada ----------
 func _unhandled_key_input(e: InputEvent) -> void:
 	if not e.pressed or e.echo: return
+	if modo=="cuentas":return
 	if modo == "menu": return _tecla_menu(e)
 	if modo == "creador": return _tecla_creador(e)
 	if modo == "unirse" or modo == "conectando": return _tecla_unirse(e)
@@ -209,12 +212,8 @@ func _tecla_menu(e: InputEvent) -> void:
 					cr.campo = 0
 					modo = "creador"
 				2:
-					if not FileAccess.file_exists(ruta) and not FileAccess.file_exists(ruta + ".bak"):
-						destino_creador = "alojar"
-						cr.campo = 0
-						modo = "creador"
-					else: _alojar()
-				3: _abrir_unirse()
+					_abrir_cuentas("servidor")
+				3: _abrir_cuentas("cliente")
 				4: get_tree().quit()
 
 func _tecla_creador(e: InputEvent) -> void:
@@ -246,6 +245,11 @@ func _tecla_creador(e: InputEvent) -> void:
 			if cr.campo == 0 and e.unicode >= 32 and e.unicode != 127 and cr.nombre.length() < 16: cr.nombre += char(e.unicode)
 
 # ---------- red ----------
+func _abrir_cuentas(pagina:String) -> void:
+	if cuentas_panel==null:
+		cuentas_panel=load("res://scripts/cuentas/panel.gd").new();cuentas_panel.esc=self;add_child(cuentas_panel)
+	cuentas_panel.abrir(pagina)
+
 func _cerrar_red() -> void:
 	if red != null: red.queue_free()
 	red = null

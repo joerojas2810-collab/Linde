@@ -6,6 +6,7 @@ func _init()->void:ui=preload("res://scripts/ui_viva.gd").new()
 func _draw() -> void:
 	var vs := size
 	if esc == null: return
+	if esc.modo=="cuentas":return
 	if esc.modo == "menu": return _menu(vs)
 	if esc.modo == "creador": return _creador(vs)
 	if esc.modo == "unirse" or esc.modo == "conectando": return _unirse(vs)

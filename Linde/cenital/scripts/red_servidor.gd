@@ -30,6 +30,7 @@ var ruta := ""                  # guardado del mundo; "" = lo guarda quien aloja
 var duracion := 0.0             # > 0: se cierra (y guarda) tras esos segundos
 var ruta_registro := ""         # JSON de métricas al cerrar (pruebas)
 var error := ""                 # motivo si no se pudo abrir el puerto
+var tls_options: TLSOptions = null # Extensión de cuentas; el flujo legado conserva su transporte.
 var peers := {}                 # peer -> {id, n, t_n, t0, fuera}
 var ids := {}                   # id de jugador -> peer
 var intencion := {}             # id -> Vector2i (dirección que mantiene)
@@ -49,6 +50,7 @@ func _ready() -> void:
 		if id != local: j.salir(id)     # nadie controla a los jugadores guardados hasta que se conecten
 	var peer := ENetMultiplayerPeer.new()
 	var err := peer.create_server(puerto, MAX_CLIENTES)
+	if err==OK and tls_options!=null:err=peer.host.dtls_server_setup(tls_options)
 	if err != OK:
 		error = "No se pudo abrir el puerto %d (%s)" % [puerto, error_string(err)]
 		push_error(error)
