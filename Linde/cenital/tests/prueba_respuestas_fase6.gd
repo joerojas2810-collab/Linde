@@ -27,7 +27,7 @@ func _init()->void:
  ok(s.economia_regional(p).resultados.back().causa=="fabricacion_local","fabricación local deja resultado causal con actor")
  ok(s.resolver_local(p).is_empty() and int(inv.get("hacha_piedra",0))==1,"mismo presupuesto de trabajo no fabrica dos veces en el minuto")
  var viabilidad: Dictionary=s.evaluar_viabilidad(p)
- ok(viabilidad.residentes==2 and viabilidad.camas==2 and viabilidad.politica_crisis=="pendiente_aprobacion","viabilidad informa hechos sin convertir umbrales no aprobados en política")
+ ok(viabilidad.residentes==2 and viabilidad.camas==2 and viabilidad.politica_crisis=="ciclo_y_mejora_material_aprobados","viabilidad conserva hechos y referencia la política de crisis aprobada")
  # No hay reemplazos por calendario: se vacía el escenario sin generar habitantes nuevos.
  var retirados: Array=p.residentes.duplicate(true)
  p.residentes.clear();s.transitos._sincronizar(p)

@@ -384,6 +384,7 @@ func actualizar_demandas() -> void:
  for p in datos().puestos.values():
   p.viabilidad = evaluar_viabilidad(p)
   registrar_presion(p)
+ for p in datos().puestos.values(): resolver_crisis(p)
  datos().demandas = {"version":1, "min":int(j.d.min), "poblados":demandas_colectivas()}
 
 
@@ -492,7 +493,7 @@ func evaluar_viabilidad(p: Dictionary) -> Dictionary:
    if enemigo.get("est", "")!="muerto" and rect.has_point(M.celda_de(enemigo.pos)): amenazas.append(str(enemigo.get("fauna_id",str(enemigo.tipo)+"@"+M.clave(M.celda_de(enemigo.pos)))))
  amenazas.sort()
  var observada: bool = j.mundo.region_cargada(Vector2i(p.celda[0],p.celda[1]))
- return {"min":int(j.d.min),"residentes":p.residentes.size(),"camas":camas,"deficit_comida":int(saldo.baya.pendiente),"infraestructura":_sostenible(p),"amenazas_observadas":amenazas,"seguridad":"no_observada" if not observada else ("amenazas_observadas" if not amenazas.is_empty() else "sin_amenazas_observadas"),"politica_crisis":"pendiente_aprobacion"}
+ return {"min":int(j.d.min),"residentes":p.residentes.size(),"camas":camas,"deficit_comida":int(saldo.baya.pendiente),"infraestructura":_sostenible(p),"amenazas_observadas":amenazas,"seguridad":"no_observada" if not observada else ("amenazas_observadas" if not amenazas.is_empty() else "sin_amenazas_observadas"),"politica_crisis":"ciclo_y_mejora_material_aprobados"}
 
 
 ## Reparar la infraestructura propia usa las mismas validaciones y costes que el jugador.
@@ -568,4 +569,121 @@ func acceso_reparacion(e: Dictionary) -> bool:
   for v in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
    if alcance.has(Edificios._celda(k)+v): accesible=true
   if not accesible: return false
+ return true
+
+## Ciclo aprobado: duración necesaria, nunca suficiente. Conserva el mismo registro físico.
+func abandono_fisico(p: Dictionary) -> bool:
+ if not p.residentes.is_empty(): return false
+ for op in transitos.datos().operaciones.values():
+  if not op.estado in ["reservada","viajando","detenida"]: continue
+  if op.destino==p.id or (op.origen==p.id and (op.tipo=="comercio" or op.get("regresando",false))): return false
+ return true
+
+func ruta_sin_amenaza_conocida(camino: Array) -> bool:
+ for q in camino:
+  var c := Vector2i(q[0],q[1])
+  for enemigo in j.combate.enemigos:
+   if enemigo.get("est", "")=="muerto": continue
+   var def: Dictionary=C.ENEMIGOS.get(enemigo.tipo,{})
+   var conducta: String=def.get("conducta","hostil")
+   if conducta=="huidizo" or (conducta=="defensivo" and not enemigo.get("alertado",false)): continue
+   if Vector2(enemigo.pos).distance_to(M.pies_de_celda(c))<=float(def.get("vision",0)): return false
+ return true
+
+func resolver_crisis(p: Dictionary) -> void:
+ if not j.es_autoridad(): return
+ if abandono_fisico(p):
+  if p.has("poblado"):
+   var pueblo: Dictionary=j.mundo.poblado(p.poblado)
+   if pueblo.get("estado", "")!="destruido": pueblo.estado="abandonado"
+  p.estado="abandonado"
+  return
+ var presion: Dictionary=p.get("presiones",{}).get("comida",{})
+ if presion.is_empty() or int(presion.get("duracion_min",0))<int(cfg.comida_min): return
+ # Una alternativa real ya ejecutada o una entrega pendiente prevalecen sobre evacuar.
+ if int(p.get("local_min",-1))<int(presion.desde) or int(p.get("comercio_intento_min",-1))<int(presion.desde): return
+ if int(balance_resumido(p).baya.en_curso)>0: return
+ var ids: Array=datos().puestos.keys();ids.sort()
+ var residentes: Array=p.residentes.duplicate()
+ residentes.sort_custom(func(x,y):return str(x.id)<str(y.id))
+ p.crisis={"min":int(j.d.min),"causa":"comida_persistente","estado":"sin_alternativa_viable"}
+ for id in ids:
+  var b: Dictionary=datos().puestos[id]
+  if id==p.id or b.residentes.is_empty() or not _sostenible(b): continue
+  var v := evaluar_viabilidad(b)
+  if not v.amenazas_observadas.is_empty(): continue
+  var plazas: int = mini(int(v.camas),int(cfg.capacidad))-b.residentes.size()-transitos.reservas_plaza(id)
+  if plazas<=0: continue
+  var saldo := balance_resumido(b)
+  # Reserva del próximo ciclo completo, además de obligaciones ya vencidas y trabajo.
+  var comida_libre: int = int(saldo.baya.stock)-int(saldo.baya.reserva)-b.residentes.size()-transitos.reservas_plaza(id)
+  if comida_libre<=0: continue
+  var camino: Array=transitos.ruta(p.id,id)
+  if camino.is_empty() or not ruta_sin_amenaza_conocida(camino): continue
+  var duracion := maxi(1,ceili((camino.size()-1)*float(M.P.CELDA)/transitos.H.VEL*C.MIN_POR_SEG))
+  for r in residentes:
+   if r.has("reserva_viaje"): continue
+   var comida := maxi(0,floori(float(int(j.d.min)+duracion-int(r.get("comida_min",p.comida_min)))/float(cfg.comida_min)))
+   var provisiones := {"baya":comida} if comida>0 else {}
+   var clave := "crisis:%s:%s:%s:%d" % [p.id,id,r.id,int(j.d.min)]
+   var reserva: Dictionary=transitos.reservar(clave,p.id,id,[r.id],{},provisiones)
+   if not reserva.ok: continue
+   var salida: Dictionary=transitos.salir(clave)
+   if not salida.ok:
+    transitos.cancelar(clave)
+    p.crisis.bloqueo=salida.motivo
+    continue
+   p.crisis.estado="migracion_en_curso"
+   p.crisis.operacion=clave
+   # El destino materialmente cubre la carencia que permanecer mantiene.
+   p.crisis.mejora={"comida_ciclo":true,"cama":true,"infraestructura":true,"destino":id}
+   return
+
+ # Tras descartar recepción en comunidades activas, considera recuperar propiedad original.
+ for id in ids:
+  var b: Dictionary=datos().puestos[id]
+  if id==p.id or not abandono_fisico(b) or not j.d.cofres.has(b.cofre): continue
+  var camino: Array=transitos.ruta(p.id,id)
+  if camino.is_empty() or not ruta_sin_amenaza_conocida(camino): continue
+  var v := evaluar_viabilidad(b)
+  if not v.amenazas_observadas.is_empty(): continue
+  var gastos := {}
+  var propietario := true
+  for eid in b.get("edificios",[]):
+   var e: Dictionary=j.d.mundo.registro.edificios.get(eid,{})
+   if e.is_empty() or e.dueno!=b.dueno: propietario=false;break
+   Edificios._sumar(gastos,Edificios.coste(Edificios.faltantes(j,e)))
+  if not propietario: continue
+  var duracion := maxi(1,ceili((camino.size()-1)*float(M.P.CELDA)/transitos.H.VEL*C.MIN_POR_SEG))
+  for r in residentes:
+   if r.has("reserva_viaje") or str(r.get("propietario_original",p.dueno))!=str(b.dueno): continue
+   # Transporta también la alimentación del siguiente ciclo; jamás la presupone.
+   var comida := maxi(0,floori(float(int(j.d.min)+duracion-int(r.get("comida_min",p.comida_min)))/float(cfg.comida_min)))+1
+   var clave := "recuperacion:%s:%s:%s:%d" % [p.id,id,r.id,int(j.d.min)]
+   var reserva: Dictionary=transitos.reservar(clave,p.id,id,[r.id],gastos,{"baya":comida},"recuperacion")
+   if not reserva.ok: continue
+   var salida: Dictionary=transitos.salir(clave)
+   if not salida.ok: transitos.cancelar(clave);continue
+   p.crisis.estado="recuperacion_en_curso";p.crisis.operacion=clave
+   return
+
+## Recuperación explícita por titulares originales, en llegada física; paga desde carga real.
+func recuperar_llegada(p: Dictionary, op: Dictionary) -> bool:
+ if not j.es_autoridad() or p.is_empty() or not p.residentes.is_empty(): return false
+ for r in op.miembros:
+  if str(r.get("propietario_original",""))!=str(p.dueno): return false
+ for id in p.get("edificios",[]):
+  var e: Dictionary=j.d.mundo.registro.edificios.get(id,{})
+  if e.is_empty() or e.dueno!=p.dueno: return false
+  if not Edificios.coste(Edificios.faltantes(j,e)).is_empty():
+   var resultado := Edificios.reparar(j,e,op.bienes,self)
+   if not resultado.ok: return false
+   op.get_or_add("reparaciones",[]).append({"edificio":id,"min":int(op.reloj),"coste":resultado.coste.duplicate(true)})
+ if not _sostenible(p) or op.miembros.size()>int(cfg.capacidad): return false
+ var comida: int=int(inventario(p).get("baya",0))+int(op.bienes.get("baya",0))+int(op.provisiones.get("baya",0))
+ if comida<int(p.get("deuda_comida",0))+op.miembros.size(): return false
+ # No devuelve inventarios perdidos: la entrega normal acredita únicamente lo transportado.
+ p.estado="activo"
+ p.recuperacion={"min":int(op.reloj),"operacion":op.id,"dueno":p.dueno}
+ if p.has("poblado"): j.mundo.poblado(p.poblado).estado="activo"
  return true

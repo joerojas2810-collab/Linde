@@ -93,9 +93,9 @@ func reservar(clave: String, origen: String, destino: String, ids: Array, bienes
   return {"ok":true,"operacion":anterior}
  var a := puesto(origen)
  var b := puesto(destino)
- if a.is_empty() or b.is_empty() or origen==destino or ids.is_empty() or not tipo in ["migracion","comercio"]: return {"ok":false,"motivo":"origen_destino"}
- if j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"]: return {"ok":false,"motivo":"recuperacion_no_aprobada"}
- if not s._sostenible(b) or (tipo!="comercio" and b.residentes.size()+reservas_plaza(destino)+ids.size()>int(s.cfg.capacidad)): return {"ok":false,"motivo":"destino_sin_capacidad"}
+ if a.is_empty() or b.is_empty() or origen==destino or ids.is_empty() or not tipo in ["migracion","comercio","recuperacion"]: return {"ok":false,"motivo":"origen_destino"}
+ if j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"] and tipo!="recuperacion": return {"ok":false,"motivo":"requiere_recuperacion"}
+ if (not s._sostenible(b) and tipo!="recuperacion") or (tipo!="comercio" and b.residentes.size()+reservas_plaza(destino)+ids.size()>int(s.cfg.capacidad)): return {"ok":false,"motivo":"destino_sin_capacidad"}
  var miembros: Array = []
  var vistos := {}
  for id in ids:
@@ -115,6 +115,10 @@ func reservar(clave: String, origen: String, destino: String, ids: Array, bienes
     miembros.append(r)
     encontrado=true
   if not encontrado: return {"ok":false,"motivo":"residente_no_disponible"}
+ if tipo=="recuperacion":
+  if not b.residentes.is_empty(): return {"ok":false,"motivo":"sitio_ocupado"}
+  for r in miembros:
+   if str(r.get("propietario_original",a.dueno))!=str(b.dueno): return {"ok":false,"motivo":"sin_derechos_originales"}
  var lote := bienes.duplicate(true)
  for item in provisiones: lote[item]=int(lote.get(item,0))+int(provisiones[item])
  for item in lote:
@@ -162,8 +166,8 @@ func salir(clave: String) -> Dictionary:
  if not datos().politica.get("usar_valores_existentes",true): return {"ok":false,"motivo":"politica_viaje_no_aprobada"}
  var a := puesto(op.origen)
  var b := puesto(op.destino)
- if j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"]: return {"ok":false,"motivo":"recuperacion_no_aprobada"}
- if not s._sostenible(b) or (op.tipo!="comercio" and b.residentes.size()+reservas_plaza(op.destino)>int(s.cfg.capacidad)): return {"ok":false,"motivo":"destino_sin_capacidad"}
+ if j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"] and op.tipo!="recuperacion": return {"ok":false,"motivo":"requiere_recuperacion"}
+ if (not s._sostenible(b) and op.tipo!="recuperacion") or (op.tipo!="comercio" and b.residentes.size()+reservas_plaza(op.destino)>int(s.cfg.capacidad)): return {"ok":false,"motivo":"destino_sin_capacidad"}
  if int(s.balance_resumido(a).baya.vencido)>0 or int(a.get("deuda_comida",0))>0: return {"ok":false,"motivo":"consumo_origen_pendiente"}
  var camino := ruta(op.origen,op.destino)
  if camino.is_empty(): return {"ok":false,"motivo":"sin_ruta"}
@@ -182,6 +186,7 @@ func salir(clave: String) -> Dictionary:
  for r in miembros:
   if not r.has("comida_min"): r.comida_min=int(a.comida_min)
  for r in miembros:
+  if not r.has("propietario_original"): r.propietario_original=a.dueno
   a.residentes.erase(r)
   r.erase("reserva_viaje")
  op.miembros=miembros;op.estado="viajando"
@@ -216,6 +221,10 @@ func actualizar() -> void:
   op.avance=siguiente;op.estado="viajando"
   if int(op.avance)<int(op.duracion): continue
   var b := puesto(op.destino)
+  if op.tipo=="recuperacion" and not op.get("regresando",false):
+   if not s.recuperar_llegada(b,op):
+    _alimentar(op,ahora)
+    op.estado="detenida";op.motivo="recuperacion_pendiente";continue
   if not b.is_empty() and j.mundo.poblado(b.get("poblado", "")).get("estado", "") in ["abandonado","destruido"]:
    _alimentar(op,ahora)
    op.estado="detenida";op.motivo="destino_no_activo";continue
@@ -325,6 +334,7 @@ func entrante(id: String,item: String) -> int:
 ## Reutiliza la valoración de Sociedad y reservas actuales; no crea precios ni caravanas periódicas.
 func comerciar(p: Dictionary) -> bool:
  if not j.es_autoridad() or not datos().politica.get("comercio_autonomo",true): return false
+ p.comercio_intento_min=int(j.d.min)
  var residentes: Array=p.residentes.duplicate()
  residentes.sort_custom(func(a,b):return str(a.id)<str(b.id))
  var disponibles: Array=[]
