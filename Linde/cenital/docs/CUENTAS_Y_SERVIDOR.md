@@ -85,3 +85,7 @@ Fuentes técnicas: [ENetConnection/DTLS](https://docs.godotengine.org/en/stable/
 El ejecutor de suites genera copias temporales ignoradas para sustituir el prefijo Unix `/tmp` por `OS.get_cache_dir()` y actualizar su autorreferencia de procesos hijo. No cambia las suites originales de IA 1. El resumen consolidado registra las repeticiones necesarias de saberes/orientación y la comprobación del mapa de iconos con los bytes canónicos ya guardados en Git; no elimina el fallo histórico de arte E04/E05.
 
 La instalación actual se ejecuta desde el proyecto fuente: el helper Python y su entorno no se empaquetan automáticamente en un export de Godot. Antes de distribuir un ejecutable independiente habrá que incorporar ese empaquetado.
+
+### Integración a main autorizada (26/10/2026)
+
+El usuario aprobó publicar y fusionar esta implementación con Fase 5a y vivienda (`origin/main` `42bef50`). Se validó la combinación con 10 suites seleccionadas y las 35 comprobaciones de cuentas; ver `production/qa/evidence/cuentas-main/README.md`. Los límites externos y de empaquetado de esta guía siguen vigentes.

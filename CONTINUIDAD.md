@@ -24,7 +24,7 @@ Solo si la tarea lo pide: el contrato del sistema en `Linde/cenital/docs/` y `de
 - **Cierre de 5a**: 39 de 40 suites sin fallos tras verificaciones dirigidas; único fallo previo de arte. La corrida completa fue 38/40: se adaptaron los escenarios de rechazo total de aparición a la existencia de otros pueblos y se verificó `prueba_aparicion` (32 PASS). El ajuste posterior de prioridad del cofre pasó UI 13, red 26 y lugares UI 10; no se repitieron suites no afectadas. Evidencia en `production/qa/evidence/mundo-1/fase-5/`; 14/13/26 PASS en núcleo/UI/red, 20 semillas al cerrar, tres días resumidos con reinicio exactamente equivalente y dos clientes ENet reales. Hashes completos de legado en dos semillas por cuatro días idénticos a Fase 4. Sin cambios de tasas, economía ni progresión.
 - **Cierre verificado de Fase 4 (26/10)**: 36 de 37 suites sin fallos; única falla previa de arte. Núcleo: 8/8 archivos de medición idénticos en legado. Integración: hashes completos de dos semillas durante cuatro días idénticos. Tres suites nuevas (13, 10 y 19 PASS), expansión en vivo con dos clientes y capturas inspeccionadas. En ese cierre no se modificó balance ni se inició Fase 5.
 - **Cierre verificado de Fases 2–3 (26/10)**: 33 de 34 suites sin fallos; única falla previa de arte. Hashes completos de legado idénticos antes/después de cada funcionalidad (dos semillas, cuatro días), batería determinista 8/8 igual. Sin cambios de balance. Evidencia y resumen final en `production/qa/evidence/mundo-1/fase-3/`.
-- **Fallo conocido, previo a Mundo 1**: `prueba` falla una comprobación sobre el hash de 96 archivos de arte (E04/E05); no lo ocultes ni lo "arregles" sin investigarlo.
+- **Fallo de hashes E04/E05 resuelto (26/10)**: se identificaron CRLF de Windows y el hash anterior al catálogo aprobado; auditoría 96/96, general y visual sin fallos. Ver `production/qa/evidence/arte-hashes/INFORME.md`. Los fallos registrados en cierres anteriores son históricos.
 
 ## Cómo ejecutar las pruebas
 Godot local: `herramientas/runtime/Godot.app/Contents/MacOS/Godot` (no está en el PATH). Detalle en ESTADO.md §4.
@@ -56,3 +56,9 @@ Leer [CUENTAS_Y_SERVIDOR](Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md), [ADR-0002](
 ### Hashes de arte revisados (26/10/2026)
 
 El fallo previo E04/E05 quedó corregido: CRLF del checkout Windows y un hash de catálogo pendiente de actualizar desde el arte aprobado `44f6f09`. Se mantienen los PNG y las entradas originales; manifiesto con procedencia y JSON fijados a LF. Auditoría 96/96, general 330/0 y visual 60/0; informe en `production/qa/evidence/arte-hashes/INFORME.md`. No asumir que se repitió toda la batería histórica. La corrección es separable de la rama de cuentas.
+
+## Integración autorizada con main (26/10/2026)
+
+El usuario autorizó push y merge de cuentas y hashes. Se incorporó `origin/main` `42bef50` (Fase 5a y primera vivienda funcional) sin conflictos y se verificó la versión combinada: **10/10 suites seleccionadas**, **35/35 comprobaciones de cuentas** y formularios reales de inicio/cierre. Evidencia y alcance exacto: [cuentas-main](production/qa/evidence/cuentas-main/README.md). No se repitió toda la batería de 43 suites. Continúan sin verificar otra computadora física e Internet público.
+
+Esta nota supera el estado histórico anterior de «rama separada, sin merge». El fallo de hashes de arte está corregido; no debe seguir tratándose como pendiente. Mantener los módulos de cuentas junto con las ampliaciones de viviendas/comunidades de IA 1. La skin permanece en pausa.

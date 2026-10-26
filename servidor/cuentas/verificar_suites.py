@@ -7,10 +7,13 @@ from pathlib import Path
 import subprocess
 import sys
 
-ap=argparse.ArgumentParser();ap.add_argument('--godot',required=True);ap.add_argument('--salida',type=Path,required=True);args=ap.parse_args()
+ap=argparse.ArgumentParser();ap.add_argument('--godot',required=True);ap.add_argument('--salida',type=Path,required=True);ap.add_argument('--suite',action='append');args=ap.parse_args()
 root=Path(__file__).resolve().parents[2];project=root/'Linde/cenital';args.salida.mkdir(parents=True,exist_ok=True)
 source=(project/'tests/ejecutar_suites.sh').read_text(encoding='utf-8')
 suites=re.search(r'SUITES=\((.*?)\)',source,re.S)[1].split();results=json.loads((args.salida/'resumen.json').read_text(encoding='utf-8')) if (args.salida/'resumen.json').exists() else []
+if args.suite:
+    if any(s not in suites for s in args.suite):raise SystemExit('Suite desconocida')
+    suites=args.suite
 for suite in suites:
     if any(x['suite']==suite for x in results):continue
     script='res://tests/'+suite+'.gd'

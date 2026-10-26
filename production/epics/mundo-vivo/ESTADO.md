@@ -251,3 +251,7 @@ El usuario solicitó commit y push de esta integración sobre 5b87517. La eviden
 ### Cierre del fallo de hashes E04/E05 (26/10/2026)
 
 Revisado por solicitud del usuario: 84 PNG intactos; doce JSON afectados por CRLF en Windows, y `E04_objetos.json` además tenía el hash anterior a las 32 entradas aprobadas en `44f6f09`. Se fijó LF por atributos de Git y se actualizó solo ese hash, conservando la procedencia original. Auditoría 96/96; general **330 PASS/0 FAIL** y visual A1–A3 **60 PASS/0 FAIL**. No se repitió toda la batería; el resultado anterior 36/37 es histórico y el único fallo allí identificado quedó resuelto en esta revisión. Detalle: [informe de hashes](../../qa/evidence/arte-hashes/INFORME.md). Sin cambios gráficos ni de reglas.
+
+## Integración de cuentas y hashes con Fase 5a/vivienda (26/10/2026)
+
+Aprobada expresamente por el usuario la publicación y fusión con main. Versión combinada con `origin/main` `42bef50`: sin conflictos de Git; conserva Fase 5a y primera vivienda. **10/10 suites seleccionadas** sin fallos (general, reglas, UI, comunidades núcleo/UI/red, vivienda núcleo/UI/red y visual); **35/35 comprobaciones de cuentas** con clientes y servidor reales; capturas y arranque/cierre de formulario en 7777/7778. Detalle en [cuentas-main](../../qa/evidence/cuentas-main/README.md). No se repitió la batería completa de 43 suites. No se probó otra computadora ni Internet público. Se mantiene la skin fuera del alcance, en pausa.

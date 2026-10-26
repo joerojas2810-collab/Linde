@@ -1,7 +1,11 @@
 extends SceneTree
 var esc
 var out="res://../../production/qa/evidence/cuentas/"
-func _initialize():call_deferred("run")
+func _initialize():
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--salida="):out=arg.trim_prefix("--salida=").trim_suffix("/")+"/"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(out))
+	call_deferred("run")
 func foto(name:String):
 	for i in 4:await process_frame
 	await RenderingServer.frame_post_draw
@@ -12,7 +16,7 @@ func run():
 	esc._abrir_cuentas("servidor");await foto("crear_servidor")
 	assert(esc.cuentas_panel.campos.puerto.text=="7777")
 	assert(esc.cuentas_panel.campos.password.secret)
-	esc.cuentas_panel.campos.carpeta.text="user://pruebas_linde/cuentas_ui"
+	esc.cuentas_panel.campos.carpeta.text="user://pruebas_linde/cuentas_ui_%d"%OS.get_process_id()
 	esc.cuentas_panel.iniciar_servidor()
 	for i in 150:
 		await create_timer(0.1).timeout
