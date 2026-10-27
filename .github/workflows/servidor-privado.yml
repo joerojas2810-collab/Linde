@@ -56,6 +56,8 @@ jobs:
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
             if (Select-String -Path "qa-compilar-$name.log" -Pattern 'SCRIPT ERROR:|Parse Error:|Failed to load script') { throw "Error compilando $name" }
           }
+      - name: Regresión de Fase 7 integrada
+        run: python servidor/dedicado/prueba_fase7.py --godot "${{ github.workspace }}/motor/Godot_v4.7.1-stable_win64.exe" --salida qa/fase7
       - name: Perfil local sin cuentas, guardado y carga
         run: ./motor/Godot_v4.7.1-stable_win64.exe --headless --path Linde/cenital --script res://tests/prueba_perfil_local.gd -- --salida=${{ github.workspace }}/qa/local
       - name: Identidad global existente

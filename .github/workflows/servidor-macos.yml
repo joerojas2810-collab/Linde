@@ -63,6 +63,8 @@ jobs:
             "$G" --headless --path Linde/cenital --script "res://scripts/cuentas/$name.gd" --check-only 2>&1 | tee "compilar-$name.log"
             ! grep -E 'SCRIPT ERROR:|Parse Error:|Failed to load script' "compilar-$name.log"
           done
+      - name: Regresión de Fase 7 integrada
+        run: python servidor/dedicado/prueba_fase7.py --godot "$PWD/motor/Godot.app/Contents/MacOS/Godot" --salida qa/fase7
       - name: Perfil local, identidad global y clientes reales
         env:
           LINDE_DIAGNOSTICO: "1"
@@ -74,7 +76,9 @@ jobs:
           python servidor/cuentas/prueba_integracion.py --godot "$G" --salida qa/cuentas
           python servidor/cuentas/prueba_integracion.py --privado --godot "$G" --salida qa/privado
       - name: Construir paquete portable arm64
-        run: python herramientas/empaquetar_macos.py --godot motor/Godot.app --python interprete/python --salida paquete
+        run: |
+          set -euo pipefail
+          python herramientas/empaquetar_macos.py --godot motor/Godot.app --python interprete/python --salida paquete 2>&1 | tee qa/construccion.log
       - name: Probar paquete, relocalización y lanzadores
         run: |
           set -euo pipefail
