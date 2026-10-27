@@ -28,7 +28,11 @@ func _init() -> void:
   var normal=Med.caso(int(previo.semilla),int(previo.generador))
   var inverso=Med.caso(int(previo.semilla),int(previo.generador),true)
   var iguales=true
-  for k in ["planes_sha256","terreno_sha256","estado_sha256","ocupadas","especies"]:
+  # El fixture precede a la economía regional integrada desde main (asentamientos,
+  # transitos, sociedad). Su hash de TODO j.d no es un contrato de hábitats.
+  # Conservamos exactos terreno, planes, ocupación y especies; exigimos además
+  # igualdad del estado actual entre órdenes y consulta sin efectos secundarios.
+  for k in ["planes_sha256","terreno_sha256","ocupadas","especies"]:
    # JSON lee cantidades como float; el canon de reglas equipara 1 y 1.0.
    var base_igual=H.canonico(normal[k])==H.canonico(previo[k])
    var orden_igual=H.canonico(normal[k])==H.canonico(inverso[k])
@@ -36,6 +40,7 @@ func _init() -> void:
     print("DIFERENCIA semilla=%d generador=%d campo=%s base=%s normal=%s inverso=%s"%[int(previo.semilla),int(previo.generador),k,H.canonico(previo[k]),H.canonico(normal[k]),H.canonico(inverso[k])])
    iguales=iguales and base_igual and orden_igual
   ok(iguales,"semilla %d/v%d: distribución exacta anterior, reinicio y orden inverso"%[int(previo.semilla),int(previo.generador)])
+  ok(normal.estado_sha256==inverso.estado_sha256,"estado completo actual reproducible con orden inverso %d/v%d"%[int(previo.semilla),int(previo.generador)])
   ok(normal.compatibles and inverso.compatibles and normal.consulta_pura and inverso.consulta_pura,"hábitats compatibles y lectura pura %d/v%d"%[int(previo.semilla),int(previo.generador)])
  var cargado=J.cargar(BASE+"guardado_previo.json")
  ok(cargado!=null,"carga guardado creado antes del cambio sin excepción de reglas")
