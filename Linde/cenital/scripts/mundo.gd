@@ -371,9 +371,13 @@ func _base(c: Vector2i) -> int:
 	var cambios: Dictionary = estado.get("registro", {}).get("suelos", {})
 	if cambios.has(clave(c)): return int(cambios[clave(c)])
 	if es_valle(c):return celdas[c.y*ANCHO+c.x]
-	if generador==null or not generador.valida(c):return T.AGUA
+	if generador==null:return T.AGUA
+	# Una región solo entra en la caché tras validar su esquina; sus celdas ya están en el límite y precalculadas.
+	# Consultar la caché antes de validar cada coordenada evita repetir esa comprobación por cada tile dibujado.
 	var region: Dictionary=regiones.get(clave(Terreno.region(c)),{})
-	return int(region.terreno[_indice_exterior(c)]) if not region.is_empty() else int(generador.datos(c).tipo)
+	if not region.is_empty():return int(region.terreno[_indice_exterior(c)])
+	if not generador.valida(c):return T.AGUA
+	return int(generador.datos(c).tipo)
 
 ## Cada paso sobre hierba libre la gasta; al llegar al umbral queda un camino (se guarda y se replica).
 func pisar(c: Vector2i) -> void:

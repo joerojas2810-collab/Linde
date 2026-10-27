@@ -70,6 +70,9 @@ func _init() -> void:
  ok(j.mundo.caja_libre(j.pies),"colisión sigue siendo válida fuera del valle")
  # Cambios y cofre cerrado en una región exterior.
  viajar(j,Vector2i(128,119))
+ var celda_cache := Vector2i(128,119)
+ ok(j.mundo.region_cargada(celda_cache) and j.mundo.tipo(celda_cache) == int(j.mundo.generador.datos(celda_cache).tipo), "consulta cacheada conserva el resultado determinista del generador")
+ ok(posmod(T.LIMITE,T.TAM)==0, "los límites técnicos coinciden con bordes de región, así validar la esquina cubre todo el chunk")
  var c:=parcela(j)
  ok(c!=Vector2i.ZERO,"encuentra una parcela exterior construible")
  viajar(j,c+Vector2i.LEFT)
