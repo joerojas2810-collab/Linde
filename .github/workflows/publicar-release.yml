@@ -1,6 +1,9 @@
 name: Publicar Release experimental
 on:
   workflow_dispatch:
+  push:
+    branches: [arena/9a96dc31-linde]
+    paths: ['.github/workflows/publicar-release.yml']
 permissions:
   contents: write
   actions: read
