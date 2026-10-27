@@ -544,3 +544,63 @@ func materiales() -> Array:
 				usos.append("nuevos planos de "+str(cfg.materiales[mat].nombre))
 		lista.append({"id":item,"nombre":C.ITEMS[item].n,"fuente":nota if nota!="" else ", ".join(fuentes),"usos":usos})
 	return lista
+
+
+## Adaptador regional de la enseñanza existente: misma confianza, disponibilidad y reloj.
+## No observa cofres para aprender. Las recetas siguen en la identidad del residente.
+func ensenar_regional(p: Dictionary, ocupados: Dictionary) -> void:
+	if not activa() or not j.es_autoridad(): return
+	var s = a.asentamientos
+	if int(s.inventario(p).get("baya",0))<=0 or int(p.get("deuda_comida",0))>0: return
+	var ens: Dictionary=sab.ensenanza
+	var ahora := int(j.d.min)
+	var alumnos: Array=p.residentes.duplicate()
+	alumnos.sort_custom(func(x,y):return str(x.id)<str(y.id))
+	var maestros: Array=alumnos.duplicate()
+	var centro := Vector2i(p.celda[0],p.celda[1])
+	for nid in j.habitantes.ids:
+		var n: Dictionary=a.estado(nid)
+		if float(n.hambre)>=float(a.reglas.umbral_comer) or _descansa(nid) or not n.get("plan",{}).is_empty() or ahora-int(n.accion_min)<int(a.reglas.intervalo_accion_min): continue
+		if M.celda_de(j.habitantes.pos(nid)).distance_to(centro)>float(ens.radio_leccion_celdas): continue
+		maestros.append({"id":nid,"recetas":a.recetas_de(nid),"detallado":true})
+	maestros.sort_custom(func(x,y):return str(x.id)<str(y.id))
+	for maestro in maestros:
+		if ocupados.has(maestro.id) or maestro.has("reserva_viaje"): continue
+		var clave := "recetas:"+str(maestro.id)
+		var lecciones: Dictionary=datos().lecciones
+		var leccion: Dictionary=lecciones.get(clave,{})
+		if not leccion.is_empty():
+			var presente := false
+			for alumno in alumnos:
+				if alumno.id==leccion.alumno and not alumno.has("reserva_viaje") and not ocupados.has(alumno.id) and not leccion.saber in alumno.get("recetas",[]) and a.sociedad.confianza(maestro.id,alumno.id)>=int(ens.confianza_min) and a.sociedad.confianza(alumno.id,maestro.id)>=int(ens.confianza_min): presente=true
+			if not presente or ahora-int(leccion.ultimo)>int(ens.espera_max_min) or not leccion.saber in maestro.get("recetas",[]):
+				_pausar(clave,str(leccion.alumno),str(leccion.saber))
+				lecciones.erase(clave);leccion={}
+		if leccion.is_empty():
+			var recetas: Array=maestro.get("recetas",[]).duplicate();recetas.sort()
+			for alumno in alumnos:
+				if alumno.id==maestro.id or alumno.has("reserva_viaje") or ocupados.has(alumno.id): continue
+				if a.sociedad.confianza(maestro.id,alumno.id)<int(ens.confianza_min) or a.sociedad.confianza(alumno.id,maestro.id)<int(ens.confianza_min): continue
+				for rid in recetas:
+					if not C.RECETAS.has(rid) or rid in alumno.get("recetas",[]): continue
+					# Las exigencias de habilidades/herramientas conservan su filtro de ejecución.
+					if ahora-int(datos().pausas.get(_clave_pausa(clave,alumno.id,rid),-1000000))<int(ens.enfriamiento_min): continue
+					leccion={"alumno":alumno.id,"saber":rid,"avance":0,"ultimo":ahora,"puesto":p.id}
+					lecciones[clave]=leccion;break
+				if not leccion.is_empty(): break
+		if leccion.is_empty() or leccion.get("puesto","")!=p.id: continue
+		ocupados[maestro.id]=true;ocupados[leccion.alumno]=true
+		if maestro.get("detallado",false):
+			a.estado(maestro.id).accion_min=ahora
+			a.estado(maestro.id).regional_ocupado_min=ahora
+		leccion.avance=int(leccion.avance)+mini(int(ens.paso_max_min),maxi(0,ahora-int(leccion.ultimo)))
+		leccion.ultimo=ahora
+		if int(leccion.avance)<int(ens.minutos): continue
+		for alumno in alumnos:
+			if alumno.id!=leccion.alumno: continue
+			alumno.get_or_add("recetas",[]).append(leccion.saber)
+			alumno.get_or_add("aprendizajes",{})[leccion.saber]={"fuente":"ensenanza","maestro":maestro.id,"min":ahora}
+			a.sociedad._vinculo(maestro.id,alumno.id,int(ens.ganancia_confianza))
+			a.sociedad._vinculo(alumno.id,maestro.id,int(ens.ganancia_confianza))
+			a.sociedad.suceso("ensenanza",str(leccion.saber),maestro.id,alumno.id)
+		lecciones.erase(clave)

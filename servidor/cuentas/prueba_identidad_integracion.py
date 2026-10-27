@@ -36,6 +36,13 @@ def main():
         for _ in range(150):
             if proc.poll() is not None:raise RuntimeError('mundo no inició')
             if (folder/'estado.json').exists() and json.loads((folder/'estado.json').read_text(encoding='utf-8')).get('estado')=='Escuchando':return proc,folder
+            if _ in (10, 50):
+                try:
+                    health = post(port+1, folder/'servidor.crt', '/estado')
+                    message = 'Sonda HTTPS Python al mundo: ' + str(health)
+                except Exception as exc:
+                    message = 'Sonda HTTPS Python al mundo: ' + type(exc).__name__ + ': ' + str(exc)
+                (out/'sonda.log').write_text(message, encoding='utf-8')
             time.sleep(.1)
         raise TimeoutError('inicio mundo')
     def stop(proc,folder):

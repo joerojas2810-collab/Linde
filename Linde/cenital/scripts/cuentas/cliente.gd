@@ -4,6 +4,7 @@ var usuario := ""
 var password := ""
 var servidor_password := ""
 var registrar := false
+var privado := false
 var puerto_cuentas := 7778
 var certificado_ruta := ""
 var sesion_linde:Dictionary={}
@@ -18,7 +19,7 @@ func _ready() -> void:
 		await _desde_sesion();return
 	var req=HTTPRequest.new();add_child(req);req.timeout=8;req.body_size_limit=8192;req.max_redirects=0
 	req.set_tls_options(TLSOptions.client(certificado_tls,"linde.local"))
-	var url="https://%s:%d/%s"%[direccion,puerto_cuentas,"registro" if registrar else "login"]
+	var url="https://%s:%d/%s"%[direccion,puerto_cuentas,"privado" if privado else ("registro" if registrar else "login")]
 	var datos={"usuario":usuario,"password":password,"servidor_password":servidor_password,"nombre":nombre}
 	var err=req.request(url,["Content-Type: application/json"],HTTPClient.METHOD_POST,JSON.stringify(datos))
 	password="";servidor_password="";datos.clear()

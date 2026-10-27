@@ -1,0 +1,30 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS ruta determinista recorre celdas reales contiguas y transitables
+PASS repetir búsqueda conserva la ruta
+PASS reserva ambos lotes y provisiones sin modificar el total de recursos
+PASS reintento del acuerdo no reserva dos veces
+PASS misma clave con otra carga se rechaza
+PASS salir mueve al NPC original a tránsito y retira su actividad del origen
+PASS tiempo deriva de distancia y velocidad vigente, sin bonificaciones
+PASS antes de llegar no se acredita la carga
+PASS guarda durante el trayecto
+PASS reinicio conserva identidad, ruta, carga y progreso
+PASS intercambio ocurre en destino y el mismo mensajero inicia regreso
+PASS repetir la llegada no duplica el intercambio
+PASS continuación del guardado en tránsito coincide con la ejecución original
+PASS regreso físico devuelve NPC y provisiones y entrega el pedido exactamente una vez
+PASS prepara cancelación con garantías reales
+PASS cancelar antes de partir devuelve ambas reservas una vez
+PASS inicia segundo viaje con provisiones reales
+PASS ruta interrumpida detiene avance y descuenta comida de las provisiones
+PASS cancelar en ruta prepara regreso; no teletransporta personas ni bienes
+PASS regreso tras interrupción devuelve garantías y mantiene consumo irreversible
+PASS réplica recibe tránsito e historial sin ejecutar viajes
+TRANSITOS: 21 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 71 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 15 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

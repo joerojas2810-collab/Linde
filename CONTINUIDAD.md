@@ -1,5 +1,9 @@
 # Continuidad: cómo retomar Linde
 
+## Integración con Arena autorizada (26/10/2026)
+
+El usuario solicitó subir Fase7 en una rama combinada con `arena/9a96dc31-linde`, sin tocar main. Rama de integración: `feature/fase7-arena`, padres Fase7 `9a7ea9f` y Arena `ea1f251`. Se conservan Fase6, cuentas y empaquetado de Arena; el único conflicto textual fue ESTADO y se resolvió conservando ambos historiales. Código de fauna/navegación/exploración idéntico al cierre de Fase7. Validación sobre la combinación: navegación32, decisiones18, fauna31 y señales ENet16, total97/97. [Evidencia](production/qa/evidence/mundo-1/fase-7/integracion-arena/README.md). Esta autorización sustituye las notas anteriores de no publicar la rama, pero no autoriza merge a main.
+
 ## Último cierre: Fase 7 completada en su alcance autorizado (26/10/2026)
 
 Rama `feature/fase7-ecologia`, base `eb022a4`; código de cierre `a5e8f3d`, sin push/merge. [Informe final, límites y reproducción](production/qa/evidence/mundo-1/fase-7/cierre/README.md). Hábitats y territorio A/B, señales/memoria personal, bajas/heridas y navegación regional funcionales. BFS existente respeta caja y presupuesto de movimiento; caché transitoria, destinos inaccesibles e invalidación por obras/streaming/golpes. Sin cambios de balance, generación o arquitectura de autoridad.

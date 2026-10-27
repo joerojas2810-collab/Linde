@@ -1,0 +1,18 @@
+PASS oficio por sí solo no inventa recetas ni fabrica una herramienta
+PASS fabricación local usa saber explícito y consume receta real exactamente
+PASS fabricación local deja resultado causal con actor
+PASS mismo presupuesto de trabajo no fabrica dos veces en el minuto
+PASS viabilidad conserva hechos y referencia la política de crisis aprobada
+PASS asentamiento vacío no genera colonos ni se reactiva por calendario
+PASS una identidad no reserva simultáneamente dos expediciones
+PASS migración saca la misma entidad del origen
+PASS capacidad perdida antes de llegar mantiene la identidad en tránsito
+PASS llegada no reactiva un destino declarado abandonado
+PASS llegada mueve identidad una vez, sin reposición ficticia
+PASS destino conserva ID, estado y asignación de cama real
+PASS trabajo del recién llegado empieza en la llegada, no antes
+PASS nuevo residente no paga consumo anterior a su llegada
+PASS repetir llegada no duplica al habitante
+PASS carencia y excedente activan trueque con un mensajero existente
+PASS pedido comprometido cubre demanda sin convertirse en inventario
+RESPUESTAS_F6: 17 comprobaciones, 0 fallos

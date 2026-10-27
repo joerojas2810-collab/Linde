@@ -145,12 +145,17 @@ func suceso(tipo: String, detalle: String, quien: String = "", otro: String = ""
 	lista.append({"min": int(j.d.min), "tipo": tipo, "detalle": detalle, "quien": quien, "otro": otro})
 	while lista.size() > int(cfg.tope_sucesos): lista.pop_front()
 
+func _estado_relacion(nid: String) -> Dictionary:
+	var regional: Dictionary=a.asentamientos.residente(nid) if a.asentamientos!=null else {}
+	return regional if not regional.is_empty() else a.estado(nid)
+
 func confianza(nid: String, otro: String) -> int:
-	return int(a.estado(nid).vinculos.get("npc:" + otro, {}).get("confianza", cfg.confianza_inicial))
+	return int(_estado_relacion(nid).get_or_add("vinculos",{}).get("npc:" + otro, {}).get("confianza", cfg.confianza_inicial))
 
 func _vinculo(nid: String, otro: String, delta: int) -> void:
 	if delta < 0: delta = -ceili(float(-delta) * (1.0 + float(caracter(nid).rencor) / 100.0))   # quien guarda rencor pierde más confianza
-	var n: Dictionary = a.estado(nid)
+	var n: Dictionary = _estado_relacion(nid)
+	n.get_or_add("vinculos",{})
 	var clave := "npc:" + otro
 	var v: Dictionary = n.vinculos.get(clave, {})
 	v["confianza"] = clampi(confianza(nid, otro) + delta, int(cfg.confianza_min), int(cfg.confianza_max))
@@ -306,8 +311,9 @@ func decidir_grupos() -> void:
 			suceso("liderazgo", "%s lidera %s" % [j.habitantes.fichas[lider].n, nombre_grupo(gid)], lider, gid)
 		var peor := ""   # objetivo compartido: la reserva del depósito más por debajo de lo previsto
 		var falta := 0
-		for item in cfg.grupos[gid].reservas:
-			var f: int = int(cfg.grupos[gid].reservas[item]) - int(g.inv.get(item, 0))
+		var balances := balance_grupo(gid)
+		for item in balances:
+			var f: int = int(balances[item].pendiente)
 			if f > falta: falta = f; peor = item
 		if peor != g.get("objetivo", ""):
 			g.objetivo = peor
@@ -406,11 +412,13 @@ func retirar_deposito(nid: String, item: String, cantidad: int) -> bool:
 func _depositar(nid: String) -> bool:
 	var gid := grupo_de(nid)
 	var g: Dictionary = grupo(gid)
-	for item in cfg.grupos[gid].reservas:
-		var disponible := excedente(nid,item)
-		var receta: Dictionary = C.RECETAS[a.perfil(nid).receta]
-		if receta.sal.has(item): disponible = maxi(0,int(a.estado(nid).inv.get(item,0))-int(a.perfil(nid).reserva_producto))
-		var cantidad: int = mini(disponible, int(cfg.grupos[gid].reservas[item]) - int(g.inv.get(item, 0)))
+	var balances := balance_grupo(gid)
+	for item in balances:
+		var b: Dictionary = balances[item]
+		var disponible := aportable(nid, item)
+		# Se transportan existencias reales aunque el saldo esté cubierto por este mismo aporte.
+		var falta := maxi(0, int(b.reserva) + int(b.individuales) - int(b.acuerdos) - int(b.atendidas) - int(g.inv.get(item, 0)))
+		var cantidad: int = mini(disponible, falta)
 		if cantidad <= 0: continue
 		if _ir(nid, _ancla(gid), "depositar", "abastecer " + nombre_grupo(gid)):
 			a._quitar(a.estado(nid).inv, item, cantidad)
@@ -482,7 +490,7 @@ func entregar(cid: String) -> bool:
 	_anadir(a.estado(c.solicitante).inv, c.bien)
 	var recibidos := {}
 	for item in c.bien: recibidos[item]=int(a.estado(c.solicitante).inv.get(item,0))
-	comprometer(c.solicitante,recibidos)
+	if c.get("grupo_destino", "") == "": comprometer(c.solicitante,recibidos)
 	_anadir(a.estado(c.proveedor).inv, c.pago)
 	a.desarrollo.observar("npc:"+c.solicitante,c.bien)
 	a.desarrollo.observar("npc:"+c.proveedor,c.pago)
@@ -600,7 +608,12 @@ func _plan_acuerdo(nid: String) -> bool:
 	var cid := _ocupado(nid)
 	if cid == "": return false
 	var c: Dictionary = datos().acuerdos[cid]
+	var tarea: Dictionary = a.tareas.datos().activos.get(nid, {})
+	var continua: bool = tarea.get("paso", {}).get("acuerdo", "") == cid
+	if continua: a.tareas.visitados[nid] = true
 	if entregar(cid):
+		if continua and c.estado == "cumplido" and c.solicitante == nid:
+			a.tareas.preparar(nid, {"tipo":"insumos_reunidos", "lote":c.bien})
 		a.estado(nid).plan = {}
 		return true
 	if c.proveedor == nid:
@@ -610,7 +623,7 @@ func _plan_acuerdo(nid: String) -> bool:
 	return true
 
 ## Metas derivadas del consumo, oficio, desgaste y reservas colectivas.
-func objetivos(nid: String) -> Array:
+func objetivos_personales(nid: String) -> Array:
 	var n: Dictionary = a.estado(nid)
 	var metas: Array = []
 	var comida: String = a.reglas.comida
@@ -635,16 +648,25 @@ func objetivos(nid: String) -> Array:
 	var receta: Dictionary = C.RECETAS[a.perfil(nid).receta]
 	var producto: String = receta.sal.keys()[0]
 	if int(n.inv.get(producto,0)) < int(a.perfil(nid).reserva_producto): metas.append({"item":producto,"cantidad":int(a.perfil(nid).reserva_producto)-int(n.inv.get(producto,0)),"motivo":"mantener mi oficio"})
-	var gid := grupo_de(nid)
-	for item in cfg.grupos[gid].reservas:
-		var falta: int = int(cfg.grupos[gid].reservas[item])-int(grupo(gid).inv.get(item,0))
-		if falta>0: metas.append({"item":item,"cantidad":falta,"motivo":"abastecer " + nombre_grupo(gid)})
 	var cid := cofre_propio(nid)
 	if cid!="" and not bool(j.d.cofres[cid].get("candado",false)) and not j.d.cofres[cid].inv.is_empty():
 		for item in cfg.proteccion.coste:
 			var falta := int(cfg.proteccion.coste[item])-int(n.inv.get(item,0))
 			if falta>0: metas.append({"item":item,"cantidad":falta,"motivo":"proteger mis ahorros"})
 	return metas
+
+## Un único saldo por dueño e ítem; excluir la tarea propia permite continuarla.
+func objetivos(nid: String) -> Array:
+	var metas := objetivos_personales(nid)
+	var gid := grupo_de(nid)
+	var balances := balance_grupo(gid, nid)
+	var colectivas: Array = []
+	for item in balances:
+		var saldo: Dictionary = balances[item]
+		if int(saldo.pendiente) > 0:
+			colectivas.append({"item":item,"cantidad":int(saldo.pendiente),"motivo":"abastecer " + nombre_grupo(gid),"grupo":gid})
+	# Conserva la posición histórica de la protección de ahorros, detrás del abastecimiento.
+	return metas.filter(func(m): return m.motivo != "proteger mis ahorros") + colectivas + metas.filter(func(m): return m.motivo == "proteger mis ahorros")
 
 func necesidad(nid: String) -> Dictionary:
 	var n: Dictionary = a.estado(nid)
@@ -705,7 +727,7 @@ func decidir(nid: String) -> void:
 		var item: String = meta.item
 		if int(n.bloqueos.get(item,-1)) > int(j.d.min): continue
 		n.objetivo = meta.motivo
-		if _obtener(nid,item,int(meta.cantidad),[],meta.motivo):
+		if _obtener(nid,item,int(meta.cantidad),[],meta.motivo,meta.get("grupo", "")):
 			n.ocupacion = "proveerse"
 			return
 		_posponer(nid,item,"sin ruta, existencias o acuerdo viable")
@@ -853,10 +875,10 @@ func _prospectar(nid: String) -> bool:
 			n.bloqueos[item] = int(j.d.min) + int(cfg.reintento_min)
 	return false
 
-func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: String) -> bool:
+func _obtener(nid: String, item: String, cantidad: int, cadena: Array, motivo: String, grupo_destino: String = "") -> bool:
 	if not cadena.is_empty(): return _obtener_material(nid, item, cantidad, cadena, motivo)
 	a.tareas.visitados[nid] = true
-	a.tareas.iniciar(nid, {"item": item, "cantidad": cantidad, "motivo": motivo})
+	a.tareas.iniciar(nid, {"item": item, "cantidad": cantidad, "motivo": motivo, "grupo": grupo_destino})
 	var antes: Dictionary = a.estado(nid).inv.duplicate(true)
 	var viable := _obtener_material(nid, item, cantidad, cadena, motivo)
 	a.tareas.resultado(nid, antes, viable)
@@ -880,9 +902,17 @@ func _obtener_material(nid: String, item: String, cantidad: int, cadena: Array, 
 		return confianza(nid,x)>confianza(nid,y) if confianza(nid,x)!=confianza(nid,y) else x<y)
 	for otro in proveedores:
 		if motivo=="mantener mi oficio" or otro==nid or excedente(otro,item)<=0 or confianza(nid,otro)<int(cfg.confianza_minima): continue
-		for lote in range(mini(cantidad,excedente(otro,item)),0,-1):
+		var oferta := excedente(otro,item)
+		if a.tareas.datos().activos.get(nid, {}).get("demanda", {}).get("grupo", "") != "": oferta = mini(oferta, aportable(otro,item))
+		for lote in range(mini(cantidad,oferta),0,-1):
 			var cid := acordar(nid,otro,item,lote)
-			if cid!="": _plan_acuerdo(nid);return true
+			if cid!="":
+				var tarea: Dictionary = a.tareas.datos().activos.get(nid, {})
+				var destino: String = tarea.get("demanda", {}).get("grupo", "")
+				if destino != "" and cadena.is_empty(): datos().acuerdos[cid].grupo_destino = destino
+				if not cadena.is_empty(): a.tareas.preparar(nid, {"tipo":"acuerdo_insumo", "acuerdo":cid})
+				_plan_acuerdo(nid)
+				return true
 	# Oficios con recetas explícitas: fabricar requiere insumos y estación reales.
 	var receta_id := ""
 	for rid in a.recetas_de(nid):
@@ -904,6 +934,7 @@ func _obtener_material(nid: String, item: String, cantidad: int, cadena: Array, 
 					a._quitar(n.inv,cfg.material_reparacion,int(cfg.coste_reparacion));datos().estaciones[estacion]=0
 					suceso("reparacion","Estación con un lingote",nid)
 				return true
+			a.tareas.preparar(nid, {"tipo":"fabricar", "entradas":r.ent, "estacion":estacion, "clase":r.est})
 			if not _ir(nid,c,"fabricar","fabricar " + C.ITEMS[item].n): return true
 			if not Inv.tiene(n.inv,r.ent): return false
 			datos().estaciones[estacion]=int(datos().estaciones.get(estacion,0))+1
@@ -931,6 +962,7 @@ func _obtener_material(nid: String, item: String, cantidad: int, cadena: Array, 
 func _recolectar(nid: String, oid: String, motivo: String) -> bool:
 	var o: Dictionary=j.mundo.objetos[oid]
 	if not permite_recurso(nid,oid) or not a.tareas.reclamar(nid, oid): return false
+	a.tareas.preparar(nid, {"tipo":"recolectar", "objeto":oid})
 	if not _ir(nid,o.c,"recolectar",motivo): return true
 	var def: Dictionary=C.OBJETOS[o.t]
 	var golpe: int=int(j.d.mundo.golpes.get(oid,0))+1
@@ -1437,3 +1469,124 @@ func texto_suceso(e: Dictionary) -> String:
 	ids.sort_custom(func(x,y): return x.length()>y.length())
 	for item in ids: detalle = detalle.replace(item, C.ITEMS[item].n)
 	return "%s %s: %s" % [nombre, acciones.get(e.tipo,e.tipo), detalle]
+
+## Inventario aportable según las reglas existentes de depósito, sin gastar compromisos.
+func aportable(nid: String, item: String, entrante_extra: int = 0) -> int:
+	var n: Dictionary = a.estado(nid)
+	var minimo := reserva(nid, item)
+	if C.RECETAS[a.perfil(nid).receta].sal.has(item): minimo = int(a.perfil(nid).reserva_producto)
+	if int(n.get("compromiso_hasta", 0)) > int(j.d.min): minimo = maxi(minimo, int(n.get("comprometido", {}).get(item, 0)))
+	return maxi(0, int(n.inv.get(item, 0)) + entrante_extra - minimo)
+
+func acceso_deposito(nid: String) -> bool:
+	var c := _ancla(grupo_de(nid))
+	return _cerca(nid, c) or not j.mundo.camino(M.celda_de(j.habitantes.pos(nid)), func(x): return j.mundo.es_adyacente(x, c)).is_empty()
+
+## Cobertura es trabajo asignado, nunca inventario ni garantía de éxito.
+## Se revalida al consultar; una caminata fallida o recurso agotado no oculta escasez.
+func atencion(nid: String, item: String) -> int:
+	var t: Dictionary = a.tareas.datos().activos.get(nid, {})
+	if t.get("estado", "") != "reclamada" or not t.get("viable", false): return 0
+	if t.demanda.get("item", "") != item: return 0
+	var n: Dictionary = a.estado(nid)
+	var paso: Dictionary = t.get("paso", {})
+	if paso.get("tipo", "") == "insumos_reunidos":
+		return int(t.demanda.cantidad) if Inv.tiene(n.inv, paso.lote) else 0
+	if paso.get("tipo", "") == "acuerdo_insumo":
+		var c: Dictionary = datos().acuerdos.get(paso.acuerdo, {})
+		return int(t.demanda.cantidad) if not c.is_empty() and acuerdo_vigente(c) else 0
+	var plan: Dictionary = n.plan
+	if plan.get("act", "") in ["compartir", "intercambiar", "esperar", "pedir"]: return 0 # stock o acuerdo ya contabilizado
+	if not plan.has("celda"): return 0
+	var c := Vector2i(int(plan.celda[0]), int(plan.celda[1]))
+	if not _cerca(nid, c) and j.mundo.camino(M.celda_de(j.habitantes.pos(nid)), func(x): return j.mundo.es_adyacente(x, c)).is_empty(): return 0
+	match paso.get("tipo", ""):
+		"recolectar":
+			var oid: String = paso.objeto
+			if not j.mundo.objetos.has(oid): return 0
+			var o: Dictionary = j.mundo.objetos[oid]
+			if j.mundo.objeto_presente(o.c) != oid or not permite_recurso(nid, oid) or golpes(nid, C.OBJETOS[o.t]) >= 9999: return 0
+		"fabricar":
+			if not Inv.tiene(n.inv, paso.entradas): return 0
+			var estacion: Dictionary = j.d.mundo.constr.get(paso.estacion, {})
+			if C.CONSTR.get(estacion.get("t", ""), {}).get("est", "") != paso.clase or not permite_estacion(nid, paso.estacion): return 0
+		_:
+			return 0 # no proyectar consumo, esperas, obras ni acciones sin precondiciones registradas
+
+	return maxi(0, int(t.demanda.get("cantidad", 0)))
+
+## Consolidación contable de los grupos del poblado inicial. Sin transferencias ni nuevo selector.
+func balance_grupo(gid: String, excluir_tarea: String = "") -> Dictionary:
+	if not cfg.grupos.has(gid): return {}
+	var necesidades := {}
+	var actores: Array = []
+	var items: Array = cfg.grupos[gid].reservas.keys()
+	for nid in j.habitantes.ids:
+		if a.perfil(nid).is_empty() or grupo_de(nid) != gid: continue
+		actores.append(nid)
+		var por_item := {}
+		for meta in objetivos_personales(nid):
+			var item: String = meta.item
+			por_item[item] = maxi(int(por_item.get(item, 0)), int(meta.cantidad)) # metas equivalentes del mismo actor
+			if not item in items: items.append(item)
+		necesidades[nid] = por_item
+	actores.sort()
+	if actores.is_empty(): return {}
+	var acceso := {}
+	var entrantes := {}
+	var colectivos := {}
+	for nid in actores:
+		acceso[nid] = acceso_deposito(nid)
+		entrantes[nid] = {}
+		colectivos[nid] = {}
+	# Una sola revalidación de ruta por acuerdo, no por cada ítem del balance.
+	for c in datos().acuerdos.values():
+		if not acuerdo_vigente(c): continue
+		for envio in [{"actor":c.solicitante,"lote":c.bien},{"actor":c.proveedor,"lote":c.pago}]:
+			if not entrantes.has(envio.actor): continue
+			for item in envio.lote:
+				entrantes[envio.actor][item] = int(entrantes[envio.actor].get(item, 0)) + int(envio.lote[item])
+		if c.get("grupo_destino", "") == gid and colectivos.has(c.solicitante):
+			for item in c.bien: colectivos[c.solicitante][item] = int(colectivos[c.solicitante].get(item, 0)) + int(c.bien[item])
+	var balances := {}
+	for item in items:
+		var individuales := 0
+		var acuerdos := 0
+		var atendidas := 0
+		var aportes := 0
+		var comprometido := 0
+		var en_curso := 0
+		var acuerdos_colectivos := 0
+		var accesible := false
+		for nid in actores:
+			var n: Dictionary = a.estado(nid)
+			var falta := int(necesidades[nid].get(item, 0))
+			individuales += falta
+			var promesa := mini(falta, int(entrantes[nid].get(item, 0)))
+			acuerdos += promesa
+			# La parte del mismo envío que atiende a una persona no cubre también al depósito.
+			var prometido := int(colectivos[nid].get(item, 0))
+			if acceso[nid]: acuerdos_colectivos += mini(maxi(0, prometido - promesa), maxi(0, aportable(nid, item, prometido) - aportable(nid, item)))
+			var t: Dictionary = a.tareas.datos().activos.get(nid, {})
+			var cobertura := atencion(nid, item) if nid != excluir_tarea else 0
+			if t.get("demanda", {}).get("grupo", "") == gid:
+				en_curso += cobertura
+			else:
+				atendidas += mini(maxi(0, falta - promesa), cobertura)
+			if acceso[nid]:
+				accesible = true
+				aportes += aportable(nid, item)
+			if int(n.get("compromiso_hasta", 0)) > int(j.d.min): comprometido += mini(int(n.inv.get(item, 0)), int(n.get("comprometido", {}).get(item, 0)))
+		var reserva_deposito := int(cfg.grupos[gid].reservas.get(item, 0))
+		var stock := int(grupo(gid).inv.get(item, 0))
+		# Un depósito inaccesible conserva su reserva, pero no abastece personas a distancia.
+		var util := stock if accesible else mini(stock, reserva_deposito)
+		var pendiente := maxi(0, reserva_deposito + individuales - acuerdos - atendidas - util - aportes - en_curso - acuerdos_colectivos)
+		balances[item] = {"id":"grupo:%s:%s" % [gid,item], "reserva":reserva_deposito, "individuales":individuales, "acuerdos":acuerdos, "acuerdos_colectivos":acuerdos_colectivos, "atendidas":atendidas, "stock":stock, "accesible":accesible, "aportable":aportes, "comprometido":comprometido, "en_curso":en_curso, "pendiente":pendiente}
+	return balances
+
+func acuerdo_vigente(c: Dictionary) -> bool:
+	if c.estado != "activo" or int(c.vence) <= int(j.d.min): return false
+	if not j.habitantes.ids.has(c.solicitante) or not j.habitantes.ids.has(c.proveedor): return false
+	var destino := M.celda_de(j.habitantes.pos(c.proveedor))
+	return _cerca(c.solicitante, destino) or not j.mundo.camino(M.celda_de(j.habitantes.pos(c.solicitante)), func(x): return j.mundo.es_adyacente(x, destino)).is_empty()

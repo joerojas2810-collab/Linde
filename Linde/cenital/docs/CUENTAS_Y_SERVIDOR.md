@@ -94,3 +94,81 @@ godot --path Linde/cenital --script res://tests/prueba_acceso_inicial.gd -- --co
 El ensayo de UI recibe `salida`, `identidad`, `python` y `puerto`; usa configuración, cuentas y guardados aislados. Se prueba registro, menú, varias partidas, recuperación de respaldo, aislamiento entre cuentas y reactivación de la autoridad. No apuntar pruebas a cuentas reales. Los avisos ObjectDB/recursos al cerrar ya existentes continúan.
 
 Fuentes técnicas: [PyJWT RS256 y validaciones](https://pyjwt.readthedocs.io/en/stable/usage.html), [Argon2-cffi](https://argon2-cffi.readthedocs.io/en/stable/parameters.html), [TLSOptions](https://docs.godotengine.org/en/stable/classes/class_tlsoptions.html), [SQLite WAL](https://sqlite.org/wal.html).
+
+## 8. Servidor dedicado estilo Forge — paquete experimental validado en CI (26/10/2026)
+
+Objetivo aprobado: paquete portable, servidor en la PC del anfitrión y conexión por
+IP/contraseña, sin VPN ni relay. Se añadió un modo privado opcional y juego local
+sin cuenta global, conservando el acceso de cuentas anterior.
+
+**Guía de uso, red, respaldo y limitaciones:** [SERVIDOR_PRIVADO.md](SERVIDOR_PRIVADO.md).
+Paquete Windows x64 construido y publicado como artefacto de Actions. No hay release
+permanente ni paquete Linux/Mac Intel. Mac Apple Silicon también está construido y
+validado: [ejecución 40422320525](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320525),
+[guía Mac](MAC_APPLE_SILICON.md). Ejecución aprobada: [40418982569](https://github.com/joerojas2810-collab/Linde/actions/runs/40418982569),
+código `d1c5372`, artefacto `Linde-Windows-servidor-y-juego` (124.695.287 bytes comprimido).
+Retención de 14 días, sujeto a las políticas y disponibilidad de GitHub.
+
+### Plan activo y estado
+
+1. **Base existente:** 9 pruebas Python anteriores pasan. La integración real se
+   ejecutó en GitHub Actions con Godot 4.7.1 oficial comprobado por SHA-256.
+   El motor continúa sin estar disponible en el sandbox Linux local.
+2. **Modo privado:** implementado en servicio Python, cliente y formularios. Credencial
+   aleatoria por certificado, persistida antes de entrar, con Argon2id del lado del
+   servidor. No se confía en el nombre visible como identidad. Cuatro pruebas nuevas
+   HTTPS reales pasan: certificado público, reconexión de identidad/ticket de un uso,
+   contraseña del mundo y bloqueo del consumo público de tickets.
+3. **Acceso sencillo y local:** implementado. Perfil local persistente separado de
+   cuentas globales; formulario de IP, nombre y contraseña; descarga inicial SOLO
+   del certificado público sin credenciales, confirmación explícita de huella por
+   canal de confianza y verificación TLS/DTLS posterior. No sustituir certificados
+   recordados automáticamente. Perfil local con guardado y carga ejecutado en Godot. La comparación manual de
+   huella y la experiencia visual aún requieren playtest.
+4. **Paquete:** lanzador con configuración persistente y arranque temporal privado;
+   cierre por Ctrl+C o script de parada. Siete pruebas del lanzador pasan con el
+   proceso de Godot simulado. Script de construcción y workflow Windows escritos,
+   con CPython/Godot/dependencias incluidos y comprobación de arranque del paquete.
+   Construcción, compilación explícita de scripts dinámicos, pruebas de dos clientes
+   en modos existente/privado, identidad global y prueba de arranque/cierre del paquete
+   aprobadas en el workflow enlazado. El paquete se puede descargar de sus artefactos.
+5. **LAN:** pendiente en dos equipos físicos.
+6. **Dos casas:** pendiente; requiere firewall, UDP 7777/TCP 7778 y resolver CGNAT
+   cuando corresponda. El modo privado no requiere TCP 7790. No hay UPnP automático.
+7. **Guía:** escrita en el enlace anterior; pendiente recorrido manual por jugadores.
+
+### Verificación automatizada preparada
+
+`.github/workflows/servidor-privado.yml` descarga Godot oficial comprobando SHA-256,
+importa scripts/recursos, prueba perfil local, identidad global existente y dos
+clientes con reconexión en modos legado y privado. Solo después construye el
+paquete Windows, comprueba su arranque/cierre y publica un artefacto temporal.
+La ejecución enlazada está aprobada; no extrapolar su resultado a redes/equipos físicos.
+
+Comprobaciones ejecutadas en esta sesión:
+
+```sh
+.venv/bin/python -m unittest discover -s servidor/cuentas -p 'test_*.py' -v  # 13 OK
+.venv/bin/python -m unittest discover -s servidor/dedicado -v              # 7 OK
+```
+
+Además, compilación de sintaxis Python y análisis de sintaxis GDScript mediante
+`gdparse` (herramienta externa de desarrollo, no sustituto del compilador Godot).
+El lanzador desde fuente sigue requiriendo Godot y Python; el paquete publicado incluye
+el motor, el intérprete y las dependencias para no requerir su instalación global.
+
+### Validación Mac Apple Silicon — 26/10/2026
+
+Commit `9c9896d`, ejecución `40422320525` aprobada: 21 pruebas Python, importación y
+compilación Godot, perfil local, identidad global y dos clientes en ambos modos con
+reconexión. Construcción arm64 con Python standalone relocatable, prueba tras mover a
+una ruta con espacios y repetición de arranque/cierre después de crear y extraer el
+ZIP preservando permisos y symlinks. Artefacto `Linde-Mac-Apple-Silicon-servidor-y-juego`,
+236.526.264 bytes. Windows del mismo commit aprobado en `40422320588`.
+
+Corregido arranque del listener Python: HTTPServer ejecutaba DNS inverso innecesario
+antes de listen(), bloqueándose en el runner macOS. Se usa bind TCP sin getfqdn;
+prueba de regresión con getfqdn simulado como error. No se deshabilitó TLS. Los
+trazados de etapas solo se activan con LINDE_DIAGNOSTICO=1 y no incluyen credenciales.
+La validación no cubre Gatekeeper/cuarentena de descargas personales ni una sesión
+cruzada Mac/Windows o dos redes físicas.

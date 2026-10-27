@@ -1,0 +1,97 @@
+name: Servidor privado Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [arena/9a96dc31-linde]
+    paths:
+      - 'servidor/**'
+      - 'Linde/cenital/**'
+      - 'herramientas/empaquetar_windows.py'
+      - '.github/workflows/servidor-privado.yml'
+env:
+  PYTHONUTF8: "1"
+permissions:
+  contents: read
+jobs:
+  paquete:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Dependencias y pruebas de Python
+        run: |
+          python -m pip install -r servidor/cuentas/requirements.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s servidor/cuentas -p "test_*.py" -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s servidor/dedicado -v
+      - name: Descargar Godot oficial y verificar SHA-256
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $url = 'https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_win64.exe.zip'
+          Invoke-WebRequest $url -OutFile godot.zip
+          $hash = (Get-FileHash godot.zip -Algorithm SHA256).Hash.ToLower()
+          if ($hash -ne 'c7a289051eaefb460b0106b60e9cd5bee0ef55fd102dcb2bed1eb356cf3d90a1') { throw 'SHA-256 incorrecto' }
+          Expand-Archive godot.zip -DestinationPath motor
+          foreach ($name in @('LICENSE.txt', 'COPYRIGHT.txt')) {
+            $notice = Invoke-RestMethod "https://api.github.com/repos/godotengine/godot/contents/${name}?ref=4.7.1-stable"
+            [IO.File]::WriteAllBytes("$pwd/motor/Godot-$name", [Convert]::FromBase64String($notice.content))
+          }
+      - name: Importar recursos y comprobar scripts
+        shell: pwsh
+        run: |
+          & ./motor/Godot_v4.7.1-stable_win64.exe --headless --path Linde/cenital --editor --import --quit 2>&1 | Tee-Object importacion.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (Select-String -Path importacion.log -Pattern 'SCRIPT ERROR:|Parse Error:|Failed to load script') { throw 'Error en scripts Godot' }
+      - name: Compilar scripts de acceso y servidor
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($name in @('acceso', 'panel', 'privado', 'cliente', 'servidor', 'main_servidor')) {
+            & ./motor/Godot_v4.7.1-stable_win64.exe --headless --path Linde/cenital --script "res://scripts/cuentas/$name.gd" --check-only 2>&1 | Tee-Object "qa-compilar-$name.log"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            if (Select-String -Path "qa-compilar-$name.log" -Pattern 'SCRIPT ERROR:|Parse Error:|Failed to load script') { throw "Error compilando $name" }
+          }
+      - name: Perfil local sin cuentas, guardado y carga
+        run: ./motor/Godot_v4.7.1-stable_win64.exe --headless --path Linde/cenital --script res://tests/prueba_perfil_local.gd -- --salida=${{ github.workspace }}/qa/local
+      - name: Identidad global existente
+        run: python servidor/cuentas/prueba_identidad_integracion.py --godot "${{ github.workspace }}/motor/Godot_v4.7.1-stable_win64.exe" --salida qa/global
+      - name: Integración segura existente
+        run: python servidor/cuentas/prueba_integracion.py --godot "${{ github.workspace }}/motor/Godot_v4.7.1-stable_win64.exe" --salida qa/cuentas
+      - name: Integración privada, dos clientes y reconexión
+        run: python servidor/cuentas/prueba_integracion.py --privado --godot "${{ github.workspace }}/motor/Godot_v4.7.1-stable_win64.exe" --salida qa/privado
+      - name: Empaquetar con Python y Godot incluidos
+        run: python herramientas/empaquetar_windows.py --godot motor/Godot_v4.7.1-stable_win64.exe --salida paquete
+      - name: Prueba de arranque del paquete
+        shell: pwsh
+        run: |
+          & ./paquete/runtime/python/python.exe ./paquete/servidor/dedicado/prueba_paquete.py --godot ./paquete/runtime/Godot.exe 2>&1 | Tee-Object qa/paquete.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Guardar paquete
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linde-Windows-servidor-y-juego
+          path: paquete/
+          retention-days: 14
+      - name: Resumir fallos del motor en anotaciones
+        if: failure()
+        shell: pwsh
+        run: |
+          Get-ChildItem qa -Filter *.log -Recurse -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | ForEach-Object {
+            $body = (Get-Content $_.FullName -Tail 45) -join "`n"
+            $body = $body.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output "::error title=$($_.Name)::$body"
+          }
+      - name: Guardar diagnósticos (no contiene cuentas reales)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-servidor
+          path: |
+            importacion.log
+            qa/**/*.log
+          retention-days: 7

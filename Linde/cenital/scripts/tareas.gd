@@ -14,7 +14,7 @@ func iniciar(nid: String, meta: Dictionary) -> void:
 	if not a.j.es_autoridad(): return
 	var d := datos()
 	var t: Dictionary = d.activos.get(nid, {})
-	if not t.is_empty() and (t.demanda.get("item", "") != meta.get("item", "") or t.demanda.get("motivo", "") != meta.get("motivo", "")):
+	if not t.is_empty() and (t.demanda.get("item", "") != meta.get("item", "") or t.demanda.get("motivo", "") != meta.get("motivo", "") or t.demanda.get("grupo", "") != meta.get("grupo", "")):
 		cancelar(nid, "cambio_de_necesidad")
 		t = {}
 	if t.is_empty():
@@ -23,6 +23,8 @@ func iniciar(nid: String, meta: Dictionary) -> void:
 		d.activos[nid] = t
 	t.demanda = meta.duplicate(true)
 	t.estado = "reclamada"
+	t.viable = false
+	t.erase("paso")
 	t.recurso = ""
 
 func disponible(nid: String, oid: String) -> bool:
@@ -38,6 +40,7 @@ func reclamar(nid: String, oid: String) -> bool:
 func resultado(nid: String, antes: Dictionary, viable: bool) -> void:
 	if not a.j.es_autoridad() or not datos().activos.has(nid): return
 	var t: Dictionary = datos().activos[nid]
+	t.viable = viable
 	var delta := {}
 	var inv: Dictionary = a.estado(nid).inv
 	var items := antes.keys()
@@ -58,9 +61,16 @@ func resultado(nid: String, antes: Dictionary, viable: bool) -> void:
 		t.erase("causa")
 		# Una acción intermedia puede producir insumos sin satisfacer todavía el objetivo.
 		var item: String = t.demanda.get("item", "")
-		if item != "" and int(delta.get(item, 0)) >= int(t.demanda.get("cantidad", 1)):
-			_archivar(t, "completada", {})
-			datos().activos.erase(nid)
+		if item != "":
+			t.demanda.cantidad = maxi(0, int(t.demanda.get("cantidad", 1)) - maxi(0, int(delta.get(item, 0))))
+			if int(t.demanda.cantidad) == 0:
+				_archivar(t, "completada", {})
+				datos().activos.erase(nid)
+			elif not delta.is_empty():
+				var reunidos := {}
+				for entrada in delta:
+					if int(delta[entrada]) > 0: reunidos[entrada] = int(delta[entrada])
+				if not reunidos.is_empty(): t.paso = {"tipo":"insumos_reunidos", "lote":reunidos}
 
 func cancelar(nid: String, causa: String) -> void:
 	if not a.j.es_autoridad() or not datos().activos.has(nid): return
@@ -71,3 +81,7 @@ func _archivar(t: Dictionary, causa: String, delta: Dictionary) -> void:
 	var lista: Array = datos().resultados
 	lista.append({"tarea": t.id, "actor": t.actor, "demanda": t.demanda.duplicate(true), "min": int(a.j.d.min), "causa": causa, "recurso": t.get("recurso", ""), "delta": delta})
 	while lista.size() > int(a.reglas.tope_recuerdos): lista.pop_front()
+
+## Precondiciones del próximo paso material, reutilizadas por la contabilidad colectiva.
+func preparar(nid: String, paso: Dictionary) -> void:
+	if a.j.es_autoridad() and datos().activos.has(nid): datos().activos[nid].paso = paso.duplicate(true)

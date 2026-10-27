@@ -1,0 +1,13 @@
+PASS falta real de techo impide sostener la vivienda
+PASS residente repara infraestructura propia con el coste exacto existente
+PASS reparación local deja causa y gasto persistente
+PASS no se repite ni cobra dos veces una reparación
+PASS jugador no puede usar la reparación común sobre propiedad ajena
+PASS reparación del jugador conserva validación y cobra su inventario, no el del poblado
+PASS se registra una presión real sin convertirla automáticamente en crisis
+PASS presión persistente conserva origen y mide su duración real
+PASS guarda presión y reparación
+PASS reinicio conserva la presión sin reiniciar su reloj
+PASS cobertura material real elimina presión sin crear una crisis programada
+PASS reparar ahora no crea producción de periodos sin infraestructura
+REPARACION_PRESION_F6: 12 comprobaciones, 0 fallos

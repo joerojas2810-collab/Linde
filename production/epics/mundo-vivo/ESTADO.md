@@ -1,5 +1,7 @@
 # Linde — estado verificado
 
+> **Integración autorizada con Arena (26/10/2026):** preparada `feature/fase7-arena` con Fase7 `9a7ea9f` y `arena/9a96dc31-linde` en `ea1f251`. Fase6 y empaquetado conservados; único conflicto textual en este documento, resuelto conservando ambas fases. Validación combinada97/97 (navegación32, decisiones18, fauna31, señales ENet16). [Evidencia](../../qa/evidence/mundo-1/fase-7/integracion-arena/README.md). Publicación de esta rama autorizada; main no se modifica. Las notas anteriores de no push describen el cierre previo.
+
 > **Actualización vigente de Fase7, 26/10/2026:** alcance autorizado completado en `feature/fase7-ecologia`, base `eb022a4`, sin push/merge. Código final `a5e8f3d`. [Informe y evidencia](../../qa/evidence/mundo-1/fase-7/cierre/README.md). La consolidación histórica de main siguiente se conserva; esta actualización sólo certifica el alcance y las pruebas descritos.
 
 Hábitats declarativos, distribución territorial A/B compatible y persistida, avisos observables personales, memoria/NPC y bajas/heridas integrados. Corregida navegación al perseguir/regresar con BFS existente y caja real, caché de sesión e invalidación; no se altera balance ni el movimiento histórico de slimes/jefes. Validación final focalizada97/97: navegación32, decisiones18, fauna31, ENet16 con dos clientes locales. Regreso20/20 atascado antes →0/20; persecución0/10. Fixture reconstruido reproducible, distinto del P2 histórico sin fuente. Revisión automatizada de escena real y tres capturas inspeccionadas: detectar, acercarse, retirada y vida40/40.
@@ -7,6 +9,7 @@ Hábitats declarativos, distribución territorial A/B compatible y persistida, a
 Avisos previos al daño2,20–3,23s en cinco acercamientos controlados, retirada/rodeo efectivos. Conforme M1-F7-C se mantienen los parámetros actuales: sin mínimos globales inventados ni inmunidad. Coste del bloque IA con24 actores/600 pasos: cercano media0,231ms/pico27,056ms; reposo media0,105ms/pico0,151ms, sin prometer FPS globales. No se repitieron suites históricas. Logs previos/fallidos preservados; avisos conocidos de recursos al cerrar. Sin validación humana de reacción ni otra PC/Internet.
 
 No queda implementación obligatoria pendiente de esta Fase7 autorizada. Reproducción, migración, simulación global, economía ecológica, ataques nuevos a NPC/edificios y viabilidad dependiente de Fase6 quedan explícitamente fuera. Las notas históricas de esta rama que señalan señales/navegación/R/T pendientes están superadas por este cierre. Integración pendiente de coordinación y autorización del usuario.
+> **Actualización Fase 6, 26/10/2026:** alcance funcional aprobado completado en `codex/fase6-economia-regional`, commits `e15bfda` y `ab86408`. Validación puntual y límites en la sección final. Las verificaciones históricas restantes conservan sus fechas originales.
 
 > **Consolidado**: 2026-10-26 · **Rama**: `main` · **Último commit considerado**: `8483789` · **Modo**: solo (sin revisión independiente)
 >
@@ -308,6 +311,61 @@ Validación puntual: `prueba_tareas` **16/16**, `prueba_autonomia` **33/33**, `p
 No implementado: agregación colectiva/descuento de órdenes en curso, contrato regional resumido, comercio nuevo, viabilidad, migración, fundación ni transición 5b. Siguiente bloque: demanda colectiva y stock accesible/comprometido con depósitos/grupos/Asentamientos existentes. El bloque cerrado es individual detallado; la Fase 6 completa sigue abierta.
 
 
+## Fase 6 — demandas colectivas (26/10/2026)
+
+Segundo bloque autorizado y completado, commit `6e13443`. Sociedad consolida carencias individuales y reservas de sus grupos por ítem, descontando stock utilizable, excedente privado aportable, compromisos, garantías con destinatario y trabajo en curso. Las mismas metas alimentan el selector y las entregas existentes: no hay inventario ni planificador paralelo. Mantiene la titularidad, los valores de balance y el contrato individual; agrega precondiciones/continuidad y cantidad restante a las tareas. Asentamientos publica una vista persistente por minuto; su adaptador regional informa deuda/consumo vencido y herramientas sin cambiar la simulación resumida. [Contrato y límites](../../../Linde/cenital/docs/AUTONOMIA.md#fase-6--consolidación-colectiva-26102026).
+
+Validación puntual en esta sesión: **colectivas 50/50 y tareas 16/16**, sin fallos. [Evidencia](../../qa/evidence/mundo-1/fase-6-colectivas/README.md). Incluye entrega con conservación de cantidades, garantía→stock sin duplicación, continuidad de insumos, no reiterar órdenes cubiertas, pérdida de precondiciones, snapshot por paso real, poblados detallado/resumidos, guardado/carga/recalcular y réplica en proceso con cliente sin autoridad. No se repitieron suites históricas ni se probaron sockets/Internet. Persisten avisos del motor sobre certificados/recursos al cerrar.
+
+Sustituye el siguiente paso del bloque anterior: falta conectar los saldos a producción/consumo regionales y sus resultados causales, conservando balances. No hay comercio entre pueblos, viabilidad nueva, migración, fundación ni 5b. La instantánea lleva minuto; el selector consulta el saldo vivo. Cobertura en curso expresa asignación pendiente, no bienes ya producidos.
+
+
+## Fase 6 — ejecución y resultados regionales (26/10/2026)
+
+Tercer bloque autorizado, commit `1be6290` en `codex/fase6-economia-regional`, implementado en Asentamientos: el ejecutor usa los saldos colectivos regionales para alimento/deuda, herramientas y límite de extracción. Registra resultados reales de cosecha, consumo/pago de deuda, asignación de herramienta y extracción en el puesto existente: ID secuencial, minuto, demanda, delta del cofre y fuente/actor/usos. Último bloqueo sin resultado ficticio. Se conserva el ejecutor material, los cursores, valores de balance y la publicación por minuto de Autonomía; no se rehacen Sociedad ni tareas individuales/colectivas. El saldo ahora muestra el requisito anterior de comida positiva para trabajar y el umbral agregado madera/piedra; esa vista no crea un ítem. [Contrato](../../../Linde/cenital/docs/AUTONOMIA.md#fase-6--saldos-y-operaciones-regionales-26102026).
+
+Verificación puntual de esta sesión: **regional 19/19, colectivas 50/50**, sin fallos. [Evidencia](../../qa/evidence/mundo-1/fase-6-regional/README.md). Conservación exacta del stock frente al historial de una ejecución, fuentes/usos reales, no repetir el mismo paso, stock completo, deuda y continuación equivalente después de cargar, falta de herramientas/fuentes y réplica en proceso con autoridad exclusiva. Sin batería histórica, sockets o Internet. Avisos conocidos del motor al cerrar persisten.
+
+Siguiente bloque propuesto: respuesta local a carencias regionales persistentes de comida/herramientas, con acciones y saberes existentes. Sin fabricación regional nueva todavía; no comercio entre pueblos, migración, fundación, viabilidad nueva ni transición 5b. El historial es acotado y no cubre aportes externos ni la génesis; los resultados guardados no se reaplican.
+
+
+## Fase 6 — alcance completo solicitado: respuestas, transporte y viabilidad (26/10/2026)
+
+Rama `codex/fase6-economia-regional`, conservando `1be6290`/`8aafe8a` y sus antecedentes. Nuevos commits funcionales `d0c2ed7`, `6cf093a`, `53c5400` y `cfa4c24`:
+
+- Alternativas locales con recursos reales y recetas conocidas explícitas; oportunidad productiva compartida, sin fabricación gratuita por oficio. Reparación propia pagada con la misma operación material del jugador y validación regional del terreno/layout.
+- Trueque autónomo ante carencias, con excedentes y valoración actuales de Sociedad. Reserva separada de ambos lotes, mensajero existente, ruta real determinista, tiempo derivado de velocidad vigente, entrega en destino y retorno con la contraoferta. Provisiones y mercancía no se confunden; se descuentan compromisos una vez en saldos.
+- Contrato de migración dirigida de residentes regionales: reserva de plaza, ID único origen→tránsito→destino, capacidades revalidadas, hogar/cama y datos conservados. Consumo por cursor del residente en pueblo/viaje evita cargo anterior al ingreso. Cancelación previa devuelve reservas; durante el viaje necesita retorno físico y conserva el gasto de comida.
+- Viabilidad factual (comida, camas, población, infraestructura y amenazas observadas; seguridad descargada desconocida), presión con origen/duración y último intento local. Se retiró el generador de colonos por espera: un pueblo vacío conserva registro y no recibe población artificial. Viajeros visibles en regiones cargadas, réplica sin simulación cliente.
+
+**Verificado en esta sesión:** tránsito 21, respuestas/migración/comercio 17, reparación/presión 12, integración regional afectada 19: **69 comprobaciones, 0 fallos**, [evidencia](../../qa/evidence/mundo-1/fase-6-autonomia-viajes/README.md). Incluye conservación de bienes + consumo, unicidad, reinicio en ruta, reintentos, ruta cortada, retorno, capacidad perdida y no doble cargo. Sin batería histórica, Internet, sockets reales, playtest visual ni prueba de escala. Persisten avisos conocidos de certificados/recursos al cerrar.
+
+**No se declara completa Fase 6.** La autorización expresa posterior aprobó los parámetros heredados del viaje. Siguen sin respuesta las propuestas concretas de umbral de crisis/admisión, mínimos y presión de fundación, abandono y derechos de recuperación (Diseño Maestro §11.8,10–16). No hay selector autónomo de evacuación, expedición fundadora, crecimiento por nuevos asentamientos o recuperación/abandono político activados. El traslado regional implementado no resuelve 5b. Los residentes sin recetas regionales explícitas no reciben conocimiento gratis; falta el contrato de adquisición correspondiente. [Detalle de límites y propuesta pendiente](../../../Linde/cenital/docs/AUTONOMIA.md#límites-que-impiden-declarar-cerrada-la-fase).
+
+
+## Fase 6 — actualización de políticas y ciclo físico (26/10/2026)
+
+El usuario aprobó los contratos de crisis/migración, fundación mínima y abandono/recuperación; quedan superadas las referencias anteriores que los indicaban pendientes. Commit `63fff6f`: selector de migración con mejora material tras un ciclo persistente e intentos locales/comerciales, evaluación de amenazas según conducta/visión vigente, abandono físico conservativo y recuperación por propietarios originales con reparación pagada desde carga a la llegada. Reutiliza Autonomía/Asentamientos/Tránsitos, sin nuevos valores o población. Deuda vencida no se cancela para forzar viajes.
+
+Pruebas puntuales: crisis/recuperación 15, integración de respuestas 17, reparación/presión 12, sin fallos; las dos últimas se ejecutaron antes de los últimos ajustes del selector/recuperación. Evidencia: `production/qa/evidence/mundo-1/fase-6-ciclo/`. Sin suites históricas ni publicación remota solicitada.
+
+**Fase 6 aún abierta:** fundación exige dos fundadores y origen viable, pero las comunidades regionales actuales tienen dos residentes/tope fijo dos. Se consultó crecimiento mediante viviendas pagadas y capacidad derivada de camas físicas, con residentes por migración real, sin crear NPC. También se consultó adquisición regional de recetas por enseñanza con maestro real y tiempos/requisitos vigentes. Ambas respuestas están pendientes: no se implementaron reglas por inferencia. Propiedad de terceros y fundación por oportunidad sin crisis permanecen excluidas; transición 5b sigue diferida.
+
+
+## Fase 6 — cierre funcional aprobado (26/10/2026)
+
+Las decisiones de recetas y capacidad fueron aprobadas por el usuario; superan los pendientes de la sección anterior. Commits `e15bfda` y `ab86408`, rama `codex/fase6-economia-regional`, conservando todo el avance previo y los cambios ajenos.
+
+- Enseñanza regional con maestro real conocedor, disponibilidad/confianza/tiempos vigentes, presupuesto laboral compartido y procedencia persistente en el NPC. Conocimiento e inventarios acompañan la identidad migrante.
+- Camas propias funcionales y accesibles determinan capacidad; viviendas y cultivos adicionales se pagan con costes reales del catálogo y alimentan demandas existentes. No población por espera ni por cama vacía.
+- Reserva alimentaria del siguiente ciclo por residente real y evaluación de sustento renovable con tasas vigentes, sin anticipar cosechas como stock. Alternativas agrícolas locales antes de fundar. Recolección alimentaria usa el botín probabilístico existente sin garantía nueva.
+- Fundación autónoma por crisis no resuelta y ventaja territorial comprobable: dos residentes existentes, origen materialmente viable, rutas/carga/provisiones reales, solar pendiente solo en Tránsitos; poblado/casa/campos se registran y pagan al llegar. Conserva identidad y continuidad en interrupciones, reinicios y repetición de llegada. Continúa el ciclo de abandono/recuperación ya aprobado.
+
+**Pruebas puntuales:** aprendizaje 8, expansión/fundación 24, crisis/recuperación 15, tránsito 21, regional 19, respuestas 17: **104/104**, sin suites históricas. [Evidencia y contraste con Diseño Maestro §9](../../qa/evidence/mundo-1/fase-6-cierre/README.md). Incluye conservación exacta por ítem, no duplicación de NPC/edificios, interrupción, continuación equivalente tras reinicio y réplica en proceso. Las corridas de integración preceden los últimos ajustes aislados según se detalla en evidencia. Avisos conocidos del motor al cerrar persisten.
+
+**Cierre funcional del alcance aprobado; ninguna decisión de diseño pendiente en él.** 5b, derechos de terceros y fundación por oportunidad sin crisis permanecen diferidos explícitos. No se certifican aún dos clientes por sockets/Internet, rendimiento a escala, frecuencia natural de fundaciones o matriz general de exploración. No hay publicación remota solicitada para esta entrega.
+
+
 ## Integración aprobada de cuentas/UI con talleres y tareas (26/10/2026)
 
 El usuario autorizó subir la revisión completa. Integrado origin/main `c84b88e` mediante `cdac6e9`, conservando talleres, casas comunales y tareas de Fase 6. Esta nota supera las notas históricas de revisión sin publicar. Validación combinada: 9 casos unitarios, 16 de acceso/partidas, 13 de identidad con dos mundos, 6 suites de regresión y tareas 16/16. [Detalle y límites](../../qa/evidence/login-inicial/main-c84b88e/README.md). Sin prueba externa ni cambios a la skin.
@@ -361,3 +419,48 @@ Rama `feature/fase7-ecologia`, sin merge/push. Siguiente bloque: señales proced
 Señal direccional desde fauna regional viva, radio de conocimiento y línea de visión existentes. Se retira por muerte, movimiento, distancia o pérdida de visión. Memoria por bloque con fecha/procedencia, referencias históricas en mapa y testimonios NPC durante la conversación existente; sin misión, recompensa, radio o tiempo nuevos. El servidor conserva IDs de fuente/ancla pero los retira del mapa publicado; aviso privado por observador, réplica sin inferir señales. Informes NPC server-side en fauna, no en mundo_vivo replicado. No se modifica distribución ni balance; legado intacto.
 
 Pruebas ejecutadas: señales20/20, servidor y dos clientes ENet reales16/16, fauna31/31 y exploración13/13. Capturas de aviso, retirada, recuerdo histórico y testimonio NPC inspeccionadas. [Informe]( ../../qa/evidence/mundo-1/fase-7/senales/README.md ). Sin otra PC/Internet ni validación humana de R/T; persisten avisos conocidos de recursos al cerrar. Los resúmenes de la ejecución inicial (19 casos de señales) se conservan; el caso de superposición y la bienvenida completa se verificaron luego en una carpeta nueva con20. No se repitieron suites ajenas al ajuste. Rama feature/fase7-ecologia, sin push/merge. Siguiente: escenario reproducible de atasco de fauna y navegación, sin cambiar estadísticas ni inventar R/T.
+## Servidor dedicado sencillo — implementación 26/10/2026
+
+En `arena/9a96dc31-linde`, modo privado opcional y perfil local sin cuenta global;
+entrada por dirección/contraseña y confianza explícita de huella, credencial persistente
+por certificado, lanzadores y construcción portable Windows preparados. Conserva
+el flujo global de cuentas. **No validado con Godot ni publicado como paquete.**
+
+Ejecutadas: 13 pruebas Python del servicio (9 previas + 4 HTTPS privado reales), 7
+del lanzador con proceso simulado, compilación sintáctica Python y parseo externo de
+GDScript modificado. Godot no está instalado y la descarga oficial está bloqueada
+por su redirección. Importación Godot, interfaz, perfil local en motor, dos clientes,
+reconexión/guardado y construcción del paquete son pruebas escritas para GitHub Actions,
+NO ejecutadas en esta sesión. LAN/dos casas y Windows limpio siguen pendientes.
+Plan único en [CUENTAS_Y_SERVIDOR §8](../../../Linde/cenital/docs/CUENTAS_Y_SERVIDOR.md#8-servidor-dedicado-estilo-forge--implementación-sin-validación-godot-26102026);
+guía en [SERVIDOR_PRIVADO](../../../Linde/cenital/docs/SERVIDOR_PRIVADO.md).
+
+### Actualización CI Windows — 26/10/2026 (supera los pendientes de motor anteriores)
+
+Ejecución [40418982569](https://github.com/joerojas2810-collab/Linde/actions/runs/40418982569),
+commit `d1c5372`, **success**. Pasaron: 20 pruebas Python, importación Godot 4.7.1,
+compilación explícita de scripts de acceso/servidor, perfil local con guardado/carga,
+identidad global, dos clientes con reconexión/progreso en modos existente y privado,
+construcción portable Windows y escucha/cierre guardando desde el paquete construido.
+Artefacto `Linde-Windows-servidor-y-juego`, 124.695.287 bytes comprimidos, retención
+14 días. Corregidos conflicto de nombre con método heredado `privado` y espera de
+liberación de `servidor.lock` al limpiar la prueba Windows. No se omitieron pruebas.
+
+Solo procesos separados en runner Windows; falta playtest manual, PC física limpia,
+LAN entre equipos e Internet entre casas. Hay avisos históricos de recursos/ObjectDB
+al salir y avisos UDP de buffer lleno durante algunas pruebas; no se certifica
+rendimiento. `main` no fue modificada.
+
+### Paquete Mac Apple Silicon — 26/10/2026
+
+En `arena/9a96dc31-linde`, código `9c9896d`, ejecuciones aprobadas
+[Mac arm64 40422320525](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320525)
+y [Windows 40422320588](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320588).
+Mac: 21 pruebas Python y suites Godot de perfil local, identidad global y dos clientes
+existentes/privados; portable Godot + CPython standalone arm64, tres `.command`,
+prueba en ruta relocalizada con espacios y ZIP extraído conservando ejecutables y
+symlinks. Artefacto Mac 236.526.264 bytes, 14 días de retención. Corregido DNS inverso
+bloqueante antes de listen en HTTPServer con prueba de regresión. No se omiten pruebas
+ni se desactiva TLS. Gatekeeper en una Mac personal, juego cruzado físico y redes
+externas siguen sin validar. [Guía Mac](../../../Linde/cenital/docs/MAC_APPLE_SILICON.md).
+La explicación paso a paso del empaquetado Windows está en la guía general del servidor.

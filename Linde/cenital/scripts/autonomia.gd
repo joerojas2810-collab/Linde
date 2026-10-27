@@ -115,6 +115,7 @@ func paso() -> void:
 		decididos += 1
 		n.accion_min = ahora
 		_decidir(nid)
+	if sociedad.activa(): asentamientos.actualizar_demandas()
 
 
 # La memoria cambia a quién busca: prioriza ayudantes conocidos y respeta una negativa reciente.

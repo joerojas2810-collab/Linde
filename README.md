@@ -11,6 +11,17 @@ Juego cenital (vista superior) en Godot 4.7.1. Estado, controles y decisiones: `
 
 `--equipo=` y `--mira=` solo aplican junto a `--nueva=`. El arte anterior (dibujo por código) ya no existe.
 
+## Servidor privado entre amigos (experimental)
+
+Modo opcional sin cuenta global y paquetes portables **Windows x64 y Mac Apple Silicon**,
+construidos y validados automáticamente con Godot 4.7.1 el 26/10/2026.
+[Windows](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320588) ·
+[Mac Apple Silicon](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320525).
+[Guía específica Mac](Linde/cenital/docs/MAC_APPLE_SILICON.md).
+Falta prueba manual entre equipos y por Internet; no es un release estable.
+[Guía de juego local, servidor, conexión y respaldos](Linde/cenital/docs/SERVIDOR_PRIVADO.md).
+El flujo anterior de cuentas sigue disponible.
+
 ## Prueba de autonomía
 
 Abrir `Iniciar-Prueba-Autonomia.command` para una partida separada donde los habitantes recolectan, fabrican, desgastan y reparan herramientas, negocian entregas y abastecen grupos según sus carencias, sin tarjetas de misión. `J` muestra necesidades y permite ayudar estando cerca; `E` habla con ellos. `G` abre materiales, planos, laminados y práctica; las piezas se generan con reglas y el aprendizaje cambia las futuras fabricaciones. [Instrucciones y límites](Linde/cenital/docs/AUTONOMIA.md). [Materiales y desarrollo](Linde/cenital/docs/DESARROLLO.md).

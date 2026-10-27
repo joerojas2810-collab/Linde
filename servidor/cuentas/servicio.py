@@ -23,6 +23,7 @@ import threading
 import time
 import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from socketserver import TCPServer
 
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError
@@ -236,8 +237,17 @@ class LimitedServer(ThreadingHTTPServer):
     daemon_threads = True
     request_queue_size = 16
     def __init__(self, *args):
+        self.trace = lambda _stage: None
         self.slots = threading.BoundedSemaphore(16)
         super().__init__(*args)
+
+    def server_bind(self):
+        # HTTPServer.server_bind hace getfqdn(): un DNS inverso innecesario puede
+        # bloquear el arranque en macOS antes de listen(). Solo servimos JSON;
+        # no usamos server_name para confianza TLS ni para construir URLs.
+        TCPServer.server_bind(self)
+        self.server_name = self.server_address[0]
+        self.server_port = self.server_address[1]
 
     def process_request(self, request, address):
         if not self.slots.acquire(False):
@@ -252,17 +262,26 @@ class LimitedServer(ThreadingHTTPServer):
     def process_request_thread(self, request, address):
         try:
             # El handshake no bloquea accept(): también está limitado a 16 hilos / 5 s.
+            self.trace('TLS handshake: inicio')
             request.settimeout(5)
             request = self.tls_context.wrap_socket(request, server_side=True)
+            self.trace('TLS handshake: completo')
             super().process_request_thread(request, address)
-        except (ssl.SSLError, OSError):
+        except (ssl.SSLError, OSError) as exc:
+            self.trace('TLS: ' + type(exc).__name__)
             self.shutdown_request(request)
         finally:
             self.slots.release()
 
 
 def serve(folder: Path, host: str, port: int, rol="legado", autoridad: Path | None = None):
+    def trace(stage):
+        if os.environ.get('LINDE_DIAGNOSTICO') == '1':
+            with (folder / 'diagnostico.log').open('a', encoding='utf-8') as log:
+                log.write(stage + '\n')
+    trace('Inicio serve')
     accounts = Accounts(folder)
+    trace('Accounts listo')
     control = (folder / "control.key").read_text().strip()
     identidad = Identidad(folder) if rol == "identidad" else None
     if rol == "mundo" and (autoridad is None or not autoridad.is_file()):
@@ -285,7 +304,10 @@ def serve(folder: Path, host: str, port: int, rol="legado", autoridad: Path | No
             self.wfile.write(body)
 
         def do_GET(self):
-            if self.path == "/estado":
+            trace('GET recibido')
+            if self.path == "/certificado" and rol == "privado":
+                self.respond(200, {"ok": True, "certificado": (folder / "servidor.crt").read_text(), "huella": huella(folder / "servidor.crt")})
+            elif self.path == "/estado":
                 self.respond(200, {"ok": True, "rol": rol})
             else:
                 self.respond(404, {"ok": False, "motivo": "Ruta desconocida"})
@@ -298,7 +320,15 @@ def serve(folder: Path, host: str, port: int, rol="legado", autoridad: Path | No
                 data = json.loads(self.rfile.read(length))
                 if not isinstance(data, dict):
                     raise Rejected("Petición inválida")
-                if self.path in ("/registro", "/login"):
+                if self.path == "/privado" and rol == "privado":
+                    # Credencial aleatoria persistida por el cliente, nunca un nombre elegido como ID.
+                    try:
+                        result = accounts.auth("login", data, self.client_address[0])
+                    except Rejected as exc:
+                        if exc.status != 401:
+                            raise
+                        result = accounts.auth("registro", data, self.client_address[0])
+                elif self.path in ("/registro", "/login"):
                     if rol == "mundo":
                         raise Rejected("Inicia sesión en Linde antes de elegir un mundo.", 403)
                     result = accounts.auth(self.path[1:], data, self.client_address[0], identidad=rol == "identidad")
@@ -327,11 +357,15 @@ def serve(folder: Path, host: str, port: int, rol="legado", autoridad: Path | No
             except Exception:
                 self.respond(500, {"ok": False, "motivo": "Error interno de cuentas"})
 
+    trace('Creando listener')
     server = LimitedServer((host, port), Handler)
+    server.trace = trace
+    trace('Listener listo')
     ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     ctx.minimum_version = ssl.TLSVersion.TLSv1_2
     ctx.load_cert_chain(folder / "servidor.crt", folder / "servidor.key")
     server.tls_context = ctx
+    trace('Contexto TLS listo')
     def watch():
         last_backup = time.monotonic()
         while True:
@@ -345,6 +379,7 @@ def serve(folder: Path, host: str, port: int, rol="legado", autoridad: Path | No
                 last_backup = time.monotonic()
     threading.Thread(target=watch, daemon=True).start()
     try:
+        trace('Entrando serve_forever')
         server.serve_forever(poll_interval=0.2)
     finally:
         server.server_close()
@@ -377,7 +412,7 @@ def main():
         if args.config:
             args.config.unlink()
         rol = config.get("rol", "legado")
-        if rol not in ("identidad", "mundo", "legado"):raise ValueError("Rol de cuentas inválido")
+        if rol not in ("identidad", "mundo", "legado", "privado"):raise ValueError("Rol de cuentas inválido")
         autoridad = Path(config["autoridad"]) if config.get("autoridad") else None
         fingerprint = certificate(args.datos)
         accounts = Accounts(args.datos)
