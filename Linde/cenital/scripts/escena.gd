@@ -67,6 +67,9 @@ var cam := Camera2D.new()
 var hud := Hud.new()
 var ruta := "user://partida.json"
 var auto_t := 0.0
+var _perfil_render_objetivo := 0
+var _perfil_render_calentamiento := 60
+var _perfil_render_muestras: Array[int] = []
 var menu_items: Array = []
 var menu_sel := 0
 var menu_msg := ""
@@ -99,6 +102,7 @@ func _ready() -> void:
 		elif a.begins_with("--equipo="): dbg["equipo"] = a.substr(9)
 		elif a.begins_with("--mira="): dbg["mira"] = a.substr(7)
 		elif a == "--auto-ataque": dbg["auto_ataque"] = true
+		elif a.begins_with("--perfil-render="): _perfil_render_objetivo = maxi(0, int(a.get_slice("=", 1)))
 		elif a == "--servidor": srv["si"] = true
 		elif a.begins_with("--puerto="): srv["puerto"] = int(a.substr(9))
 		elif a.begins_with("--semilla="): srv["semilla"] = int(a.substr(10))
@@ -973,6 +977,7 @@ static func ordenar_dibujo(a: Array, b: Array) -> bool:
 
 func _draw() -> void:
 	if modo != "juego" or j == null: return
+	var perfil_inicio_us := Time.get_ticks_usec() if _perfil_render_objetivo > 0 else -1
 	rotulos.clear()
 	cuerpos_rotulo.clear()
 	arte_mundo.parcelas=j.d.get("mundo_vivo",{}).get("autonomia",{}).get("sociedad",{}).get("parcelas",{})
@@ -1085,6 +1090,18 @@ func _draw() -> void:
 		for y in range(y0, y1 + 1):
 			for x in range(x0, x1 + 1):
 				if m.bloquea(Vector2i(x, y)): draw_rect(Rect2(x * s, y * s, s, s), Color(1, 0, 0, 0.25))
+	if perfil_inicio_us >= 0:
+		var duracion_us := Time.get_ticks_usec() - perfil_inicio_us
+		if _perfil_render_calentamiento > 0:
+			_perfil_render_calentamiento -= 1
+		else:
+			_perfil_render_muestras.append(duracion_us)
+			if _perfil_render_muestras.size() >= _perfil_render_objetivo:
+				_perfil_render_muestras.sort()
+				var suma := 0
+				for us in _perfil_render_muestras: suma += us
+				print("MEDIDA_RENDER muestras=%d promedio_us=%.1f p95_us=%d max_us=%d alcance=CPU_de_Escena._draw_sin_GPU" % [_perfil_render_muestras.size(), float(suma) / _perfil_render_muestras.size(), _perfil_render_muestras[int(_perfil_render_muestras.size() * 0.95)], _perfil_render_muestras[-1]])
+				_perfil_render_objetivo = 0
 
 func _telegrafo(e: Dictionary) -> void:
 	var info: Dictionary = j.combate.info_ataque(e, e.atq)

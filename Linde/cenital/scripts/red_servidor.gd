@@ -38,7 +38,7 @@ var intencion := {}             # id -> Vector2i (dirección que mantiene)
 var ultimo_seq := {}            # id -> último número de pedido aceptado (evita duplicados y repeticiones)
 var anim := {}                  # id -> {prev, t_mov, an}
 var ofertas := {}               # id destino -> {de, dar, recibir}: oferta de intercambio pendiente (sesión, no se guarda)
-var registro := {"rechazos": {}, "tick_ms": [], "max_jugadores": 0, "bytes": 0.0}
+var registro := {"rechazos": {}, "tick_ms": [], "snapshot_ms": [], "difusion_ms": [], "max_jugadores": 0, "bytes": 0.0}
 var _firma_mundo := {}
 var _firma_priv := {}
 var _firma_perf := ""
@@ -393,16 +393,24 @@ func _difundir() -> void:
 	var dentro: Array = []
 	for pid in peers: if peers[pid].id != "": dentro.append(pid)
 	if dentro.is_empty(): return
+	var medir := ruta_registro != ""
+	var t0 := Time.get_ticks_usec() if medir else 0
 	var inst := instantanea_actual()
 	# ENet no debe fragmentar instantáneas grandes en el canal sin fiabilidad.
 	var grande := var_to_bytes(inst).size() > 1200
+	var t_snapshot := Time.get_ticks_usec() - t0 if medir else 0
+	var t_envio := Time.get_ticks_usec() if medir else 0
 	for pid in dentro:
 		if grande: instantanea_fiable.rpc_id(pid,inst)
 		else: instantanea.rpc_id(pid, inst)
 	# Las instantáneas de movimiento son frecuentes y pequeñas; no serializar y duplicar el estado durable 20 veces/s.
 	# Un cuarto de segundo mantiene las acciones visibles con poca demora y reduce cinco veces este trabajo.
 	_estado_acum += TICK
-	if _estado_acum + 0.000001 < ESTADO_S: return
+	if _estado_acum + 0.000001 < ESTADO_S:
+		if medir and registro.snapshot_ms.size() < 20000:
+			registro.snapshot_ms.append(float(t_snapshot) / 1000.0)
+			registro.difusion_ms.append(float(Time.get_ticks_usec() - t_envio) / 1000.0)
+		return
 	_estado_acum = fmod(_estado_acum, ESTADO_S)
 	var cambios := {}
 	for k in SECCIONES:
@@ -425,7 +433,11 @@ func _difundir() -> void:
 		if f != _firma_priv.get(id, ""):
 			_firma_priv[id] = f
 			_enviar(pid, ["privado", pr])
+	var t_difusion := Time.get_ticks_usec() - t_envio if medir else 0
 	registro.bytes += (multiplayer.multiplayer_peer as ENetMultiplayerPeer).get_host().pop_statistic(ENetConnection.HOST_TOTAL_SENT_DATA)
+	if medir and registro.snapshot_ms.size() < 20000:
+		registro.snapshot_ms.append(float(t_snapshot) / 1000.0)
+		registro.difusion_ms.append(float(t_difusion) / 1000.0)
 
 func _enviar(pid: int, datos: Array) -> void:
 	if pid != 0 and is_inside_tree() and multiplayer.multiplayer_peer is ENetMultiplayerPeer: evento.rpc_id(pid, datos)
@@ -489,11 +501,23 @@ func otros_jugadores() -> Array:
 func estado_txt() -> String:
 	return "Alojando en el puerto %d · %d conectado(s)" % [puerto, ids.size()]
 
+static func _resumen_ms(muestras: Array) -> Dictionary:
+	if muestras.is_empty(): return {"prom_ms": -1.0, "p95_ms": -1.0, "max_ms": -1.0}
+	var t: Array = muestras.duplicate()
+	t.sort()
+	var suma := 0.0
+	for x in t: suma += float(x)
+	return {"prom_ms": suma / t.size(), "p95_ms": t[int(t.size() * 0.95)], "max_ms": t.back()}
+
 func _escribir_registro() -> void:
 	var t: Array = registro.tick_ms.duplicate()
 	t.sort()
+	var tick_stats := _resumen_ms(registro.tick_ms)
 	var r := {"rechazos": registro.rechazos, "max_jugadores": registro.max_jugadores, "ticks": t.size(),
+		"tick_ms_prom": tick_stats["prom_ms"],
 		"tick_ms_p95": t[int(t.size() * 0.95)] if not t.is_empty() else -1.0, "tick_ms_max": t.back() if not t.is_empty() else -1.0,
+		"snapshot_muestras": registro.snapshot_ms.size(), "difusion_muestras": registro.difusion_ms.size(),
+		"snapshot": _resumen_ms(registro.snapshot_ms), "difusion": _resumen_ms(registro.difusion_ms),
 		"bytes_enviados": registro.bytes, "segundos": _t}
 	var f := FileAccess.open(ruta_registro, FileAccess.WRITE)
 	if f: f.store_string(JSON.stringify(r, "  "))

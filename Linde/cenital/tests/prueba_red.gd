@@ -140,6 +140,12 @@ func _evaluar(srv_cerro: bool) -> void:
 		and g.d.mundo.rotos.has(roca) and not txt.contains("clave-ana") and not txt.contains("clave-bea"),
 		"cerró solo=%s · guardado con @ana y @bea, la roca rota y sin claves en claro" % srv_cerro)
 	var seg := maxf(1.0, float(R.get("segundos", 1)))
+	var snap: Dictionary = R.get("snapshot", {})
+	var dif: Dictionary = R.get("difusion", {})
+	_check("medidas de serialización y difusión registradas", int(R.get("snapshot_muestras", 0)) > 0 and int(R.get("difusion_muestras", 0)) > 0,
+		"muestras snapshot=%s difusión=%s" % [R.get("snapshot_muestras", 0), R.get("difusion_muestras", 0)])
 	_check("tick del servidor < 16,67 ms (p95)", float(R.get("tick_ms_p95", 99)) < 16.67,
-		"p95=%.3f ms máx=%.3f ms en %s ticks · enviados %.1f KB/s en total (%.1f KB/s por jugador conectado, media de %.0f s)" % [float(R.get("tick_ms_p95", -1)),
-		float(R.get("tick_ms_max", -1)), R.get("ticks"), float(R.get("bytes_enviados", 0)) / 1024.0 / seg, float(R.get("bytes_enviados", 0)) / 1024.0 / seg / 2.0, seg])
+		"tick prom=%.3f p95=%.3f máx=%.3f ms en %s · snapshot prom/p95/máx=%.3f/%.3f/%.3f ms · difusión prom/p95/máx=%.3f/%.3f/%.3f ms · enviados %.1f KB/s total (%.1f KB/s/jugador), %.0f s" % [float(R.get("tick_ms_prom", -1)), float(R.get("tick_ms_p95", -1)),
+		float(R.get("tick_ms_max", -1)), R.get("ticks"), float(snap.get("prom_ms", -1)), float(snap.get("p95_ms", -1)), float(snap.get("max_ms", -1)),
+		float(dif.get("prom_ms", -1)), float(dif.get("p95_ms", -1)), float(dif.get("max_ms", -1)), float(R.get("bytes_enviados", 0)) / 1024.0 / seg,
+		float(R.get("bytes_enviados", 0)) / 1024.0 / seg / 2.0, seg])
