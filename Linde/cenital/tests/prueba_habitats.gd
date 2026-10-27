@@ -30,7 +30,11 @@ func _init() -> void:
   var iguales=true
   for k in ["planes_sha256","terreno_sha256","estado_sha256","ocupadas","especies"]:
    # JSON lee cantidades como float; el canon de reglas equipara 1 y 1.0.
-   iguales=iguales and H.canonico(normal[k])==H.canonico(previo[k]) and H.canonico(normal[k])==H.canonico(inverso[k])
+   var base_igual=H.canonico(normal[k])==H.canonico(previo[k])
+   var orden_igual=H.canonico(normal[k])==H.canonico(inverso[k])
+   if not base_igual or not orden_igual:
+    print("DIFERENCIA semilla=%d generador=%d campo=%s base=%s normal=%s inverso=%s"%[int(previo.semilla),int(previo.generador),k,H.canonico(previo[k]),H.canonico(normal[k]),H.canonico(inverso[k])])
+   iguales=iguales and base_igual and orden_igual
   ok(iguales,"semilla %d/v%d: distribución exacta anterior, reinicio y orden inverso"%[int(previo.semilla),int(previo.generador)])
   ok(normal.compatibles and inverso.compatibles and normal.consulta_pura and inverso.consulta_pura,"hábitats compatibles y lectura pura %d/v%d"%[int(previo.semilla),int(previo.generador)])
  var cargado=J.cargar(BASE+"guardado_previo.json")
