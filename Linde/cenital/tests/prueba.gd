@@ -1,4 +1,5 @@
 extends SceneTree
+const ImgUtil = preload("res://scripts/imagen_util.gd")
 const P = preload("res://scripts/params.gd")
 const C = preload("res://scripts/catalogos.gd")
 const Inv = preload("res://scripts/inventario.gd")
@@ -1351,13 +1352,13 @@ func t_ataque_equipo() -> void:
 		"ataque equipo: sin conjunto de ataque cae a la caminata sin error")
 
 func t_imagen_util() -> void:
-	var im: Image = ImagenUtil.imagen("res://arte/equipo/base/capas/cuerpo.png")
+	var im: Image = ImgUtil.imagen("res://arte/equipo/base/capas/cuerpo.png")
 	ok(im != null and im.get_width() > 0 and im.get_width() % 4 == 0 and im.get_width() == im.get_height(), "imagen_util: res:// importado devuelve imagen cuadrada de 4 celdas")
 	var f: String = tmp + "/iu.png"
 	Image.create(8, 4, false, Image.FORMAT_RGBA8).save_png(f)
-	var t: Image = ImagenUtil.imagen(f)
-	ok(t != null and t.get_width() == 8 and t.get_height() == 4 and ImagenUtil.existe(f), "imagen_util: PNG temporal en user:// sigue funcionando")
-	ok(ImagenUtil.imagen("res://arte/no_existe.png") == null and not ImagenUtil.existe("res://arte/no_existe.png"), "imagen_util: ruta inexistente devuelve null")
+	var t: Image = ImgUtil.imagen(f)
+	ok(t != null and t.get_width() == 8 and t.get_height() == 4 and ImgUtil.existe(f), "imagen_util: PNG temporal en user:// sigue funcionando")
+	ok(ImgUtil.imagen("res://arte/no_existe.png") == null and not ImgUtil.existe("res://arte/no_existe.png"), "imagen_util: ruta inexistente devuelve null")
 
 
 # ---------- E02: herramienta, daño, caída y dormir ----------

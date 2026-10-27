@@ -89,6 +89,8 @@ jobs:
           ditto -x -k entrega/Linde-Mac-Apple-Silicon.zip extraido
           P="$PWD/extraido/Linde Mac"
           test -x "$P/Iniciar servidor.command"
+          test -d "$P/Linde/cenital/.godot/imported"
+          "$P/runtime/python/bin/python3" "$P/servidor/dedicado/prueba_cliente_paquete.py" --godot "$P/runtime/Godot.app/Contents/MacOS/Godot" 2>&1 | tee qa/cliente-extraido.log
           "$P/runtime/python/bin/python3" "$P/servidor/dedicado/prueba_paquete.py" --godot "$P/runtime/Godot.app/Contents/MacOS/Godot" 2>&1 | tee qa/extraido.log
       - name: Publicar paquete Apple Silicon
         uses: actions/upload-artifact@v4

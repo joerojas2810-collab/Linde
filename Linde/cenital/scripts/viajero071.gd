@@ -1,4 +1,5 @@
 extends RefCounted
+const ImgUtil = preload("res://scripts/imagen_util.gd")
 # Native 128px drawing -> 32 world units. Cached 192px frames allow limbs/tools to extend beyond the body.
 const A=preload("res://scripts/aspecto.gd")
 const P=preload("res://scripts/params.gd")
@@ -12,7 +13,7 @@ var generados=0
 
 func source(path:String)->Image:
 	if not images.has(path):
-		var im=ImagenUtil.imagen(path)
+		var im=ImgUtil.imagen(path)
 		if im==null:return null
 		im.convert(Image.FORMAT_RGBA8);images[path]=im
 	return images[path]

@@ -1,4 +1,5 @@
 extends SceneTree
+const ImgUtil = preload("res://scripts/imagen_util.gd")
 var raiz="res://arte/pendientes_v1/"
 var fichas={}
 func core(im:Image,r:Rect2i)->Image:
@@ -16,7 +17,7 @@ func montar(im:Image,tam:Vector2i,lim:Vector2,pie:Vector2i)->Image:
 	var out=Image.create(tam.x,tam.y,false,Image.FORMAT_RGBA8);out.fill(Color(0,0,0,0))
 	out.blit_rect(im,Rect2i(Vector2i.ZERO,im.get_size()),pie-Vector2i(im.get_width()/2,im.get_height()));return out
 func _initialize():
-	var mundo=ImagenUtil.imagen(raiz+"mundo_fuente.png");mundo.convert(Image.FORMAT_RGBA8)
+	var mundo=ImgUtil.imagen(raiz+"mundo_fuente.png");mundo.convert(Image.FORMAT_RGBA8)
 	var nombres=["roca_redonda","roca_pizarra","roca_caliza","bayas_redonda","bayas_ancha","arbusto_valle","arbusto_bosque","arbusto_sierra","arbusto_secano","arbusto_pradera","arbusto_ribera","penasco","pino_ralo","arbol_seco","espinoso","arenisca","arbusto_flores","juncos","canas","helecho","tronco_caido","petate","jergon","letrero"]
 	for i in 24:
 		var c=i%6;var f=i/6
@@ -29,12 +30,12 @@ func _initialize():
 		var im=montar(core(mundo,rec),tam,lim,pie);guardar(im,nombres[i])
 		var b=im.get_used_rect();fichas[nombres[i]]={"archivo":"../pendientes_v1/"+nombres[i]+".png","canvas":[tam.x/2,tam.y/2],"pivote":[pie.x/2,pie.y/2],"bbox":[b.position.x/2,b.position.y/2,b.end.x/2,b.end.y/2],"escala_dibujada":1,"resolucion_nativa":[tam.x,tam.y]}
 	FileAccess.open(raiz+"catalogo.json",FileAccess.WRITE).store_string(JSON.stringify(fichas,"  "))
-	var fauna=ImagenUtil.imagen(raiz+"fauna_fuente.png");fauna.convert(Image.FORMAT_RGBA8)
+	var fauna=ImgUtil.imagen(raiz+"fauna_fuente.png");fauna.convert(Image.FORMAT_RGBA8)
 	var filas=[0,395,710,1004,1368,fauna.get_height()]
 	var ids=["espectro_bosque","golem_sierra","diablillo_secano","arpia_pradera","slime_ribera"]
 	var fuentes=["enemy_specter_normal_earth","enemy_golem_normal_earth","enemy_imp_normal_fire","enemy_harpy_normal_wind","enemy_slime_normal_water"]
 	for f in 5:
-		var original=ImagenUtil.imagen("res://arte/actores/fauna/"+fuentes[f]+"_idle.png");var fw=original.get_width()/4
+		var original=ImgUtil.imagen("res://arte/actores/fauna/"+fuentes[f]+"_idle.png");var fw=original.get_width()/4
 		var bbox=original.get_region(Rect2i(0,0,fw,original.get_height())).get_used_rect()
 		for c in 3:
 			var rec=Rect2i(c*324,filas[f],324,filas[f+1]-filas[f])
@@ -53,7 +54,7 @@ func _initialize():
 					if accion=="defeat":dy=180-cuadro.get_height()
 					atlas.blit_rect(cuadro,Rect2i(0,0,mini(140,cuadro.get_width()),cuadro.get_height()),Vector2i(k*140+dx,dy))
 				guardar(atlas,"fauna_"+ids[f]+"_"+accion+"_"+str(c+1))
-	var equipo=ImagenUtil.imagen(raiz+"equipo_fuente.png");equipo.convert(Image.FORMAT_RGBA8)
+	var equipo=ImgUtil.imagen(raiz+"equipo_fuente.png");equipo.convert(Image.FORMAT_RGBA8)
 	var ew=equipo.get_width();var eh=equipo.get_height()
 	for c in 6:
 		var im=core(equipo,Rect2i(c*ew/6,0,ew/6,eh/3))

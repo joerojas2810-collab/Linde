@@ -1,4 +1,5 @@
 extends RefCounted
+const ImgUtil = preload("res://scripts/imagen_util.gd")
 # Personaje base + equipo por capas con las hojas de colores índice (Linde/documentos/contrato-equipo.md, PROPUESTA).
 # Hojas en <dir>/manifiesto.json: celda 32, pivote [16, 32], filas frente/derecha/espalda/izquierda, 4 cuadros.
 # Recoloreado por CPU (Image), sin shaders: cada color índice -> color de la paleta de la familia -> delta de la variante.
@@ -99,7 +100,7 @@ func _cargar_estados(dir: String) -> void:
 		estados[nombre] = st
 
 func _cargar_estado_img(f: String, cel: int, cols: int, errs: Array, guardar: Callable) -> void:
-	var img: Image = ImagenUtil.imagen(f)
+	var img: Image = ImgUtil.imagen(f)
 	if img == null: errs.append("falta " + f); return
 	if img.get_width() != cols * cel or img.get_height() != 4 * cel: errs.append("%s no mide %dx%d" % [f, cols * cel, 4 * cel]); return
 	img.convert(Image.FORMAT_RGBA8)
@@ -139,7 +140,7 @@ func _cargar_ataque(dir: String) -> void:
 	for e in atq.errores: push_warning("arte_equipo (ataque): " + e)
 
 func _cargar_en(f: String, cel: int, errs: Array, guardar: Callable) -> void:
-	var img: Image = ImagenUtil.imagen(f)
+	var img: Image = ImgUtil.imagen(f)
 	if img == null: errs.append("falta " + f); return
 	if img.get_width() != 4 * cel or img.get_height() != 4 * cel: errs.append("%s no mide %dx%d" % [f, 4 * cel, 4 * cel]); return
 	img.convert(Image.FORMAT_RGBA8)

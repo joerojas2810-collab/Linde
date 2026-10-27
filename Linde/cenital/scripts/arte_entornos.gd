@@ -1,4 +1,5 @@
 extends "res://scripts/mundo_arte.gd"
+const ImgUtil = preload("res://scripts/imagen_util.gd")
 ## Presentación mundial integrada. Mismas celdas, recursos, colisiones y reglas.
 var mundo_actual
 const VELADURAS:={"valle":Color(0.46,0.73,0.23,0.16),"bosque":Color(0.18,0.44,0.20,0.23),"pradera":Color(0.38,0.73,0.30,0.23),"sierra":Color(0.33,0.44,0.54,0.20),"secano":Color(0.87,0.60,0.24,0.19)}
@@ -116,7 +117,7 @@ var atlas: Texture2D
 var regiones: Dictionary = {}
 
 func _init() -> void:
-	var im := ImagenUtil.imagen("res://arte/mundo/vivo/objetos_originales.png")
+	var im := ImgUtil.imagen("res://arte/mundo/vivo/objetos_originales.png")
 	atlas = ImageTexture.create_from_image(im)
 	var cfg: Array = JSON.parse_string(FileAccess.get_file_as_string("res://arte/mundo/vivo/atlas.json"))
 	for i in cfg[0].ids.size():

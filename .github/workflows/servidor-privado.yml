@@ -71,11 +71,25 @@ jobs:
         run: |
           & ./paquete/runtime/python/python.exe ./paquete/servidor/dedicado/prueba_paquete.py --godot ./paquete/runtime/Godot.exe 2>&1 | Tee-Object qa/paquete.log
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Crear ZIP preservando recursos ocultos y probar el cliente extraído
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force entrega | Out-Null
+          python -c "import shutil; shutil.make_archive('entrega/Linde-Windows-servidor-y-juego', 'zip', 'paquete')"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m zipfile -e entrega/Linde-Windows-servidor-y-juego.zip "ensayo con espacios/Linde Windows"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $P = "$pwd/ensayo con espacios/Linde Windows"
+          if (-not (Test-Path "$P/Linde/cenital/.godot/imported")) { throw 'Faltan recursos importados en el ZIP' }
+          & "$P/runtime/python/python.exe" "$P/servidor/dedicado/prueba_cliente_paquete.py" --godot "$P/runtime/Godot.exe" 2>&1 | Tee-Object qa/cliente-extraido.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & "$P/runtime/python/python.exe" "$P/servidor/dedicado/prueba_paquete.py" --godot "$P/runtime/Godot.exe" 2>&1 | Tee-Object qa/servidor-extraido.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Guardar paquete
         uses: actions/upload-artifact@v4
         with:
           name: Linde-Windows-servidor-y-juego
-          path: paquete/
+          path: entrega/Linde-Windows-servidor-y-juego.zip
           retention-days: 14
       - name: Resumir fallos del motor en anotaciones
         if: failure()
