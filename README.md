@@ -15,9 +15,10 @@ Juego cenital (vista superior) en Godot 4.7.1. Estado, controles y decisiones: `
 
 Modo opcional sin cuenta global y paquetes portables **Windows x64 y Mac Apple Silicon**,
 construidos y validados automáticamente con Godot 4.7.1 el 26/10/2026.
-[Windows](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320588) ·
-[Mac Apple Silicon](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320525).
+[Windows](https://github.com/joerojas2810-collab/Linde/actions/runs/40426412236) ·
+[Mac Apple Silicon](https://github.com/joerojas2810-collab/Linde/actions/runs/40426412243).
 [Guía específica Mac](Linde/cenital/docs/MAC_APPLE_SILICON.md).
+Incluye Fase 7 y la corrección de recursos/clases del ZIP descargado.
 Falta prueba manual entre equipos y por Internet; no es un release estable.
 [Guía de juego local, servidor, conexión y respaldos](Linde/cenital/docs/SERVIDOR_PRIVADO.md).
 El flujo anterior de cuentas sigue disponible.

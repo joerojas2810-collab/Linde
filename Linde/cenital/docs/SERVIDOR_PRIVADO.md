@@ -16,6 +16,9 @@ En GitHub:
 3. Esperar a que termine correctamente. Si falla, consultar los logs; no ignorar
    errores de importación, de integración o del paquete.
 4. Descargar el artefacto **Linde-Windows-servidor-y-juego** y extraerlo completo.
+   Dentro viene **Linde-Windows-servidor-y-juego.zip**: extraer también ese ZIP en
+   una carpeta nueva, por ejemplo `C:\Juegos\Linde`. No ejecutar desde el ZIP ni
+   mezclar archivos con una descarga anterior.
    GitHub puede pedir iniciar sesión para descargar artefactos. La retención es de
    14 días; esto no es todavía un release permanente.
 
@@ -199,3 +202,27 @@ Windows en macOS. No hay paquete Intel en esta entrega.
 9. **Mantener explícito el límite de red.** UDP 7777 mueve la partida; TCP 7778
    gestiona el acceso seguro. El paquete no abre el router ni resuelve CGNAT.
    Las pruebas de CI ocurren en una máquina; no certifican conexión entre casas.
+
+## Versión combinada Fase 7 — paquetes corregidos (26/10/2026)
+
+Código `a4fffda` en `arena/9a96dc31-linde`, descendiente de `feature/fase7-arena`.
+[Windows aprobado](https://github.com/joerojas2810-collab/Linde/actions/runs/40426412236)
+y [Mac aprobado](https://github.com/joerojas2810-collab/Linde/actions/runs/40426412243).
+
+Se corrigió la dependencia de la caché global para ImagenUtil con preloads explícitos.
+Windows ahora publica un ZIP interno que preserva `.godot`, omitido por defecto al
+subir carpetas ocultas a Artifacts. Se extrae y prueba el cliente (menú y perfil local
+con guardado/carga), además del servidor, antes de publicar en ambos sistemas.
+
+Se ejecutaron ocho suites de Fase 7 y las integraciones previas. Se hizo portable la
+ruta temporal de prueba_fauna. El test de hábitats mantiene los valores históricos
+exactos de terreno, planes, ocupación y especies; el hash global del fixture anterior
+a la economía regional no representa ese contrato. Se comprueba por separado que el
+estado completo actual es igual entre órdenes y que las consultas no lo modifican.
+No se regeneraron los fixtures históricos ni se cambió la distribución de fauna para
+forzar el resultado. No implica prueba de GPU/interfaz en un equipo físico ni Internet.
+
+Para actualizar un mundo existente: detener y respaldar primero su carpeta completa;
+no copiar solo mundo.json, pues la identidad/certificado y SQLite del servidor también
+son necesarios. Los clientes deben usar la misma versión que el servidor. No borrar
+los datos personales de Godot para actualizar el programa.

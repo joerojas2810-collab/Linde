@@ -464,3 +464,26 @@ bloqueante antes de listen en HTTPServer con prueba de regresión. No se omiten 
 ni se desactiva TLS. Gatekeeper en una Mac personal, juego cruzado físico y redes
 externas siguen sin validar. [Guía Mac](../../../Linde/cenital/docs/MAC_APPLE_SILICON.md).
 La explicación paso a paso del empaquetado Windows está en la guía general del servidor.
+
+### Integración Fase 7 en Arena y corrección cliente/ZIP — 26/10/2026
+
+Merge `bba6374` de `feature/fase7-arena` en `arena/9a96dc31-linde`, preservando
+`4b56d72`. Código final probado `a4fffda`. Ejecuciones **success**:
+[Windows 40426412236](https://github.com/joerojas2810-collab/Linde/actions/runs/40426412236),
+[Mac arm64 40426412243](https://github.com/joerojas2810-collab/Linde/actions/runs/40426412243).
+
+21 pruebas Python, ocho suites Fase 7 (fauna, hábitats, distribución, territorios,
+señales, señales por red, navegación y decisiones), perfil local y accesos global,
+existente y privado con dos clientes/reconexión. Cliente y servidor probados desde
+el ZIP extraído. Preloads explícitos de imagen_util y ZIP interno Windows preservando
+`.godot` corrigen el fallo de arranque reportado por el usuario. Artefactos nuevos:
+Windows ID 12700690434 (136.885.516 bytes); Mac ID 12700236801 (236.568.888 bytes),
+14 días de retención. Los enlaces anteriores no incorporan estas correcciones.
+
+La prueba histórica de hábitats separa la igualdad de planes/terreno/cantidades del
+hash global anterior a la economía regional; conserva la referencia espacial y añade
+igualdad del estado actual entre órdenes, además de pureza. Se sustituyó `/tmp` por
+OS.get_cache_dir en prueba_fauna para Windows. No se desactivaron suites ni se
+actualizaron los fixtures para ocultar diferencias. Avisos históricos de recursos/UDP
+al salir persisten. Pendientes GPU/GUI manual, Mac/PC físicos y dos redes externas.
+Main y feature/fase7-arena no fueron modificadas.

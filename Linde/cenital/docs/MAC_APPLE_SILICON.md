@@ -1,8 +1,8 @@
 # Linde — Mac con chip Apple (M1/M2/M3/M4 o posterior)
 
 Paquete experimental **arm64**, no Intel. Construcción aprobada el 26/10/2026:
-[ejecución 40422320525](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320525),
-código `9c9896d`. [Descargar artefacto](https://github.com/joerojas2810-collab/Linde/actions/runs/40422320525/artifacts/12699131096),
+[ejecución 40426412243](https://github.com/joerojas2810-collab/Linde/actions/runs/40426412243),
+código `a4fffda`. [Descargar artefacto](https://github.com/joerojas2810-collab/Linde/actions/runs/40426412243/artifacts/12700236801),
 aproximadamente 237 MB, retención 14 días. El workflow `Servidor privado Mac Apple
 Silicon` solo publica el ZIP si pasan las pruebas. Consultar su ejecución para
 conocer el resultado; este documento por sí solo no certifica una construcción.

@@ -172,3 +172,16 @@ prueba de regresión con getfqdn simulado como error. No se deshabilitó TLS. Lo
 trazados de etapas solo se activan con LINDE_DIAGNOSTICO=1 y no incluyen credenciales.
 La validación no cubre Gatekeeper/cuarentena de descargas personales ni una sesión
 cruzada Mac/Windows o dos redes físicas.
+
+### Versión combinada Fase 7 y corrección ZIP — 26/10/2026
+
+Integración por merge de `feature/fase7-arena` en `arena/9a96dc31-linde` (`bba6374`),
+conservando la corrección de ImagenUtil/ZIP `4b56d72`. Código construido `a4fffda`.
+Resultados aprobados: Windows `40426412236` y Mac `40426412243`, 21 pruebas Python,
+ocho suites Fase 7, perfil local, identidad global, dos clientes y reconexión en modos
+existente/privado. El ZIP extraído ahora se prueba arrancando cliente y servidor; el
+cliente verifica ausencia de errores de script y guardado/carga del perfil aislado.
+Windows preserva `.godot` dentro de un ZIP interno; extraer ambos niveles.
+[Guía actualizada y contratos de prueba](SERVIDOR_PRIVADO.md#versión-combinada-fase-7--paquetes-corregidos-26102026).
+Se mantienen pendientes equipos físicos, GPU/interfaz manual, Gatekeeper e Internet.
+No se modificó main ni se publicó sobre la rama feature/fase7-arena.
