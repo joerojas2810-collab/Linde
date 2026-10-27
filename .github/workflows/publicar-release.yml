@@ -1,0 +1,109 @@
+name: Publicar Release experimental
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TAG: v0.1.0-preview.1
+      SHA: a4fffda26df2fb82c7ab2df47cedccd6e5653234
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar procedencia de los paquetes aprobados
+        shell: bash
+        run: |
+          set -euo pipefail
+          for run in 40426412236 40426412243; do
+            test "$(gh api "repos/$GH_REPO/actions/runs/$run" --jq .conclusion)" = success
+            test "$(gh api "repos/$GH_REPO/actions/runs/$run" --jq .head_sha)" = "$SHA"
+          done
+          test "$(gh api "repos/$GH_REPO" --jq .private)" = false
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo 'Ya existe esta Release: no se sustituye ni publica automáticamente otra versión.' >&2
+            exit 1
+          fi
+      - name: Descargar Windows validado
+        uses: actions/download-artifact@v4
+        with:
+          name: Linde-Windows-servidor-y-juego
+          run-id: 40426412236
+          github-token: ${{ github.token }}
+          path: entrega
+      - name: Descargar Mac validado
+        uses: actions/download-artifact@v4
+        with:
+          name: Linde-Mac-Apple-Silicon-servidor-y-juego
+          run-id: 40426412243
+          github-token: ${{ github.token }}
+          path: entrega
+      - name: Comprobar ZIP y generar sumas de descarga
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          import zipfile
+          sums = []
+          for filename, prefix in [('Linde-Windows-servidor-y-juego.zip', ''), ('Linde-Mac-Apple-Silicon.zip', 'Linde Mac/')]:
+              path = Path('entrega') / filename
+              with zipfile.ZipFile(path) as archive:
+                  if archive.testzip() is not None:
+                      raise RuntimeError('ZIP corrupto: ' + filename)
+                  names = archive.namelist()
+                  if prefix + 'Linde/cenital/scripts/imagen_util.gd' not in names:
+                      raise RuntimeError('Falta imagen_util: ' + filename)
+                  if not any(name.startswith(prefix + 'Linde/cenital/.godot/imported/') for name in names):
+                      raise RuntimeError('Faltan recursos importados: ' + filename)
+              sums.append(hashlib.sha256(path.read_bytes()).hexdigest() + '  ' + filename)
+          Path('entrega/SHA256SUMS.txt').write_text('\n'.join(sums) + '\n', encoding='ascii')
+          PY
+      - name: Publicar paquetes como prerelease pública
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > notas.md <<'NOTES'
+          ## Linde — Fase 7, juego local y servidor privado (experimental)
+
+          Descargas sin cuenta de GitHub. Elegir el archivo de su sistema en **Assets**:
+          - **Linde-Windows-servidor-y-juego.zip**: Windows x64.
+          - **Linde-Mac-Apple-Silicon.zip**: Mac con chip Apple, arm64; no Intel.
+          - **SHA256SUMS.txt**: comprobación de integridad de las descargas.
+
+          Extraer el ZIP completo en una carpeta nueva. Estos ZIP son los paquetes directos,
+          sin el envoltorio adicional de GitHub Actions. No ejecutar desde dentro del ZIP.
+          Abrir **Jugar Linde.bat** (Windows) o **Jugar Linde.command** (Mac), elegir el modo
+          local/privado y crear una partida. Para alojar, ejecutar **Iniciar servidor**;
+          para salir guardando, **Guardar y cerrar servidor**.
+
+          Incluye Godot, Python y dependencias. No requiere instalarlos globalmente.
+          Incluye Fase 7 y corrección de ImagenUtil/recursos ocultos del ZIP.
+          Código probado: `a4fffda26df2fb82c7ab2df47cedccd6e5653234`.
+          Windows: ejecución 40426412236. Mac: ejecución 40426412243.
+
+          **Antes de actualizar:** detener y respaldar la carpeta completa del servidor;
+          no sobrescribir ni borrar sus mundos, certificados o credenciales. Los jugadores
+          deben usar la misma versión. El mundo no tiene contraseña por defecto: configurar
+          una antes de exponer el servidor. UDP 7777 y TCP 7778 requieren firewall/router
+          accesibles para jugar entre casas; el paquete no resuelve CGNAT.
+
+          **Estado experimental:** pruebas automáticas de 21 casos Python, ocho suites de
+          Fase 7, cliente local, dos clientes/reconexión y cliente/servidor del ZIP extraído.
+          No certifica GPU/interfaz manual, Gatekeeper en una Mac personal, juego cruzado
+          entre equipos físicos ni conexión entre casas. El paquete de Linde no tiene
+          firma/notarización Developer ID propia; macOS puede requerir aprobación explícita.
+          No desactivar globalmente las protecciones del sistema.
+
+          Ver LEEME.md y, en Mac, LEEME-MAC.md incluidos en el paquete. Las notas de esta
+          Release prevalecen sobre los enlaces históricos de Artifacts de esas guías.
+          Los archivos automáticos "Source code" no contienen los runtimes: descargar los
+          ZIP nombrados arriba para jugar.
+          NOTES
+          gh release create "$TAG" entrega/Linde-Windows-servidor-y-juego.zip entrega/Linde-Mac-Apple-Silicon.zip entrega/SHA256SUMS.txt --draft --prerelease --target "$SHA" --title 'Linde — Fase 7 y servidor privado (experimental)' --notes-file notas.md
+          gh release edit "$TAG" --draft=false
