@@ -13,6 +13,7 @@ const PUERTO := 7777
 const MAX_CLIENTES := 15
 const VERSION := 8              # versión del protocolo; el cliente la manda en «hola» (6: saberes y enseñanza; 7: huella de reglas; 8: geometría y expansión del registro de lugares)
 const TICK := 0.05              # 20 Hz
+const ESTADO_S := 0.25           # estado durable a 4 Hz; la instantánea de movimiento sigue a 20 Hz
 const ALCANCE := 2              # celdas (Chebyshev) para construir, retirar y usar cofres
 const MAX_PEDIDOS_S := 40       # pedidos por segundo y conexión; el resto se descarta
 const ESPERA_HOLA_S := 10.0     # una conexión que no se identifica en este tiempo se corta
@@ -42,6 +43,7 @@ var _firma_mundo := {}
 var _firma_priv := {}
 var _firma_perf := ""
 var _acum := 0.0
+var _estado_acum := ESTADO_S  # fuerza una primera reconciliación; las bienvenidas ya llevan estado completo
 var _guard_t := 0.0
 var _t := 0.0
 
@@ -271,6 +273,11 @@ func ejecutar(id: String, datos) -> bool:
 			var o: Dictionary = ofertas[id]
 			ofertas.erase(id)
 			j.intercambiar(o.de, id, o.dar, o.recibir)
+		"aceptar_plantilla", "entregar_plantilla":
+			if not _sig(a, [TYPE_STRING]) or a[0].is_empty() or j.vivo == null:
+				return _rechazo(id, tipo)
+			if tipo == "aceptar_plantilla": j.aceptar_mision_plantilla(a[0], id)
+			else: j.entregar_mision_plantilla(a[0], id)
 		"fabricar", "usar", "equipar", "desequipar", "aprender", "aceptar", "entregar":
 			if not _sig(a, [TYPE_STRING]) or not _clave_valida(tipo, a[0]): return _rechazo(id, tipo)
 			match tipo:
@@ -392,6 +399,11 @@ func _difundir() -> void:
 	for pid in dentro:
 		if grande: instantanea_fiable.rpc_id(pid,inst)
 		else: instantanea.rpc_id(pid, inst)
+	# Las instantáneas de movimiento son frecuentes y pequeñas; no serializar y duplicar el estado durable 20 veces/s.
+	# Un cuarto de segundo mantiene las acciones visibles con poca demora y reduce cinco veces este trabajo.
+	_estado_acum += TICK
+	if _estado_acum + 0.000001 < ESTADO_S: return
+	_estado_acum = fmod(_estado_acum, ESTADO_S)
 	var cambios := {}
 	for k in SECCIONES:
 		var v = _seccion(k)

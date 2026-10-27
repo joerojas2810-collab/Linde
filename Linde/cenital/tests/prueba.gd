@@ -170,6 +170,7 @@ func t_construccion() -> void:
 	ok(not j.construir("muro", j.mundo.objetos[arb].c).ok, "no se construye sobre un árbol")
 	var antes: Dictionary = j.jug().inv.duplicate()
 	ok(not j.construir("muro", Vector2i(27, 23)).ok and j.jug().inv == antes and j.mundo.constr_en(Vector2i(27, 23)).is_empty(), "bloquear un lugar esencial se rechaza y revierte")
+	ok(not j.construir("muro", Mundo.ENTRADA).ok and j.jug().inv == antes and j.mundo.constr_en(Mundo.ENTRADA).is_empty(), "la celda de entrada tampoco puede quedar bajo un muro")
 	ok(not j.construir("muro", Vector2i(30, 19)).ok, "no se encierra la cama de Maren")
 	ok(j.construir("muro", Vector2i(31, 40)).ok and j.construir("muro", Vector2i(32, 39)).ok, "muros laterales válidos")
 	ok(not j.construir("muro", Vector2i(32, 41)).ok, "no se puede encerrar al propio jugador")

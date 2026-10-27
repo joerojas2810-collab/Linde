@@ -80,7 +80,7 @@ Los datos vienen del Atlas (contrato `atlas-contrato.md`, versión del 2026-10-2
 - **Si el servidor se reinicia en la misma hora de juego:** la última hora evaluada se persiste para no evaluar dos veces el mismo minuto; el enfriamiento persistido impide repetir el evento.
 - **Si `<id>_presente` ya es `true` y el habitante existe:** la reconciliación no hace nada.
 - **Si una llegada no tiene cama libre:** llega igual y duerme al raso hasta que haya una cama (la cama es descanso, no capacidad). Si hay cama libre pero sin ruta desde la entrada, el evento no se aplica y reintenta en la siguiente evaluación.
-- **Si el jugador bloquea el camino de entrada:** ya está impedido, porque la entrada es un lugar esencial para las reglas de construcción.
+- **Si el jugador intenta bloquear la celda de entrada (32,46):** la construcción se rechaza explícitamente. La comprobación no depende solo de una búsqueda de alcanzabilidad, porque esa búsqueda incluye su origen aunque la celda esté bloqueada.
 - **Si la cama de un habitante presente se retira:** vale el comportamiento actual (`sin_cama`).
 - **Si el paquete cambia entre reinicios:** las variables guardadas desconocidas se conservan y se avisan; las tarjetas retiradas se ignoran; las variables nuevas toman su inicial.
 - **Si nadie está conectado:** el mundo sigue avanzando; al volver, los jugadores ven el estado resultante.

@@ -791,7 +791,7 @@ func _armar() -> void:
 					elif m.da == "" and e == "cumplida": j.entregar(id))
 				if e == "activa" or e == "cumplida":
 					for o in m.obj: _l("      " + ("[x] " if j.objetivo_ok(o) else "[ ] ") + j.objetivo_txt(o))
-			if j.vivo != null and not j.autonomia.activa():   # misiones de plantilla (story-004); el cliente de red no tiene vivo
+				if j.vivo != null and not j.autonomia.activa():   # la réplica muestra el estado recibido y envía aceptación/entrega a la autoridad
 				for mi: Dictionary in j.vivo.instancias_visibles(J.LOCAL):
 					var iid: String = str(mi.iid)
 					var act: bool = mi.estado == "activa"

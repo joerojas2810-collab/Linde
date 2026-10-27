@@ -551,6 +551,8 @@ func _area_ruta(desde: Vector2i) -> Rect2i:
 ## Validación finita: nunca recorre un mundo ilimitado para colocar una pared.
 func construccion_segura(c: Vector2i, actores: Array) -> bool:
 	if es_valle(c):
+		# La BFS incluye su origen aunque esté bloqueado; no permitir que una pared ocupe la propia entrada/esencial.
+		if esenciales(ID_INICIAL).has(c): return false
 		var alc:=alcanzables()
 		for e in esenciales(ID_INICIAL):if not alc.has(e):return false   # alcanzabilidad desde la entrada del Valle: solo su pueblo
 		for actor in actores:

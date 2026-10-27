@@ -296,6 +296,10 @@ class Replica extends "res://scripts/juego.gd":
 	func engarzar(clave: String, variante: String, _id: String = LOCAL) -> Dictionary: return _env(["engarzar", clave, variante])
 	func aceptar(mid: String, _id: String = LOCAL) -> Dictionary: return _env(["aceptar", mid])
 	func entregar(mid: String, _id: String = LOCAL) -> Dictionary: return _env(["entregar", mid])
+	func aceptar_mision_plantilla(iid: String, _id: String = LOCAL) -> Dictionary:
+		return _env(["aceptar_plantilla", iid])
+	func entregar_mision_plantilla(iid: String, _id: String = LOCAL) -> Dictionary:
+		return _env(["entregar_plantilla", iid])
 	func gestionar_cofre(cid: String, accion: String, destino: String = "", _id: String = LOCAL) -> Dictionary:
 		return _env(["gestionar_cofre", cid, accion, destino])
 
