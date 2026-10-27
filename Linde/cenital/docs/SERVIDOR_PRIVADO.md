@@ -3,10 +3,19 @@
 **Paquete experimental Windows x64 — 26/10/2026.** El workflow comprueba el
 proyecto con Godot y publica el paquete solo tras pasar sus pruebas automatizadas.
 No es una certificación de conexión entre dos computadoras físicas o por Internet.
-La distribución se realiza como artefacto de Actions, no como release permanente.
+La distribución recomendada es la Release pública experimental; Actions conserva
+los artefactos de las construcciones durante 14 días.
 El modo global de cuentas sigue disponible y no es necesario para este modo privado.
 
 ## Conseguir el paquete Windows
+
+**Recomendado, sin cuenta de GitHub:** descargar el ZIP Windows desde la
+[Release pública v0.1.0-preview.1](https://github.com/joerojas2810-collab/Linde/releases/tag/v0.1.0-preview.1).
+Extraerlo una sola vez y conservar la carpeta completa. Los paquetes de Release
+no tienen la caducidad de 14 días de Actions. Son los mismos ZIP internos validados;
+no incluyen el envoltorio extra del artefacto. SHA256SUMS.txt permite comprobarlos.
+
+### Alternativa: artefactos de GitHub Actions
 
 En GitHub:
 

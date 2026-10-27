@@ -9,6 +9,12 @@ conocer el resultado; este documento por sí solo no certifica una construcción
 
 ## Descargar y abrir
 
+**Recomendado:** [descargar ZIP Mac sin cuenta de GitHub](https://github.com/joerojas2810-collab/Linde/releases/download/v0.1.0-preview.1/Linde-Mac-Apple-Silicon.zip)
+desde la Release pública experimental. Extraerlo **una sola vez** para obtener
+`Linde Mac`, y seguir desde el paso 4 de abajo. No caduca a los 14 días como Actions.
+
+Los pasos 1–3 siguientes corresponden únicamente a la alternativa de Actions:
+
 1. En GitHub → **Actions → Servidor privado Mac Apple Silicon**, abrir una ejecución
    verde de `arena/9a96dc31-linde`.
 2. En **Artifacts**, descargar `Linde-Mac-Apple-Silicon-servidor-y-juego`. GitHub puede

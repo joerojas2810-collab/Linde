@@ -487,3 +487,15 @@ OS.get_cache_dir en prueba_fauna para Windows. No se desactivaron suites ni se
 actualizaron los fixtures para ocultar diferencias. Avisos históricos de recursos/UDP
 al salir persisten. Pendientes GPU/GUI manual, Mac/PC físicos y dos redes externas.
 Main y feature/fase7-arena no fueron modificadas.
+
+### Release pública experimental — 26/10/2026
+
+Publicada `v0.1.0-preview.1`, prerelease no borrador, sobre código probado `a4fffda`.
+[Ejecución de publicación 40428090190](https://github.com/joerojas2810-collab/Linde/actions/runs/40428090190)
+aprobada: verifica procedencia/conclusión/SHA de ambas construcciones previas, CRC
+y recursos ocultos de los ZIP, calcula SHA256SUMS y publica ambos paquetes sin
+reconstruirlos. Descargas públicas sin cuenta; conserva el estado experimental y
+las limitaciones de validación física anteriores. No se modifica main ni se cambia
+la visibilidad del repositorio, que ya era público.
+
+[Release](https://github.com/joerojas2810-collab/Linde/releases/tag/v0.1.0-preview.1).
