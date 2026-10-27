@@ -1,0 +1,58 @@
+{
+  "pruebas": [
+    {
+      "prueba": "registro funciona sin ningún mundo alojado",
+      "ok": true
+    },
+    {
+      "prueba": "otra instancia de acceso reconoce la misma identidad",
+      "ok": true
+    },
+    {
+      "prueba": "el mismo ID no entra dos veces al mismo mundo",
+      "ok": true
+    },
+    {
+      "prueba": "mundo usa ID global sin recibir contraseña de Linde",
+      "ok": true
+    },
+    {
+      "prueba": "contraseña privada sigue separada de la cuenta",
+      "ok": true
+    },
+    {
+      "prueba": "la misma cuenta entra a otro mundo sin registrarse de nuevo",
+      "ok": true
+    },
+    {
+      "prueba": "mundo no duplica cuentas ni hashes globales: mundo1",
+      "ok": true
+    },
+    {
+      "prueba": "mundo no duplica cuentas ni hashes globales: mundo2",
+      "ok": true
+    },
+    {
+      "prueba": "servidor de mundo no acepta un login paralelo",
+      "ok": true
+    },
+    {
+      "prueba": "token global no sirve directamente como permiso de mundo",
+      "ok": true
+    },
+    {
+      "prueba": "progreso preparado en el guardado existente",
+      "ok": true
+    },
+    {
+      "prueba": "reconexión desde nueva instancia recupera el personaje global",
+      "ok": true
+    },
+    {
+      "prueba": "las cuentas siguen disponibles con todos los mundos cerrados",
+      "ok": true
+    }
+  ],
+  "otra_pc_verificada": false,
+  "internet_verificado": false
+}

@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "preferencias": {
+    "espectro_bosque": {"vecino_objeto": ["arbol", "arbusto"]},
+    "golem_sierra": {"vecino_objeto": ["roca", "veta", "veta_cobre"]},
+    "diablillo_secano": {"vecinos_despejados": true},
+    "arpia_pradera": {"vecinos_despejados": true},
+    "slime_ribera": {"conservar_origen": true}
+  },
+  "territorial": {"radio_nucleo": 12, "evitar_rutas": true, "anclar": ["ruinas", "cueva"], "sin_ubicacion": "posponer"}
+}

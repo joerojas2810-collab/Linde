@@ -1,0 +1,4683 @@
+{
+  "activacion_nueva": false,
+  "casos": [
+    {
+      "consulta_pura": true,
+      "fauna": 90,
+      "hostiles": 40,
+      "hostiles_dentro_lugar": 0,
+      "hostiles_dentro_poblado": 0,
+      "hostiles_nucleo_1e": 3,
+      "hostiles_sobre_ruta": 0,
+      "lugares": 11,
+      "lugares_verificados": true,
+      "macros": [
+        "0,0",
+        "0,1",
+        "1,0"
+      ],
+      "persistencia": true,
+      "poblados": 3,
+      "poblados_verificados": true,
+      "puntos": [
+        {
+          "celda": [
+            79,
+            6
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 39,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@4,0",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            94,
+            6
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 24,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@5,0",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            75,
+            29
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 40,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,1",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            85,
+            21
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 35,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@5,1",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            72,
+            40
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 26,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,2",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            81,
+            41
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 34,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,2",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            1,
+            55
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@0,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            31,
+            59
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 1,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@1,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            34,
+            60
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@2,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            63,
+            55
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 4,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@3,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            64,
+            60
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 1,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            9,
+            64
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 9,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@0,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            18,
+            66
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 7,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@1,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            44,
+            76
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@2,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            53,
+            68
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 9,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@3,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            71,
+            72
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 1,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            93,
+            79
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,4",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            11,
+            90
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 27,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@0,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            30,
+            83
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 24,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@1,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            35,
+            94
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 16,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@2,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            61,
+            81
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@3,5",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            74,
+            85
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,5",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            91,
+            91
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 19,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            10,
+            104
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@0,6",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            23,
+            98
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 9,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@1,6",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            36,
+            106
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@2,6",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            48,
+            105
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@3,6",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            66,
+            110
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 18,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@4,6",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            95,
+            98
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 30,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,6",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            11,
+            117
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 21,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@0,7",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            23,
+            121
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 9,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@1,7",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            43,
+            118
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 1,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@2,7",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            54,
+            116
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@3,7",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            72,
+            122
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@4,7",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            80,
+            114
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 28,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@5,7",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            15,
+            143
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@0,8",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            26,
+            131
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@1,8",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            34,
+            139
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@2,8",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            52,
+            140
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 4,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@3,8",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            65,
+            131
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@4,8",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            94,
+            130
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 37,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@5,8",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            15,
+            150
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@0,9",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            24,
+            146
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@1,9",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            47,
+            147
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@2,9",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            48,
+            156
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@3,9",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            69,
+            144
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 16,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@4,9",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            88,
+            147
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 33,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,9",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            31,
+            172
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 13,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@1,10",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            43,
+            162
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 1,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@2,10",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            59,
+            167
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@0,1"
+            ],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@3,10",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            67,
+            161
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@0,1"
+            ],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@4,10",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            85,
+            171
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,10",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            26,
+            179
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 25,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@1,11",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            39,
+            178
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@2,11",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            52,
+            176
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@3,11",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            72,
+            178
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 9,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@4,11",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            83,
+            180
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,11",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            102,
+            8
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@6,0",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            126,
+            1
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 9,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@7,0",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            140,
+            15
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@8,0",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            145,
+            3
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 24,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@9,0",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            189,
+            1
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 70,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@11,0",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            101,
+            17
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@6,1",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            136,
+            26
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@1,0"
+            ],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@8,1",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            155,
+            31
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 11,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@1,0"
+            ],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@9,1",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            172,
+            26
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 32,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@10,1",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            185,
+            29
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 43,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@11,1",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            122,
+            45
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            132,
+            40
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 4,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            151,
+            44
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 16,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@9,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            174,
+            34
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 29,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@10,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            190,
+            41
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 52,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@11,2",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            109,
+            58
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 19,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@6,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            119,
+            62
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            131,
+            56
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,3",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            151,
+            49
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@9,3",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            174,
+            49
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 34,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,3",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            183,
+            59
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 33,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            99,
+            69
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 30,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@6,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            126,
+            71
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            143,
+            64
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 4,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            145,
+            69
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 9,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@9,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            171,
+            73
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            180,
+            74
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            102,
+            80
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 23,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@6,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            124,
+            93
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 38,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            131,
+            87
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 28,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            156,
+            80
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@9,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            161,
+            82
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            178,
+            81
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,5",
+          "tipo": "golem_sierra"
+        }
+      ],
+      "rutas": 11,
+      "rutas_verificadas": true,
+      "semilla": 123
+    },
+    {
+      "consulta_pura": true,
+      "fauna": 90,
+      "hostiles": 43,
+      "hostiles_dentro_lugar": 0,
+      "hostiles_dentro_poblado": 0,
+      "hostiles_nucleo_1e": 4,
+      "hostiles_sobre_ruta": 1,
+      "lugares": 11,
+      "lugares_verificados": true,
+      "macros": [
+        "0,0",
+        "0,1",
+        "1,0"
+      ],
+      "persistencia": true,
+      "poblados": 3,
+      "poblados_verificados": true,
+      "puntos": [
+        {
+          "celda": [
+            71,
+            1
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 55,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@4,0",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            89,
+            12
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 26,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@5,0",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            78,
+            22
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 27,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@4,1",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            84,
+            25
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@5,1",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            79,
+            36
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 25,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@4,2",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            83,
+            40
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 25,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@5,2",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            14,
+            56
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 18,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@0,3",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            20,
+            62
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@1,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            34,
+            60
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@2,3",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            59,
+            62
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 0,
+            "en_ruta": true,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@3,3",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            78,
+            53
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 16,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            80,
+            53
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 18,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            14,
+            73
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 4,
+            "en_ruta": false,
+            "lugares": [
+              "ruinas@0,0"
+            ],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@0,4",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            23,
+            73
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@1,4",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            44,
+            78
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@2,4",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            63,
+            73
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 11,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@3,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            65,
+            77
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,4",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            89,
+            78
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 36,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            13,
+            81
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@0,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            24,
+            84
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@1,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            45,
+            81
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 18,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@2,5",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            62,
+            93
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 31,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@3,5",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            73,
+            80
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 22,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,5",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            80,
+            80
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 29,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,5",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            60,
+            97
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 35,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@3,6",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            78,
+            108
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 55,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,6",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            81,
+            105
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 55,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,6",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            6,
+            117
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 28,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@0,7",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            47,
+            126
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@2,7",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            48,
+            126
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 16,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@3,7",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            75,
+            114
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 48,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@4,7",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            95,
+            126
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 63,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@5,7",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            15,
+            130
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@0,8",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            25,
+            140
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 7,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@1,8",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            35,
+            130
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@2,8",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            53,
+            140
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 11,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@3,8",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            90,
+            140
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 48,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@5,8",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            8,
+            147
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@0,9",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            26,
+            144
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@1,9",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            36,
+            144
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@2,9",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            49,
+            154
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@3,9",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            64,
+            159
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 29,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@4,9",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            92,
+            147
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 57,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@5,9",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            12,
+            171
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 10,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@0,1"
+            ],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@0,10",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            20,
+            175
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@0,1"
+            ],
+            "poblados": [],
+            "ruta": "ruta@poblado@0,1"
+          },
+          "id": "fauna_v1@1,10",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            38,
+            169
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@2,10",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            53,
+            171
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@3,10",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            67,
+            163
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 25,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@4,10",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            84,
+            169
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 31,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,10",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            7,
+            179
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@0,1"
+            ],
+            "poblados": [],
+            "ruta": "ruta@poblado@0,1"
+          },
+          "id": "fauna_v1@0,11",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            16,
+            188
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 7,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@0,1"
+            ],
+            "poblados": [],
+            "ruta": "ruta@poblado@0,1"
+          },
+          "id": "fauna_v1@1,11",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            43,
+            180
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@2,11",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            48,
+            183
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@3,11",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            73,
+            189
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@4,11",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            83,
+            189
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,11",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            107,
+            8
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@6,0",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            119,
+            11
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@7,0",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            131,
+            13
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 13,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,0",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            149,
+            0
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 44,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@9,0",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            190,
+            14
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 71,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@11,0",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            110,
+            17
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@6,1",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            126,
+            21
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@7,1",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            131,
+            29
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,1",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            146,
+            31
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@9,1",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            160,
+            27
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 32,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@10,1",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            190,
+            29
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 62,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@11,1",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            111,
+            36
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 7,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@6,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            112,
+            43
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@7,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            138,
+            38
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 10,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            151,
+            34
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 19,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@9,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            168,
+            33
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 37,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@10,2",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            185,
+            39
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 48,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@11,2",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            108,
+            56
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 23,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@6,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            116,
+            48
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,3",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            138,
+            49
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@1,0"
+            ],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,3",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            153,
+            58
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@1,0"
+            ],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@9,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            168,
+            48
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 22,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@10,3",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            179,
+            50
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 31,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,3",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            98,
+            79
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 46,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@6,4",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            123,
+            68
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            142,
+            76
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 21,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@8,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            151,
+            67
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@9,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            175,
+            79
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 4,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            188,
+            76
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            111,
+            90
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 54,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@6,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            120,
+            83
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 38,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            130,
+            90
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 37,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            151,
+            92
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 28,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@9,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            171,
+            94
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            187,
+            83
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,5",
+          "tipo": "golem_sierra"
+        }
+      ],
+      "rutas": 11,
+      "rutas_verificadas": true,
+      "semilla": 456
+    },
+    {
+      "consulta_pura": true,
+      "fauna": 89,
+      "hostiles": 40,
+      "hostiles_dentro_lugar": 0,
+      "hostiles_dentro_poblado": 0,
+      "hostiles_nucleo_1e": 1,
+      "hostiles_sobre_ruta": 1,
+      "lugares": 11,
+      "lugares_verificados": true,
+      "macros": [
+        "0,0",
+        "0,1",
+        "1,0"
+      ],
+      "persistencia": true,
+      "poblados": 3,
+      "poblados_verificados": true,
+      "puntos": [
+        {
+          "celda": [
+            73,
+            10
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 68,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@4,0",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            91,
+            10
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 50,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@5,0",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            71,
+            26
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 50,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,1",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            94,
+            20
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 37,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@5,1",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            72,
+            36
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 41,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,2",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            84,
+            37
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 39,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@5,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            13,
+            56
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 19,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@0,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            26,
+            61
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@1,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            41,
+            57
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@2,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            48,
+            56
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 7,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@3,3",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            67,
+            60
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,3",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            2,
+            70
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 27,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@0,4",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            23,
+            75
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@1,4",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            47,
+            77
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 14,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@2,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            48,
+            75
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,0"
+          },
+          "id": "fauna_v1@3,4",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            79,
+            72
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            84,
+            77
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            13,
+            87
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 10,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@0,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            21,
+            87
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@1,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            33,
+            92
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 13,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@2,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            53,
+            81
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@3,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            66,
+            93
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@4,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            80,
+            92
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 11,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@5,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            0,
+            96
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 32,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@0,6",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            20,
+            105
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 23,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,0"
+          },
+          "id": "fauna_v1@1,6",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            34,
+            102
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@2,6",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            59,
+            97
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 13,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,0"
+          },
+          "id": "fauna_v1@3,6",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            72,
+            107
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@4,6",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            95,
+            109
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 11,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,6",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            3,
+            115
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 33,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@0,7",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            23,
+            117
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 11,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@1,7",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            37,
+            118
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 1,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@2,7",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            57,
+            127
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 8,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@3,7",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            68,
+            117
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@4,7",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            90,
+            117
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 7,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,7",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            14,
+            140
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 13,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@0,1"
+            ],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@0,8",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            20,
+            136
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@1,8",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            36,
+            139
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 4,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@2,8",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            52,
+            143
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@3,8",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            7,
+            155
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@0,9",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            29,
+            145
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@0,1"
+            ],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@1,9",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            43,
+            145
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 11,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@2,9",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            48,
+            152
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 16,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@3,9",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            87,
+            152
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 37,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,9",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            13,
+            169
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 16,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@0,1"
+          },
+          "id": "fauna_v1@0,10",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            26,
+            168
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 6,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@1,10",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            41,
+            175
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 9,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@2,10",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            93,
+            168
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 59,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@5,10",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            3,
+            185
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 29,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@0,11",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            19,
+            183
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 13,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@1,11",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            37,
+            185
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 1,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@2,11",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            48,
+            185
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [
+              "campamento@0,1"
+            ],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@3,11",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            79,
+            191
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 36,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@4,11",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            87,
+            187
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 41,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@0,1"
+          },
+          "id": "fauna_v1@5,11",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            100,
+            0
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 51,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@6,0",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            124,
+            3
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 24,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,0",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            136,
+            3
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@8,0",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            145,
+            0
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 23,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@9,0",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            174,
+            5
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 26,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,0",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            191,
+            7
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 41,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,0",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            109,
+            29
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 19,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@6,1",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            126,
+            29
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,1",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            137,
+            18
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 5,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@8,1",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            145,
+            26
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 3,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@1,0"
+            ],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@9,1",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            175,
+            28
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 13,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,1",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            186,
+            18
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 25,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,1",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            111,
+            34
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@ruinas@1,0"
+          },
+          "id": "fauna_v1@6,2",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            124,
+            44
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 4,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,2",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            135,
+            39
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 0,
+            "en_ruta": true,
+            "lugares": [],
+            "nucleos_1e": [
+              "poblado@1,0"
+            ],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@8,2",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            159,
+            39
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 13,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@poblado@1,0"
+          },
+          "id": "fauna_v1@9,2",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            168,
+            45
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 23,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,2",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            185,
+            43
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 38,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,2",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            107,
+            54
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 21,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@6,3",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            117,
+            55
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 11,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,3",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            138,
+            60
+          ],
+          "conducta": "territorial",
+          "contexto": {
+            "distancia_ruta": 10,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,3",
+          "tipo": "slime_ribera"
+        },
+        {
+          "celda": [
+            173,
+            51
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 34,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@10,3",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            176,
+            52
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 38,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@1,0"
+          },
+          "id": "fauna_v1@11,3",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            111,
+            66
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 17,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@6,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            126,
+            65
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 2,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            140,
+            68
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 12,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,4",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            144,
+            72
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 16,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@9,4",
+          "tipo": "diablillo_secano"
+        },
+        {
+          "celda": [
+            175,
+            69
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 47,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@10,4",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            186,
+            78
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 58,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@11,4",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            99,
+            91
+          ],
+          "conducta": "huidizo",
+          "contexto": {
+            "distancia_ruta": 26,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@cueva@0,1"
+          },
+          "id": "fauna_v1@6,5",
+          "tipo": "arpia_pradera"
+        },
+        {
+          "celda": [
+            120,
+            95
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 15,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@7,5",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            131,
+            95
+          ],
+          "conducta": "defensivo",
+          "contexto": {
+            "distancia_ruta": 7,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@8,5",
+          "tipo": "golem_sierra"
+        },
+        {
+          "celda": [
+            151,
+            83
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 20,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@9,5",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            168,
+            93
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 33,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@10,5",
+          "tipo": "espectro_bosque"
+        },
+        {
+          "celda": [
+            181,
+            83
+          ],
+          "conducta": "hostil",
+          "contexto": {
+            "distancia_ruta": 50,
+            "en_ruta": false,
+            "lugares": [],
+            "nucleos_1e": [],
+            "poblados": [],
+            "ruta": "ruta@campamento@1,0"
+          },
+          "id": "fauna_v1@11,5",
+          "tipo": "espectro_bosque"
+        }
+      ],
+      "rutas": 11,
+      "rutas_verificadas": true,
+      "semilla": 789
+    }
+  ],
+  "legado_sin_nucleo": true
+}

@@ -1,0 +1,38 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS partida nueva inicializa estado aditivo de fauna
+PASS catálogo y botines usan objetos válidos
+PASS misma semilla da encuentros idénticos independientemente del orden
+PASS los cinco biomas aportan especies distintas y la ribera usa orilla transitable
+PASS puntos de fauna respetan franja segura del valle y agua de ribera
+PASS explorar genera fauna real y respeta el techo de 24
+PASS no hay duplicados ni apariciones sobre paredes, agua o jugador
+PASS daño confirmado registra herida persistente
+PASS guarda fauna herida con la partida
+PASS cargar restaura al herido sin curarlo ni duplicarlo
+PASS descargar una región retira la criatura y conserva su herida
+PASS regresar recupera la misma herida
+PASS muerte da recompensa una sola vez y activa enfriamiento
+PASS guardar y cargar no permite cultivar una baja reciente
+PASS descargar y regresar tampoco elimina el enfriamiento
+PASS la especie reaparece cuando vence su enfriamiento
+PASS gólem no inicia combate por mera proximidad
+PASS gólem se defiende al recibir un golpe
+PASS arpía intenta huir antes de ser atacada
+PASS diablillo detecta al jugador y prepara ataque con aviso
+PASS persecución regional tiene límite y cancela el ataque
+PASS ataque avisado inflige daño real y entra en recuperación
+PASS invulnerabilidad impide daño repetido inmediato
+PASS fauna regional no golpea a través de un muro
+PASS descargar fauna no crea una falsa animación de muerte
+PASS construir sobre un punto aplaza la aparición
+PASS exploración sucesiva mantiene acotadas criaturas activas y caché de planes
+PASS 20 tiras de arte disponibles con dimensiones compatibles
+PASS instantánea del servidor transmite especies y estados a la réplica
+PASS réplica nunca genera fauna por su cuenta
+PASS migración añade fauna sin reemplazar inventario ni progreso
+FAUNA: 31 comprobaciones, 0 fallos
+WARNING: 132 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 16 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

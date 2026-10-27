@@ -450,6 +450,8 @@ func privado(id: String) -> Dictionary:
 	var pr: Dictionary = j.jug(id).duplicate(true)
 	pr.erase("clave")
 	pr.erase("pos")
+	if pr.has("mapa"):pr.mapa=j.Exploracion.mapa_publicable(pr.mapa)
+	if j.mundo.modo_inicio()=="poblado":pr["aviso_ecologico"]=j.aviso_ecologico(id)
 	pr["pista_contextual"] = j.pista_contextual(id).duplicate(true)
 	pr["msgs"] = j.rt[id].msgs.duplicate() if j.rt.has(id) else []
 	return pr

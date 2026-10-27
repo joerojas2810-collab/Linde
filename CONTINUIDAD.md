@@ -1,5 +1,17 @@
 # Continuidad: cómo retomar Linde
 
+## Integración con Arena autorizada (26/10/2026)
+
+El usuario solicitó subir Fase7 en una rama combinada con `arena/9a96dc31-linde`, sin tocar main. Rama de integración: `feature/fase7-arena`, padres Fase7 `9a7ea9f` y Arena `ea1f251`. Se conservan Fase6, cuentas y empaquetado de Arena; el único conflicto textual fue ESTADO y se resolvió conservando ambos historiales. Código de fauna/navegación/exploración idéntico al cierre de Fase7. Validación sobre la combinación: navegación32, decisiones18, fauna31 y señales ENet16, total97/97. [Evidencia](production/qa/evidence/mundo-1/fase-7/integracion-arena/README.md). Esta autorización sustituye las notas anteriores de no publicar la rama, pero no autoriza merge a main.
+
+## Último cierre: Fase 7 completada en su alcance autorizado (26/10/2026)
+
+Rama `feature/fase7-ecologia`, base `eb022a4`; código de cierre `a5e8f3d`, sin push/merge. [Informe final, límites y reproducción](production/qa/evidence/mundo-1/fase-7/cierre/README.md). Hábitats y territorio A/B, señales/memoria personal, bajas/heridas y navegación regional funcionales. BFS existente respeta caja y presupuesto de movimiento; caché transitoria, destinos inaccesibles e invalidación por obras/streaming/golpes. Sin cambios de balance, generación o arquitectura de autoridad.
+
+Última validación: navegación32/32, decisiones18/18, fauna31/31 y señales ENet16/16 (dos clientes reales locales), total97/97. Regreso reproducible20 atascos antes →0 después; persecución0/10. P2 histórico sin fuente, no se equiparan muestras. Revisión automatizada en escena real con retirada, capturas inspeccionadas y vida40/40. Avisos2,20–3,23s antes del daño en casos controlados; se reutilizan parámetros actuales conforme M1-F7-C, sin R/T globales nuevos ni inmunidad. Logs fallidos y finales conservados.
+
+No queda otro bloque obligatorio de Fase7 dentro del alcance autorizado. Siguiente acción de proyecto: revisar/integrar la rama coordinadamente cuando el usuario lo autorice; no iniciar capacidades nuevas ni fusionar main automáticamente. Excluidos reproducción, migración, economía ecológica, simulación global y nuevos ataques a NPC/edificios. Internet/otra PC y reacción humana universal no certificados. Las notas históricas de abajo con Fase7 pendiente quedan superadas por este cierre; mantienen trazabilidad.
+
 ## Qué es
 Linde es un RPG 2D cenital de **mundo vivo** en Godot 4.7.1 (`Linde/cenital`, GDScript): servidor autoritativo con réplica en clientes, habitantes autónomos (necesidades, trueque, construcción, llegada, oficios, saberes), fabricación por gramática, exterior generado por regiones y fauna. La **autonomía es el modo principal**; no hay campaña obligatoria. El objetivo actual es **Mundo 1**: un mundo compartido y persistente, con pueblos que prosperan o decaen, donde exploración, civilización y progresión salgan de un mismo mundo simulado (sin escalado de enemigos al nivel del jugador).
 
@@ -87,3 +99,45 @@ Verificación mínima del merge: `prueba_taller_ui` **7 PASS/0 FAIL** (escena co
 ## Integración publicada de acceso inicial con main (26/10/2026)
 
 El usuario autorizó subir la revisión completa. Integrado origin/main `c84b88e` mediante `cdac6e9`, conservando talleres, casas comunales y tareas de Fase 6. Esta nota supera las notas históricas de revisión sin publicar. Validación combinada: 9 casos unitarios, 16 de acceso/partidas, 13 de identidad con dos mundos, 6 suites de regresión y tareas 16/16. [Detalle y límites](production/qa/evidence/login-inicial/main-c84b88e/README.md). Sin prueba externa ni cambios a la skin.
+
+## Continuar Fase 7: ecología territorial (26/10/2026)
+
+Rama de trabajo `feature/fase7-ecologia` sobre main `eb022a4`; no merge/push autorizados para esta fase. Diseño obligatorio versionado: [DISENO_MAESTRO_FASE7](docs/investigacion/DISENO_MAESTRO_FASE7.md); contrato existente actualizado: [FAUNA_Y_PELIGROS](Linde/cenital/docs/FAUNA_Y_PELIGROS.md). Primer bloque: perfiles abreviados/explícitos, validación y consulta pura de hábitat integrados en Fauna, sin cambiar distribución, reglas selladas ni persistencia. Evidencia: [hábitats](production/qa/evidence/mundo-1/fase-7/habitats/README.md), con 23 comprobaciones nuevas y equivalencia exacta en 5.046 regiones; base fauna31/terreno49, regresión fauna31 y red exterior localhost1. No declarar terminada la fase ni verificados P2/señales/Internet.
+
+Siguiente: aprobación humana de distribución/calmas/lugares antes de modificar posiciones/densidades/dificultad. No añadir reproducción, migración, simulación global o economía dependiente de Fase 6. `LINDE_Fase_7_investigacion_ecologia.md` no estaba en el repo ni junto a los adjuntos: ubicación solicitada, pendiente. Mantener la skin en pausa y el checkout original intacto.
+
+
+### Investigación ecológica localizada (26/10/2026)
+
+El usuario volvió a indicar la carpeta y ya se encontró y leyó íntegra [LINDE_Fase_7_investigacion_ecologia.md](docs/investigacion/LINDE_Fase_7_investigacion_ecologia.md). Se incorpora como referencia sin alterar el diseño maestro ni el alcance autorizado: stock, reproducción, migración y efectos económicos siguen aplazados. Esta nota supera el pendiente de localización anterior. Sin cambios de código ni repetición de pruebas en este complemento; la redistribución territorial sigue pendiente de propuesta/aprobación.
+
+### Siguiente decisión: propuesta A de ubicaciones (26/10/2026)
+
+Prototipo y [galería comparativa](production/qa/evidence/mundo-1/fase-7/propuesta-ubicacion/GALERIA.html) preparados, no activados en el juego. Mismas cantidades/especies por región; preferencias de vecinos cardinales con vegetación/roca o despejados, y retorno al punto original si no hay alternativa. 2.523 regiones: 2.271 apariciones, 904 puntos propuestos diferentes; conservación/orden inverso/estado puro y regresión hábitats23. Investigación complementaria ya localizada y leída (`6f78a6b`). Antes de continuar con activación se requiere decisión humana de distribución y persistencia versionada; no sustituir planes de partidas existentes. No merge/push.
+
+
+### Preferencias A aprobadas y activación v2 (26/10/2026)
+
+El usuario aprobó las preferencias de ubicación. Mundos nuevos poblados guardan `d.fauna.distribucion` v2 y una copia de los datos declarativos; los existentes permanecen v1 sin mover sus puntos, bajas o heridas. Modificar defaults no reescribe mundos guardados y una política desconocida rechaza carga con motivo explícito. Cantidades, especie, ID, bioma y región conservados; mismo generador/candidatos, reglas globales selladas intactas. No se activa migración de mundos ni cambios de balance.
+
+Verificado: distribución **17/17**, compatibilidad/hábitats **23/23**, fauna **31/31**, cuentas/reconexión real con dos mundos locales **13/13**; los dos guardados llevan v2. [Informe y límites](production/qa/evidence/mundo-1/fase-7/activacion-v2/README.md). Sin otra PC/Internet. Avisos de recursos conocidos al salir. Siguiente: señales de fuentes reales y propuesta de calma/lugares; R/T y otros cambios territoriales no están aprobados. Rama `feature/fase7-ecologia`, sin merge/push. Esta nota supera el pendiente de aprobación A de las notas anteriores.
+
+### Propuesta B pendiente de aprobación (26/10/2026)
+
+Contexto territorial de solo lectura y comparativa de calma/lugares preparados en [propuesta-b](production/qa/evidence/mundo-1/fase-7/propuesta-b/README.md). V2 sigue activa sin cambios. B propone ampliar exclusión de nacimiento hostil/territorial a rutas y núcleo12 existente, anclar hostiles a ruinas/cuevas de su misma región y posponer si no hay candidato seguro compatible. Medición 324regiones/269planes:14puntos movidos,6anclas,9conflictos→0,0aplazamientos naturales. Caso límite de aplazamiento probado. Requiere aprobación porque cambia distribución y puede reducir presencia local en casos sin alternativa; no es inmunidad ni cambia combate. Resolver persistencia/expansión antes de activar: no usar registro mutable en plan_region sin congelar las decisiones. Sin merge/push.
+
+
+### Propuesta B aprobada y activación territorial v3 (26/10/2026)
+
+El usuario aprobó B, incluido posponer una aparición sin celda compatible. Nuevos mundos poblados usan v3; existentes v1/v2 se conservan sin migración. Exclusión de nacimiento hostil/territorial en rutas, áreas de pueblos y núcleo existente12; anclas a ruinas/cuevas compatibles de la misma región, sin nueva población nominal. La persecución sigue pudiendo entrar al poblado. Decisiones de generación congeladas una vez en `d.fauna.territorios`, incluidas ausencias, anclas y aplazamientos; no se reconstruyen por cargar ni cambian con obras posteriores. No hay simulación ecológica lejana nueva.
+
+Verificación final, registrada en carpeta nueva: territorios18/18, distribuciónv2 17/17, hábitats/v1 23/23, amenazas12/12; integración de dos mundos y clientes locales con reconexión13/13. Expansión inversa/negativa, guardado y caché negativa comprobados. Ambos servidores guardan v3 y tres territorios. [Evidencia e incidencias](production/qa/evidence/mundo-1/fase-7/activacion-v3/README.md). El primer arranque rechazó el número JSON3.0 por una comparación de tipos; corregido y validado. Ahora un mundo no creado impide que el servidor anuncie escucha. No se alteraron resúmenes fallidos: la validación final nueva conserva el historial. Avisos de recursos conocidos persisten; sin otra PC/Internet.
+
+Rama `feature/fase7-ecologia`, sin merge/push. Siguiente bloque: señales procedentes de criaturas/estados reales y conocimiento personal. R/T, navegación/P2, ataques a NPC/edificios, reproducción/migración y economía siguen pendientes/fuera de este bloque. Esta nota supera el pendiente de aprobación B de las notas anteriores.
+
+
+### Fase 7: avisos reales y memoria personal (26/10/2026)
+
+Señal direccional desde fauna regional viva, radio de conocimiento y línea de visión existentes. Se retira por muerte, movimiento, distancia o pérdida de visión. Memoria por bloque con fecha/procedencia, referencias históricas en mapa y testimonios NPC durante la conversación existente; sin misión, recompensa, radio o tiempo nuevos. El servidor conserva IDs de fuente/ancla pero los retira del mapa publicado; aviso privado por observador, réplica sin inferir señales. Informes NPC server-side en fauna, no en mundo_vivo replicado. No se modifica distribución ni balance; legado intacto.
+
+Pruebas ejecutadas: señales20/20, servidor y dos clientes ENet reales16/16, fauna31/31 y exploración13/13. Capturas de aviso, retirada, recuerdo histórico y testimonio NPC inspeccionadas. [Informe]( production/qa/evidence/mundo-1/fase-7/senales/README.md ). Sin otra PC/Internet ni validación humana de R/T; persisten avisos conocidos de recursos al cerrar. Los resúmenes de la ejecución inicial (19 casos de señales) se conservan; el caso de superposición y la bienvenida completa se verificaron luego en una carpeta nueva con20. No se repitieron suites ajenas al ajuste. Rama feature/fase7-ecologia, sin push/merge. Siguiente: escenario reproducible de atasco de fauna y navegación, sin cambiar estadísticas ni inventar R/T.

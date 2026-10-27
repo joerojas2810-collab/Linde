@@ -14,6 +14,7 @@ const Fauna = preload("res://scripts/fauna.gd")
 var j
 var fauna
 var enemigos: Array = []
+var rutas: Dictionary = {} # Caché de sesión: nunca forma parte del guardado ni de la réplica.
 var pjs := {}           # id -> {est: libre|aviso|activo|rec, t, inv_t, dir}: sesión, no se guarda
 
 # Compatibilidad: ciclo de ataque del jugador local.
@@ -47,6 +48,7 @@ static func centro(e: Dictionary) -> Vector2:
 func reiniciar() -> void:
 	fauna.guardar()
 	enemigos.clear()
+	rutas.clear()
 	for s in j.mundo.spawns_slime: enemigos.append(_nuevo("slime", Mundo.pies_de_celda(s)))
 	for id in JEFES: _aparecer_si_toca(id)
 
@@ -112,6 +114,11 @@ func paso(dt: float) -> void:
 				"rec": a.est = "libre"
 	for e in enemigos: _paso_enemigo(e, dt)
 	enemigos = enemigos.filter(func(e): return e.est != "muerto")
+	var presentes := {}
+	for e in enemigos:
+		if e.has("fauna_id"): presentes[e.fauna_id] = true
+	for id in rutas.keys():
+		if not presentes.has(id): rutas.erase(id)
 
 func zona_golpe(id: String = P.LOCAL) -> Rect2:
 	var a: Dictionary = C.PJ_ATAQUE
@@ -137,6 +144,7 @@ func _danar(e: Dictionary, dmg: int, id: String = P.LOCAL) -> void:
 	j.autonomia.desarrollo.registrar(j.actor_desarrollo(id),"combate",{str(j.jug(id).equipo.get("arma","")):1})
 	if not C.ENEMIGOS[e.tipo].has("fases"):
 		e.pos = _mover(e, Vector2(ataque(id).dir) * KNOCKBACK_PX)
+		if e.has("fauna_id"): rutas.erase(e.fauna_id)
 	if e.hp <= 0: _morir(e, id)
 	else: fauna.recordar(e)
 
@@ -152,6 +160,45 @@ func _morir(e: Dictionary, id: String) -> void:
 
 func _mover(e: Dictionary, d: Vector2) -> Vector2:
 	return j.mundo.mover(e.pos, d, Vector2(e.tam, e.tam * 0.6))
+
+# Sólo fauna regional. Reutiliza BFS y colisión; conserva presupuesto de movimiento y estados.
+func _navegar(e: Dictionary, destino: Vector2, distancia: float) -> Vector2:
+	var delta := destino - Vector2(e.pos)
+	var paso := delta.limit_length(distancia)
+	if not e.has("fauna_id"): return _mover(e, delta.normalized() * distancia)
+	var id: String = e.fauna_id
+	var meta := Mundo.celda_de(destino)
+	var cache: Dictionary = rutas.get(id, {})
+	if not cache.is_empty() and (cache.meta != meta or cache.version != j.mundo.version):
+		rutas.erase(id)
+		cache = {}
+	if cache.is_empty():
+		var directo := _mover(e, paso)
+		if directo.is_equal_approx(Vector2(e.pos) + paso): return directo
+		var caja := Vector2(e.tam, e.tam * 0.6)
+		var ruta: Array = j.mundo.camino(Mundo.celda_de(e.pos), func(c): return c == meta,
+			Rect2i(), func(c): return j.mundo.caja_libre(Mundo.pies_de_celda(c), caja))
+		# Un cuerpo ancho puede quedar libre en el borde de una celda cuyo centro no admite su caja.
+		if not ruta.is_empty() and not j.mundo.caja_libre(Mundo.pies_de_celda(ruta[0]), caja): ruta.pop_front()
+		cache = {"meta": meta, "version": j.mundo.version, "ruta": ruta}
+		rutas[id] = cache
+	# Ruta vacía también se recuerda: sin búsqueda por fotograma frente a destinos inaccesibles.
+	if cache.ruta.is_empty(): return e.pos
+	var posicion: Vector2 = e.pos
+	while distancia > 0.0 and not cache.ruta.is_empty():
+		var punto := Mundo.pies_de_celda(cache.ruta[0])
+		var tramo := posicion.distance_to(punto)
+		if is_zero_approx(tramo):
+			cache.ruta.pop_front()
+			continue
+		var avance := (punto - posicion).limit_length(distancia)
+		var siguiente: Vector2 = j.mundo.mover(posicion, avance, Vector2(e.tam, e.tam * 0.6))
+		if not siguiente.is_equal_approx(posicion + avance): return siguiente
+		posicion = siguiente
+		distancia -= avance.length()
+		if posicion.is_equal_approx(punto): cache.ruta.pop_front()
+	if cache.ruta.is_empty(): rutas.erase(id)
+	return posicion
 
 func info_ataque(e: Dictionary, nombre: String) -> Dictionary:
 	var def: Dictionary = C.ENEMIGOS[e.tipo]
@@ -179,9 +226,12 @@ func _mas_cercano(e: Dictionary) -> Array:
 func _visible(e: Dictionary, id: String) -> bool:
 	if not e.has("fauna_id"): return true # conservar los encuentros históricos
 	var hasta: Vector2 = j.pies_de(id)
-	var pasos := maxi(1, ceili(e.pos.distance_to(hasta) / 4.0))
+	return linea_visible(e.pos,hasta)
+
+func linea_visible(desde:Vector2,hasta:Vector2) -> bool:
+	var pasos := maxi(1, ceili(desde.distance_to(hasta) / 4.0))
 	for i in range(1, pasos):
-		if j.mundo.bloquea(Mundo.celda_de(e.pos.lerp(hasta, float(i) / pasos))): return false
+		if j.mundo.bloquea(Mundo.celda_de(desde.lerp(hasta, float(i) / pasos))): return false
 	return true
 
 func _paso_enemigo(e: Dictionary, dt: float) -> void:
@@ -196,7 +246,7 @@ func _paso_enemigo(e: Dictionary, dt: float) -> void:
 		e.est = "regresa"
 		e.obj = ""
 		e.alertado = false
-		e.pos = _mover(e, (e.home - e.pos).normalized() * def.vel * dt)
+		e.pos = _navegar(e, e.home, def.vel * dt)
 		if e.pos.distance_to(e.home) < 8.0: e.est = "idle"
 		return
 	if conducta == "huidizo" and not e.get("alertado", false) and dist < def.vision:
@@ -217,7 +267,7 @@ func _paso_enemigo(e: Dictionary, dt: float) -> void:
 			if dist <= def.vision and (conducta != "defensivo" or e.get("alertado", false)) and _visible(e, cerca[0]):
 				e.est = "persigue"
 				e.obj = cerca[0]
-			elif e.pos.distance_to(e.home) > 2.0: e.pos = _mover(e, (e.home - e.pos).normalized() * def.vel * dt)
+			elif e.pos.distance_to(e.home) > 2.0: e.pos = _navegar(e, e.home, def.vel * dt)
 			if jefe and e.hp < def.hp and dist > def.vision * 2.0: e.hp = def.hp   # reinicio de encuentro
 		"persigue":
 			if dist > def.vision * 2.0 or not _visible(e, cerca[0]):
@@ -236,7 +286,7 @@ func _paso_enemigo(e: Dictionary, dt: float) -> void:
 				e.n_atq += 1
 			else:
 				e.dir = (cp - centro(e)).normalized()
-				e.pos = _mover(e, (cp - centro(e)).normalized() * def.vel * dt)
+				e.pos = _navegar(e, cp + Vector2(0, e.tam / 2.0), def.vel * dt)
 		"aviso":
 			e.t -= dt
 			if e.t <= 0.0:

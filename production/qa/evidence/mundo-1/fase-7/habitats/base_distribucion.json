@@ -1,0 +1,113 @@
+{
+  "casos": [
+    {
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": 229,
+        "diablillo_secano": 63,
+        "espectro_bosque": 192,
+        "golem_sierra": 212,
+        "slime_ribera": 53
+      },
+      "estado_sha256": "4bdc943716162574c56b1ee20a0888d5dbdbb166567ace99f0ff408c61763946",
+      "generador": 1,
+      "ocupadas": 749,
+      "planes_sha256": "04b5a05e04b111d526434e76d9a32b5589a65b2af669fae9c941a30d66146c5b",
+      "regiones": 841,
+      "semilla": 123,
+      "terreno_sha256": "c374112f3bbbcff5181166f734cccd429a1bf304d5cd626d71d0d137387a7d33",
+      "tiempo_ms": 84.144
+    },
+    {
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": 229,
+        "diablillo_secano": 63,
+        "espectro_bosque": 192,
+        "golem_sierra": 212,
+        "slime_ribera": 53
+      },
+      "estado_sha256": "082ab03e42bb4b58b5cfb13f4f17498925e2536daa65caf9ace77a21644a9ff6",
+      "generador": 2,
+      "ocupadas": 749,
+      "planes_sha256": "04b5a05e04b111d526434e76d9a32b5589a65b2af669fae9c941a30d66146c5b",
+      "regiones": 841,
+      "semilla": 123,
+      "terreno_sha256": "37e4e9b67ed09ede9bc21f1f2dcfbf519aa0b05d7b57cad62dd9ca32901f4938",
+      "tiempo_ms": 82.878
+    },
+    {
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": 297,
+        "diablillo_secano": 73,
+        "espectro_bosque": 192,
+        "golem_sierra": 175,
+        "slime_ribera": 30
+      },
+      "estado_sha256": "187e18a4aaabd66a5e13cf3fd946cfdfea7eacfc34c2d66c3df850ae52da8425",
+      "generador": 1,
+      "ocupadas": 767,
+      "planes_sha256": "fa400840a631436affee71802cd5cb6ecfcc14692b151f1bf31f383495719675",
+      "regiones": 841,
+      "semilla": 456,
+      "terreno_sha256": "a6c90fa1294897fb907e10f99632d8e7b4b899b0d88e13b65475a95d739fd175",
+      "tiempo_ms": 78.987
+    },
+    {
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": 297,
+        "diablillo_secano": 73,
+        "espectro_bosque": 192,
+        "golem_sierra": 175,
+        "slime_ribera": 30
+      },
+      "estado_sha256": "9e7bc56ac455c3531b99694067d6a41975941c383f44f75026a5f2acaa7dfd25",
+      "generador": 2,
+      "ocupadas": 767,
+      "planes_sha256": "fa400840a631436affee71802cd5cb6ecfcc14692b151f1bf31f383495719675",
+      "regiones": 841,
+      "semilla": 456,
+      "terreno_sha256": "d55d3980095dfab0d7348c2d25a6b88c2fb75a5edd7acca130ab267526f639c3",
+      "tiempo_ms": 128.513
+    },
+    {
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": 231,
+        "diablillo_secano": 84,
+        "espectro_bosque": 217,
+        "golem_sierra": 177,
+        "slime_ribera": 46
+      },
+      "estado_sha256": "b44732074d8c8a632085af14486f0135c2f7ea61d3bbf73425bed9227557ea48",
+      "generador": 1,
+      "ocupadas": 755,
+      "planes_sha256": "92f783b7de8e0c5fac90dca7edcaae38aa382d98efed12ebfa702a913d2f87bb",
+      "regiones": 841,
+      "semilla": 789,
+      "terreno_sha256": "62a002be1fccffbe3bd35e96be6f80fae4e64624f1272d8fd700b1731bb30369",
+      "tiempo_ms": 90.9
+    },
+    {
+      "consulta_pura": true,
+      "especies": {
+        "arpia_pradera": 231,
+        "diablillo_secano": 84,
+        "espectro_bosque": 217,
+        "golem_sierra": 177,
+        "slime_ribera": 46
+      },
+      "estado_sha256": "c076140a63bb79e11d20013784bc12a0e0a3a931f15344e49674830ff07afbe7",
+      "generador": 2,
+      "ocupadas": 755,
+      "planes_sha256": "92f783b7de8e0c5fac90dca7edcaae38aa382d98efed12ebfa702a913d2f87bb",
+      "regiones": 841,
+      "semilla": 789,
+      "terreno_sha256": "b738acc228121067e6f0f34ebcb4c2cc97c81a662bd96871b18138d0e4c95ef7",
+      "tiempo_ms": 127.869
+    }
+  ],
+  "huella": "c8f0292b54ffba51bde95b4e846dd1908ba41cd7e8290e384c0e1a71476beb2b"
+}

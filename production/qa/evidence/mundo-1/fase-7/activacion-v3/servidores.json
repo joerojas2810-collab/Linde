@@ -1,0 +1,12 @@
+{
+  "mundo1": {
+    "version": 3,
+    "territorios": 3,
+    "anclas": 1
+  },
+  "mundo2": {
+    "version": 3,
+    "territorios": 3,
+    "anclas": 1
+  }
+}

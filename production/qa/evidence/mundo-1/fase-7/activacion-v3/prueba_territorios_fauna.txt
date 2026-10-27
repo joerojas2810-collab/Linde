@@ -1,0 +1,49 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+
+
+PASS mundo nuevo activa v3 con decisiones territoriales válidas
+
+PASS posiciones e IDs coinciden exactamente con B aprobada, semilla 123.0
+
+PASS fuentes reales, nacimientos fuera de espacios humanos y lectura pura, semilla 123.0
+
+PASS posiciones e IDs coinciden exactamente con B aprobada, semilla 456.0
+
+PASS fuentes reales, nacimientos fuera de espacios humanos y lectura pura, semilla 456.0
+
+PASS posiciones e IDs coinciden exactamente con B aprobada, semilla 789.0
+
+PASS fuentes reales, nacimientos fuera de espacios humanos y lectura pura, semilla 789.0
+
+PASS guardar y cargar conserva posiciones, anclas y ausencias planificadas
+
+PASS obras posteriores no mueven ni vuelven a sembrar una población registrada
+
+PASS expansión inversa de macrorregiones produce las mismas decisiones durables
+
+PASS consultar territorio desconocido no genera lugares ni población
+
+PASS registrar un territorio invalida su anterior caché vacía
+
+PASS nuevas regiones mantienen su decisión al reiniciar
+
+PASS mundos v2 permanecen v2 sin añadir ni mover territorios
+
+PASS sin alternativa conserva la identidad nominal y pospone el nacimiento
+
+PASS punto pospuesto no materializa una criatura ni ocupa el cupo activo
+
+PASS reinicio no reactiva una aparición pospuesta
+
+PASS territorio incompleto rechazado sin inventar reemplazos
+
+TERRITORIOS: 18 comprobaciones, 0 fallos
+
+WARNING: 219 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+
+   at: cleanup (core/object/object.cpp:2536)
+
+ERROR: 14 resources still in use at exit (run with --verbose for details).
+
+   at: clear (core/io/resource.cpp:822)

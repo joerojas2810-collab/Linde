@@ -1,0 +1,30 @@
+[
+  {
+    "suite": "prueba_territorios_fauna",
+    "ok": true,
+    "passes": 18,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_distribucion_fauna",
+    "ok": true,
+    "passes": 17,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_habitats",
+    "ok": true,
+    "passes": 23,
+    "fails": 0,
+    "exit": 0
+  },
+  {
+    "suite": "prueba_amenazas",
+    "ok": true,
+    "passes": 12,
+    "fails": 0,
+    "exit": 0
+  }
+]

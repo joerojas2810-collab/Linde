@@ -1,0 +1,53 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+
+
+PASS encuentro de prueba materializado desde una fuente regional real
+
+PASS aviso vigente direccional sin identidad oculta ni coordenadas
+
+PASS consultar un aviso no altera población, bajas ni fuentes
+
+PASS una fuente superpuesta no inventa una dirección cardinal
+
+PASS avistamiento privado conserva fuente real y fecha
+
+PASS otro jugador no hereda señal ni recuerdos personales
+
+PASS al alejarse no hay aviso vigente aunque exista historia
+
+PASS una pared impide la señal por visión
+
+PASS restaurar visión recupera el aviso desde la misma fuente viva
+
+PASS movimiento fuera de alcance retira aviso sin actualizar una ubicación histórica
+
+PASS muerte confirmada retira inmediatamente el aviso actual
+
+PASS mapa conserva fecha y bloque aproximado, no presencia actual
+
+PASS guardar y cargar conserva memoria sin resucitar el aviso
+
+PASS conversación voluntaria entrega un testimonio real al NPC
+
+PASS NPC transmite un recuerdo fechado con procedencia, incluso tras la derrota
+
+PASS un rumor histórico no se convierte en alarma de criatura viva
+
+PASS estado privado de red oculta IDs y anclas internas
+
+PASS informes de NPC e identidades internas no se publican en bienvenida ni perfiles
+
+PASS réplica muestra historia privada recibida sin generar avisos por su cuenta
+
+PASS modo legado sin señales ni estado nuevo
+
+SENALES: 20 comprobaciones, 0 fallos
+
+WARNING: 84 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+
+   at: cleanup (core/object/object.cpp:2536)
+
+ERROR: 14 resources still in use at exit (run with --verbose for details).
+
+   at: clear (core/io/resource.cpp:822)

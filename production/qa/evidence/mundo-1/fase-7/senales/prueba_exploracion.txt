@@ -1,0 +1,39 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+
+
+PASS inicio contiene exactamente el radio de visión existente
+
+PASS ruta y coordenadas negativas descubren exactamente lo observado
+
+PASS otro jugador no hereda descubrimientos
+
+PASS rechaza intercambio lejano
+
+PASS rumor persiste con procedencia
+
+PASS NPC recibe lo explorado por el jugador
+
+PASS visitar confirma un rumor
+
+PASS bienvenida excluye el mapa ajeno
+
+PASS perfiles públicos sin mapas
+
+PASS guarda mapa
+
+PASS carga conserva descubrimientos y fuentes
+
+MAPA_60_MIN bloques=5409 bytes=90433 presupuesto=4194304
+
+PASS mapa de 60 min dentro del presupuesto de 4 MiB
+
+PASS legado no añade estado ni permite intercambio
+
+WARNING: 66 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+
+   at: cleanup (core/object/object.cpp:2536)
+
+ERROR: 14 resources still in use at exit (run with --verbose for details).
+
+   at: clear (core/io/resource.cpp:822)

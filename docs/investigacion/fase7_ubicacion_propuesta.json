@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "estado": "propuesta_no_activada",
+  "alcance": "ubicacion_dentro_de_la_misma_region_sin_cambiar_cantidad_especie_ni_bioma",
+  "preferencias": {
+    "espectro_bosque": {"vecino_objeto": ["arbol", "arbusto"]},
+    "golem_sierra": {"vecino_objeto": ["roca", "veta", "veta_cobre"]},
+    "diablillo_secano": {"vecinos_despejados": true},
+    "arpia_pradera": {"vecinos_despejados": true},
+    "slime_ribera": {"conservar_origen": true}
+  }
+}

@@ -1,6 +1,6 @@
 extends RefCounted
 ## Mapa personal: reutiliza la cuadrícula y el radio de visión de Autonomia.
-## Solo guarda bloques y procedencia; las identidades compartidas vienen del registro del mundo.
+## Guarda bloques, procedencia y avistamientos fechados; sin seguimiento de amenazas ocultas.
 const M = preload("res://scripts/mundo.gd")
 
 ## Actualiza lo visto desde la posición autoritativa; legado conserva su estado exacto.
@@ -10,6 +10,26 @@ static func observar(j, id: String) -> void:
 	var vistos := {"bloques": {}}
 	j.autonomia._ver(vistos, M.celda_de(j.pies_de(id)), int(j.autonomia.reglas.conocimiento.radio_vision))
 	for k in vistos.bloques: mapa.bloques[k] = "visto"
+	var senal:Dictionary=j.combate.fauna.senal_desde(j.pies_de(id))
+	if not senal.is_empty():
+		var memoria:Dictionary=mapa.get_or_add("avistamientos",{})
+		memoria[senal.bloque]=_recuerdo(senal,"visto")
+
+static func _recuerdo(senal:Dictionary,relato:String) -> Dictionary:
+	return {"fuente":senal.fuente,"ancla":senal.get("ancla",""),"categoria":senal.categoria,"min":int(senal.min),"relato":relato}
+
+## Aviso vigente calculado desde una fuente viva; nunca a partir de un rumor histórico.
+static func aviso_actual(j,id:String) -> Dictionary:
+	var s:Dictionary=j.combate.fauna.senal_desde(j.pies_de(id))
+	if s.is_empty():return {}
+	return {"texto":s.texto,"categoria":s.categoria,"direccion":s.direccion}
+
+## Solo copias para la red: IDs internos de criatura/ancla no son conocimiento público.
+static func mapa_publicable(mapa:Dictionary) -> Dictionary:
+	var copia=mapa.duplicate(true)
+	for recuerdo in copia.get("avistamientos",{}).values():
+		recuerdo.erase("fuente");recuerdo.erase("ancla")
+	return copia
 
 ## Intercambio voluntario y cercano: el NPC aporta rumores; recibe lo recorrido por el jugador.
 ## Un rumor conserva la primera fuente y nunca sustituye un bloque visto personalmente.
@@ -43,6 +63,23 @@ static func intercambiar(j, npc: String, id: String) -> Dictionary:
 				nuevos += 1
 	for k in mapa.bloques:
 		if mapa.bloques[k] == "visto": n[k] = true
+	# Memoria ecológica server-side, sin duplicar NPC ni enviarla en mundo_vivo.
+	var informes:Dictionary=j.d.fauna.get_or_add("informes_npc",{})
+	var memoria:Dictionary=informes.get_or_add(npc,{})
+	var actual:Dictionary=j.combate.fauna.senal_desde(pos)
+	if not actual.is_empty():memoria[actual.bloque]=_recuerdo(actual,"visto");n[actual.bloque]=true
+	for k in memoria:
+		if not n.has(k):continue
+		var previa:Dictionary=mapa.get("avistamientos",{}).get(k,{})
+		if previa.is_empty() or int(memoria[k].min)>int(previa.min):
+			if not mapa.bloques.has(k):mapa.bloques[k]="npc:"+npc;nuevos+=1
+			var destino:Dictionary=mapa.get_or_add("avistamientos",{})
+			destino[k]=memoria[k].duplicate(true);destino[k].relato="npc:"+npc
+	for k in mapa.get("avistamientos",{}):
+		var visto:Dictionary=mapa.avistamientos[k]
+		if visto.relato!="visto":continue
+		if not memoria.has(k) or int(visto.min)>int(memoria[k].min):
+			memoria[k]=visto.duplicate(true);memoria[k].relato="pj:"+id
 	return j._ok("Intercambiaron referencias: %d zonas nuevas en tu mapa (M). Son aproximadas; explóralas para confirmarlas." % nuevos, id)
 
 ## Hitos existentes cuyo centro cae en un bloque conocido; el rumor sigue siendo aproximado.
@@ -63,4 +100,10 @@ static func hitos(j, id: String) -> Array:
 		var c := Vector2i(lugar.centro[0], lugar.centro[1])
 		var k: String = j.autonomia._bloque(c)
 		if bloques.has(k): salida.append({"id": lid, "nombre": lugar.nombre, "bloque": k, "fuente": bloques[k], "tipo": lugar.tipo})
+	var avistamientos:Dictionary=j.jug(id).get("mapa",{}).get("avistamientos",{})
+	ids=avistamientos.keys();ids.sort()
+	for k in ids:
+		if not bloques.has(k):continue
+		var a:Dictionary=avistamientos[k]
+		salida.append({"id":"avistamiento@"+k,"nombre":"Avistamiento "+str(a.categoria),"bloque":k,"fuente":a.relato,"tipo":"avistamiento","min":int(a.min)})
 	return salida
