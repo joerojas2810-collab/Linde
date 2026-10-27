@@ -1,0 +1,17 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+MEDIDA_CONFIG herramienta=medir_subsistemas semilla=123 muestras=40 habitantes=2 jugadores=1 regiones_inicio=44 modo=poblado godot=4.7.1-stable (official) nota=muestreo_CPU_por_operacion; las categorías no son sumables
+MEDIDA_CPU subsistema=npc_movimiento_necesidades n=40 promedio_us=10.1 p95_us=12 max_us=12
+MEDIDA_CPU subsistema=npc_decisiones_lote n=40 promedio_us=103707.4 p95_us=104276 max_us=104886
+MEDIDA_CPU subsistema=navegacion_BFS n=40 promedio_us=1428.5 p95_us=1453 max_us=1464
+MEDIDA_CPU subsistema=fauna_actualizar n=40 promedio_us=68.8 p95_us=69 max_us=70
+MEDIDA_CPU subsistema=economia_regional n=40 promedio_us=234630.8 p95_us=250815 max_us=268725
+MEDIDA_CPU subsistema=regiones_streaming_frio n=30 promedio_us=12239.0 p95_us=13430 max_us=13480
+MEDIDA_CPU subsistema=red_snapshot_bytes_local n=40 promedio_us=8.8 p95_us=10 max_us=12
+MEDIDA_CPU subsistema=tick_completo_referencia n=40 promedio_us=123555.1 p95_us=338941 max_us=341289
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 39 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 17 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

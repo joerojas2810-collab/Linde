@@ -1,0 +1,14 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS caché coincide con BFS sin caché
+PASS modificar el resultado no contamina la caché
+PASS retirar muro/puerta invalida inmediatamente
+PASS construir muro invalida inmediatamente
+PASS alcance real de poblado mantiene celdas y orden
+PASS orden BFS conservado para elecciones de recursos
+PASS caché fuera del guardado
+RESULTADO 0 fallos
+WARNING: 36 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 16 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

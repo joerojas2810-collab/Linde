@@ -1,0 +1,33 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS no funda sin crisis ni grupo suficiente
+PASS demanda de recepción crea una obra física, no residentes
+PASS vivienda pagada aumenta capacidad sin crear población
+PASS construcción descuenta materiales reales
+PASS incorporación usa una identidad existente en tránsito
+PASS demanda de recepción crea una obra física, no residentes
+PASS vivienda pagada aumenta capacidad sin crear población
+PASS construcción descuenta materiales reales
+PASS incorporación usa una identidad existente en tránsito
+PASS crecimiento conserva el total de NPC del mundo
+PASS déficit renovable persiste sin convertir proyección en stock
+PASS solar tiene terreno, fuentes reales y ruta comprobable
+PASS expedición reserva y sale sin registrar pueblo ni crear población
+PASS fundadores reales y ventaja territorial trazable
+PASS guarda expedición sin materializar destino
+PASS solar alterado detiene la expedición sin materializar ni gastar la obra
+PASS guarda interrupción conservando viajeros y carga
+PASS solo la llegada funda y paga el plano existente
+PASS continuación con y sin reinicio produce exactamente el mismo registro
+PASS fundación conserva contrato mínimo físico
+PASS origen más destino más obra y consumo conservan cada recurso exactamente
+PASS no hay población inventada y la obra registra coste real
+PASS réplica recibe fundación e identidades sin ejecutar otra obra
+PASS repetir llegada no duplica edificios, carga ni residentes
+EXPANSION_F6: 24 comprobaciones, 0 fallos
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 94 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 16 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

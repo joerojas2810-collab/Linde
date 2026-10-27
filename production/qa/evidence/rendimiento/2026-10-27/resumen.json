@@ -1,0 +1,2207 @@
+{
+  "base": "a7f9766",
+  "equipo": "Apple M3",
+  "godot": "4.7.1 stable",
+  "renderer": "gl_compatibility",
+  "resolucion": [
+    1280,
+    720
+  ],
+  "zoom": 3,
+  "semilla": 123,
+  "repeticiones": 3,
+  "calentamiento_cuadros": 60,
+  "cuadros_por_repeticion": 360,
+  "escenarios": {
+    "quieto": {
+      "before": {
+        "n": 1080,
+        "promedio_ms": 26.492019444444445,
+        "p95_ms": 27.545,
+        "max_ms": 372.489,
+        "fps": 37.74721674567194,
+        "fps_repeticiones": [
+          36.82413519285669,
+          37.641976910620485,
+          38.829116617103814
+        ],
+        "cuadros_mayores_100ms": 23,
+        "cuadros_mayores_200ms": 23,
+        "subsistemas_activos": {
+          "economia_demandas": {
+            "n": 23,
+            "promedio_ms": 126.45165217391305,
+            "p95_ms": 130.567,
+            "max_ms": 132.206
+          },
+          "economia_regional": {
+            "n": 23,
+            "promedio_ms": 105.46221739130435,
+            "p95_ms": 107.664,
+            "max_ms": 108.156
+          },
+          "economia_sociedad": {
+            "n": 23,
+            "promedio_ms": 0.016869565217391306,
+            "p95_ms": 0.019,
+            "max_ms": 0.02
+          },
+          "escena_process": {
+            "n": 1080,
+            "promedio_ms": 5.474841666666666,
+            "p95_ms": 0.318,
+            "max_ms": 352.289
+          },
+          "fauna": {
+            "n": 22,
+            "promedio_ms": 0.08886363636363635,
+            "p95_ms": 0.093,
+            "max_ms": 0.094
+          },
+          "navegacion": {
+            "n": 23,
+            "promedio_ms": 0.4213478260869565,
+            "p95_ms": 1.421,
+            "max_ms": 1.43
+          },
+          "navegacion_regional": {
+            "n": 23,
+            "promedio_ms": 227.6574347826087,
+            "p95_ms": 231.499,
+            "max_ms": 234.666
+          },
+          "npc_decidir": {
+            "n": 3,
+            "promedio_ms": 109.95333333333333,
+            "p95_ms": 111.545,
+            "max_ms": 111.545
+          },
+          "npc_decisiones_necesidades": {
+            "n": 23,
+            "promedio_ms": 246.32986956521736,
+            "p95_ms": 344.559,
+            "max_ms": 352.016
+          },
+          "npc_movimiento": {
+            "n": 1080,
+            "promedio_ms": 0.027280555555555554,
+            "p95_ms": 0.035,
+            "max_ms": 0.08
+          },
+          "regiones_streaming": {
+            "n": 1080,
+            "promedio_ms": 0.010312962962962963,
+            "p95_ms": 0.012,
+            "max_ms": 0.025
+          },
+          "regiones_total": {
+            "n": 1080,
+            "promedio_ms": 0.033434259259259254,
+            "p95_ms": 0.043,
+            "max_ms": 0.092
+          },
+          "render_cpu": {
+            "n": 1080,
+            "promedio_ms": 13.89273888888889,
+            "p95_ms": 14.296,
+            "max_ms": 30.266
+          },
+          "tick": {
+            "n": 1080,
+            "promedio_ms": 5.342239814814815,
+            "p95_ms": 0.129,
+            "max_ms": 352.141
+          }
+        },
+        "peores_cuadros": [
+          {
+            "economia_demandas": 132206,
+            "economia_regional": 108156,
+            "economia_sociedad": 17,
+            "escena_process": 352289,
+            "fps_monitor": 33.0,
+            "frame": 212,
+            "frame_us": 372489,
+            "navegacion": 1430,
+            "navegacion_regional": 234666,
+            "npc_decidir": 111545,
+            "npc_decisiones_necesidades": 352016,
+            "npc_movimiento": 50,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 11,
+            "regiones_total": 38,
+            "render_cpu": 13969,
+            "tick": 352141
+          },
+          {
+            "economia_demandas": 130567,
+            "economia_regional": 104602,
+            "economia_sociedad": 17,
+            "escena_process": 344813,
+            "fps_monitor": 37.0,
+            "frame": 216,
+            "frame_us": 365024,
+            "navegacion": 1421,
+            "navegacion_regional": 229839,
+            "npc_decidir": 109292,
+            "npc_decisiones_necesidades": 344559,
+            "npc_movimiento": 49,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 10,
+            "regiones_total": 30,
+            "render_cpu": 14009,
+            "tick": 344687
+          },
+          {
+            "economia_demandas": 126671,
+            "economia_regional": 105198,
+            "economia_sociedad": 17,
+            "escena_process": 341248,
+            "fps_monitor": 37.0,
+            "frame": 218,
+            "frame_us": 362400,
+            "navegacion": 1402,
+            "navegacion_regional": 226860,
+            "npc_decidir": 109023,
+            "npc_decisiones_necesidades": 340991,
+            "npc_movimiento": 47,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 10,
+            "regiones_total": 33,
+            "render_cpu": 13552,
+            "tick": 341113
+          },
+          {
+            "economia_demandas": 128359,
+            "economia_regional": 107664,
+            "economia_sociedad": 18,
+            "escena_process": 236364,
+            "fps_monitor": 29.0,
+            "frame": 27,
+            "frame_us": 256758,
+            "navegacion": 316,
+            "navegacion_regional": 231499,
+            "npc_decisiones_necesidades": 236097,
+            "npc_movimiento": 30,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 12,
+            "regiones_total": 38,
+            "render_cpu": 14088,
+            "tick": 236210
+          },
+          {
+            "economia_demandas": 126952,
+            "economia_regional": 104892,
+            "economia_sociedad": 18,
+            "escena_process": 232154,
+            "fps_monitor": 31.0,
+            "frame": 265,
+            "frame_us": 255741,
+            "navegacion": 221,
+            "navegacion_regional": 227741,
+            "npc_decisiones_necesidades": 231917,
+            "npc_movimiento": 32,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 9,
+            "regiones_total": 26,
+            "render_cpu": 14413,
+            "tick": 232034
+          },
+          {
+            "economia_demandas": 126498,
+            "economia_regional": 107171,
+            "economia_sociedad": 17,
+            "escena_process": 233989,
+            "fps_monitor": 36.0,
+            "frame": 358,
+            "frame_us": 254905,
+            "navegacion": 244,
+            "navegacion_regional": 229582,
+            "npc_decisiones_necesidades": 233741,
+            "npc_movimiento": 19,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 11,
+            "regiones_total": 37,
+            "render_cpu": 13642,
+            "tick": 233835
+          },
+          {
+            "economia_demandas": 125939,
+            "economia_regional": 104396,
+            "economia_sociedad": 18,
+            "escena_process": 230618,
+            "fps_monitor": 41.0,
+            "frame": 170,
+            "frame_us": 254899,
+            "navegacion": 266,
+            "navegacion_regional": 226313,
+            "npc_decisiones_necesidades": 230403,
+            "npc_movimiento": 24,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 9,
+            "regiones_total": 27,
+            "render_cpu": 13516,
+            "tick": 230505
+          },
+          {
+            "economia_demandas": 127581,
+            "economia_regional": 105644,
+            "economia_sociedad": 19,
+            "escena_process": 233549,
+            "fps_monitor": 38.0,
+            "frame": 311,
+            "frame_us": 254650,
+            "navegacion": 247,
+            "navegacion_regional": 229084,
+            "npc_decisiones_necesidades": 233300,
+            "npc_movimiento": 21,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 12,
+            "regiones_total": 38,
+            "render_cpu": 13755,
+            "tick": 233400
+          }
+        ]
+      },
+      "after": {
+        "n": 1080,
+        "promedio_ms": 21.497741666666666,
+        "p95_ms": 25.481,
+        "max_ms": 162.795,
+        "fps": 46.51651394390651,
+        "fps_repeticiones": [
+          47.396715644589406,
+          44.819238409091334,
+          47.43187366573151
+        ],
+        "cuadros_mayores_100ms": 3,
+        "cuadros_mayores_200ms": 0,
+        "subsistemas_activos": {
+          "economia_demandas": {
+            "n": 22,
+            "promedio_ms": 6.6,
+            "p95_ms": 22.509,
+            "max_ms": 23.33
+          },
+          "economia_regional": {
+            "n": 22,
+            "promedio_ms": 0.6618181818181819,
+            "p95_ms": 0.693,
+            "max_ms": 1.168
+          },
+          "economia_sociedad": {
+            "n": 22,
+            "promedio_ms": 0.013181818181818182,
+            "p95_ms": 0.018,
+            "max_ms": 0.021
+          },
+          "escena_process": {
+            "n": 1080,
+            "promedio_ms": 0.6741509259259258,
+            "p95_ms": 0.319,
+            "max_ms": 136.46
+          },
+          "fauna": {
+            "n": 22,
+            "promedio_ms": 0.09181818181818181,
+            "p95_ms": 0.099,
+            "max_ms": 0.116
+          },
+          "navegacion": {
+            "n": 22,
+            "promedio_ms": 0.42763636363636365,
+            "p95_ms": 1.373,
+            "max_ms": 1.433
+          },
+          "navegacion_regional": {
+            "n": 22,
+            "promedio_ms": 3.1435454545454546,
+            "p95_ms": 18.307,
+            "max_ms": 18.895
+          },
+          "npc_decidir": {
+            "n": 3,
+            "promedio_ms": 109.606,
+            "p95_ms": 112.027,
+            "max_ms": 112.027
+          },
+          "npc_decisiones_necesidades": {
+            "n": 22,
+            "promedio_ms": 22.271363636363635,
+            "p95_ms": 131.74,
+            "max_ms": 136.099
+          },
+          "npc_movimiento": {
+            "n": 1080,
+            "promedio_ms": 0.024971296296296294,
+            "p95_ms": 0.034,
+            "max_ms": 0.062
+          },
+          "regiones_streaming": {
+            "n": 1080,
+            "promedio_ms": 0.008690740740740742,
+            "p95_ms": 0.011,
+            "max_ms": 0.014
+          },
+          "regiones_total": {
+            "n": 1080,
+            "promedio_ms": 0.027992592592592593,
+            "p95_ms": 0.038,
+            "max_ms": 0.051
+          },
+          "render_cpu": {
+            "n": 1080,
+            "promedio_ms": 13.84358425925926,
+            "p95_ms": 14.473,
+            "max_ms": 30.906
+          },
+          "tick": {
+            "n": 1080,
+            "promedio_ms": 0.5502666666666667,
+            "p95_ms": 0.141,
+            "max_ms": 136.275
+          }
+        },
+        "peores_cuadros": [
+          {
+            "economia_demandas": 23330,
+            "economia_regional": 639,
+            "economia_sociedad": 14,
+            "escena_process": 136460,
+            "fps_monitor": 46.0,
+            "frame": 211,
+            "frame_us": 162795,
+            "navegacion": 1433,
+            "navegacion_regional": 18895,
+            "npc_decidir": 112027,
+            "npc_decisiones_necesidades": 136099,
+            "npc_movimiento": 62,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 8,
+            "regiones_total": 32,
+            "render_cpu": 14597,
+            "tick": 136275
+          },
+          {
+            "economia_demandas": 22509,
+            "economia_regional": 636,
+            "economia_sociedad": 12,
+            "escena_process": 131966,
+            "fps_monitor": 48.0,
+            "frame": 222,
+            "frame_us": 151663,
+            "navegacion": 1354,
+            "navegacion_regional": 18307,
+            "npc_decidir": 108516,
+            "npc_decisiones_necesidades": 131740,
+            "npc_movimiento": 43,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 9,
+            "regiones_total": 27,
+            "render_cpu": 13634,
+            "tick": 131855
+          },
+          {
+            "economia_demandas": 22291,
+            "economia_regional": 623,
+            "economia_sociedad": 12,
+            "escena_process": 131516,
+            "fps_monitor": 49.0,
+            "frame": 227,
+            "frame_us": 151283,
+            "navegacion": 1373,
+            "navegacion_regional": 18115,
+            "npc_decidir": 108275,
+            "npc_decisiones_necesidades": 131272,
+            "npc_movimiento": 46,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 10,
+            "regiones_total": 30,
+            "render_cpu": 13601,
+            "tick": 131391
+          },
+          {
+            "escena_process": 257,
+            "fps_monitor": 37.0,
+            "frame": 13,
+            "frame_us": 38261,
+            "npc_movimiento": 31,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 8,
+            "regiones_total": 27,
+            "render_cpu": 30906,
+            "tick": 116
+          },
+          {
+            "escena_process": 228,
+            "fps_monitor": 37.0,
+            "frame": 15,
+            "frame_us": 36809,
+            "npc_movimiento": 29,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 11,
+            "regiones_total": 34,
+            "render_cpu": 30600,
+            "tick": 95
+          },
+          {
+            "escena_process": 188,
+            "fps_monitor": 40.0,
+            "frame": 18,
+            "frame_us": 36590,
+            "npc_movimiento": 22,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 9,
+            "regiones_total": 28,
+            "render_cpu": 30520,
+            "tick": 81
+          },
+          {
+            "economia_demandas": 4444,
+            "economia_regional": 683,
+            "economia_sociedad": 18,
+            "escena_process": 5519,
+            "fps_monitor": 46.0,
+            "frame": 78,
+            "frame_us": 33306,
+            "navegacion": 316,
+            "navegacion_regional": 743,
+            "npc_decisiones_necesidades": 5200,
+            "npc_movimiento": 33,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 11,
+            "regiones_total": 46,
+            "render_cpu": 15439,
+            "tick": 5325
+          },
+          {
+            "escena_process": 365,
+            "fps_monitor": 39.0,
+            "frame": 229,
+            "frame_us": 33236,
+            "npc_movimiento": 41,
+            "pos": [
+              472.0,
+              428.0
+            ],
+            "regiones": 44,
+            "regiones_streaming": 9,
+            "regiones_total": 38,
+            "render_cpu": 14617,
+            "tick": 148
+          }
+        ]
+      }
+    },
+    "cargadas": {
+      "before": {
+        "n": 1080,
+        "promedio_ms": 26.69346759259259,
+        "p95_ms": 27.103,
+        "max_ms": 361.441,
+        "fps": 37.462349038440365,
+        "fps_repeticiones": [
+          37.400502974430836,
+          37.564881593928014,
+          37.422087992426604
+        ],
+        "cuadros_mayores_100ms": 24,
+        "cuadros_mayores_200ms": 24,
+        "subsistemas_activos": {
+          "economia_demandas": {
+            "n": 24,
+            "promedio_ms": 125.56025,
+            "p95_ms": 126.507,
+            "max_ms": 126.821
+          },
+          "economia_regional": {
+            "n": 24,
+            "promedio_ms": 105.23979166666668,
+            "p95_ms": 106.729,
+            "max_ms": 107.51
+          },
+          "economia_sociedad": {
+            "n": 24,
+            "promedio_ms": 0.017875,
+            "p95_ms": 0.021,
+            "max_ms": 0.031
+          },
+          "escena_process": {
+            "n": 1080,
+            "promedio_ms": 5.645542592592593,
+            "p95_ms": 0.287,
+            "max_ms": 341.073
+          },
+          "fauna": {
+            "n": 22,
+            "promedio_ms": 0.1163181818181818,
+            "p95_ms": 0.193,
+            "max_ms": 0.2
+          },
+          "navegacion": {
+            "n": 33,
+            "promedio_ms": 0.6279090909090909,
+            "p95_ms": 1.433,
+            "max_ms": 1.461
+          },
+          "navegacion_regional": {
+            "n": 24,
+            "promedio_ms": 226.6415,
+            "p95_ms": 228.738,
+            "max_ms": 229.275
+          },
+          "npc_decidir": {
+            "n": 3,
+            "promedio_ms": 108.80033333333333,
+            "p95_ms": 109.099,
+            "max_ms": 109.099
+          },
+          "npc_decisiones_necesidades": {
+            "n": 24,
+            "promedio_ms": 244.47658333333334,
+            "p95_ms": 340.244,
+            "max_ms": 340.843
+          },
+          "npc_movimiento": {
+            "n": 1080,
+            "promedio_ms": 0.03453425925925926,
+            "p95_ms": 0.03,
+            "max_ms": 1.424
+          },
+          "regiones_streaming": {
+            "n": 1080,
+            "promedio_ms": 0.015218518518518518,
+            "p95_ms": 0.017,
+            "max_ms": 0.102
+          },
+          "regiones_total": {
+            "n": 1080,
+            "promedio_ms": 0.04834074074074074,
+            "p95_ms": 0.057,
+            "max_ms": 0.144
+          },
+          "render_cpu": {
+            "n": 1080,
+            "promedio_ms": 13.900222222222222,
+            "p95_ms": 14.123,
+            "max_ms": 32.706
+          },
+          "tick": {
+            "n": 1080,
+            "promedio_ms": 5.535485185185186,
+            "p95_ms": 0.169,
+            "max_ms": 340.958
+          }
+        },
+        "peores_cuadros": [
+          {
+            "economia_demandas": 126821,
+            "economia_regional": 105264,
+            "economia_sociedad": 19,
+            "escena_process": 341073,
+            "fps_monitor": 37.0,
+            "frame": 215,
+            "frame_us": 361441,
+            "navegacion": 1461,
+            "navegacion_regional": 227006,
+            "npc_decidir": 108653,
+            "npc_decisiones_necesidades": 340843,
+            "npc_movimiento": 41,
+            "pos": [
+              472.0,
+              542.709899902344
+            ],
+            "regiones": 44,
+            "regiones_streaming": 15,
+            "regiones_total": 48,
+            "render_cpu": 13735,
+            "tick": 340958
+          },
+          {
+            "economia_demandas": 126414,
+            "economia_regional": 105085,
+            "economia_sociedad": 16,
+            "escena_process": 340469,
+            "fps_monitor": 36.0,
+            "frame": 214,
+            "frame_us": 360648,
+            "navegacion": 1425,
+            "navegacion_regional": 226534,
+            "npc_decidir": 108649,
+            "npc_decisiones_necesidades": 340244,
+            "npc_movimiento": 40,
+            "pos": [
+              472.0,
+              540.052612304688
+            ],
+            "regiones": 44,
+            "regiones_streaming": 15,
+            "regiones_total": 47,
+            "render_cpu": 13770,
+            "tick": 340359
+          },
+          {
+            "economia_demandas": 126460,
+            "economia_regional": 104366,
+            "economia_sociedad": 18,
+            "escena_process": 340253,
+            "fps_monitor": 37.0,
+            "frame": 214,
+            "frame_us": 360498,
+            "navegacion": 1433,
+            "navegacion_regional": 225856,
+            "npc_decidir": 109099,
+            "npc_decisiones_necesidades": 340031,
+            "npc_movimiento": 39,
+            "pos": [
+              472.0,
+              540.4501953125
+            ],
+            "regiones": 44,
+            "regiones_streaming": 13,
+            "regiones_total": 42,
+            "render_cpu": 13799,
+            "tick": 340143
+          },
+          {
+            "economia_demandas": 126153,
+            "economia_regional": 105750,
+            "economia_sociedad": 17,
+            "escena_process": 232186,
+            "fps_monitor": 29.0,
+            "frame": 26,
+            "frame_us": 259539,
+            "navegacion": 303,
+            "navegacion_regional": 227895,
+            "npc_decisiones_necesidades": 231971,
+            "npc_movimiento": 29,
+            "pos": [
+              472.0,
+              551.017700195312
+            ],
+            "regiones": 44,
+            "regiones_streaming": 16,
+            "regiones_total": 49,
+            "render_cpu": 13935,
+            "tick": 232073
+          },
+          {
+            "economia_demandas": 126040,
+            "economia_regional": 104873,
+            "economia_sociedad": 21,
+            "escena_process": 231201,
+            "fps_monitor": 37.0,
+            "frame": 120,
+            "frame_us": 256278,
+            "navegacion": 283,
+            "navegacion_regional": 226839,
+            "npc_decisiones_necesidades": 230995,
+            "npc_movimiento": 26,
+            "pos": [
+              472.0,
+              439.964447021484
+            ],
+            "regiones": 44,
+            "regiones_streaming": 13,
+            "regiones_total": 44,
+            "render_cpu": 13670,
+            "tick": 231097
+          },
+          {
+            "economia_demandas": 126507,
+            "economia_regional": 104623,
+            "economia_sociedad": 15,
+            "escena_process": 231429,
+            "fps_monitor": 32.0,
+            "frame": 261,
+            "frame_us": 255632,
+            "navegacion": 239,
+            "navegacion_regional": 227027,
+            "npc_decisiones_necesidades": 231201,
+            "npc_movimiento": 22,
+            "pos": [
+              472.0,
+              479.238220214844
+            ],
+            "regiones": 44,
+            "regiones_streaming": 15,
+            "regiones_total": 55,
+            "render_cpu": 13884,
+            "tick": 231303
+          },
+          {
+            "economia_demandas": 126082,
+            "economia_regional": 106641,
+            "economia_sociedad": 17,
+            "escena_process": 233000,
+            "fps_monitor": 36.0,
+            "frame": 354,
+            "frame_us": 254403,
+            "navegacion": 242,
+            "navegacion_regional": 228738,
+            "npc_decisiones_necesidades": 232794,
+            "npc_movimiento": 21,
+            "pos": [
+              472.0,
+              510.441772460938
+            ],
+            "regiones": 44,
+            "regiones_streaming": 14,
+            "regiones_total": 43,
+            "render_cpu": 13808,
+            "tick": 232890
+          },
+          {
+            "economia_demandas": 126019,
+            "economia_regional": 107510,
+            "economia_sociedad": 31,
+            "escena_process": 233885,
+            "fps_monitor": 38.0,
+            "frame": 308,
+            "frame_us": 254094,
+            "navegacion": 240,
+            "navegacion_regional": 229275,
+            "npc_decisiones_necesidades": 233645,
+            "npc_movimiento": 22,
+            "pos": [
+              472.0,
+              446.7568359375
+            ],
+            "regiones": 44,
+            "regiones_streaming": 15,
+            "regiones_total": 52,
+            "render_cpu": 13784,
+            "tick": 233756
+          }
+        ]
+      },
+      "after": {
+        "n": 1080,
+        "promedio_ms": 21.912112037037037,
+        "p95_ms": 26.015,
+        "max_ms": 177.879,
+        "fps": 45.636860486554006,
+        "fps_repeticiones": [
+          46.1955465183379,
+          44.04658415681074,
+          46.75958055097593
+        ],
+        "cuadros_mayores_100ms": 3,
+        "cuadros_mayores_200ms": 0,
+        "subsistemas_activos": {
+          "economia_demandas": {
+            "n": 23,
+            "promedio_ms": 6.436434782608696,
+            "p95_ms": 22.404,
+            "max_ms": 23.269
+          },
+          "economia_regional": {
+            "n": 23,
+            "promedio_ms": 9.938565217391304,
+            "p95_ms": 18.75,
+            "max_ms": 19.351
+          },
+          "economia_sociedad": {
+            "n": 23,
+            "promedio_ms": 0.013,
+            "p95_ms": 0.016,
+            "max_ms": 0.017
+          },
+          "escena_process": {
+            "n": 1080,
+            "promedio_ms": 0.8731611111111112,
+            "p95_ms": 0.293,
+            "max_ms": 155.742
+          },
+          "fauna": {
+            "n": 22,
+            "promedio_ms": 0.11854545454545455,
+            "p95_ms": 0.208,
+            "max_ms": 0.212
+          },
+          "navegacion": {
+            "n": 32,
+            "promedio_ms": 0.6415625,
+            "p95_ms": 1.425,
+            "max_ms": 1.558
+          },
+          "navegacion_regional": {
+            "n": 23,
+            "promedio_ms": 12.290782608695652,
+            "p95_ms": 35.666,
+            "max_ms": 36.628
+          },
+          "npc_decidir": {
+            "n": 3,
+            "promedio_ms": 110.32,
+            "p95_ms": 113.38,
+            "max_ms": 113.38
+          },
+          "npc_decisiones_necesidades": {
+            "n": 23,
+            "promedio_ms": 30.827956521739132,
+            "p95_ms": 149.504,
+            "max_ms": 155.472
+          },
+          "npc_movimiento": {
+            "n": 1080,
+            "promedio_ms": 0.03463796296296297,
+            "p95_ms": 0.033,
+            "max_ms": 1.388
+          },
+          "regiones_streaming": {
+            "n": 1080,
+            "promedio_ms": 0.015318518518518518,
+            "p95_ms": 0.018,
+            "max_ms": 0.097
+          },
+          "regiones_total": {
+            "n": 1080,
+            "promedio_ms": 0.049710185185185184,
+            "p95_ms": 0.066,
+            "max_ms": 0.135
+          },
+          "render_cpu": {
+            "n": 1080,
+            "promedio_ms": 13.882051851851852,
+            "p95_ms": 14.491,
+            "max_ms": 31.875
+          },
+          "tick": {
+            "n": 1080,
+            "promedio_ms": 0.7599564814814814,
+            "p95_ms": 0.169,
+            "max_ms": 155.598
+          }
+        },
+        "peores_cuadros": [
+          {
+            "economia_demandas": 23269,
+            "economia_regional": 18712,
+            "economia_sociedad": 17,
+            "escena_process": 155742,
+            "fps_monitor": 47.0,
+            "frame": 206,
+            "frame_us": 177879,
+            "navegacion": 1558,
+            "navegacion_regional": 36628,
+            "npc_decidir": 113380,
+            "npc_decisiones_necesidades": 155472,
+            "npc_movimiento": 46,
+            "pos": [
+              472.0,
+              540.591552734375
+            ],
+            "regiones": 44,
+            "regiones_streaming": 17,
+            "regiones_total": 66,
+            "render_cpu": 14752,
+            "tick": 155598
+          },
+          {
+            "economia_demandas": 22366,
+            "economia_regional": 18012,
+            "economia_sociedad": 12,
+            "escena_process": 149410,
+            "fps_monitor": 50.0,
+            "frame": 218,
+            "frame_us": 177770,
+            "navegacion": 1414,
+            "navegacion_regional": 35517,
+            "npc_decidir": 108735,
+            "npc_decisiones_necesidades": 149199,
+            "npc_movimiento": 37,
+            "pos": [
+              472.0,
+              540.451904296875
+            ],
+            "regiones": 44,
+            "regiones_streaming": 14,
+            "regiones_total": 44,
+            "render_cpu": 13695,
+            "tick": 149306
+          },
+          {
+            "economia_demandas": 22404,
+            "economia_regional": 18164,
+            "economia_sociedad": 13,
+            "escena_process": 149733,
+            "fps_monitor": 47.0,
+            "frame": 218,
+            "frame_us": 169905,
+            "navegacion": 1425,
+            "navegacion_regional": 35666,
+            "npc_decidir": 108845,
+            "npc_decisiones_necesidades": 149504,
+            "npc_movimiento": 38,
+            "pos": [
+              472.0,
+              541.126403808594
+            ],
+            "regiones": 44,
+            "regiones_streaming": 14,
+            "regiones_total": 46,
+            "render_cpu": 13708,
+            "tick": 149621
+          },
+          {
+            "economia_demandas": 3945,
+            "economia_regional": 18188,
+            "economia_sociedad": 12,
+            "escena_process": 22376,
+            "fps_monitor": 40.0,
+            "frame": 266,
+            "frame_us": 47018,
+            "navegacion": 238,
+            "navegacion_regional": 18249,
+            "npc_decisiones_necesidades": 22189,
+            "npc_movimiento": 16,
+            "pos": [
+              472.0,
+              476.237426757812
+            ],
+            "regiones": 44,
+            "regiones_streaming": 14,
+            "regiones_total": 43,
+            "render_cpu": 13460,
+            "tick": 22273
+          },
+          {
+            "economia_demandas": 3995,
+            "economia_regional": 18419,
+            "economia_sociedad": 14,
+            "escena_process": 22685,
+            "fps_monitor": 41.0,
+            "frame": 266,
+            "frame_us": 46808,
+            "navegacion": 245,
+            "navegacion_regional": 18475,
+            "npc_decisiones_necesidades": 22478,
+            "npc_movimiento": 18,
+            "pos": [
+              472.0,
+              476.379180908203
+            ],
+            "regiones": 44,
+            "regiones_streaming": 13,
+            "regiones_total": 44,
+            "render_cpu": 13655,
+            "tick": 22571
+          },
+          {
+            "economia_demandas": 4054,
+            "economia_regional": 19351,
+            "economia_sociedad": 15,
+            "escena_process": 23699,
+            "fps_monitor": 43.0,
+            "frame": 71,
+            "frame_us": 45925,
+            "navegacion": 313,
+            "navegacion_regional": 19395,
+            "npc_decisiones_necesidades": 23469,
+            "npc_movimiento": 30,
+            "pos": [
+              472.0,
+              485.244323730469
+            ],
+            "regiones": 44,
+            "regiones_streaming": 15,
+            "regiones_total": 48,
+            "render_cpu": 13727,
+            "tick": 23577
+          },
+          {
+            "economia_demandas": 4003,
+            "economia_regional": 18037,
+            "economia_sociedad": 13,
+            "escena_process": 22318,
+            "fps_monitor": 36.0,
+            "frame": 26,
+            "frame_us": 45130,
+            "navegacion": 303,
+            "navegacion_regional": 18097,
+            "npc_decisiones_necesidades": 22100,
+            "npc_movimiento": 24,
+            "pos": [
+              472.0,
+              550.375427246094
+            ],
+            "regiones": 44,
+            "regiones_streaming": 15,
+            "regiones_total": 61,
+            "render_cpu": 13915,
+            "tick": 22193
+          },
+          {
+            "economia_demandas": 4146,
+            "economia_regional": 18426,
+            "economia_sociedad": 14,
+            "escena_process": 22873,
+            "fps_monitor": 37.0,
+            "frame": 26,
+            "frame_us": 43759,
+            "navegacion": 306,
+            "navegacion_regional": 18488,
+            "npc_decisiones_necesidades": 22636,
+            "npc_movimiento": 28,
+            "pos": [
+              472.0,
+              550.087829589844
+            ],
+            "regiones": 44,
+            "regiones_streaming": 16,
+            "regiones_total": 59,
+            "render_cpu": 14378,
+            "tick": 22745
+          }
+        ]
+      }
+    },
+    "nuevas": {
+      "before": {
+        "n": 1080,
+        "promedio_ms": 45.55535,
+        "p95_ms": 58.686,
+        "max_ms": 390.87,
+        "fps": 21.951318560827655,
+        "fps_repeticiones": [
+          21.724556877877035,
+          22.023554803627892,
+          22.109580732335644
+        ],
+        "cuadros_mayores_100ms": 33,
+        "cuadros_mayores_200ms": 33,
+        "subsistemas_activos": {
+          "economia_demandas": {
+            "n": 33,
+            "promedio_ms": 124.2330303030303,
+            "p95_ms": 129.643,
+            "max_ms": 129.927
+          },
+          "economia_regional": {
+            "n": 33,
+            "promedio_ms": 103.69781818181818,
+            "p95_ms": 107.827,
+            "max_ms": 110.688
+          },
+          "economia_sociedad": {
+            "n": 33,
+            "promedio_ms": 0.01712121212121212,
+            "p95_ms": 0.021,
+            "max_ms": 0.026
+          },
+          "escena_process": {
+            "n": 1080,
+            "promedio_ms": 7.8433268518518515,
+            "p95_ms": 0.627,
+            "max_ms": 343.191
+          },
+          "fauna": {
+            "n": 31,
+            "promedio_ms": 0.23290322580645162,
+            "p95_ms": 0.348,
+            "max_ms": 0.356
+          },
+          "navegacion": {
+            "n": 48,
+            "promedio_ms": 0.6618333333333334,
+            "p95_ms": 1.429,
+            "max_ms": 1.487
+          },
+          "navegacion_regional": {
+            "n": 33,
+            "promedio_ms": 223.63027272727274,
+            "p95_ms": 232.479,
+            "max_ms": 235.478
+          },
+          "npc_decidir": {
+            "n": 6,
+            "promedio_ms": 98.401,
+            "p95_ms": 111.678,
+            "max_ms": 111.678
+          },
+          "npc_decisiones_necesidades": {
+            "n": 33,
+            "promedio_ms": 245.8979696969697,
+            "p95_ms": 341.651,
+            "max_ms": 342.868
+          },
+          "npc_movimiento": {
+            "n": 1080,
+            "promedio_ms": 0.04226851851851852,
+            "p95_ms": 0.038,
+            "max_ms": 1.513
+          },
+          "regiones_streaming": {
+            "n": 1080,
+            "promedio_ms": 0.04015833333333333,
+            "p95_ms": 0.013,
+            "max_ms": 2.877
+          },
+          "regiones_total": {
+            "n": 1080,
+            "promedio_ms": 0.06591111111111111,
+            "p95_ms": 0.05,
+            "max_ms": 2.923
+          },
+          "render_cpu": {
+            "n": 1080,
+            "promedio_ms": 30.18145833333333,
+            "p95_ms": 46.156,
+            "max_ms": 79.516
+          },
+          "tick": {
+            "n": 1080,
+            "promedio_ms": 7.660266666666667,
+            "p95_ms": 0.407,
+            "max_ms": 343.032
+          }
+        },
+        "peores_cuadros": [
+          {
+            "economia_demandas": 119007,
+            "economia_regional": 98371,
+            "economia_sociedad": 18,
+            "escena_process": 303749,
+            "fps_monitor": 14.0,
+            "frame": 319,
+            "frame_us": 390870,
+            "navegacion": 425,
+            "navegacion_regional": 213247,
+            "npc_decidir": 85796,
+            "npc_decisiones_necesidades": 303284,
+            "npc_movimiento": 149,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 12,
+            "regiones_total": 37,
+            "render_cpu": 77079,
+            "tick": 303578
+          },
+          {
+            "economia_demandas": 116656,
+            "economia_regional": 97359,
+            "economia_sociedad": 13,
+            "escena_process": 299702,
+            "fps_monitor": 14.0,
+            "frame": 322,
+            "frame_us": 385433,
+            "navegacion": 438,
+            "navegacion_regional": 210010,
+            "npc_decidir": 85171,
+            "npc_decisiones_necesidades": 299271,
+            "npc_movimiento": 162,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 9,
+            "regiones_total": 31,
+            "render_cpu": 79516,
+            "tick": 299543
+          },
+          {
+            "economia_demandas": 116982,
+            "economia_regional": 98578,
+            "economia_sociedad": 17,
+            "escena_process": 301862,
+            "fps_monitor": 14.0,
+            "frame": 325,
+            "frame_us": 385238,
+            "navegacion": 420,
+            "navegacion_regional": 211506,
+            "npc_decidir": 85770,
+            "npc_decisiones_necesidades": 301433,
+            "npc_movimiento": 147,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 11,
+            "regiones_total": 35,
+            "render_cpu": 77173,
+            "tick": 301692
+          },
+          {
+            "economia_demandas": 125448,
+            "economia_regional": 105634,
+            "economia_sociedad": 18,
+            "escena_process": 343191,
+            "fps_monitor": 23.0,
+            "frame": 169,
+            "frame_us": 373447,
+            "navegacion": 1429,
+            "navegacion_regional": 226024,
+            "npc_decidir": 111678,
+            "npc_decisiones_necesidades": 342868,
+            "npc_movimiento": 41,
+            "pos": [
+              1240.0,
+              428.0
+            ],
+            "regiones": 49,
+            "regiones_streaming": 11,
+            "regiones_total": 37,
+            "render_cpu": 22593,
+            "tick": 343032
+          },
+          {
+            "economia_demandas": 126296,
+            "economia_regional": 104305,
+            "economia_sociedad": 17,
+            "escena_process": 341972,
+            "fps_monitor": 24.0,
+            "frame": 175,
+            "frame_us": 372626,
+            "navegacion": 1487,
+            "navegacion_regional": 225556,
+            "npc_decidir": 110955,
+            "npc_decisiones_necesidades": 341651,
+            "npc_movimiento": 41,
+            "pos": [
+              1240.0,
+              428.0
+            ],
+            "regiones": 49,
+            "regiones_streaming": 10,
+            "regiones_total": 31,
+            "render_cpu": 23018,
+            "tick": 341826
+          },
+          {
+            "economia_demandas": 125393,
+            "economia_regional": 104347,
+            "economia_sociedad": 14,
+            "escena_process": 341169,
+            "fps_monitor": 24.0,
+            "frame": 171,
+            "frame_us": 371358,
+            "navegacion": 1420,
+            "navegacion_regional": 224807,
+            "npc_decidir": 111036,
+            "npc_decisiones_necesidades": 340864,
+            "npc_movimiento": 38,
+            "pos": [
+              1240.0,
+              428.0
+            ],
+            "regiones": 49,
+            "regiones_streaming": 11,
+            "regiones_total": 32,
+            "render_cpu": 22729,
+            "tick": 341021
+          },
+          {
+            "economia_demandas": 126319,
+            "economia_regional": 103271,
+            "economia_sociedad": 21,
+            "escena_process": 229970,
+            "fps_monitor": 20.0,
+            "frame": 259,
+            "frame_us": 288511,
+            "navegacion": 1320,
+            "navegacion_regional": 224167,
+            "npc_decisiones_necesidades": 229672,
+            "npc_movimiento": 23,
+            "pos": [
+              1752.0,
+              428.0
+            ],
+            "regiones": 59,
+            "regiones_streaming": 11,
+            "regiones_total": 39,
+            "render_cpu": 48337,
+            "tick": 229800
+          },
+          {
+            "economia_demandas": 126018,
+            "economia_regional": 107827,
+            "economia_sociedad": 19,
+            "escena_process": 234277,
+            "fps_monitor": 12.0,
+            "frame": 355,
+            "frame_us": 285780,
+            "navegacion": 234,
+            "navegacion_regional": 229177,
+            "npc_decisiones_necesidades": 233923,
+            "npc_movimiento": 28,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 14,
+            "regiones_total": 47,
+            "render_cpu": 45403,
+            "tick": 234058
+          }
+        ]
+      },
+      "after": {
+        "n": 1080,
+        "promedio_ms": 39.162675,
+        "p95_ms": 56.899,
+        "max_ms": 198.136,
+        "fps": 25.534517241225224,
+        "fps_repeticiones": [
+          26.087824225457933,
+          25.72190858562298,
+          24.82707767985718
+        ],
+        "cuadros_mayores_100ms": 6,
+        "cuadros_mayores_200ms": 0,
+        "subsistemas_activos": {
+          "economia_demandas": {
+            "n": 33,
+            "promedio_ms": 5.83930303030303,
+            "p95_ms": 22.487,
+            "max_ms": 22.748
+          },
+          "economia_regional": {
+            "n": 33,
+            "promedio_ms": 10.154818181818182,
+            "p95_ms": 18.898,
+            "max_ms": 19.127
+          },
+          "economia_sociedad": {
+            "n": 33,
+            "promedio_ms": 0.01418181818181818,
+            "p95_ms": 0.018,
+            "max_ms": 0.021
+          },
+          "escena_process": {
+            "n": 1080,
+            "promedio_ms": 1.3671231481481483,
+            "p95_ms": 0.688,
+            "max_ms": 135.313
+          },
+          "fauna": {
+            "n": 31,
+            "promedio_ms": 0.23667741935483871,
+            "p95_ms": 0.369,
+            "max_ms": 0.371
+          },
+          "navegacion": {
+            "n": 48,
+            "promedio_ms": 0.6595833333333334,
+            "p95_ms": 1.418,
+            "max_ms": 1.473
+          },
+          "navegacion_regional": {
+            "n": 33,
+            "promedio_ms": 11.804212121212123,
+            "p95_ms": 18.919,
+            "max_ms": 19.184
+          },
+          "npc_decidir": {
+            "n": 6,
+            "promedio_ms": 98.91666666666667,
+            "p95_ms": 111.853,
+            "max_ms": 111.853
+          },
+          "npc_decisiones_necesidades": {
+            "n": 33,
+            "promedio_ms": 34.04669696969697,
+            "p95_ms": 134.824,
+            "max_ms": 135.007
+          },
+          "npc_movimiento": {
+            "n": 1080,
+            "promedio_ms": 0.04160092592592593,
+            "p95_ms": 0.039,
+            "max_ms": 1.515
+          },
+          "regiones_streaming": {
+            "n": 1080,
+            "promedio_ms": 0.040125,
+            "p95_ms": 0.013,
+            "max_ms": 3.043
+          },
+          "regiones_total": {
+            "n": 1080,
+            "promedio_ms": 0.06548148148148149,
+            "p95_ms": 0.052,
+            "max_ms": 3.108
+          },
+          "render_cpu": {
+            "n": 1080,
+            "promedio_ms": 30.269162962962966,
+            "p95_ms": 46.94,
+            "max_ms": 82.013
+          },
+          "tick": {
+            "n": 1080,
+            "promedio_ms": 1.186112037037037,
+            "p95_ms": 0.422,
+            "max_ms": 135.175
+          }
+        },
+        "peores_cuadros": [
+          {
+            "economia_demandas": 4236,
+            "economia_regional": 17428,
+            "economia_sociedad": 18,
+            "escena_process": 110061,
+            "fps_monitor": 18.0,
+            "frame": 326,
+            "frame_us": 198136,
+            "navegacion": 444,
+            "navegacion_regional": 17462,
+            "npc_decidir": 87825,
+            "npc_decisiones_necesidades": 109602,
+            "npc_movimiento": 148,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 13,
+            "regiones_total": 42,
+            "render_cpu": 82013,
+            "tick": 109865
+          },
+          {
+            "economia_demandas": 4060,
+            "economia_regional": 17051,
+            "economia_sociedad": 12,
+            "escena_process": 106878,
+            "fps_monitor": 19.0,
+            "frame": 326,
+            "frame_us": 197712,
+            "navegacion": 421,
+            "navegacion_regional": 17133,
+            "npc_decidir": 85281,
+            "npc_decisiones_necesidades": 106478,
+            "npc_movimiento": 143,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 10,
+            "regiones_total": 28,
+            "render_cpu": 80015,
+            "tick": 106726
+          },
+          {
+            "economia_demandas": 4297,
+            "economia_regional": 17170,
+            "economia_sociedad": 16,
+            "escena_process": 108067,
+            "fps_monitor": 18.0,
+            "frame": 315,
+            "frame_us": 195023,
+            "navegacion": 427,
+            "navegacion_regional": 17233,
+            "npc_decidir": 86015,
+            "npc_decisiones_necesidades": 107593,
+            "npc_movimiento": 151,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 10,
+            "regiones_total": 33,
+            "render_cpu": 80587,
+            "tick": 107896
+          },
+          {
+            "economia_demandas": 22748,
+            "economia_regional": 645,
+            "economia_sociedad": 12,
+            "escena_process": 135313,
+            "fps_monitor": 31.0,
+            "frame": 165,
+            "frame_us": 169557,
+            "navegacion": 1473,
+            "navegacion_regional": 18280,
+            "npc_decidir": 111522,
+            "npc_decisiones_necesidades": 135007,
+            "npc_movimiento": 40,
+            "pos": [
+              1240.0,
+              428.0
+            ],
+            "regiones": 49,
+            "regiones_streaming": 9,
+            "regiones_total": 29,
+            "render_cpu": 22974,
+            "tick": 135175
+          },
+          {
+            "economia_demandas": 22252,
+            "economia_regional": 635,
+            "economia_sociedad": 13,
+            "escena_process": 135129,
+            "fps_monitor": 32.0,
+            "frame": 176,
+            "frame_us": 165231,
+            "navegacion": 1418,
+            "navegacion_regional": 18066,
+            "npc_decidir": 111853,
+            "npc_decisiones_necesidades": 134824,
+            "npc_movimiento": 35,
+            "pos": [
+              1240.0,
+              428.0
+            ],
+            "regiones": 49,
+            "regiones_streaming": 9,
+            "regiones_total": 37,
+            "render_cpu": 22676,
+            "tick": 134975
+          },
+          {
+            "economia_demandas": 22487,
+            "economia_regional": 638,
+            "economia_sociedad": 13,
+            "escena_process": 134531,
+            "fps_monitor": 30.0,
+            "frame": 175,
+            "frame_us": 165083,
+            "navegacion": 1402,
+            "navegacion_regional": 18264,
+            "npc_decidir": 111004,
+            "npc_decisiones_necesidades": 134218,
+            "npc_movimiento": 37,
+            "pos": [
+              1240.0,
+              428.0
+            ],
+            "regiones": 49,
+            "regiones_streaming": 10,
+            "regiones_total": 35,
+            "render_cpu": 23021,
+            "tick": 134375
+          },
+          {
+            "escena_process": 3076,
+            "fps_monitor": 18.0,
+            "frame": 300,
+            "frame_us": 90656,
+            "npc_movimiento": 28,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 2778,
+            "regiones_total": 2805,
+            "render_cpu": 78994,
+            "tick": 140
+          },
+          {
+            "escena_process": 3110,
+            "fps_monitor": 18.0,
+            "frame": 300,
+            "frame_us": 88870,
+            "npc_movimiento": 28,
+            "pos": [
+              2008.0,
+              428.0
+            ],
+            "regiones": 64,
+            "regiones_streaming": 2786,
+            "regiones_total": 2819,
+            "render_cpu": 79622,
+            "tick": 142
+          }
+        ]
+      }
+    }
+  },
+  "cpu_aislada": {
+    "before": {
+      "npc_movimiento_necesidades": {
+        "repeticiones": [
+          {
+            "subsistema": "npc_movimiento_necesidades",
+            "n": "40",
+            "promedio_us": "10.3",
+            "p95_us": "11",
+            "max_us": "11"
+          },
+          {
+            "subsistema": "npc_movimiento_necesidades",
+            "n": "40",
+            "promedio_us": "10.1",
+            "p95_us": "12",
+            "max_us": "12"
+          },
+          {
+            "subsistema": "npc_movimiento_necesidades",
+            "n": "40",
+            "promedio_us": "10.4",
+            "p95_us": "11",
+            "max_us": "11"
+          }
+        ],
+        "promedio_ms": 0.010266666666666667,
+        "p95_peor_ms": 0.012,
+        "max_ms": 0.012
+      },
+      "npc_decisiones_lote": {
+        "repeticiones": [
+          {
+            "subsistema": "npc_decisiones_lote",
+            "n": "40",
+            "promedio_us": "107154.0",
+            "p95_us": "122154",
+            "max_us": "124835"
+          },
+          {
+            "subsistema": "npc_decisiones_lote",
+            "n": "40",
+            "promedio_us": "103707.4",
+            "p95_us": "104276",
+            "max_us": "104886"
+          },
+          {
+            "subsistema": "npc_decisiones_lote",
+            "n": "40",
+            "promedio_us": "106053.9",
+            "p95_us": "108958",
+            "max_us": "109128"
+          }
+        ],
+        "promedio_ms": 105.63843333333334,
+        "p95_peor_ms": 122.154,
+        "max_ms": 124.835
+      },
+      "navegacion_BFS": {
+        "repeticiones": [
+          {
+            "subsistema": "navegacion_BFS",
+            "n": "40",
+            "promedio_us": "1472.4",
+            "p95_us": "1522",
+            "max_us": "1542"
+          },
+          {
+            "subsistema": "navegacion_BFS",
+            "n": "40",
+            "promedio_us": "1428.5",
+            "p95_us": "1453",
+            "max_us": "1464"
+          },
+          {
+            "subsistema": "navegacion_BFS",
+            "n": "40",
+            "promedio_us": "1458.1",
+            "p95_us": "1572",
+            "max_us": "1621"
+          }
+        ],
+        "promedio_ms": 1.453,
+        "p95_peor_ms": 1.572,
+        "max_ms": 1.621
+      },
+      "fauna_actualizar": {
+        "repeticiones": [
+          {
+            "subsistema": "fauna_actualizar",
+            "n": "40",
+            "promedio_us": "69.8",
+            "p95_us": "75",
+            "max_us": "77"
+          },
+          {
+            "subsistema": "fauna_actualizar",
+            "n": "40",
+            "promedio_us": "68.8",
+            "p95_us": "69",
+            "max_us": "70"
+          },
+          {
+            "subsistema": "fauna_actualizar",
+            "n": "40",
+            "promedio_us": "79.9",
+            "p95_us": "133",
+            "max_us": "135"
+          }
+        ],
+        "promedio_ms": 0.07283333333333333,
+        "p95_peor_ms": 0.133,
+        "max_ms": 0.135
+      },
+      "economia_regional": {
+        "repeticiones": [
+          {
+            "subsistema": "economia_regional",
+            "n": "40",
+            "promedio_us": "233206.8",
+            "p95_us": "251626",
+            "max_us": "257142"
+          },
+          {
+            "subsistema": "economia_regional",
+            "n": "40",
+            "promedio_us": "234630.8",
+            "p95_us": "250815",
+            "max_us": "268725"
+          },
+          {
+            "subsistema": "economia_regional",
+            "n": "40",
+            "promedio_us": "234008.7",
+            "p95_us": "250398",
+            "max_us": "254586"
+          }
+        ],
+        "promedio_ms": 233.94876666666667,
+        "p95_peor_ms": 251.626,
+        "max_ms": 268.725
+      },
+      "regiones_streaming_frio": {
+        "repeticiones": [
+          {
+            "subsistema": "regiones_streaming_frio",
+            "n": "30",
+            "promedio_us": "12253.3",
+            "p95_us": "13314",
+            "max_us": "13718"
+          },
+          {
+            "subsistema": "regiones_streaming_frio",
+            "n": "30",
+            "promedio_us": "12239.0",
+            "p95_us": "13430",
+            "max_us": "13480"
+          },
+          {
+            "subsistema": "regiones_streaming_frio",
+            "n": "30",
+            "promedio_us": "12228.0",
+            "p95_us": "13589",
+            "max_us": "14681"
+          }
+        ],
+        "promedio_ms": 12.2401,
+        "p95_peor_ms": 13.589,
+        "max_ms": 14.681
+      },
+      "red_snapshot_bytes_local": {
+        "repeticiones": [
+          {
+            "subsistema": "red_snapshot_bytes_local",
+            "n": "40",
+            "promedio_us": "8.9",
+            "p95_us": "9",
+            "max_us": "13"
+          },
+          {
+            "subsistema": "red_snapshot_bytes_local",
+            "n": "40",
+            "promedio_us": "8.8",
+            "p95_us": "10",
+            "max_us": "12"
+          },
+          {
+            "subsistema": "red_snapshot_bytes_local",
+            "n": "40",
+            "promedio_us": "8.8",
+            "p95_us": "10",
+            "max_us": "10"
+          }
+        ],
+        "promedio_ms": 0.008833333333333334,
+        "p95_peor_ms": 0.01,
+        "max_ms": 0.013
+      },
+      "tick_completo_referencia": {
+        "repeticiones": [
+          {
+            "subsistema": "tick_completo_referencia",
+            "n": "40",
+            "promedio_us": "128551.4",
+            "p95_us": "357701",
+            "max_us": "373268"
+          },
+          {
+            "subsistema": "tick_completo_referencia",
+            "n": "40",
+            "promedio_us": "123555.1",
+            "p95_us": "338941",
+            "max_us": "341289"
+          },
+          {
+            "subsistema": "tick_completo_referencia",
+            "n": "40",
+            "promedio_us": "125109.9",
+            "p95_us": "340791",
+            "max_us": "344512"
+          }
+        ],
+        "promedio_ms": 125.7388,
+        "p95_peor_ms": 357.701,
+        "max_ms": 373.268
+      }
+    },
+    "after": {
+      "npc_movimiento_necesidades": {
+        "repeticiones": [
+          {
+            "subsistema": "npc_movimiento_necesidades",
+            "n": "40",
+            "promedio_us": "10.6",
+            "p95_us": "12",
+            "max_us": "17"
+          },
+          {
+            "subsistema": "npc_movimiento_necesidades",
+            "n": "40",
+            "promedio_us": "10.3",
+            "p95_us": "12",
+            "max_us": "13"
+          },
+          {
+            "subsistema": "npc_movimiento_necesidades",
+            "n": "40",
+            "promedio_us": "10.2",
+            "p95_us": "11",
+            "max_us": "11"
+          }
+        ],
+        "promedio_ms": 0.010366666666666666,
+        "p95_peor_ms": 0.012,
+        "max_ms": 0.017
+      },
+      "npc_decisiones_lote": {
+        "repeticiones": [
+          {
+            "subsistema": "npc_decisiones_lote",
+            "n": "40",
+            "promedio_us": "108923.3",
+            "p95_us": "121270",
+            "max_us": "125622"
+          },
+          {
+            "subsistema": "npc_decisiones_lote",
+            "n": "40",
+            "promedio_us": "105438.8",
+            "p95_us": "108507",
+            "max_us": "109238"
+          },
+          {
+            "subsistema": "npc_decisiones_lote",
+            "n": "40",
+            "promedio_us": "106092.3",
+            "p95_us": "117970",
+            "max_us": "126916"
+          }
+        ],
+        "promedio_ms": 106.81813333333334,
+        "p95_peor_ms": 121.27,
+        "max_ms": 126.916
+      },
+      "navegacion_BFS": {
+        "repeticiones": [
+          {
+            "subsistema": "navegacion_BFS",
+            "n": "40",
+            "promedio_us": "1447.2",
+            "p95_us": "1483",
+            "max_us": "1534"
+          },
+          {
+            "subsistema": "navegacion_BFS",
+            "n": "40",
+            "promedio_us": "1459.7",
+            "p95_us": "1560",
+            "max_us": "1626"
+          },
+          {
+            "subsistema": "navegacion_BFS",
+            "n": "40",
+            "promedio_us": "1445.3",
+            "p95_us": "1503",
+            "max_us": "1512"
+          }
+        ],
+        "promedio_ms": 1.4507333333333334,
+        "p95_peor_ms": 1.56,
+        "max_ms": 1.626
+      },
+      "fauna_actualizar": {
+        "repeticiones": [
+          {
+            "subsistema": "fauna_actualizar",
+            "n": "40",
+            "promedio_us": "70.8",
+            "p95_us": "82",
+            "max_us": "105"
+          },
+          {
+            "subsistema": "fauna_actualizar",
+            "n": "40",
+            "promedio_us": "69.8",
+            "p95_us": "75",
+            "max_us": "76"
+          },
+          {
+            "subsistema": "fauna_actualizar",
+            "n": "40",
+            "promedio_us": "69.1",
+            "p95_us": "72",
+            "max_us": "76"
+          }
+        ],
+        "promedio_ms": 0.06989999999999999,
+        "p95_peor_ms": 0.082,
+        "max_ms": 0.105
+      },
+      "economia_regional": {
+        "repeticiones": [
+          {
+            "subsistema": "economia_regional",
+            "n": "40",
+            "promedio_us": "4573.7",
+            "p95_us": "4755",
+            "max_us": "4768"
+          },
+          {
+            "subsistema": "economia_regional",
+            "n": "40",
+            "promedio_us": "4575.4",
+            "p95_us": "4729",
+            "max_us": "4755"
+          },
+          {
+            "subsistema": "economia_regional",
+            "n": "40",
+            "promedio_us": "4710.2",
+            "p95_us": "4945",
+            "max_us": "4954"
+          }
+        ],
+        "promedio_ms": 4.619766666666666,
+        "p95_peor_ms": 4.945,
+        "max_ms": 4.954
+      },
+      "regiones_streaming_frio": {
+        "repeticiones": [
+          {
+            "subsistema": "regiones_streaming_frio",
+            "n": "30",
+            "promedio_us": "12485.4",
+            "p95_us": "13988",
+            "max_us": "14018"
+          },
+          {
+            "subsistema": "regiones_streaming_frio",
+            "n": "30",
+            "promedio_us": "12479.2",
+            "p95_us": "15388",
+            "max_us": "17254"
+          },
+          {
+            "subsistema": "regiones_streaming_frio",
+            "n": "30",
+            "promedio_us": "12630.4",
+            "p95_us": "14259",
+            "max_us": "14424"
+          }
+        ],
+        "promedio_ms": 12.531666666666666,
+        "p95_peor_ms": 15.388,
+        "max_ms": 17.254
+      },
+      "red_snapshot_bytes_local": {
+        "repeticiones": [
+          {
+            "subsistema": "red_snapshot_bytes_local",
+            "n": "40",
+            "promedio_us": "8.7",
+            "p95_us": "9",
+            "max_us": "9"
+          },
+          {
+            "subsistema": "red_snapshot_bytes_local",
+            "n": "40",
+            "promedio_us": "8.9",
+            "p95_us": "10",
+            "max_us": "13"
+          },
+          {
+            "subsistema": "red_snapshot_bytes_local",
+            "n": "40",
+            "promedio_us": "8.6",
+            "p95_us": "9",
+            "max_us": "9"
+          }
+        ],
+        "promedio_ms": 0.008733333333333333,
+        "p95_peor_ms": 0.01,
+        "max_ms": 0.013
+      },
+      "tick_completo_referencia": {
+        "repeticiones": [
+          {
+            "subsistema": "tick_completo_referencia",
+            "n": "40",
+            "promedio_us": "11478.8",
+            "p95_us": "117522",
+            "max_us": "139573"
+          },
+          {
+            "subsistema": "tick_completo_referencia",
+            "n": "40",
+            "promedio_us": "11072.0",
+            "p95_us": "115425",
+            "max_us": "131720"
+          },
+          {
+            "subsistema": "tick_completo_referencia",
+            "n": "40",
+            "promedio_us": "11450.3",
+            "p95_us": "117851",
+            "max_us": "137377"
+          }
+        ],
+        "promedio_ms": 11.333699999999999,
+        "p95_peor_ms": 117.851,
+        "max_ms": 139.573
+      }
+    }
+  },
+  "red": [
+    {
+      "bytes_enviados": 3225074.0,
+      "difusion": {
+        "max_ms": 17.003,
+        "p95_ms": 5.463,
+        "prom_ms": 1.23069845360825
+      },
+      "difusion_muestras": 388,
+      "max_jugadores": 2,
+      "rechazos": {
+        "@ana": 9
+      },
+      "segundos": 35.0128553333329,
+      "snapshot": {
+        "max_ms": 0.492,
+        "p95_ms": 0.207,
+        "prom_ms": 0.115507731958763
+      },
+      "snapshot_muestras": 388,
+      "tick_ms_max": 170.869,
+      "tick_ms_p95": 16.58,
+      "tick_ms_prom": 3.48739,
+      "ticks": 700
+    },
+    {
+      "bytes_enviados": 3212006.0,
+      "difusion": {
+        "max_ms": 8.309,
+        "p95_ms": 5.627,
+        "prom_ms": 1.15335532994924
+      },
+      "difusion_muestras": 394,
+      "max_jugadores": 2,
+      "rechazos": {
+        "@ana": 9
+      },
+      "segundos": 35.0037636666667,
+      "snapshot": {
+        "max_ms": 2.507,
+        "p95_ms": 0.204,
+        "prom_ms": 0.119901015228426
+      },
+      "snapshot_muestras": 394,
+      "tick_ms_max": 148.777,
+      "tick_ms_p95": 11.789,
+      "tick_ms_prom": 3.44100571428571,
+      "ticks": 700
+    },
+    {
+      "bytes_enviados": 3705186.0,
+      "difusion": {
+        "max_ms": 10.531,
+        "p95_ms": 6.54,
+        "prom_ms": 1.38385025380711
+      },
+      "difusion_muestras": 394,
+      "max_jugadores": 2,
+      "rechazos": {
+        "@ana": 9
+      },
+      "segundos": 35.0139139999993,
+      "snapshot": {
+        "max_ms": 0.834,
+        "p95_ms": 0.235,
+        "prom_ms": 0.127104060913706
+      },
+      "snapshot_muestras": 394,
+      "tick_ms_max": 148.631,
+      "tick_ms_p95": 14.346,
+      "tick_ms_prom": 3.88288714285714,
+      "ticks": 700
+    }
+  ]
+}

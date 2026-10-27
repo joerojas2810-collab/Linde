@@ -1,0 +1,24 @@
+diff --git a/Linde/cenital/scripts/asentamientos.gd b/Linde/cenital/scripts/asentamientos.gd
+index b3c5435..37cbbf9 100644
+--- a/Linde/cenital/scripts/asentamientos.gd
++++ b/Linde/cenital/scripts/asentamientos.gd
+@@ -15,0 +16,3 @@ var cfg: Dictionary
++# Solo sesión: el alcance cambia con la geometría, no con consultas económicas repetidas.
++var _alcances: Dictionary = {}
++var _alcances_version := -1
+@@ -124,0 +128,8 @@ func _alcance(centro: Vector2i) -> Dictionary:
++ if _alcances_version != j.mundo.version:
++  _alcances.clear()
++  _alcances_version = j.mundo.version
++ var clave := Vector3i(centro.x, centro.y, int(cfg.radio_recursos))
++ if not _alcances.has(clave): _alcances[clave] = _calcular_alcance(centro)
++ return _alcances[clave].duplicate()
++
++func _calcular_alcance(centro: Vector2i) -> Dictionary:
+diff --git a/Linde/cenital/scripts/escena.gd b/Linde/cenital/scripts/escena.gd
+index cd0ce30..c4adc15 100644
+--- a/Linde/cenital/scripts/escena.gd
++++ b/Linde/cenital/scripts/escena.gd
+@@ -798 +798 @@ func _armar() -> void:
+-				if j.vivo != null and not j.autonomia.activa():   # la réplica muestra el estado recibido y envía aceptación/entrega a la autoridad
++			if j.vivo != null and not j.autonomia.activa():   # la réplica muestra el estado recibido y envía aceptación/entrega a la autoridad

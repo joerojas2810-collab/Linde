@@ -1,0 +1,24 @@
+{
+  "bytes_enviados": 3212006.0,
+  "difusion": {
+    "max_ms": 8.309,
+    "p95_ms": 5.627,
+    "prom_ms": 1.15335532994924
+  },
+  "difusion_muestras": 394,
+  "max_jugadores": 2,
+  "rechazos": {
+    "@ana": 9
+  },
+  "segundos": 35.0037636666667,
+  "snapshot": {
+    "max_ms": 2.507,
+    "p95_ms": 0.204,
+    "prom_ms": 0.119901015228426
+  },
+  "snapshot_muestras": 394,
+  "tick_ms_max": 148.777,
+  "tick_ms_p95": 11.789,
+  "tick_ms_prom": 3.44100571428571,
+  "ticks": 700
+}

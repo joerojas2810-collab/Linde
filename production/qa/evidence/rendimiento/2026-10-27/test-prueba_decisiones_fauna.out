@@ -1,0 +1,32 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS escenario mínimo existente proporciona una fuente real
+PASS espectro_bosque: aviso perceptible y preparación antes de daño
+MEDICION espectro_bosque senal_s=0.000 ataque_s=1.833 dano_s=2.767 margen_s=2.767
+PASS espectro_bosque: retirarse evita contacto mediante movimiento real
+PASS espectro_bosque: rodear evita contacto mediante movimiento real
+PASS golem_sierra: aviso perceptible y preparación antes de daño
+MEDICION golem_sierra senal_s=0.000 ataque_s=2.033 dano_s=3.233 margen_s=3.233
+PASS golem_sierra: retirarse evita contacto mediante movimiento real
+PASS golem_sierra: rodear evita contacto mediante movimiento real
+PASS diablillo_secano: aviso perceptible y preparación antes de daño
+MEDICION diablillo_secano senal_s=0.000 ataque_s=1.567 dano_s=2.233 margen_s=2.233
+PASS diablillo_secano: retirarse evita contacto mediante movimiento real
+PASS diablillo_secano: rodear evita contacto mediante movimiento real
+PASS arpia_pradera: aviso perceptible y preparación antes de daño
+MEDICION arpia_pradera senal_s=0.000 ataque_s=1.367 dano_s=2.200 margen_s=2.200
+PASS arpia_pradera: retirarse evita contacto mediante movimiento real
+PASS arpia_pradera: rodear evita contacto mediante movimiento real
+PASS slime_ribera: aviso perceptible y preparación antes de daño
+MEDICION slime_ribera senal_s=0.000 ataque_s=1.667 dano_s=2.500 margen_s=2.500
+PASS slime_ribera: retirarse evita contacto mediante movimiento real
+PASS slime_ribera: rodear evita contacto mediante movimiento real
+PASS pared oculta tanto la advertencia visual como la detección
+PASS al recuperar visión se puede decidir sin gracia artificial
+RESULTADO 18 PASS 0 FAIL
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+WARNING: 36 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 16 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

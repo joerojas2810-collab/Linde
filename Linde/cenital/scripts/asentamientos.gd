@@ -13,6 +13,9 @@ var transitos
 const Fundacion = preload("res://scripts/fundacion.gd")
 var fundacion
 var cfg: Dictionary
+# Solo sesión: el alcance cambia con la geometría, no con consultas económicas repetidas.
+var _alcances: Dictionary = {}
+var _alcances_version := -1
 const PIEZAS = [["cama_huesped",1,0],["cama_huesped",1,1],["campo",-1,0],["campo",-1,1],["cofre",0,2]]
 func _init(autonomia) -> void:
  a=autonomia;j=a.j
@@ -122,6 +125,14 @@ func _transitable(c: Vector2i) -> bool:
  var id: String=str(d.objeto)+"@"+M.clave(c)
  return j.mundo.estado.get("registro",{}).get("despejes",{}).has(M.clave(c)) or str(d.objeto)=="" or not C.OBJETOS.get(str(d.objeto),{}).get("bloquea",true) or j.d.mundo.rotos.has(id)
 func _alcance(centro: Vector2i) -> Dictionary:
+ if _alcances_version != j.mundo.version:
+  _alcances.clear()
+  _alcances_version = j.mundo.version
+ var clave := Vector3i(centro.x, centro.y, int(cfg.radio_recursos))
+ if not _alcances.has(clave): _alcances[clave] = _calcular_alcance(centro)
+ return _alcances[clave].duplicate()
+
+func _calcular_alcance(centro: Vector2i) -> Dictionary:
  var vistos: Dictionary={centro:true}
  var cola: Array=[centro]
  var i:=0
