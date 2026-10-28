@@ -1,0 +1,45 @@
+name: Juego jugable (arranque y campaña)
+on:
+  workflow_dispatch:
+  push:
+    branches: [arena/359338c9-linde]
+    paths:
+      - 'Linde/cenital/**'
+      - 'herramientas/verificar_jugable.py'
+      - '.github/workflows/jugable.yml'
+permissions:
+  contents: read
+jobs:
+  arranque:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar Godot 4.7.1 con SHA-256 fijado
+        run: |
+          set -euo pipefail
+          curl --retry 3 --retry-delay 2 -fL 'https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_linux.x86_64.zip' -o godot.zip
+          echo 'c7ff14fd28472c8d4f193043de30278dcf7e5241a1dcf7566b02e27addaa33ba  godot.zip' | sha256sum -c -
+          unzip -q godot.zip -d motor
+          chmod +x motor/Godot_v4.7.1-stable_linux.x86_64
+      - name: Importar recursos y detectar errores de parseo
+        run: |
+          set -euo pipefail
+          G="$PWD/motor/Godot_v4.7.1-stable_linux.x86_64"
+          "$G" --headless --path Linde/cenital --editor --import --quit 2>&1 | tee importacion.log
+          if grep -qE 'SCRIPT ERROR:|Parse Error:|Failed to load script' importacion.log; then
+            echo 'Error de parseo o de script durante la importación.' >&2
+            exit 1
+          fi
+      - name: Pruebas headless del juego jugable
+        run: |
+          set -euo pipefail
+          python3 herramientas/verificar_jugable.py --godot "$PWD/motor/Godot_v4.7.1-stable_linux.x86_64" --salida qa/jugable
+      - name: Publicar logs si algo falla
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-juego-jugable
+          path: |
+            importacion.log
+            qa/jugable/
